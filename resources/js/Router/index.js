@@ -3,7 +3,7 @@ import routes from "./routes";
 
 const router = createRouter({
     histroy: createWebHistory(),
-    routes
+    routes,
 })
 
 export default router;

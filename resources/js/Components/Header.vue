@@ -9,7 +9,7 @@ export default {
     data() {
         return {
             list: [
-                { title: "Login", to: "/login" }
+                { title: "Home", to: "/" }
             ],
         };
     },
