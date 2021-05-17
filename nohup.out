@@ -1,0 +1,7 @@
+Starting Laravel development server: http://0.0.0.0:8000
+[Mon May 17 17:34:33 2021] PHP 7.4.3 Development Server (http://0.0.0.0:8000) started
+[Mon May 17 17:34:47 2021] 96.237.236.25:53299 Accepted
+[Mon May 17 17:34:47 2021] 96.237.236.25:53299 Closing
+[Mon May 17 17:34:48 2021] 96.237.236.25:53304 Accepted
+[Mon May 17 17:34:48 2021] 96.237.236.25:53304 [200]: GET /favicon.ico
+[Mon May 17 17:34:48 2021] 96.237.236.25:53304 Closing
