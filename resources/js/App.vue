@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style>
-@font-face {
+/* @font-face {
   font-family: "Montserrat";
   src: local("Montserrat"),
     url("../assets/fonts/Montserrat/Montserrat-Black.ttf") format("truetype"),
@@ -35,5 +35,5 @@ export default {
     url("../assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf") format("truetype"),
     url("../assets/fonts/Montserrat/Montserrat-Thin.ttf") format("truetype"),
     url("../assets/fonts/Montserrat/Montserrat-ThinItalic.ttf") format("truetype");
-}
+} */
 </style>
