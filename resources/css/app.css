@@ -195,9 +195,9 @@ html {
   }
   
   .bg-custom {
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.6)!important;
+    color: white!important;
+    border-radius: 1rem!important;
   }
   
   .carousel-caption h1 {
@@ -217,21 +217,21 @@ html {
   }
   
   .btn-lg {
-    border-radius: 10px;
-    text-transform: uppercase;
-    font-size: 1rem;
-    border-width: medium;
-    width: 8rem;
+    border-radius: 10px!important;
+    text-transform: uppercase!important;
+    font-size: 1rem!important;
+    border-width: medium!important;
+    width: 8rem!important;
   }
   
   .btn-danger {
-    background-color: var(--FSCred);
-    border: .05rem solid var(--FSCred);
+    background-color: var(--FSCred)!important;
+    border: .05rem solid var(--FSCred)!important;
   }
   
   .btn-primary {
-    background-color: #4981b3;
-    border: .05rem solid #4981b3;
+    background-color: #4981b3!important;
+    border: .05rem solid #4981b3!important;
   }
   
   .btn-primary:hover, .btn-primary:focus {
