@@ -3,7 +3,7 @@
     <!-- Image Carousel -->
     <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="6500">
         <!-- Carousel Content -->
-        <div class="carousel-inner">
+        <div class="carousel-inner h-100">
             <!-- Carousel Item 1 -->
             <div class="carousel-item active">
                 <img src="img/carousel/1.jpg" alt="Image carousel" class="w-100">
