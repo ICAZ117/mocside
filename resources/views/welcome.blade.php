@@ -11,7 +11,7 @@
         <!-- Style CSS -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+        <!-- <link href="{{ HTML::style(https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap) }}" rel="stylesheet"> -->
     </head>
     <body>
         <div id="app">

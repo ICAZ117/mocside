@@ -11,7 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.copyDirectory('resources/assets/fonts', 'public/fonts');
+
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]).vue();
+
