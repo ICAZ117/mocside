@@ -6,17 +6,20 @@ import { createApp } from 'vue';
 import router from "./Router/index";
 import App from "./App.vue";
 
-// jQuery
-import "./jquery-3.5.1.min";
+// // jQuery
+// import "./jquery-3.5.1.min";
 
-// Bootstrap 4.5
-import "./bootstrap.min";
+// // Bootstrap 4.5
+// import "./bootstrap.min";
 
-// Popper
-import "./popper.min";
+// // Popper
+// import "./popper.min";
 
-// Font Awesome
-import "./all.min";
+// // Font Awesome
+// import "./all.min";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 
 // Vue.use(VueRouter);
 
