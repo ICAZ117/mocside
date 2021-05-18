@@ -247,6 +247,10 @@ html {
     margin-left: 8px;
   }
   
+  .col-8 {
+    flex: 0 0 66.666667%!important;
+    max-width: 66.666667%!important;
+  }
   /*============= COURSES =============*/
   
   .courses.header {
