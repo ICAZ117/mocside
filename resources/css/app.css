@@ -19,6 +19,8 @@ html {
   @font-face {
     font-family: "Montserrat";
     src: local("Montserrat"),
+      url("../assets/fonts/Montserrat/Montserrat-Medium.ttf") format("truetype"),
+      url("../assets/fonts/Montserrat/Montserrat-MediumItalic.ttf") format("truetype"),
       url("../assets/fonts/Montserrat/Montserrat-Regular.ttf") format("truetype"),
       url("../assets/fonts/Montserrat/Montserrat-SemiBold.ttf") format("truetype"),
       url("../assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf") format("truetype"),
@@ -34,9 +36,7 @@ html {
       url("../assets/fonts/Montserrat/Montserrat-ExtraLightItalic.ttf") format("truetype"),
       url("../assets/fonts/Montserrat/Montserrat-Italic.ttf") format("truetype"),
       url("../assets/fonts/Montserrat/Montserrat-Light.ttf") format("truetype"),
-      url("../assets/fonts/Montserrat/Montserrat-LightItalic.ttf") format("truetype"),
-      url("../assets/fonts/Montserrat/Montserrat-Medium.ttf") format("truetype"),
-      url("../assets/fonts/Montserrat/Montserrat-MediumItalic.ttf") format("truetype");
+      url("../assets/fonts/Montserrat/Montserrat-LightItalic.ttf") format("truetype");
   }
 
   /*-- Body Reset --*/
