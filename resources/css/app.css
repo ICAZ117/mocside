@@ -68,7 +68,7 @@ html {
   
   h1, h4 {
     font-family: 'Montserrat';
-    font-weight: bold;
+    font-weight: bold!important;
   }
 
   .no-decor, .no-decor:hover {
