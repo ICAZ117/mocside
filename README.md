@@ -1,8 +1,11 @@
 Beginning of time itself
-testing
+Completed:
 
-testing again
-this is chase test
+* Created Laravel project (currently at /home/max/mocside)
+* Set up a Github repository that we can upload to from our local devices and pull from from the server
+* Summer schedule
 
-Ibraheem's test
-chase test 2
+Todo:
+
+* Transition html/php home page into laravel project using vue components
+* Create login and registration modals
