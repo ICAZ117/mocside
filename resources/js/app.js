@@ -1,7 +1,7 @@
 require('./bootstrap');
 
 import { createApp } from 'vue';
-import VueRouter from 'vue-router';
+// import VueRouter from 'vue-router';
 
 import router from "./Router/index";
 import App from "./App.vue";
