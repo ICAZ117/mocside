@@ -42,7 +42,7 @@ html {
   /*-- Body Reset --*/
   body {
     overflow-x: hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat'!important;
     color: #616971;
     background-image: url("../img/background.jpg");
     background-size: cover;
