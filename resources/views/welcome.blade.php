@@ -6,12 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{{env('APP_NAME')}} | pageName</title>
         <link rel="shortcut icon" href="{{ asset('img/icon.png') }}">
-        <!-- Bootstrap 4.5 CSS
-        <link rel="stylesheet" href="../css/bootstrap.min.css"> -->
         <!-- Style CSS -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <!-- Google Fonts -->
-        <!-- <link href="{{ HTML::style(https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap) }}" rel="stylesheet"> -->
     </head>
     <body>
         <div id="app">
