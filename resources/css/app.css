@@ -58,7 +58,7 @@ html {
   body {
     overflow-x: hidden;
     font-family: 'Montserrat'!important;
-    font-weight: 300;
+    font-weight: normal;
     color: #616971;
     background-image: url("../img/background.jpg");
     background-size: cover;
@@ -67,9 +67,10 @@ html {
   }
   
   h4 {
-    font-weight: 500;
+    font-family: 'Montserrat';
+    font-weight: bold;
   }
-  
+
   .no-decor, .no-decor:hover {
     text-decoration: none;
     color: inherit;
