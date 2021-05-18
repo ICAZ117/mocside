@@ -7,7 +7,7 @@
         <title>{{env('APP_NAME')}} | pageName</title>
         <link rel="shortcut icon" href="img/icon.png">
         <!-- Bootstrap 4.5 CSS -->
-        <link rel="stylesheet" href="{{ mix('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
         <!-- Style CSS -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <!-- Google Fonts -->
