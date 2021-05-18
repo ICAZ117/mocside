@@ -18,7 +18,7 @@ export default {
   font-family: "Montserrat";
   src: local("Montserrat"),
     url("../assets/fonts/Montserrat/Montserrat-Black.ttf") format("truetype"),
-    url("../assets/fonts/Montserrat/Montserrat-Blackitalic.ttf") format("truetype"),
+    url("../assets/fonts/Montserrat/Montserrat-BlackItalic.ttf") format("truetype"),
     url("../assets/fonts/Montserrat/Montserrat-Bold.ttf") format("truetype"),
     url("../assets/fonts/Montserrat/Montserrat-BoldItalic.ttf") format("truetype"),
     url("../assets/fonts/Montserrat/Montserrat-ExtraBold.ttf") format("truetype"),
