@@ -183,6 +183,13 @@
             <button type="submit" class="btn btn-danger">Log In</button>
         </form>
         </div> -->
+        <script>
+            methods: {
+                async login() {
+                    console.log("log in");
+                }
+            }
+        </script>
     </template>
   </Modal>
 </template>
