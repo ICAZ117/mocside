@@ -1,15 +1,15 @@
 <template>
   <div class="app">
-    <Header />
+    <Navbar />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Header from "./Components/Header";
+import Navbar from "./Components/Navbar";
 
 export default {
-  components: { Header },
+  components: { Navbar },
 };
 </script>
 
