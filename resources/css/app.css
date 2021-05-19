@@ -209,14 +209,14 @@ nav {
   margin: auto;
   background-color: white;
   padding: 0.5rem;
-  border-radius: 0.25!important;
+  border-radius: 0.25rem!important;
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, .1);
   width: calc(0.33 * 100vw);
 }
 
 .modal-wrapper-4 {
   padding: 0.5rem;
-  border: 1px solid var(--FSCred);
+  border: 1px solid #333333;
 }
 
 /*============= CAROUSEL =============*/
