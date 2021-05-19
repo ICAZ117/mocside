@@ -2,14 +2,16 @@
   <div class="app">
     <Navbar />
     <router-view></router-view>
+    <Modal />
   </div>
 </template>
 
 <script>
 import Navbar from "./Components/Navbar";
+import Modal from "./Components/Modal";
 
 export default {
-  components: { Navbar },
+  components: { Navbar, Modal },
 };
 </script>
 
