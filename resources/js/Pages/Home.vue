@@ -144,6 +144,7 @@
                 }, false);
             })();
         </script> -->
+        </div>
     </template>
 </Modal>
 </template>
