@@ -94,7 +94,14 @@
     </div>
     <!-- End Socket -->
 </body>
-<Modal></Modal>
+<Modal>
+    <template v-slot:title>
+        <h1>Login</h1>
+    </template>
+    <template v-slot:body>
+        <p>Email</p>
+    </template>
+</Modal>
 </template>
 
 <script>
