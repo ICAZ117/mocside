@@ -124,7 +124,7 @@
             <button type="submit" class="btn btn-danger">Log In</button>
         </form>
 
-        <!-- <script>
+        <script>
             // Disable form submissions if there are invalid fields
             (function () {
                 'use strict';
@@ -143,7 +143,7 @@
                     });
                 }, false);
             })();
-        </script> -->
+        </script>
         </div>
     </template>
 </Modal>
