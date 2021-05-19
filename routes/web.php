@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{vue_capture?}', function () {
-    return view('welcome');
- })->where('vue_capture', '^(?!storage).*$'); 
+// Route::get('/{vue_capture?}', function () {
+//     return view('welcome');
+//  })->where('vue_capture', '^(?!storage).*$'); 
