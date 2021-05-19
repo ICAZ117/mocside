@@ -15,14 +15,16 @@
       </button>
 
       <div class="collapse navbar-collapse nav-items" id="navbarResponsive">
-        <div class="nav-item">
-          <router-link
-            v-for="item in list"
-            :key="item.title"
-            :to="item.to"
-            class="nav-link"
-            >{{ item.title }}</router-link
-          >
+        <div class="navbar-nav">
+          <div class="nav-item">
+            <router-link
+              v-for="item in list"
+              :key="item.title"
+              :to="item.to"
+              class="nav-link"
+              >{{ item.title }}</router-link
+            >
+          </div>
         </div>
       </div>
     </nav>
@@ -35,7 +37,12 @@
 export default {
   data() {
     return {
-      list: [{ title: "Home", to: "/" }, { title: "Courses", to: "/" }, { title: "Login", to: "/" }, { title: "Sign Up", to: "/" }],
+      list: [
+        { title: "Home", to: "/" },
+        { title: "Courses", to: "/" },
+        { title: "Login", to: "/" },
+        { title: "Sign Up", to: "/" },
+      ],
     };
   },
 };
