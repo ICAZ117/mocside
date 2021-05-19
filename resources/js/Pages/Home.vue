@@ -94,7 +94,7 @@
     </div>
     <!-- End Socket -->
 </body>
-<Modal />
+<Modal></Modal>
 </template>
 
 <script>
