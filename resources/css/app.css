@@ -122,6 +122,8 @@ nav {
 
 .nav-item {
   padding: 0!important;
+  -ms-flex-direction: row!important;
+  flex-direction: row!important;
 }
 
 .nav-link {
