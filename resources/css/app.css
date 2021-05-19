@@ -443,6 +443,28 @@ thead.labtable, thead.problemtable {
   padding: 20px;
 }
 
+.form-label {
+  /* label - text-sm text-gray-500 */
+  font-size: 12pt;
+  color: gray;
+}
+
+.form-input {
+  /* placeholder-gray-400????            appearance-none              focus:ring-blue-500 */
+  display: block;
+  width: 100%;
+  padding: 2rem 1rem;
+  color: gray;
+  border: 1px solid lightgray;
+  border-radius: 0.5rem;
+  box-shadow: 0 .5rem .5rem rgba(0, 0, 0, .1);
+}
+
+.form-input:focus {
+  outline: none;
+  border: 5px solid var(--FSCred);
+}
+
 /*============= WORKSPACE =============*/
 
 .work-area {
