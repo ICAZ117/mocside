@@ -202,7 +202,10 @@ export default {
   },
   methods: {
     async login() {
-        console.log("log in");
+        
+        // code properly connects to this point
+
+
       const payload = {
         email: this.email,
         password: this.password,
