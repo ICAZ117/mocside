@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import Modal from "./Components/Modal";
+import Modal from "../Components/Modal";
 export default {
     components: { Modal },
 }
