@@ -87,14 +87,14 @@ nav {
 }
 
 .navbar-nav {
-  -ms-flex-direction: row;
+  -ms-flex-direction: row!important;
   flex-direction: row!important;
 }
 
 .navbar-spacer {
   margin: 0;
   padding: 0;
-  /* padding-top: 60px; */
+  padding-top: 60px;
   z-index: 1;
   background-color: red;
 }
