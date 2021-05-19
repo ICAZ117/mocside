@@ -96,7 +96,7 @@
 </body>
 <Modal>
     <template v-slot:title>
-        <h1>Login</h1>
+        Login
     </template>
     <template v-slot:body>
         <p>Email</p>
