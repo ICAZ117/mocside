@@ -10,6 +10,8 @@ Completed:
 
 Todo:
 
+* Clicking off Login Closes Login
+  *Clicking on Login in Nav opens Login
 * Create Registration Modal
 * Style Login Modal
 * Style BaseBtn
