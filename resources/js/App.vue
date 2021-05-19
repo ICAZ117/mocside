@@ -8,6 +8,7 @@
 <script>
 import Navbar from "./Components/Navbar";
 
+
 export default {
   components: { Navbar },
 };
