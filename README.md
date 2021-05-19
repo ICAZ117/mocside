@@ -11,6 +11,7 @@ Completed:
 Todo:
 
 
+* Clicking off Login Closes it, and Clicking Login on Nav opens Log In
 * Create registration modal
 * stlye login modal
 * syle BaseBtn, remove long tailwind class name
