@@ -192,6 +192,11 @@ nav {
 
 .modal-wrapper-1 {
   position: absolute;
+  margin: 0 0 0 0!important;
+  top: 0px!important;
+  right: 0px!important;
+  bottom: 0px!important;
+  left: 0px!important;
 }
 
 .modal-wrapper-2 {
