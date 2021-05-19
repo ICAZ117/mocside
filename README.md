@@ -10,12 +10,10 @@ Completed:
 
 Todo:
 
-
-* Clicking off Login Closes it, and Clicking Login on Nav opens Log In
-* Create registration modal
-* stlye login modal
-* syle BaseBtn, remove long tailwind class name
-* style Home Page
+* Create Registration Modal
+* Style Login Modal
+* Style BaseBtn
+  * Remove long tailwind class name
+* Style Home Page
 * Add Auth to Login
 * Add register button to Login Modal
-
