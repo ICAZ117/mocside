@@ -2,7 +2,7 @@
   <div>
     <label
       :for="name"
-      class=""
+      class="form-label"
       :class="{ 'sr-only': !showLabel }"
       v-if="label"
     >
@@ -16,10 +16,8 @@
       @input="updateValue"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
-      class=""
+      class="form-input"
     />
-	<!-- text-sm text-gray-500 -->
-	<!-- block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-500 -->
   </div>
 </template>
 
