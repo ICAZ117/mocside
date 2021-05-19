@@ -192,6 +192,11 @@ nav {
 
 .modal-wrapper-1 {
   position: absolute;
+  margin: 0 0 0 0!important;
+  top: 0px!important;
+  right: 0px!important;
+  bottom: 0px!important;
+  left: 0px!important;
 }
 
 .modal-wrapper-2 {
@@ -203,15 +208,15 @@ nav {
   z-index: 30;
   margin: auto;
   background-color: white;
-  padding: 16px;
-  border-radius: 2rem!important;
+  padding: 0.5rem;
+  border-radius: 0.25!important;
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, .1);
-  width: calc(0.83 * 100vw);
+  width: calc(0.33 * 100vw);
 }
 
 .modal-wrapper-4 {
-  padding: 16px;
-  border: 0.5rem solid var(--FSCred);
+  padding: 0.5rem;
+  border: 1px solid var(--FSCred);
 }
 
 /*============= CAROUSEL =============*/
