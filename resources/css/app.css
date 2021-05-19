@@ -87,6 +87,7 @@ nav {
 }
 
 .navbar-nav {
+  display: flex!important;
   -ms-flex-direction: row!important;
   flex-direction: row!important;
 }
@@ -122,6 +123,7 @@ nav {
 
 .nav-item {
   padding: 0!important;
+  display: flex!important;
   -ms-flex-direction: row!important;
   flex-direction: row!important;
 }
