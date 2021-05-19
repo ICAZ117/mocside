@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokenController;
@@ -16,6 +18,12 @@ use App\Http\Controllers\TokenController;
 */
 
 Route::post('/sanctum/token', TokenController::class);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/users/{id}', function ($id) {
+        return User::findOrFail($id);
+    });
+});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
