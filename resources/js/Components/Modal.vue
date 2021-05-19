@@ -5,9 +5,9 @@
     <div class="modal-wrapper-2">
       <div class="modal-wrapper-3">
         <div class="modal-wrapper-4">
-          <h1>
+          <h3>
             <slot name="title"></slot>
-          </h1>
+          </h3>
           <main>
             <slot name="body"></slot>
           </main>
