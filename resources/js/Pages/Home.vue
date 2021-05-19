@@ -94,11 +94,13 @@
     </div>
     <!-- End Socket -->
 </body>
+<Modal />
 </template>
 
 <script>
+import Modal from "./Components/Modal";
 export default {
-
+    components: { Modal },
 }
 </script>
 
