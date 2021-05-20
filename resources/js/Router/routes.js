@@ -4,11 +4,11 @@ const routes = [
         component: () => import("../Pages/Home.vue"),
         name: 'home'
     },
-    // {
-    //     path: '/courses',
-    //     component: () => import("../Pages/Courses.vue"),
-    //     name: "Courses"
-    // },
+    {
+        path: '/courses',
+        component: () => import("../Pages/Courses.vue"),
+        name: "Courses"
+    },
     {
         path: "/about",
         component: () => import("../Pages/About.vue"),

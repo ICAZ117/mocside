@@ -39,7 +39,7 @@ export default {
     return {
       list: [
         { title: "Home", to: "/" },
-        { title: "Courses", to: "/" },
+        { title: "Courses", to: "/courses" },
         { title: "Login", to: "/" },
         { title: "Sign Up", to: "/" },
       ],

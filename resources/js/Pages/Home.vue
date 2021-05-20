@@ -231,6 +231,7 @@ export default {
     },
     toggleLogin() {
       this.isShowLogin = !this.isShowLogin;
+      console.log("change isShowLogin");
     },
   },
 };
