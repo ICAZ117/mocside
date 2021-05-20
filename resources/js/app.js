@@ -4,7 +4,9 @@ import { createApp } from 'vue';
 // import VueRouter from 'vue-router';
 
 import router from "./Router/index";
+console.log("this far")
 import App from "./App.vue";
+console.log('but not here')
 import store from "./Store/index";
 
 // Font Awesome
