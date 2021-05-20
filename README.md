@@ -1,5 +1,7 @@
 ===============> MocsIDE<===============
 
+no u
+
 Completed:
 
 * Created Laravel project (currently at /home/max/mocside)
