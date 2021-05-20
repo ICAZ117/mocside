@@ -24,8 +24,8 @@
               class="nav-link"
               >{{ item.title }}</router-link
             >
-            <a class="nav-link" href="/">Login</a>
-            <a class="nav-link" href="/">Sign Up</a>
+            <a class="nav-link" href="Login.vue">Login</a>
+            <a class="nav-link" href="#">Sign Up</a>
           </div>
         </div>
       </div>
@@ -42,8 +42,6 @@ export default {
       list: [
         { title: "Home", to: "/" },
         { title: "Courses", to: "/courses" },
-        // { title: "Login", to: "/" },
-        // { title: "Sign Up", to: "/" },
       ],
     };
   },
