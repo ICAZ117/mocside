@@ -1,6 +1,6 @@
 <template>
   <h1>This is the About Page</h1>
-  <Modal>
+  <Modal v-if="isShowLogin" @close="toggleLogin">
     <template v-slot:title> Login </template>
     <template v-slot:body>
       <!-- Login Form -->
@@ -68,6 +68,7 @@ export default {
   components: { Modal, FormInput, BaseBtn },
   data() {
     return {
+      isShowLogin: true,
       email: null,
       password: null,
       error: null,
@@ -98,6 +99,10 @@ export default {
       } catch (error) {
         this.error = getError(error);
       }
+    },
+    toggleLogin() {
+      this.isShowLogin = !this.isShowLogin;
+      console.log("change isShowLogin");
     },
   },
 };
