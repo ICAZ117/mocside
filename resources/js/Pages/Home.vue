@@ -195,7 +195,7 @@ export default {
   components: { Modal, FormInput, BaseBtn },
   data() {
     return {
-      isShowLogin: false,
+      isShowLogin: true,
       email: null,
       password: null,
       error: null,
