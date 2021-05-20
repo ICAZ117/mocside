@@ -185,7 +185,7 @@
         </div> -->
     </template>
   </Modal>
-  <router-view></router-view>
+  <!-- <router-view></router-view> -->
 </template>
 
 <script>
