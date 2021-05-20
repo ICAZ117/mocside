@@ -1,5 +1,5 @@
 <template>
-  <section @click="handleClose" class="modal-section"></section>
+  <section @click="handleClose" class="modal-section">
   <!-- <div class="absolute inset-0"> -->
   <div class="modal-wrapper-1">
     <div class="modal-wrapper-2">
@@ -15,6 +15,7 @@
       </div>
     </div>
   </div>
+  </section>
 </template>
 
 <script>
