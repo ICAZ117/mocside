@@ -1,4 +1,4 @@
-import * as API from "./services/API";
+import * as API from "./API";
 
 export default {
   async uploadFile(payload) {
