@@ -24,7 +24,7 @@
               class="nav-link"
               >{{ item.title }}</router-link
             >
-            <a class="nav-link" href="Login.vue">Login</a>
+            <button class="nav-link">Login</button>
             <a class="nav-link" href="#">Sign Up</a>
           </div>
         </div>
