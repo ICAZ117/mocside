@@ -185,6 +185,7 @@
         </div> -->
     </template>
   </Modal>
+  <router-view></router-view>
 </template>
 
 <script>
@@ -203,9 +204,7 @@ export default {
   },
   methods: {
     async login() {
-        
-        // code properly connects to this point
-
+      // code properly connects to this point
 
       const payload = {
         email: this.email,

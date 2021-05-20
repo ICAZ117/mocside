@@ -2,7 +2,14 @@ const routes = [
     {
         path: '',
         component: () => import("../Pages/Home.vue"),
-        name: 'home'
+        name: 'home',
+        children: [
+            {
+            path: 'login',
+            component: () => import("../Pages/Login.vue"),
+            props: true
+            }
+        ]
     },
     {
         path: '/courses',
