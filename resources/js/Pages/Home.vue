@@ -171,34 +171,34 @@ export default {
     };
   },
   methods: {
-    async login() {
-      // code properly connects to this point
+    // async login() {
+    //   // code properly connects to this point
 
-      const payload = {
-        email: this.email,
-        password: this.password,
-      };
-      this.error = null;
-      try {
-        await AuthService.login(payload);
-        const authUser = await this.$store.dispatch("auth/getAuthUser");
-        if (authUser) {
-          this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
-          this.$router.push("/dashboard");
-        } else {
-          const error = Error(
-            "Unable to fetch user after login, check your API settings."
-          );
-          error.name = "Fetch User";
-          throw error;
-        }
-      } catch (error) {
-        this.error = getError(error);
-      }
-    },
-    toggleLogin() {
-      this.isLoginOpen = !this.isLoginOpen;
-    },
+    //   const payload = {
+    //     email: this.email,
+    //     password: this.password,
+    //   };
+    //   this.error = null;
+    //   try {
+    //     await AuthService.login(payload);
+    //     const authUser = await this.$store.dispatch("auth/getAuthUser");
+    //     if (authUser) {
+    //       this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
+    //       this.$router.push("/dashboard");
+    //     } else {
+    //       const error = Error(
+    //         "Unable to fetch user after login, check your API settings."
+    //       );
+    //       error.name = "Fetch User";
+    //       throw error;
+    //     }
+    //   } catch (error) {
+    //     this.error = getError(error);
+    //   }
+    // },
+    // toggleLogin() {
+    //   this.isLoginOpen = !this.isLoginOpen;
+    // },
   },
 };
 </script>

@@ -2,7 +2,7 @@
   <body>
     <!-- Login Form -->
     <div class="login">
-      <form onsubmit="validate" class="needs-validation" novalidate>
+      <form onsubmit="prevent" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="uname">Username:</label>
           <input
@@ -36,7 +36,7 @@
             <div class="invalid-feedback">Check this checkbox to continue.</div>
           </label>
         </div>
-        <button type="submit" class="btn btn-danger">Log In</button>
+        <button type="submit" @click="validate" class="btn btn-danger">Log In</button>
       </form>
 
       <!-- <script>
