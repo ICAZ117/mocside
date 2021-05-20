@@ -94,14 +94,14 @@
     </div>
     <!-- End Socket -->
   </body>
-  <Modal v-if="this.isLoginOpen" @close="toggleLogin">
-    <!--  -->
+  <!-- <Modal @close="toggleLogin">
+    <! v-if="this.isLoginOpen" 
     <template v-slot:title> Login </template>
     <template v-slot:body>
-      <!-- Login Form -->
+      <! Login Form 
       <div class="login">
         <form @submit.prevent="login">
-          <!-- change from email to username later -->
+          <! change from email to username later 
           <FormInput
             type="email"
             label="Email"
@@ -120,14 +120,14 @@
           />
           <div class="flex justify-between">
             <BaseBtn type="submit" text="Login" />
-            <!-- <router-link to="/forgot-password" class="text-sm base-link">
+            <! <router-link to="/forgot-password" class="text-sm base-link">
               Forgot your password?
-            </router-link> -->
+            </router-link> --
           </div>
         </form>
       </div>
 
-      <!-- <div class="login">
+      <! <div class="login">
         <form action="" class="needs-validation" novalidate>
             <div class="form-group">
                 <label for="uname">Username:</label>
@@ -150,9 +150,9 @@
             </div>
             <button type="submit" class="btn btn-danger">Log In</button>
         </form>
-        </div> -->
+        </div> 
     </template>
-  </Modal>
+  </Modal> -->
   <!-- <router-view></router-view> -->
 </template>
 
@@ -167,7 +167,7 @@ export default {
       email: null,
       password: null,
       error: null,
-      props: ["isLoginOpen"],
+      // props: ["isLoginOpen"],
     };
   },
   methods: {
