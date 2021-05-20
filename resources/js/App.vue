@@ -1,8 +1,8 @@
 <template>
   <div class="app">
     <Navbar @open-login="toggleLogin"/>
-    <router-view name="home" :isLoginOpen="isLoginOpen"></router-view>
-    <!--  -->
+    <!-- <router-view name="home" :isLoginOpen="isLoginOpen"></router-view> -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -14,12 +14,12 @@ export default {
   components: { Navbar },
   data() {
     return {
-      isLoginOpen: false,
+      // isLoginOpen: false,
     }
   },
   methods: {
     toggleLogin() {
-      this.isLoginOpen = !this.isLoginOpen;
+      // this.isLoginOpen = !this.isLoginOpen;
     }
   },
 };
