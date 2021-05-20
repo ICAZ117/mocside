@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "@/store/index";
+import store from "../Store/index";
 
 export const apiClient = axios.create({
   baseURL: process.env.VUE_APP_API_URL + "/api",

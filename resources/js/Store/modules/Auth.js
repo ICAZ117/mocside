@@ -1,6 +1,6 @@
-import router from "@/router";
-import { getError } from "@/utils/helpers";
-import AuthService from "@/services/AuthService";
+import router from "../../router";
+import { getError } from "../../utils/helpers";
+import AuthService from "../../services/AuthService";
 
 export const namespaced = true;
 

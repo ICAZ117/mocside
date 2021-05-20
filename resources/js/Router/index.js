@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import store from "@/Store/index";
+import store from "../Store/index";
 import routes from "./routes";
 
 const router = createRouter({
