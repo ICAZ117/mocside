@@ -187,6 +187,8 @@ nav {
   width: 100vw!important;
   background-color: rgba(75, 75, 75, 0.5)!important;
   position: fixed!important;
+  top: 0;
+  left: 0;
 }
 
 .modal-wrapper-1 {
