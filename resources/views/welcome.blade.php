@@ -11,6 +11,7 @@
     </head>
     <body>
         <div id="app">
+        <p>Testing</p>
             <app></app>
         </div>
 
