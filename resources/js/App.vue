@@ -1,7 +1,7 @@
 <template>
   <div class="app">
-    <Navbar />
-    <router-view></router-view>
+    <Navbar @open-login="toggleLogin"/>
+    <router-view :isLoginOpen="isLoginOpen"></router-view>
   </div>
 </template>
 
@@ -11,6 +11,16 @@ import Navbar from "./Components/Navbar";
 
 export default {
   components: { Navbar },
+  data() {
+    return {
+      isLoginOpen = false,
+    }
+  },
+  methods: {
+    toggleLogin() {
+      this.isLoginOpen = !isLoginOpen;
+    }
+  },
 };
 </script>
 

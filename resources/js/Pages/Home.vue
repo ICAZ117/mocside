@@ -127,7 +127,7 @@
     </div>
     <!-- End Socket -->
   </body>
-  <Modal v-if="isShowLogin" @close="toggleLogin">
+  <Modal v-if="isLoginOpen" @close="toggleLogin">
     <template v-slot:title> Login </template>
     <template v-slot:body>
       <!-- Login Form -->
@@ -196,10 +196,10 @@ export default {
   components: { Modal, FormInput, BaseBtn },
   data() {
     return {
-      isShowLogin: true,
       email: null,
       password: null,
       error: null,
+      props: [ isLoginOpen ],
     };
   },
   methods: {
@@ -229,8 +229,7 @@ export default {
       }
     },
     toggleLogin() {
-      this.isShowLogin = !this.isShowLogin;
-      console.log("change isShowLogin");
+      this.isLoginOpen = !this.isLoginOpen;
     },
   },
 };
