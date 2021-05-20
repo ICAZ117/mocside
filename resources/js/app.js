@@ -5,7 +5,7 @@ import { createApp } from 'vue';
 
 import router from "./Router/index";
 import App from "./App.vue";
-import store from "./Store";
+import store from "./Store/index";
 
 // Font Awesome
 import "./all.min";
