@@ -1,4 +1,4 @@
-import router from "../../router/index";
+import router from "../../Router/index";
 import { getError } from "../../utils/helpers";
 import AuthService from "../../services/AuthService";
 
