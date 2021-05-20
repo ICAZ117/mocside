@@ -1,20 +1,21 @@
 <template>
-  <section @click="handleClose" class="modal-section"></section>
-  <!-- <div class="absolute inset-0"> -->
-  <div class="modal-wrapper-1">
-    <div class="modal-wrapper-2">
-      <div class="modal-wrapper-3">
-        <div class="modal-wrapper-4">
-          <h3>
-            <slot name="title"></slot>
-          </h3>
-          <main>
-            <slot name="body"></slot>
-          </main>
+  <section @click="handleClose" class="modal-section">
+    <!-- <div class="absolute inset-0"> -->
+    <div class="modal-wrapper-1">
+      <div class="modal-wrapper-2">
+        <div class="modal-wrapper-3">
+          <div class="modal-wrapper-4">
+            <h3>
+              <slot name="title"></slot>
+            </h3>
+            <main>
+              <slot name="body"></slot>
+            </main>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
