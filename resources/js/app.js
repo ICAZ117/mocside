@@ -5,6 +5,7 @@ import { createApp } from 'vue';
 
 import router from "./Router/index";
 import App from "./App.vue";
+import store from "./Store";
 
 // Font Awesome
 import "./all.min";
@@ -22,4 +23,5 @@ import "bootstrap";
 
 const app = createApp(App);
 app.use(router);
+app.use(store);
 app.mount('#app');
