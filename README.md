@@ -7,11 +7,11 @@ Completed:
 * Summer schedule
 * Transition html/php home page into laravel project using vue components
 * Create basic login modal
+  * pressing off Login Modal now closes the modal properly
 
 Todo:
 
-* Clicking off Login Closes Login
-  * Clicking on Login in Nav opens Login
+* Clicking on Login in Nav opens Login
 * Create Registration Modal
 * Style Login Modal
 * Style BaseBtn
