@@ -2,7 +2,7 @@
   <body>
     <!-- Login Form -->
     <div class="login">
-      <form @submit="validate" class="needs-validation" novalidate>
+      <form onsubmit="validate" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="uname">Username:</label>
           <input
