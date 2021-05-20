@@ -4,7 +4,7 @@ import { createApp } from 'vue';
 
 import router from "./Router/index";
 // import store from "./Store/index";
-import App from "./App.vue";
+import App from "../js/App.vue";
 
 
 // Font Awesome
