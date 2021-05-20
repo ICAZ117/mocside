@@ -1,5 +1,5 @@
 <template>
-  <section @click="handleClose" class="modal-section"></section>
+  <div @click="handleClose" class="modal-section"></div>
   <!-- <div class="absolute inset-0"> -->
   <div class="modal-wrapper-1">
     <div class="modal-wrapper-2">
