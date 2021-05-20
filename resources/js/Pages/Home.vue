@@ -127,7 +127,8 @@
     </div>
     <!-- End Socket -->
   </body>
-  <Modal v-if="isLoginOpen" @close="toggleLogin">
+  <Modal  @close="toggleLogin">
+    <!-- v-if="isLoginOpen" -->
     <template v-slot:title> Login </template>
     <template v-slot:body>
       <!-- Login Form -->
@@ -199,7 +200,7 @@ export default {
       email: null,
       password: null,
       error: null,
-      props: [ isLoginOpen ],
+      // props: [ isLoginOpen ],
     };
   },
   methods: {
@@ -228,9 +229,9 @@ export default {
         this.error = getError(error);
       }
     },
-    toggleLogin() {
-      this.isLoginOpen = !this.isLoginOpen;
-    },
+    // toggleLogin() {
+    //   this.isLoginOpen = !this.isLoginOpen;
+    // },
   },
 };
 </script>
