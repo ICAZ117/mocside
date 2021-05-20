@@ -36,7 +36,7 @@
             <div class="invalid-feedback">Check this checkbox to continue.</div>
           </label>
         </div>
-        <button type="submit" @click="validate" class="btn btn-danger">Log In</button>
+        <button @click="validate" class="btn btn-danger">Log In</button>
       </form>
 
       <!-- <script>
