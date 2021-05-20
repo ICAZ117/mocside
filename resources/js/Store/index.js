@@ -1,7 +1,7 @@
 import { createStore } from "vuex";
 
-import * as auth from "../store/modules/Auth";
-import * as user from "../store/modules/User";
+import * as auth from "../Store/modules/Auth";
+import * as user from "../Store/modules/User";
 
 const store =  new createStore({
   strict: true,
