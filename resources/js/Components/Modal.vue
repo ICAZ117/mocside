@@ -1,5 +1,5 @@
 <template>
-  <section @click="close" class="modal-section"></section>
+  <section @click="handleClose" class="modal-section"></section>
   <!-- <div class="absolute inset-0"> -->
   <div class="modal-wrapper-1">
     <div class="modal-wrapper-2">
@@ -24,6 +24,11 @@ export default {
       emit("close");
     }
     return { close };
+  },
+  methods: {
+    handleClose() {
+      this.$emit("close");
+    }
   },
 };
 </script>
