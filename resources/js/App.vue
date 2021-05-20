@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     toggleLogin() {
-      this.isLoginOpen = !isLoginOpen;
+      this.isLoginOpen = !this.isLoginOpen;
     }
   },
 };
