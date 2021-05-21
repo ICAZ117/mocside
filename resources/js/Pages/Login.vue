@@ -91,7 +91,7 @@ export default {
         await AuthService.login(payload);
         const authUser = await this.$store.dispatch("auth/getAuthUser");
         if (authUser) {
-          this.$store.dispath("auth/setGuest", { value: "isNotGuest" });
+          this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
           this.$router.push("/courses"); // push home?
         } else {
           const error = Error(
