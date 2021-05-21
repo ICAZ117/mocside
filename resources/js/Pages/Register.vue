@@ -1,8 +1,8 @@
 <template>
   <body>
     <!-- Login Form -->
-	<p>Register view</p>
-    <div class="login">
+    <div class="register">
+		<h3 class="register-title">Register</h3>
       <form onsubmit="prevent" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="uname">Username:</label>

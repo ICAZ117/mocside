@@ -443,6 +443,10 @@ thead.labtable, thead.problemtable {
   padding: 20px;
 }
 
+.login-title {
+  text-align: center;
+}
+
 .form-label {
   /* label - text-sm text-gray-500 */
   font-size: 12pt;
@@ -464,6 +468,21 @@ thead.labtable, thead.problemtable {
   outline: none;
   border: 5px solid var(--FSCred);
 }
+
+/*============= Sign Up PAGE =============*/
+.register {
+  width: 400px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 20px;
+}
+
+.register-title {
+  text-align: center;
+}
+
 
 /*============= WORKSPACE =============*/
 

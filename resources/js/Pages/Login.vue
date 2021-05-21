@@ -2,6 +2,7 @@
   <body>
     <!-- Login Form -->
     <div class="login">
+      <h3 class="login-title">Login</h3>
       <form onsubmit="prevent" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="uname">Username:</label>
