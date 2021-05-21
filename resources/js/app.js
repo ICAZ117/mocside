@@ -7,7 +7,7 @@ import router from "./Router/index";
 import App from "../js/App.vue";
 
 // Vuelidate
-import { VuelidatePlugin } from '@vuelidate/core'
+import VuelidatePlugin from '@vuelidate/core'
 
 
 // Font Awesome
