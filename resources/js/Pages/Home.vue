@@ -18,10 +18,8 @@
 
                   <h4>A modern, free to use online IDE for virtual classrooms</h4>
 
-                  <!-- <a href="login.php" class="btn btn-danger btn-lg mr-2">Login</a> -->
                   <router-link to="/login" class="btn btn-danger btn-lg mr-2">Login</router-link>
 
-                  <!-- <a href="#" class="btn btn-danger btn-lg ml-2">Sign Up</a> -->
                   <router-link to="/register" class="btn btn-danger btn-lg ml-2">Sign Up</router-link>
                 </div>
               </div>
