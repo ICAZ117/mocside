@@ -25,7 +25,7 @@
               >{{ item.title }}</router-link
             >
             <!-- <a class="nav-link" @click="toggleLoginModal" href="">Login</a> -->
-            <a class="nav-link" href="#">Sign Up</a>
+            <!-- <a class="nav-link" href="#">Sign Up</a> -->
           </div>
         </div>
       </div>
@@ -43,6 +43,7 @@ export default {
         { title: "Home", to: "/" },
         { title: "Courses", to: "/courses" },
         { title: "Login", to: "/login" },
+        {title: "Sign Up", to: "/register"},
       ],
       // isLoginOpen: false,
     };
