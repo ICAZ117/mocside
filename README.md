@@ -20,3 +20,5 @@ Todo:
 * Add Auth to Register and add to Database if new User
 * Work on Course Page Styling
 * Make Course Page Dynamic for each unqiue User
+
+NOTE: FORM VALIDATION WORKS (kinda)
