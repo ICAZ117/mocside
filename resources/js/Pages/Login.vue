@@ -32,48 +32,32 @@
         </div>
         <div class="form-group form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" name="remember" />Remember Me
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="remember"
+            />Remember Me
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Check this checkbox to continue.</div>
           </label>
         </div>
         <button @click="validate" class="btn btn-danger">Log In</button>
       </form>
-
-      <!-- <script>
-        // Disable form submissions if there are invalid fields
-        (function () {
-          "use strict";
-          window.addEventListener(
-            "load",
-            function () {
-              // Get the forms we want to add validation styles to
-              var forms = document.getElementsByClassName("needs-validation");
-              // Loop over them and prevent submission
-              var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener(
-                  "submit",
-                  function (event) {
-                    if (form.checkValidity() === false) {
-                      event.preventDefault();
-                      event.stopPropagation();
-                    }
-                    form.classList.add("was-validated");
-                  },
-                  false
-                );
-              });
-            },
-            false
-          );
-        })();
-      </script> -->
     </div>
   </body>
 </template>
 
 <script>
+import AuthService from '../services/AuthService';
+import { getError } from "../utils/helpers";
 export default {
+  data() {
+    return {
+      email: null,
+      password: null,
+      error: null,
+    };
+  },
   methods: {
     validate() {
       "use strict";
@@ -99,6 +83,29 @@ export default {
         },
         false
       );
+    },
+    async login() {
+      const payload = {
+        email: this.email,
+        password: this.password,
+      };
+      this.error = null;
+      try {
+        await AuthService.login(payload);
+        const authUser = await this.$store.dispatch("auth/getAuthUser");
+        if (authUser) {
+          this.$store.dispath("auth/setGuest", {value: "isNotGuest" });
+          this.$router.push('/courses'); // push home?
+        } else {
+          const error = Error(
+            "Unable to fetch user after login, check your API settings."
+          );
+          error.name = "Fetch User";
+          throw error;
+        }
+      } catch (error) {
+        this.error = getError(error);
+      }
     },
   },
 };
