@@ -1,168 +1,7 @@
 <template>
-    <div class="container" style="max-width: 500px; text-align: left">
-
-        <div class="alert alert-success" role="alert">
-            <h2 class="alert-heading">Vue Form Validation Example</h2>
-        </div>
-
-        <form @submit.prevent="handleSubmit">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" v-model="userForm.name" id="name" name="name" class="form-control"
-                    :class="{ 'is-invalid': isSubmitted && $v.userForm.name.$error }" />
-                <div v-if="isSubmitted && !$v.userForm.name.required" class="invalid-feedback">Name field is required</div>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" v-model="userForm.email" id="email" name="email" class="form-control"
-                    :class="{ 'is-invalid': isSubmitted && $v.userForm.email.$error }" />
-                <div v-if="isSubmitted && $v.userForm.email.$error" class="invalid-feedback">
-                    <span v-if="!$v.userForm.email.required">Email field is required</span>
-                    <span v-if="!$v.userForm.email.email">Please provide valid email</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="mobile">Mobile</label>
-                <input type="text" v-model="userForm.mobile" id="mobile" name="mobile" class="form-control"
-                    :class="{ 'is-invalid': isSubmitted && $v.userForm.mobile.$error }" />
-                <div v-if="isSubmitted && $v.userForm.mobile.$error" class="invalid-feedback">
-                    <span v-if="!$v.userForm.mobile.required">Mobile field is required</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <div class="form-group" :class="{ 'is-invalid': isSubmitted && $v.userForm.gender.$error }">
-                    <div class="form-check form-check-inline" :class="{ 'is-invalid': isSubmitted && $v.userForm.gender.$error }">
-                        <input class="form-check-input" type="radio" name="gender" v-model="userForm.gender" id="gender1" value="male">
-                        <label class="form-check-label" for="gender1">Male</label>
-                    </div>
-                    <div class="form-check form-check-inline" :class="{ 'is-invalid': isSubmitted && $v.userForm.gender.$error }">
-                        <input class="form-check-input" type="radio" name="gender" v-model="userForm.gender" id="gender2" value="female">
-                        <label class="form-check-label" for="gender2">Female</label>
-                    </div>
-
-                    <div v-if="isSubmitted && $v.userForm.gender.$error" class="invalid-feedback">
-                        <span v-if="!$v.userForm.gender.required">This field is required</span>
-                    </div>                    
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" v-model="userForm.password" id="password" name="password" class="form-control"
-                    :class="{ 'is-invalid': isSubmitted && $v.userForm.password.$error }" />
-                <div v-if="isSubmitted && $v.userForm.password.$error" class="invalid-feedback">
-                    <span v-if="!$v.userForm.password.required">Password field is required</span>
-                    <span v-if="!$v.userForm.password.minLength">Password should be at least 5 characters long</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" v-model="userForm.confirmPassword" id="confirmPassword" name="confirmPassword"
-                    class="form-control" :class="{ 'is-invalid': isSubmitted && $v.userForm.confirmPassword.$error }" />
-                <div v-if="isSubmitted && $v.userForm.confirmPassword.$error" class="invalid-feedback">
-                    <span v-if="!$v.userForm.confirmPassword.required">Confirm Password field is required</span>
-                    <span v-else-if="!$v.userForm.confirmPassword.sameAsPassword">Passwords should be matched</span>
-                </div>
-            </div>
-
-            <div class="form-group form-check">
-                <input type="checkbox" v-model="userForm.accept" @change="$v.userForm.accept.$touch()" id="accept" class="form-check-input">
-                <label class="form-check-label" :class="{ 'is-invalid': isSubmitted && $v.userForm.accept.$error }" for="accept">Accept terms &nbsp; conditions</label>
-
-                <div v-if="isSubmitted && $v.userForm.accept.$error" class="invalid-feedback">
-                    <span v-if="!$v.userForm.accept.required">Accept terms and conditions</span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <button class="btn btn-danger btn-block">Register</button>
-            </div>
-        </form>
-        
-    </div>
-</template>
-
-<script>
-    import {
-        required,
-        email,
-        minLength,
-        sameAs
-    } from "vuelidate/lib/validators";
-
-    export default {
-        data() {
-            return {
-                userForm: {
-                    name: "",
-                    email: "",
-                    mobile: "",
-                    gender: "",
-                    password: "",
-                    confirmPassword: "",
-                    accept: ""
-                },
-                isSubmitted: false
-            };
-        },
-        validations: {
-            userForm: {
-                name: {
-                    required
-                },
-                email: {
-                    required,
-                    email
-                },
-                mobile: {
-                    required
-                },
-                gender: {
-                    required
-                },
-                password: {
-                    required,
-                    minLength: minLength(5)
-                },
-                confirmPassword: {
-                    required,
-                    sameAsPassword: sameAs('password')
-                },
-                accept: {
-                    required (val) {
-                      return val
-                    }
-                }
-            }
-        },
-        methods: {
-            handleSubmit() {
-                this.isSubmitted = true;
-
-                this.$v.$touch();
-                if (this.$v.$invalid) {
-                    return;
-                }
-
-                alert("SUCCESS!" + JSON.stringify(this.userForm));
-            }
-        }
-    };
-</script>
-
-<style>
-
-</style>
-
-<!-- <template>
-<div>
+  <div>
     <!-- Login Form -->
-<!--    <div class="login">
+    <div class="login">
       <h3 class="login-title">Login</h3>
       <form @submit.prevent="validate" class="needs-validation">
         <div class="form-group">
@@ -193,11 +32,7 @@
         </div>
         <div class="form-group form-check">
           <label class="form-check-label">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              name="remember"
-            />Remember Me
+            <input class="form-check-input" type="checkbox" name="remember" />Remember Me
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Check this checkbox to continue.</div>
           </label>
@@ -205,11 +40,11 @@
         <button type="submit" class="btn btn-danger">Log In</button>
       </form>
     </div>
-  </body>
+  </div>
 </template>
 
 <script>
-import AuthService from '../services/AuthService';
+import AuthService from "../services/AuthService";
 import { getError } from "../utils/helpers";
 export default {
   data() {
@@ -222,7 +57,7 @@ export default {
   methods: {
     validate() {
       console.log("Inside validate");
-      "use strict";
+      ("use strict");
       window.addEventListener(
         "load",
         function () {
@@ -256,8 +91,8 @@ export default {
         await AuthService.login(payload);
         const authUser = await this.$store.dispatch("auth/getAuthUser");
         if (authUser) {
-          this.$store.dispath("auth/setGuest", {value: "isNotGuest" });
-          this.$router.push('/courses'); // push home?
+          this.$store.dispath("auth/setGuest", { value: "isNotGuest" });
+          this.$router.push("/courses"); // push home?
         } else {
           const error = Error(
             "Unable to fetch user after login, check your API settings."
@@ -274,4 +109,3 @@ export default {
 </script>
 
 <style></style>
--->
