@@ -1,7 +1,8 @@
 <template>
   <div class="app">
-    <Navbar @open-login="toggleLogin"/>
+    <!-- <Navbar @open-login="toggleLogin"/> -->
     <!-- <router-view name="home" :isLoginOpen="isLoginOpen"></router-view> -->
+    <Navbar />
     <router-view></router-view>
   </div>
 </template>
