@@ -3,19 +3,20 @@
     <!-- Login Form -->
     <div class="login">
       <h3 class="login-title">Login</h3>
-      <form @submit.prevent="validate" class="needs-validation">
+      <form @submit.prevent="login" class="needs-validation">
         <div class="form-group">
-          <label for="uname">Username:</label>
+          <label for="email">Email:</label>
           <input
-            type="text"
+            type="email"
             class="form-control"
-            id="uname"
-            placeholder="Enter username"
-            name="uname"
+            id="email"
+            placeholder="Enter email"
+            name="email"
+            v-model="email"
             required
           />
           <div class="valid-feedback"></div>
-          <div class="invalid-feedback">Please enter your username</div>
+          <div class="invalid-feedback">Please enter your email</div>
         </div>
         <div class="form-group">
           <label for="pwd">Password:</label>
@@ -25,6 +26,7 @@
             id="pwd"
             placeholder="Enter password"
             name="pswd"
+            v-model="password"
             required
           />
           <div class="valid-feedback"></div>

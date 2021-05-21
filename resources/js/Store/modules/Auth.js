@@ -49,6 +49,9 @@ export const actions = {
         commit("SET_ERROR", getError(error));
       });
   },
+  setGuest(context, { value }) {
+    window.localStorage.setItem("guest", value);
+  },
 };
 
 export const getters = {
@@ -66,5 +69,11 @@ export const getters = {
   },
   loggedIn: (state) => {
     return !!state.user;
+  },
+  guest: () => {
+    const storageItem = window.localStorage.getItem("guest");
+    if (!storageItem) return false;
+    if (storageItem === "isGuest") return true;
+    if (storageItem === "isNotGuest") return false;
   },
 };
