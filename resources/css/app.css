@@ -66,6 +66,7 @@ body {
   background-image: url("../img/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0)!important;
   z-index: 0;
 }
 
