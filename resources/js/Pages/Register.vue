@@ -171,9 +171,13 @@
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       userForm: {
@@ -205,7 +209,7 @@ export default {
       },
       password: {
         required,
-        minLength: minLength(5),
+        minLength: minLength(8),
       },
       confirmPassword: {
         required,
