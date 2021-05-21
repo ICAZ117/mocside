@@ -3,7 +3,7 @@
     <!-- Login Form -->
     <div class="login">
       <h3 class="login-title">Login</h3>
-      <form onsubmit="prevent" class="needs-validation" novalidate>
+      <form @submit.prevent="validate" class="needs-validation" novalidate>
         <div class="form-group">
           <label for="uname">Username:</label>
           <input
@@ -37,7 +37,7 @@
             <div class="invalid-feedback">Check this checkbox to continue.</div>
           </label>
         </div>
-        <button @click="validate" class="btn btn-danger">Log In</button>
+        <button type="submit" class="btn btn-danger">Log In</button>
       </form>
 
       <!-- <script>
@@ -76,6 +76,7 @@
 export default {
   methods: {
     validate() {
+      console.log("Inside validate");
       "use strict";
       window.addEventListener(
         "load",
