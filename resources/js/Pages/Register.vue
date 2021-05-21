@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div>
     <!-- Login Form -->
     <div class="register">
 		<h3 class="register-title">Register</h3>
@@ -82,7 +82,7 @@
         })();
       </script> -->
     </div>
-  </body>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div>
     <!-- Login Form -->
     <div class="login">
       <h3 class="login-title">Login</h3>
@@ -69,7 +69,7 @@
         })();
       </script> -->
     </div>
-  </body>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-	<body>
+	<div>
     <!-- Main Page-->
 
     <div class="courses header">
@@ -94,7 +94,7 @@
         </div>
     </div>
 
-</body>
+</div>
 </template>
 
 <script>

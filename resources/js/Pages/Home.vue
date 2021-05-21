@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div>
     <!-- Image Carousel -->
     <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="6500">
       <!-- Carousel Content -->
@@ -93,7 +93,7 @@
       <p><a href="#" target="_blank">and here</a></p>
     </div>
     <!-- End Socket -->
-  </body>
+  </div>
   <!-- <Modal @close="toggleLogin">
     <! v-if="this.isLoginOpen" 
     <template v-slot:title> Login </template>
