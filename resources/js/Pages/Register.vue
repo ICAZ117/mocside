@@ -4,6 +4,19 @@
     <div class="register">
 		<h3 class="register-title">Register</h3>
       <form onsubmit="prevent" class="needs-validation" novalidate>
+		<div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="uname"
+            placeholder="Enter Email"
+            name="email"
+            required
+          />
+          <div class="valid-feedback"></div>
+          <div class="invalid-feedback">Please enter your Email</div>
+        </div>
         <div class="form-group">
           <label for="uname">Username:</label>
           <input
