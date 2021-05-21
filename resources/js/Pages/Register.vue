@@ -108,6 +108,7 @@
           name="password"
           class="form-control"
           :class="{ 'is-invalid': isSubmitted && $v.userForm.password.$error }"
+          autocomplete="new-password"
         />
         <div v-if="isSubmitted && $v.userForm.password.$error" class="invalid-feedback">
           <span v-if="!$v.userForm.password.required">Password field is required</span>
@@ -127,6 +128,7 @@
           name="confirmPassword"
           class="form-control"
           :class="{ 'is-invalid': isSubmitted && $v.userForm.confirmPassword.$error }"
+          autocomplete="new-password"
         />
         <div
           v-if="isSubmitted && $v.userForm.confirmPassword.$error"
