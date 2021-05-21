@@ -6,7 +6,9 @@ import router from "./Router/index";
 // import store from "./Store/index";
 import App from "../js/App.vue";
 
-
+// Vuelidate
+import "@vuelidate/core";
+import "vuelidate/lib/validators";
 
 // Font Awesome
 import "./all.min";
