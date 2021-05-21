@@ -172,7 +172,7 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
 export default {
   setup() {
