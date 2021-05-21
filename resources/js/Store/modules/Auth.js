@@ -44,6 +44,7 @@ export const actions = {
         commit("SET_LOADING", false);
       })
       .catch((error) => {
+        console.log(error)
         commit("SET_LOADING", false);
         commit("SET_USER", null);
         commit("SET_ERROR", getError(error));
