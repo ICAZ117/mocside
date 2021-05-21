@@ -153,7 +153,7 @@
             class="form-check-label"
             :class="{ 'is-invalid': isSubmitted && $v.userForm.accept.$error }"
             for="accept"
-            >Accept terms &nbsp; conditions</label
+            >Accept terms & conditions</label
           >
 
           <div v-if="isSubmitted && $v.userForm.accept.$error" class="invalid-feedback">
