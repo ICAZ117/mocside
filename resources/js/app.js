@@ -7,8 +7,8 @@ import router from "./Router/index";
 import App from "../js/App.vue";
 
 // Vuelidate
-import "@vuelidate/core";
-import "vuelidate/lib/validators";
+import { VuelidatePlugin } from '@vuelidate/core'
+
 
 // Font Awesome
 import "./all.min";
@@ -18,7 +18,7 @@ import "bootstrap";
 
 
 const app = createApp(App);
-
+app.use(VuelidatePlugin);
 app.use(router);
 // app.use(store);
 app.mount('#app');
