@@ -15,7 +15,8 @@
             class="form-control"
             :class="{ 'is-invalid': isSubmitted && v$.userForm.name.$error }"
           />
-          <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback">
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <div v-if="isSubmitted && !v$.userForm.name" class="invalid-feedback">
             Name field is required
           </div>
         </div>
