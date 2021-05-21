@@ -23,6 +23,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/{id}', function ($id) {
         return User::findOrFail($id);
     });
+    Route::get('/users/auth', AuthController::class);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
