@@ -1,9 +1,6 @@
 <template>
   <div>
     <nav class="navbar bg-light navbar-light navbar-expand-xl">
-      <a href="index.php" class="navbar-brand"
-        ><img src="img/logo/brandlight.png" alt="Mocs-IDE" title="Logo"
-      /></a>
       <router-link to="/" class=navbar-brand>
         <img src="img/logo/brandlight.png" alt="Mocs-IDE" title="Logo"/>
       </router-link>
