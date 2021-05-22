@@ -40,6 +40,7 @@ export const actions = {
     commit("SET_LOADING", true);
     return AuthService.getAuthUser()
       .then((response) => {
+        console.log(response)
         commit("SET_USER", response.data.data);
         commit("SET_LOADING", false);
       })

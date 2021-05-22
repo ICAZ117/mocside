@@ -13,9 +13,10 @@
             id="name"
             name="name"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && $v.userForm.name.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.name.$error }"
           />
-          <div v-if="isSubmitted && !$v.userForm.name.required" class="invalid-feedback">
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <div v-if="isSubmitted && !v$.userForm.name" class="invalid-feedback">
             Name field is required
           </div>
         </div>
@@ -29,11 +30,11 @@
             id="email"
             name="email"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && $v.userForm.email.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
           />
-          <div v-if="isSubmitted && $v.userForm.email.$error" class="invalid-feedback">
-            <span v-if="!$v.userForm.email.required">Email field is required</span>
-            <span v-if="!$v.userForm.email.email">Please provide valid email</span>
+          <div v-if="isSubmitted && v$.userForm.email.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.email.required">Email field is required</span>
+            <span v-if="!v$.userForm.email.email">Please provide valid email</span>
           </div>
         </div>
 
@@ -46,10 +47,10 @@
             id="mobile"
             name="mobile"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && $v.userForm.mobile.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.mobile.$error }"
           />
-          <div v-if="isSubmitted && $v.userForm.mobile.$error" class="invalid-feedback">
-            <span v-if="!$v.userForm.mobile.required">Mobile field is required</span>
+          <div v-if="isSubmitted && v$.userForm.mobile.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.mobile.required">Mobile field is required</span>
           </div>
         </div>
 
@@ -58,11 +59,11 @@
           <label for="gender">Gender</label>
           <div
             class="form-group"
-            :class="{ 'is-invalid': isSubmitted && $v.userForm.gender.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.gender.$error }"
           >
             <div
               class="form-check form-check-inline"
-              :class="{ 'is-invalid': isSubmitted && $v.userForm.gender.$error }"
+              :class="{ 'is-invalid': isSubmitted && v$.userForm.gender.$error }"
             >
               <input
                 class="form-check-input"
@@ -76,7 +77,7 @@
             </div>
             <div
               class="form-check form-check-inline"
-              :class="{ 'is-invalid': isSubmitted && $v.userForm.gender.$error }"
+              :class="{ 'is-invalid': isSubmitted && v$.userForm.gender.$error }"
             >
               <input
                 class="form-check-input"
@@ -89,8 +90,8 @@
               <label class="form-check-label" for="gender2">Female</label>
             </div>
 
-            <div v-if="isSubmitted && $v.userForm.gender.$error" class="invalid-feedback">
-              <span v-if="!$v.userForm.gender.required">This field is required</span>
+            <div v-if="isSubmitted && v$.userForm.gender.$error" class="invalid-feedback">
+              <span v-if="!v$.userForm.gender.required">This field is required</span>
             </div>
           </div>
         </div>
@@ -104,12 +105,12 @@
             id="password"
             name="password"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && $v.userForm.password.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.password.$error }"
             autocomplete="new-password"
           />
-          <div v-if="isSubmitted && $v.userForm.password.$error" class="invalid-feedback">
-            <span v-if="!$v.userForm.password.required">Password field is required</span>
-            <span v-if="!$v.userForm.password.minLength"
+          <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.password.required">Password field is required</span>
+            <span v-if="!v$.userForm.password.minLength"
               >Password should be at least 5 characters long</span
             >
           </div>
@@ -124,17 +125,17 @@
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && $v.userForm.confirmPassword.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && $v.userForm.confirmPassword.$error"
+            v-if="isSubmitted && v$.userForm.confirmPassword.$error"
             class="invalid-feedback"
           >
-            <span v-if="!$v.userForm.confirmPassword.required"
+            <span v-if="!v$.userForm.confirmPassword.required"
               >Confirm Password field is required</span
             >
-            <span v-else-if="!$v.userForm.confirmPassword.sameAsPassword"
+            <span v-else-if="!v$.userForm.confirmPassword.sameAsPassword"
               >Passwords should be matched</span
             >
           </div>
@@ -145,19 +146,19 @@
           <input
             type="checkbox"
             v-model="userForm.accept"
-            @change="$v.userForm.accept.$touch()"
+            @change="v$.userForm.accept.$touch()"
             id="accept"
             class="form-check-input"
           />
           <label
             class="form-check-label"
-            :class="{ 'is-invalid': isSubmitted && $v.userForm.accept.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.accept.$error }"
             for="accept"
             >Accept terms & conditions</label
           >
 
-          <div v-if="isSubmitted && $v.userForm.accept.$error" class="invalid-feedback">
-            <span v-if="!$v.userForm.accept.required">Accept terms and conditions</span>
+          <div v-if="isSubmitted && v$.userForm.accept.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.accept.required">Accept terms and conditions</span>
           </div>
         </div>
 
@@ -176,7 +177,9 @@ import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
 export default {
   setup() {
-    return { v$: useVuelidate() };
+    return {
+      v$: useVuelidate(),
+    };
   },
   data() {
     return {
@@ -226,8 +229,8 @@ export default {
     handleSubmit() {
       this.isSubmitted = true;
 
-      this.$v.$touch();
-      if (this.$v.$invalid) {
+      this.v$.$touch();
+      if (this.v$.$invalid) {
         return;
       }
 
