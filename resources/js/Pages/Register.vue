@@ -16,7 +16,10 @@
             :class="{ 'is-invalid': isSubmitted && v$.userForm.fname.$error }"
           />
           <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <div v-if="isSubmitted && v$.userForm.fname.$error" class="invalid-feedback">
+          <div
+            v-if="isSubmitted && v$.userForm.fname.$error"
+            class="invalid-feedback"
+          >
             Please enter your first name
           </div>
         </div>
@@ -34,7 +37,10 @@
             :class="{ 'is-invalid': isSubmitted && v$.userForm.lname.$error }"
           />
           <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <div v-if="isSubmitted && v$.userForm.lname.$error" class="invalid-feedback">
+          <div
+            v-if="isSubmitted && v$.userForm.lname.$error"
+            class="invalid-feedback"
+          >
             Please enter your last name
           </div>
         </div>
@@ -49,10 +55,15 @@
             id="username"
             name="username"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.userForm.username.$error }"
+            :class="{
+              'is-invalid': isSubmitted && v$.userForm.username.$error,
+            }"
           />
           <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <div v-if="isSubmitted && v$.userForm.username.$error" class="invalid-feedback">
+          <div
+            v-if="isSubmitted && v$.userForm.username.$error"
+            class="invalid-feedback"
+          >
             Please enter a username
           </div>
         </div>
@@ -69,7 +80,10 @@
             class="form-control"
             :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
           />
-          <div v-if="isSubmitted && v$.userForm.email.$error" class="invalid-feedback">
+          <div
+            v-if="isSubmitted && v$.userForm.email.$error"
+            class="invalid-feedback"
+          >
             <span v-if="v$.userForm.email.required.$invalid"
               >Please enter your email</span
             >
@@ -90,10 +104,15 @@
             id="password"
             name="password"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.userForm.password.$error }"
+            :class="{
+              'is-invalid': isSubmitted && v$.userForm.password.$error,
+            }"
             autocomplete="new-password"
           />
-          <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
+          <div
+            v-if="isSubmitted && v$.userForm.password.$error"
+            class="invalid-feedback"
+          >
             <span v-if="v$.userForm.password.required.$invalid"
               >Please enter a password</span
             >
@@ -113,7 +132,9 @@
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error }"
+            :class="{
+              'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error,
+            }"
             autocomplete="new-password"
           />
           <div
@@ -123,10 +144,10 @@
             <span v-if="v$.userForm.confirmPassword.required.$invalid"
               >Please re-enter your password</span
             >
-            <span v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
+            <span
+              v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
               >Your passwords don't match!
-            </span
-            >
+            </span>
           </div>
         </div>
         <br />
@@ -205,7 +226,7 @@ export default {
       this.error = null;
       this.message = null;
       const payload = {
-        name: this.userForm.fname + ' ' + this.userForm.lname,
+        name: this.userForm.fname + " " + this.userForm.lname,
         email: this.userForm.email,
         password: this.userForm.password,
         password_confirmation: this.userForm.passwordConfirm,
