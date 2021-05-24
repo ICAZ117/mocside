@@ -198,6 +198,15 @@ export default {
     return {
       error: null,
       message: null,
+      v$: useValidate(),
+      fname: "",
+      lname: "",
+      email: "",
+      username: "",
+      password: {
+        password: "",
+        confirmPassword: "",
+      },
       isSubmitted: false,
     };
   },
@@ -206,6 +215,13 @@ export default {
       this.isSubmitted = true;
 
       this.v$.$touch();
+      this.v$.validate();
+      if(!this.v$.$error) {
+        alert('Form Successfully Submitted.');
+      }
+      else {
+        alert('Form failed verification');
+      }
       if (this.v$.$invalid) {
         return;
       }
