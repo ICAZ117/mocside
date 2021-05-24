@@ -20,6 +20,7 @@
             Please enter your first name
           </div>
         </div>
+        <br />
 
         <!-------------------- LAST NAME -------------------->
         <div class="form-group">
@@ -37,6 +38,7 @@
             Please enter your last name
           </div>
         </div>
+        <br />
 
         <!-------------------- USERNAME -------------------->
         <div class="form-group">
@@ -54,6 +56,7 @@
             Please enter a username
           </div>
         </div>
+        <br />
 
         <!--------------------- EMAIL --------------------->
         <div class="form-group">
@@ -76,6 +79,7 @@
             >
           </div>
         </div>
+        <br />
 
         <!------------------- PASSWORD ------------------->
         <div class="form-group">
@@ -98,6 +102,7 @@
             >
           </div>
         </div>
+        <br />
 
         <!---------------- REPEAT PASSWORD ---------------->
         <div class="form-group">
@@ -123,7 +128,8 @@
             >
           </div>
         </div>
-        <!-- REMOVED CODE GOES HERE -->
+        <br />
+        <br />
 
         <!-------------------- SUBMIT -------------------->
         <div class="form-group">
