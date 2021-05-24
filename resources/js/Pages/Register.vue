@@ -9,7 +9,7 @@
           <label for="fname">First Name</label>
           <input
             type="text"
-            v-model="state.fname"
+            v-model="userForm.fname"
             id="fname"
             name="fname"
             class="form-control"
@@ -30,7 +30,7 @@
           <label for="lname">Last Name</label>
           <input
             type="text"
-            v-model="state.lname"
+            v-model="userForm.lname"
             id="lname"
             name="lname"
             class="form-control"
@@ -51,7 +51,7 @@
           <label for="username">Username</label>
           <input
             type="text"
-            v-model="state.username"
+            v-model="userForm.username"
             id="username"
             name="username"
             class="form-control"
@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="state.email"
+            v-model="userForm.email"
             id="email"
             name="email"
             class="form-control"
@@ -100,7 +100,7 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="state.password"
+            v-model="userForm.password"
             id="password"
             name="password"
             class="form-control"
@@ -128,7 +128,7 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="state.confirmPassword"
+            v-model="userForm.confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
@@ -168,47 +168,49 @@ import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
 export default {
   setup() {
-    const state = reactive({
-      fname: "",
-      lname: "",
-      email: "",
-      username: "",
-      password: {
-        password: "",
-        confirmPassword: "",
-      },
-    })
-    const rules = computed(() => {
-      return {
-        fname: { required },
-        lname: { required },
-        username: { required },
-        email: { required, email },
-        password: {
-          password: { required, minLength: minLength(8) },
-          confirmPassword: { required, sameAs: sameAs(state.password.password) },
-        },
-      }
-    })
-    const v$ = useValidate(rules, state)
-
-    return { state, v$ }
+    return {
+      v$: useValidate(),
+    }    
   },
   data() {
     return {
       error: null,
       message: null,
-      v$: useValidate(),
-      fname: "",
-      lname: "",
-      email: "",
-      username: "",
-      password: {
+      userForm: {
+        fname: "",
+        lname: "",
+        email: "",
+        username: "",
         password: "",
         confirmPassword: "",
       },
       isSubmitted: false,
     };
+  },
+  validations: {
+    userForm: {
+      fname: {
+        required,
+      },
+      lname: {
+        required,
+      },
+      username: {
+        required,
+      },
+      email: {
+        required,
+        email,
+      },
+      password: {
+        required,
+        minLength: minLength(8),
+      },
+      confirmPassword: {
+        required,
+        sameAsPassword: sameAs("password"), //this looks specifically for the string "password" in the confirm password field, tried a bunch of ways to change and was unable
+      },
+    },
   },
   methods: {
     handleSubmit() {
