@@ -40,12 +40,14 @@ export const actions = {
     commit("SET_LOADING", true);
     return AuthService.getAuthUser()
       .then((response) => {
-        console.log("response: " + response);
+        console.log("Found User.")
+        console.log(response.data);
         commit("SET_USER", response.data.data);
         commit("SET_LOADING", false);
       })
       .catch((error) => {
-        console.log("error: " + error);
+        console.log("Couldn't find user. Unauthenticated?")
+        console.log(error);
         commit("SET_LOADING", false);
         commit("SET_USER", null);
         commit("SET_ERROR", getError(error));
