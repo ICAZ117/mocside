@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="this.userForm.email"
+            v-model="this.userForm.email.data"
             id="email"
             name="email"
             class="form-control"
@@ -100,7 +100,7 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="userForm.password"
+            v-model="this.userForm.password.data"
             id="password"
             name="password"
             class="form-control"
@@ -128,7 +128,7 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="userForm.confirmPassword"
+            v-model="this.userForm.confirmPassword.data"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
