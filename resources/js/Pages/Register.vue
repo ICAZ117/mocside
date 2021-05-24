@@ -176,12 +176,27 @@ export default {
       error: null,
       message: null,
       userForm: {
-        fname: "",
-        lname: "",
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
+        fname: {
+          data: "",
+        },
+        lname: {
+          data: "",
+        },
+        username: {
+          data: "",
+        },
+        email: {
+          data: "",
+          type: "email",
+        },
+        password: {
+          data: "",
+          type: "password",
+        },
+        confirmPassword: {
+          data: "",
+          type: "password",
+        },
       },
       isSubmitted: false,
     };
@@ -189,27 +204,33 @@ export default {
   validations: {
     userForm: {
       fname: {
-        required,
+        data: { required },
       },
       lname: {
-        required,
+        data: { required },
       },
       username: {
-        required,
+        data: { required },
       },
       email: {
-        required,
-        email,
+        data: {
+          required,
+          email,
+        },
       },
       password: {
-        required,
-        minLength: minLength(8),
+        data: {
+          required,
+          minLength: minLength(8),
+        },
       },
       confirmPassword: {
-        required,
-        sameAsPassword: sameAs(function() {
-          return this.userForm.password;
-        }),
+        data: {
+          required,
+          sameAsPassword: sameAs(function() {
+            return this.userForm.password;
+          }),
+        },
       },
     },
   },
