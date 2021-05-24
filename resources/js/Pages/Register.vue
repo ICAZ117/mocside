@@ -186,7 +186,7 @@ export default {
       },
       confirmPassword: {
         required,
-        sameAsPassword: sameAs("password"),
+        sameAsPassword: sameAs(this.userForm.password), //what the HECK IBRAHEEM I HAVE BEEN BUG FIXING THIS LINE BECAUSE YOU WERE CHECKING IT AGAINST THE STRING ("PASSWORD") INSTEAD OF THE VALUE OF THE PASSWORD.....URRGGHHHHHHHHHHHHHHHHHHH
       },
     },
   },
@@ -196,10 +196,6 @@ export default {
 
       this.v$.$touch();
       if (this.v$.$invalid) {
-        console.log(this.v$.userForm.password);
-        console.log(this.v$.userForm.password.$error);
-        console.log(this.v$.userForm.confirmPassword);
-        console.log(this.v$.userForm.confirmPassword.$error);
         return;
       }
 
