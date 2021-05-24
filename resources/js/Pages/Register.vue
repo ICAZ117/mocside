@@ -125,10 +125,6 @@
             >
             <span v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
               >Your passwords don't match!
-              <div>
-                {{this.v$.userForm.password}}
-                {{this.v$.userForm.confirmPassword}}
-              </div>
             </span
             >
           </div>
@@ -200,6 +196,10 @@ export default {
 
       this.v$.$touch();
       if (this.v$.$invalid) {
+        console.log(this.userForm.password);
+        console.log(v$.userForm.password.$error);
+        console.log(this.confirmPassword);
+        console.log(v$.userForm.confirmPassword.$error);
         return;
       }
 
