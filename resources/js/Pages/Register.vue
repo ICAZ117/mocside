@@ -196,9 +196,9 @@ export default {
 
       this.v$.$touch();
       if (this.v$.$invalid) {
-        console.log(this.v$.userForm.password.stringify);
+        console.log(this.v$.userForm.password);
         console.log(this.v$.userForm.password.$error);
-        console.log(this.v$.userForm.confirmPassword.JSON);
+        console.log(this.v$.userForm.confirmPassword);
         console.log(this.v$.userForm.confirmPassword.$error);
         return;
       }
