@@ -57,6 +57,27 @@
             >
           </div>
         </div>
+
+        <!------------------- PASSWORD ------------------->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            v-model="userForm.password"
+            id="password"
+            name="password"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.password.$error }"
+            autocomplete="new-password"
+          />
+          <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.password.required">Password field is required</span>
+            <span v-if="!v$.userForm.password.minLength"
+              >Password should be at least 5 characters long</span
+            >
+          </div>
+        </div>
+
         <!-- REMOVED CODE GOES HERE -->
 
         <!-------------------- SUBMIT -------------------->
@@ -71,7 +92,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 // import { required, email, minLength, sameAs } from "@vuelidate/validators";
-import { required, email } from "@vuelidate/validators";
+import { required, email, minLength } from "@vuelidate/validators";
 
 export default {
   setup() {
@@ -85,7 +106,7 @@ export default {
         fname: "",
         lname: "",
         email: "",
-        // password: "",
+        password: "",
         // confirmPassword: "",
         // accept: "",
       },
@@ -104,10 +125,10 @@ export default {
         required,
         email,
       },
-      // password: {
-      //   required,
-      //   minLength: minLength(8),
-      // },
+      password: {
+        required,
+        minLength: minLength(8),
+      },
       // confirmPassword: {
       //   required,
       //   sameAsPassword: sameAs("password"),
