@@ -12,9 +12,16 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
-    public function getKey(): string {
+    public function getKey(): string
+    {
         return static::class;
     }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+
 
     /**
      * The attributes that are mass assignable.
@@ -44,5 +51,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean',
     ];
 }

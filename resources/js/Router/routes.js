@@ -14,7 +14,8 @@ const routes = [
     {
         path: '/courses',
         component: () => import("../Pages/Courses.vue"),
-        name: "Courses"
+        name: "Courses",
+        meta: { requiresAuth: true },
     },
     {
         path: "/about",

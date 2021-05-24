@@ -210,7 +210,7 @@ export default {
         password_confirmation: this.userForm.passwordConfirm,
       };
       AuthService.registerUser(payload)
-        .then(() => this.$router.push("/courses"))
+        .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
         .catch((error) => (this.error = getError(error)));
     },
   },
