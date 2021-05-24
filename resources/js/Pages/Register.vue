@@ -188,9 +188,15 @@ export default {
   },
   validations: {
     userForm: {
-      fname: { required },
-      lname: { required },
-      username: { required },
+      fname: { 
+        required 
+      },
+      lname: { 
+        required 
+      },
+      username: { 
+        required 
+      },
       email: {
         required,
         email,
@@ -201,7 +207,7 @@ export default {
       },
       confirmPassword: {
         required,
-        sameAs: sameAs('userForm.password'),
+        sameAsPassword: sameAs('userForm.password'),
       },
     },
   },
