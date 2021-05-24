@@ -74,14 +74,38 @@
           />
           <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
             <span v-if="v$.userForm.password.required.$invalid"
-              >Password field is required</span
+              >Please enter a password</span
             >
             <span v-if="v$.userForm.password.minLength.$invalid"
-              >Password must be at <i>LEAST</i> 8 characters long</span
+              >Passwords must be at <i>LEAST</i> 8 characters long</span
             >
           </div>
         </div>
 
+        <!---------------- REPEAT PASSWORD ---------------->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            v-model="userForm.confirmPassword"
+            id="confirmPassword"
+            name="confirmPassword"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error }"
+            autocomplete="new-password"
+          />
+          <div
+            v-if="isSubmitted && v$.userForm.confirmPassword.$error"
+            class="invalid-feedback"
+          >
+            <span v-if="v$.userForm.confirmPassword.required.$invalid"
+              >Please re-enter your password</span
+            >
+            <span v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
+              >Your passwords don't match!</span
+            >
+          </div>
+        </div>
         <!-- REMOVED CODE GOES HERE -->
 
         <!-------------------- SUBMIT -------------------->
@@ -95,8 +119,7 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
-// import { required, email, minLength, sameAs } from "@vuelidate/validators";
-import { required, email, minLength } from "@vuelidate/validators";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
 export default {
   setup() {
@@ -111,8 +134,7 @@ export default {
         lname: "",
         email: "",
         password: "",
-        // confirmPassword: "",
-        // accept: "",
+        confirmPassword: "",
       },
       isSubmitted: false,
     };
@@ -133,15 +155,10 @@ export default {
         required,
         minLength: minLength(8),
       },
-      // confirmPassword: {
-      //   required,
-      //   sameAsPassword: sameAs("password"),
-      // },
-      // accept: {
-      //   required(val) {
-      //     return val;
-      //   },
-      // },
+      confirmPassword: {
+        required,
+        sameAsPassword: sameAs("password"),
+      },
     },
   },
   methods: {
