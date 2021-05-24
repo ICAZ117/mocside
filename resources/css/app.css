@@ -472,11 +472,11 @@ thead.labtable, thead.problemtable {
 
 /*============= REGISTER =============*/
 .register {
-  width: 400px;
+  width: 450px;
   border: 1px solid lightgrey;
   background-color: white;
   margin: auto;
-  margin-top: 0!important;
+  margin-top: 1rem;
   padding: 20px;
 }
 
