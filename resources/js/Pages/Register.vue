@@ -9,7 +9,7 @@
           <label for="fname">First Name</label>
           <input
             type="text"
-            v-model="this.userForm.fname.data"
+            v-model="this.userForm.fname"
             id="fname"
             name="fname"
             class="form-control"
@@ -30,7 +30,7 @@
           <label for="lname">Last Name</label>
           <input
             type="text"
-            v-model="this.userForm.lname.data"
+            v-model="this.userForm.lname"
             id="lname"
             name="lname"
             class="form-control"
@@ -51,7 +51,7 @@
           <label for="username">Username</label>
           <input
             type="text"
-            v-model="this.userForm.username.data"
+            v-model="this.userForm.username"
             id="username"
             name="username"
             class="form-control"
@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="this.userForm.email.data"
+            v-model="this.userForm.email"
             id="email"
             name="email"
             class="form-control"
@@ -100,7 +100,7 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="this.userForm.password.data"
+            v-model="this.userForm.password"
             id="password"
             name="password"
             class="form-control"
@@ -128,7 +128,7 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="this.userForm.confirmPassword.data"
+            v-model="this.userForm.confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
@@ -176,61 +176,32 @@ export default {
       error: null,
       message: null,
       userForm: {
-        fname: {
-          data: "",
-        },
-        lname: {
-          data: "",
-        },
-        username: {
-          data: "",
-        },
-        email: {
-          data: "",
-          type: "email",
-        },
-        password: {
-          data: "",
-          type: "password",
-        },
-        confirmPassword: {
-          data: "",
-          type: "password",
-        },
+        fname: "",
+        lname: "",
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
       },
       isSubmitted: false,
     };
   },
   validations: {
     userForm: {
-      fname: {
-        data: { required },
-      },
-      lname: {
-        data: { required },
-      },
-      username: {
-        data: { required },
-      },
+      fname: { required },
+      lname: { required },
+      username: { required },
       email: {
-        data: {
-          required,
-          email,
-        },
+        required,
+        email,
       },
       password: {
-        data: {
-          required,
-          minLength: minLength(8),
-        },
+        required,
+        minLength: minLength(8),
       },
       confirmPassword: {
-        data: {
-          required,
-          sameAsPassword: sameAs(function() {
-            return this.userForm.password;
-          }),
-        },
+        required,
+        sameAs: sameAs('userForm.password'),
       },
     },
   },
