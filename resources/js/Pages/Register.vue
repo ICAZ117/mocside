@@ -17,13 +17,68 @@
           />
           <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
           <div v-if="isSubmitted && v$.userForm.fname.$error" class="invalid-feedback">
-            Name field is required
+            Please enter your first name
           </div>
         </div>
 
+        <!-------------------- LAST NAME -------------------->
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input
+            type="text"
+            v-model="this.userForm.lname"
+            id="lname"
+            name="lname"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.lname.$error }"
+          />
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <div v-if="isSubmitted && v$.userForm.lname.$error" class="invalid-feedback">
+            Please enter your last name
+          </div>
+        </div>
 
-        <!-- MISSING CODE GOES HERE -->
+        <!--------------------- EMAIL --------------------->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            v-model="this.userForm.email"
+            id="email"
+            name="email"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
+          />
+          <div v-if="isSubmitted && v$.userForm.email.$error" class="invalid-feedback">
+            <span v-if="v$.userForm.email.required.$invalid">Please enter your email</span>
+            <span v-if="v$.userForm.email.email.$invalid"
+              >Please provide a valid email address
+              (rickastley@NeverGonnaGiveYouUp.com)</span
+            >
+          </div>
+        </div>
 
+        <!------------------- PASSWORD ------------------->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            v-model="userForm.password"
+            id="password"
+            name="password"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.password.$error }"
+            autocomplete="new-password"
+          />
+          <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.password.required">Password field is required</span>
+            <span v-if="!v$.userForm.password.minLength"
+              >Password should be at least 5 characters long</span
+            >
+          </div>
+        </div>
+
+        <!-- REMOVED CODE GOES HERE -->
 
         <!-------------------- SUBMIT -------------------->
         <div class="form-group">
@@ -37,7 +92,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 // import { required, email, minLength, sameAs } from "@vuelidate/validators";
-import { required } from "@vuelidate/validators";
+import { required, email, minLength } from "@vuelidate/validators";
 
 export default {
   setup() {
@@ -49,9 +104,9 @@ export default {
     return {
       userForm: {
         fname: "",
-        // lname: "",
-        // email: "",
-        // password: "",
+        lname: "",
+        email: "",
+        password: "",
         // confirmPassword: "",
         // accept: "",
       },
@@ -63,17 +118,17 @@ export default {
       fname: {
         required,
       },
-      // lname: {
-      //   required,
-      // },
-      // email: {
-      //   required,
-      //   email,
-      // },
-      // password: {
-      //   required,
-      //   minLength: minLength(8),
-      // },
+      lname: {
+        required,
+      },
+      email: {
+        required,
+        email,
+      },
+      password: {
+        required,
+        minLength: minLength(8),
+      },
       // confirmPassword: {
       //   required,
       //   sameAsPassword: sameAs("password"),
