@@ -189,13 +189,13 @@ export default {
   validations: {
     userForm: {
       fname: {
-        data: required,
+        required,
       },
       lname: {
-        data: required,
+        required,
       },
       username: {
-        data: required,
+        required,
       },
       email: {
         required,
@@ -206,12 +206,10 @@ export default {
         minLength: minLength(8),
       },
       confirmPassword: {
-        data: {
-          required,
-          sameAsPassword: sameAs(function() {
-            return this.userForm.password;
-          }),
-        },
+        required,
+        sameAsPassword: sameAs(function() {
+          return this.userForm.password;
+        }),
       },
     },
   },
