@@ -207,7 +207,7 @@ export default {
       },
       confirmPassword: {
         required,
-        sameAsPassword: sameAs(this.userForm.password), // what the HECK IBRAHEEM I HAVE BEEN BUG FIXING THIS LINE BECAUSE YOU WERE CHECKING IT AGAINST THE STRING ("PASSWORD") INSTEAD OF THE VALUE OF THE PASSWORD.....URRGGHHHHHHHHHHHHHHHHHHH
+        sameAsPassword: sameAs(this.userForm.password), 
       },
     },
   },
@@ -238,5 +238,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
