@@ -17,12 +17,111 @@
           />
           <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
           <div v-if="isSubmitted && v$.userForm.fname.$error" class="invalid-feedback">
-            Name field is required
+            Please enter your first name
           </div>
         </div>
 
 
-        <!-- MISSING CODE GOES HERE -->
+        <!-------------------- LAST NAME -------------------->
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input
+            type="text"
+            v-model="this.userForm.lname"
+            id="lname"
+            name="lname"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.lname.$error }"
+          />
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <div v-if="isSubmitted && v$.userForm.lname.$error" class="invalid-feedback">
+            Please enter your last name
+          </div>
+        </div>
+
+        <!--------------------- EMAIL --------------------->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            v-model="this.userForm.email"
+            id="email"
+            name="email"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
+          />
+          <div v-if="isSubmitted && v$.userForm.email.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.email.required">Please enter your email</span>
+            <span v-if="!v$.userForm.email.email">Please provide a valid email address (rickastley@NeverGonnaGiveYouUp.com)</span>
+          </div>
+        </div>
+
+        <!------------------- PASSWORD ------------------->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            v-model="userForm.password"
+            id="password"
+            name="password"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.password.$error }"
+            autocomplete="new-password"
+          />
+          <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.password.required">Password field is required</span>
+            <span v-if="!v$.userForm.password.minLength"
+              >Password should be at least 5 characters long</span
+            >
+          </div>
+        </div>
+
+        <!---------------- REPEAT PASSWORD ---------------->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            v-model="userForm.confirmPassword"
+            id="confirmPassword"
+            name="confirmPassword"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error }"
+            autocomplete="new-password"
+          />
+          <div
+            v-if="isSubmitted && v$.userForm.confirmPassword.$error"
+            class="invalid-feedback"
+          >
+            <span v-if="!v$.userForm.confirmPassword.required"
+              >Confirm Password field is required</span
+            >
+            <span v-else-if="!v$.userForm.confirmPassword.sameAsPassword"
+              >Passwords should be matched</span
+            >
+          </div>
+        </div>
+
+        <!------------------ ACCEPT TERMS ------------------>
+        <div class="form-group form-check">
+          <input
+            type="checkbox"
+            v-model="userForm.accept"
+            @change="v$.userForm.accept.$touch()"
+            id="accept"
+            class="form-check-input"
+          />
+          <label
+            class="form-check-label"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.accept.$error }"
+            for="accept"
+            >Accept terms & conditions</label
+          >
+
+          <div v-if="isSubmitted && v$.userForm.accept.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.accept.required">Accept terms and conditions</span>
+          </div>
+        </div>
+
 
 
         <!-------------------- SUBMIT -------------------->
