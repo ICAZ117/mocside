@@ -77,7 +77,7 @@
               >Password field is required</span
             >
             <span v-if="v$.userForm.password.minLength.$invalid"
-              >Password must be at LEAST 8 characters long</span
+              >Password must be at <i>LEAST</i> 8 characters long</span
             >
           </div>
         </div>
