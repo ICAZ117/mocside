@@ -148,11 +148,11 @@ export default {
     return {
       userForm: {
         fname: "",
-        // lname: "",
-        // email: "",
-        // password: "",
-        // confirmPassword: "",
-        // accept: "",
+        lname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        accept: "",
       },
       isSubmitted: false,
     };
@@ -162,26 +162,26 @@ export default {
       fname: {
         required,
       },
-      // lname: {
-      //   required,
-      // },
-      // email: {
-      //   required,
-      //   email,
-      // },
-      // password: {
-      //   required,
-      //   minLength: minLength(8),
-      // },
-      // confirmPassword: {
-      //   required,
-      //   sameAsPassword: sameAs("password"),
-      // },
-      // accept: {
-      //   required(val) {
-      //     return val;
-      //   },
-      // },
+      lname: {
+        required,
+      },
+      email: {
+        required,
+        email,
+      },
+      password: {
+        required,
+        minLength: minLength(8),
+      },
+      confirmPassword: {
+        required,
+        sameAsPassword: sameAs("password"),
+      },
+      accept: {
+        required(val) {
+          return val;
+        },
+      },
     },
   },
   methods: {
