@@ -151,6 +151,8 @@ export default {
   },
   data() {
     return {
+      error: null,
+      message: null,
       userForm: {
         fname: "",
         lname: "",
@@ -197,6 +199,19 @@ export default {
       }
 
       alert("SUCCESS!" + JSON.stringify(this.userForm));
+    },
+    registerUser() {
+      this.error = null;
+      this.message = null;
+      const payload = {
+        name: this.userForm.fname + ' ' + this.userForm.lname,
+        email: this.userForm.email,
+        password: this.userForm.password,
+        password_confirmation: this.userForm.passwordConfirm,
+      };
+      AuthService.registerUser(payload)
+        .then(() => this.$router.push("/courses"))
+        .catch((error) => (this.error = getError(error)));
     },
   },
 };
