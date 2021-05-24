@@ -23,6 +23,10 @@
 
 <!-- REMOVED CODE GOES HERE -->
         
+        <!-------------------- SUBMIT -------------------->
+        <div class="form-group">
+          <button class="btn btn-danger btn-block">Register</button>
+        </div>
       </form>
     </div>
   </div>
