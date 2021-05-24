@@ -198,7 +198,7 @@ export default {
       if (this.v$.$invalid) {
         console.log(this.userForm.password);
         console.log(this.v$.userForm.password.$error);
-        console.log(this.confirmPassword);
+        console.log(this.userForm.confirmPassword);
         console.log(this.v$.userForm.confirmPassword.$error);
         return;
       }
