@@ -124,7 +124,12 @@
               >Please re-enter your password</span
             >
             <span v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
-              >Your passwords don't match!</span
+              >Your passwords don't match!
+              <div>
+                {{this.v$.password}}
+                {{this.v$.confirmPassword}}
+              </div>
+            </span
             >
           </div>
         </div>
