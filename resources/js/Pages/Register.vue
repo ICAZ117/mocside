@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="login">
-      <h3 class="login-title">Sign Up</h3>
+    <div class="register">
+      <h3 class="register-title">Sign Up</h3>
       <!--------------------- START FORM --------------------->
       <form @submit.prevent="handleSubmit">
         <!-------------------- FIRST NAME -------------------->

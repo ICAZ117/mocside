@@ -470,13 +470,13 @@ thead.labtable, thead.problemtable {
   border: 5px solid var(--FSCred);
 }
 
-/*============= Sign Up PAGE =============*/
+/*============= REGISTER =============*/
 .register {
   width: 400px;
   border: 1px solid lightgrey;
   background-color: white;
   margin: auto;
-  margin-top: 5rem;
+  margin-top: 0!important;
   padding: 20px;
 }
 
