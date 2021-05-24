@@ -50,8 +50,8 @@
             :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
           />
           <div v-if="isSubmitted && v$.userForm.email.$error" class="invalid-feedback">
-            <span v-if="!v$.userForm.email.required">Please enter your email</span>
-            <span v-if="!v$.userForm.email.email"
+            <span v-if="v$.userForm.email.required.$invalid">Please enter your email</span>
+            <span v-if="v$.userForm.email.email.$invalid"
               >Please provide a valid email address
               (rickastley@NeverGonnaGiveYouUp.com)</span
             >
