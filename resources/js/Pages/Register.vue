@@ -38,6 +38,23 @@
           </div>
         </div>
 
+        <!-------------------- USERNAME -------------------->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            v-model="this.userForm.username"
+            id="username"
+            name="username"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.username.$error }"
+          />
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <div v-if="isSubmitted && v$.userForm.username.$error" class="invalid-feedback">
+            Please enter a username
+          </div>
+        </div>
+
         <!--------------------- EMAIL --------------------->
         <div class="form-group">
           <label for="email">Email</label>
@@ -132,6 +149,7 @@ export default {
       userForm: {
         fname: "",
         lname: "",
+        username: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -145,6 +163,9 @@ export default {
         required,
       },
       lname: {
+        required,
+      },
+      username: {
         required,
       },
       email: {
