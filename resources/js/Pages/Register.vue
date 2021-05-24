@@ -207,7 +207,7 @@ export default {
       },
       confirmPassword: {
         required,
-        sameAsPassword: sameAs(this.userForm.password), 
+        sameAsPassword: sameAs("password"), 
       },
     },
   },
