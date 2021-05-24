@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="this.userForm.email.data"
+            v-model="this.userForm.email"
             id="email"
             name="email"
             class="form-control"
@@ -100,7 +100,7 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="this.userForm.password.data"
+            v-model="this.userForm.password"
             id="password"
             name="password"
             class="form-control"
@@ -128,7 +128,7 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="this.userForm.confirmPassword.data"
+            v-model="this.userForm.confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
@@ -189,31 +189,27 @@ export default {
   validations: {
     userForm: {
       fname: {
-        data: { required },
+        data: required,
       },
       lname: {
-        data: { required },
+        data: required,
       },
       username: {
-        data: { required },
+        data: required,
       },
       email: {
-        data: { 
-          required,
-          email,
-        },
+        required,
+        email,
       },
       password: {
-        data: {
-          required,
-          minLength: minLength(8),
-        },
+        required,
+        minLength: minLength(8),
       },
       confirmPassword: {
         data: {
           required,
           sameAsPassword: sameAs(function() {
-            return this.userForm.password.data;
+            return this.userForm.password;
           }),
         },
       },
