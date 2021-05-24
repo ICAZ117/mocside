@@ -26,11 +26,13 @@ export const mutations = {
 };
 
 export const actions = {
-  logout({ commit }) {
+  logout({ commit, dispatch }) {
     return AuthService.logout()
       .then(() => {
         commit("SET_USER", null);
-        router.push({ path: "/login" });
+        dispatch("setGuest", { value: "isGuest" });
+        if (router.currentRoute.name !== "login")
+          router.push({ path: "/login" });
       })
       .catch((error) => {
         commit("SET_ERROR", getError(error));

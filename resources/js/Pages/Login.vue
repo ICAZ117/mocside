@@ -92,8 +92,6 @@ export default {
       try {
         await AuthService.login(payload);
         const authUser = await this.$store.dispatch("auth/getAuthUser");
-        console.log("back in login.vue");
-        console.log(authUser);
         if (authUser) {
           this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
           this.$router.push("/courses"); // push home?
