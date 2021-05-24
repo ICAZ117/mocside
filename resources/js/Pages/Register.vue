@@ -38,6 +38,25 @@
           </div>
         </div>
 
+        <!--------------------- EMAIL --------------------->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            v-model="this.userForm.email"
+            id="email"
+            name="email"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
+          />
+          <div v-if="isSubmitted && v$.userForm.email.$error" class="invalid-feedback">
+            <span v-if="!v$.userForm.email.required">Please enter your email</span>
+            <span v-if="!v$.userForm.email.email"
+              >Please provide a valid email address
+              (rickastley@NeverGonnaGiveYouUp.com)</span
+            >
+          </div>
+        </div>
         <!-- REMOVED CODE GOES HERE -->
 
         <!-------------------- SUBMIT -------------------->
@@ -52,7 +71,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 // import { required, email, minLength, sameAs } from "@vuelidate/validators";
-import { required } from "@vuelidate/validators";
+import { required, email } from "@vuelidate/validators";
 
 export default {
   setup() {
@@ -65,7 +84,7 @@ export default {
       userForm: {
         fname: "",
         lname: "",
-        // email: "",
+        email: "",
         // password: "",
         // confirmPassword: "",
         // accept: "",
@@ -81,10 +100,10 @@ export default {
       lname: {
         required,
       },
-      // email: {
-      //   required,
-      //   email,
-      // },
+      email: {
+        required,
+        email,
+      },
       // password: {
       //   required,
       //   minLength: minLength(8),
