@@ -9,7 +9,7 @@
           <label for="fname">First Name</label>
           <input
             type="text"
-            v-model="this.userForm.fname"
+            v-model="this.userForm.fname.data"
             id="fname"
             name="fname"
             class="form-control"
@@ -30,7 +30,7 @@
           <label for="lname">Last Name</label>
           <input
             type="text"
-            v-model="this.userForm.lname"
+            v-model="this.userForm.lname.data"
             id="lname"
             name="lname"
             class="form-control"
@@ -51,7 +51,7 @@
           <label for="username">Username</label>
           <input
             type="text"
-            v-model="this.userForm.username"
+            v-model="this.userForm.username.data"
             id="username"
             name="username"
             class="form-control"
@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="this.userForm.email"
+            v-model="this.userForm.email.data"
             id="email"
             name="email"
             class="form-control"
@@ -100,7 +100,7 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="this.userForm.password"
+            v-model="this.userForm.password.data"
             id="password"
             name="password"
             class="form-control"
@@ -128,7 +128,7 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="this.userForm.confirmPassword"
+            v-model="this.userForm.confirmPassword.data"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
