@@ -64,7 +64,7 @@ export default {
     return {
       userForm: {
         fname: "",
-        // lname: "",
+        lname: "",
         // email: "",
         // password: "",
         // confirmPassword: "",
@@ -78,9 +78,9 @@ export default {
       fname: {
         required,
       },
-      // lname: {
-      //   required,
-      // },
+      lname: {
+        required,
+      },
       // email: {
       //   required,
       //   email,
