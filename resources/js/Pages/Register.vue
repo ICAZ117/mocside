@@ -126,8 +126,8 @@
             <span v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
               >Your passwords don't match!
               <div>
-                {{this.v$.password}}
-                {{this.v$.confirmPassword}}
+                {{this.v$.userForm.password}}
+                {{this.v$.userForm.confirmPassword}}
               </div>
             </span
             >
