@@ -18,10 +18,11 @@ const routes = [
         component: () => import("../Pages/Courses.vue"),
         name: "Courses",
         meta: { requiresAuth: true },
-        beforeEnter: (to, from, next) => {
-            if (store.getters["auth/isAdmin"]) next();
-            else next(false);
-        }
+        // Reference for syntax
+        // beforeEnter: (to, from, next) => {
+        //     if (store.getters["auth/isAdmin"]) next();
+        //     else next(false);
+        // }
     },
     {
         path: "/about",
