@@ -71,9 +71,9 @@
             autocomplete="new-password"
           />
           <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
-            <span v-if="!v$.userForm.password.required">Password field is required</span>
-            <span v-if="!v$.userForm.password.minLength"
-              >Password should be at least 5 characters long</span
+            <span v-if="v$.userForm.password.required.$invalid">Password field is required</span>
+            <span v-if="v$.userForm.password.minLength.$invalid"
+              >Password must be at <i>LEAST<i> 8 characters long</span
             >
           </div>
         </div>
