@@ -50,7 +50,9 @@
             :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
           />
           <div v-if="isSubmitted && v$.userForm.email.$error" class="invalid-feedback">
-            <span v-if="v$.userForm.email.required.$invalid">Please enter your email</span>
+            <span v-if="v$.userForm.email.required.$invalid"
+              >Please enter your email</span
+            >
             <span v-if="v$.userForm.email.email.$invalid"
               >Please provide a valid email address
               (rickastley@NeverGonnaGiveYouUp.com)</span
@@ -71,9 +73,11 @@
             autocomplete="new-password"
           />
           <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
-            <span v-if="v$.userForm.password.required.$invalid">Password field is required</span>
+            <span v-if="v$.userForm.password.required.$invalid"
+              >Password field is required</span
+            >
             <span v-if="v$.userForm.password.minLength.$invalid"
-              >Password must be at <i>LEAST<i> 8 characters long</span
+              >Password must be at LEAST 8 characters long</span
             >
           </div>
         </div>
