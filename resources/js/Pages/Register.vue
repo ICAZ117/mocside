@@ -21,8 +21,25 @@
           </div>
         </div>
 
-<!-- REMOVED CODE GOES HERE -->
-        
+        <!-------------------- LAST NAME -------------------->
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input
+            type="text"
+            v-model="this.userForm.lname"
+            id="lname"
+            name="lname"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.lname.$error }"
+          />
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <div v-if="isSubmitted && v$.userForm.lname.$error" class="invalid-feedback">
+            Please enter your last name
+          </div>
+        </div>
+
+        <!-- REMOVED CODE GOES HERE -->
+
         <!-------------------- SUBMIT -------------------->
         <div class="form-group">
           <button class="btn btn-danger btn-block">Register</button>
