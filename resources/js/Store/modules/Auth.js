@@ -36,22 +36,18 @@ export const actions = {
         commit("SET_ERROR", getError(error));
       });
   },
-  getAuthUser({ commit }) {
+  async getAuthUser({ commit }) {
     commit("SET_LOADING", true);
-    return AuthService.getAuthUser()
-      .then((response) => {
-        console.log("Found User.");
-        commit("SET_USER", response.data.data);
-        commit("SET_LOADING", false);
-        console.log(state);
-      })
-      .catch((error) => {
-        console.log("Couldn't find user. Unauthenticated?")
-        console.log(error);
-        commit("SET_LOADING", false);
-        commit("SET_USER", null);
-        commit("SET_ERROR", getError(error));
-      });
+    try {
+      const response = await AuthService.getAuthUser();
+      commit("SET_USER", response.data.data);
+      commit("SET_LOADING", false);
+      return response.data.data;
+    } catch (error) {
+      commit("SET_LOADING", false);
+      commit("SET_USER", null);
+      commit("SET_ERROR", getError(error));
+    }
   },
   setGuest(context, { value }) {
     window.localStorage.setItem("guest", value);
