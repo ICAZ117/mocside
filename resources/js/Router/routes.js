@@ -1,3 +1,5 @@
+import store from "../Store/index";
+
 const routes = [
     {
         path: '',
@@ -16,6 +18,10 @@ const routes = [
         component: () => import("../Pages/Courses.vue"),
         name: "Courses",
         meta: { requiresAuth: true },
+        beforeEnter: (to, from, next) => {
+            if (store.getters["auth/isAdmin"]) next();
+            else next(false);
+        }
     },
     {
         path: "/about",
