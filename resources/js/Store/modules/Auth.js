@@ -44,6 +44,7 @@ export const actions = {
         console.log(response.data);
         commit("SET_USER", response.data.data);
         commit("SET_LOADING", false);
+        console.log(state)
       })
       .catch((error) => {
         console.log("Couldn't find user. Unauthenticated?")
