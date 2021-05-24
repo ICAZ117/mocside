@@ -162,7 +162,6 @@
 </template>
 
 <script>
-import { reactive, computed } from 'vue';
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, sameAs } from "@vuelidate/validators";
 
@@ -170,7 +169,7 @@ export default {
   setup() {
     return {
       v$: useValidate(),
-    }    
+    };    
   },
   data() {
     return {
@@ -217,13 +216,6 @@ export default {
       this.isSubmitted = true;
 
       this.v$.$touch();
-      this.v$.validate();
-      if(!this.v$.$error) {
-        alert('Form Successfully Submitted.');
-      }
-      else {
-        alert('Form failed verification');
-      }
       if (this.v$.$invalid) {
         return;
       }
