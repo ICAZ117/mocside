@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { getError } from "../utils/helpers";
 export default {
   data() {
     return {
@@ -46,6 +47,8 @@ export default {
   },
   computed: {
     isLoggedIn: async function() {
+
+      //not quite working currently
       try {
         const authUser = await this.$store.dispatch("auth/getAuthUser");
         if (authUser) {
@@ -62,6 +65,10 @@ export default {
       } catch (error) {
         this.error = getError(error);
       }
+
+
+
+      //this will be changed to the above function once its working
       return false;
     }
   },
