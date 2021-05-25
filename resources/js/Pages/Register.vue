@@ -127,13 +127,14 @@
           <input
             type="password"
             v-model="userForm.confirmPassword"
-            id="confirmPassword"
-            name="confirmPassword"
             class="form-control"
+            :class="{
+              'is-invalid': isSubmitted && hasError,
+            }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && hasError"
+            v-if="hasError"
             class="invalid-feedback"
           >
             <span v-if="isEmpty"
@@ -208,7 +209,7 @@ export default {
       if (this.v$.$invalid) {
         return;
       }
-      alert("SUCCESS!" + JSON.stringify(this.userForm));
+      registerUser();
     },
     registerUser() {
       this.error = null;
@@ -217,7 +218,7 @@ export default {
         name: this.userForm.fname + " " + this.userForm.lname,
         email: this.userForm.email,
         password: this.userForm.password,
-        password_confirmation: this.userForm.passwordConfirm,
+        password_confirmation: this.userForm.confirmPassword,
       };
       AuthService.registerUser(payload)
         .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
@@ -226,17 +227,13 @@ export default {
   },
   computed: {
     isDiff: function() {
-      return this.password != this.confirmPassword;
+      return this.userForm.password != this.userForm.confirmPassword;
     },
     isEmpty: function() {
-      console.log("This:");
-      console.log(this.confirmPassword);
-      console.log("\nNot using this");
-      console.log(confirmPassword);
-      return confirmPassword == "";
+      return this.userForm.confirmPassword == "";
     },
     hasError: function() {
-      return true;
+      return this.isEmpty || this.isDiff;
     }
   }
 };
