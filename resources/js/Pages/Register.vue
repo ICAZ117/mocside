@@ -9,7 +9,7 @@
           <label for="fname">First Name</label>
           <input
             type="text"
-            v-model="state.fname"
+            v-model="this.state.fname"
             id="fname"
             name="fname"
             class="form-control"
@@ -30,7 +30,7 @@
           <label for="lname">Last Name</label>
           <input
             type="text"
-            v-model="state.lname"
+            v-model="this.state.lname"
             id="lname"
             name="lname"
             class="form-control"
@@ -51,7 +51,7 @@
           <label for="username">Username</label>
           <input
             type="text"
-            v-model="state.username"
+            v-model="this.state.username"
             id="username"
             name="username"
             class="form-control"
@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="state.email"
+            v-model="this.state.email"
             id="email"
             name="email"
             class="form-control"
@@ -99,7 +99,7 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="state.password"
+            v-model="this.state.password"
             id="password"
             name="password"
             class="form-control"
@@ -126,7 +126,7 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="state.confirmPassword"
+            v-model="this.state.confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
