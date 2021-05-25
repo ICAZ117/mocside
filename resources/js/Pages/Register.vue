@@ -9,7 +9,7 @@
           <label for="fname">First Name</label>
           <input
             type="text"
-            v-model="userForm.fname"
+            v-model="state.fname"
             id="fname"
             name="fname"
             class="form-control"
@@ -30,7 +30,7 @@
           <label for="lname">Last Name</label>
           <input
             type="text"
-            v-model="userForm.lname"
+            v-model="state.lname"
             id="lname"
             name="lname"
             class="form-control"
@@ -51,7 +51,7 @@
           <label for="username">Username</label>
           <input
             type="text"
-            v-model="userForm.username"
+            v-model="state.username"
             id="username"
             name="username"
             class="form-control"
@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="userForm.email"
+            v-model="state.email"
             id="email"
             name="email"
             class="form-control"
@@ -94,13 +94,12 @@
           </div>
         </div>
         <br />
-
         <!------------------- PASSWORD ------------------->
         <div class="form-group">
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="userForm.password"
+            v-model="state.password"
             id="password"
             name="password"
             class="form-control"
@@ -122,13 +121,12 @@
           </div>
         </div>
         <br />
-
         <!---------------- REPEAT PASSWORD ---------------->
         <div class="form-group">
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="userForm.confirmPassword"
+            v-model="state.confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
@@ -162,64 +160,66 @@
 </template>
 
 <script>
+import { reactive, computed } from 'vue';
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, sameAs } from "@vuelidate/validators";
-
 export default {
   setup() {
-    return {
-      v$: useVuelidate(),
-    };    
+    const state = reactive({
+      fname: "",
+      lname: "",
+      email: "",
+      username: "",
+      password: {
+        password: "",
+        confirmPassword: "",
+      },
+    })
+    const rules = computed(() => {
+      return {
+        fname: { required },
+        lname: { required },
+        username: { required },
+        email: { required, email },
+        password: {
+          password: { required, minLength: minLength(8) },
+          confirmPassword: { required, sameAs: sameAs(state.password.password) },
+        },
+      }
+    })
+    const v$ = useVuelidate(rules, state)
+    return { state, v$ }
   },
   data() {
     return {
       error: null,
       message: null,
-      userForm: {
-        fname: "",
-        lname: "",
-        email: "",
-        username: "",
+      v$: useVuelidate(),
+      fname: "",
+      lname: "",
+      email: "",
+      username: "",
+      password: {
         password: "",
         confirmPassword: "",
       },
       isSubmitted: false,
     };
   },
-  validations: {
-    userForm: {
-      fname: {
-        required,
-      },
-      lname: {
-        required,
-      },
-      username: {
-        required,
-      },
-      email: {
-        required,
-        email,
-      },
-      password: {
-        required,
-        minLength: minLength(8),
-      },
-      confirmPassword: {
-        required,
-        sameAsPassword: sameAs(password), //this looks specifically for the string "password" in the confirm password field, tried a bunch of ways to change and was unable
-      },
-    },
-  },
   methods: {
     handleSubmit() {
       this.isSubmitted = true;
-
       this.v$.$touch();
+      this.v$.validate();
+      if(!this.v$.$error) {
+        alert('Form Successfully Submitted.');
+      }
+      else {
+        alert('Form failed verification');
+      }
       if (this.v$.$invalid) {
         return;
       }
-
       alert("SUCCESS!" + JSON.stringify(this.userForm));
     },
     registerUser() {
