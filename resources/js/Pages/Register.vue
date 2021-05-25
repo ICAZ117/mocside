@@ -168,7 +168,7 @@ import { required, email, minLength, sameAs } from "@vuelidate/validators";
 export default {
   setup() {
     return {
-      v$: useValidate(),
+      v$: useVuelidate(),
     };    
   },
   data() {
