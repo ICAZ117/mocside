@@ -9,7 +9,7 @@
           <label for="fname">First Name</label>
           <input
             type="text"
-            v-model="fname"
+            v-model="state.fname"
             id="fname"
             name="fname"
             class="form-control"
@@ -30,7 +30,7 @@
           <label for="lname">Last Name</label>
           <input
             type="text"
-            v-model="lname"
+            v-model="state.lname"
             id="lname"
             name="lname"
             class="form-control"
@@ -51,7 +51,7 @@
           <label for="username">Username</label>
           <input
             type="text"
-            v-model="username"
+            v-model="state.username"
             id="username"
             name="username"
             class="form-control"
@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="email"
+            v-model="state.email"
             id="email"
             name="email"
             class="form-control"
@@ -99,7 +99,7 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="password.password"
+            v-model="state.password.password"
             id="password"
             name="password"
             class="form-control"
@@ -126,7 +126,7 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="password.confirmPassword"
+            v-model="state.password.confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
@@ -195,14 +195,6 @@ export default {
       error: null,
       message: null,
       v$: useVuelidate(),
-      fname: "",
-      lname: "",
-      email: "",
-      username: "",
-      password: {
-        password: "",
-        confirmPassword: "",
-      },
       isSubmitted: false,
     };
   },
@@ -219,16 +211,16 @@ export default {
       if (this.v$.$invalid) {
         return;
       }
-      alert("SUCCESS!" + JSON.stringify(this.data));
+      alert("SUCCESS!");
     },
     registerUser() {
       this.error = null;
       this.message = null;
       const payload = {
-        name: this.fname + " " + this.lname,
-        email: this.email,
-        password: this.password.password,
-        password_confirmation: this.password.confirmPassword,
+        name: state.fname + " " + state.lname,
+        email: state.email,
+        password: state.password.password,
+        password_confirmation: state.password.confirmPassword,
       };
       AuthService.registerUser(payload)
         .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
