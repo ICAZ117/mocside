@@ -3,6 +3,7 @@
     <Navbar />
     <router-view></router-view>
   </div>
+  <p>{{ authUser }}</p>
 </template>
 
 <script>
@@ -13,6 +14,7 @@ export default {
   components: { Navbar },
   data() {
     return {
+      authUser: await this.$store.dispatch("auth/getAuthUser"),
     }
   },
   methods: {
