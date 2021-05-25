@@ -230,7 +230,7 @@ export default {
       return this.userForm.confirmPassword == "";
     },
     hasError: function() {
-      return isEmpty || isDiff;
+      return this.isEmpty || this.isDiff;
     }
   }
 };
