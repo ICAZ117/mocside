@@ -228,14 +228,14 @@ export default {
     },
   },
   computed: {
-    isSame() {
+    isSame: function() {
       return this.password == this.confirmPassword;
     },
-    isEmpty() {
+    isEmpty: function() {
       return this.confirmPassword == "";
     },
-    hasError() {
-      return isSame() || isEmpty();
+    hasError: function() {
+      return isSame || isEmpty;
     }
   }
 };
