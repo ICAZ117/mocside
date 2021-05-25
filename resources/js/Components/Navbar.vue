@@ -39,8 +39,10 @@ export default {
     };
   },
   methods: {
-    logout() {
+    async logout() {
       console.log("attempting log out");
+      await this.$store.dispatch("auth/logout");
+      console.log("successful?");
     }
   },
   computed: {
