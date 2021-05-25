@@ -131,10 +131,10 @@ nav {
 
 .nav-link {
   color: #555555!important;
-  height: 60px;
+  height: 60px!important;
   padding-top: 17px!important;
-  width: 150px;
-  text-align: center;
+  width: 150px!important;
+  text-align: center!important;
 }
 
 .link-btn {
