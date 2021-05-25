@@ -9,7 +9,7 @@
           <label for="fname">First Name</label>
           <input
             type="text"
-            v-model="this.state.fname"
+            v-model="fname"
             id="fname"
             name="fname"
             class="form-control"
@@ -30,7 +30,7 @@
           <label for="lname">Last Name</label>
           <input
             type="text"
-            v-model="this.state.lname"
+            v-model="lname"
             id="lname"
             name="lname"
             class="form-control"
@@ -51,7 +51,7 @@
           <label for="username">Username</label>
           <input
             type="text"
-            v-model="this.state.username"
+            v-model="username"
             id="username"
             name="username"
             class="form-control"
@@ -74,7 +74,7 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="this.state.email"
+            v-model="email"
             id="email"
             name="email"
             class="form-control"
@@ -99,7 +99,7 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="this.state.password"
+            v-model="password.password"
             id="password"
             name="password"
             class="form-control"
@@ -126,7 +126,7 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="this.state.confirmPassword"
+            v-model="password.confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
@@ -214,7 +214,7 @@ export default {
         alert('Form Successfully Submitted.');
       }
       else {
-        alert('Form failed verification');
+        alert(this.v$.error);
       }
       if (this.v$.$invalid) {
         return;
