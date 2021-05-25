@@ -129,12 +129,12 @@
             v-model="userForm.confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && true,
+              'is-invalid': isSubmitted && hasError,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="true"
+            v-if="hasError"
             class="invalid-feedback"
           >
             <span v-if="isEmpty"
