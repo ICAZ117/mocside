@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     isLoggedIn: function() {
-      return true;
+      return false;
     }
   },
 };
