@@ -9,15 +9,15 @@
           <label for="fname">First Name</label>
           <input
             type="text"
-            v-model="state.fname"
+            v-model="userForm.fname"
             id="fname"
             name="fname"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.state.fname.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.fname.$error }"
           />
-          <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.state.fname.$error"
+            v-if="isSubmitted && v$.userForm.fname.$error"
             class="invalid-feedback"
           >
             Please enter your first name
@@ -30,15 +30,15 @@
           <label for="lname">Last Name</label>
           <input
             type="text"
-            v-model="state.lname"
+            v-model="userForm.lname"
             id="lname"
             name="lname"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.state.lname.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.lname.$error }"
           />
-          <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.state.lname.$error"
+            v-if="isSubmitted && v$.userForm.lname.$error"
             class="invalid-feedback"
           >
             Please enter your last name
@@ -51,17 +51,17 @@
           <label for="username">Username</label>
           <input
             type="text"
-            v-model="state.username"
+            v-model="userForm.username"
             id="username"
             name="username"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.state.username.$error,
+              'is-invalid': isSubmitted && v$.userForm.username.$error,
             }"
           />
-          <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.state.username.$error"
+            v-if="isSubmitted && v$.userForm.username.$error"
             class="invalid-feedback"
           >
             Please enter a username
@@ -74,20 +74,20 @@
           <label for="email">Email</label>
           <input
             type="email"
-            v-model="state.email"
+            v-model="userForm.email"
             id="email"
             name="email"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.state.email.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
           />
           <div
-            v-if="isSubmitted && v$.state.email.$error"
+            v-if="isSubmitted && v$.userForm.email.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.state.email.required.$invalid"
+            <span v-if="v$.userForm.email.required.$invalid"
               >Please enter your email</span
             >
-            <span v-if="v$.state.email.$invalid"
+            <span v-if="v$.userForm.email.email.$invalid"
               >Please provide a valid email address
               (rickastley@NeverGonnaGiveYouUp.com)</span
             >
@@ -99,23 +99,23 @@
           <label for="password">Password</label>
           <input
             type="password"
-            v-model="state.password.password"
+            v-model="userForm.password"
             id="password"
             name="password"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.state.password.password.$error,
+              'is-invalid': isSubmitted && v$.userForm.password.$error,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.state.password.password.$error"
+            v-if="isSubmitted && v$.userForm.password.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.state.password.password.required.$invalid"
+            <span v-if="v$.userForm.password.required.$invalid"
               >Please enter a password</span
             >
-            <span v-if="v$.state.password.password.minLength.$invalid"
+            <span v-if="v$.userForm.password.minLength.$invalid"
               >Passwords must be at <i>LEAST</i> 8 characters long</span
             >
           </div>
@@ -126,24 +126,24 @@
           <label for="confirmPassword">Confirm Password</label>
           <input
             type="password"
-            v-model="state.password.confirmPassword"
+            v-model="userForm.confirmPassword"
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.state.password.confirmPassword.$error,
+              'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.state.password.confirmPassword.$error"
+            v-if="isSubmitted && v$.userForm.confirmPassword.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.state.password.confirmPassword.required.$invalid"
+            <span v-if="v$.userForm.confirmPassword.required.$invalid"
               >Please re-enter your password</span
             >
             <span
-              v-else-if="v$.state.password.confirmPassword.sameAsPassword.$invalid"
+              v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
               >Your passwords don't match!
             </span>
           </div>
@@ -160,67 +160,71 @@
 </template>
 
 <script>
-import { reactive, computed } from 'vue';
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength, sameAs } from "@vuelidate/validators";
 export default {
   setup() {
-    const state = reactive({
-      fname: "",
-      lname: "",
-      email: "",
-      username: "",
-      password: {
-        password: "",
-        confirmPassword: "",
-      },
-    })
-    const rules = computed(() => {
-      return {
-        fname: { required },
-        lname: { required },
-        username: { required },
-        email: { required, email },
-        password: {
-          password: { required, minLength: minLength(8) },
-          confirmPassword: { required, sameAs: sameAs(state.password.password) },
-        },
-      }
-    })
-    const v$ = useVuelidate(rules, state)
-    return { state, v$ }
+    return {
+      v$: useVuelidate(),
+    };    
   },
   data() {
     return {
       error: null,
       message: null,
-      v$: useVuelidate(),
+      userForm: {
+        fname: "",
+        lname: "",
+        email: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+      },
       isSubmitted: false,
     };
+  },
+  validations: {
+    userForm: {
+      fname: {
+        required,
+      },
+      lname: {
+        required,
+      },
+      username: {
+        required,
+      },
+      email: {
+        required,
+        email,
+      },
+      password: {
+        required,
+        minLength: minLength(8),
+      },
+      confirmPassword: {
+        required,
+        sameAsPassword: sameAs(password), //this looks specifically for the string "password" in the confirm password field, tried a bunch of ways to change and was unable
+      },
+    },
   },
   methods: {
     handleSubmit() {
       this.isSubmitted = true;
       this.v$.$touch();
-      if(!this.v$.$error) {
-        alert('Form Successfully Submitted.');
-      }
-      else {
-        alert(this.v$.error);
-      }
       if (this.v$.$invalid) {
         return;
       }
-      alert("SUCCESS!");
+      alert("SUCCESS!" + JSON.stringify(this.userForm));
     },
     registerUser() {
       this.error = null;
       this.message = null;
       const payload = {
-        name: state.fname + " " + state.lname,
-        email: state.email,
-        password: state.password.password,
-        password_confirmation: state.password.confirmPassword,
+        name: this.userForm.fname + " " + this.userForm.lname,
+        email: this.userForm.email,
+        password: this.userForm.password,
+        password_confirmation: this.userForm.passwordConfirm,
       };
       AuthService.registerUser(payload)
         .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
