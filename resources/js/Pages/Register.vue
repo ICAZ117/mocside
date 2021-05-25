@@ -131,7 +131,7 @@
             name="confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && isSame,
+              'is-invalid': isSubmitted && isDiff,
             }"
             autocomplete="new-password"
           />
@@ -143,7 +143,7 @@
               >Please re-enter your password</span
             >
             <span
-              v-else-if="!isSame"
+              v-else-if="isDiff"
               >Your passwords don't match!
             </span>
           </div>
@@ -172,6 +172,9 @@ export default {
     return {
       error: null,
       message: null,
+      isDiff: false,
+      hasError: false,
+      isEmpty: false,
       userForm: {
         fname: "",
         lname: "",
@@ -228,14 +231,14 @@ export default {
     },
   },
   computed: {
-    isSame: function() {
+    isDiff: function() {
       return this.password == this.confirmPassword;
     },
     isEmpty: function() {
       return this.confirmPassword == "";
     },
     hasError: function() {
-      return isSame || isEmpty;
+      return isDiff || isEmpty;
     }
   }
 };
