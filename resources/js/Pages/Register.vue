@@ -215,7 +215,7 @@ export default {
         name: this.userForm.fname + " " + this.userForm.lname,
         email: this.userForm.email,
         password: this.userForm.password,
-        password_confirmation: this.userForm.passwordConfirm,
+        password_confirmation: this.userForm.confirmPassword,
       };
       AuthService.registerUser(payload)
         .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
@@ -224,13 +224,13 @@ export default {
   },
   computed: {
     isDiff: function() {
-      return this.password != this.confirmPassword;
+      return this.userForm.password != this.userForm.confirmPassword;
     },
     isEmpty: function() {
       return this.userForm.confirmPassword == "";
     },
     hasError: function() {
-      return true;
+      return isEmpty || isDiff;
     }
   }
 };
