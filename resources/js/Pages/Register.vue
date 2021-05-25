@@ -130,9 +130,6 @@
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
-            :class="{
-              'is-invalid': isSubmitted && isDiff,
-            }"
             autocomplete="new-password"
           />
           <div
@@ -232,7 +229,7 @@ export default {
   },
   computed: {
     isDiff: function() {
-      return this.password == this.confirmPassword;
+      return this.password != this.confirmPassword;
     },
     isEmpty: function() {
       return this.confirmPassword == "";
