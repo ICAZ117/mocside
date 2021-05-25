@@ -24,8 +24,6 @@
               class="nav-link"
               >{{ item.title }}</router-link
             >
-            <!-- <a class="nav-link" @click="toggleLoginModal" href="">Login</a> -->
-            <!-- <a class="nav-link" href="#">Sign Up</a> -->
           </div>
         </div>
       </div>
@@ -45,14 +43,13 @@ export default {
         { title: "Login", to: "/login" },
         { title: "Sign Up", to: "/register" },
       ],
-      // isLoginOpen: false,
     };
   },
-  // methods: {
-  //   toggleLoginModal() {
-  //     this.$emit("open-login");
-  //   }
-  // },
+  computed: {
+    isLoggedIn: function() {
+      return true;
+    }
+  },
 };
 </script>
 
