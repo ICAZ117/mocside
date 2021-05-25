@@ -181,6 +181,13 @@ nav {
   transition-duration: 200ms;
 }
 
+.pfp {
+  max-height: 40px;
+  max-width: 40px;
+  border: 1px solid #333333;
+  border-radius: 50%;
+}
+
 /*=============== MODAL ==============*/
 .modal-section {
   z-index: 20!important;
@@ -644,6 +651,7 @@ footer .svg-inline--fa:hover {
   border-top: .1rem solid #4981b3;
 }
 
+/*============= PROFILE =============*/
 /*============= MEDIA QUERIES =============*/
 
 @media (min-width: 1200px) {
