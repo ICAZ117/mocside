@@ -160,6 +160,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
+import AuthService from "../services/AuthService";
 export default {
   setup() {
     return {
