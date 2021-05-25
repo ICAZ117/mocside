@@ -128,6 +128,9 @@
             type="password"
             v-model="userForm.confirmPassword"
             class="form-control"
+            :class="{
+              'is-invalid': isSubmitted && true,
+            }"
             autocomplete="new-password"
           />
           <div
