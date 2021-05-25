@@ -18,6 +18,8 @@
           <div class="valid-feedback"></div>
           <div class="invalid-feedback">Please enter your email</div>
         </div>
+        <br />
+
         <div class="form-group">
           <label for="pwd">Password:</label>
           <input
@@ -32,6 +34,8 @@
           <div class="valid-feedback"></div>
           <div class="invalid-feedback">Please enter your password</div>
         </div>
+        <br />
+
         <div class="form-group form-check">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox" name="remember" />Remember Me
