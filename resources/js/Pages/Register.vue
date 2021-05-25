@@ -228,9 +228,9 @@ export default {
     },
     isEmpty: function() {
       console.log("This:");
-      console.log(this.confirmPassword);
+      console.log(this.userForm.confirmPassword);
       console.log("\nNot using this");
-      console.log(confirmPassword);
+      console.log(userForm.confirmPassword);
       return confirmPassword == "";
     },
     hasError: function() {
