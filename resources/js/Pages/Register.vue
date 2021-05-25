@@ -94,7 +94,6 @@
           </div>
         </div>
         <br />
-
         <!------------------- PASSWORD ------------------->
         <div class="form-group">
           <label for="password">Password</label>
@@ -122,7 +121,6 @@
           </div>
         </div>
         <br />
-
         <!---------------- REPEAT PASSWORD ---------------->
         <div class="form-group">
           <label for="confirmPassword">Confirm Password</label>
@@ -133,19 +131,19 @@
             name="confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error,
+              'is-invalid': isSubmitted && isDiff,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.userForm.confirmPassword.$error"
+            v-if="isSubmitted && hasError"
             class="invalid-feedback"
           >
-            <span v-if="v$.userForm.confirmPassword.required.$invalid"
+            <span v-if="isEmpty"
               >Please re-enter your password</span
             >
             <span
-              v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
+              v-else-if="isDiff"
               >Your passwords don't match!
             </span>
           </div>
@@ -163,8 +161,7 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
-
+import { required, email, minLength } from "@vuelidate/validators";
 export default {
   setup() {
     return {
@@ -175,6 +172,9 @@ export default {
     return {
       error: null,
       message: null,
+      isDiff: false,
+      hasError: false,
+      isEmpty: false,
       userForm: {
         fname: "",
         lname: "",
@@ -205,21 +205,15 @@ export default {
         required,
         minLength: minLength(8),
       },
-      confirmPassword: {
-        required,
-        sameAsPassword: sameAs( function() { return this.userForm.password } ), //this looks specifically for the string "password" in the confirm password field, tried a bunch of ways to change and was unable
-      },
     },
   },
   methods: {
     handleSubmit() {
       this.isSubmitted = true;
-
       this.v$.$touch();
       if (this.v$.$invalid) {
         return;
       }
-
       alert("SUCCESS!" + JSON.stringify(this.userForm));
     },
     registerUser() {
@@ -236,5 +230,16 @@ export default {
         .catch((error) => (this.error = getError(error)));
     },
   },
+  computed: {
+    isDiff: function() {
+      return this.password == this.confirmPassword;
+    },
+    isEmpty: function() {
+      return this.confirmPassword == "";
+    },
+    hasError: function() {
+      return isDiff || isEmpty;
+    }
+  }
 };
 </script>
