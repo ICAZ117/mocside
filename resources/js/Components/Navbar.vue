@@ -49,7 +49,7 @@ export default {
     isLoggedIn: async function() {
 
 
-      //this will be changed to the above function once its working
+      //this will be changed to check the store to see if a user is logged in
       return false;
     }
   },
