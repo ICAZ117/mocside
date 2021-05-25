@@ -18,4 +18,8 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # Redirect www requests to non-www
+    RewriteCond %{HTTP_HOST} ^www.mocside.com:8000$ [NC]
+    RewriteRule ^(.*)$ http://mocside.com:8000/$1 [R=301,L]
 </IfModule>
