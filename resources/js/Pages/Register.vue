@@ -130,9 +130,6 @@
             id="confirmPassword"
             name="confirmPassword"
             class="form-control"
-            :class="{
-              'is-invalid': isSubmitted && isDiff,
-            }"
             autocomplete="new-password"
           />
           <div
@@ -172,9 +169,6 @@ export default {
     return {
       error: null,
       message: null,
-      isDiff: false,
-      hasError: false,
-      isEmpty: false,
       userForm: {
         fname: "",
         lname: "",
@@ -232,13 +226,17 @@ export default {
   },
   computed: {
     isDiff: function() {
-      return this.password == this.confirmPassword;
+      return this.password != this.confirmPassword;
     },
     isEmpty: function() {
-      return this.confirmPassword == "";
+      console.log("This:");
+      console.log(this.confirmPassword);
+      console.log("\nNot using this");
+      console.log(confirmPassword);
+      return confirmPassword == "";
     },
     hasError: function() {
-      return isDiff || isEmpty;
+      return true;
     }
   }
 };
