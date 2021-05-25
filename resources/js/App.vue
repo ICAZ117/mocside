@@ -12,7 +12,7 @@ import Navbar from "./Components/Navbar";
 
 export default {
   components: { Navbar },
-  data() {
+  async data() {
     return {
       authUser: await this.$store.dispatch("auth/getAuthUser"),
     }
