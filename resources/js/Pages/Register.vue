@@ -13,11 +13,11 @@
             id="fname"
             name="fname"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.fname.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.state.fname.$error }"
           />
           <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.fname.$error"
+            v-if="isSubmitted && v$.state.fname.$error"
             class="invalid-feedback"
           >
             Please enter your first name
@@ -34,11 +34,11 @@
             id="lname"
             name="lname"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.lname.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.state.lname.$error }"
           />
           <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.lname.$error"
+            v-if="isSubmitted && v$.state.lname.$error"
             class="invalid-feedback"
           >
             Please enter your last name
@@ -56,12 +56,12 @@
             name="username"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.username.$error,
+              'is-invalid': isSubmitted && v$.state.username.$error,
             }"
           />
           <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.username.$error"
+            v-if="isSubmitted && v$.state.username.$error"
             class="invalid-feedback"
           >
             Please enter a username
@@ -78,16 +78,16 @@
             id="email"
             name="email"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.email.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.state.email.$error }"
           />
           <div
-            v-if="isSubmitted && v$.email.$error"
+            v-if="isSubmitted && v$.state.email.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.email.required.$invalid"
+            <span v-if="v$.state.email.required.$invalid"
               >Please enter your email</span
             >
-            <span v-if="v$.email.email.$invalid"
+            <span v-if="v$.state.email.$invalid"
               >Please provide a valid email address
               (rickastley@NeverGonnaGiveYouUp.com)</span
             >
@@ -104,18 +104,18 @@
             name="password"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.password.password.$error,
+              'is-invalid': isSubmitted && v$.state.password.password.$error,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.password.password.$error"
+            v-if="isSubmitted && v$.state.password.password.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.password.password.required.$invalid"
+            <span v-if="v$.state.password.password.required.$invalid"
               >Please enter a password</span
             >
-            <span v-if="v$.password.password.minLength.$invalid"
+            <span v-if="v$.state.password.password.minLength.$invalid"
               >Passwords must be at <i>LEAST</i> 8 characters long</span
             >
           </div>
@@ -131,19 +131,19 @@
             name="confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.password.confirmPassword.$error,
+              'is-invalid': isSubmitted && v$.state.password.confirmPassword.$error,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.password.confirmPassword.$error"
+            v-if="isSubmitted && v$.state.password.confirmPassword.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.password.confirmPassword.required.$invalid"
+            <span v-if="v$.state.password.confirmPassword.required.$invalid"
               >Please re-enter your password</span
             >
             <span
-              v-else-if="v$.password.confirmPassword.sameAsPassword.$invalid"
+              v-else-if="v$.state.password.confirmPassword.sameAsPassword.$invalid"
               >Your passwords don't match!
             </span>
           </div>
