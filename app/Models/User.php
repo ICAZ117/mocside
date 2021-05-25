@@ -22,7 +22,6 @@ class User extends Authenticatable
         return $this->is_admin;
     }
 
-
     /**
      * The attributes that are mass assignable.
      *
