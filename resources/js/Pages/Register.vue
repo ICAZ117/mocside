@@ -127,8 +127,6 @@
           <input
             type="password"
             v-model="userForm.confirmPassword"
-            id="confirmPassword"
-            name="confirmPassword"
             class="form-control"
             autocomplete="new-password"
           />
