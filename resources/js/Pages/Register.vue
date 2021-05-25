@@ -13,11 +13,11 @@
             id="fname"
             name="fname"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.userForm.fname.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.fname.$error }"
           />
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.userForm.fname.$error"
+            v-if="isSubmitted && v$.fname.$error"
             class="invalid-feedback"
           >
             Please enter your first name
@@ -34,11 +34,11 @@
             id="lname"
             name="lname"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.userForm.lname.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.lname.$error }"
           />
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.userForm.lname.$error"
+            v-if="isSubmitted && v$.lname.$error"
             class="invalid-feedback"
           >
             Please enter your last name
@@ -56,12 +56,12 @@
             name="username"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.userForm.username.$error,
+              'is-invalid': isSubmitted && v$.username.$error,
             }"
           />
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <!-- <div v-if="isSubmitted && !v$.name.required" class="invalid-feedback"> -->
           <div
-            v-if="isSubmitted && v$.userForm.username.$error"
+            v-if="isSubmitted && v$.username.$error"
             class="invalid-feedback"
           >
             Please enter a username
@@ -78,16 +78,16 @@
             id="email"
             name="email"
             class="form-control"
-            :class="{ 'is-invalid': isSubmitted && v$.userForm.email.$error }"
+            :class="{ 'is-invalid': isSubmitted && v$.email.$error }"
           />
           <div
-            v-if="isSubmitted && v$.userForm.email.$error"
+            v-if="isSubmitted && v$.email.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.userForm.email.required.$invalid"
+            <span v-if="v$.email.required.$invalid"
               >Please enter your email</span
             >
-            <span v-if="v$.userForm.email.email.$invalid"
+            <span v-if="v$.email.email.$invalid"
               >Please provide a valid email address
               (rickastley@NeverGonnaGiveYouUp.com)</span
             >
@@ -104,18 +104,18 @@
             name="password"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.userForm.password.$error,
+              'is-invalid': isSubmitted && v$.password.$error,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.userForm.password.$error"
+            v-if="isSubmitted && v$.password.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.userForm.password.required.$invalid"
+            <span v-if="v$.password.required.$invalid"
               >Please enter a password</span
             >
-            <span v-if="v$.userForm.password.minLength.$invalid"
+            <span v-if="v$.password.minLength.$invalid"
               >Passwords must be at <i>LEAST</i> 8 characters long</span
             >
           </div>
@@ -131,19 +131,19 @@
             name="confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error,
+              'is-invalid': isSubmitted && v$.confirmPassword.$error,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.userForm.confirmPassword.$error"
+            v-if="isSubmitted && v$.confirmPassword.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.userForm.confirmPassword.required.$invalid"
+            <span v-if="v$.confirmPassword.required.$invalid"
               >Please re-enter your password</span
             >
             <span
-              v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
+              v-else-if="v$.confirmPassword.sameAsPassword.$invalid"
               >Your passwords don't match!
             </span>
           </div>
@@ -210,7 +210,6 @@ export default {
     handleSubmit() {
       this.isSubmitted = true;
       this.v$.$touch();
-      this.v$.validate();
       if(!this.v$.$error) {
         alert('Form Successfully Submitted.');
       }
@@ -220,16 +219,16 @@ export default {
       if (this.v$.$invalid) {
         return;
       }
-      alert("SUCCESS!" + JSON.stringify(this.userForm));
+      alert("SUCCESS!" + JSON.stringify(this.data));
     },
     registerUser() {
       this.error = null;
       this.message = null;
       const payload = {
-        name: this.userForm.fname + " " + this.userForm.lname,
-        email: this.userForm.email,
-        password: this.userForm.password,
-        password_confirmation: this.userForm.passwordConfirm,
+        name: this.fname + " " + this.lname,
+        email: this.email,
+        password: this.password,
+        password_confirmation: this.passwordConfirm,
       };
       AuthService.registerUser(payload)
         .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
