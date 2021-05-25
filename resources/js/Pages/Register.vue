@@ -235,7 +235,7 @@ export default {
       return this.confirmPassword == "";
     },
     hasError: function() {
-      return isDiff || isEmpty;
+      return true;
     }
   }
 };
