@@ -17,13 +17,12 @@
       <div class="collapse navbar-collapse nav-items" id="navbarResponsive">
         <div class="navbar-nav">
           <div class="nav-item">
-            <router-link
-              v-for="item in list"
-              :key="item.title"
-              :to="item.to"
-              class="nav-link"
-              >{{ item.title }}</router-link
-            >
+            <router-link :key="Home" :to="/" class="nav-link">Home</router-link>
+            <router-link v-if="isLoggedIn" :key="Courses" :to="/courses" class="nav-link">Courses</router-link>
+            <router-link v-if="!isLoggedIn" :key="Login" :to="/login" class="nav-link">Login</router-link>
+            <router-link v-if="!isLoggedIn" :key="Sign/ Up" :to="/register" class="nav-link">Sign Up</router-link>
+            <a v-if="isLoggedIn" class="nav-link" href="">Logout</a>
+            <router-link v-if="isLoggedIn" :key="Profile" :to="item.to" class="nav-link"><img class="pfp" src="img/DefaultPFP.png" alt="Profile"></router-link>
           </div>
         </div>
       </div>
