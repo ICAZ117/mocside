@@ -209,7 +209,7 @@ export default {
       if (this.v$.$invalid) {
         return;
       }
-      alert("SUCCESS!" + JSON.stringify(this.userForm));
+      registerUser();
     },
     registerUser() {
       this.error = null;
