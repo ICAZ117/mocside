@@ -207,7 +207,7 @@ export default {
       },
       confirmPassword: {
         required,
-        sameAsPassword: sameAs( function() { return this.userForm.password } ), //this looks specifically for the string "password" in the confirm password field, tried a bunch of ways to change and was unable
+        sameAsPassword: sameAs(password), //this looks specifically for the string "password" in the confirm password field, tried a bunch of ways to change and was unable
       },
     },
   },
