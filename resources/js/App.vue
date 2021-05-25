@@ -3,7 +3,6 @@
     <Navbar />
     <router-view></router-view>
   </div>
-  <p>{{ authUser }}</p>
 </template>
 
 <script>

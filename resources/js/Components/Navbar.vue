@@ -33,39 +33,13 @@
 </template>
 
 <script>
-import { getError } from "../utils/helpers";
 export default {
   data() {
     return {
-      list: [
-        { title: "Home", to: "/" },
-        { title: "Courses", to: "/courses" },
-        { title: "Login", to: "/login" },
-        { title: "Sign Up", to: "/register" },
-      ],
     };
   },
   computed: {
     isLoggedIn: async function() {
-
-      //not quite working currently
-      try {
-        const authUser = await this.$store.dispatch("auth/getAuthUser");
-        if (authUser) {
-          console.log("logged in");
-        }
-        else {
-          console.log("not logged in");
-          // const error = Error(
-          //   "Unable to fetch user, try logging in"
-          // );
-          // error.name = "Fetch User";
-          // throw error;
-        }
-      } catch (error) {
-        this.error = getError(error);
-      }
-
 
 
       //this will be changed to the above function once its working
