@@ -131,19 +131,19 @@
             name="confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && Somethin else goes here,
+              'is-invalid': isSubmitted && isSame,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && call a method"
+            v-if="isSubmitted && hasError"
             class="invalid-feedback"
           >
-            <span v-if="call a method"
+            <span v-if="isEmpty"
               >Please re-enter your password</span
             >
             <span
-              v-else-if="call a method"
+              v-else-if="!isSame"
               >Your passwords don't match!
             </span>
           </div>
@@ -227,5 +227,16 @@ export default {
         .catch((error) => (this.error = getError(error)));
     },
   },
+  computed: {
+    isSame() {
+      return this.password == this.confirmPassword;
+    },
+    isEmpty() {
+      return this.confirmPassword == "";
+    },
+    hasError() {
+      return isSame() || isEmpty();
+    }
+  }
 };
 </script>
