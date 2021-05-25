@@ -46,6 +46,21 @@ export default {
   },
   computed: {
     isLoggedIn: function() {
+      try {
+        const authUser = await this.$store.dispatch("auth/getAuthUser");
+        if (authUser) {
+          console.log("logged in");
+        }
+        else {
+          const error = Error(
+            "Unable to fetch user, try logging in"
+          );
+          error.name = "Fetch User";
+          throw error;
+        }
+      } catch (error) {
+        this.error = getError(error);
+      }
       return false;
     }
   },
