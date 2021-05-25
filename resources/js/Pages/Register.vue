@@ -104,18 +104,18 @@
             name="password"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.password.$error,
+              'is-invalid': isSubmitted && v$.password.password.$error,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.password.$error"
+            v-if="isSubmitted && v$.password.password.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.password.required.$invalid"
+            <span v-if="v$.password.password.required.$invalid"
               >Please enter a password</span
             >
-            <span v-if="v$.password.minLength.$invalid"
+            <span v-if="v$.password.password.minLength.$invalid"
               >Passwords must be at <i>LEAST</i> 8 characters long</span
             >
           </div>
@@ -131,19 +131,19 @@
             name="confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.confirmPassword.$error,
+              'is-invalid': isSubmitted && v$.password.confirmPassword.$error,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.confirmPassword.$error"
+            v-if="isSubmitted && v$.password.confirmPassword.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.confirmPassword.required.$invalid"
+            <span v-if="v$.password.confirmPassword.required.$invalid"
               >Please re-enter your password</span
             >
             <span
-              v-else-if="v$.confirmPassword.sameAsPassword.$invalid"
+              v-else-if="v$.password.confirmPassword.sameAsPassword.$invalid"
               >Your passwords don't match!
             </span>
           </div>
@@ -227,8 +227,8 @@ export default {
       const payload = {
         name: this.fname + " " + this.lname,
         email: this.email,
-        password: this.password,
-        password_confirmation: this.passwordConfirm,
+        password: this.password.password,
+        password_confirmation: this.password.confirmPassword,
       };
       AuthService.registerUser(payload)
         .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
