@@ -12,13 +12,16 @@ import Navbar from "./Components/Navbar";
 
 export default {
   components: { Navbar },
-  async data() {
+  data() {
     return {
       authUser: await this.$store.dispatch("auth/getAuthUser"),
     }
   },
-  methods: {
-  },
+  computed: {
+    authUser: async function() {
+      return await this.$store.dispatch("auth/getAuthUser");
+    },
+  }
 };
 </script>
 

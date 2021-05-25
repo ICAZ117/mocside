@@ -94,66 +94,6 @@
     </div>
     <!-- End Socket -->
   </div>
-  <!-- <Modal @close="toggleLogin">
-    <! v-if="this.isLoginOpen" 
-    <template v-slot:title> Login </template>
-    <template v-slot:body>
-      <! Login Form 
-      <div class="login">
-        <form @submit.prevent="login">
-          <! change from email to username later 
-          <FormInput
-            type="email"
-            label="Email"
-            name="email"
-            v-model="email"
-            autocomplete="email"
-            placeholder="Luke@jedi.com"
-            class="mb-2"
-          />
-          <FormInput
-            type="password"
-            label="Password"
-            name="password"
-            v-model="password"
-            class="mb-4"
-          />
-          <div class="flex justify-between">
-            <BaseBtn type="submit" text="Login" />
-            <! <router-link to="/forgot-password" class="text-sm base-link">
-              Forgot your password?
-            </router-link> --
-          </div>
-        </form>
-      </div>
-
-      <! <div class="login">
-        <form action="" class="needs-validation" novalidate>
-            <div class="form-group">
-                <label for="uname">Username:</label>
-                <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-                <div class="valid-feedback"></div>
-                <div class="invalid-feedback">Please enter your username</div>
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-                <div class="valid-feedback"></div>
-                <div class="invalid-feedback">Please enter your password</div>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember">Remember Me
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Check this checkbox to continue.</div>
-                </label>
-            </div>
-            <button type="submit" class="btn btn-danger">Log In</button>
-        </form>
-        </div> 
-    </template>
-  </Modal> -->
-  <!-- <router-view></router-view> -->
 </template>
 
 <script>
