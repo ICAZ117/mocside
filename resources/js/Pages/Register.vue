@@ -131,19 +131,19 @@
             name="confirmPassword"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.userForm.confirmPassword.$error,
+              'is-invalid': isSubmitted && Somethin else goes here,
             }"
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && v$.userForm.confirmPassword.$error"
+            v-if="isSubmitted && call a method"
             class="invalid-feedback"
           >
-            <span v-if="v$.userForm.confirmPassword.required.$invalid"
+            <span v-if="call a method"
               >Please re-enter your password</span
             >
             <span
-              v-else-if="v$.userForm.confirmPassword.sameAsPassword.$invalid"
+              v-else-if="call a method"
               >Your passwords don't match!
             </span>
           </div>
@@ -161,7 +161,7 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, email, minLength } from "@vuelidate/validators";
 export default {
   setup() {
     return {
@@ -201,10 +201,6 @@ export default {
       password: {
         required,
         minLength: minLength(8),
-      },
-      confirmPassword: {
-        required,
-        sameAsPassword: sameAs(password), //this looks specifically for the string "password" in the confirm password field, tried a bunch of ways to change and was unable
       },
     },
   },
