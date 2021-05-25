@@ -169,9 +169,6 @@ export default {
     return {
       error: null,
       message: null,
-      isDiff: false,
-      hasError: false,
-      isEmpty: false,
       userForm: {
         fname: "",
         lname: "",
