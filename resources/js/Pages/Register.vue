@@ -209,7 +209,7 @@ export default {
       if (this.v$.$invalid) {
         return;
       }
-      registerUser();
+      this.registerUser();
     },
     registerUser() {
       this.error = null;
