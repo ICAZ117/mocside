@@ -229,7 +229,11 @@ export default {
       return this.password != this.confirmPassword;
     },
     isEmpty: function() {
-      return this.confirmPassword == "";
+      console.log("This:");
+      console.log(this.confirmPassword);
+      console.log("\nNot using this");
+      console.log(confirmPassword);
+      return confirmPassword == "";
     },
     hasError: function() {
       return true;
