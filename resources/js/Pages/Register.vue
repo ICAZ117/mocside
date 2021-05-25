@@ -131,7 +131,7 @@
             autocomplete="new-password"
           />
           <div
-            v-if="isSubmitted && hasError"
+            v-if="true"
             class="invalid-feedback"
           >
             <span v-if="isEmpty"
