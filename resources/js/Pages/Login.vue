@@ -3,36 +3,48 @@
     <!-- Login Form -->
     <div class="login">
       <h3 class="login-title">Login</h3>
+
       <form @submit.prevent="login" class="needs-validation">
+        <!-------------------- USERNAME -------------------->
         <div class="form-group">
-          <label for="email">Email:</label>
+          <label for="userEmail">Username/Email</label>
           <input
-            type="email"
+            type="text"
+            v-model="userForm.userEmail"
+            id="userEmail"
+            name="userEmail"
             class="form-control"
-            id="email"
-            placeholder="Enter email"
-            name="email"
-            v-model="email"
-            required
+            :class="{
+              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
+            }"
           />
-          <div class="valid-feedback"></div>
-          <div class="invalid-feedback">Please enter your email</div>
+          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+          <div
+            v-if="isSubmitted && v$.userForm.userEmail.$error"
+            class="invalid-feedback"
+          >
+            Please enter your username or email address
+          </div>
         </div>
         <br />
 
+        <!------------------- PASSWORD ------------------->
         <div class="form-group">
-          <label for="pwd">Password:</label>
+          <label for="password">Password</label>
           <input
             type="password"
+            v-model="userForm.password"
+            id="password"
+            name="password"
             class="form-control"
-            id="pwd"
-            placeholder="Enter password"
-            name="pswd"
-            v-model="password"
-            required
+            :class="{
+              'is-invalid': isSubmitted && v$.userForm.password.$error,
+            }"
+            autocomplete="new-password"
           />
-          <div class="valid-feedback"></div>
-          <div class="invalid-feedback">Please enter your password</div>
+          <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
+            Please enter your password
+          </div>
         </div>
         <br />
 
@@ -43,7 +55,11 @@
             <div class="invalid-feedback">Check this checkbox to continue.</div>
           </label>
         </div>
-        <button type="submit" class="btn btn-danger">Log In</button>
+
+        <!-------------------- SUBMIT -------------------->
+        <div class="form-group">
+          <button class="btn btn-danger btn-block">Register</button>
+        </div>
       </form>
     </div>
   </div>
@@ -52,44 +68,49 @@
 <script>
 import AuthService from "../services/AuthService";
 import { getError } from "../utils/helpers";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+
 export default {
-  data() {
+  setup() {
     return {
-      email: null,
-      password: null,
-      error: null,
+      v$: useVuelidate(),
     };
   },
+  data() {
+    return {
+      error: null,
+      message: null,
+      userForm: {
+        userEmail: "",
+        password: "",
+      },
+      isSubmitted: false,
+    };
+  },
+  validations: {
+    userForm: {
+      userEmail: {
+        required,
+      },
+      password: {
+        required,
+        // minLength: minLength(8),
+      },
+    },
+  },
   methods: {
-    validate() {
-      console.log("Inside validate");
-      ("use strict");
-      window.addEventListener(
-        "load",
-        function () {
-          // Get the forms we want to add validation styles to
-          var forms = document.getElementsByClassName("needs-validation");
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function (form) {
-            form.addEventListener(
-              "submit",
-              function (event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add("was-validated");
-              },
-              false
-            );
-          });
-        },
-        false
-      );
+    handleSubmit() {
+      this.isSubmitted = true;
+      this.v$.$touch();
+      if (this.v$.$invalid) {
+        return;
+      }
+      this.login();
     },
     async login() {
       const payload = {
-        email: this.email,
+        userEmail: this.userEmail,
         password: this.password,
       };
       this.error = null;
