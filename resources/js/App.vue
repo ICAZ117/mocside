@@ -7,7 +7,7 @@
 
 <script>
 import Navbar from "./Components/Navbar";
-import store from "../Store/index";
+import store from "./Store/index";
 
 export default {
   components: { Navbar },
