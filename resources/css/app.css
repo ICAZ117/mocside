@@ -129,7 +129,7 @@ nav {
   flex-direction: row!important;
 }
 
-.link-btn {
+/* .link-btn {
   width:0.0000000001px;
   height:0.00000000001px;
   background-color: #ffffff;
@@ -138,7 +138,7 @@ nav {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-}
+} */
 
 .nav-link {
   color: #555555!important;
@@ -146,7 +146,6 @@ nav {
   padding-top: 17px!important;
   width: 150px!important;
   text-align: center!important;
-  margin-top: 8px!important;
 }
 
 .nav-link.active, .nav-link:hover {
