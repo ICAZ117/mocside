@@ -17,6 +17,7 @@
             :class="{
               'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
             }"
+            autocomplete="username"
           />
           <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
           <div
@@ -40,7 +41,7 @@
             :class="{
               'is-invalid': isSubmitted && v$.userForm.password.$error,
             }"
-            autocomplete="new-password"
+            autocomplete="current-password"
           />
           <div v-if="isSubmitted && v$.userForm.password.$error" class="invalid-feedback">
             Please enter your password
