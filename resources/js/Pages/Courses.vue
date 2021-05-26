@@ -113,9 +113,8 @@ export default {
     },
     mounted() {
         this.authUser = store.getters["auth/authUser"];
-        console.log(this.authUser.courses);
-        console.log(this.authUser.courses.courses);
-        console.log(JSON.parse(this.authUser.courses));
+        console.log(JSON.parse(this.authUser.courses).courses);
+        this.courses = JSON.parse(this.authUser.courses).courses;
     },
 
 
