@@ -60,7 +60,6 @@ export const actions = {
   },
   setGuest(context, { value }) {
     window.localStorage.setItem("guest", value);
-    commit("SET_TEST", true);
   },
 };
 
