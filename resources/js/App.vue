@@ -16,6 +16,22 @@ export default {
       authUser: await this.$store.dispatch("auth/getAuthUser"),
     }
   },
+  mounted() {
+    var flag = store.getters["auth/guest"];
+      console.log(flag);
+
+      if(flag || flag == null) {
+        console.log("true user is a guest");
+      }
+      else {
+        console.log("false user is not a guest, user is logged in?");
+      }
+
+      return null;
+  },
+  methods: {
+
+  },
   computed: {
     authUser: async function() {
       // return await this.$store.dispatch("auth/getAuthUser");
