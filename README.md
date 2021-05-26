@@ -17,6 +17,7 @@ Completed:
 * Log Out button works, and logs out the user
 * certain pages are unaccesible to non logged in users(example: courses)
 * Upon opening the site if you have a valid csrf-token then it will log you in
+* Course Page is now Dynamic
 
 
 
@@ -42,7 +43,6 @@ Todo:
 
 * Course Page
 	* Style Course Page
-	* Get Dynamic Courses from Database and User
 
 * Lab Page
 	* Style Lab Page
