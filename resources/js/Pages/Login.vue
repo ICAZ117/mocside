@@ -58,7 +58,7 @@
 
         <!-------------------- SUBMIT -------------------->
         <div class="form-group">
-          <button class="btn btn-danger btn-block">Register</button>
+          <button class="btn btn-danger btn-block">Login</button>
         </div>
       </form>
     </div>
@@ -106,12 +106,12 @@ export default {
       if (this.v$.$invalid) {
         return;
       }
-      this.login();
+      await this.login();
     },
     async login() {
       const payload = {
-        userEmail: this.userEmail,
-        password: this.password,
+        userEmail: this.userForm.userEmail,
+        password: this.userForm.password,
       };
       this.error = null;
       try {
