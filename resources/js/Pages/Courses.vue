@@ -98,5 +98,23 @@
 </template>
 
 <script>
-export default {};
+import store from "../Store/index";
+export default {
+    data() {
+        return {
+            authUser: store.getters["auth/authUser"],
+            courses: [],
+        };
+    },
+    methods: {
+        getCourses() {
+            console.log(authUser);
+        },
+    },
+    mounted() {
+        console.log(authUser);
+    },
+
+
+};
 </script>
