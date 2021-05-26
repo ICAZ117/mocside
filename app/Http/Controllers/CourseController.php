@@ -26,7 +26,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         // I only want admins to be able to create a course
-        if (Auth::user->isAdmin()) {
+        if (Auth::user()->isAdmin()) {
             $validData = $request->validate([
                 'id' => 'required|int',
                 'roster' => 'required',
@@ -59,7 +59,7 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         // Only admins update courses
-        if (Auth::user->isAdmin()) {
+        if (Auth::user()->isAdmin()) {
             $cou = course::find($id);
             $cou->update($request->all());
             return $cou;
