@@ -106,7 +106,7 @@ export default {
       if (this.v$.$invalid) {
         return;
       }
-      await this.login();
+      this.login();
     },
     async login() {
       const payload = {
