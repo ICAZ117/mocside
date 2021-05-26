@@ -25,17 +25,6 @@ export default {
       authUser = await this.$store.dispatch("auth/getAuthUser");
     }
   },
-  computed: {
-    authUser: async function () {
-      var flag = store.getters["auth/guest"];
-      if (flag || flag == null) {
-        return null;
-      }
-      else {
-        return await this.$store.dispatch("auth/getAuthUser");
-      }
-    },
-  },
 };
 </script>
 
