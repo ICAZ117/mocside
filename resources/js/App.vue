@@ -20,10 +20,9 @@ export default {
     var flag = store.getters["auth/guest"];
 
     if (flag || flag == null) {
-      authUser = null;
+      this.authUser = null;
     } else {
-      authUser = await this.$store.dispatch("auth/getAuthUser");
-      //atttempt change
+      this.authUser = await this.$store.dispatch("auth/getAuthUser");
     }
   },
 };
