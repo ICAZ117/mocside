@@ -23,6 +23,7 @@ export default {
       authUser = null;
     } else {
       authUser = await this.$store.dispatch("auth/getAuthUser");
+      //atttempt change
     }
   },
 };
