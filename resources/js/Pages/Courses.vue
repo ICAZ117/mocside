@@ -99,22 +99,27 @@
 
 <script>
 import store from "../Store/index";
+import * as API from "../services/API";
 export default {
     data() {
         return {
             authUser: null,
+            enrolledCourses: [],
             courses: [],
+
         };
     },
     methods: {
         getCourses() {
-            console.log(this.authUser);
+            for(i = 0; i < this.enrolledCourses.length; i++) {
+                var cur = enrolledCourses[i];
+                console.log(API.apiClient.get(`/courses/${cur}`));
+            }
         },
     },
     mounted() {
         this.authUser = store.getters["auth/authUser"];
-        console.log(JSON.parse(this.authUser.courses).courses);
-        this.courses = JSON.parse(this.authUser.courses).courses;
+        this.enrolledCourses = JSON.parse(this.authUser.courses).courses;
     },
 
 
