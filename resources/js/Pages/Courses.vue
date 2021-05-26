@@ -112,6 +112,7 @@ export default {
         },
     },
     mounted() {
+        authUser = null;
         this.authUser = store.getters["auth/authUser"];
         console.log(this.authUser);
     },
