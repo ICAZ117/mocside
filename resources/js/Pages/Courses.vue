@@ -121,6 +121,7 @@ export default {
     mounted() {
         this.authUser = store.getters["auth/authUser"];
         this.enrolledCourses = JSON.parse(this.authUser.courses).courses;
+        console.log(process.env.VUE_APP_API_URL);
         this.getCourses();
     },
 
