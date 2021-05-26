@@ -115,7 +115,7 @@ export default {
             for(i = 0; i < this.enrolledCourses.length; i++) {
                 var cur = this.enrolledCourses[i];
                 const course = await API.apiClient.get(`/courses/${cur}`);
-                this.courses.push(course);
+                this.courses.push(course.data);
             }
             console.log(this.courses);
         },
