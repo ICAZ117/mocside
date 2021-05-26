@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <Navbar />
+    <Navbar :authUser="authUser2" />
     <router-view></router-view>
   </div>
 </template>
@@ -25,6 +25,20 @@ export default {
       this.authUser = await this.$store.dispatch("auth/getAuthUser");
     }
   },
+  computed: {
+    authUser2: async function() {
+      var flag = store.getters["auth/guest"];
+      if(flag || flag == null) {
+        // this.authUser = null;
+        console.log("authUser null");
+      }
+      else {
+        // this.authUser = await this.$store.dispatch("auth/getAuthUser");
+        console.log("authUser set to User");
+      }
+      return null;
+    }  
+  }
 };
 </script>
 

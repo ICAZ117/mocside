@@ -34,15 +34,16 @@
 
 <script>
 export default {
+  props: {
+    authUser: Object,
+  },
   data() {
     return {
     };
   },
   methods: {
     async logout() {
-      console.log("attempting log out");
       await this.$store.dispatch("auth/logout");
-      console.log("successful?");
     }
   },
   computed: {
