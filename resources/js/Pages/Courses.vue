@@ -26,7 +26,7 @@
             </a>
             
             <!-- Image Card 1 -->
-            <a href="labs.php" class="no-decor">
+            <!-- <a href="labs.php" class="no-decor">
                 <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card coursecard w-100">
                         <div class="courses card-img-top" style="background-image: url(img/courses/2290.png);"></div>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-            </a>
+            </a> -->
         </div>
     </div>
 
