@@ -27,7 +27,8 @@ export default {
   },
   computed: {
     authUser2: async function() {
-      var flag2 = store.getters["auth/guest"];
+      // var flag2 = store.getters["auth/guest"];
+      var flag2 = store.state.user;
       console.log(flag2);
       if(flag2 || flag2 == null) {
         // this.authUser = null;
