@@ -110,18 +110,19 @@ export default {
         };
     },
     methods: {
-        getCourses() {
+        async getCourses() {
             var i;
             for(i = 0; i < this.enrolledCourses.length; i++) {
                 var cur = this.enrolledCourses[i];
-                console.log(API.apiClient.get(`/courses/${cur}`));
+                const course = await API.apiClient.get(`/courses/${cur}`);
+                this.courses.push(course);
             }
+            console.log(this.courses);
         },
     },
     mounted() {
         this.authUser = store.getters["auth/authUser"];
         this.enrolledCourses = JSON.parse(this.authUser.courses).courses;
-        console.log(process.env.VUE_APP_API_URL);
         this.getCourses();
     },
 
