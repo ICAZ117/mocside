@@ -102,7 +102,7 @@ import store from "../Store/index";
 export default {
     data() {
         return {
-            authUser: store.getters["auth/authUser"],
+            authUser: null,
             courses: [],
         };
     },
@@ -112,6 +112,7 @@ export default {
         },
     },
     mounted() {
+        authUser = store.getters["auth/authUser"];
         console.log(authUser);
     },
 
