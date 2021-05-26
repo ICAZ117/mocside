@@ -4,7 +4,7 @@
     <div class="login">
       <h3 class="login-title">Login</h3>
 
-      <form @submit.prevent="login" class="needs-validation">
+      <form @submit.prevent="handleSubmit" class="needs-validation">
         <!-------------------- USERNAME -------------------->
         <div class="form-group">
           <label for="userEmail">Username/Email</label>
