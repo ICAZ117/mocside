@@ -108,12 +108,12 @@ export default {
     },
     methods: {
         getCourses() {
-            console.log(authUser);
+            console.log(this.authUser);
         },
     },
     mounted() {
-        authUser = store.getters["auth/authUser"];
-        console.log(authUser);
+        this.authUser = store.getters["auth/authUser"];
+        console.log(this.authUser);
     },
 
 
