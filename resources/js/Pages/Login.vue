@@ -110,7 +110,7 @@ export default {
     },
     async login() {
       const payload = {
-        userEmail: this.userForm.userEmail,
+        email: this.userForm.userEmail,
         password: this.userForm.password,
       };
       this.error = null;
