@@ -21,8 +21,8 @@
             <router-link v-if="isLoggedIn" to="/courses" class="nav-link">Courses</router-link>
             <router-link v-if="!isLoggedIn" to="/login" class="nav-link">Login</router-link>
             <router-link v-if="!isLoggedIn" to="/register" class="nav-link">Sign Up</router-link>
-            <button @click="logout" v-if="isLoggedIn" class="link-btn nav-link" >Logout</button>
             <router-link v-if="isLoggedIn" to="/about" class="nav-link"><img class="pfp" src="../../img/DefaultPFP.png" alt="Profile"></router-link>
+            <a @click="logout" v-if="isLoggedIn" class="link-btn nav-link" >Logout</a>
           </div>
         </div>
       </div>
