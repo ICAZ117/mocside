@@ -11,8 +11,14 @@ import store from "./Store/index";
 
 export default {
   components: { Navbar },
-  async setup() {
-    authUser = async function() {
+  async data() {
+    return {
+      authUser: await this.$store.dispatch("auth/getAuthUser"),
+    }
+  },
+  computed: {
+    authUser: async function() {
+      // return await this.$store.dispatch("auth/getAuthUser");
       var flag = await this.$store.dispatch("auth/guest");
       console.log(flag);
 
@@ -24,16 +30,6 @@ export default {
       }
 
       return null;
-    };
-  },
-  async data() {
-    return {
-      authUser: await this.$store.dispatch("auth/getAuthUser"),
-    }
-  },
-  computed: {
-    authUser: async function() {
-      return await this.$store.dispatch("auth/getAuthUser");
     },
   }
 };
