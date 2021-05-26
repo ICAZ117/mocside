@@ -11,46 +11,23 @@ import store from "./Store/index";
 
 export default {
   components: { Navbar },
-  async data() {
+  data() {
     return {
-      authUser: await this.$store.dispatch("auth/getAuthUser"),
+      authUser: null,
+    };
+  },
+  async mounted() {
+    var flag = store.getters["auth/guest"];
+
+    if (flag || flag == null) {
+      authUser = null;
+    } else {
+      authUser = await this.$store.dispatch("auth/getAuthUser");
+      //atttempt change
     }
   },
-  mounted() {
-    var flag = store.getters["auth/guest"];
-      console.log(flag);
-
-      if(flag || flag == null) {
-        console.log("true user is a guest");
-      }
-      else {
-        console.log("false user is not a guest, user is logged in?");
-      }
-
-      return null;
-  },
-  methods: {
-
-  },
-  computed: {
-    authUser: async function() {
-      // return await this.$store.dispatch("auth/getAuthUser");
-      var flag = await this.$store.dispatch("auth/guest");
-      console.log(flag);
-
-      if(flag) {
-        console.log("true user is a guest")
-      }
-      else {
-        console.log("false user is not a guest, user is logged in?");
-      }
-
-      return null;
-    },
-  }
 };
 </script>
 
 <style>
-
 </style>
