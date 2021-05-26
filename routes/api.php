@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/{id}', function ($id) {
         return User::findOrFail($id);
     });
+    Route::resource('courses', CourseController::class);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
