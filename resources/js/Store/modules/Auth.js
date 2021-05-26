@@ -8,6 +8,7 @@ export const state = {
   user: null,
   loading: false,
   error: null,
+  test: true,
 };
 
 export const mutations = {
@@ -23,6 +24,9 @@ export const mutations = {
   SET_ERROR(state, error) {
     state.error = error;
   },
+  SET_TEST(state, test) {
+    state.test = test;
+  },
 };
 
 export const actions = {
@@ -31,6 +35,7 @@ export const actions = {
       .then(() => {
         commit("SET_USER", null);
         dispatch("setGuest", { value: "isGuest" });
+        commit("SET_TEST", true);
         if (router.currentRoute.name !== "login")
           router.push({ path: "/login" });
       })
@@ -43,16 +48,19 @@ export const actions = {
     try {
       const response = await AuthService.getAuthUser();
       commit("SET_USER", response.data.data);
+      commit("SET_TEST", false);
       commit("SET_LOADING", false);
       return response.data.data;
     } catch (error) {
       commit("SET_LOADING", false);
       commit("SET_USER", null);
+      commit("SET_TEST", true);
       commit("SET_ERROR", getError(error));
     }
   },
   setGuest(context, { value }) {
     window.localStorage.setItem("guest", value);
+    commit("SET_TEST", true);
   },
 };
 
@@ -71,6 +79,9 @@ export const getters = {
   },
   loggedIn: (state) => {
     return !!state.user;
+  },
+  test: (state) => {
+    return state.test;
   },
   guest: () => {
     const storageItem = window.localStorage.getItem("guest");
