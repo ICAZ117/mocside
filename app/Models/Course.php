@@ -16,7 +16,7 @@ class Course extends Model
         'roster',
         'name',
         'description',
-        'img_loc'
+        'img_loc',
     ];
 
     // not sure if this will be helpful, leaving commented.
