@@ -16,7 +16,7 @@ export default {
       authUser: await this.$store.dispatch("auth/getAuthUser"),
     }
   },
-  mounted() {
+  async mounted() {
     var flag = await this.$store.dispatch("auth/guest");
       console.log(flag);
 
