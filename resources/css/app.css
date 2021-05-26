@@ -80,6 +80,13 @@ h1, h4 {
   color: inherit;
 }
 
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap
+}
+
 /*============= NAVIGATION =============*/
 
 nav {
@@ -200,6 +207,7 @@ nav {
 }
 
 /*=============== MODAL ==============*/
+
 .modal-section {
   z-index: 20!important;
   height: 100vh!important;
@@ -489,6 +497,7 @@ thead.labtable, thead.problemtable {
 }
 
 /*============= REGISTER =============*/
+
 .register {
   width: 450px;
   border: 1px solid lightgrey;
@@ -501,7 +510,6 @@ thead.labtable, thead.problemtable {
 .register-title {
   text-align: center;
 }
-
 
 /*============= WORKSPACE =============*/
 
@@ -663,6 +671,7 @@ footer .svg-inline--fa:hover {
 }
 
 /*============= PROFILE =============*/
+
 /*============= MEDIA QUERIES =============*/
 
 @media (min-width: 1200px) {
