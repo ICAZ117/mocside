@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    authUser2: async function() {
+    authUser2: function() {
       // var flag2 = store.getters["auth/guest"];
       var flag2 = store.state.user;
       console.log(flag2);
