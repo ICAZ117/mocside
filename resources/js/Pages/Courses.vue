@@ -113,7 +113,7 @@ export default {
         getCourses() {
             var i;
             for(i = 0; i < this.enrolledCourses.length; i++) {
-                var cur = enrolledCourses[i];
+                var cur = this.enrolledCourses[i];
                 console.log(API.apiClient.get(`/courses/${cur}`));
             }
         },
