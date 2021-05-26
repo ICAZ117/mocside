@@ -20,6 +20,9 @@ class UserResource extends JsonResource
           'email' => $this->email,
           'emailVerified' => $this->email_verified_at,
           'isAdmin' => $this->isAdmin(),
+          'fsc_id' => $this->fsc_id,
+          'fsc_role' => $this->fsc_role,
+          'courses' => $this->courses,
         ];
     }
 }
