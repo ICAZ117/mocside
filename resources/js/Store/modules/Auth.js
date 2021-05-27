@@ -43,7 +43,7 @@ export const actions = {
         commit("SET_ERROR", getError(error));
       });
   },
-  async getAuthUser({ commit }) {
+  async getAuthUser({ commit, dispatch }) {
     commit("SET_LOADING", true);
     try {
       const response = await AuthService.getAuthUser();
@@ -55,7 +55,9 @@ export const actions = {
       commit("SET_LOADING", false);
       commit("SET_USER", null);
       commit("SET_ISGUEST", true);
+      dispatch("setGuest", { value: "isGuest" });
       commit("SET_ERROR", getError(error));
+      return null;
     }
   },
   setGuest(context, { value }) {

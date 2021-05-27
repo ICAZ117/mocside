@@ -21,6 +21,11 @@ export default {
       return await this.$store.dispatch("auth/getAuthUser");
     },
   },
+  mounted: {
+    initCheck() {
+      this.authUser = await this.$store.dispatch("auth/getAuthUser");
+    },
+  },
   computed: {
     authUser: function() {
       var flag = store.getters["auth/isGuest"];
