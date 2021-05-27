@@ -34,9 +34,9 @@
 
 <script>
 export default {
-  props: {
-    authUser: Object,
-  },
+  // props: {
+  //   authUser: Object,
+  // },
   data() {
     return {
     };
@@ -47,13 +47,18 @@ export default {
     }
   },
   computed: {
-    isLoggedIn: async function() {
-
-
-      //this will be changed to check the store to see if a user is logged in
-      return false;
+    isLoggedIn: function() {
+      // console.log(authUser);
+      // console.log(this.authUser);
+      // if (authUser != null) {
+      //   return true;
+      // }
+      // else {
+      //   return false;
+      // }
+      return true;
     }
-  },
+  }
 };
 </script>
 
