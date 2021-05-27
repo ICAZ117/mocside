@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <Navbar :authUser="test" />
+    <Navbar :authUser="authUser" />
     <router-view></router-view>
   </div>
 </template>
@@ -13,7 +13,6 @@ export default {
   components: { Navbar },
   data() {
     return {
-      test: "true",
     };
   },
   methods: {
