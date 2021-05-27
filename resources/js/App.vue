@@ -22,7 +22,7 @@ export default {
     },
   },
   async mounted() {
-    this.authUser = await this.$store.dispatch("auth/getAuthUser");
+    await this.$store.dispatch("auth/getAuthUser");
   },
   computed: {
     authUser: function() {
