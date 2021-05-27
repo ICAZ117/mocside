@@ -19,6 +19,7 @@ Completed:
 * Upon opening the site if you have a valid csrf-token then it will log you in
 * Course Page is now Dynamic
 * Navbar now properly shows login only when not logged in, and logout only when logged in
+* Labs page properly opens and closes upon browser back button and clicking course nav button
 
 
 
@@ -46,4 +47,5 @@ Todo:
 
 * Lab Page
 	* Style Lab Page
-	* Get Dynamic labs from Database and Course
+	* Get Dynamic labs info from Database/generate necessary info in database
+	* add button in top left to return to courses page
