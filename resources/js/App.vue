@@ -13,7 +13,7 @@ export default {
   components: { Navbar },
   data() {
     return {
-      test = "true",
+      test: "true",
     };
   },
   methods: {
