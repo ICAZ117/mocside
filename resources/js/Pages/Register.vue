@@ -232,7 +232,7 @@ export default {
       },
       fscid: {
         required,
-        between: between(0, 999999),
+        between: between(0, 10000000),
         minLength: minLength(7),
         maxLength: maxLength(7),
         integer,
