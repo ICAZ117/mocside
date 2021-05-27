@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <Navbar :authUser="authUser2" />
+    <Navbar :authUser="authUser" />
     <router-view></router-view>
   </div>
 </template>
@@ -16,27 +16,21 @@ export default {
       authUser: null,
     };
   },
-  async mounted() {
-    var flag = store.getters["auth/guest"];
-
-    if (flag || flag == null) {
-      this.authUser = null;
-    } else {
-      this.authUser = await this.$store.dispatch("auth/getAuthUser");
-    }
-  },
   computed: {
-    authUser2: function() {
-      var flag2 = store.getters["auth/test"]; //currently this works...i just need to rename and integrate it
-      if(flag2 || flag2 == null) {
+    authUser: function() {
+      var flag = store.getters["auth/isGuest"];
+      var flag2 = store.getters["auth/guest"];
+      console.log("flag(auth/iGuest): " + flag);
+      console.log("flag2(auth/guest): " +flag2);
+      if(flag || flag == null) {
         // this.authUser = null;
         console.log("authUser null");
+        return null;
       }
       else {
-        // this.authUser = await this.$store.dispatch("auth/getAuthUser");
         console.log("authUser set to User");
+        return await this.$store.dispatch("auth/getAuthUser");
       }
-      return null;
     }  
   }
 };
