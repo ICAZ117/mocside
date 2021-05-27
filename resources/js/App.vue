@@ -21,8 +21,8 @@ export default {
       return await this.$store.dispatch("auth/getAuthUser");
     },
   },
-  mounted() {
-    
+  async mounted() {
+    this.authUser = await this.$store.dispatch("auth/getAuthUser");
   },
   computed: {
     authUser: function() {
