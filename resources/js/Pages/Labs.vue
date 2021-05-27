@@ -69,17 +69,9 @@ export default {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data;
       console.log(this.labs);
-      // var i;
-      // for (i = 0; i < this.enrolledCourses.length; i++) {
-      //   var cur = this.enrolledCourses[i];
-      //   const course = await API.apiClient.get(`/courses/${cur}`);
-      //   this.courses.push(course.data);
-      // }
     },
   },
   mounted() {
-    // update course ID from URL - I will begin with hardcode
-    // this.courseID = 2280;
     this.getLabs();
   },
   beforeUnmount() {
