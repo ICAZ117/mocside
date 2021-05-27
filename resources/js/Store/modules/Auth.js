@@ -8,7 +8,7 @@ export const state = {
   user: null,
   loading: false,
   error: null,
-  test: true,
+  isGuest: true,
 };
 
 export const mutations = {
@@ -24,8 +24,8 @@ export const mutations = {
   SET_ERROR(state, error) {
     state.error = error;
   },
-  SET_TEST(state, test) {
-    state.test = test;
+  SET_ISGUEST(state, isGuest) {
+    state.isGuest = isGuest;
   },
 };
 
@@ -35,7 +35,7 @@ export const actions = {
       .then(() => {
         commit("SET_USER", null);
         dispatch("setGuest", { value: "isGuest" });
-        commit("SET_TEST", true);
+        commit("SET_ISGUEST", true);
         if (router.currentRoute.name !== "login")
           router.push({ path: "/login" });
       })
@@ -43,19 +43,22 @@ export const actions = {
         commit("SET_ERROR", getError(error));
       });
   },
-  async getAuthUser({ commit }) {
+  async getAuthUser({ commit, dispatch }) {
     commit("SET_LOADING", true);
     try {
       const response = await AuthService.getAuthUser();
       commit("SET_USER", response.data.data);
-      commit("SET_TEST", false);
+      commit("SET_ISGUEST", false);
+      dispatch("setGuest", { value: "isNotGuest" });
       commit("SET_LOADING", false);
       return response.data.data;
     } catch (error) {
       commit("SET_LOADING", false);
       commit("SET_USER", null);
-      commit("SET_TEST", true);
+      commit("SET_ISGUEST", true);
+      dispatch("setGuest", { value: "isGuest" });
       commit("SET_ERROR", getError(error));
+      return null;
     }
   },
   setGuest(context, { value }) {
@@ -79,8 +82,8 @@ export const getters = {
   loggedIn: (state) => {
     return !!state.user;
   },
-  test: (state) => {
-    return state.test;
+  isGuest: (state) => {
+    return state.isGuest;
   },
   guest: () => {
     const storageItem = window.localStorage.getItem("guest");

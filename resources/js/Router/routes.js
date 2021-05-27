@@ -18,6 +18,13 @@ const routes = [
         component: () => import("../Pages/Courses.vue"),
         name: "Courses",
         meta: { requiresAuth: true },
+        children: [
+            {
+                path: '/labs',
+                component: () => import("../Pages/Labs.vue"),
+                props: true
+            }
+        ]
         // Reference for syntax
         // beforeEnter: (to, from, next) => {
         //     if (store.getters["auth/isAdmin"]) next();
