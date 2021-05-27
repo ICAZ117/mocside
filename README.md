@@ -18,6 +18,7 @@ Completed:
 * certain pages are unaccesible to non logged in users(example: courses)
 * Upon opening the site if you have a valid csrf-token then it will log you in
 * Course Page is now Dynamic
+* Navbar now properly shows login only when not logged in, and logout only when logged in
 
 
 
@@ -38,8 +39,7 @@ Todo:
 	* Style Button
 
 * NavBar
-	* Show home, login, sign up if not signed in
-	* show home, courses, logout, profile if signed in
+	* Style Navbar
 
 * Course Page
 	* Style Course Page
