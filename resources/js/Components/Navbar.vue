@@ -48,12 +48,13 @@ export default {
   },
   computed: {
     isLoggedIn: function() {
-      if (authUser != null) {
-        return true;
-      }
-      else {
-        return false;
-      }
+      // if (authUser != null) {
+      //   return true;
+      // }
+      // else {
+      //   return false;
+      // }
+      return false;
     }
   }
 };
