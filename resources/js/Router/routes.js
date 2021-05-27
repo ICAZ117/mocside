@@ -20,9 +20,9 @@ const routes = [
         meta: { requiresAuth: true },
         children: [
             {
-                path: '/labs',
+                path: ':id/labs',
                 component: () => import("../Pages/Labs.vue"),
-                props: true
+                name: "Labs",
             }
         ]
         // Reference for syntax
@@ -31,6 +31,17 @@ const routes = [
         //     else next(false);
         // }
     },
+    // {
+    //     path: '/courses/:id',
+    //     component: () => import("../Pages/Courses.vue"),
+    //     name: "labs",
+    //     children: [
+    //         {
+    //             path: 'labs',
+    //             component: () => import("../Pages/Labs.vue"),
+    //         }
+    //     ]
+    // },
     {
         path: "/about",
         component: () => import("../Pages/About.vue"),
