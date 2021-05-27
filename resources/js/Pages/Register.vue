@@ -116,8 +116,8 @@
             <span v-if="v$.userForm.fscid.integer.$invalid"
               >Bruh. That needs to be a number smh</span
             >
-            <span v-if="v$.userForm.fscid.minVal.$invalid"
-              >ID's aren't negative big brain</span
+            <span v-if="v$.userForm.fscid.between.$invalid"
+              >ID's are between 0-9999999 big brain</span
             >
             <span v-if="v$.userForm.fscid.minLength.$invalid"
               >All ID's are 7 digits long</span
@@ -195,7 +195,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { getError } from "../utils/helpers";
-import { required, email, minLength, maxLength, minVal, integer } from "@vuelidate/validators";
+import { required, email, minLength, maxLength, between, integer } from "@vuelidate/validators";
 import AuthService from "../services/AuthService";
 export default {
   setup() {
@@ -232,7 +232,7 @@ export default {
       },
       fscid: {
         required,
-        minVal: minVal(0),
+        between: between(0, 999999),
         minLength: minLength(7),
         maxLength: maxLength(7),
         integer,
