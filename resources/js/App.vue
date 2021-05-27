@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <Navbar :test="authUser" />
+    <Navbar :authUser="test" />
     <router-view></router-view>
   </div>
 </template>
