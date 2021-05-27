@@ -68,6 +68,7 @@ export default {
     },
   },
   mounted() {
+    this.labIsOpen = false;
     this.authUser = store.getters["auth/authUser"];
     if (this.authUser.courses){
         this.enrolledCourses = JSON.parse(this.authUser.courses).courses;
