@@ -78,10 +78,7 @@ export default {
     this.getLabs();
   },
   beforeUnmount() {
-    console.log("before Unmounting");
+    this.$emit("Unmounting");
   },
-  unmounted() {
-    console.log("unmounted");
-  }
 };
 </script>
