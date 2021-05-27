@@ -19,6 +19,10 @@ class Course extends Model
         'img_loc',
     ];
 
+    protected $hidden = [
+        'roster',
+    ];
+
     // not sure if this will be helpful, leaving commented.
     // protected $casts = [
     //     'published' => 'boolean',
@@ -29,4 +33,9 @@ class Course extends Model
     // public function owner() {
     //     return $this->belongsTo('user', 'user_id');
     // }
+
+    public function labs()
+    {
+        return $this->hasMany(Lab::class);
+    }
 }

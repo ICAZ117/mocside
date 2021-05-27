@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LabController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/{id}', function ($id) {
         return User::findOrFail($id);
     });
+
     Route::resource('courses', CourseController::class);
+    
+    Route::get('/labs/{course_id}', [LabController::class, 'showCourse']);
+    Route::post('/labs', [LabController::class, 'store']);
+    Route::put('/labs/{id}', [LabController::class, 'update']);
+    Route::delete('/labs/{id}', [LabController::class, 'destroy']);
+    // Route::get('/labs', [LabController::class, 'index']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
