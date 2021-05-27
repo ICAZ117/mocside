@@ -18,25 +18,25 @@
           </tr>
         </thead>
         <tbody>
-          <div v-for="lab in labs" :key="lab.id">
-            <tr
-              class="lab"
-              style="cursor: pointer"
-            >
-            <!-- :onclick="(location.href = `${lab.location}`)" -->
-              <td>
-                <a>{{ lab.name }}</a>
-              </td>
-              <!-- <td>{{ lab.numProblems }}</td> -->
-              <td>6</td>
-              <!-- <td>{{ lab.percentComplete }}</td> -->
-              <td>69%</td>
-              <!-- <td>{{ lab.due_date }}</td> -->
-              <td>4/20/0420</td>
-              <!-- <td>{{ lab.lastActivity }}</td> -->
-              <td>4/20/0420</td>
-            </tr>
-          </div>
+          <tr
+            class="lab"
+            style="cursor: pointer"
+            v-for="lab in labs"
+            :key="lab.id"
+          >
+          <!-- :onclick="(location.href = `${lab.location}`)" -->
+            <td>
+              <a>{{ lab.name }}</a>
+            </td>
+            <!-- <td>{{ lab.numProblems }}</td> -->
+            <td>6</td>
+            <!-- <td>{{ lab.percentComplete }}</td> -->
+            <td>69%</td>
+            <!-- <td>{{ lab.due_date }}</td> -->
+            <td>4/20/0420</td>
+            <!-- <td>{{ lab.lastActivity }}</td> -->
+            <td>4/20/0420</td>
+          </tr>
 
           <tr
             class="lab"
