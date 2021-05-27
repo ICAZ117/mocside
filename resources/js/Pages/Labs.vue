@@ -54,10 +54,10 @@
 <script>
 import * as API from "../services/API";
 export default {
+  props: ['courseID'],
   data() {
     return {
       labs: [],
-      courseID: null,
     };
   },
   methods: {
@@ -75,7 +75,7 @@ export default {
   },
   mounted() {
     // update course ID from URL - I will begin with hardcode
-    this.courseID = 2280;
+    // this.courseID = 2280;
     this.getLabs();
   },
   beforeUnmount() {

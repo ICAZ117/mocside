@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <router-view @Unmounting="labIsOpen=false" v-if="labIsOpen" :test="test"></router-view>
+    <router-view @Unmounting="labUnmounting()" v-if="labIsOpen" :courseID="courseID"></router-view>
   </div>
 </template>
 
@@ -51,11 +51,13 @@ export default {
       enrolledCourses: [],
       courses: [],
       labIsOpen: false,
+      courseID: null,
     };
   },
   methods: {
     goToLabs(id) {
       this.labIsOpen = true;
+      this.courseID = id;
       this.$router.push({ name: 'Labs', params: { id: id } })
     },
     async getCourses() {
@@ -65,6 +67,10 @@ export default {
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data);
       }
+    },
+    labUnmounting() {
+      this.labIsOpen=false;
+      this.courseID=null;
     },
   },
   mounted() {
