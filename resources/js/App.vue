@@ -17,11 +17,11 @@ export default {
     };
   },
   computed: {
-    authUser: function() {
+    async authUser: function() {
       var flag = store.getters["auth/isGuest"];
       var flag2 = store.getters["auth/guest"];
       console.log("flag(auth/iGuest): " + flag);
-      console.log("flag2(auth/guest): " +flag2);
+      console.log("flag2(auth/guest): " + flag2);
       if(flag || flag == null) {
         // this.authUser = null;
         console.log("authUser null");
