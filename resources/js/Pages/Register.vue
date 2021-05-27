@@ -94,6 +94,41 @@
           </div>
         </div>
         <br />
+
+        <!--------------------- FSCID --------------------->
+        <div class="form-group">
+          <label for="email">FSC ID</label>
+          <input
+            type="number"
+            v-model="userForm.fscid"
+            id="fscid"
+            name="fscid"
+            class="form-control"
+            :class="{ 'is-invalid': isSubmitted && v$.userForm.fscid.$error }"
+          />
+          <div
+            v-if="isSubmitted && v$.userForm.fscid.$error"
+            class="invalid-feedback"
+          >
+            <span v-if="v$.userForm.fscid.required.$invalid"
+              >Please enter your FSC ID</span
+            >
+            <span v-if="v$.userForm.fscid.integer.$invalid"
+              >Bruh. That needs to be a number smh</span
+            >
+            <span v-if="v$.userForm.fscid.minVal.$invalid"
+              >ID's aren't negative big brain</span
+            >
+            <span v-if="v$.userForm.fscid.minLength.$invalid"
+              >All ID's are 7 digits long</span
+            >
+            <span v-if="v$.userForm.fscid.maxLength.$invalid"
+              >All ID's are 7 digits long</span
+            >
+          </div>
+        </div>
+        <br />
+
         <!------------------- PASSWORD ------------------->
         <div class="form-group">
           <label for="password">Password</label>
@@ -160,7 +195,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { getError } from "../utils/helpers";
-import { required, email, minLength } from "@vuelidate/validators";
+import { required, email, minLength, maxLength, minVal, integer } from "@vuelidate/validators";
 import AuthService from "../services/AuthService";
 export default {
   setup() {
@@ -176,6 +211,7 @@ export default {
         fname: "",
         lname: "",
         email: "",
+        fscid: "",
         username: "",
         password: "",
         confirmPassword: "",
@@ -193,6 +229,13 @@ export default {
       },
       username: {
         required,
+      },
+      fscid: {
+        required,
+        minVal: minVal(0),
+        minLength: minLength(7),
+        maxLength: maxLength(7),
+        integer,
       },
       email: {
         required,
@@ -218,7 +261,9 @@ export default {
       this.message = null;
       const payload = {
         name: this.userForm.fname + " " + this.userForm.lname,
+        // username: this.userForm.username,
         email: this.userForm.email,
+        fsc_id: this.userForm.fscid,
         password: this.userForm.password,
         password_confirmation: this.userForm.confirmPassword,
       };
