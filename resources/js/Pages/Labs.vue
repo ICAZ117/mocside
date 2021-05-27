@@ -76,6 +76,12 @@ export default {
     // update course ID from URL - I will begin with hardcode
     this.courseID = 2280;
     this.getLabs();
+  },
+  beforeUnmount() {
+    console.log("before Unmounting");
+  },
+  unmounted() {
+    console.log("unmounted");
   }
 };
 </script>
