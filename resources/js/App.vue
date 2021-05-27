@@ -13,7 +13,7 @@ export default {
   components: { Navbar },
   data() {
     return {
-      
+
     };
   },
   methods: {
@@ -21,10 +21,8 @@ export default {
       return await this.$store.dispatch("auth/getAuthUser");
     },
   },
-  mounted: {
-    async initCheck() {
-      this.authUser = await this.$store.dispatch("auth/getAuthUser");
-    },
+  mounted() {
+    
   },
   computed: {
     authUser: function() {
