@@ -1,42 +1,43 @@
 <template>
   <div>
     <!-- Main Page-->
+    <div v-if="!labIsOpen">
+      <div class="courses header">
+        <h2>My Courses</h2>
+        <hr />
+      </div>
 
-    <div class="courses header">
-      <h2>My Courses</h2>
-      <hr />
-    </div>
+      <div class="coursecontainer">
+        <div class="courserow row my-5">
+          <div v-for="course in courses" :key="course.id">
+            <a @click="goToLabs(course.id)"  class="no-decor">
+                <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
+              <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="card coursecard w-100">
+                  <div
+                    class="courses card-img-top"
+                    :style="{ backgroundImage: `url(${course.img_loc})` }"
+                  ></div>
+                  <div class="courses card-content">
+                    <h6 class="card-title my-3 mx-2 mb-0">{{ course.name }}</h6>
 
-    <div class="coursecontainer">
-      <div class="courserow row my-5">
-        <div v-for="course in courses" :key="course.id">
-          <a @click="goToLabs(course.id)"  class="no-decor">
-              <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
-            <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-              <div class="card coursecard w-100">
-                <div
-                  class="courses card-img-top"
-                  :style="{ backgroundImage: `url(${course.img_loc})` }"
-                ></div>
-                <div class="courses card-content">
-                  <h6 class="card-title my-3 mx-2 mb-0">{{ course.name }}</h6>
+                    <hr class="courses my-0" />
 
-                  <hr class="courses my-0" />
-
-                  <a href="Labs.vue" class="courselaunch text-danger mx-2 my-1 no-decor"
-                    >Get Started</a
-                  >
+                    <a href="Labs.vue" class="courselaunch text-danger mx-2 my-1 no-decor"
+                      >Get Started</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
-        </div>
-        <div v-if="courses.length == 0">
-          <h1>No Registered Courses</h1>
+            </a>
+          </div>
+          <div v-if="courses.length == 0">
+            <h1>No Registered Courses</h1>
+          </div>
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view v-if="labIsOpen"></router-view>
   </div>
 </template>
 
@@ -49,11 +50,13 @@ export default {
       authUser: null,
       enrolledCourses: [],
       courses: [],
+      labIsOpen: false,
     };
   },
   methods: {
     goToLabs(id) {
-        this.$router.push({ name: 'Labs', params: { id: id } })
+      this.labIsOpen = true;
+      this.$router.push({ name: 'Labs', params: { id: id } })
     },
     async getCourses() {
       var i;
