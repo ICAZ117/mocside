@@ -159,6 +159,7 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
+import { getError } from "../utils/helpers";
 import { required, email, minLength } from "@vuelidate/validators";
 import AuthService from "../services/AuthService";
 export default {
