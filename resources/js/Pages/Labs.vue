@@ -25,12 +25,12 @@
               style="cursor: pointer"
             >
               <td>
-                <a>{{ lab.title }}</a>
+                <a>{{ lab.name }}</a>
               </td>
-              <td>{{ lab.numProblems }}</td>
+              <!-- <td>{{ lab.numProblems }}</td>
               <td>{{ lab.percentComplete }}</td>
               <td>{{ lab.dueDate }}</td>
-              <td>{{ lab.lastActivity }}</td>
+              <td>{{ lab.lastActivity }}</td> -->
             </tr>
           </div>
 
