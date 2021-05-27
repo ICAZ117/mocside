@@ -10,7 +10,8 @@
     <div class="coursecontainer">
       <div class="courserow row my-5">
         <div v-for="course in courses" :key="course.id">
-          <router-link :to="{ name: 'Labs', params: { id: course.id } }" class="no-decor">
+          <a @click="goToLabs(course.id)"  class="no-decor">
+              <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
             <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
               <div class="card coursecard w-100">
                 <div
@@ -28,10 +29,8 @@
                 </div>
               </div>
             </div>
-          </router-link>
+          </a>
         </div>
-
-        <router-view></router-view>
 
         <!-- Image Card 1 -->
         <!-- <a href="labs.php" class="no-decor">
@@ -66,6 +65,9 @@ export default {
     };
   },
   methods: {
+    goToLabs(id) {
+        router.push({ name: 'Labs', params: { id: id } })
+    },
     async getCourses() {
       var i;
       for (i = 0; i < this.enrolledCourses.length; i++) {
