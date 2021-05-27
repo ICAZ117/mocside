@@ -16,8 +16,13 @@ export default {
       authUser: null,
     };
   },
+  methods: {
+    async getAuthUser() {
+      return await this.$store.dispatch("auth/getAuthUser");
+    },
+  },
   computed: {
-    async authUser: function() {
+    authUser: function() {
       var flag = store.getters["auth/isGuest"];
       var flag2 = store.getters["auth/guest"];
       console.log("flag(auth/iGuest): " + flag);
@@ -29,7 +34,7 @@ export default {
       }
       else {
         console.log("authUser set to User");
-        return await this.$store.dispatch("auth/getAuthUser");
+        return this.getAuthUser();
       }
     }  
   }
