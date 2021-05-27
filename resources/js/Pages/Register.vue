@@ -117,7 +117,7 @@
               >Bruh. That needs to be a number smh</span
             >
             <span v-if="v$.userForm.fscid.between.$invalid"
-              >ID's are between 0-9999999 big brain</span
+              >ID's are between 0-10000000 big brain</span
             >
             <span v-if="v$.userForm.fscid.minLength.$invalid"
               >All ID's are 7 digits long</span
