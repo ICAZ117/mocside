@@ -79,7 +79,9 @@ export default {
   },
   mounted() {
     this.authUser = store.getters["auth/authUser"];
-    this.enrolledCourses = JSON.parse(this.authUser.courses).courses;
+    if (this.authUser.courses){
+        this.enrolledCourses = JSON.parse(this.authUser.courses).courses;
+    }
     this.getCourses();
   },
 };

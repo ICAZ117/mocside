@@ -266,7 +266,6 @@ export default {
         fsc_id: this.userForm.fscid,
         password: this.userForm.password,
         password_confirmation: this.userForm.confirmPassword,
-        courses: {},
       };
       AuthService.registerUser(payload)
         .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
