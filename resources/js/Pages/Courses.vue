@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <router-view @Unmounting="labIsOpen=false" v-if="labIsOpen"></router-view>
+    <router-view @Unmounting="labIsOpen=false" v-if="labIsOpen" :test="test"></router-view>
   </div>
 </template>
 
