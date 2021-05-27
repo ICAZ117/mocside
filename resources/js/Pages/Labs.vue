@@ -27,10 +27,10 @@
               <td>
                 <a>{{ lab.name }}</a>
               </td>
-              <!-- <td>{{ lab.numProblems }}</td>
+              <td>{{ lab.numProblems }}</td>
               <td>{{ lab.percentComplete }}</td>
-              <td>{{ lab.dueDate }}</td>
-              <td>{{ lab.lastActivity }}</td> -->
+              <td>{{ lab.due_date }}</td>
+              <td>{{ lab.lastActivity }}</td>
             </tr>
           </div>
 
