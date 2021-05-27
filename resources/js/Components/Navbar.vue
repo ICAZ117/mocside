@@ -47,13 +47,15 @@ export default {
     }
   },
   computed: {
-    isLoggedIn: async function() {
-
-
-      //this will be changed to check the store to see if a user is logged in
-      return false;
+    isLoggedIn: function() {
+      if (authUser != null) {
+        return true;
+      }
+      else {
+        return false;
+      }
     }
-  },
+  }
 };
 </script>
 
