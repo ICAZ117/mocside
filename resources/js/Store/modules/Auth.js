@@ -49,6 +49,7 @@ export const actions = {
       const response = await AuthService.getAuthUser();
       commit("SET_USER", response.data.data);
       commit("SET_ISGUEST", false);
+      dispatch("setGuest", { value: "isNotGuest" });
       commit("SET_LOADING", false);
       return response.data.data;
     } catch (error) {
