@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     goToLabs(id) {
-        router.push({ name: 'Labs', params: { id: id } })
+        this.$router.push({ name: 'Labs', params: { id: id } })
     },
     async getCourses() {
       var i;
