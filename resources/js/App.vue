@@ -22,7 +22,7 @@ export default {
     },
   },
   mounted: {
-    initCheck() {
+    async initCheck() {
       this.authUser = await this.$store.dispatch("auth/getAuthUser");
     },
   },
