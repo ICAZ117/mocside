@@ -48,6 +48,8 @@ export default {
   },
   computed: {
     isLoggedIn: function() {
+      console.log(authUser);
+      console.log(this.authUser);
       // if (authUser != null) {
       //   return true;
       // }
