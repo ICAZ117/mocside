@@ -10,7 +10,7 @@
     <div class="coursecontainer">
         <div class="courserow row my-5">
             
-            <a href="#" v-for="course in courses" :key="course.id" class="no-decor">
+            <a href="Labs.vue" v-for="course in courses" :key="course.id" class="no-decor">
                 <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="card coursecard w-100">
                         <div class="courses card-img-top" :style='{ backgroundImage: `url(${course.img_loc})` }'></div>
@@ -19,7 +19,7 @@
 
                                 <hr class="courses my-0">
 
-                                <a href="#" class="courselaunch text-danger mx-2 my-1 no-decor">Get Started</a>
+                                <a href="Labs.vue" class="courselaunch text-danger mx-2 my-1 no-decor">Get Started</a>
                         </div>
                     </div>
                 </div>
