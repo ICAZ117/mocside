@@ -84,7 +84,7 @@ export const getters = {
   },
   guest: () => {
     const storageItem = window.localStorage.getItem("guest");
-    if (!storageItem) return false;
+    if (!storageItem) return true;
     if (storageItem === "isGuest") return true;
     if (storageItem === "isNotGuest") return false;
   },
