@@ -31,6 +31,8 @@
           </router-link>
         </div>
 
+        <router-view></router-view>
+
         <!-- Image Card 1 -->
         <!-- <a href="labs.php" class="no-decor">
                 <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
