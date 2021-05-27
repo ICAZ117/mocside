@@ -27,10 +27,14 @@
               <td>
                 <a>{{ lab.name }}</a>
               </td>
-              <td>{{ lab.numProblems }}</td>
-              <td>{{ lab.percentComplete }}</td>
-              <td>{{ lab.due_date }}</td>
-              <td>{{ lab.lastActivity }}</td>
+              <!-- <td>{{ lab.numProblems }}</td> -->
+              <td>6</td>
+              <!-- <td>{{ lab.percentComplete }}</td> -->
+              <td>69%</td>
+              <!-- <td>{{ lab.due_date }}</td> -->
+              <td>4/20/0420</td>
+              <!-- <td>{{ lab.lastActivity }}</td> -->
+              <td>4/20/0420</td>
             </tr>
           </div>
 
