@@ -62,8 +62,9 @@ export default {
   },
   methods: {
     async getLabs() {
-      const labs = await API.apiClient.get(`/labs/${this.courseID}`);
-      console.log(labs);
+      const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
+      this.labs = rawLabs.data;
+      console.log(this.labs);
       // var i;
       // for (i = 0; i < this.enrolledCourses.length; i++) {
       //   var cur = this.enrolledCourses[i];
