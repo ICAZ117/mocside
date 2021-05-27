@@ -13,7 +13,7 @@ export default {
   components: { Navbar },
   data() {
     return {
-      authUser: null,
+      
     };
   },
   methods: {
