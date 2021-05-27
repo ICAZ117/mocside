@@ -34,9 +34,9 @@
 
 <script>
 export default {
-  // props: {
-  //   authUser: Object,
-  // },
+  props: {
+    authUser: boolean,
+  },
   data() {
     return {
     };
@@ -48,15 +48,14 @@ export default {
   },
   computed: {
     isLoggedIn: function() {
-      // console.log(authUser);
-      // console.log(this.authUser);
-      // if (authUser != null) {
-      //   return true;
-      // }
-      // else {
-      //   return false;
-      // }
-      return true;
+      console.log(authUser);
+      console.log(this.authUser);
+      if (authUser == false) {
+        return false;
+      }
+      else {
+        return true;
+      }
     }
   }
 };
