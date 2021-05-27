@@ -34,9 +34,7 @@
 
 <script>
 export default {
-  props: {
-    authUser: boolean,
-  },
+  props: ['authUser'],
   data() {
     return {
     };
