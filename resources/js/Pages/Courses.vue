@@ -31,6 +31,9 @@
             </div>
           </a>
         </div>
+        <div v-if="courses.length == 0">
+          <h1>No Registered Courses</h1>
+        </div>
 
         <!-- Image Card 1 -->
         <!-- <a href="labs.php" class="no-decor">
