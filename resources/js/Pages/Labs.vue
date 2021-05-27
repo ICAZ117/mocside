@@ -21,9 +21,9 @@
           <div v-for="lab in labs" :key="lab.id">
             <tr
               class="lab"
-              :onclick="(location.href = `${lab.location}`)"
               style="cursor: pointer"
             >
+            <!-- :onclick="(location.href = `${lab.location}`)" -->
               <td>
                 <a>{{ lab.name }}</a>
               </td>
@@ -36,9 +36,9 @@
 
           <tr
             class="lab"
-            onclick="location.href='problems.php';"
             style="cursor: pointer"
           >
+          <!-- onclick="location.href='problems.php';" -->
             <td><a>Lab 2: Printing & I/O</a></td>
             <td>5</td>
             <td>100%</td>
