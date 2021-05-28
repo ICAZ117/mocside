@@ -126,7 +126,9 @@ export default {
     },
     async getProblems() {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
+      console.log(rawProblems);
       this.problems = rawProblems.data;
+      console.log(this.problems);
     },
     assignmentUnmounting() {
       this.assignmentisOpen=false;
