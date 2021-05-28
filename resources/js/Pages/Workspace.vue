@@ -214,9 +214,11 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
   scrollbarStyle: "overlay", //works
   foldGutter: {
     rangefinder: new CodeMirror.fold.combine(
+      console.log(1.1),
       CodeMirror.fold.indent,
       CodeMirror.fold.comment,
-      CodeMirror.fold.brace
+      CodeMirror.fold.brace,
+      console.log(1.2),
     ),
   },
   gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
