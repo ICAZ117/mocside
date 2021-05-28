@@ -54,7 +54,7 @@
       </table>
     </div>
   </div>
-  <router-view @problem-unmounting="problemUnmounting()" v-if="problemisOpen" :labID="labID"></router-view>
+  <router-view @problems-unmounting="problemUnmounting()" v-if="problemisOpen" :labID="labID"></router-view>
 </template>
 
 <script>
@@ -64,7 +64,6 @@ export default {
   emits: ['lab-unmounting'],
   data() {
     return {
-      labIDS: [],
       labs: [],
       problemisOpen: false,
       labID: null,

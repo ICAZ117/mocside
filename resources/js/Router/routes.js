@@ -28,6 +28,13 @@ const routes = [
                         path: ':lab_id/problems',
                         component: () => import("../Pages/Problems.vue"),
                         name: "Problems",
+                        children: [
+                            {
+                                path: ':problem_id/workspace',
+                                component: () => import("../Pages/Workspace.vue"),
+                                name: "Assignment",
+                            }
+                        ]
                     }
                 ]
             }
