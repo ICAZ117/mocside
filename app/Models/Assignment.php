@@ -24,8 +24,8 @@ class Assignment extends Model
         return $this->belongsTo(Lab::class);
     }
 
-    // public function test_cases()
-    // {
-    //     return $this->hasMany(TestCase::class);
-    // }
+    public function test_cases()
+    {
+        return $this->hasMany(TestCase::class);
+    }
 }

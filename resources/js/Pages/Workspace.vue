@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import "../../assets/codemirror/lib/codemirror";
+import CodeMirror from "../../assets/codemirror/lib/codemirror";
 
 // the css stylesheet for the text editor object
 
@@ -202,6 +202,8 @@ import "../../assets/codemirror/mode/clike/clike.js";
 
 import * as API from "../services/API";
 
+console.log(1);
+
 var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
   //the following are settings for the editor area, given through an object
   mode: "text/x-java", //works
@@ -223,8 +225,12 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
   },
 });
 
+console.log(2);
+
 //the following are also settings for the editor area
 editor.setSize("calc(2 * (100vw / 3))", "500px");
+
+console.log(3);
 
 var ExcludedTriggerValues = {
   Enter: "13",
@@ -295,6 +301,8 @@ var ExcludedTriggerValues = {
   ContextMenu: "93",
 };
 
+console.log(4);
+
 editor.on("keydown", function (editor, event) {
   var __Cursor = editor.getDoc().getCursor();
   var __Token = editor.getTokenAt(__Cursor);
@@ -315,8 +323,12 @@ editor.on("keydown", function (editor, event) {
   }
 });
 
+console.log(5);
+
 //changing the Theme
 var input = document.getElementById("themeSelect");
+
+console.log(6);
 
 function selectTheme() {
   var theme = input.options[input.selectedIndex].textContent;
@@ -326,8 +338,12 @@ function selectTheme() {
   console.log(editor.getValue()); //this is to show how to get the editor value out of it
 }
 
+console.log(7);
+
 //changing the Mode
 var input2 = document.getElementById("modeSelect");
+
+console.log(8);
 
 function selectMode() {
   var mode = input2.options[input2.selectedIndex].textContent;
@@ -335,21 +351,37 @@ function selectMode() {
   location.hash = "#" + mode + "+" + location.hash.slice(1).split("+")[1];
 }
 
+console.log(9);
+
 //the following is for if the url is changed instead of using the selection box
 var choice =
   (location.hash && location.hash.slice(1)) ||
   (document.location.search && decodeURIComponent(document.location.search.slice(1)));
 //location.hash returns a part of the url...example: http://127.0.0.1:5500/index.html#eclipse   will return #eclipse    slice method removes the #
+
+console.log(10);
+
 var mode = choice.split("+")[0];
+
+console.log(11);
+
 var theme = choice.split("+")[1];
+
+console.log(12);
+
 if (theme) {
   input.value = theme; //this is where the blank is happening i think
   editor.setOption("theme", theme);
 }
+
+console.log(13);
+
 if (mode) {
   input2.value = mode;
   editor.setOption("mode", mode);
 }
+
+console.log(14);
 
 //this is called when the hashvalue in the url is changed
 CodeMirror.on(window, "hashchange", function () {
@@ -365,6 +397,8 @@ CodeMirror.on(window, "hashchange", function () {
     selectTheme();
   }
 });
+
+console.log(15);
 
 export default {
   props: ["problemID"],
