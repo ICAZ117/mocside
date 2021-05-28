@@ -25,7 +25,6 @@
             :key="lab.id"
             @click="goToProblems(lab.id)"
           >
-          <!-- :onclick="(location.href = `${lab.location}`)" -->
             <td>
               <a>{{ lab.name }}</a>
             </td>
@@ -43,7 +42,6 @@
             class="lab"
             style="cursor: pointer"
           >
-          <!-- onclick="location.href='problems.php';" -->
             <td><a>Lab 2: Printing & I/O</a></td>
             <td>5</td>
             <td>100%</td>
