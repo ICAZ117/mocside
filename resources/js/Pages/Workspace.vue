@@ -214,16 +214,20 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
   scrollbarStyle: "overlay", //works
   foldGutter: {
     rangefinder: new CodeMirror.fold.combine(
+      console.log(1.1),
       CodeMirror.fold.indent,
       CodeMirror.fold.comment,
-      CodeMirror.fold.brace
+      CodeMirror.fold.brace,
+      console.log(1.2),
     ),
   },
   gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
   extraKeys: {
     "Ctrl-Space": "autocomplete",
   },
-});
+},
+console.log(1.3),
+);
 
 console.log(2);
 
