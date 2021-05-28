@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <router-view @Unmounting="labUnmounting()" v-if="labIsOpen" :courseID="courseID"></router-view>
+    <router-view @lab-unmounting="labUnmounting()" v-if="labIsOpen" :courseID="courseID"></router-view>
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
     goToLabs(id) {
       this.labIsOpen = true;
       this.courseID = id;
-      this.$router.push({ name: 'Labs', params: { id: id } })
+      this.$router.push({ name: 'Labs', params: { course_id: id } })
     },
     async getCourses() {
       var i;

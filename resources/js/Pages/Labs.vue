@@ -54,16 +54,16 @@
       </table>
     </div>
   </div>
-  <router-view v-if="problemIsOpen" :labID="labID"></router-view>
+  <router-view @problems-unmounting="problemUnmounting()" v-if="problemisOpen" :labID="labID"></router-view>
 </template>
 
 <script>
 import * as API from "../services/API";
 export default {
   props: ['courseID'],
+  emits: ['lab-unmounting'],
   data() {
     return {
-      labIDS: [],
       labs: [],
       problemisOpen: false,
       labID: null,
@@ -71,17 +71,16 @@ export default {
   },
   methods: {
     goToProblems(id) {
-      console.log("make problem open true");
-      this.problemIsOpen = true;
+      this.problemisOpen = true;
       this.labID = id;
-      this.$router.push({ name: 'Problems', params: { id: id } });
+      this.$router.push({ name: 'Problems', params: { lab_id: id } });
     },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data;
     },
     problemUnmounting() {
-      this.problemIsOpen=false;
+      this.problemisOpen=false;
       this.labID=null;
     },
   },
@@ -90,7 +89,7 @@ export default {
     this.getLabs();
   },
   beforeUnmount() {
-    this.$emit("Unmounting");
+    this.$emit("lab-unmounting");
   },
 };
 </script>

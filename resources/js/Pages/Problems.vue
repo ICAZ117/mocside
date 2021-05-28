@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div v-if="!assignmentisOpen">
     <!-- Main Page-->
 
     <div class="courses header">
-      <h2>Lab X: Problems</h2>
+      <h2>Lab {{ this.labID }}: Problems</h2>
       <hr />
     </div>
 
@@ -20,8 +20,22 @@
         </thead>
         <tbody>
           <tr
+            class="problem"
+            style="cursor: pointer"
+            v-for="problem in problems"
+            :key="problem.id"
+            @click="goToProblem(problem.id)"
+          >
+            <td>{{ lab.name }}</td>
+            <td>{{ lab.test_cases }}</td>
+            <td>69%</td>
+            <td>{{ lab.due_date }}</td>
+            <td>1/24/2021</td>
+          </tr>
+
+          <tr
             class="problem incomplete"
-            onclick="location.href='workspace.php';"
+            @click="goToProblem(1)"
             style="cursor: pointer"
           >
             <td>Problem 1</td>
@@ -89,29 +103,43 @@
       </table>
     </div>
   </div>
+  <router-view @assignment-unmounting="assignmentUnmounting()" v-if="assignmentisOpen" :problemID="problemID"></router-view>
 </template>
 
 <script>
 import * as API from "../services/API";
 export default {
   props: ["labID"],
+  emits: ["problems-unmounting"],
   data() {
     return {
       problems: [],
+      assignmentisOpen: false,
+      problemID: null,
     };
   },
   methods: {
+    goToProblem(id) {
+      this.assignmentisOpen = true;
+      this.problemID = id;
+      this.$router.push({ name: "Assignment", params: { problem_id: id } });
+    },
     async getProblems() {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
       this.problems = rawProblems.data;
     },
+    assignmentUnmounting() {
+      this.assignmentisOpen=false;
+      this.problemID=null;
+    },
   },
   mounted() {
+      this.assignmentisOpen=false;
     // this.getProblems();
     console.log("getProblems");
   },
   beforeUnmount() {
-    this.$emit("Unmounting");
+    this.$emit("problems-unmounting");
   },
 };
 </script>
