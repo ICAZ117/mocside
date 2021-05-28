@@ -72,10 +72,9 @@ export default {
   },
   methods: {
     goToProblems(id) {
-      console.log("make problem open true");
       this.problemisOpen = true;
       this.labID = id;
-      this.$router.push({ name: 'Problems', params: { id: id } });
+      this.$router.push({ name: 'Problems', params: { lab_id: id } });
     },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);

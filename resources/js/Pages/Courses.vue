@@ -58,7 +58,7 @@ export default {
     goToLabs(id) {
       this.labIsOpen = true;
       this.courseID = id;
-      this.$router.push({ name: 'Labs', params: { id: id } })
+      this.$router.push({ name: 'Labs', params: { course_id: id } })
     },
     async getCourses() {
       var i;
