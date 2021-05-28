@@ -5,26 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lab extends Model
+class Assignment extends Model
 {
     use HasFactory;
-
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
-    }
-
-    public function assignments()
-    {
-        return $this-hasMany(Assignment::class);
-    }
-
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'name',
         'description',
+        'sample',
+        'test_cases',
         'due_date',
-        'course_id',
+        'lab_id'
     ];
+
+    public function lab() 
+    {
+        return $this->belongsTo(Lab::class);
+    }
+
+    // public function test_cases()
+    // {
+    //     return $this->hasMany(TestCase::class);
+    // }
 }
