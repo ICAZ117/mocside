@@ -29,7 +29,7 @@
             <td>{{ problem.name }}</td>
             <td>{{ problem.test_cases }}</td>
             <td>69%</td>
-            <td>{{ problem.due_date }}</td>
+            <td>{{ problem.due_date }}.split(' ')[0]</td>
             <td>1/24/2021</td>
           </tr>
 
@@ -115,6 +115,7 @@ export default {
       this.assignmentisOpen = false;
       this.problemID = null;
     },
+    
   },
   mounted() {
     this.assignmentisOpen = false;
