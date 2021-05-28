@@ -28,17 +28,15 @@
             <td>
               <a>{{ lab.name }}</a>
             </td>
-            <!-- <td>{{ lab.numProblems }}</td> -->
-            <td>6</td>
+            <td>{{ lab.num_problems }}</td>
             <!-- <td>{{ lab.percentComplete }}</td> -->
             <td>69%</td>
-            <!-- <td>{{ lab.due_date }}</td> -->
-            <td>4/20/0420</td>
+            <td>{{ lab.due_date.split(' ')[0] }}</td>
             <!-- <td>{{ lab.lastActivity }}</td> -->
             <td>4/20/0420</td>
           </tr>
 
-          <tr
+          <!-- <tr
             class="lab"
             style="cursor: pointer"
           >
@@ -47,7 +45,7 @@
             <td>100%</td>
             <td>1/31/2021</td>
             <td>1/31/2021</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -75,7 +73,7 @@ export default {
     },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
-      this.labs = rawLabs.data;
+      this.labs = rawLabs.data.data;
     },
     problemUnmounting() {
       this.problemisOpen=false;

@@ -33,7 +33,7 @@
             <td>1/24/2021</td>
           </tr>
 
-          <tr
+          <!-- <tr
             class="problem incomplete"
             @click="goToProblem(1)"
             style="cursor: pointer"
@@ -76,7 +76,7 @@
             <td>80%</td>
             <td>2/14/2021</td>
             <td>2/11/2021</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>

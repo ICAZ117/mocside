@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LabResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
@@ -21,7 +22,8 @@ class LabController extends Controller
     public function showCourse($course_id)
     {
         $labs = Course::find($course_id)->labs;
-        return $labs;
+        $labsRes = LabResource::collection($labs);
+        return $labsRes;
     }
 
     public function store(Request $request)
