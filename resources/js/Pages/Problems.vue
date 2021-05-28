@@ -77,33 +77,15 @@
             <td>2/14/2021</td>
             <td>2/11/2021</td>
           </tr>
-          <tr
-            class="problem"
-            onclick="location.href='workspace.php';"
-            style="cursor: pointer"
-          >
-            <td>Problem 5</td>
-            <td>8</td>
-            <td>0%</td>
-            <td>2/21/2021</td>
-            <td></td>
-          </tr>
-          <tr
-            class="problem"
-            onclick="location.href='workspace.php';"
-            style="cursor: pointer"
-          >
-            <td>Problem 6</td>
-            <td>4</td>
-            <td>0%</td>
-            <td>3/1/2021</td>
-            <td></td>
-          </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <router-view @assignment-unmounting="assignmentUnmounting()" v-if="assignmentisOpen" :problemID="problemID"></router-view>
+  <router-view
+    @assignment-unmounting="assignmentUnmounting()"
+    v-if="assignmentisOpen"
+    :problemID="problemID"
+  ></router-view>
 </template>
 
 <script>
@@ -130,13 +112,13 @@ export default {
       console.log(this.problems);
     },
     assignmentUnmounting() {
-      this.assignmentisOpen=false;
-      this.problemID=null;
+      this.assignmentisOpen = false;
+      this.problemID = null;
     },
   },
   mounted() {
-      this.assignmentisOpen=false;
-      this.getProblems();
+    this.assignmentisOpen = false;
+    this.getProblems();
   },
   beforeUnmount() {
     this.$emit("problems-unmounting");
