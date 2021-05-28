@@ -35,7 +35,7 @@
 
           <tr
             class="problem incomplete"
-            @click="goToProblem(problem.id)"
+            @click="goToProblem(1)"
             style="cursor: pointer"
           >
             <td>Problem 1</td>
