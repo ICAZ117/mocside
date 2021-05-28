@@ -29,7 +29,7 @@
             <td>{{ problem.name }}</td>
             <td>{{ problem.test_cases }}</td>
             <td>69%</td>
-            <td>{{ problem.due_date }}.split(' ')[0]</td>
+            <td>{{ problem.due_date }}</td>
             <td>1/24/2021</td>
           </tr>
 
