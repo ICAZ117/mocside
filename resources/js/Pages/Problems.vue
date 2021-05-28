@@ -26,10 +26,10 @@
             :key="problem.id"
             @click="goToProblem(problem.id)"
           >
-            <td>{{ lab.name }}</td>
-            <td>{{ lab.test_cases }}</td>
+            <td>{{ problem.name }}</td>
+            <td>{{ problem.test_cases }}</td>
             <td>69%</td>
-            <td>{{ lab.due_date }}</td>
+            <td>{{ problem.due_date }}</td>
             <td>1/24/2021</td>
           </tr>
 
