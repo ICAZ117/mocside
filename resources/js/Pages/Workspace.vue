@@ -102,7 +102,7 @@ import "codemirror/addon/fold/indent-fold.js";
 import "codemirror/addon/fold/markdown-fold.js";
 import "codemirror/addon/fold/xml-fold.js";
 
-// import _ from 'lodash'
+import _ from 'lodash'
 
 function betterTab(cm) {
   if (cm.somethingSelected()) {
@@ -165,32 +165,32 @@ export default {
     onCmBlur(codemirror) {
       //console.log('onCmBlur', codemirror)
     },
-    // saveCode: _.debounce((obj) => {
-    //   //console.log('saving code', code)
-    //   if (obj.firstLoad) {
-    //     obj.firstLoad = false;
-    //     return;
-    //   }
-    //   if (obj.code == null) return;
-    //   let doc = {
-    //     path: obj.$route.path,
-    //     doc: obj.code,
-    //   };
-    //   obj.axios.put("http://docker:7777", doc);
-    // }, 2000),
-    // loadData(path = null) {
-    //   if (this.$route.path == "/") return;
+    saveCode: _.debounce((obj) => {
+      //console.log('saving code', code)
+      if (obj.firstLoad) {
+        obj.firstLoad = false;
+        return;
+      }
+      if (obj.code == null) return;
+      let doc = {
+        path: obj.$route.path,
+        doc: obj.code,
+      };
+      obj.axios.put("http://docker:7777", doc);
+    }, 2000),
+    loadData(path = null) {
+      if (this.$route.path == "/") return;
 
-    //   let doc = {
-    //     path: path == null ? this.$route.path : path,
-    //   };
-    //   this.code = null;
-    //   this.axios.post("http://docker:7777", doc).then((rs) => {
-    //     //console.log('load data', rs.data)
-    //     this.firstLoad = true;
-    //     this.code = rs.data.body;
-    //   });
-    // },
+      let doc = {
+        path: path == null ? this.$route.path : path,
+      };
+      this.code = null;
+      this.axios.post("http://docker:7777", doc).then((rs) => {
+        //console.log('load data', rs.data)
+        this.firstLoad = true;
+        this.code = rs.data.body;
+      });
+    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/${this.labID}`);
@@ -205,14 +205,14 @@ export default {
   beforeUnmount() {
     this.$emit("assignment-unmounting");
   },
-  // watch: {
-  //   $route(to, from) {
-  //     this.loadData(to.path);
-  //   },
-  //   code: function () {
-  //     //console.log('changed')
-  //     this.saveCode(this);
-  //   },
-  // },
+  watch: {
+    $route(to, from) {
+      this.loadData(to.path);
+    },
+    code: function () {
+      //console.log('changed')
+      this.saveCode(this);
+    },
+  },
 };
 </script>
