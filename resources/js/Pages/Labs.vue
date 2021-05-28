@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!problemisOpen">
     <!-- Main Page-->
     <div class="courses header">
       <h2>Labs</h2>
@@ -23,6 +23,7 @@
             style="cursor: pointer"
             v-for="lab in labs"
             :key="lab.id"
+            @click="goToProblems(lab.id)"
           >
           <!-- :onclick="(location.href = `${lab.location}`)" -->
             <td>
@@ -53,6 +54,7 @@
       </table>
     </div>
   </div>
+  <router-view @Unmounting="problemUnmounting()" v-if="problemIsOpen" :labID="labID"></router-view>
 </template>
 
 <script>
@@ -61,16 +63,29 @@ export default {
   props: ['courseID'],
   data() {
     return {
+      labIDS: [],
       labs: [],
+      problemisOpen: false,
+      labID: null,
     };
   },
   methods: {
+    goToProblems(id) {
+      this.problemIsOpen = true;
+      this.labID = id;
+      this.$router.push({ name: 'Problems', params: { id: id } });
+    },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data;
     },
+    problemUnmounting() {
+      this.problemIsOpen=false;
+      this.labID=null;
+    },
   },
   mounted() {
+    this.problemisOpen = false;
     this.getLabs();
   },
   beforeUnmount() {

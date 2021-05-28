@@ -23,6 +23,13 @@ const routes = [
                 path: ':id/labs',
                 component: () => import("../Pages/Labs.vue"),
                 name: "Labs",
+                children: [
+                    {
+                        path: ':id/problems',
+                        component: () => import("../Pages/Problems.vue"),
+                        name: "Problems",
+                    }
+                ]
             }
         ]
         // Reference for syntax
