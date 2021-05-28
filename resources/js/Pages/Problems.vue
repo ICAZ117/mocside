@@ -26,10 +26,10 @@
             :key="problem.id"
             @click="goToProblem(problem.id)"
           >
-            <td>{{ lab.name }}</td>
-            <td>{{ lab.test_cases }}</td>
+            <td>{{ problem.name }}</td>
+            <td>{{ problem.test_cases }}</td>
             <td>69%</td>
-            <td>{{ lab.due_date }}</td>
+            <td>{{ problem.due_date }}</td>
             <td>1/24/2021</td>
           </tr>
 
@@ -126,7 +126,8 @@ export default {
     },
     async getProblems() {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
-      this.problems = rawProblems.data;
+      this.problems = rawProblems.data.data;
+      console.log(this.problems);
     },
     assignmentUnmounting() {
       this.assignmentisOpen=false;
@@ -135,8 +136,7 @@ export default {
   },
   mounted() {
       this.assignmentisOpen=false;
-    // this.getProblems();
-    console.log("getProblems");
+      this.getProblems();
   },
   beforeUnmount() {
     this.$emit("problems-unmounting");
