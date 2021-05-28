@@ -114,7 +114,6 @@ export default {
       this.assignmentisOpen = false;
       this.problemID = null;
     },
-    
   },
   mounted() {
     this.assignmentisOpen = false;
