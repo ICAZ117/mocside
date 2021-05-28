@@ -36,7 +36,7 @@
             <td>4/20/0420</td>
           </tr>
 
-          <tr
+          <!-- <tr
             class="lab"
             style="cursor: pointer"
           >
@@ -45,7 +45,7 @@
             <td>100%</td>
             <td>1/31/2021</td>
             <td>1/31/2021</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
