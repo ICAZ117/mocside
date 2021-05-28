@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Assignment;
+use App\Models\Lab;
 use App\Http\Resources\AssignmentResource;
 
 class AssignmentController extends Controller
