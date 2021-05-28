@@ -225,7 +225,9 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
   extraKeys: {
     "Ctrl-Space": "autocomplete",
   },
-});
+},
+console.log(1.3),
+);
 
 console.log(2);
 
