@@ -43,7 +43,8 @@
         </form>
 
         <div class="codemirror">
-          <div v-if="code != null">
+          <!-- <div v-if="code != null"> -->
+          <div>
             <codemirror
               style="text-align: left; height: 100%"
               v-model="code"
@@ -102,7 +103,7 @@ import "codemirror/addon/fold/indent-fold.js";
 import "codemirror/addon/fold/markdown-fold.js";
 import "codemirror/addon/fold/xml-fold.js";
 
-import _ from 'lodash'
+import _ from "lodash";
 
 function betterTab(cm) {
   if (cm.somethingSelected()) {
@@ -124,7 +125,7 @@ export default {
   data() {
     return {
       assignment: {},
-      code: null,
+      code: "",
       firstLoad: true,
       cmOption: {
         tabSize: 4,
@@ -184,7 +185,7 @@ export default {
       let doc = {
         path: path == null ? this.$route.path : path,
       };
-      this.code = null;
+      // this.code = null;
       // this.axios.post("http://docker:7777", doc).then((rs) => {
       //   //console.log('load data', rs.data)
       //   this.firstLoad = true;
