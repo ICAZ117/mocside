@@ -18,7 +18,7 @@ class AssignmentResource extends JsonResource
           'id' => $this->id,
           'name' => $this->name,
           'description' => $this->description,
-          'test_cases' => $this->test_cases->count(),
+          'test_cases' => $this->test_cases,
           'due_date' => $this->due_date,
         ];
     }
