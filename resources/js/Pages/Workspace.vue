@@ -176,7 +176,7 @@ export default {
         path: obj.$route.path,
         doc: obj.code,
       };
-      obj.axios.put("http://docker:7777", doc);
+      // obj.axios.put("http://docker:7777", doc);
     }, 2000),
     loadData(path = null) {
       if (this.$route.path == "/") return;
@@ -185,11 +185,11 @@ export default {
         path: path == null ? this.$route.path : path,
       };
       this.code = null;
-      this.axios.post("http://docker:7777", doc).then((rs) => {
-        //console.log('load data', rs.data)
-        this.firstLoad = true;
-        this.code = rs.data.body;
-      });
+      // this.axios.post("http://docker:7777", doc).then((rs) => {
+      //   //console.log('load data', rs.data)
+      //   this.firstLoad = true;
+      //   this.code = rs.data.body;
+      // });
     },
     async getAssignment() {
       //this route needs to be worked on and adjusted
