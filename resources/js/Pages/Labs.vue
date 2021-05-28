@@ -54,7 +54,7 @@
       </table>
     </div>
   </div>
-  <router-view @Unmounting="problemUnmounting()" v-if="problemIsOpen" :labID="labID"></router-view>
+  <router-view v-if="problemIsOpen" :labID="labID"></router-view>
 </template>
 
 <script>
