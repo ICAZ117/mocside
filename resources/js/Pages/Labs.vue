@@ -54,13 +54,14 @@
       </table>
     </div>
   </div>
-  <router-view v-if="problemisOpen" :labID="labID"></router-view>
+  <router-view @problem-unmounting="problemUnmounting()" v-if="problemisOpen" :labID="labID"></router-view>
 </template>
 
 <script>
 import * as API from "../services/API";
 export default {
   props: ['courseID'],
+  emits: ['lab-unmounting'],
   data() {
     return {
       labIDS: [],
@@ -90,7 +91,7 @@ export default {
     this.getLabs();
   },
   beforeUnmount() {
-    this.$emit("Unmounting");
+    this.$emit("lab-unmounting");
   },
 };
 </script>
