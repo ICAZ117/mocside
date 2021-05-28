@@ -72,7 +72,7 @@ export default {
   methods: {
     goToProblems(id) {
       console.log("make problem open true");
-      this.problemIsOpen = true;
+      this.problemisOpen = true;
       this.labID = id;
       this.$router.push({ name: 'Problems', params: { id: id } });
     },
@@ -81,7 +81,7 @@ export default {
       this.labs = rawLabs.data;
     },
     problemUnmounting() {
-      this.problemIsOpen=false;
+      this.problemisOpen=false;
       this.labID=null;
     },
   },
