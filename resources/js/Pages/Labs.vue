@@ -68,7 +68,6 @@ export default {
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data;
-      console.log(this.labs);
     },
   },
   mounted() {

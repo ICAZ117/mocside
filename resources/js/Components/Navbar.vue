@@ -46,7 +46,6 @@ export default {
   },
   computed: {
     isLoggedIn: function() {
-      console.log(this.authUser);
       if (this.authUser == null) {
         return false;
       }
