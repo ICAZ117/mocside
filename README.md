@@ -20,6 +20,8 @@ Completed:
 * Course Page is now Dynamic
 * Navbar now properly shows login only when not logged in, and logout only when logged in
 * Labs page properly opens and closes upon browser back button and clicking course nav button
+* added problems and workspace pages
+* labs and problems now grab some dynamic info
 
 
 
@@ -55,6 +57,19 @@ Todo:
 
 * Lab Page
 	* Style Lab Page
-	* Get Dynamic labs info from Database/generate necessary info in database
 	* add button in top left to return to courses page
 	* Add the Professor version of this page, ie. the add, delete, publish buttons for labs
+	* complete dynamic labs info
+
+* Problems Page
+	* Style Problems Page
+	* add button in top left to return to courses page
+	* add the professor version of this page, ie. the add, delete, publish buttons for labs
+	* complete dynamic problems info
+
+* Workspace Page
+	* Style Workspace Page
+	* Get Codemirror working properly
+	* add button in top left to return to courses page
+
+
