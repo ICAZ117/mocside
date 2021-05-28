@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import "../../assets/codemirror/lib/codemirror";
+import CodeMirror from "../../assets/codemirror/lib/codemirror";
 
 // the css stylesheet for the text editor object
 
