@@ -28,8 +28,7 @@
             <td>
               <a>{{ lab.name }}</a>
             </td>
-            <!-- <td>{{ lab.numProblems }}</td> -->
-            <td>6</td>
+            <td>{{ lab.num_problems }}</td>
             <!-- <td>{{ lab.percentComplete }}</td> -->
             <td>69%</td>
             <td>{{ lab.due_date.split(' ')[0] }}</td>
