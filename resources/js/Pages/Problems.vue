@@ -135,8 +135,7 @@ export default {
   },
   mounted() {
       this.assignmentisOpen=false;
-    // this.getProblems();
-    console.log("getProblems");
+      this.getProblems();
   },
   beforeUnmount() {
     this.$emit("problems-unmounting");
