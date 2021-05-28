@@ -73,7 +73,7 @@ export default {
     },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
-      this.labs = rawLabs.data;
+      this.labs = rawLabs.data.data;
     },
     problemUnmounting() {
       this.problemisOpen=false;
