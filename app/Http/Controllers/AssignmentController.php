@@ -60,7 +60,7 @@ class AssignmentController extends Controller
     public function showRes($id)
     {
         $listOfAssignments = Lab::find($id)->assignments;
-        $assignmentRes = AssignmentResource::collection($listOfAssignments::paginate());
+        $assignmentRes = AssignmentResource::collection($listOfAssignments);
         // $assignment = Assignment::find($id);
         // // I can abstract in here by creating a resource (like User Res.)
         // // And choose what I want in the return array, including things
