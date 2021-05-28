@@ -3,7 +3,7 @@
     <!-- Main Page-->
 
     <div class="courses header">
-      <h2>Lab X: Problems</h2>
+      <h2>Lab {{ this.labID }}: Problems</h2>
       <hr />
     </div>
 
