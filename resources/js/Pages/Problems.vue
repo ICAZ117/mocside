@@ -29,7 +29,7 @@
             <td>{{ problem.name }}</td>
             <td>{{ problem.test_cases }}</td>
             <td>69%</td>
-            <td>{{ problem.due_date }}.split(' ')[0]</td>
+            <td>{{ problem.due_date.split(' ')[0] }}</td>
             <td>1/24/2021</td>
           </tr>
 
@@ -109,7 +109,6 @@ export default {
     async getProblems() {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
       this.problems = rawProblems.data.data;
-      console.log(this.problems);
     },
     assignmentUnmounting() {
       this.assignmentisOpen = false;
