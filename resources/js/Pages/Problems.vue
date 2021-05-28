@@ -29,7 +29,7 @@
             <td>{{ problem.name }}</td>
             <td>{{ problem.test_cases }}</td>
             <td>69%</td>
-            <td>{{ problem.due_date }}</td>
+            <td>{{ problem.due_date }}.split(' ')[0]</td>
             <td>1/24/2021</td>
           </tr>
 
@@ -76,29 +76,6 @@
             <td>80%</td>
             <td>2/14/2021</td>
             <td>2/11/2021</td>
-          </tr>
-          <tr
-            class="problem"
-            onclick="location.href='workspace.php';"
-            style="cursor: pointer"
-          >
-            <td>Problem 5</td>
-            <td>8</td>
-            <td>0%</td>
-            <td>2/21/2021</td>
-            <td></td>
-          </tr>
-          <tr
-            class="problem"
-            onclick="location.href='workspace.php';"
-            style="cursor: pointer"
-          >
-            <td>Problem 6</td>
-            <td>4</td>
-            <td>0%</td>
-            <td>3/1/2021</td>
-            <td></td>
-          </tr>
         </tbody>
       </table>
     </div>
