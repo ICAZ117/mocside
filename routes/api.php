@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -35,6 +36,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/labs/{id}', [LabController::class, 'update']);
     Route::delete('/labs/{id}', [LabController::class, 'destroy']);
     // Route::get('/labs', [LabController::class, 'index']);
+
+    Route::get('/problems/{id}', [AssignmentController::class, 'showRes']);
+    Route::post('/problems', [AssignmentController::class, 'store']);
+    Route::put('/problems/{id}', [AssignmentController::class, 'update']);
+    Route::delete('/problems/{id}', [AssignmentController::class, 'destroy']);
+    // we need this route for populating the workspace, but not for displaying list.
+    Route::get('/problems/full/{id}', [AssignmentController::class, 'show']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
