@@ -25,8 +25,14 @@ Completed:
 
 Todo:
 
+* Navbar
+	* Add active element to highlight the active element
+	* add a red background instead of white when anywhere except the home page
+
 * Home Page
 	* Style Home Page
+	* fix carousel
+	* fill homepage with any necessary information
 
 * Login Page
 	* Style Login Page
@@ -44,8 +50,11 @@ Todo:
 
 * Course Page
 	* Style Course Page
+	* add the professor version of the page, ie. the add, delete, publish buttons for courses
+	* perhaps make another middle page for professors to go to before labs, which shows the course details, and overview as well as student overview
 
 * Lab Page
 	* Style Lab Page
 	* Get Dynamic labs info from Database/generate necessary info in database
 	* add button in top left to return to courses page
+	* Add the Professor version of this page, ie. the add, delete, publish buttons for labs
