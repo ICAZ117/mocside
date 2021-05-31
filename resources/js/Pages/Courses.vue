@@ -115,7 +115,7 @@ export default {
           ind = i;
         }
       }
-      array.splice(ind, 1);
+      this.enrolledCourses.splice(ind, 1);
       this.addProfessor();
       this.courseID = null;
       this.getCourses();
