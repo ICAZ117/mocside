@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="edit-course">
     <div class="course-create-form">
       <form @submit.prevent="handleSubmit" class="course-form">
         <div class="form-group">
@@ -122,6 +122,7 @@
 
 <script>
 export default {
+  emits: ["edit-unmounting"],
   data() {
     return {
       error: null,
@@ -139,13 +140,16 @@ export default {
   methods: {
     handleSubmit() {
       this.isSubmitted = true;
-    //   this.v$.$touch();
-    //   if (this.v$.$invalid) {
-    //     return;
-    //   }
-    //   this.login();
-	console.log("handles submit")
+      //   this.v$.$touch();
+      //   if (this.v$.$invalid) {
+      //     return;
+      //   }
+      //   this.login();
+      console.log("handles submit");
     },
+  },
+  beforeUnmount() {
+    this.$emit("edit-unmounting");
   },
 };
 </script>
