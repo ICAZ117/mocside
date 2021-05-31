@@ -44,7 +44,7 @@
             v-model:value="content"
             @init="editorInit"
             lang="html"
-            theme="{{ theme }}"
+            :theme="{ theme }"
           />
           <!-- style="height: 300px" -->
           <div style="margin-left: 21vw; display: flex">
