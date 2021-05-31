@@ -22,7 +22,7 @@ class ProfessorController extends Controller
             ]);
             return Professor::create($validData);
         }
-        return resonse()->json(['message' => 'Forbidden'], 403);
+        return response()->json(['message' => 'Forbidden'], 403);
     }
 
     public function show($id)
@@ -38,7 +38,7 @@ class ProfessorController extends Controller
             $prof->update($request->all());
             return $prof;
         }
-        return resonse()->json(['message' => 'Forbidden'], 403);
+        return response()->json(['message' => 'Forbidden'], 403);
     }
 
     public function destroy($id)
@@ -48,6 +48,6 @@ class ProfessorController extends Controller
             $deletedProfs = Professor::where('fsc_id', $id)->delete();
             return $deletedProfs;
         }
-        return resonse()->json(['message' => 'Forbidden'], 403);
+        return response()->json(['message' => 'Forbidden'], 403);
     }
 }
