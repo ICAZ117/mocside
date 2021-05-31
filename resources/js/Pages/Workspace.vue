@@ -119,6 +119,83 @@ import { VAceEditor } from "vue3-ace-editor";
 //////////////////////////////////////////////////////////////////////
 import "ace-builds/src-noconflict/theme-gob";
 
+if (this.importTheme == "ambiance") {
+  import("ace-builds/src-noconflict/theme-ambiance");
+} else if (this.importTheme == "chaos") {
+  import("ace-builds/src-noconflict/theme-chaos");
+} else if (this.importTheme == "chrome") {
+  import("ace-builds/src-noconflict/theme-chrome");
+} else if (this.importTheme == "clouds") {
+  import("ace-builds/src-noconflict/theme-clouds");
+} else if (this.importTheme == "clouds_midnight") {
+  import("ace-builds/src-noconflict/theme-clouds_midnight");
+} else if (this.importTheme == "cobalt") {
+  import("ace-builds/src-noconflict/theme-cobalt");
+} else if (this.importTheme == "crimson_editor") {
+  import("ace-builds/src-noconflict/theme-crimson_editor");
+} else if (this.importTheme == "dawn") {
+  import("ace-builds/src-noconflict/theme-dawn");
+} else if (this.importTheme == "dracula") {
+  import("ace-builds/src-noconflict/theme-dracula");
+} else if (this.importTheme == "dreamweaver") {
+  import("ace-builds/src-noconflict/theme-dreamweaver");
+} else if (this.importTheme == "eclipse") {
+  import("ace-builds/src-noconflict/theme-eclipse");
+} else if (this.importTheme == "github") {
+  import("ace-builds/src-noconflict/theme-github");
+} else if (this.importTheme == "gob") {
+  import("ace-builds/src-noconflict/theme-gob");
+} else if (this.importTheme == "gruvbox") {
+  import("ace-builds/src-noconflict/theme-gruvbox");
+} else if (this.importTheme == "idle_fingers") {
+  import("ace-builds/src-noconflict/theme-idle_fingers");
+} else if (this.importTheme == "iplastic") {
+  import("ace-builds/src-noconflict/theme-iplastic");
+} else if (this.importTheme == "katzenmilch") {
+  import("ace-builds/src-noconflict/theme-katzenmilch");
+} else if (this.importTheme == "kr_theme") {
+  import("ace-builds/src-noconflict/theme-kr_theme");
+} else if (this.importTheme == "kuroir") {
+  import("ace-builds/src-noconflict/theme-kuroir");
+} else if (this.importTheme == "merbivore") {
+  import("ace-builds/src-noconflict/theme-merbivore");
+} else if (this.importTheme == "merbivore_soft") {
+  import("ace-builds/src-noconflict/theme-merbivore_soft");
+} else if (this.importTheme == "mono_industrial") {
+  import("ace-builds/src-noconflict/theme-mono_industrial");
+} else if (this.importTheme == "monokai") {
+  import("ace-builds/src-noconflict/theme-monokai");
+} else if (this.importTheme == "nord_dark") {
+  import("ace-builds/src-noconflict/theme-nord_dark");
+} else if (this.importTheme == "pastel_on_dark") {
+  import("ace-builds/src-noconflict/theme-pastel_on_dark");
+} else if (this.importTheme == "solarized_dark") {
+  import("ace-builds/src-noconflict/theme-solarized_dark");
+} else if (this.importTheme == "solarized_light") {
+  import("ace-builds/src-noconflict/theme-solarized_light");
+} else if (this.importTheme == "sqlserver") {
+  import("ace-builds/src-noconflict/theme-sqlserver");
+} else if (this.importTheme == "terminal") {
+  import("ace-builds/src-noconflict/theme-terminal");
+} else if (this.importTheme == "textmate") {
+  import("ace-builds/src-noconflict/theme-textmate");
+} else if (this.importTheme == "tomorrow") {
+  import("ace-builds/src-noconflict/theme-tomorrow");
+} else if (this.importTheme == "tomorrow_night") {
+  import("ace-builds/src-noconflict/theme-tomorrow_night");
+} else if (this.importTheme == "tomorrow_night_blue") {
+  import("ace-builds/src-noconflict/theme-tomorrow_night_blue");
+} else if (this.importTheme == "tomorrow_night_bright") {
+  import("ace-builds/src-noconflict/theme-tomorrow_night_bright");
+} else if (this.importTheme == "tomorrow_night_eighties") {
+  import("ace-builds/src-noconflict/theme-tomorrow_night_eighties");
+} else if (this.importTheme == "twilight") {
+  import("ace-builds/src-noconflict/theme-twilight");
+} else if (this.importTheme == "vibrant_ink") {
+  import("ace-builds/src-noconflict/theme-vibrant_ink");
+} else if (this.importTheme == "xcode") {
+  import("ace-builds/src-noconflict/theme-xcode");
+}
 //////////////////////////////////////////////////////////////////////
 //                             MODES                                //
 //////////////////////////////////////////////////////////////////////
@@ -190,7 +267,7 @@ import "ace-builds/src-noconflict/theme-gob";
 // import "ace-builds/src-noconflict/mode-io";
 // import "ace-builds/src-noconflict/mode-jack";
 // import "ace-builds/src-noconflict/mode-jade";
-// import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/mode-java";
 // import "ace-builds/src-noconflict/mode-javascript";
 // import "ace-builds/src-noconflict/mode-json";
 // import "ace-builds/src-noconflict/mode-json5";
@@ -243,7 +320,7 @@ import "ace-builds/src-noconflict/theme-gob";
 // import "ace-builds/src-noconflict/mode-properties";
 // import "ace-builds/src-noconflict/mode-protobuf";
 // import "ace-builds/src-noconflict/mode-puppet";
-// import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-python";
 // import "ace-builds/src-noconflict/mode-qml";
 // import "ace-builds/src-noconflict/mode-r";
 // import "ace-builds/src-noconflict/mode-razor";
@@ -340,6 +417,7 @@ import "ace-builds/src-noconflict/theme-gob";
 // import "ace-builds/src-noconflict/worker-php";
 // import "ace-builds/src-noconflict/worker-xml";
 // import "ace-builds/src-noconflict/worker-xquery";
+var importTheme = "gob";
 
 export default {
   props: ["problemID"],
@@ -367,10 +445,9 @@ export default {
       console.log("themeInput:");
       console.log(this.theme);
 
+      importTheme = this.theme;
       // var selection = "ace-builds/src-noconflict/theme-" + this.theme;
       // import(selection);
-
-      
     },
   },
   mounted() {
@@ -381,82 +458,4 @@ export default {
     this.$emit("assignment-unmounting");
   },
 };
-
-if (this.theme == "ambiance") {
-        import("ace-builds/src-noconflict/theme-ambiance");
-      } else if (this.theme == "chaos") {
-        import("ace-builds/src-noconflict/theme-chaos");
-      } else if (this.theme == "chrome") {
-        import("ace-builds/src-noconflict/theme-chrome");
-      } else if (this.theme == "clouds") {
-        import("ace-builds/src-noconflict/theme-clouds");
-      } else if (this.theme == "clouds_midnight") {
-        import("ace-builds/src-noconflict/theme-clouds_midnight");
-      } else if (this.theme == "cobalt") {
-        import("ace-builds/src-noconflict/theme-cobalt");
-      } else if (this.theme == "crimson_editor") {
-        import("ace-builds/src-noconflict/theme-crimson_editor");
-      } else if (this.theme == "dawn") {
-        import("ace-builds/src-noconflict/theme-dawn");
-      } else if (this.theme == "dracula") {
-        import("ace-builds/src-noconflict/theme-dracula");
-      } else if (this.theme == "dreamweaver") {
-        import("ace-builds/src-noconflict/theme-dreamweaver");
-      } else if (this.theme == "eclipse") {
-        import("ace-builds/src-noconflict/theme-eclipse");
-      } else if (this.theme == "github") {
-        import("ace-builds/src-noconflict/theme-github");
-      } else if (this.theme == "gob") {
-        import("ace-builds/src-noconflict/theme-gob");
-      } else if (this.theme == "gruvbox") {
-        import("ace-builds/src-noconflict/theme-gruvbox");
-      } else if (this.theme == "idle_fingers") {
-        import("ace-builds/src-noconflict/theme-idle_fingers");
-      } else if (this.theme == "iplastic") {
-        import("ace-builds/src-noconflict/theme-iplastic");
-      } else if (this.theme == "katzenmilch") {
-        import("ace-builds/src-noconflict/theme-katzenmilch");
-      } else if (this.theme == "kr_theme") {
-        import("ace-builds/src-noconflict/theme-kr_theme");
-      } else if (this.theme == "kuroir") {
-        import("ace-builds/src-noconflict/theme-kuroir");
-      } else if (this.theme == "merbivore") {
-        import("ace-builds/src-noconflict/theme-merbivore");
-      } else if (this.theme == "merbivore_soft") {
-        import("ace-builds/src-noconflict/theme-merbivore_soft");
-      } else if (this.theme == "mono_industrial") {
-        import("ace-builds/src-noconflict/theme-mono_industrial");
-      } else if (this.theme == "monokai") {
-        import("ace-builds/src-noconflict/theme-monokai");
-      } else if (this.theme == "nord_dark") {
-        import("ace-builds/src-noconflict/theme-nord_dark");
-      } else if (this.theme == "pastel_on_dark") {
-        import("ace-builds/src-noconflict/theme-pastel_on_dark");
-      } else if (this.theme == "solarized_dark") {
-        import("ace-builds/src-noconflict/theme-solarized_dark");
-      } else if (this.theme == "solarized_light") {
-        import("ace-builds/src-noconflict/theme-solarized_light");
-      } else if (this.theme == "sqlserver") {
-        import("ace-builds/src-noconflict/theme-sqlserver");
-      } else if (this.theme == "terminal") {
-        import("ace-builds/src-noconflict/theme-terminal");
-      } else if (this.theme == "textmate") {
-        import("ace-builds/src-noconflict/theme-textmate");
-      } else if (this.theme == "tomorrow") {
-        import("ace-builds/src-noconflict/theme-tomorrow");
-      } else if (this.theme == "tomorrow_night") {
-        import("ace-builds/src-noconflict/theme-tomorrow_night");
-      } else if (this.theme == "tomorrow_night_blue") {
-        import("ace-builds/src-noconflict/theme-tomorrow_night_blue");
-      } else if (this.theme == "tomorrow_night_bright") {
-        import("ace-builds/src-noconflict/theme-tomorrow_night_bright");
-      } else if (this.theme == "tomorrow_night_eighties") {
-        import("ace-builds/src-noconflict/theme-tomorrow_night_eighties");
-      } else if (this.theme == "twilight") {
-        import("ace-builds/src-noconflict/theme-twilight");
-      } else if (this.theme == "vibrant_ink") {
-        import("ace-builds/src-noconflict/theme-vibrant_ink");
-      } else if (this.theme == "xcode") {
-        import("ace-builds/src-noconflict/theme-xcode");
-      }
 </script>
