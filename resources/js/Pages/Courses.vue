@@ -74,6 +74,16 @@ export default {
     };
   },
   methods: {
+    async addCourse() {
+      // make new course in database and return the ID
+      payload = {
+        name: "New Course",
+        description: "New Course",
+      }
+      const course = await API.apiClient.post(`/courses`, payload);
+
+      this.$router.push({ name: 'EditCourse', params: { course_id: courseID } })
+    },
     goToLabs(id) {
       this.labIsOpen = true;
       this.courseID = id;
