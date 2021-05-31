@@ -163,7 +163,6 @@ export default {
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
-    console.log(course);
   },
   beforeUnmount() {
     this.$emit("edit-unmounting");
