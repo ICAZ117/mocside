@@ -99,15 +99,13 @@ export default {
     editCourse(id) {
       this.childIsOpen = true;
       this.CourseID = id;
-      this.$router.push({
-        name: "EditCourse",
-        params: { course_id: this.courseID },
-      });
+      console.log("ID: " + id + "\nCourse ID: " + this.courseID);
+      this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
     deleteCourse(id) {
       this.childIsOpen = false;
       //delete the course
-      console.log("delete Course");
+      console.log("delete Course: " + id);
       this.courseID = null;
     },
     goToLabs(id) {
