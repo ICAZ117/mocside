@@ -79,7 +79,7 @@ export default {
       enrolledCourses: [],
       courses: [],
       childIsOpen: false,
-      courseID: "",
+      courseID: null,
     };
   },
   methods: {
@@ -91,27 +91,23 @@ export default {
       const course = await API.apiClient.post(`/courses`, payload);
       this.courseID = course.data.id;
       this.childIsOpen = true;
-      this.$router.push({
-        name: "EditCourse",
-        params: { course_id: this.courseID },
-      });
+      this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
     editCourse(id) {
       this.childIsOpen = true;
       this.CourseID = id;
-      console.log("ID: " + id + "\nCourse ID: " + this.courseID);
-      this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
+      this.$router.push({ name: "EditCourse", params: { course_id: id } });
     },
     deleteCourse(id) {
       this.childIsOpen = false;
       //delete the course
       console.log("delete Course: " + id);
-      this.courseID = "";
+      this.courseID = null;
     },
     goToLabs(id) {
       this.childIsOpen = true;
       this.courseID = id;
-      this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      this.$router.push({ name: "Labs", params: { course_id: id } });
     },
     async getCourses() {
       var i;
@@ -123,7 +119,7 @@ export default {
     },
     childUnmounting() {
       this.childIsOpen = false;
-      this.courseID = "";
+      this.courseID = null;
     },
   },
   mounted() {
