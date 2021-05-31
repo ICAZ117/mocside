@@ -406,6 +406,17 @@ hr.courses {
   flex: content;
 }
 
+/*============= EDIT COURSES =============*/
+
+.edit-course {
+  width: 400px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 20px;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable, table.problemtable {
