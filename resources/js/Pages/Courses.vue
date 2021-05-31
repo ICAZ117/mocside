@@ -37,7 +37,7 @@
                 <div class="card coursecard w-100">
                   <div
                     class="courses card-img-top"
-                    :style="{ backgroundImage: url('../../img/courses/addcourse.png') }"
+                    :style="{ backgroundImage: `url('../../img/courses/addcourse.png')` }"
                   ></div>
                   <div class="courses card-content">
                     <h6 class="card-title my-3 mx-2 mb-0">Add Course</h6>
