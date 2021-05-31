@@ -120,8 +120,8 @@ export default {
   mounted() {
     this.childIsOpen = false;
     this.authUser = store.getters["auth/authUser"];
-    if (this.authUser.fsc_user.courses) {
-      this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
+    if (this.authUser.fscUser.courses) {
+      this.enrolledCourses = JSON.parse(this.authUser.fscUser.courses).courses;
     }
     this.getCourses();
   },
