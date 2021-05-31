@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="edit-course">
     <div class="course-create-form">
       <form @submit.prevent="handleSubmit" class="course-form">
         <div class="form-group">
