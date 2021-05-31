@@ -31,7 +31,7 @@
               </div>
             </a>
             <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">•••</a>
-            <a @click="deleteCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
+            <a @click="deleteCourse(course.id, course)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
           </div>
           <div class="add-course">
             <a @click="addCourse()" class="no-decor">
@@ -102,7 +102,7 @@ export default {
       this.courseID = id;
       this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
-    async deleteCourse(id) {
+    async deleteCourse(id, course) {
       this.childIsOpen = false;
       //delete the course
       const res = await API.apiClient.delete(`/courses/${id}`);
@@ -112,13 +112,13 @@ export default {
       var ind = 0;
       for(i = 0; i<=this.enrolledCourses.length; i++) {
         if (this.enrolledCourses[i] == id) {
-          index = i;
+          ind = i;
         }
       }
-      array.splice(ind, 1);
+      this.enrolledCourses.splice(ind, 1);
       this.addProfessor();
+      delete this.courses.course;
       this.courseID = null;
-      this.getCourses();
     },
     goToLabs(id) {
       this.childIsOpen = true;
