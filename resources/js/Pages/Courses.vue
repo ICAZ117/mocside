@@ -94,8 +94,8 @@ export default {
       var payload = {
         "courses": this.courses,
       }
-      console.log(this.authUser.fsc_id);
-      const prof = await API.apiClient.put(`/professors/${this.authUser.fsc_id}`, payload);
+      console.log(this.authUser.fsc_user.fsc_id);
+      const prof = await API.apiClient.put(`/professors/${this.authUser.fsc_user.fsc_id}`, payload);
       console.log(prof);
       return prof;
     },
