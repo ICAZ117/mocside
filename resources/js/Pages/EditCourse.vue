@@ -144,7 +144,7 @@ export default {
     //     return;
     //   }
     //   this.login();
-	console.log("handles submit");
+	console.log("handles submit")
     },
   },
 };
