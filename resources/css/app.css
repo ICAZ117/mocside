@@ -554,9 +554,9 @@ thead.labtable, thead.problemtable {
   margin: 0;
 }
 
-.row {
-  margin: 0;
-  padding: 0;
+.work-area .row {
+  margin: 0!important;
+  padding: 0!important;
 }
 
 .console {
