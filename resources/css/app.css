@@ -406,6 +406,25 @@ hr.courses {
   flex: content;
 }
 
+/*============= EDIT COURSES =============*/
+
+.edit-course {
+  width: 400px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 20px;
+}
+
+.edit-course-title {
+  text-align: center;
+}
+
+.dates {
+  display: flex;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable, table.problemtable {
@@ -526,7 +545,7 @@ thead.labtable, thead.problemtable {
 .instructions {
   background-color: rgb(42, 43, 51);
   color: lightgray;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - var(--nav-height));
   margin: 0;
   padding: 1rem;
 }
@@ -536,24 +555,23 @@ thead.labtable, thead.problemtable {
 }
 
 .editor {
-  background-color: rgb(58, 58, 58);
   font-family: consolas;
   font-weight: lighter;
   font-size: 12pt;
-  min-height: calc((100vh - 60px) / 2);
+  min-height: calc((100vh - var(--nav-height)) / 2);
   margin: 0;
 }
 
-.row {
-  margin: 0;
-  padding: 0;
+.row>* {
+  margin: 0!important;
+  padding: 0!important;
 }
 
 .console {
   background-color: rgb(58, 58, 58);
   color: lightgray;
   font-family: consolas;
-  min-height: calc((100vh - 60px) / 2);
+  min-height: calc((100vh - var(--nav-height)) / 2);
   margin: 0;
   padding: 2rem;
 }

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="edit-course">
+    <h3 class="edit-course-title">Course Editor</h3>
     <div class="course-create-form">
       <form @submit.prevent="handleSubmit" class="course-form">
         <div class="form-group">
@@ -69,24 +70,33 @@
         <br />
 
         <div class="form-group">
-          <label for="Course Date">Course Date</label>
-          <input
-            type="text"
-            v-model="courseForm.date"
-            id="courseDate"
-            name="courseDate"
-            class="form-control"
-          />
-          <!-- :class="{
+          <label for="Course Dates">Course Dates</label>
+          <div class="row">
+            <input
+              type="Date"
+              v-model="courseForm.dateStart"
+              id="courseDateStart"
+              name="courseDateStart"
+              class="form-control col-4"
+            />
+            <input
+              type="Date"
+              v-model="courseForm.dateEnd"
+              id="courseDateEnd"
+              name="courseDateEnd"
+              class="form-control col-7"
+            />
+            <!-- :class="{
               'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
             }" -->
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <!-- <div
+            <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
+            <!-- <div
             v-if="isSubmitted && v$.userForm.userEmail.$error"
             class="invalid-feedback"
           >
             Please enter the Course Name
           </div> -->
+          </div>
         </div>
         <br />
 
@@ -113,7 +123,7 @@
         <br />
 
         <div class="form-group">
-          <button class="btn btn-danger btn-block">Login</button>
+          <button class="btn btn-danger btn-block">Submit Changes</button>
         </div>
       </form>
     </div>
@@ -121,7 +131,10 @@
 </template>
 
 <script>
+import * as API from "../services/API";
 export default {
+  props: ["courseID"],
+  emits: ["edit-unmounting"],
   data() {
     return {
       error: null,
@@ -130,7 +143,8 @@ export default {
         name: "",
         description: "",
         img: "",
-        date: "",
+        dateStart: "",
+        dateEnd: "",
         roster: "",
       },
       isSubmitted: false,
@@ -139,13 +153,20 @@ export default {
   methods: {
     handleSubmit() {
       this.isSubmitted = true;
-    //   this.v$.$touch();
-    //   if (this.v$.$invalid) {
-    //     return;
-    //   }
-    //   this.login();
-	console.log("handles submit");
+      //   this.v$.$touch();
+      //   if (this.v$.$invalid) {
+      //     return;
+      //   }
+      //   this.login();
+      console.log("handles submit");
     },
+  },
+  async mounted() {
+    const course = await API.apiClient.get(`/courses/${this.courseID}`);
+    console.log(course);
+  },
+  beforeUnmount() {
+    this.$emit("edit-unmounting");
   },
 };
 </script>

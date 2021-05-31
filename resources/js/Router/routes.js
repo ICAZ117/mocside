@@ -37,7 +37,12 @@ const routes = [
                         ]
                     }
                 ]
-            }
+            },
+            {
+                path: ':course_id/edit',
+                component: () => import("../Pages/EditCourse.vue"),
+                name: "EditCourse",
+            },
         ]
         // Reference for syntax
         // beforeEnter: (to, from, next) => {
