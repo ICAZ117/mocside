@@ -133,7 +133,7 @@
 <script>
 import * as API from "../services/API";
 export default {
-	props: ['courseID'],
+  props: ["courseID"],
   emits: ["edit-unmounting"],
   data() {
     return {
@@ -162,8 +162,8 @@ export default {
     },
   },
   async mounted() {
-	  const course = await API.apiClient.get(`/courses/${this.courseID}`);
-	  console.log(course);
+    const course = await API.apiClient.get(`/courses/${this.courseID}`);
+    console.log(course);
   },
   beforeUnmount() {
     this.$emit("edit-unmounting");
