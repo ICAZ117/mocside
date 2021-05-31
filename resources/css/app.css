@@ -421,6 +421,10 @@ hr.courses {
   text-align: center;
 }
 
+.dates {
+  display: flex;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable, table.problemtable {
