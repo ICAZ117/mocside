@@ -46,7 +46,7 @@ class ProfessorController extends Controller
         if (Auth::user()->isAdmin())
         {
             $deletedProfs = Professor::where('fsc_id', $id)->delete();
-            return $deletedProfs
+            return $deletedProfs;
         }
         return resonse()->json(['message' => 'Forbidden'], 403);
     }
