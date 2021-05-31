@@ -22,6 +22,25 @@ class User extends Authenticatable
         return $this->is_admin;
     }
 
+    public function isProf(): bool
+    {
+        $fscRole = $this->fsc_role;
+        if ($fscRole == 'professor')
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function fscUser()
+    {
+        if ($this->isProf())
+        {
+            return $this->hasOne(Professor::class, 'fsc_id', 'fsc_id');
+        }
+        return $this->hasOne(Student::class, 'fsc_id', 'fsc_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,7 +52,6 @@ class User extends Authenticatable
         'password',
         'fsc_id',
         'fsc_role',
-        'courses',
     ];
 
     /**
