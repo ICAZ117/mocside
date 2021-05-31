@@ -79,7 +79,7 @@ export default {
       enrolledCourses: [],
       courses: [],
       childIsOpen: false,
-      courseID: null,
+      courseID: "",
     };
   },
   methods: {
@@ -106,7 +106,7 @@ export default {
       this.childIsOpen = false;
       //delete the course
       console.log("delete Course: " + id);
-      this.courseID = null;
+      this.courseID = "";
     },
     goToLabs(id) {
       this.childIsOpen = true;
@@ -123,7 +123,7 @@ export default {
     },
     childUnmounting() {
       this.childIsOpen = false;
-      this.courseID = null;
+      this.courseID = "";
     },
   },
   mounted() {
