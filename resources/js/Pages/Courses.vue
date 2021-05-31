@@ -121,6 +121,9 @@ export default {
     this.childIsOpen = false;
     this.authUser = store.getters["auth/authUser"];
     if (this.authUser.fsc_user.courses) {
+      console.log(this.authUser.fsc_user);
+      console.log(this.authUser.fsc_user.courses);
+      console.log(JSON.parse(this.authUser.fsc_user.courses).courses);
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
