@@ -26,8 +26,8 @@
                     <!-- <a href="Labs.vue" class="courselaunch text-danger mx-2 my-1 no-decor"
                       >Get Started</a
                     > -->
-                    <button @click="editCourse(course.id)" class="btn btn-danger btn-lg">Edit</button>
-                    <button @click="deleteCourse(course.id)" class="btn btn-danger btn-lg">Delete</button>
+                    <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">•••</a>
+                    <a @click="deleteCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
                   </div>
                 </div>
               </div>
