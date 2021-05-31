@@ -44,9 +44,61 @@
             v-model:value="content"
             @init="editorInit"
             lang="html"
-            theme="gob"
+            theme="gruvbox"
           />
           <!-- style="height: 300px" -->
+          <!-- <div style="margin-left: 21vw; display: flex">
+            <p>
+              Select a Theme:
+              <select onchange="selectTheme()" id="themeSelect">
+                <option>Ambiance</option>
+                <option>Chaos</option>
+                <option>Chrome</option>
+                <option>Clouds</option>
+                <option>Clouds Midnight</option>
+                <option>Cobalt</option>
+                <option>Crimson Editor</option>
+                <option>Dawn</option>
+                <option>Dracula</option>
+                <option>Dreamweaver</option>
+                <option>Eclipse</option>
+                <option>Github</option>
+                <option>Gob</option>
+                <option>Gruvbox</option>
+                <option>Idle Fingers</option>
+                <option>Iplastic</option>
+                <option>Katzenmilch</option>
+                <option>Kr Theme</option>
+                <option>Kuroir</option>
+                <option>Merbivore</option>
+                <option>Merbivore Soft</option>
+                <option>Mono Industrial</option>
+                <option>Monokai</option>
+                <option>Nord Dark</option>
+                <option>Pastel On Dark</option>
+                <option>Solarized Dark</option>
+                <option>Solarized Light</option>
+                <option>SQL Server</option>
+                <option>Terminal</option>
+                <option>Textmate</option>
+                <option>Tomorrow</option>
+                <option>Tomorrow Night</option>
+                <option>Tomorrow Night Blue</option>
+                <option>Tomorrow Night Bright</option>
+                <option>Tomorrow Night Eighties</option>
+                <option>Twilight</option>
+                <option>Vibrant Ink</option>
+                <option>XCode</option>
+              </select>
+            </p>
+            <p style="margin-left: 50px">
+              Select a Language:
+              <select onchange=" selectMode()" id="modeSelect">
+                <option selected>Java</option>
+                <option>Python</option>
+              </select>
+            </p>
+          </div> -->
           <input type="submit" name="submit" class="btn btn-success" />
         </form>
       </div>
