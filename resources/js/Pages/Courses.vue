@@ -85,13 +85,24 @@ export default {
       };
       const course = await API.apiClient.post(`/courses`, payload);
       this.courseID = course.data.id;
+      this.enrolledCourses.push(this.courseID);
+      const prof = await this.addProfessor();
       this.childIsOpen = true;
       this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
+    async addProfessor() {
+      var payload = {
+        "courses": this.enrolledCourses,
+      }
+      console.log(this.authUser.fsc_user.fsc_id);
+      const prof = await API.apiClient.put(`/professors/${this.authUser.fsc_user.fsc_id}`, payload);
+      console.log(prof);
+      return prof;
+    },
     editCourse(id) {
       this.childIsOpen = true;
-      this.CourseID = id;
-      this.$router.push({ name: "EditCourse", params: { course_id: id } });
+      this.courseID = id;
+      this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
     deleteCourse(id) {
       this.childIsOpen = false;
@@ -102,7 +113,7 @@ export default {
     goToLabs(id) {
       this.childIsOpen = true;
       this.courseID = id;
-      this.$router.push({ name: "Labs", params: { course_id: id } });
+      this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
     },
     async getCourses() {
       var i;
@@ -120,12 +131,7 @@ export default {
   mounted() {
     this.childIsOpen = false;
     this.authUser = store.getters["auth/authUser"];
-    console.log(this.authUser);
-    console.log(this.authUser.fsc_user.courses);
     if (this.authUser.fsc_user.courses) {
-      console.log(this.authUser.fsc_user);
-      console.log(this.authUser.fsc_user.courses);
-      console.log(JSON.parse(this.authUser.fsc_user.courses).courses);
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
