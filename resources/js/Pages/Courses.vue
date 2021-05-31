@@ -92,7 +92,7 @@ export default {
     },
     async addProfessor() {
       var payload = {
-        "courses": JSON.stringify({"courses":  this.enrolledCourses}),
+        "courses": this.enrolledCourses,
       }
       console.log(this.authUser.fsc_user.fsc_id);
       const prof = await API.apiClient.put(`/professors/${this.authUser.fsc_user.fsc_id}`, payload);
