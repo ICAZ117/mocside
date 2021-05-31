@@ -58,11 +58,10 @@
 <script>
 import { VAceEditor } from "vue3-ace-editor";
 
+
 //////////////////////////////////////////////////////////////////////
 //                            THEMES                                //
 //////////////////////////////////////////////////////////////////////
-// Collapsed cuz its long
-if (true) {
 import 'ace-builds/src-noconflict/theme-ambiance';
 import 'ace-builds/src-noconflict/theme-chaos';
 import 'ace-builds/src-noconflict/theme-chrome';
@@ -101,13 +100,11 @@ import 'ace-builds/src-noconflict/theme-tomorrow_night_eighties';
 import 'ace-builds/src-noconflict/theme-twilight';
 import 'ace-builds/src-noconflict/theme-vibrant_ink';
 import 'ace-builds/src-noconflict/theme-xcode';
-}
+
 
 //////////////////////////////////////////////////////////////////////
 //                             MODES                                //
 //////////////////////////////////////////////////////////////////////
-// Collapsed cuz its long
-if (true) {
 import 'ace-builds/src-noconflict/mode-abap';
 import 'ace-builds/src-noconflict/mode-abc';
 import 'ace-builds/src-noconflict/mode-actionscript';
@@ -279,13 +276,11 @@ import 'ace-builds/src-noconflict/mode-xml';
 import 'ace-builds/src-noconflict/mode-xquery';
 import 'ace-builds/src-noconflict/mode-yaml';
 import 'ace-builds/src-noconflict/mode-zeek';
-}
+
 
 //////////////////////////////////////////////////////////////////////
 //                            EXTRAS                                //
 //////////////////////////////////////////////////////////////////////
-// Collapsed cuz its long
-if (true) {
 import 'ace-builds/src-noconflict/ext-beautify';
 import 'ace-builds/src-noconflict/ext-code_lens';
 import 'ace-builds/src-noconflict/ext-elastic_tabstops_lite';
@@ -307,24 +302,20 @@ import 'ace-builds/src-noconflict/ext-statusbar';
 import 'ace-builds/src-noconflict/ext-textarea';
 import 'ace-builds/src-noconflict/ext-themelist';
 import 'ace-builds/src-noconflict/ext-whitespace';
-}
+
 
 //////////////////////////////////////////////////////////////////////
 //                           KEYBINDINGS                            //
 //////////////////////////////////////////////////////////////////////
-// Collapsed cuz its long
-if (true) {
 import 'ace-builds/src-noconflict/keybinding-emacs.';
 import 'ace-builds/src-noconflict/keybinding-sublime.';
 import 'ace-builds/src-noconflict/keybinding-vim.';
 import 'ace-builds/src-noconflict/keybinding-vscode.';
-}
+
 
 //////////////////////////////////////////////////////////////////////
 //                             WORKERS                              //
 //////////////////////////////////////////////////////////////////////
-// Collapsed cuz its long
-if (true) {
 import 'ace-builds/src-noconflict/worker-base';
 import 'ace-builds/src-noconflict/worker-coffee';
 import 'ace-builds/src-noconflict/worker-css';
@@ -335,7 +326,6 @@ import 'ace-builds/src-noconflict/worker-lua';
 import 'ace-builds/src-noconflict/worker-php';
 import 'ace-builds/src-noconflict/worker-xml';
 import 'ace-builds/src-noconflict/worker-xquery';
-}
 
 export default {
   props: ["problemID"],
