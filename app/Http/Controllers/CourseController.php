@@ -29,8 +29,6 @@ class CourseController extends Controller
         // I only want admins to be able to create a course
         if (Auth::user()->isAdmin()) {
             $validData = $request->validate([
-                'id' => 'required|int',
-                'roster' => 'required',
                 'name' => 'required',
                 'description' => 'required',
             ]);
