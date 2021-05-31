@@ -112,7 +112,7 @@ export default {
       var ind = 0;
       for(i = 0; i<=this.enrolledCourses.length; i++) {
         if (this.enrolledCourses[i] == id) {
-          index = i;
+          ind = i;
         }
       }
       array.splice(ind, 1);
