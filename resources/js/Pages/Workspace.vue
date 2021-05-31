@@ -32,25 +32,34 @@
         <!-- <textarea id="editor" cols="30" rows="10"></textarea> -->
 
         <form class="editorform" method="POST">
-          <textarea
+          <!-- <textarea
             name="editor"
             id="editor"
             cols="150"
             rows="1"
             placeholder="class Main {&NewLine;&Tab;public static void main(String[] args) {&NewLine;&Tab;&Tab;// Put your code here&NewLine;&Tab;}&NewLine;}"
-          ></textarea>
+          ></textarea> -->
+          <v-ace-editor
+            class="editor"
+            v-model:value="content"
+            @init="editorInit"
+            lang="html"
+            theme="chrome"
+          />
+          <!-- style="height: 300px" -->
           <input type="submit" name="submit" class="btn btn-success" />
         </form>
-
-        <!-- CODE HERE -->
       </div>
-
       <div class="console row"></div>
     </div>
   </div>
 </template>
 
 <script>
+import { VAceEditor } from "vue3-ace-editor";
+import "ace-builds/src-noconflict/mode-text";
+import "ace-builds/src-noconflict/theme-chrome";
+
 export default {
   props: ["problemID"],
   emits: ["assignment-unmounting"],
@@ -66,6 +75,9 @@ export default {
       this.assignment = rawAssignment.data;
     },
   },
+  components: {
+    VAceEditor,
+  },
   mounted() {
     // this.getAssignment();
     console.log("getAssignment");
@@ -73,5 +85,5 @@ export default {
   beforeUnmount() {
     this.$emit("assignment-unmounting");
   },
-}
+};
 </script>
