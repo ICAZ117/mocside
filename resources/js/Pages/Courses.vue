@@ -86,7 +86,7 @@ export default {
       const course = await API.apiClient.post(`/courses`, payload);
       this.courseID = course.data.id;
       this.courses.push(this.courseID);
-      this.addProfessor();
+      const prof = await this.addProfessor();
       this.childIsOpen = true;
       this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
@@ -94,8 +94,10 @@ export default {
       var payload = {
         "courses": this.courses,
       }
+      console.log(this.authUser.fsc_id);
       const prof = await API.apiClient.put(`/professors/${this.authUser.fsc_id}`, payload);
       console.log(prof);
+      return prof;
     },
     editCourse(id) {
       this.childIsOpen = true;
