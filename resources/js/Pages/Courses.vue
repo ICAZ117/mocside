@@ -102,11 +102,23 @@ export default {
       this.courseID = id;
       this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
-    deleteCourse(id) {
+    async deleteCourse(id) {
       this.childIsOpen = false;
       //delete the course
+      const res = await API.apiClient.delete(`/courses/${id}`);
+      console.log(res);
       console.log("delete Course: " + id);
+      var i;
+      var ind;
+      for(i = 0; i<=this.enrolledCourses.length; i++) {
+        if (this.enrolledCourses[i] == id) {
+          index = i;
+        }
+      }
+      array.splice(ind, 1);
+      this.addProfessor();
       this.courseID = null;
+      this.getCourses();
     },
     goToLabs(id) {
       this.childIsOpen = true;
