@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     async addCourse() {
-      payload = {
+      var payload = {
         name: "New Course",
         description: "New Course",
       }
