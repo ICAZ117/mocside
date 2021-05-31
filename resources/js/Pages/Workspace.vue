@@ -117,7 +117,7 @@ import { VAceEditor } from "vue3-ace-editor";
 //////////////////////////////////////////////////////////////////////
 //                            THEMES                                //
 //////////////////////////////////////////////////////////////////////
-import "ace-builds/src-noconflict/theme-gob";
+import "ace-builds/src-noconflict/theme-gob");
 
 //////////////////////////////////////////////////////////////////////
 //                             MODES                                //
@@ -370,7 +370,19 @@ export default {
       // var selection = "ace-builds/src-noconflict/theme-" + this.theme;
       // import(selection);
 
-      if (this.theme == "ambiance") {
+      
+    },
+  },
+  mounted() {
+    // this.getAssignment();
+    console.log("getAssignment");
+  },
+  beforeUnmount() {
+    this.$emit("assignment-unmounting");
+  },
+};
+
+if (this.theme == "ambiance") {
         import("ace-builds/src-noconflict/theme-ambiance");
       } else if (this.theme == "chaos") {
         import("ace-builds/src-noconflict/theme-chaos");
@@ -447,14 +459,4 @@ export default {
       } else if (this.theme == "xcode") {
         import("ace-builds/src-noconflict/theme-xcode");
       }
-    },
-  },
-  mounted() {
-    // this.getAssignment();
-    console.log("getAssignment");
-  },
-  beforeUnmount() {
-    this.$emit("assignment-unmounting");
-  },
-};
 </script>
