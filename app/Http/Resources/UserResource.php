@@ -18,11 +18,9 @@ class UserResource extends JsonResource
           'id' => $this->id,
           'name' => $this->name,
           'email' => $this->email,
-          'emailVerified' => $this->email_verified_at,
           'isAdmin' => $this->isAdmin(),
-          'fsc_id' => $this->fsc_id,
-          'fsc_role' => $this->fsc_role,
-          'courses' => $this->courses,
+          'isProfessor' => $this->isProf(),
+          'fsc_user' => $this->fscUser,
         ];
     }
 }

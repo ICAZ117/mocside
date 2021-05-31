@@ -9,6 +9,8 @@ use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LabController;
+use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestCaseController;
 
 /*
@@ -50,6 +52,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/test-cases', [TestCaseController::class, 'store']);
     Route::put('/test-cases/{id}', [TestCaseController::class, 'update']);
     Route::put('/test-cases/{id}', [TestCaseController::class, 'destroy']);
+
+    Route::post('/professors', [ProfessorController::class, 'store']);
+    Route::put('/professors/{id}', [ProfessorController::class, 'update']);
+    Route::get('/professors/{id}', [ProfessorController::class, 'show']);
+    Route::delete('/professors/{id}', [ProfessorController::class, 'destroy']);
+
+    Route::post('/students', [StudentController::class, 'store']);
+    Route::put('/students/{id}', [StudentController::class, 'update']);
+    Route::get('/students/{id}', [StudentController::class, 'show']);
+    Route::destroy('/students/{id}', [StudentController::class, 'destroy']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
