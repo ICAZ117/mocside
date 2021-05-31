@@ -50,7 +50,7 @@
           <div style="margin-left: 21vw; display: flex">
             <p>
               Select a Theme:
-              <select onchange="selectTheme()" id="themeSelect">
+              <select onchange="this.selectTheme()" id="themeSelect">
                 <optgroup label="Bright">
                   <option>Clouds</option>
                   <option>Chrome</option>
