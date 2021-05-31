@@ -300,27 +300,27 @@ import "ace-builds/src-noconflict/ext-textarea";
 import "ace-builds/src-noconflict/ext-themelist";
 import "ace-builds/src-noconflict/ext-whitespace";
 
-//////////////////////////////////////////////////////////////////////
-//                           KEYBINDINGS                            //
-//////////////////////////////////////////////////////////////////////
-import "ace-builds/src-noconflict/keybinding-emacs.";
-import "ace-builds/src-noconflict/keybinding-sublime.";
-import "ace-builds/src-noconflict/keybinding-vim.";
-import "ace-builds/src-noconflict/keybinding-vscode.";
+// //////////////////////////////////////////////////////////////////////
+// //                           KEYBINDINGS                            //
+// //////////////////////////////////////////////////////////////////////
+// import "ace-builds/src-noconflict/keybinding-emacs.";
+// import "ace-builds/src-noconflict/keybinding-sublime.";
+// import "ace-builds/src-noconflict/keybinding-vim.";
+// import "ace-builds/src-noconflict/keybinding-vscode.";
 
-//////////////////////////////////////////////////////////////////////
-//                             WORKERS                              //
-//////////////////////////////////////////////////////////////////////
-import "ace-builds/src-noconflict/worker-base";
-import "ace-builds/src-noconflict/worker-coffee";
-import "ace-builds/src-noconflict/worker-css";
-import "ace-builds/src-noconflict/worker-html";
-import "ace-builds/src-noconflict/worker-javascript";
-import "ace-builds/src-noconflict/worker-json";
-import "ace-builds/src-noconflict/worker-lua";
-import "ace-builds/src-noconflict/worker-php";
-import "ace-builds/src-noconflict/worker-xml";
-import "ace-builds/src-noconflict/worker-xquery";
+// //////////////////////////////////////////////////////////////////////
+// //                             WORKERS                              //
+// //////////////////////////////////////////////////////////////////////
+// import "ace-builds/src-noconflict/worker-base";
+// import "ace-builds/src-noconflict/worker-coffee";
+// import "ace-builds/src-noconflict/worker-css";
+// import "ace-builds/src-noconflict/worker-html";
+// import "ace-builds/src-noconflict/worker-javascript";
+// import "ace-builds/src-noconflict/worker-json";
+// import "ace-builds/src-noconflict/worker-lua";
+// import "ace-builds/src-noconflict/worker-php";
+// import "ace-builds/src-noconflict/worker-xml";
+// import "ace-builds/src-noconflict/worker-xquery";
 
 export default {
   props: ["problemID"],
