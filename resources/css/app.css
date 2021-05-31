@@ -536,7 +536,6 @@ thead.labtable, thead.problemtable {
 }
 
 .editor {
-  background-color: rgb(58, 58, 58);
   font-family: consolas;
   font-weight: lighter;
   font-size: 12pt;
