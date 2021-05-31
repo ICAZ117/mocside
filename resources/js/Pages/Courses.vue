@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Main Page-->
-    <div v-if="!labIsOpen">
+    <div v-if="!childIsOpen">
       <div class="courses header">
         <h2>My Courses</h2>
         <hr />
@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    <router-view @lab-unmounting="labUnmounting()" v-if="labIsOpen" :courseID="courseID"></router-view>
+    <router-view @lab-unmounting="childUnmounting()" @edit-unmounting="childUnmounting()" v-if="childIsOpen" :courseID="courseID"></router-view>
   </div>
 </template>
 
@@ -69,13 +69,23 @@ export default {
       authUser: null,
       enrolledCourses: [],
       courses: [],
-      labIsOpen: false,
+      childIsOpen: false,
       courseID: null,
     };
   },
   methods: {
+    async addCourse() {
+      var payload = {
+        name: "New Course",
+        description: "New Course",
+      }
+      const course = await API.apiClient.post(`/courses`, payload);
+      this.courseID = course.data.id;
+      this.childIsOpen = true;
+      this.$router.push({ name: 'EditCourse', params: { course_id: this.courseID } })
+    },
     goToLabs(id) {
-      this.labIsOpen = true;
+      this.childIsOpen = true;
       this.courseID = id;
       this.$router.push({ name: 'Labs', params: { course_id: id } })
     },
@@ -87,13 +97,13 @@ export default {
         this.courses.push(course.data);
       }
     },
-    labUnmounting() {
-      this.labIsOpen=false;
+    childUnmounting() {
+      this.childIsOpen=false;
       this.courseID=null;
     },
   },
   mounted() {
-    this.labIsOpen = false;
+    this.childIsOpen = false;
     this.authUser = store.getters["auth/authUser"];
     if (this.authUser.courses){
         this.enrolledCourses = JSON.parse(this.authUser.courses).courses;
