@@ -417,6 +417,10 @@ hr.courses {
   padding: 20px;
 }
 
+.edit-course-title {
+  text-align: center;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable, table.problemtable {

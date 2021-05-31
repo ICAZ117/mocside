@@ -1,5 +1,6 @@
 <template>
   <div class="edit-course">
+	  <h3 class="edit-course-title">Course Editor</h3>
     <div class="course-create-form">
       <form @submit.prevent="handleSubmit" class="course-form">
         <div class="form-group">
@@ -113,7 +114,7 @@
         <br />
 
         <div class="form-group">
-          <button class="btn btn-danger btn-block">Login</button>
+          <button class="btn btn-danger btn-block">Submit Changes</button>
         </div>
       </form>
     </div>
