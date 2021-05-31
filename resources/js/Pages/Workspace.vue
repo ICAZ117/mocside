@@ -44,61 +44,71 @@
             v-model:value="content"
             @init="editorInit"
             lang="html"
-            theme="gruvbox"
+            theme="gob"
           />
           <!-- style="height: 300px" -->
-          <!-- <div style="margin-left: 21vw; display: flex">
+          <div style="margin-left: 21vw; display: flex">
             <p>
               Select a Theme:
               <select onchange="selectTheme()" id="themeSelect">
-                <option>Ambiance</option>
-                <option>Chaos</option>
-                <option>Chrome</option>
-                <option>Clouds</option>
-                <option>Clouds Midnight</option>
-                <option>Cobalt</option>
-                <option>Crimson Editor</option>
-                <option>Dawn</option>
-                <option>Dracula</option>
-                <option>Dreamweaver</option>
-                <option>Eclipse</option>
-                <option>Github</option>
-                <option>Gob</option>
-                <option>Gruvbox</option>
-                <option>Idle Fingers</option>
-                <option>Iplastic</option>
-                <option>Katzenmilch</option>
-                <option>Kr Theme</option>
-                <option>Kuroir</option>
-                <option>Merbivore</option>
-                <option>Merbivore Soft</option>
-                <option>Mono Industrial</option>
-                <option>Monokai</option>
-                <option>Nord Dark</option>
-                <option>Pastel On Dark</option>
-                <option>Solarized Dark</option>
-                <option>Solarized Light</option>
-                <option>SQL Server</option>
-                <option>Terminal</option>
-                <option>Textmate</option>
-                <option>Tomorrow</option>
-                <option>Tomorrow Night</option>
-                <option>Tomorrow Night Blue</option>
-                <option>Tomorrow Night Bright</option>
-                <option>Tomorrow Night Eighties</option>
-                <option>Twilight</option>
-                <option>Vibrant Ink</option>
-                <option>XCode</option>
+                <optgroup label="Bright">
+                  <option>Clouds</option>
+                  <option>Chrome</option>
+                  <option>Crimson Editor</option>
+                  <option>Dawn</option>
+                  <option>Dreamweaver</option>
+                  <option>Eclipse</option>
+                  <option>GitHub</option>
+                  <option>IPlastic</option>
+                  <option>Solarized Light</option>
+                  <option>TextMate</option>
+                  <option>Tomorrow</option>
+                  <option>Xcode</option>
+                  <option>Kuroir</option>
+                  <option>KatzenMilch</option>
+                  <option>SQL Server</option>
+                </optgroup>
+                <optgroup label="Dark">
+                  <option>Ambiance</option>
+                  <option>Chaos</option>
+                  <option>Clouds Midnight</option>
+                  <option>Dracula</option>
+                  <option>Cobalt</option>
+                  <option>Gruvbox</option>
+                  <option>Green on Black</option>
+                  <option>Idle Fingers</option>
+                  <option>krTheme</option>
+                  <option>Merbivore</option>
+                  <option>Merbivore Soft</option>
+                  <option>Mono Industrial</option>
+                  <option>Monokai</option>
+                  <option>Nord Dark</option>
+                  <option>Pastel on dark</option>
+                  <option>Solarized Dark</option>
+                  <option>Terminal</option>
+                  <option>Tomorrow Night</option>
+                  <option>
+                    Tomorrow Night Blue
+                  </option>
+                  <option>
+                    Tomorrow Night Bright
+                  </option>
+                  <option>
+                    Tomorrow Night 80s
+                  </option>
+                  <option>Twilight</option>
+                  <option>Vibrant Ink</option>
+                </optgroup>
               </select>
             </p>
             <p style="margin-left: 50px">
               Select a Language:
-              <select onchange=" selectMode()" id="modeSelect">
+              <select onchange=" selectMode()" id="modeS-elect">
                 <option selected>Java</option>
                 <option>Python</option>
               </select>
             </p>
-          </div> -->
+          </div>
           <input type="submit" name="submit" class="btn btn-success" />
         </form>
       </div>
@@ -383,6 +393,7 @@ export default {
   data() {
     return {
       assignment: {},
+      themeInput: document.getElementById("themeSelect"),
     };
   },
   methods: {
@@ -391,6 +402,17 @@ export default {
       const rawAssignment = await API.apiClient.get(`/problems/${this.labID}`);
       this.assignment = rawAssignment.data;
     },
+    //changing the Theme
+    selectTheme() {
+        console.log("themeInput:");
+        console.log(this.themeInput);
+        var selection = themeInput.options[themeInput.selectedIndex].textContent;
+
+        console.log("\nSelection:");
+        console.log(selection);
+
+        console.log(editor.getValue()); //this is to show how to get the editor value out of it
+    }
   },
   components: {
     VAceEditor,
