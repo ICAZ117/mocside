@@ -23,9 +23,11 @@
 
                     <hr class="courses my-0" />
 
-                    <a href="Labs.vue" class="courselaunch text-danger mx-2 my-1 no-decor"
+                    <!-- <a href="Labs.vue" class="courselaunch text-danger mx-2 my-1 no-decor"
                       >Get Started</a
-                    >
+                    > -->
+                    <button @click="editCourse(course.id)" class="btn btn-danger btn-lg">Edit</button>
+                    <button @click="deleteCourse(course.id)" class="btn btn-danger btn-lg">Delete</button>
                   </div>
                 </div>
               </div>
@@ -84,10 +86,21 @@ export default {
       this.childIsOpen = true;
       this.$router.push({ name: 'EditCourse', params: { course_id: this.courseID } })
     },
+    editCourse(id) {
+      this.childIsOpen = true;
+      this.CourseID = id;
+      this.$router.push({ name: 'EditCourse', params: { course_id: this.courseID } })
+    },
+    deleteCourse(id) {
+      this.childIsOpen = false;
+      //delete the course
+      console.log("delete Course");
+      this.courseID = null;
+    },
     goToLabs(id) {
       this.childIsOpen = true;
       this.courseID = id;
-      this.$router.push({ name: 'Labs', params: { course_id: id } })
+      this.$router.push({ name: 'Labs', params: { course_id: this.courseID } })
     },
     async getCourses() {
       var i;
