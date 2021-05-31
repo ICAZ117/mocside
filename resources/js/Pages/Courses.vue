@@ -39,13 +39,13 @@
                     class="courses card-img-top"
                     :style="{ backgroundImage: `url('../../img/courses/addcourse.png')` }"
                   ></div>
-                  <div class="courses card-content">
+                  <!-- <div class="courses card-content">
                     <h6 class="card-title my-3 mx-2 mb-0">Add Course</h6>
                     <hr class="courses my-0" />
 
                     <a class="courselaunch text-danger mx-2 my-1 no-decor"></a
                     >
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </a>
