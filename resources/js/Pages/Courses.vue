@@ -92,8 +92,8 @@ export default {
     },
     async addProfessor() {
       var payload = {
-        "courses": this.enrolledCourses,
-      }
+        "courses": JSON.stringify({"courses":  this.enrolledCourses}),
+      };
       console.log(this.authUser.fsc_user.fsc_id);
       const prof = await API.apiClient.put(`/professors/${this.authUser.fsc_user.fsc_id}`, payload);
       console.log(prof);
@@ -133,7 +133,9 @@ export default {
     this.authUser = store.getters["auth/authUser"];
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
+      console.log("inside the get enrolled courses");
     }
+    console.log(this.enrolledCourses);
     this.getCourses();
   },
 };
