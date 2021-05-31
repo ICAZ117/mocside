@@ -118,6 +118,7 @@ export default {
     },
   },
   mounted() {
+    console.log("hello Worlds")
     this.childIsOpen = false;
     this.authUser = store.getters["auth/authUser"];
     console.log(this.authUser);
