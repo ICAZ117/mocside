@@ -61,7 +61,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/students', [StudentController::class, 'store']);
     Route::put('/students/{id}', [StudentController::class, 'update']);
     Route::get('/students/{id}', [StudentController::class, 'show']);
-    Route::destroy('/students/{id}', [StudentController::class, 'destroy']);
+    Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
