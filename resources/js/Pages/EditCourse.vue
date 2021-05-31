@@ -132,6 +132,7 @@
 
 <script>
 export default {
+	props: ['courseID'],
   emits: ["edit-unmounting"],
   data() {
     return {
@@ -158,6 +159,10 @@ export default {
       //   this.login();
       console.log("handles submit");
     },
+  },
+  mounted() {
+	  const course = await API.apiClient.get(`/courses/${this.courseID}`);
+	  console.log(course);
   },
   beforeUnmount() {
     this.$emit("edit-unmounting");

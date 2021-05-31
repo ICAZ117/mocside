@@ -60,12 +60,7 @@
         </div>
       </div>
     </div>
-    <router-view
-      @lab-unmounting="childUnmounting()"
-      @edit-unmounting="childUnmounting()"
-      v-if="childIsOpen"
-      :courseID="courseID"
-    ></router-view>
+    <router-view @lab-unmounting="childUnmounting()" @edit-unmounting="childUnmounting()" v-if="childIsOpen" :courseID="courseID"></router-view>
   </div>
 </template>
 
