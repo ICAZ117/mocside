@@ -133,9 +133,7 @@ export default {
     this.authUser = store.getters["auth/authUser"];
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
-      console.log("inside the get enrolled courses");
     }
-    console.log(this.enrolledCourses);
     this.getCourses();
   },
 };
