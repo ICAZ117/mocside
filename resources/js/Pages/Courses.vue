@@ -90,8 +90,8 @@ export default {
     },
     editCourse(id) {
       this.childIsOpen = true;
-      this.CourseID = id;
-      this.$router.push({ name: "EditCourse", params: { course_id: id } });
+      this.courseID = id;
+      this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
     deleteCourse(id) {
       this.childIsOpen = false;
@@ -102,7 +102,7 @@ export default {
     goToLabs(id) {
       this.childIsOpen = true;
       this.courseID = id;
-      this.$router.push({ name: "Labs", params: { course_id: id } });
+      this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
     },
     async getCourses() {
       var i;
