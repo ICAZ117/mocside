@@ -42,7 +42,13 @@
           <input type="submit" name="submit" class="btn btn-success" />
         </form>
 
-        <!-- CODE HERE -->
+        <v-ace-editor
+          v-model:value="content"
+          @init="editorInit"
+          lang="html"
+          theme="chrome"
+          style="height: 300px"
+        />
       </div>
 
       <div class="console row"></div>
@@ -51,6 +57,10 @@
 </template>
 
 <script>
+import { VAceEditor } from "vue3-ace-editor";
+import 'ace-builds/src-noconflict/mode-text';
+import 'ace-builds/src-noconflict/theme-chrome';
+
 export default {
   props: ["problemID"],
   emits: ["assignment-unmounting"],
@@ -66,6 +76,9 @@ export default {
       this.assignment = rawAssignment.data;
     },
   },
+  components: {
+    VAceEditor,
+  },
   mounted() {
     // this.getAssignment();
     console.log("getAssignment");
@@ -73,5 +86,5 @@ export default {
   beforeUnmount() {
     this.$emit("assignment-unmounting");
   },
-}
+};
 </script>
