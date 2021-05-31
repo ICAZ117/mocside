@@ -120,6 +120,8 @@ export default {
   mounted() {
     this.childIsOpen = false;
     this.authUser = store.getters["auth/authUser"];
+    console.log(this.authUser);
+    console.log(this.authUser.fsc_user.courses);
     if (this.authUser.fsc_user.courses) {
       console.log(this.authUser.fsc_user);
       console.log(this.authUser.fsc_user.courses);
