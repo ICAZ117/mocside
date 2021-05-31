@@ -70,21 +70,21 @@
         <br />
 
         <div class="form-group">
-          <div class="dates">
-            <label for="Course Dates">Course Dates</label>
+          <label for="Course Dates">Course Dates</label>
+          <div class="row">
             <input
               type="Date"
               v-model="courseForm.dateStart"
               id="courseDateStart"
               name="courseDateStart"
-              class="form-control"
+              class="form-control col-4"
             />
             <input
               type="Date"
               v-model="courseForm.dateEnd"
               id="courseDateEnd"
               name="courseDateEnd"
-              class="form-control"
+              class="form-control col-7"
             />
             <!-- :class="{
               'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
