@@ -393,7 +393,7 @@ export default {
   data() {
     return {
       assignment: {},
-      themeInput = document.getElementById("themeSelect"),
+      themeInput: document.getElementById("themeSelect"),
     };
   },
   methods: {
