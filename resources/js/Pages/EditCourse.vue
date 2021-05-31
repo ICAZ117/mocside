@@ -160,7 +160,7 @@ export default {
       console.log("handles submit");
     },
   },
-  mounted() {
+  async mounted() {
 	  const course = await API.apiClient.get(`/courses/${this.courseID}`);
 	  console.log(course);
   },
