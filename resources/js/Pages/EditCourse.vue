@@ -114,7 +114,7 @@
         <br />
 
         <div class="form-group">
-          <button class="btn btn-danger btn-block">Login</button>
+          <button class="btn btn-danger btn-block">Submit Changes</button>
         </div>
       </form>
     </div>
