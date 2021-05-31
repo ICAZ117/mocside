@@ -115,7 +115,7 @@ export default {
           ind = i;
         }
       }
-      this.$delete(this.enrolledCourses, ind);
+      this.enrolledCourses.splice(ind, 1);
       this.addProfessor();
       delete this.courses.course;
       this.courseID = null;
