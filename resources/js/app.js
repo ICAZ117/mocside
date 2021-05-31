@@ -20,10 +20,10 @@ import "bootstrap";
 //////////////////// CODEMIRROR \\\\\\\\\\\\\\\\\\\\
 //////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\
 // require lib
-import VueCodemirror from 'vue-codemirror'
+import VueCodemirror from 'vue3-code-mirror';
  
 // require styles
-import 'codemirror/lib/codemirror.css'
+import 'codemirror/lib/codemirror.css';
  
 // require more codemirror resource...
  
