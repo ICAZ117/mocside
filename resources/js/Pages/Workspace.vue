@@ -119,83 +119,7 @@ import { VAceEditor } from "vue3-ace-editor";
 //////////////////////////////////////////////////////////////////////
 import "ace-builds/src-noconflict/theme-gob";
 
-if (window.theme == "ambiance") {
-  import("ace-builds/src-noconflict/theme-ambiance");
-} else if (window.theme == "chaos") {
-  import("ace-builds/src-noconflict/theme-chaos");
-} else if (window.theme == "chrome") {
-  import("ace-builds/src-noconflict/theme-chrome");
-} else if (window.theme == "clouds") {
-  import("ace-builds/src-noconflict/theme-clouds");
-} else if (window.theme == "clouds_midnight") {
-  import("ace-builds/src-noconflict/theme-clouds_midnight");
-} else if (window.theme == "cobalt") {
-  import("ace-builds/src-noconflict/theme-cobalt");
-} else if (window.theme == "crimson_editor") {
-  import("ace-builds/src-noconflict/theme-crimson_editor");
-} else if (window.theme == "dawn") {
-  import("ace-builds/src-noconflict/theme-dawn");
-} else if (window.theme == "dracula") {
-  import("ace-builds/src-noconflict/theme-dracula");
-} else if (window.theme == "dreamweaver") {
-  import("ace-builds/src-noconflict/theme-dreamweaver");
-} else if (window.theme == "eclipse") {
-  import("ace-builds/src-noconflict/theme-eclipse");
-} else if (window.theme == "github") {
-  import("ace-builds/src-noconflict/theme-github");
-} else if (window.theme == "gob") {
-  import("ace-builds/src-noconflict/theme-gob");
-} else if (window.theme == "gruvbox") {
-  import("ace-builds/src-noconflict/theme-gruvbox");
-} else if (window.theme == "idle_fingers") {
-  import("ace-builds/src-noconflict/theme-idle_fingers");
-} else if (window.theme == "iplastic") {
-  import("ace-builds/src-noconflict/theme-iplastic");
-} else if (window.theme == "katzenmilch") {
-  import("ace-builds/src-noconflict/theme-katzenmilch");
-} else if (window.theme == "kr_theme") {
-  import("ace-builds/src-noconflict/theme-kr_theme");
-} else if (window.theme == "kuroir") {
-  import("ace-builds/src-noconflict/theme-kuroir");
-} else if (window.theme == "merbivore") {
-  import("ace-builds/src-noconflict/theme-merbivore");
-} else if (window.theme == "merbivore_soft") {
-  import("ace-builds/src-noconflict/theme-merbivore_soft");
-} else if (window.theme == "mono_industrial") {
-  import("ace-builds/src-noconflict/theme-mono_industrial");
-} else if (window.theme == "monokai") {
-  import("ace-builds/src-noconflict/theme-monokai");
-} else if (window.theme == "nord_dark") {
-  import("ace-builds/src-noconflict/theme-nord_dark");
-} else if (window.theme == "pastel_on_dark") {
-  import("ace-builds/src-noconflict/theme-pastel_on_dark");
-} else if (window.theme == "solarized_dark") {
-  import("ace-builds/src-noconflict/theme-solarized_dark");
-} else if (window.theme == "solarized_light") {
-  import("ace-builds/src-noconflict/theme-solarized_light");
-} else if (window.theme == "sqlserver") {
-  import("ace-builds/src-noconflict/theme-sqlserver");
-} else if (window.theme == "terminal") {
-  import("ace-builds/src-noconflict/theme-terminal");
-} else if (window.theme == "textmate") {
-  import("ace-builds/src-noconflict/theme-textmate");
-} else if (window.theme == "tomorrow") {
-  import("ace-builds/src-noconflict/theme-tomorrow");
-} else if (window.theme == "tomorrow_night") {
-  import("ace-builds/src-noconflict/theme-tomorrow_night");
-} else if (window.theme == "tomorrow_night_blue") {
-  import("ace-builds/src-noconflict/theme-tomorrow_night_blue");
-} else if (window.theme == "tomorrow_night_bright") {
-  import("ace-builds/src-noconflict/theme-tomorrow_night_bright");
-} else if (window.theme == "tomorrow_night_eighties") {
-  import("ace-builds/src-noconflict/theme-tomorrow_night_eighties");
-} else if (window.theme == "twilight") {
-  import("ace-builds/src-noconflict/theme-twilight");
-} else if (window.theme == "vibrant_ink") {
-  import("ace-builds/src-noconflict/theme-vibrant_ink");
-} else if (window.theme == "xcode") {
-  import("ace-builds/src-noconflict/theme-xcode");
-}
+
 //////////////////////////////////////////////////////////////////////
 //                             MODES                                //
 //////////////////////////////////////////////////////////////////////
@@ -458,4 +382,82 @@ export default {
     this.$emit("assignment-unmounting");
   },
 };
+
+if (window.theme == "ambiance") {
+  import("ace-builds/src-noconflict/theme-ambiance");
+} else if (window.theme == "chaos") {
+  import("ace-builds/src-noconflict/theme-chaos");
+} else if (window.theme == "chrome") {
+  import("ace-builds/src-noconflict/theme-chrome");
+} else if (window.theme == "clouds") {
+  import("ace-builds/src-noconflict/theme-clouds");
+} else if (window.theme == "clouds_midnight") {
+  import("ace-builds/src-noconflict/theme-clouds_midnight");
+} else if (window.theme == "cobalt") {
+  import("ace-builds/src-noconflict/theme-cobalt");
+} else if (window.theme == "crimson_editor") {
+  import("ace-builds/src-noconflict/theme-crimson_editor");
+} else if (window.theme == "dawn") {
+  import("ace-builds/src-noconflict/theme-dawn");
+} else if (window.theme == "dracula") {
+  import("ace-builds/src-noconflict/theme-dracula");
+} else if (window.theme == "dreamweaver") {
+  import("ace-builds/src-noconflict/theme-dreamweaver");
+} else if (window.theme == "eclipse") {
+  import("ace-builds/src-noconflict/theme-eclipse");
+} else if (window.theme == "github") {
+  import("ace-builds/src-noconflict/theme-github");
+} else if (window.theme == "gob") {
+  import("ace-builds/src-noconflict/theme-gob");
+} else if (window.theme == "gruvbox") {
+  import("ace-builds/src-noconflict/theme-gruvbox");
+} else if (window.theme == "idle_fingers") {
+  import("ace-builds/src-noconflict/theme-idle_fingers");
+} else if (window.theme == "iplastic") {
+  import("ace-builds/src-noconflict/theme-iplastic");
+} else if (window.theme == "katzenmilch") {
+  import("ace-builds/src-noconflict/theme-katzenmilch");
+} else if (window.theme == "kr_theme") {
+  import("ace-builds/src-noconflict/theme-kr_theme");
+} else if (window.theme == "kuroir") {
+  import("ace-builds/src-noconflict/theme-kuroir");
+} else if (window.theme == "merbivore") {
+  import("ace-builds/src-noconflict/theme-merbivore");
+} else if (window.theme == "merbivore_soft") {
+  import("ace-builds/src-noconflict/theme-merbivore_soft");
+} else if (window.theme == "mono_industrial") {
+  import("ace-builds/src-noconflict/theme-mono_industrial");
+} else if (window.theme == "monokai") {
+  import("ace-builds/src-noconflict/theme-monokai");
+} else if (window.theme == "nord_dark") {
+  import("ace-builds/src-noconflict/theme-nord_dark");
+} else if (window.theme == "pastel_on_dark") {
+  import("ace-builds/src-noconflict/theme-pastel_on_dark");
+} else if (window.theme == "solarized_dark") {
+  import("ace-builds/src-noconflict/theme-solarized_dark");
+} else if (window.theme == "solarized_light") {
+  import("ace-builds/src-noconflict/theme-solarized_light");
+} else if (window.theme == "sqlserver") {
+  import("ace-builds/src-noconflict/theme-sqlserver");
+} else if (window.theme == "terminal") {
+  import("ace-builds/src-noconflict/theme-terminal");
+} else if (window.theme == "textmate") {
+  import("ace-builds/src-noconflict/theme-textmate");
+} else if (window.theme == "tomorrow") {
+  import("ace-builds/src-noconflict/theme-tomorrow");
+} else if (window.theme == "tomorrow_night") {
+  import("ace-builds/src-noconflict/theme-tomorrow_night");
+} else if (window.theme == "tomorrow_night_blue") {
+  import("ace-builds/src-noconflict/theme-tomorrow_night_blue");
+} else if (window.theme == "tomorrow_night_bright") {
+  import("ace-builds/src-noconflict/theme-tomorrow_night_bright");
+} else if (window.theme == "tomorrow_night_eighties") {
+  import("ace-builds/src-noconflict/theme-tomorrow_night_eighties");
+} else if (window.theme == "twilight") {
+  import("ace-builds/src-noconflict/theme-twilight");
+} else if (window.theme == "vibrant_ink") {
+  import("ace-builds/src-noconflict/theme-vibrant_ink");
+} else if (window.theme == "xcode") {
+  import("ace-builds/src-noconflict/theme-xcode");
+}
 </script>
