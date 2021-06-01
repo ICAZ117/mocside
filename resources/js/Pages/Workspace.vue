@@ -25,7 +25,6 @@
         <v-ace-editor
           class="editor"
           v-model:value="content"
-          @init="editorInit"
           :lang="lang"
           :theme="theme"
         />

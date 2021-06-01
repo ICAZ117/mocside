@@ -61,7 +61,7 @@ class CourseController extends Controller
         if (Auth::user()->isAdmin()) {
             $cou = course::find($id);
             $cou->update($request->all());
-            return $cou;
+            return response()->json(['message' => 'Updated sucessfully.'], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
