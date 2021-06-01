@@ -28255,7 +28255,7 @@ var _hoisted_4 = {
   }
 };
 var _hoisted_5 = {
-  "class": "row px-1"
+  "class": "row px-1 mx-1"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
@@ -28275,39 +28275,52 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_8 = {
-  "class": "col-10"
+  style: {
+    "width": "78% !important"
+  }
+};
+var _hoisted_9 = {
+  style: {
+    "float": "right !important"
+  }
+};
+var _hoisted_10 = {
+  "class": "configure-editor"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "theme",
   "class": "workspace-label"
 }, "Theme: ", -1
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<optgroup label=\"Dark\"><option value=\"ambiance\">Ambiance</option><option value=\"chaos\">Chaos</option><option value=\"clouds_midnight\">Clouds Midnight</option><option value=\"dracula\">Dracula</option><option value=\"cobalt\">Cobalt</option><option value=\"gruvbox\">Gruvbox</option><option value=\"gob\" selected>Green on Black</option><option value=\"idle_fingers\">idle Fingers</option><option value=\"kr_theme\">krTheme</option><option value=\"merbivore\">Merbivore</option><option value=\"merbivore_soft\">Merbivore Soft</option><option value=\"mono_industrial\">Mono Industrial</option><option value=\"monokai\">Monokai</option><option value=\"nord_dark\">Nord Dark</option><option value=\"pastel_on_dark\">Pastel on dark</option><option value=\"solarized_dark\">Solarized Dark</option><option value=\"terminal\">Terminal</option><option value=\"tomorrow_night\">Tomorrow Night</option><option value=\"tomorrow_night_blue\">Tomorrow Night Blue</option><option value=\"tomorrow_night_bright\">Tomorrow Night Bright</option><option value=\"tomorrow_night_eighties\">Tomorrow Night 80s</option><option value=\"twilight\">Twilight</option><option value=\"vibrant_ink\">Vibrant Ink</option></optgroup><optgroup label=\"Light\"><option value=\"chrome\">Chrome</option><option value=\"clouds\">Clouds</option><option value=\"crimson_editor\">Crimson Editor</option><option value=\"dawn\">Dawn</option><option value=\"dreamweaver\">Dreamweaver</option><option value=\"eclipse\">Eclipse</option><option value=\"github\">GitHub</option><option value=\"iplastic\">IPlastic</option><option value=\"solarized_light\">Solarized Light</option><option value=\"textmate\">TextMate</option><option value=\"tomorrow\">Tomorrow</option><option value=\"xcode\">Xcode</option><option value=\"kuroir\">Kuroir</option><option value=\"katzenmilch\">KatzenMilch</option><option value=\"sqlserver\">SQL Server</option></optgroup>", 2);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<optgroup label=\"Dark\"><option value=\"ambiance\">Ambiance</option><option value=\"chaos\">Chaos</option><option value=\"clouds_midnight\">Clouds Midnight</option><option value=\"dracula\">Dracula</option><option value=\"cobalt\">Cobalt</option><option value=\"gruvbox\">Gruvbox</option><option value=\"gob\" selected>Green on Black</option><option value=\"idle_fingers\">idle Fingers</option><option value=\"kr_theme\">krTheme</option><option value=\"merbivore\">Merbivore</option><option value=\"merbivore_soft\">Merbivore Soft</option><option value=\"mono_industrial\">Mono Industrial</option><option value=\"monokai\">Monokai</option><option value=\"nord_dark\">Nord Dark</option><option value=\"pastel_on_dark\">Pastel on dark</option><option value=\"solarized_dark\">Solarized Dark</option><option value=\"terminal\">Terminal</option><option value=\"tomorrow_night\">Tomorrow Night</option><option value=\"tomorrow_night_blue\">Tomorrow Night Blue</option><option value=\"tomorrow_night_bright\">Tomorrow Night Bright</option><option value=\"tomorrow_night_eighties\">Tomorrow Night 80s</option><option value=\"twilight\">Twilight</option><option value=\"vibrant_ink\">Vibrant Ink</option></optgroup><optgroup label=\"Light\"><option value=\"chrome\">Chrome</option><option value=\"clouds\">Clouds</option><option value=\"crimson_editor\">Crimson Editor</option><option value=\"dawn\">Dawn</option><option value=\"dreamweaver\">Dreamweaver</option><option value=\"eclipse\">Eclipse</option><option value=\"github\">GitHub</option><option value=\"iplastic\">IPlastic</option><option value=\"solarized_light\">Solarized Light</option><option value=\"textmate\">TextMate</option><option value=\"tomorrow\">Tomorrow</option><option value=\"xcode\">Xcode</option><option value=\"kuroir\">Kuroir</option><option value=\"katzenmilch\">KatzenMilch</option><option value=\"sqlserver\">SQL Server</option></optgroup>", 2);
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "lang",
-  "class": "workspace-label"
+  "class": "workspace-label",
+  style: {
+    "margin-left": "40px"
+  }
 }, "Language: ", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "java",
   selected: ""
 }, "Java", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "python"
 }, "Python", -1
 /* HOISTED */
 );
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "console row"
 }, null, -1
 /* HOISTED */
@@ -28327,23 +28340,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     theme: $data.theme
   }, null, 8
   /* PROPS */
-  , ["value", "onInit", "lang", "theme"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+  , ["value", "onInit", "lang", "theme"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.theme = $event;
     }),
     id: "theme",
     "class": "console-select form-select"
-  }, [_hoisted_10], 512
+  }, [_hoisted_12], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.theme]]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.theme]]), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.lang = $event;
     }),
     id: "lang",
     "class": "console-select form-select"
-  }, [_hoisted_13, _hoisted_14], 512
+  }, [_hoisted_15, _hoisted_16], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.lang]])])])]), _hoisted_15])])], 2112
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.lang]])])])])])]), _hoisted_17])])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   );
 }

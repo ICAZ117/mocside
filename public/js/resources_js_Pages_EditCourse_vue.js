@@ -237,8 +237,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 2:
               course = _context.sent;
+              _this.courseForm.name = course.data.name;
+              _this.courseForm.description = course.data.description;
+              _this.courseForm.img = "";
+              _this.courseForm.dateStart = course.data.start_date;
+              _this.courseForm.dateEnd = course.data.end_date;
+              _this.courseForm.roster = JSON.parse(course.data.roster).roster;
 
-            case 3:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -496,7 +502,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.description]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" :class=\"{\n              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,\n            }\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"isSubmitted && !v$.userForm.name.required\" class=\"invalid-feedback\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div\n            v-if=\"isSubmitted && v$.userForm.userEmail.$error\"\n            class=\"invalid-feedback\"\n          >\n            Please enter the Course Name\n          </div> ")]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <label for=\"Course Image\">Course Image</label>\n          <input\n            type=\"text\"\n            v-model=\"courseForm.img\"\n            id=\"courseImage\"\n            name=\"courseImage\"\n            class=\"form-control\"\n          /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" :class=\"{\n              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,\n            }\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"isSubmitted && !v$.userForm.name.required\" class=\"invalid-feedback\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div\n            v-if=\"isSubmitted && v$.userForm.userEmail.$error\"\n            class=\"invalid-feedback\"\n          >\n            Please enter the Course Name\n          </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FileUpload, {
     label: "Upload Course Image",
     fileTypes: ['image/*'],
-    endpoint: "/api/images/store",
+    endpoint: "/images/store",
     onFileUploaded: $options.updateImage,
     "class": "p-5 bg-white border rounded shadow"
   }, null, 8
