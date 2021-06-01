@@ -415,6 +415,8 @@ hr.courses {
 .fixed-course-width {
   width: auto!important;
   margin-bottom: 3rem!important;
+  margin-left: 1rem!important;
+  margin-right:1rem!important
 }
 /*============= EDIT COURSES =============*/
 
