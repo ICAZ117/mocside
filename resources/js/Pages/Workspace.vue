@@ -30,8 +30,9 @@
           :theme="theme"
         />
         <div class="row">
-          <input type="submit" name="submit" class="col-2 btn btn-success" />
-          <div class="col-5">
+          <button type="run" name="run" class="run-code col-2 btn btn-success">Run</button>
+          <button type="submit" name="submit" class="submit-code col-2 btn btn-success">Submit</button>
+          <div class="col-4">
             <label for="theme" class="workspace-label">Theme:  </label>
             <select v-model="theme" id="theme" class="console-select form-select">
               <optgroup label="Dark">
@@ -78,7 +79,7 @@
               </optgroup>
             </select>
           </div>
-          <div class="col-5">
+          <div class="col-4">
             <label for="lang" class="workspace-label">Language:  </label>
             <select v-model="lang" id="lang" class="console-select form-select">
               <option value="java" selected>Java</option>

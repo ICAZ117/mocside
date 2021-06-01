@@ -606,6 +606,12 @@ thead.labtable, thead.problemtable {
   color: lightgray!important;
 }
 
+.run-code, .submit-code {
+  border: none!important;
+  min-width: 50%!important;
+  width: 50%!important;
+  max-width: 50%!important;
+}
 /*========= ADD ASSIGNMENT =========*/
 
 .assignment-title {
