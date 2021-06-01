@@ -21372,6 +21372,12 @@ var routes = [{
         name: "Assignment"
       }]
     }]
+  }, {
+    path: ':course_id/edit',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_Pages_EditCourse_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../Pages/EditCourse.vue */ "./resources/js/Pages/EditCourse.vue"));
+    },
+    name: "EditCourse"
   }] // Reference for syntax
   // beforeEnter: (to, from, next) => {
   //     if (store.getters["auth/isAdmin"]) next();
@@ -50674,6 +50680,13 @@ var index = {
 /******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/amd define */
+/******/ 	(() => {
+/******/ 		__webpack_require__.amdD = function () {
+/******/ 			throw new Error('define cannot be used indirect');
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
 /******/ 		var deferred = [];
@@ -50747,7 +50760,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_Pages_Home_vue":1,"resources_js_Pages_Courses_vue":1,"resources_js_Pages_Labs_vue":1,"resources_js_Pages_Problems_vue":1,"resources_js_Pages_Workspace_vue":1,"resources_js_Pages_About_vue":1,"resources_js_Pages_Login_vue":1,"resources_js_Pages_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_Pages_Home_vue":1,"resources_js_Pages_Courses_vue":1,"resources_js_Pages_Labs_vue":1,"resources_js_Pages_Problems_vue":1,"resources_js_Pages_Workspace_vue":1,"resources_js_Pages_EditCourse_vue":1,"resources_js_Pages_About_vue":1,"resources_js_Pages_Login_vue":1,"resources_js_Pages_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

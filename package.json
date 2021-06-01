@@ -13,7 +13,7 @@
         "@vue/compiler-sfc": "^3.0.11",
         "axios": "^0.21.1",
         "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "postcss": "^8.1.14",
         "vue-loader": "^16.2.0"
     },
@@ -23,8 +23,10 @@
         "@vuelidate/validators": "^2.0.0-alpha.14",
         "bootstrap": "^5.0.0-beta3",
         "vue": "^3.0.11",
+        "vue-date-fns": "^2.0.1",
         "vue-router": "^4.0.8",
         "vue-template-compiler": "^2.6.12",
+        "vue3-ace-editor": "^2.0.2",
         "vuex": "^4.0.0"
     }
 }
