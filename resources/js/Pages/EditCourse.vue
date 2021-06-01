@@ -159,7 +159,7 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       this.isSubmitted = true;
       var payload = {
         "name": this.courseForm.name,
