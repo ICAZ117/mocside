@@ -30,13 +30,13 @@
           :theme="theme"
         />
         <div class="row px-1">
-          <button type="run" name="run" class="run-code col-2 btn btn-success">
+          <button type="run" name="run" class="run-code col-1 btn btn-success">
             Run
           </button>
-          <button type="submit" name="submit" class="submit-code col-2 btn btn-success">
+          <button type="submit" name="submit" class="submit-code col-1 btn btn-success">
             Submit
           </button>
-          <div class="col-8">
+          <div class="col-10">
             <label for="theme" class="workspace-label">Theme: </label>
             <select v-model="theme" id="theme" class="console-select form-select">
               <optgroup label="Dark">
