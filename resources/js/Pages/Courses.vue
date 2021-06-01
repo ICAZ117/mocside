@@ -127,7 +127,7 @@ export default {
       this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
     },
     async getCourses() {
-      this.courses = null;
+      this.courses = [];
       var i;
       for (i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
