@@ -565,6 +565,7 @@ thead.labtable, thead.problemtable {
 .row>* {
   margin: 0!important;
   padding: 0!important;
+  width: auto!important;
 }
 
 .console {
