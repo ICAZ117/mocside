@@ -177,9 +177,9 @@ export default {
     this.courseForm.name = course.data.name;
     this.courseForm.description = course.data.description;
     this.courseForm.img = "";
-    this.courseForm.dateStart = "";
-    this.courseForm.dateEnd = "";
-    this.courseForm.roster = "";
+    this.courseForm.dateStart = course.data.start_date;
+    this.courseForm.dateEnd = course.data.end_date;
+    this.courseForm.roster = course.data.roster.roster;
   },
   beforeUnmount() {
     this.$emit("edit-unmounting");
