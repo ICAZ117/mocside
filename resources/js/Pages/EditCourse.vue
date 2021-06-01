@@ -162,11 +162,11 @@ export default {
     handleSubmit() {
       this.isSubmitted = true;
       var payload = {
-        name = this.courseForm.name,
-        description = this.courseForm.description,
-        img = "",
-        date_start = this.courseForm.dateStart,
-        date_end = this.courseForm.dateEnd,
+        "name": this.courseForm.name,
+        "description": this.courseForm.description,
+        "img": "",
+        "date_start": this.courseForm.dateStart,
+        "date_end": this.courseForm.dateEnd,
       }
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
       console.log(res);
