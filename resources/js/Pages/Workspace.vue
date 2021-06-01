@@ -49,7 +49,7 @@
           <!-- style="height: 300px" -->
           <!-- <div style="margin-left: 21vw; display: flex"> -->
           <div class="row">
-            <div class="col-6">
+            <div class="col-5">
               <label for="theme">Theme: </label>
               <select v-model="theme" id="theme">
                 <optgroup label="Dark">
@@ -96,7 +96,7 @@
                 </optgroup>
               </select>
             </div>
-            <div class="col-6">
+            <div class="col-5">
               <label for="lang">Language: </label>
               <select v-model="lang" id="lang">
                 <option value="java" selected>Java</option>
