@@ -405,7 +405,7 @@ hr.courses {
   flex: content;
 }
 
-fixed-course-width {
+.fixed-course-width {
   width: auto!important;
   margin-bottom: 3rem!important;
 }
