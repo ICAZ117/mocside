@@ -49,9 +49,10 @@
           <!-- style="height: 300px" -->
           <!-- <div style="margin-left: 21vw; display: flex"> -->
           <div class="row">
+            <input type="submit" name="submit" class="col-2 btn btn-success" />
             <div class="col-5">
-              <label for="theme">Theme: </label>
-              <select v-model="theme" id="theme">
+              <label for="theme" class="workspace-label">Theme:@nbsp@nbsp</label>
+              <select v-model="theme" id="theme" class="form-select">
                 <optgroup label="Dark">
                   <option value="ambiance">Ambiance</option>
                   <option value="chaos">Chaos</option>
@@ -97,13 +98,12 @@
               </select>
             </div>
             <div class="col-5">
-              <label for="lang">Language: </label>
-              <select v-model="lang" id="lang">
+              <label for="lang" class="workspace-label">Language:@nbsp@nbsp</label>
+              <select v-model="lang" id="lang" class="form-select">
                 <option value="java" selected>Java</option>
                 <option value="python">Python</option>
               </select>
             </div>
-            <input type="submit" name="submit" class="col-2 btn btn-success" />
           </div>
         </form>
       </div>

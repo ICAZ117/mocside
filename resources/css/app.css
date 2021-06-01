@@ -576,6 +576,10 @@ thead.labtable, thead.problemtable {
   padding: 2rem;
 }
 
+.workspace-label {
+  color: lightgray;
+}
+
 /*========= ADD ASSIGNMENT =========*/
 
 .assignment-title {
