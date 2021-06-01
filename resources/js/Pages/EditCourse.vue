@@ -179,7 +179,7 @@ export default {
     this.courseForm.img = "";
     this.courseForm.dateStart = course.data.start_date;
     this.courseForm.dateEnd = course.data.end_date;
-    this.courseForm.roster = course.data.roster.roster;
+    this.courseForm.roster = JSON.parse(course.data.roster).roster;
   },
   beforeUnmount() {
     this.$emit("edit-unmounting");
