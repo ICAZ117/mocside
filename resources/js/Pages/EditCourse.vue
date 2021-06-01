@@ -67,7 +67,7 @@
             Please enter the Course Name
           </div> -->
 
-          <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/api/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow"/>
+          <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow"/>
         </div>
         <br />
 
