@@ -29,53 +29,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       authUser: null,
       enrolledCourses: [],
       courses: [],
-      labIsOpen: false,
+      childIsOpen: false,
       courseID: null
     };
   },
   methods: {
-    goToLabs: function goToLabs(id) {
-      this.labIsOpen = true;
-      this.courseID = id;
-      this.$router.push({
-        name: 'Labs',
-        params: {
-          course_id: id
-        }
-      });
-    },
-    getCourses: function getCourses() {
+    addCourse: function addCourse() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var i, cur, course;
+        var payload, course;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                i = 0;
+                payload = {
+                  name: "New Course",
+                  description: "New Course"
+                };
+                _context.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.post("/courses", payload);
 
-              case 1:
-                if (!(i < _this.enrolledCourses.length)) {
-                  _context.next = 10;
-                  break;
-                }
-
-                cur = _this.enrolledCourses[i];
-                _context.next = 5;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/courses/".concat(cur));
-
-              case 5:
+              case 3:
                 course = _context.sent;
+                _this.courseID = course.data.id;
 
-                _this.courses.push(course.data);
+                _this.enrolledCourses.push(_this.courseID);
 
-              case 7:
-                i++;
-                _context.next = 1;
-                break;
+                _this.addProfessor();
 
-              case 10:
+                _this.childIsOpen = true;
+
+                _this.$router.push({
+                  name: "EditCourse",
+                  params: {
+                    course_id: _this.courseID
+                  }
+                });
+
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -83,17 +75,162 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    labUnmounting: function labUnmounting() {
-      this.labIsOpen = false;
+    addProfessor: function addProfessor() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var payload, prof;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                payload = {
+                  "courses": JSON.stringify({
+                    "courses": _this2.enrolledCourses
+                  })
+                };
+                _context2.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/professors/".concat(_this2.authUser.fsc_user.fsc_id), payload);
+
+              case 3:
+                prof = _context2.sent;
+                return _context2.abrupt("return", prof);
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    editCourse: function editCourse(id) {
+      this.childIsOpen = true;
+      this.courseID = id;
+      this.$router.push({
+        name: "EditCourse",
+        params: {
+          course_id: this.courseID
+        }
+      });
+    },
+    deleteCourse: function deleteCourse(id, course) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var flag, res, i, ind;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                flag = confirm("Are you Sure you want to delete " + course.name);
+
+                if (!flag) {
+                  _context3.next = 17;
+                  break;
+                }
+
+                _this3.childIsOpen = false; //delete the course
+
+                _context3.next = 5;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.delete("/courses/".concat(id));
+
+              case 5:
+                res = _context3.sent;
+                console.log(res);
+                console.log("delete Course: " + id);
+                ind = null;
+
+                for (i = 0; i <= _this3.enrolledCourses.length; i++) {
+                  if (_this3.enrolledCourses[i] == id) {
+                    ind = i;
+                  }
+                }
+
+                _this3.enrolledCourses.splice(ind, 1);
+
+                _this3.addProfessor();
+
+                delete _this3.courses.course;
+                _this3.courseID = null;
+
+                _this3.getCourses();
+
+                _context3.next = 18;
+                break;
+
+              case 17:
+                console.log("Delete avoided");
+
+              case 18:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    goToLabs: function goToLabs(id) {
+      this.childIsOpen = true;
+      this.courseID = id;
+      this.$router.push({
+        name: "Labs",
+        params: {
+          course_id: this.courseID
+        }
+      });
+    },
+    getCourses: function getCourses() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var i, cur, course;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.courses = [];
+                i = 0;
+
+              case 2:
+                if (!(i < _this4.enrolledCourses.length)) {
+                  _context4.next = 11;
+                  break;
+                }
+
+                cur = _this4.enrolledCourses[i];
+                _context4.next = 6;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/courses/".concat(cur));
+
+              case 6:
+                course = _context4.sent;
+
+                _this4.courses.push(course.data);
+
+              case 8:
+                i++;
+                _context4.next = 2;
+                break;
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    childUnmounting: function childUnmounting() {
+      this.childIsOpen = false;
       this.courseID = null;
     }
   },
   mounted: function mounted() {
-    this.labIsOpen = false;
+    this.childIsOpen = false;
     this.authUser = _Store_index__WEBPACK_IMPORTED_MODULE_1__.default.getters["auth/authUser"];
 
-    if (this.authUser.courses) {
-      this.enrolledCourses = JSON.parse(this.authUser.courses).courses;
+    if (this.authUser.fsc_user.courses) {
+      this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
 
     this.getCourses();
@@ -150,26 +287,34 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-  href: "Labs.vue",
-  "class": "courselaunch text-danger mx-2 my-1 no-decor"
-}, "Get Started", -1
+var _hoisted_10 = {
+  "class": "add-course fixed-course-width"
+};
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "card coursecard w-100"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "courses card-img-add"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"courses card-content\">\n                    <h6 class=\"card-title my-3 mx-2 mb-0\">Add Course</h6>\n                    <hr class=\"courses my-0\" />\n\n                    <a class=\"courselaunch text-danger mx-2 my-1 no-decor\"></a\n                    >\n                  </div> ")])], -1
 /* HOISTED */
 );
 
-var _hoisted_11 = {
+var _hoisted_12 = {
   key: 0
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "No Registered Courses", -1
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "No Registered Courses", -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Main Page"), !$data.labIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.courses, function (course) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Main Page"), !$data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.courses, function (course) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      "class": "fixed-course-width",
       key: course.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
       onClick: function onClick($event) {
@@ -185,15 +330,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STYLE */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h6", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(course.name), 1
     /* TEXT */
-    ), _hoisted_9, _hoisted_10])])])], 8
+    ), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a href=\"Labs.vue\" class=\"courselaunch text-danger mx-2 my-1 no-decor\"\n                      >Get Started</a\n                    > ")])])])], 8
+    /* PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      onClick: function onClick($event) {
+        return $options.editCourse(course.id);
+      },
+      "class": "courselaunch text-danger mx-2 my-1 no-decor"
+    }, "•••", 8
+    /* PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      onClick: function onClick($event) {
+        return $options.deleteCourse(course.id, course);
+      },
+      "class": "courselaunch text-danger mx-2 my-1 no-decor"
+    }, "X", 8
     /* PROPS */
     , ["onClick"])]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), $data.courses.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_11, [_hoisted_12])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.labIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.addCourse();
+    }),
+    "class": "no-decor"
+  }, [_hoisted_11])]), $data.courses.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_12, [_hoisted_13])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, {
     key: 1,
-    onLabUnmounting: _cache[1] || (_cache[1] = function ($event) {
-      return $options.labUnmounting();
+    onLabUnmounting: _cache[2] || (_cache[2] = function ($event) {
+      return $options.childUnmounting();
+    }),
+    onEditUnmounting: _cache[3] || (_cache[3] = function ($event) {
+      return $options.childUnmounting();
     }),
     courseID: $data.courseID
   }, null, 8

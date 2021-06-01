@@ -36,7 +36,7 @@ class ProfessorController extends Controller
         {
             $prof = Professor::where('fsc_id', $id);
             $prof->update($request->all());
-            return response()->json([$prof]);
+            return response()->json(['message' => 'Updated sucessfully.'], 200);
         }
         return response()->json(['message' => 'Forbidden'], 403);
     }

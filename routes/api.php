@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
@@ -62,6 +63,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/students/{id}', [StudentController::class, 'update']);
     Route::get('/students/{id}', [StudentController::class, 'show']);
     Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+
+    Route::post('/images/store', [AvatarController::class, 'store']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
