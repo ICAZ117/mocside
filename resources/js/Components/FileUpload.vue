@@ -52,16 +52,20 @@ export default {
       this.clearMessage();
       this.file = event.target.files[0];
     },
-    uploadFile() {
+    async uploadFile() {
       const payload = {};
       const formData = new FormData();
       formData.append("file", this.file);
       payload.file = formData;
       payload.endpoint = this.endpoint;
       this.clearMessage();
-      FileService.uploadFile(payload)
-        .then(() => (this.message = "File uploaded."))
-        .catch((error) => (this.error = getError(error)));
+	  try {
+		  const response = await FileService.uploadFile(payload);
+		  this.message = "File uploaded.";
+	  }
+	  catch(error) {
+		this.error = getError(error);
+	  }
     },
   },
 };

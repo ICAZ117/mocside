@@ -2,6 +2,7 @@ import * as API from "./API";
 
 export default {
   async uploadFile(payload) {
-    await API.apiClient.post(payload.endpoint, payload.file);
+    const res = await API.apiClient.post(payload.endpoint, payload.file);
+    return res;
   },
 };
