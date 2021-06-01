@@ -406,6 +406,9 @@ hr.courses {
   flex: content;
 }
 
+fixed-course-width {
+  width: auto!important;
+}
 /*============= EDIT COURSES =============*/
 
 .edit-course {
