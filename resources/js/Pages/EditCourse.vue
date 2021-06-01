@@ -174,6 +174,12 @@ export default {
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
+    this.courseForm.name = course.data.name;
+    this.courseForm.description = course.data.description;
+    this.courseForm.img = "";
+    this.courseForm.dateStart = "";
+    this.courseForm.dateEnd = "";
+    this.courseForm.roster = "";
   },
   beforeUnmount() {
     this.$emit("edit-unmounting");
