@@ -29,7 +29,7 @@
           :lang="lang"
           :theme="theme"
         />
-        <div class="row px-1">
+        <div class="row px-1 mx-1">
           <button type="run" name="run" class="run-code col-1 btn btn-success">
             Run
           </button>
@@ -84,7 +84,7 @@
                     <option value="sqlserver">SQL Server</option>
                   </optgroup>
                 </select>
-                <label for="lang" class="workspace-label">Language: </label>
+                <label for="lang" class="workspace-label" style="margin-left: 40px;">Language: </label>
                 <select v-model="lang" id="lang" class="console-select form-select">
                   <option value="java" selected>Java</option>
                   <option value="python">Python</option>
