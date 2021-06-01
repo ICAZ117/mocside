@@ -352,11 +352,10 @@ hr.courses {
 
 .coursecard {
   border: 1px solid #a1a1a1;
-  margin-bottom: 3rem;
 }
 
 .width {
-  max-width: 277.5px!important;
+  width: 277.5px!important;
 }
 
 .coursecard:hover {
@@ -372,6 +371,13 @@ hr.courses {
   background-size: cover;
   background-repeat: no-repeat;
   vertical-align: bottom;
+}
+
+.courses.card-img-add {
+  height: 234px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(/images/addcourse.png?1ea9bd1796af3db07ae4ce6986189ab2);
 }
 
 .courses.card-content {
@@ -400,6 +406,31 @@ hr.courses {
   width: 100vw!important;
   display: flex;
   flex: content;
+}
+
+.fixed-course-width {
+  width: auto!important;
+  margin-bottom: 3rem!important;
+  margin-left: 1rem!important;
+  margin-right:1rem!important
+}
+/*============= EDIT COURSES =============*/
+
+.edit-course {
+  width: 400px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  margin: auto;
+  margin-top: 5rem;
+  padding: 20px;
+}
+
+.edit-course-title {
+  text-align: center;
+}
+
+.dates {
+  display: flex;
 }
 
 /*============== LABS and PROBLEMS ==============*/
@@ -522,7 +553,7 @@ thead.labtable, thead.problemtable {
 .instructions {
   background-color: rgb(42, 43, 51);
   color: lightgray;
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - var(--nav-height));
   margin: 0;
   padding: 1rem;
 }
@@ -532,28 +563,53 @@ thead.labtable, thead.problemtable {
 }
 
 .editor {
-  background-color: rgb(58, 58, 58);
   font-family: consolas;
   font-weight: lighter;
   font-size: 12pt;
-  min-height: calc((100vh - 60px) / 2);
+  min-height: calc((100vh - var(--nav-height)) / 2);
   margin: 0;
 }
 
-.row {
+.row>* {
   margin: 0;
-  padding: 0;
+  padding: 0!important;
 }
 
 .console {
   background-color: rgb(58, 58, 58);
   color: lightgray;
   font-family: consolas;
-  min-height: calc((100vh - 60px) / 2);
+  min-height: calc((100vh - var(--nav-height)) / 2);
   margin: 0;
   padding: 2rem;
 }
 
+.workspace-label {
+  color: lightgray;
+}
+
+.console-select.form-select {
+  border: 1px solid lightgray!important;
+  border-radius: 5px!important;
+  background-color: rgb(32, 32, 32)!important;
+  transition-timing-function: ease-in-out!important;
+  transition-duration: 1000ms!important;
+  max-height: 30px!important;
+  max-width: 250px!important;
+  display: inline-block!important;
+  padding: 0 0 0 5px!important;
+  margin: 5px 0 0 5px!important;
+  color: lightgray!important;
+}
+
+.run-code, .submit-code {
+  border: none!important;
+  min-width: 10%!important;
+  width: 10%!important;
+  max-width: 10%!important;
+  margin-right: 1%!important;
+  max-height: 31px!important;
+}
 /*========= ADD ASSIGNMENT =========*/
 
 .assignment-title {

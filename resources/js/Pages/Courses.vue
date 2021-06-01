@@ -9,7 +9,7 @@
 
       <div class="coursecontainer">
         <div class="courserow row my-5">
-          <div v-for="course in courses" :key="course.id">
+          <div class="fixed-course-width" v-for="course in courses" :key="course.id">
             <a @click="goToLabs(course.id)" class="no-decor">
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -31,17 +31,14 @@
               </div>
             </a>
             <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">•••</a>
-            <a @click="deleteCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
+            <a @click="deleteCourse(course.id, course)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
           </div>
-          <div class="add-course">
+          <div class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor">
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
                   <div
-                    class="courses card-img-top"
-                    :style="{
-                      backgroundImage: `url('../../img/courses/addcourse.png')`,
-                    }"
+                    class="courses card-img-add"
                   ></div>
                   <!-- <div class="courses card-content">
                     <h6 class="card-title my-3 mx-2 mb-0">Add Course</h6>
@@ -102,11 +99,30 @@ export default {
       this.courseID = id;
       this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
-    deleteCourse(id) {
-      this.childIsOpen = false;
-      //delete the course
-      console.log("delete Course: " + id);
-      this.courseID = null;
+    async deleteCourse(id, course) {
+      var flag = confirm("Are you Sure you want to delete " + course.name);
+      if(flag) {
+        this.childIsOpen = false;
+        //delete the course
+        const res = await API.apiClient.delete(`/courses/${id}`);
+        console.log(res);
+        console.log("delete Course: " + id);
+        var i;
+        var ind = null;
+        for(i = 0; i<=this.enrolledCourses.length; i++) {
+          if (this.enrolledCourses[i] == id) {
+            ind = i;
+          }
+        }
+        this.enrolledCourses.splice(ind, 1);
+        this.addProfessor();
+        delete this.courses.course;
+        this.courseID = null;
+        this.getCourses();
+      }
+      else {
+        console.log("Delete avoided");
+      }
     },
     goToLabs(id) {
       this.childIsOpen = true;
@@ -114,6 +130,7 @@ export default {
       this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
     },
     async getCourses() {
+      this.courses = [];
       var i;
       for (i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
