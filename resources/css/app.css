@@ -564,7 +564,9 @@ thead.labtable, thead.problemtable {
 }
 
 .instructions-hr {
-  border-top: 3px solid var(--FSCred);
+  border-top: 3px ridge var(--FSCred)!important;
+  background-color: var(--FSCred)!important;
+  opacity: 1!important;
 }
 
 .editor {
