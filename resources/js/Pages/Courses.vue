@@ -109,7 +109,7 @@ export default {
       console.log(res);
       console.log("delete Course: " + id);
       var i;
-      var ind = 0;
+      var ind = null;
       for(i = 0; i<=this.enrolledCourses.length; i++) {
         if (this.enrolledCourses[i] == id) {
           ind = i;
