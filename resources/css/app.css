@@ -580,6 +580,16 @@ thead.labtable, thead.problemtable {
   color: lightgray;
 }
 
+.console-select.form-select {
+  border: none!important;
+  background-color: rgb(58, 58, 58)!important;
+  transition-timing-function: linear!important;
+  transition-duration: 200ms!important;
+  max-height: 20px!important;
+  max-width: 250px!important;
+  display: inline-block!important;
+}
+
 /*========= ADD ASSIGNMENT =========*/
 
 .assignment-title {
