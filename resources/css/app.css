@@ -575,7 +575,7 @@ thead.labtable, thead.problemtable {
 }
 
 .row>* {
-  margin: 0!important;
+  margin: 0;
   padding: 0!important;
 }
 
@@ -606,6 +606,14 @@ thead.labtable, thead.problemtable {
   color: lightgray!important;
 }
 
+.run-code, .submit-code {
+  border: none!important;
+  min-width: 10%!important;
+  width: 10%!important;
+  max-width: 10%!important;
+  margin-right: 1%!important;
+  max-height: 31px!important;
+}
 /*========= ADD ASSIGNMENT =========*/
 
 .assignment-title {
