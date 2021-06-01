@@ -48,14 +48,14 @@
         <br />
 
         <div class="form-group">
-          <label for="Course Image">Course Image</label>
+          <!-- <label for="Course Image">Course Image</label>
           <input
             type="text"
             v-model="courseForm.img"
             id="courseImage"
             name="courseImage"
             class="form-control"
-          />
+          /> -->
           <!-- :class="{
               'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
             }" -->
@@ -66,6 +66,8 @@
           >
             Please enter the Course Name
           </div> -->
+
+          <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/api/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow"/>
         </div>
         <br />
 
@@ -132,9 +134,15 @@
 
 <script>
 import * as API from "../services/API";
+import FlashMessage from "../Components/FlashMessage";
+import FileUpload from "../Components/FileUpload";
 export default {
   props: ["courseID"],
   emits: ["edit-unmounting"],
+  components: {
+    FlashMessage,
+    FileUpload,
+  },
   data() {
     return {
       error: null,
@@ -160,6 +168,9 @@ export default {
       //   this.login();
       console.log("handles submit");
     },
+    updateImage() {
+      console.log("updated the image");
+    }
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
