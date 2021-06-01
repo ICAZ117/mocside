@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import { getError } from "@/utils/helpers";
-import BaseBtn from "@/components/BaseBtn";
-import FileService from "@/services/FileService";
-import FlashMessage from "@/components/FlashMessage";
+import { getError } from "../utils/helpers";
+import BaseBtn from "./BaseBtn";
+import FileService from "../services/FileService";
+import FlashMessage from "./FlashMessage";
 export default {
   name: "FileUpload",
   props: {
