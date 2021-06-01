@@ -29,7 +29,7 @@
           :lang="lang"
           :theme="theme"
         />
-        <div class="row">
+        <div class="row px-1">
           <button type="run" name="run" class="run-code col-2 btn btn-success">Run</button>
           <button type="submit" name="submit" class="submit-code col-2 btn btn-success">Submit</button>
           <div class="col-4">

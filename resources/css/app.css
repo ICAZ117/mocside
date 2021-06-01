@@ -608,9 +608,11 @@ thead.labtable, thead.problemtable {
 
 .run-code, .submit-code {
   border: none!important;
-  min-width: 50%!important;
-  width: 50%!important;
-  max-width: 50%!important;
+  min-width: 10%!important;
+  width: 10%!important;
+  max-width: 10%!important;
+  margin-right: 1%!important;
+  max-height: 31px!important;
 }
 /*========= ADD ASSIGNMENT =========*/
 
