@@ -30,10 +30,14 @@
           :theme="theme"
         />
         <div class="row px-1">
-          <button type="run" name="run" class="run-code col-2 btn btn-success">Run</button>
-          <button type="submit" name="submit" class="submit-code col-2 btn btn-success">Submit</button>
-          <div class="col-4">
-            <label for="theme" class="workspace-label">Theme:  </label>
+          <button type="run" name="run" class="run-code col-2 btn btn-success">
+            Run
+          </button>
+          <button type="submit" name="submit" class="submit-code col-2 btn btn-success">
+            Submit
+          </button>
+          <div class="col-8">
+            <label for="theme" class="workspace-label">Theme: </label>
             <select v-model="theme" id="theme" class="console-select form-select">
               <optgroup label="Dark">
                 <option value="ambiance">Ambiance</option>
@@ -78,9 +82,7 @@
                 <option value="sqlserver">SQL Server</option>
               </optgroup>
             </select>
-          </div>
-          <div class="col-4">
-            <label for="lang" class="workspace-label">Language:  </label>
+            <label for="lang" class="workspace-label">Language: </label>
             <select v-model="lang" id="lang" class="console-select form-select">
               <option value="java" selected>Java</option>
               <option value="python">Python</option>
