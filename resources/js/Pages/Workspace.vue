@@ -43,7 +43,7 @@
             class="editor"
             v-model:value="content"
             @init="editorInit"
-            lang="html"
+            :lang="lang"
             :theme="theme"
           />
           <!-- style="height: 300px" -->
