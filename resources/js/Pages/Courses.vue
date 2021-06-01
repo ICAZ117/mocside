@@ -115,12 +115,11 @@ export default {
           ind = i;
         }
       }
-      console.log(this.enrolledCourses);
       this.enrolledCourses.splice(ind, 1);
-      console.log(this.enrolledCourses);
       this.addProfessor();
       delete this.courses.course;
       this.courseID = null;
+      this.getCourses();
     },
     goToLabs(id) {
       this.childIsOpen = true;
@@ -128,6 +127,7 @@ export default {
       this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
     },
     async getCourses() {
+      this.courses = null;
       var i;
       for (i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
