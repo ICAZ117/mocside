@@ -590,6 +590,7 @@ thead.labtable, thead.problemtable {
 
 .workspace-label {
   color: lightgray;
+  margin-left: auto!important;
 }
 
 .console-select.form-select {
