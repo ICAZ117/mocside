@@ -360,7 +360,7 @@ hr.courses {
 }
 
 .width {
-  max-width: 277.5px!important;
+  width: 277.5px!important;
 }
 
 .coursecard:hover {
