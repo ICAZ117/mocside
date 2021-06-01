@@ -377,6 +377,13 @@ hr.courses {
   vertical-align: bottom;
 }
 
+.courses.card-img-add {
+  height: 238px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('../img/courses/addcourse.png');
+}
+
 .courses.card-content {
   height: 6.5rem;
 }
