@@ -356,7 +356,6 @@ hr.courses {
 
 .coursecard {
   border: 1px solid #a1a1a1;
-  margin-bottom: 3rem;
 }
 
 .width {
@@ -406,8 +405,9 @@ hr.courses {
   flex: content;
 }
 
-fixed-course-width {
+.fixed-course-width {
   width: auto!important;
+  margin-bottom: 3rem!important;
 }
 /*============= EDIT COURSES =============*/
 

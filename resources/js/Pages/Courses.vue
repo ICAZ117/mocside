@@ -33,12 +33,12 @@
             <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">•••</a>
             <a @click="deleteCourse(course.id, course)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
           </div>
-          <div class="add-course">
+          <div class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor">
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
                   <div
-                    class="courses card-img-top"
+                    class="courses"
                     :style="{
                       backgroundImage: `url('../../img/courses/addcourse.png')`,
                     }"
