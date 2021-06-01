@@ -584,8 +584,9 @@ thead.labtable, thead.problemtable {
 }
 
 .console-select.form-select {
-  border: none!important;
-  background-color: rgb(58, 58, 58)!important;
+  border: 1px solid lightgray!important;
+  border-radius: 50%;
+  background-color: rgb(32, 32, 32)!important;
   transition-timing-function: linear!important;
   transition-duration: 200ms!important;
   max-height: 30px!important;
