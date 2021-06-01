@@ -21,10 +21,6 @@ class Course extends Model
         'end_date',
     ];
 
-    protected $hidden = [
-        'roster',
-    ];
-
     // not sure if this will be helpful, leaving commented.
     // protected $casts = [
     //     'published' => 'boolean',
