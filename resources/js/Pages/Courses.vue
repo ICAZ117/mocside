@@ -115,7 +115,9 @@ export default {
           ind = i;
         }
       }
+      console.log(this.enrolledCourses);
       this.enrolledCourses.splice(ind, 1);
+      console.log(this.enrolledCourses);
       this.addProfessor();
       delete this.courses.course;
       this.courseID = null;
