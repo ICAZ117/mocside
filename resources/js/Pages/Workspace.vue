@@ -43,15 +43,16 @@
             class="editor"
             v-model:value="content"
             @init="editorInit"
-            lang="html"
+            :lang="lang"
             :theme="theme"
           />
           <!-- style="height: 300px" -->
           <!-- <div style="margin-left: 21vw; display: flex"> -->
           <div class="row">
-            <div class="col-6">
-              <label for="theme">Theme: </label>
-              <select v-model="theme" id="theme">
+            <input type="submit" name="submit" class="col-2 btn btn-success" />
+            <div class="col-5">
+              <label for="theme" class="workspace-label">Theme:</label>
+              <select v-model="theme" id="theme" class="console-select form-select">
                 <optgroup label="Dark">
                   <option value="ambiance">Ambiance</option>
                   <option value="chaos">Chaos</option>
@@ -96,14 +97,13 @@
                 </optgroup>
               </select>
             </div>
-            <div class="col-6">
-              <label for="lang">Language: </label>
-              <select v-model="lang" id="lang">
+            <div class="col-5">
+              <label for="lang" class="workspace-label">Language:@nbsp;@nbsp;</label>
+              <select v-model="lang" id="lang" class="console-select form-select">
                 <option value="java" selected>Java</option>
                 <option value="python">Python</option>
               </select>
             </div>
-            <input type="submit" name="submit" class="col-2 btn btn-success" />
           </div>
         </form>
       </div>
