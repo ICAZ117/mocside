@@ -119,81 +119,81 @@ import { VAceEditor } from "vue3-ace-editor";
 //////////////////////////////////////////////////////////////////////
 import "ace-builds/src-noconflict/theme-gob";
 
-if (this.importTheme == "ambiance") {
+if (window.theme == "ambiance") {
   import("ace-builds/src-noconflict/theme-ambiance");
-} else if (this.importTheme == "chaos") {
+} else if (window.theme == "chaos") {
   import("ace-builds/src-noconflict/theme-chaos");
-} else if (this.importTheme == "chrome") {
+} else if (window.theme == "chrome") {
   import("ace-builds/src-noconflict/theme-chrome");
-} else if (this.importTheme == "clouds") {
+} else if (window.theme == "clouds") {
   import("ace-builds/src-noconflict/theme-clouds");
-} else if (this.importTheme == "clouds_midnight") {
+} else if (window.theme == "clouds_midnight") {
   import("ace-builds/src-noconflict/theme-clouds_midnight");
-} else if (this.importTheme == "cobalt") {
+} else if (window.theme == "cobalt") {
   import("ace-builds/src-noconflict/theme-cobalt");
-} else if (this.importTheme == "crimson_editor") {
+} else if (window.theme == "crimson_editor") {
   import("ace-builds/src-noconflict/theme-crimson_editor");
-} else if (this.importTheme == "dawn") {
+} else if (window.theme == "dawn") {
   import("ace-builds/src-noconflict/theme-dawn");
-} else if (this.importTheme == "dracula") {
+} else if (window.theme == "dracula") {
   import("ace-builds/src-noconflict/theme-dracula");
-} else if (this.importTheme == "dreamweaver") {
+} else if (window.theme == "dreamweaver") {
   import("ace-builds/src-noconflict/theme-dreamweaver");
-} else if (this.importTheme == "eclipse") {
+} else if (window.theme == "eclipse") {
   import("ace-builds/src-noconflict/theme-eclipse");
-} else if (this.importTheme == "github") {
+} else if (window.theme == "github") {
   import("ace-builds/src-noconflict/theme-github");
-} else if (this.importTheme == "gob") {
+} else if (window.theme == "gob") {
   import("ace-builds/src-noconflict/theme-gob");
-} else if (this.importTheme == "gruvbox") {
+} else if (window.theme == "gruvbox") {
   import("ace-builds/src-noconflict/theme-gruvbox");
-} else if (this.importTheme == "idle_fingers") {
+} else if (window.theme == "idle_fingers") {
   import("ace-builds/src-noconflict/theme-idle_fingers");
-} else if (this.importTheme == "iplastic") {
+} else if (window.theme == "iplastic") {
   import("ace-builds/src-noconflict/theme-iplastic");
-} else if (this.importTheme == "katzenmilch") {
+} else if (window.theme == "katzenmilch") {
   import("ace-builds/src-noconflict/theme-katzenmilch");
-} else if (this.importTheme == "kr_theme") {
+} else if (window.theme == "kr_theme") {
   import("ace-builds/src-noconflict/theme-kr_theme");
-} else if (this.importTheme == "kuroir") {
+} else if (window.theme == "kuroir") {
   import("ace-builds/src-noconflict/theme-kuroir");
-} else if (this.importTheme == "merbivore") {
+} else if (window.theme == "merbivore") {
   import("ace-builds/src-noconflict/theme-merbivore");
-} else if (this.importTheme == "merbivore_soft") {
+} else if (window.theme == "merbivore_soft") {
   import("ace-builds/src-noconflict/theme-merbivore_soft");
-} else if (this.importTheme == "mono_industrial") {
+} else if (window.theme == "mono_industrial") {
   import("ace-builds/src-noconflict/theme-mono_industrial");
-} else if (this.importTheme == "monokai") {
+} else if (window.theme == "monokai") {
   import("ace-builds/src-noconflict/theme-monokai");
-} else if (this.importTheme == "nord_dark") {
+} else if (window.theme == "nord_dark") {
   import("ace-builds/src-noconflict/theme-nord_dark");
-} else if (this.importTheme == "pastel_on_dark") {
+} else if (window.theme == "pastel_on_dark") {
   import("ace-builds/src-noconflict/theme-pastel_on_dark");
-} else if (this.importTheme == "solarized_dark") {
+} else if (window.theme == "solarized_dark") {
   import("ace-builds/src-noconflict/theme-solarized_dark");
-} else if (this.importTheme == "solarized_light") {
+} else if (window.theme == "solarized_light") {
   import("ace-builds/src-noconflict/theme-solarized_light");
-} else if (this.importTheme == "sqlserver") {
+} else if (window.theme == "sqlserver") {
   import("ace-builds/src-noconflict/theme-sqlserver");
-} else if (this.importTheme == "terminal") {
+} else if (window.theme == "terminal") {
   import("ace-builds/src-noconflict/theme-terminal");
-} else if (this.importTheme == "textmate") {
+} else if (window.theme == "textmate") {
   import("ace-builds/src-noconflict/theme-textmate");
-} else if (this.importTheme == "tomorrow") {
+} else if (window.theme == "tomorrow") {
   import("ace-builds/src-noconflict/theme-tomorrow");
-} else if (this.importTheme == "tomorrow_night") {
+} else if (window.theme == "tomorrow_night") {
   import("ace-builds/src-noconflict/theme-tomorrow_night");
-} else if (this.importTheme == "tomorrow_night_blue") {
+} else if (window.theme == "tomorrow_night_blue") {
   import("ace-builds/src-noconflict/theme-tomorrow_night_blue");
-} else if (this.importTheme == "tomorrow_night_bright") {
+} else if (window.theme == "tomorrow_night_bright") {
   import("ace-builds/src-noconflict/theme-tomorrow_night_bright");
-} else if (this.importTheme == "tomorrow_night_eighties") {
+} else if (window.theme == "tomorrow_night_eighties") {
   import("ace-builds/src-noconflict/theme-tomorrow_night_eighties");
-} else if (this.importTheme == "twilight") {
+} else if (window.theme == "twilight") {
   import("ace-builds/src-noconflict/theme-twilight");
-} else if (this.importTheme == "vibrant_ink") {
+} else if (window.theme == "vibrant_ink") {
   import("ace-builds/src-noconflict/theme-vibrant_ink");
-} else if (this.importTheme == "xcode") {
+} else if (window.theme == "xcode") {
   import("ace-builds/src-noconflict/theme-xcode");
 }
 //////////////////////////////////////////////////////////////////////
@@ -417,7 +417,7 @@ import "ace-builds/src-noconflict/mode-python";
 // import "ace-builds/src-noconflict/worker-php";
 // import "ace-builds/src-noconflict/worker-xml";
 // import "ace-builds/src-noconflict/worker-xquery";
-var importTheme = "gob";
+var theme = "gob";
 
 export default {
   props: ["problemID"],
@@ -445,7 +445,7 @@ export default {
       console.log("themeInput:");
       console.log(this.theme);
 
-      importTheme = this.theme;
+      window.theme = this.theme;
       // var selection = "ace-builds/src-noconflict/theme-" + this.theme;
       // import(selection);
     },
