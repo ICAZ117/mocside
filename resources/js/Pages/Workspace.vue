@@ -38,7 +38,7 @@
           </button>
           <div style="width: 78% !important">
             <div style="float: right !important">
-              <div style="display: block !important">
+              <div class="configure-editor">
                 <label for="theme" class="workspace-label">Theme: </label>
                 <select v-model="theme" id="theme" class="console-select form-select">
                   <optgroup label="Dark">
