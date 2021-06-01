@@ -17,6 +17,8 @@ class Course extends Model
         'name',
         'description',
         'img_loc',
+        'start_date',
+        'end_date',
     ];
 
     protected $hidden = [
