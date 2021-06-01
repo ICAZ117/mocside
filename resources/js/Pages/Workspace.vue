@@ -1,7 +1,7 @@
 <template>
   <!-- Main Page-->
   <div class="row">
-    <div class="instructions col-4">
+    <div class="instructions col-4 p-4">
       <h4>Problem X: Title</h4>
       <hr class="instructions-hr" />
       <p>
