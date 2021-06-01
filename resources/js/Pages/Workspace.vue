@@ -1,7 +1,7 @@
 <template>
   <!-- Main Page-->
   <div class="row">
-    <div class="instructions col-4">
+    <div class="instructions col-4 p-4">
       <h4>Problem X: Title</h4>
       <hr class="instructions-hr" />
       <p>
@@ -29,7 +29,7 @@
           :lang="lang"
           :theme="theme"
         />
-        <div class="row px-1">
+        <div class="row px-1 my-1">
           <button type="run" name="run" class="run-code col-1 btn btn-success">
             Run
           </button>
@@ -38,7 +38,7 @@
           </button>
           <div style="width: 78% !important">
             <div style="float: right !important">
-              <div style="display: block !important">
+              <div class="configure-editor">
                 <label for="theme" class="workspace-label">Theme: </label>
                 <select v-model="theme" id="theme" class="console-select form-select">
                   <optgroup label="Dark">
@@ -84,7 +84,7 @@
                     <option value="sqlserver">SQL Server</option>
                   </optgroup>
                 </select>
-                <label for="lang" class="workspace-label">Language: </label>
+                <label for="lang" class="workspace-label" style="margin-left: 40px;">Language: </label>
                 <select v-model="lang" id="lang" class="console-select form-select">
                   <option value="java" selected>Java</option>
                   <option value="python">Python</option>

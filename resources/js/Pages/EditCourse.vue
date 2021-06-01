@@ -67,7 +67,7 @@
             Please enter the Course Name
           </div> -->
 
-          <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/api/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow"/>
+          <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow"/>
         </div>
         <br />
 
@@ -179,7 +179,7 @@ export default {
     this.courseForm.img = "";
     this.courseForm.dateStart = course.data.start_date;
     this.courseForm.dateEnd = course.data.end_date;
-    this.courseForm.roster = course.data.roster.roster;
+    this.courseForm.roster = JSON.parse(course.data.roster).roster;
   },
   beforeUnmount() {
     this.$emit("edit-unmounting");

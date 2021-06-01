@@ -416,8 +416,9 @@ hr.courses {
   width: auto!important;
   margin-bottom: 3rem!important;
   margin-left: 1rem!important;
-  margin-right:1rem!important
+  margin-right: 1rem!important
 }
+
 /*============= EDIT COURSES =============*/
 
 .edit-course {
@@ -563,7 +564,7 @@ thead.labtable, thead.problemtable {
 }
 
 .instructions-hr {
-  border-top: 3px ridge var(--FSCred);
+  border-top: 3px solid var(--FSCred);
 }
 
 .editor {
@@ -614,6 +615,13 @@ thead.labtable, thead.problemtable {
   margin-right: 1%!important;
   max-height: 31px!important;
 }
+
+.configure-editor {
+  min-width: 690px;
+  width: auto !important;
+  width: 690px;
+}
+
 /*========= ADD ASSIGNMENT =========*/
 
 .assignment-title {
