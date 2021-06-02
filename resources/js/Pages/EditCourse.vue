@@ -90,23 +90,18 @@
 
         <div class="form-group">
           <label for="Course Roster">Course Roster</label>
-          <input
+          <!-- <input
             type="text"
             v-model="courseForm.roster"
             id="courseRoster"
             name="courseRoster"
             class="form-control"
-          />
-          <!-- :class="{
-              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
-            }" -->
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <!-- <div
-            v-if="isSubmitted && v$.userForm.userEmail.$error"
-            class="invalid-feedback"
-          >
-            Please enter the Course Name
-          </div> -->
+          /> -->
+          <ul>
+            <li v-for="student in students" :key="student.id">{{ student.name }}
+              <a @click="removeStudent(student.id)">X</a>
+            </li>
+          </ul>
         </div>
         <br />
 
@@ -141,11 +136,12 @@ export default {
         img: "",
         dateStart: "",
         dateEnd: "",
-        roster: "",
+        roster: [],
       },
       isSubmitted: false,
       file: null,
       endpoint: "/images/store",
+      students: [],
     };
   },
   methods: {
@@ -192,6 +188,18 @@ export default {
         }
       }
     },
+    async removeStudent(id) {
+      //remove student ID from course's roster list
+      console.log("remove student: "+ id);
+
+      //remove course ID from student's courses list
+    },
+    async getStudents() {
+      for (let i = 0; i < this.courseForm.roster.length; i++) {
+        const res = await API.apiClient.get(`/students/${this.courseForm.roster[i]}`);
+        this.students.push(res.data.data);
+      }
+    },
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
@@ -201,6 +209,7 @@ export default {
     this.courseForm.dateStart = course.data.start_date;
     this.courseForm.dateEnd = course.data.end_date;
     this.courseForm.roster = JSON.parse(course.data.roster).roster;
+    this.getStudents();
   },
   beforeUnmount() {
     this.$emit("edit-unmounting");

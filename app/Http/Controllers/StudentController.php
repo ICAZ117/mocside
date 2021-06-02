@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
@@ -30,7 +31,9 @@ class StudentController extends Controller
     {
         if (Auth::user()->isAdmin())
         {
-            return Student::where('fsc_id', $id)->first();
+            $user = Student::where('fsc_id', $id)->first()->user;
+            return new UserResource($user);
+            // return response()->json(['message' => $user]);
         }
 
         $request_id = Auth::user()->fsc_id;
