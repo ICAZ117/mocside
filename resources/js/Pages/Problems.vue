@@ -82,6 +82,7 @@
     @assignment-unmounting="assignmentUnmounting()"
     v-if="assignmentisOpen"
     :problemID="problemID"
+    :lang="lang"
   ></router-view>
 </template>
 

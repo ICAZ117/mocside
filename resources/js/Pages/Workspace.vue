@@ -83,11 +83,6 @@
                     <option value="sqlserver">SQL Server</option>
                   </optgroup>
                 </select>
-                <label for="lang" class="workspace-label" style="margin-left: 40px;">Language: </label>
-                <select v-model="lang" id="lang" class="console-select form-select">
-                  <option value="java">Java</option>
-                  <option value="python" selected>Python</option>
-                </select>
               </div>
             </div>
           </div>
@@ -368,13 +363,12 @@ import "ace-builds/src-noconflict/mode-python";
 // import "ace-builds/src-noconflict/worker-xquery";
 
 export default {
-  props: ["problemID"],
+  props: ["problemID", "lang"],
   emits: ["assignment-unmounting"],
   data() {
     return {
       assignment: {},
       theme: "gob",
-      lang: "python",
       content: "",
     };
   },
