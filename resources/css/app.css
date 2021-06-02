@@ -458,7 +458,7 @@ table.labtable, table.problemtable {
 thead.labtable, thead.problemtable {
   background-color: rgba(0, 96, 169, 0.75);
   color: white;
-  border: 1px solid rgba(0, 96, 169);
+  border: 1px solid rgba(0, 96, 169, 0.75);
 }
 
 .complete {
