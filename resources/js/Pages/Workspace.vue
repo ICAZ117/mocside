@@ -370,7 +370,7 @@ export default {
       assignment: {},
       theme: "gob",
       content: "",
-      editorLangauge: "";
+      editorLangauge: "",
     };
   },
   methods: {
