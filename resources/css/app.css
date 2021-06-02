@@ -504,9 +504,9 @@ thead.labtable, thead.problemtable {
   border: 1px solid #9e9e9e;
 }
 
-.description-row {
-  background-color: transparent;
-  border: none;
+.description-data {
+  background-color: transparent!important;
+  border: none!important;
 }
 
 /*============= LOGIN PAGE =============*/
