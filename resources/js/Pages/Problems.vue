@@ -32,7 +32,8 @@
               <td>1/24/2021</td>
             </tr>
             <tr v-show="isExpanded(problem.id)" class="problem-description">
-              <td colspan="5">
+              <td></td>
+              <td colspan="4">
                 <div>
                   <h4>
                     <b>{{ problem.name }}</b>
