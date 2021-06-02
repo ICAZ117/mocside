@@ -498,12 +498,11 @@ thead.labtable, thead.problemtable {
 
 .problem-description {
   background-color: white;
-  margin-left: 20px!important;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.5s;
+  margin-left: 50px!important;
   border: 1px solid #9e9e9e;
   border-top: none!important;
   border-bottom: none!important;
+  padding: 1rem;
 }
 
 .description-data {
@@ -512,6 +511,15 @@ thead.labtable, thead.problemtable {
   padding: 0!important;
 }
 
+.v-enter-active {
+  transition-timing-function: ease-out;
+  transition-duration: 500ms;
+}
+
+.v-leave-active {
+  transition-timing-function: ease-out;
+  transition-duration: 500ms;
+}
 /*============= LOGIN PAGE =============*/
 
 .login {

@@ -30,7 +30,7 @@
             <td>{{ problem.due_date.split(" ")[0] }}</td>
             <td>1/24/2021</td>
           </tr>
-          <transition type="ease-out">
+          <transition name="v-enter-active">
             <tr v-show="isExpanded(problem.id)" class="description-data">
               <td colspan="5" class="description-data">
                 <div class="problem-description">
@@ -94,7 +94,7 @@ export default {
       problems: [],
       assignmentisOpen: false,
       problemID: null,
-      expandedProblem: [],
+      expandedProblem: null,
       lang: "",
     };
   },
@@ -113,17 +113,20 @@ export default {
       this.problemID = null;
     },
     isExpanded(key) {
-      return this.expandedProblem.indexOf(key) !== -1;
+      // return this.expandedProblem.indexOf(key) !== -1;
+      return this.expandedProblem == key;
     },
     toggleExpansion(key) {
-      // Open
+      // Close
       if (this.isExpanded(key)) {
-        this.expandedProblem.splice(this.expandedProblem.indexOf(key), 1);
+        // this.expandedProblem.splice(this.expandedProblem.indexOf(key), 1);
+        this.expandedProblem = null;
         this.lang = "";
       }
-      // Close
+      // Open
       else {
-        this.expandedProblem.push(key);
+        // this.expandedProblem.push(key);
+        this.expandedProblem = key
       }
     },
   },
