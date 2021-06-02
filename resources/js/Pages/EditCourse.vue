@@ -212,10 +212,7 @@ export default {
           break;
         }
       }
-      var payload = {
-        "roster": JSON.stringify({"roster": this.courseForm.roster}),
-      }
-      const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
+      const res = await this.updateRoster();
 
       //remove course ID from student's courses list
       var courses = JSON.parse(student.fsc_user.courses).courses;
@@ -225,10 +222,7 @@ export default {
           break;
         }
       }
-      payload = {
-        "courses": JSON.stringify({"courses": courses}),
-      }
-      const res2 = await API.apiClient.put(`/students/${student.fsc_user.fsc_id}`, payload);
+      const res2 = await this.updateStudentCourses(courses);
 
       //remove student object from list
       this.students = this.students.filter((user, i) => i  != index);
@@ -241,23 +235,14 @@ export default {
     },
     async addStudent() {
       try {
-        const stud = await API.apiClient.get(`/students/${this.studentID}`);
-
-        console.log("console log");
+        const stud = await this.getStudent();
 
         this.courseForm.roster.push(this.studentID);
-        var payload = {
-          "roster": JSON.stringify({"roster": this.courseForm.roster}),
-        }
-        const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
+        const res = await this.updateRoster();
 
         var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
         courses.push(this.courseID);
-        payload = {
-          "courses": JSON.stringify({"courses": courses}),
-        }
-        const res2 = await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
-
+        const res2 = await this.updateStudentCourses(courses);
 
         //at end add to the students list
         this.students.push(stud.data.data);
@@ -265,6 +250,21 @@ export default {
       catch (error) {
         console.log(error);
       }
+    },
+    async getStudent() {
+      return await API.apiClient.get(`/students/${this.studentID}`);
+    },
+    async updateRoster() {
+      var payload = {
+        "roster": JSON.stringify({"roster": this.courseForm.roster}),
+      }
+      return await API.apiClient.put(`/courses/${this.courseID}`, payload);
+    },
+    async updateStudentCourses(courses) {
+      payload = {
+        "courses": JSON.stringify({"courses": courses}),
+      }
+      return await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
     },
   },
   async mounted() {
