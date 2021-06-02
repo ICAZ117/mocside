@@ -85,7 +85,7 @@ export default {
     editLab() {
       console.log("edit lab");
     },
-    removeLabe() {
+    removeLab() {
       console.log("remove lab");
     },
   },
