@@ -158,7 +158,7 @@ export default {
       file: null,
       endpoint: "/images/store",
       students: [],
-      studentID,
+      studentID: "",
     };
   },
   methods: {
