@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <template v-for="(lab, key) in labs" :key="lab.id">
-          <tr class="lab" style="cursor: pointer" @click="goToProblems(lab.id)">
+          <tr class="lab pointer" @click="goToProblems(lab.id)">
             <td>
               <a>{{ lab.name }}</a>
             </td>
@@ -29,8 +29,8 @@
             <!-- <td>{{ lab.lastActivity }}</td> -->
             <td>4/20/0420</td>
           </tr>
-          <a @click="editLab">•••</a>
-          <a @click="removeLab(lab.id, key)">X</a>
+          <a class="pointer" @click="editLab">•••</a>
+          <a class="pointer" @click="removeLab(lab.id, key)">X</a>
         </template>
 
         <!-- <tr
