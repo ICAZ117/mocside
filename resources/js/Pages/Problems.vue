@@ -30,47 +30,49 @@
             <td>{{ problem.due_date.split(" ")[0] }}</td>
             <td>1/24/2021</td>
           </tr>
-          <tr v-show="isExpanded(problem.id)" class="description-data">
-            <td colspan="5" class="description-data">
-              <div class="problem-description">
-                <h4>
-                  <b>{{ problem.name }}</b>
-                </h4>
-                <p>
-                  {{ problem.description }}
-                  <br />
-                  Due Date: {{ problem.due_date.split(" ")[0] }}
-                  <br />
-                  Test Cases: {{ problem.test_cases }}
-                  <br />
-                </p>
-                <div style="width: 50% !important">
-                  <div class="row">
-                    <div class="col-9">
-                      <select v-model="lang" id="lang" class="form-select">
-                        <option value="" selected disabled hidden>
-                          Select a language...
-                        </option>
-                        <option value="Java">Java</option>
-                        <option value="Python">Python</option>
-                      </select>
-                    </div>
-                    <div class="col-3 ml-1">
-                      <button
-                        type="launch"
-                        name="launch"
-                        class="launch-workspace btn btn-success"
-                        :disabled="!lang.length"
-                        @click="goToProblem(problem.id)"
-                      >
-                        Launch in {{ lang }}
-                      </button>
+          <transition type="ease-out">
+            <tr v-show="isExpanded(problem.id)" class="description-data">
+              <td colspan="5" class="description-data">
+                <div class="problem-description">
+                  <h4>
+                    <b>{{ problem.name }}</b>
+                  </h4>
+                  <p>
+                    {{ problem.description }}
+                    <br />
+                    Due Date: {{ problem.due_date.split(" ")[0] }}
+                    <br />
+                    Test Cases: {{ problem.test_cases }}
+                    <br />
+                  </p>
+                  <div style="width: 50% !important">
+                    <div class="row">
+                      <div class="col-9">
+                        <select v-model="lang" id="lang" class="form-select">
+                          <option value="" selected disabled hidden>
+                            Select a language...
+                          </option>
+                          <option value="Java">Java</option>
+                          <option value="Python">Python</option>
+                        </select>
+                      </div>
+                      <div class="col-3 ml-1">
+                        <button
+                          type="launch"
+                          name="launch"
+                          class="launch-workspace btn btn-success"
+                          :disabled="!lang.length"
+                          @click="goToProblem(problem.id)"
+                        >
+                          Launch in {{ lang }}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </transition>
         </template>
       </tbody>
     </table>
