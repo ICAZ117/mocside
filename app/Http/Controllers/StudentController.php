@@ -28,6 +28,11 @@ class StudentController extends Controller
 
     public function show($id)
     {
+        if (Auth::user()->isAdmin())
+        {
+            return Student::where('fsc_id', $id)->first();
+        }
+
         $request_id = Auth::user()->fsc_id;
         if ($request_id == $id)
         {
