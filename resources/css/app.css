@@ -496,6 +496,10 @@ thead.labtable, thead.problemtable {
   background-color: rgba(231, 231, 231, 0.75);
 }
 
+.problem-description {
+  padding-left: 20px!important;
+}
+
 /*============= LOGIN PAGE =============*/
 
 .login {
