@@ -2,7 +2,7 @@
   <div class="edit-course">
     <h3 class="edit-course-title">Course Editor</h3>
     <div class="course-create-form">
-      <form @submit.prevent="handleSubmit" class="course-form">
+      <form @submit.prevent="uploadImage" class="course-form">
         <div class="form-group">
           <label for="Course Name">Course Name</label>
           <input
@@ -48,26 +48,6 @@
         <br />
 
         <div class="form-group">
-          <!-- <label for="Course Image">Course Image</label>
-          <input
-            type="text"
-            v-model="courseForm.img"
-            id="courseImage"
-            name="courseImage"
-            class="form-control"
-          /> -->
-          <!-- :class="{
-              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
-            }" -->
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <!-- <div
-            v-if="isSubmitted && v$.userForm.userEmail.$error"
-            class="invalid-feedback"
-          >
-            Please enter the Course Name
-          </div> -->
-
-          <!-- <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow" /> -->
           <div class="mb-4">
             <label for="file" class="sr-only">
               Upload Course Image
@@ -169,10 +149,11 @@ export default {
   methods: {
     async handleSubmit() {
       this.isSubmitted = true;
+      uploadImage();
       var payload = {
         name: this.courseForm.name,
         description: this.courseForm.description,
-        img: "",
+        img: this.courseForm.img,
         date_start: this.courseForm.dateStart,
         date_end: this.courseForm.dateEnd,
       };
@@ -182,11 +163,15 @@ export default {
     updateImage() {
       console.log("updated the image");
     },
+    clearMessage() {
+      this.error = null;
+      this.message = null;
+    },
     fileChange(event) {
       this.clearMessage();
       this.file = event.target.files[0];
     },
-    async uploadFile() {
+    async uploadImage() {
       const payload = {};
       const formData = new FormData();
       formData.append("file", this.file);
@@ -196,6 +181,8 @@ export default {
       try {
         const response = await FileService.uploadFile(payload);
         this.message = "File uploaded.";
+        this.courseForm.img = response.asset_link;
+        console.log(this.courseForm.img);
       }
       catch(error) {
       this.error = getError(error);
