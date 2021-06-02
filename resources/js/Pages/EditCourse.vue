@@ -67,7 +67,13 @@
             Please enter the Course Name
           </div> -->
 
-          <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow"/>
+          <!-- <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow" /> -->
+          <div class="mb-4">
+            <label for="file" class="sr-only">
+              Upload Course Image
+            </label>
+            <input type="file" :accept="['image/*']" @change="fileChange" id="file"/>
+          </div>
         </div>
         <br />
 
@@ -156,24 +162,45 @@ export default {
         roster: "",
       },
       isSubmitted: false,
+      file: null,
+      endpoint: "/images/store",
     };
   },
   methods: {
     async handleSubmit() {
       this.isSubmitted = true;
       var payload = {
-        "name": this.courseForm.name,
-        "description": this.courseForm.description,
-        "img": "",
-        "date_start": this.courseForm.dateStart,
-        "date_end": this.courseForm.dateEnd,
-      }
+        name: this.courseForm.name,
+        description: this.courseForm.description,
+        img: "",
+        date_start: this.courseForm.dateStart,
+        date_end: this.courseForm.dateEnd,
+      };
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
       console.log(res);
     },
     updateImage() {
       console.log("updated the image");
-    }
+    },
+    fileChange(event) {
+      this.clearMessage();
+      this.file = event.target.files[0];
+    },
+    async uploadFile() {
+      const payload = {};
+      const formData = new FormData();
+      formData.append("file", this.file);
+      payload.file = formData;
+      payload.endpoint = this.endpoint;
+      this.clearMessage();
+      try {
+        const response = await FileService.uploadFile(payload);
+        this.message = "File uploaded.";
+      }
+      catch(error) {
+      this.error = getError(error);
+      }
+    },
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
