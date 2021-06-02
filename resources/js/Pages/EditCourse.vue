@@ -240,24 +240,29 @@ export default {
       }
     },
     async addStudent() {
-      this.courseForm.roster.push(this.studentID);
-      var payload = {
-        "roster": JSON.stringify({"roster": this.courseForm.roster}),
+      try {
+        const stud = await API.apiClient.get(`/students/${this.studentID}`);
+
+        this.courseForm.roster.push(this.studentID);
+        var payload = {
+          "roster": JSON.stringify({"roster": this.courseForm.roster}),
+        }
+        const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
+
+        var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
+        courses.push(this.courseID);
+        payload = {
+          "courses": JSON.stringify({"courses": courses}),
+        }
+        const res2 = await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
+
+
+        //at end add to the students list
+        this.students.push(stud.data.data);
       }
-      const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
-
-      const stud = await API.apiClient.get(`/students/${this.studentID}`);
-
-      var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
-      courses.push(this.courseID);
-      payload = {
-        "courses": JSON.stringify({"courses": courses}),
+      catch (error) {
+        console.log(error);
       }
-      const res2 = await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
-
-
-      //at end add to the students list
-      this.students.push(stud.data.data);
     },
   },
   async mounted() {
