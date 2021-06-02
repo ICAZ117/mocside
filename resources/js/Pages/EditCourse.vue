@@ -106,6 +106,22 @@
         <br />
 
         <div class="form-group">
+          <label for="AddStudent">Add Student by ID</label>
+          <div class="row">
+            <input
+              type="number"
+              v-model="studentID"
+              id="AddStudent"
+              name="AddStudent"
+              class="form-control col-7"
+            />
+          </div>
+          <button @click="addStudent" class="btn btn-danger btn-block">Add Student</button>
+        </div>
+        <br />
+
+
+        <div class="form-group">
           <button class="btn btn-danger btn-block">Submit Changes</button>
         </div>
       </form>
@@ -142,6 +158,7 @@ export default {
       file: null,
       endpoint: "/images/store",
       students: [],
+      studentID,
     };
   },
   methods: {
@@ -221,6 +238,26 @@ export default {
         const res = await API.apiClient.get(`/students/${this.courseForm.roster[i]}`);
         this.students.push(res.data.data);
       }
+    },
+    async addStudent() {
+      this.courseForm.roster.push(this.studentID);
+      var payload = {
+        "roster": JSON.stringify({"roster": this.courseForm.roster}),
+      }
+      const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
+
+      const stud = await API.apiClient.get(`/students/${this.studentID}`);
+
+      var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
+      courses.push(this.courseID);
+      payload = {
+        "courses": JSON.stringify({"courses": courses}),
+      }
+      const res2 = await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
+
+
+      //at end add to the students list
+      this.students.push(stud.data.data);
     },
   },
   async mounted() {
