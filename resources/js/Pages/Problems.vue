@@ -10,6 +10,7 @@
     <table class="table problemtable">
       <thead class="problemtable">
         <tr>
+          <th></th>
           <th>Title</th>
           <th># Test Cases</th>
           <th>% Successful</th>
@@ -24,13 +25,15 @@
             style="cursor: pointer"
             @click="toggleExpansion(problem.id)"
           >
+            <td v-show="!isExpanded(problem.id)"><i class="fas fa-chevron-right"></i></td>
+            <td v-show="isExpanded(problem.id)"><i class="fas fa-chevron-down"></i></td>
             <td>{{ problem.name }}</td>
             <td>{{ problem.test_cases }}</td>
             <td>69%</td>
             <td>{{ problem.due_date.split(" ")[0] }}</td>
             <td>1/24/2021</td>
           </tr>
-          <tr v-show="isExpanded(problem.id)" class="description-data" style="transition-timing-function: ease-out; transition-duration: 500ms;">
+          <tr v-show="isExpanded(problem.id)" class="description-data">
             <td colspan="5" class="description-data">
               <div class="problem-description">
                 <h4>
