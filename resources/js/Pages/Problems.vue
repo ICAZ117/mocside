@@ -24,9 +24,8 @@
             :key="problem.id"
             class="problem"
             style="cursor: pointer"
-            @click="toggleExpansion(problem.id)"
           >
-            <div>
+            <div @click="toggleExpansion(problem.id)">
               <td>{{ problem.name }}</td>
               <td>{{ problem.test_cases }}</td>
               <td>69%</td>
