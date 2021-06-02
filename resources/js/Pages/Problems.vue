@@ -19,64 +19,52 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            class="problem"
-            style="cursor: pointer"
-            v-for="problem in problems"
-            :key="problem.id"
-            @click="goToProblem(problem.id)"
-          >
-            <td>{{ problem.name }}</td>
-            <td>{{ problem.test_cases }}</td>
-            <td>69%</td>
-            <td>{{ problem.due_date.split(' ')[0] }}</td>
-            <td>1/24/2021</td>
-          </tr>
-
-          <!-- <tr
-            class="problem incomplete"
-            @click="goToProblem(1)"
-            style="cursor: pointer"
-          >
-            <td>Problem 1</td>
-            <td>66%</td>
-            <td>3</td>
-            <td>1/24/2021</td>
-            <td>1/24/2021</td>
-          </tr>
-          <tr
-            class="problem complete"
-            onclick="location.href='workspace.php';"
-            style="cursor: \pointer"
-          >
-            <td>Problem 2</td>
-            <td>100%</td>
-            <td>5</td>
-            <td>1/31/2021</td>
-            <td>1/31/2021</td>
-          </tr>
-          <tr
-            class="problem complete"
-            onclick="location.href='workspace.php';"
-            style="cursor: pointer"
-          >
-            <td>Problem 3</td>
-            <td>6</td>
-            <td>100%</td>
-            <td>2/7/2021</td>
-            <td>2/5/2021</td>
-          </tr>
-          <tr
-            class="problem"
-            onclick="location.href='workspace.php';"
-            style="cursor: pointer"
-          >
-            <td>Problem 4</td>
-            <td>5</td>
-            <td>80%</td>
-            <td>2/14/2021</td>
-            <td>2/11/2021</td>
-          </tr> -->
+          <div v-for="problem in problems" :key="problem.id">
+            <tr
+              class="problem"
+              style="cursor: pointer"
+              @click="toggleExpansion(problem.id)"
+            >
+              <td>{{ problem.name }}</td>
+              <td>{{ problem.test_cases }}</td>
+              <td>69%</td>
+              <td>{{ problem.due_date.split(" ")[0] }}</td>
+              <td>1/24/2021</td>
+            </tr>
+            <div v-show="isExpanded(problem.id)" class="problem-description">
+              <h4>
+                <b>{{ problem.name }}</b>
+              </h4>
+              <p>
+                {{ problem.description }}
+                <br />
+                Due Date: {{ problem.due_date.split(" ")[0] }}
+                <br />
+                Test Cases: {{ problem.test_cases }}
+                <br />
+              </p>
+              <div class="row">
+                <div class="col-10">
+                  <select v-model="lang" id="lang" class="form-select">
+                    <option value="" selected disabled hidden>Select a language...</option>
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                  </select>
+                </div>
+                <div class="col-2">
+                  <button
+                    type="launch"
+                    name="launch"
+                    class="launch-workspace btn btn-success"
+                    :disabled="!lang.length"
+                    @click="goToProblem(problem.id)"
+                  >
+                    Launch in {{ lang }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </tbody>
       </table>
     </div>
@@ -98,6 +86,8 @@ export default {
       problems: [],
       assignmentisOpen: false,
       problemID: null,
+      expandedProblem: [],
+      lang: "",
     };
   },
   methods: {
@@ -114,6 +104,14 @@ export default {
       this.assignmentisOpen = false;
       this.problemID = null;
     },
+    isExpanded(key) {
+      return this.expandedProblem.indexOf(key) !== -1;
+    },
+    toggleExpansion(key) {
+      if (this.isExpanded(key))
+        this.expandedProblem.splice(this.expandedProblem.indexOf(key), 1);
+      else this.expandedProblem.push(key);
+    },
   },
   mounted() {
     this.assignmentisOpen = false;
@@ -125,5 +123,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
