@@ -12,7 +12,7 @@ class AvatarController extends Controller
     {
         try {
             $filePath = Storage::disk('public')->putFile('images', $request->file);
-            return response()->json(['message' => $filePath], 200);
+            return response()->json(['message' => $filePath, 'asset_link' => asset('storage/'.$filePath)], 200);
         } catch (Exception $exception) {
             return response()->json(['message' => $exception->getMessage()], 409);
         }
