@@ -31,10 +31,9 @@
               <td>{{ problem.due_date.split(" ")[0] }}</td>
               <td>1/24/2021</td>
             </tr>
-            <tr v-show="isExpanded(problem.id)" class="problem-description">
-              <td></td>
-              <td colspan="4">
-                <div>
+            <tr v-show="isExpanded(problem.id)" class="description-row">
+              <td colspan="5">
+                <div class="problem-description">
                   <h4>
                     <b>{{ problem.name }}</b>
                   </h4>
@@ -57,7 +56,7 @@
                           <option value="Python">Python</option>
                         </select>
                       </div>
-                      <div class="col-3">
+                      <div class="col-3 ml-1">
                         <button
                           type="launch"
                           name="launch"
