@@ -243,6 +243,8 @@ export default {
       try {
         const stud = await API.apiClient.get(`/students/${this.studentID}`);
 
+        console.log(stud.data.Exception);
+
         this.courseForm.roster.push(this.studentID);
         var payload = {
           "roster": JSON.stringify({"roster": this.courseForm.roster}),
