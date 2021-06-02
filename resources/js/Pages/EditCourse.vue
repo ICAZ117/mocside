@@ -182,6 +182,7 @@ export default {
       this.clearMessage();
       try {
         const response = await FileService.uploadFile(payload);
+        console.log(respsonse);
         this.message = "File uploaded.";
         this.courseForm.img = response.asset_link;
         console.log(this.courseForm.img);
