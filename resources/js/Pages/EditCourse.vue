@@ -2,7 +2,7 @@
   <div class="edit-course">
     <h3 class="edit-course-title">Course Editor</h3>
     <div class="course-create-form">
-      <form @submit.prevent="uploadImage" class="course-form">
+      <form @submit.prevent="handleSubmit" class="course-form">
         <div class="form-group">
           <label for="Course Name">Course Name</label>
           <input
@@ -184,7 +184,6 @@ export default {
         const response = await FileService.uploadFile(payload);
         this.message = "File uploaded.";
         this.courseForm.img = response.data.asset_link;
-        console.log(this.courseForm.img);
       }
       catch(error) {
       this.error = getError(error);
