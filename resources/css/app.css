@@ -510,6 +510,13 @@ thead.labtable, thead.problemtable {
   border: none!important;
   padding: 0!important;
 }
+
+.spacer {
+  color: transparent;
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+}
 /*============= LOGIN PAGE =============*/
 
 .login {

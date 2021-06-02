@@ -10,7 +10,7 @@
     <table class="table problemtable">
       <thead class="problemtable">
         <tr>
-          <th></th>
+          <th><i class="fas fa-chevron-down spacer"></i></th>
           <th>Title</th>
           <th># Test Cases</th>
           <th>% Successful</th>
