@@ -121,6 +121,7 @@
 <script>
 import * as API from "../services/API";
 import { getError } from "../utils/helpers";
+import FileService from "../services/FileService";
 import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
 export default {
