@@ -243,7 +243,7 @@ export default {
       try {
         const stud = await API.apiClient.get(`/students/${this.studentID}`);
 
-        console.log(stud.data.Exception);
+        console.log(stud.status);
 
         this.courseForm.roster.push(this.studentID);
         var payload = {
