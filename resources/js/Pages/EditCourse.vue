@@ -151,7 +151,7 @@ export default {
   methods: {
     async handleSubmit() {
       this.isSubmitted = true;
-      this.uploadImage();
+      await this.uploadImage();
       var payload = {
         name: this.courseForm.name,
         description: this.courseForm.description,
