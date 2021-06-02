@@ -155,7 +155,7 @@ export default {
       var payload = {
         name: this.courseForm.name,
         description: this.courseForm.description,
-        img: this.courseForm.img,
+        img_loc: this.courseForm.img,
         date_start: this.courseForm.dateStart,
         date_end: this.courseForm.dateEnd,
       };
