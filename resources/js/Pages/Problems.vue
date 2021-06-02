@@ -19,18 +19,19 @@
           </tr>
         </thead>
         <tbody>
-          <div v-for="problem in problems" :key="problem.id">
-            <tr
-              class="problem"
-              style="cursor: pointer"
-              @click="toggleExpansion(problem.id)"
-            >
-              <td>{{ problem.name }}</td>
-              <td>{{ problem.test_cases }}</td>
-              <td>69%</td>
-              <td>{{ problem.due_date.split(" ")[0] }}</td>
-              <td>1/24/2021</td>
-            </tr>
+          <tr
+            v-for="problem in problems"
+            :key="problem.id"
+            class="problem"
+            style="cursor: pointer"
+            @click="toggleExpansion(problem.id)"
+          >
+            <td>{{ problem.name }}</td>
+            <td>{{ problem.test_cases }}</td>
+            <td>69%</td>
+            <td>{{ problem.due_date.split(" ")[0] }}</td>
+            <td>1/24/2021</td>
+            <br />
             <div v-show="isExpanded(problem.id)" class="problem-description">
               <h4>
                 <b>{{ problem.name }}</b>
@@ -46,7 +47,9 @@
               <div class="row">
                 <div class="col-10">
                   <select v-model="lang" id="lang" class="form-select">
-                    <option value="" selected disabled hidden>Select a language...</option>
+                    <option value="" selected disabled hidden>
+                      Select a language...
+                    </option>
                     <option value="Java">Java</option>
                     <option value="Python">Python</option>
                   </select>
@@ -64,7 +67,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </tr>
         </tbody>
       </table>
     </div>
