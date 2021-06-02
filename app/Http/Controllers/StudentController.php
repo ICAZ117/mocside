@@ -30,7 +30,7 @@ class StudentController extends Controller
     {
         if (Auth::user()->isAdmin())
         {
-            return Student::where('fsc_id', $request_id)->first();
+            return Student::where('fsc_id', $id)->first();
         }
 
         $request_id = Auth::user()->fsc_id;
