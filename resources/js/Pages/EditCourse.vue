@@ -99,7 +99,7 @@
           /> -->
           <ul>
             <li v-for="student in students" :key="student.id">{{ student.name }}
-              <a @click="removeStudent(student.id)">X</a>
+              <a @click="removeStudent(student)">X</a>
             </li>
           </ul>
         </div>
@@ -156,7 +156,6 @@ export default {
         end_date: this.courseForm.dateEnd,
       };
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
-      console.log(res);
     },
     updateImage() {
       console.log("updated the image");
@@ -188,11 +187,31 @@ export default {
         }
       }
     },
-    async removeStudent(id) {
+    async removeStudent(student) {
       //remove student ID from course's roster list
-      console.log("remove student: "+ id);
+      for(let i = 0; i<this.courseForm.roster.length; i++) {
+        if(this.courseForm.roster[i] == student.fsc_user.fsc_id) {
+          this.courseForm.roster.splice(i, 1);
+          break;
+        }
+      }
+      var payload = {
+        "roster": JSON.stringify({"roster": this.courseForm.roster}),
+      }
+      const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
 
       //remove course ID from student's courses list
+      var courses = JSON.parse(student.fsc_user.courses).courses;
+      for (let i = 0; i < courses.length; i++) {
+        if(courses[i] == this.courseID) {
+          courses.splice(i, 1);
+          break;
+        }
+      }
+      payload = {
+        "courses": JSON.stringify({"courses": courses}),
+      }
+      const res2 = await API.apiClient.put(`/students/${student.fsc_user.fsc_id}`, payload);
     },
     async getStudents() {
       for (let i = 0; i < this.courseForm.roster.length; i++) {
