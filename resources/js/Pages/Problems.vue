@@ -26,11 +26,13 @@
             style="cursor: pointer"
             @click="toggleExpansion(problem.id)"
           >
-            <td>{{ problem.name }}</td>
-            <td>{{ problem.test_cases }}</td>
-            <td>69%</td>
-            <td>{{ problem.due_date.split(" ")[0] }}</td>
-            <td>1/24/2021</td>
+            <div>
+              <td>{{ problem.name }}</td>
+              <td>{{ problem.test_cases }}</td>
+              <td>69%</td>
+              <td>{{ problem.due_date.split(" ")[0] }}</td>
+              <td>1/24/2021</td>
+            </div>
             <br />
             <div v-show="isExpanded(problem.id)" class="problem-description">
               <h4>
