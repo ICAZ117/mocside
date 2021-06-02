@@ -5,7 +5,7 @@
       <h2>Labs</h2>
       <hr />
     </div>
-
+    <a @click="addLab">ADD</a>
     <table class="table labtable">
       <thead class="labtable">
         <tr>
@@ -33,6 +33,8 @@
           <td>{{ lab.due_date.split(" ")[0] }}</td>
           <!-- <td>{{ lab.lastActivity }}</td> -->
           <td>4/20/0420</td>
+          <td><a @click="editLab">•••</a></td>
+          <td><a @click="removeLab">X</a></td>
         </tr>
 
         <!-- <tr
@@ -80,6 +82,15 @@ export default {
     problemUnmounting() {
       this.problemisOpen = false;
       this.labID = null;
+    },
+    addLab() {
+      console.log("add lab");
+    },
+    editLab() {
+      console.log("edit lab");
+    },
+    removeLabe() {
+      console.log("remove lab");
     },
   },
   mounted() {
