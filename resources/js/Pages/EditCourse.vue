@@ -159,14 +159,17 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       this.isSubmitted = true;
-      //   this.v$.$touch();
-      //   if (this.v$.$invalid) {
-      //     return;
-      //   }
-      //   this.login();
-      console.log("handles submit");
+      var payload = {
+        "name": this.courseForm.name,
+        "description": this.courseForm.description,
+        "img": "",
+        "date_start": this.courseForm.dateStart,
+        "date_end": this.courseForm.dateEnd,
+      }
+      const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
+      console.log(res);
     },
     updateImage() {
       console.log("updated the image");

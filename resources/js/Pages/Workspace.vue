@@ -85,8 +85,8 @@
                 </select>
                 <label for="lang" class="workspace-label" style="margin-left: 40px;">Language: </label>
                 <select v-model="lang" id="lang" class="console-select form-select">
-                  <option value="java" selected>Java</option>
-                  <option value="python">Python</option>
+                  <option value="java">Java</option>
+                  <option value="python" selected>Python</option>
                 </select>
               </div>
             </div>
@@ -374,7 +374,7 @@ export default {
     return {
       assignment: {},
       theme: "gob",
-      lang: "java",
+      lang: "python",
       content: "",
     };
   },
