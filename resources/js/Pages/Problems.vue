@@ -31,9 +31,9 @@
               <td>{{ problem.due_date.split(" ")[0] }}</td>
               <td>1/24/2021</td>
             </tr>
-            <tr>
+            <tr v-show="isExpanded(problem.id)">
               <td colspan="5">
-                <div v-show="isExpanded(problem.id)" class="problem-description">
+                <div class="problem-description">
                   <h4>
                     <b>{{ problem.name }}</b>
                   </h4>
@@ -114,11 +114,13 @@ export default {
       return this.expandedProblem.indexOf(key) !== -1;
     },
     toggleExpansion(key) {
+      // Open
       if (this.isExpanded(key)) {
-        console.log("top");
         this.expandedProblem.splice(this.expandedProblem.indexOf(key), 1);
-      } else {
-        console.log("bottom");
+        this.lang = "";
+      }
+      // Close
+      else {
         this.expandedProblem.push(key);
       }
     },
