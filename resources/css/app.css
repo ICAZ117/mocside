@@ -507,6 +507,7 @@ thead.labtable, thead.problemtable {
 .description-data {
   background-color: transparent!important;
   border: none!important;
+  padding: 0!important;
 }
 
 /*============= LOGIN PAGE =============*/
