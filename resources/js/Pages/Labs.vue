@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="lab in labs" :key="lab.id">
+        <template v-for="(lab, key) in labs" :key="lab.id">
           <tr class="lab" style="cursor: pointer" @click="goToProblems(lab.id)">
             <td>
               <a>{{ lab.name }}</a>
@@ -30,7 +30,7 @@
             <td>4/20/0420</td>
           </tr>
           <a @click="editLab">•••</a>
-          <a @click="removeLab">X</a>
+          <a @click="removeLab(lab.id, key)">X</a>
         </template>
 
         <!-- <tr
@@ -85,8 +85,17 @@ export default {
     editLab() {
       console.log("edit lab");
     },
-    removeLab() {
-      console.log("remove lab");
+    async removeLab(lab, key) {
+      //remove from lab the current course..right now we only save one course....it will need to change to be multiple courses later
+      var payload = {
+        "course_id": null,
+      }
+
+      //update the  courses labs list
+      const res = await API.apiClient.put(`/labs/${lab}`, payload);
+
+      //filter from labs
+      this.labs = this.labs.filter((l, i) => i  != key);
     },
   },
   mounted() {
