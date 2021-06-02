@@ -44,7 +44,7 @@ class StudentController extends Controller
         return resonse()->json(['message' => 'This is not your user!'], 403);
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
         if (Auth::user()->isAdmin())
         {
