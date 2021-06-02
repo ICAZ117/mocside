@@ -183,6 +183,7 @@ export default {
       try {
         const response = await FileService.uploadFile(payload);
         this.message = "File uploaded.";
+        console.log(response.data.asset_link);
         this.courseForm.img = response.data.asset_link;
       }
       catch(error) {
