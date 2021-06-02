@@ -59,13 +59,13 @@ export default {
       payload.file = formData;
       payload.endpoint = this.endpoint;
       this.clearMessage();
-	  try {
-		  const response = await FileService.uploadFile(payload);
-		  this.message = "File uploaded.";
-	  }
-	  catch(error) {
-		this.error = getError(error);
-	  }
+      try {
+        const response = await FileService.uploadFile(payload);
+        this.message = "File uploaded.";
+      }
+      catch(error) {
+      this.error = getError(error);
+      }
     },
   },
 };

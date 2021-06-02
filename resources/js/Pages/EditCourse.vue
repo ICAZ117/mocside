@@ -48,26 +48,12 @@
         <br />
 
         <div class="form-group">
-          <!-- <label for="Course Image">Course Image</label>
-          <input
-            type="text"
-            v-model="courseForm.img"
-            id="courseImage"
-            name="courseImage"
-            class="form-control"
-          /> -->
-          <!-- :class="{
-              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
-            }" -->
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <!-- <div
-            v-if="isSubmitted && v$.userForm.userEmail.$error"
-            class="invalid-feedback"
-          >
-            Please enter the Course Name
-          </div> -->
-
-          <FileUpload label="Upload Course Image" :fileTypes="['image/*']" endpoint="/images/store" @fileUploaded="updateImage" class="p-5 bg-white border rounded shadow"/>
+          <div class="mb-4">
+            <label for="file" class="sr-only">
+              Upload Course Image
+            </label>
+            <input type="file" :accept="['image/*']" @change="fileChange" id="file"/>
+          </div>
         </div>
         <br />
 
@@ -134,6 +120,8 @@
 
 <script>
 import * as API from "../services/API";
+import { getError } from "../utils/helpers";
+import FileService from "../services/FileService";
 import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
 export default {
@@ -156,30 +144,60 @@ export default {
         roster: "",
       },
       isSubmitted: false,
+      file: null,
+      endpoint: "/images/store",
     };
   },
   methods: {
     async handleSubmit() {
       this.isSubmitted = true;
+      await this.uploadImage();
       var payload = {
-        "name": this.courseForm.name,
-        "description": this.courseForm.description,
-        "img": "",
-        "date_start": this.courseForm.dateStart,
-        "date_end": this.courseForm.dateEnd,
-      }
+        name: this.courseForm.name,
+        description: this.courseForm.description,
+        img_loc: this.courseForm.img,
+        start_date: this.courseForm.dateStart,
+        end_date: this.courseForm.dateEnd,
+      };
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
       console.log(res);
     },
     updateImage() {
       console.log("updated the image");
-    }
+    },
+    clearMessage() {
+      this.error = null;
+      this.message = null;
+    },
+    fileChange(event) {
+      this.clearMessage();
+      this.file = event.target.files[0];
+    },
+    async uploadImage() {
+      if(this.file != null) {
+        const payload = {};
+        const formData = new FormData();
+        formData.append("file", this.file);
+        payload.file = formData;
+        payload.endpoint = this.endpoint;
+        this.clearMessage();
+        try {
+          const response = await FileService.uploadFile(payload);
+          this.message = "File uploaded.";
+          console.log(response.data.asset_link);
+          this.courseForm.img = response.data.asset_link;
+        }
+        catch(error) {
+        this.error = getError(error);
+        }
+      }
+    },
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
     this.courseForm.name = course.data.name;
     this.courseForm.description = course.data.description;
-    this.courseForm.img = "";
+    this.courseForm.img = course.data.img_loc;
     this.courseForm.dateStart = course.data.start_date;
     this.courseForm.dateEnd = course.data.end_date;
     this.courseForm.roster = JSON.parse(course.data.roster).roster;
