@@ -9,7 +9,7 @@
 
       <div class="coursecontainer">
         <div class="courserow row my-5">
-          <div class="fixed-course-width" v-for="course in courses" :key="course.id">
+          <div class="fixed-course-width" v-for="(course, key) in courses" :key="course.id">
             <a @click="goToLabs(course.id)" class="no-decor">
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -31,7 +31,7 @@
               </div>
             </a>
             <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">•••</a>
-            <a @click="deleteCourse(course.id, course)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
+            <a @click="deleteCourse(course.id, course, key)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
           </div>
           <div class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor">
@@ -85,6 +85,7 @@ export default {
       this.enrolledCourses.push(this.courseID);
       this.addProfessor();
       this.childIsOpen = true;
+      this.courses.push(course.data);
       this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
     async addProfessor() {
@@ -99,7 +100,7 @@ export default {
       this.courseID = id;
       this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
     },
-    async deleteCourse(id, course) {
+    async deleteCourse(id, course, key) {
       var flag = confirm("Are you Sure you want to delete " + course.name);
       if(flag) {
         this.childIsOpen = false;
@@ -118,11 +119,15 @@ export default {
         this.addProfessor();
         delete this.courses.course;
         this.courseID = null;
-        this.getCourses();
+        // this.getCourses();
+
+        //filter the courses list
+        this.courses = this.courses.filter((c, i) => i  != key);
       }
       else {
         console.log("Delete avoided");
       }
+
     },
     goToLabs(id) {
       this.childIsOpen = true;
