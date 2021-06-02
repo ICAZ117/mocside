@@ -98,7 +98,9 @@
             class="form-control"
           /> -->
           <ul>
-            <li v-for="student in roster" :key="student.id">{{ student.name }}</li>
+            <li v-for="student in students" :key="student.id">{{ student.name }}
+              <a @click="removeStudent(student.id)">X</a>
+            </li>
           </ul>
         </div>
         <br />
@@ -186,15 +188,16 @@ export default {
         }
       }
     },
-    async removeStudent() {
+    async removeStudent(id) {
       //remove student ID from course's roster list
+      console.log("remove student: "+ id);
 
       //remove course ID from student's courses list
     },
     async getStudents() {
       for (let i = 0; i < this.courseForm.roster.length; i++) {
         const res = await API.apiClient.get(`/students/${this.courseForm.roster[i]}`);
-        this.students.push(res.data);
+        this.students.push(res.data.data);
       }
     },
   },
