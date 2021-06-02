@@ -174,20 +174,22 @@ export default {
       this.file = event.target.files[0];
     },
     async uploadImage() {
-      const payload = {};
-      const formData = new FormData();
-      formData.append("file", this.file);
-      payload.file = formData;
-      payload.endpoint = this.endpoint;
-      this.clearMessage();
-      try {
-        const response = await FileService.uploadFile(payload);
-        this.message = "File uploaded.";
-        console.log(response.data.asset_link);
-        this.courseForm.img = response.data.asset_link;
-      }
-      catch(error) {
-      this.error = getError(error);
+      if(this.file != null) {
+        const payload = {};
+        const formData = new FormData();
+        formData.append("file", this.file);
+        payload.file = formData;
+        payload.endpoint = this.endpoint;
+        this.clearMessage();
+        try {
+          const response = await FileService.uploadFile(payload);
+          this.message = "File uploaded.";
+          console.log(response.data.asset_link);
+          this.courseForm.img = response.data.asset_link;
+        }
+        catch(error) {
+        this.error = getError(error);
+        }
       }
     },
   },
@@ -195,7 +197,7 @@ export default {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
     this.courseForm.name = course.data.name;
     this.courseForm.description = course.data.description;
-    this.courseForm.img = "";
+    this.courseForm.img = course.data.img_loc;
     this.courseForm.dateStart = course.data.start_date;
     this.courseForm.dateEnd = course.data.end_date;
     this.courseForm.roster = JSON.parse(course.data.roster).roster;
