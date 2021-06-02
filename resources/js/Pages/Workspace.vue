@@ -370,6 +370,7 @@ export default {
       assignment: {},
       theme: "gob",
       content: "",
+      editorLangauge: "";
     };
   },
   methods: {
@@ -382,9 +383,17 @@ export default {
   components: {
     VAceEditor,
   },
+  beforeMount() {
+    if (this.lang == "Java") {
+      this.editorLangauge = "java";
+    }
+    else {
+      this.editorLangauge = "python";
+    }
+  },
   mounted() {
-    // this.getAssignment();
-    console.log("getAssignment");
+    console.log(this.lang);
+    console.log(this.editorLangauge);
   },
   beforeUnmount() {
     this.$emit("assignment-unmounting");
