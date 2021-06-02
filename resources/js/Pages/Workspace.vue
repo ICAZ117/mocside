@@ -25,7 +25,7 @@
         <v-ace-editor
           class="editor"
           v-model:value="content"
-          :lang="lang"
+          :lang="editorLangauge"
           :theme="theme"
         />
         <div class="row px-1 my-1">
@@ -370,6 +370,7 @@ export default {
       assignment: {},
       theme: "gob",
       content: "",
+      editorLangauge: "",
     };
   },
   methods: {
@@ -382,9 +383,17 @@ export default {
   components: {
     VAceEditor,
   },
+  beforeMount() {
+    if (this.lang == "Java") {
+      this.editorLangauge = "java";
+    }
+    else {
+      this.editorLangauge = "python";
+    }
+  },
   mounted() {
-    // this.getAssignment();
-    console.log("getAssignment");
+    console.log(this.lang);
+    console.log(this.editorLangauge);
   },
   beforeUnmount() {
     this.$emit("assignment-unmounting");
