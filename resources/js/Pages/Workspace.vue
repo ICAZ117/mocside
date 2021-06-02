@@ -25,7 +25,7 @@
         <v-ace-editor
           class="editor"
           v-model:value="content"
-          :lang="lang"
+          :lang="editorLangauge"
           :theme="theme"
         />
         <div class="row px-1 my-1">
