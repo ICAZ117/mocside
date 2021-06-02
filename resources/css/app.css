@@ -633,9 +633,9 @@ thead.labtable, thead.problemtable {
 }
 
 .configure-editor {
-  min-width: 690px;
+  min-width: 308px;
   width: auto !important;
-  width: 690px;
+  width: 308px;
 }
 
 /*========= ADD ASSIGNMENT =========*/
