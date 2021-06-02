@@ -50,7 +50,7 @@ class StudentController extends Controller
         {
             $student = Student::where('fsc_id', $id)->first();
             $student->update($request->all());
-            return $student;
+            return response()->json(['message' => $student]);
         }
 
         $request_id = Auth::user()->fsc_id;
