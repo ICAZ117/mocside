@@ -10,7 +10,7 @@
       <div class="coursecontainer">
         <div class="courserow row my-5">
           <div class="fixed-course-width" v-for="(course, key) in courses" :key="course.id">
-            <a @click="goToLabs(course.id)" class="no-decor">
+            <a @click="goToLabs(course.id)" class="no-decor pointer">
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
@@ -30,11 +30,11 @@
                 </div>
               </div>
             </a>
-            <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor">•••</a>
-            <a @click="deleteCourse(course.id, course, key)" class="courselaunch text-danger mx-2 my-1 no-decor">X</a>
+            <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
+            <a @click="deleteCourse(course.id, course, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
           </div>
           <div class="add-course fixed-course-width">
-            <a @click="addCourse()" class="no-decor">
+            <a @click="addCourse()" class="no-decor pointer">
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
                   <div

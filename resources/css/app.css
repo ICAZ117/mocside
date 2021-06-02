@@ -87,6 +87,9 @@ h1, h4 {
   flex-wrap: wrap
 }
 
+.pointer {
+  cursor: pointer;
+}
 /*============= NAVIGATION =============*/
 
 nav {
@@ -330,7 +333,6 @@ nav {
 }
 
 /*============= COURSES =============*/
-
 .courses.header {
   width: 100%;
   background-color: var(--FSCblue);
