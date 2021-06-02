@@ -98,8 +98,8 @@
             class="form-control"
           /> -->
           <ul>
-            <li v-for="student in students" :key="student.id">{{ student.name }}
-              <a @click="removeStudent(student)">X</a>
+            <li v-for="(student, key) in students" :key="student.id">{{ student.name }}
+              <a @click="removeStudent(student, key)">X</a>
             </li>
           </ul>
         </div>
@@ -187,7 +187,7 @@ export default {
         }
       }
     },
-    async removeStudent(student) {
+    async removeStudent(student, index) {
       //remove student ID from course's roster list
       for(let i = 0; i<this.courseForm.roster.length; i++) {
         if(this.courseForm.roster[i] == student.fsc_user.fsc_id) {
@@ -212,6 +212,9 @@ export default {
         "courses": JSON.stringify({"courses": courses}),
       }
       const res2 = await API.apiClient.put(`/students/${student.fsc_user.fsc_id}`, payload);
+
+      //remove student object from list
+      this.students = this.students.filter((user, i) => i  != index);
     },
     async getStudents() {
       for (let i = 0; i < this.courseForm.roster.length; i++) {
