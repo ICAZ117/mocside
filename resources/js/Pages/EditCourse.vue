@@ -98,7 +98,7 @@
             class="form-control"
           /> -->
           <ul>
-            <li v-for="student in roster" :key="student.id">{{ student.name }}</li>
+            <li v-for="student in students" :key="student.id">{{ student.name }}</li>
           </ul>
         </div>
         <br />
