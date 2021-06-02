@@ -193,7 +193,7 @@ export default {
     },
     async getStudents() {
       for (let i = 0; i < this.courseForm.roster.length; i++) {
-        const res = await API.apiClient.get(`/students/${i}`);
+        const res = await API.apiClient.get(`/students/${students[i]}`);
         console.log(res);
         console.log(res.data);
         // this.students.push();
