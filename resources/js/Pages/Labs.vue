@@ -17,25 +17,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          class="lab"
-          style="cursor: pointer"
-          v-for="lab in labs"
-          :key="lab.id"
-          @click="goToProblems(lab.id)"
-        >
-          <td>
-            <a>{{ lab.name }}</a>
-          </td>
-          <td>{{ lab.num_problems }}</td>
-          <!-- <td>{{ lab.percentComplete }}</td> -->
-          <td>69%</td>
-          <td>{{ lab.due_date.split(" ")[0] }}</td>
-          <!-- <td>{{ lab.lastActivity }}</td> -->
-          <td>4/20/0420</td>
-          <td><a @click="editLab">•••</a></td>
-          <td><a @click="removeLab">X</a></td>
-        </tr>
+        <template v-for="lab in labs" :key="lab.id">
+          <tr class="lab" style="cursor: pointer" @click="goToProblems(lab.id)">
+            <td>
+              <a>{{ lab.name }}</a>
+            </td>
+            <td>{{ lab.num_problems }}</td>
+            <!-- <td>{{ lab.percentComplete }}</td> -->
+            <td>69%</td>
+            <td>{{ lab.due_date.split(" ")[0] }}</td>
+            <!-- <td>{{ lab.lastActivity }}</td> -->
+            <td>4/20/0420</td>
+          </tr>
+          <a @click="editLab">•••</a>
+          <a @click="removeLab">X</a>
+        </template>
 
         <!-- <tr
             class="lab"
