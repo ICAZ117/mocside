@@ -510,16 +510,6 @@ thead.labtable, thead.problemtable {
   border: none!important;
   padding: 0!important;
 }
-
-.v-enter-active {
-  transition-timing-function: ease-out;
-  transition-duration: 500ms;
-}
-
-.v-leave-active {
-  transition-timing-function: ease-out;
-  transition-duration: 500ms;
-}
 /*============= LOGIN PAGE =============*/
 
 .login {

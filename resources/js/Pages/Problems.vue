@@ -30,49 +30,47 @@
             <td>{{ problem.due_date.split(" ")[0] }}</td>
             <td>1/24/2021</td>
           </tr>
-          <transition name="v-enter-active">
-            <tr v-show="isExpanded(problem.id)" class="description-data">
-              <td colspan="5" class="description-data">
-                <div class="problem-description">
-                  <h4>
-                    <b>{{ problem.name }}</b>
-                  </h4>
-                  <p>
-                    {{ problem.description }}
-                    <br />
-                    Due Date: {{ problem.due_date.split(" ")[0] }}
-                    <br />
-                    Test Cases: {{ problem.test_cases }}
-                    <br />
-                  </p>
-                  <div style="width: 50% !important">
-                    <div class="row">
-                      <div class="col-9">
-                        <select v-model="lang" id="lang" class="form-select">
-                          <option value="" selected disabled hidden>
-                            Select a language...
-                          </option>
-                          <option value="Java">Java</option>
-                          <option value="Python">Python</option>
-                        </select>
-                      </div>
-                      <div class="col-3 ml-1">
-                        <button
-                          type="launch"
-                          name="launch"
-                          class="launch-workspace btn btn-success"
-                          :disabled="!lang.length"
-                          @click="goToProblem(problem.id)"
-                        >
-                          Launch in {{ lang }}
-                        </button>
-                      </div>
+          <tr v-show="isExpanded(problem.id)" class="description-data" style="transition-timing-function: ease-out; transition-duration: 500ms;">
+            <td colspan="5" class="description-data">
+              <div class="problem-description">
+                <h4>
+                  <b>{{ problem.name }}</b>
+                </h4>
+                <p>
+                  {{ problem.description }}
+                  <br />
+                  Due Date: {{ problem.due_date.split(" ")[0] }}
+                  <br />
+                  Test Cases: {{ problem.test_cases }}
+                  <br />
+                </p>
+                <div style="width: 50% !important">
+                  <div class="row">
+                    <div class="col-9">
+                      <select v-model="lang" id="lang" class="form-select">
+                        <option value="" selected disabled hidden>
+                          Select a language...
+                        </option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                      </select>
+                    </div>
+                    <div class="col-3 ml-1">
+                      <button
+                        type="launch"
+                        name="launch"
+                        class="launch-workspace btn btn-success"
+                        :disabled="!lang.length"
+                        @click="goToProblem(problem.id)"
+                      >
+                        Launch in {{ lang }}
+                      </button>
                     </div>
                   </div>
                 </div>
-              </td>
-            </tr>
-          </transition>
+              </div>
+            </td>
+          </tr>
         </template>
       </tbody>
     </table>
@@ -120,13 +118,13 @@ export default {
       // Close
       if (this.isExpanded(key)) {
         // this.expandedProblem.splice(this.expandedProblem.indexOf(key), 1);
-        this.expandedProblem = null;
         this.lang = "";
+        this.expandedProblem = null;
       }
       // Open
       else {
         // this.expandedProblem.push(key);
-        this.expandedProblem = key
+        this.expandedProblem = key;
       }
     },
   },
