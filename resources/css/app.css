@@ -497,7 +497,10 @@ thead.labtable, thead.problemtable {
 }
 
 .problem-description {
-  padding-left: 20px!important;
+  background-color: white;
+  margin-left: 20px!important;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.5s;
 }
 
 /*============= LOGIN PAGE =============*/
