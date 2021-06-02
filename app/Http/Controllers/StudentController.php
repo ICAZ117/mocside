@@ -46,6 +46,13 @@ class StudentController extends Controller
 
     public function update($id)
     {
+        if (Auth::user()->isAdmin())
+        {
+            $student = Student::where('fsc_id', $request_id)->first();
+            $student->update($request->all());
+            return $student;
+        }
+        
         $request_id = Auth::user()->fsc_id;
         if ($request_id == $id)
         {
