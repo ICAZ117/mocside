@@ -17,8 +17,13 @@ class Student extends Model
         'courses',
     ];
 
-    // public function progress()
-    // {
-    //     return $this->hasOne(Progress::class);
-    // }
+    public function progress()
+    {
+        return $this->hasOne(Progress::class, 'fsc_id', 'fsc_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'fsc_id', 'fsc_id');
+    }
 }
