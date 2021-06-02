@@ -31,9 +31,9 @@
               <td>{{ problem.due_date.split(" ")[0] }}</td>
               <td>1/24/2021</td>
             </tr>
-            <tr v-show="isExpanded(problem.id)">
+            <tr v-show="isExpanded(problem.id)" class="problem-description">
               <td colspan="5">
-                <div class="problem-description">
+                <div>
                   <h4>
                     <b>{{ problem.name }}</b>
                   </h4>
