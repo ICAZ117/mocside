@@ -156,8 +156,8 @@ export default {
         name: this.courseForm.name,
         description: this.courseForm.description,
         img_loc: this.courseForm.img,
-        date_start: this.courseForm.dateStart,
-        date_end: this.courseForm.dateEnd,
+        start_date: this.courseForm.dateStart,
+        end_date: this.courseForm.dateEnd,
       };
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
       console.log(res);
