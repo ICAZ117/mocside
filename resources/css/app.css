@@ -442,6 +442,7 @@ hr.courses {
 
 table.labtable, table.problemtable {
   background-color: inherit;
+  margin: 2rem;
 }
 
 .labtable td, .problemtable td {
@@ -455,31 +456,35 @@ table.labtable, table.problemtable {
 }
 
 thead.labtable, thead.problemtable {
-  background-color: rgba(0, 96, 169, 0.75);
+  background-color: rgba(0, 96, 169, 0.4);
   color: white;
-  border: 1px solid rgba(0, 96, 169, 0.75);
+  border: 1px solid rgba(0, 96, 169, 0.4);
 }
 
 .complete {
-  background-color: rgba(156, 223, 140, 0.75);
+  background-color: rgba(156, 223, 140, 0.4);
 }
 
 .incomplete {
-  background-color: rgba(255, 102, 102, 0.75);
+  background-color: rgba(255, 102, 102, 0.4);
+}
+
+.lab, .problem {
+  background-color: rgba(231, 231, 231, 0.4);
 }
 
 .lab:hover, .problem:hover {
-  background-color: #CCCCCC;
+  background-color: rgba(204, 204, 204, 0.4);
   transition-timing-function: ease-in;
   transition-duration: 0.2s;
 }
 
 .complete:hover {
-  background-color: rgba(113, 167, 100, 0.75);
+  background-color: rgba(113, 167, 100, 0.4);
 }
 
 .incomplete:hover {
-  background-color: rgba(204, 81, 81, 0.75);
+  background-color: rgba(204, 81, 81, 0.4);
 }
 
 .lab a, .problem a {
@@ -489,11 +494,6 @@ thead.labtable, thead.problemtable {
 .lab a:hover, .problem a:hover {
   text-decoration: underline;
   color: rgb(1, 125, 173);
-}
-
-.labdiv, .problemdiv {
-  margin: 2rem;
-  background-color: rgba(231, 231, 231, 0.75);
 }
 
 .problem-description {
