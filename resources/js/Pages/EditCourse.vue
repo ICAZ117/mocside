@@ -98,7 +98,9 @@
             class="form-control"
           /> -->
           <ul>
-            <li v-for="student in students" :key="student.id">{{ student.name }}</li>
+            <li v-for="student in students" :key="student.id">{{ student.name }}
+              <a @click="removeStudent(student.id)">X</a>
+            </li>
           </ul>
         </div>
         <br />
@@ -186,8 +188,9 @@ export default {
         }
       }
     },
-    async removeStudent() {
+    async removeStudent(id) {
       //remove student ID from course's roster list
+      console.log("remove student: "+ id);
 
       //remove course ID from student's courses list
     },
