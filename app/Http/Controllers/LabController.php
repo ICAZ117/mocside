@@ -35,7 +35,7 @@ class LabController extends Controller
                 'course_id' => 'required|int',
                 'due_date' => 'required',
             ]);
-            return Lab::create($validData);
+            return new LabResource(Lab::create($validData));
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
