@@ -51,6 +51,7 @@
 
 <script>
 import * as API from "../services/API";
+import store from "../Store/index";
 export default {
   props: ["courseID"],
   emits: ["unmounting"],
@@ -109,7 +110,7 @@ export default {
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
       this.fscID = this.authUser.fsc_user.fsc_id;
-      const res = await APi.apiClient.get(`/progress/${this.fscID}`);
+      const res = await API.apiClient.get(`/progress/${this.fscID}`);
       this.progress = res.data;
     },
     async getPercent(lab) {
