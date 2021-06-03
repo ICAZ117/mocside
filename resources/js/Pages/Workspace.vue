@@ -364,7 +364,7 @@ import "ace-builds/src-noconflict/mode-python";
 
 export default {
   props: ["problemID", "lang"],
-  emits: ["assignment-unmounting"],
+  emits: ["unmounting"],
   data() {
     return {
       assignment: {},
@@ -396,7 +396,7 @@ export default {
     console.log(this.editorLangauge);
   },
   beforeUnmount() {
-    this.$emit("assignment-unmounting");
+    this.$emit("unmounting");
   },
 };
 </script>

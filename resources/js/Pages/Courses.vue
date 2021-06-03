@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-    <router-view @lab-unmounting="childUnmounting()" @edit-unmounting="childUnmounting()" v-if="childIsOpen" :courseID="courseID"></router-view>
+    <router-view @unmounting="Unmounting()" v-if="childIsOpen" :courseID="courseID"></router-view>
   </div>
 </template>
 
@@ -143,7 +143,7 @@ export default {
         this.courses.push(course.data);
       }
     },
-    childUnmounting() {
+    Unmounting() {
       this.childIsOpen = false;
       this.courseID = null;
     },

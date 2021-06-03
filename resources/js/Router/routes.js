@@ -33,7 +33,12 @@ const routes = [
                                 path: ':problem_id/workspace',
                                 component: () => import("../Pages/Workspace.vue"),
                                 name: "Assignment",
-                            }
+                            },
+                            {
+                                path: ':problem_id/edit',
+                                component: () => import("../Pages/CreateAssignment.vue"),
+                                name: "EditAssignment",
+                            },
                         ]
                     },
                     {

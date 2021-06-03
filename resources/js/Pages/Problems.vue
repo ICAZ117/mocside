@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!assignmentisOpen">
+  <div v-if="!childisOpen">
     <!-- Main Page-->
 
     <div class="courses header">
@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="problem in problems" :key="problem.id">
+        <template v-for="(problem, key) in problems" :key="problem.id">
           <tr
             class="problem pointer"
             @click="toggleExpansion(problem.id)"
@@ -73,13 +73,15 @@
               </div>
             </td>
           </tr>
+          <a @click="editProblem(problem.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
+          <a @click="deleteProblem(problem, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
         </template>
       </tbody>
     </table>
   </div>
   <router-view
-    @assignment-unmounting="assignmentUnmounting()"
-    v-if="assignmentisOpen"
+    @unmounting="Unmounting()"
+    v-if="childisOpen"
     :problemID="problemID"
     :lang="lang"
   ></router-view>
@@ -93,15 +95,38 @@ export default {
   data() {
     return {
       problems: [],
-      assignmentisOpen: false,
+      childisOpen: false,
       problemID: null,
       expandedProblem: null,
       lang: "",
     };
   },
   methods: {
+    async addProblem() {
+      var payload = {
+        "name": "New Problem",
+        "description": "New Problem",
+        "lab_id": this.labID,
+      }
+      const problem = await API.apiClient.post(`/problems`, payload);
+      this.problemID = problem.data.id;
+      this.problems.push(problem.data);
+      this.childIsOpen = true;
+      this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
+    },
+    editProblem(id) {
+      this.chidlIsOpen = true;
+      this.problemID = id;
+      this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
+    },
+    async deleteProblem(problem, key) {
+      const res = await API.apiClient.delete(`/problems/${problem.id}`);
+
+      //filter the problems list
+      this.problems = this.problems.filter((p, i) => i  != key);
+    },
     goToProblem(id) {
-      this.assignmentisOpen = true;
+      this.childisOpen = true;
       this.problemID = id;
       this.$router.push({ name: "Assignment", params: { problem_id: id } });
     },
@@ -109,8 +134,8 @@ export default {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
       this.problems = rawProblems.data.data;
     },
-    assignmentUnmounting() {
-      this.assignmentisOpen = false;
+    Unmounting() {
+      this.childisOpen = false;
       this.problemID = null;
     },
     isExpanded(key) {
@@ -132,7 +157,7 @@ export default {
     },
   },
   mounted() {
-    this.assignmentisOpen = false;
+    this.childisOpen = false;
     this.getProblems();
   },
   beforeUnmount() {

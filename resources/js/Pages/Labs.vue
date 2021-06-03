@@ -53,7 +53,7 @@
 import * as API from "../services/API";
 export default {
   props: ["courseID"],
-  emits: ["lab-unmounting"],
+  emits: ["unmounting"],
   data() {
     return {
       labs: [],
@@ -76,7 +76,6 @@ export default {
       this.labID = null;
     },
     async addLab() {
-      console.log("add lab");
       var payload = {
         "name": "New Lab",
         "description": "New Lab",
@@ -84,8 +83,10 @@ export default {
         "due_date": "2021-06-3 23:59:59",
       }
       const lab = await API.apiClient.post(`/labs/`, payload);
-      this.labs.push(lab.data);
-      this.labID  = lab.data.id;
+      this.labs.push(lab.data.data);
+      console.log(lab.data.data);
+      this.labID  = lab.data.data.id;
+      console.log(this.labID);
       this.childisOpen = true;
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
@@ -95,7 +96,7 @@ export default {
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
     async removeLab(lab, key) {
-      //remove from lab the current course..right now we only save one course....it will need to change to be multiple courses later
+      //remove from lab the current course
       const res = await API.apiClient.delete(`/labs/${lab}`);
 
       //filter from labs
@@ -107,7 +108,7 @@ export default {
     this.getLabs();
   },
   beforeUnmount() {
-    this.$emit("lab-unmounting");
+    this.$emit("unmounting");
   },
 };
 </script>
