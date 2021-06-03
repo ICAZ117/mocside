@@ -11,6 +11,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestCaseController;
 
@@ -66,6 +67,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
     Route::post('/images/store', [AvatarController::class, 'store']);
+
+    Route::get('/progress/{id}', [ProgressController::class, 'show']);
+    Route::post('/progress', [ProgressController::class, 'store']);
+    Route::put('/progress/{id}', [ProgressController::class, 'update']);
+    Route::delete('/progress/{id}', [ProgressController::class, 'destroy']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
