@@ -1,7 +1,7 @@
 <template>
   <div class="create-assignment">
     <div class="container">
-      <button class="btn btn-success btn-lg">PUBLISH TO ALL</button>
+      <button class="btn btn-primary btn-md ml-1">PUBLISH TO ALL</button>
       <br />
       <div class="no-decor">
         <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
