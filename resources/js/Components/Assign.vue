@@ -13,32 +13,35 @@
 
               <hr class="courses my-0" />
 
-              <div class="row">
-                <div class="col-4">
-                  Publish: 
+              <div class="card-body center">
+                <div class="row">
+                  <div class="col-4">Publish:</div>
+                  <div class="col-8">
+                    <label class="switch">
+                      <input type="checkbox" />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
                 </div>
-                <div class="col-8">
-                  <label class="switch">
-                    <input type="checkbox" />
-                    <span class="slider round"></span>
-                  </label>
-                </div>
+
+                <br />
+
+                <label for="dueDate">Due Date: </label>
+                <input type="date" id="dueDate" />
               </div>
+              <div class="card-footer">
+                <hr class="courses my-0" />
 
-              <br />
-
-              <label for="dueDate">Due Date: </label>
-              <input type="date" id="dueDate" />
-
-              <hr class="courses my-0" />
-
-              <div class="row center">
+                <div class="row center">
                   <div class="col-6">
                     <small><a href="" class="no-decor">Student Preview</a></small>
                   </div>
                   <div class="col-6">
-                    <small><a href="" class="no-decor">Gradebook & Submissions</a></small>
+                    <small
+                      ><a href="" class="no-decor">Gradebook &<br />Submissions</a></small
+                    >
                   </div>
+                </div>
               </div>
             </div>
           </div>
