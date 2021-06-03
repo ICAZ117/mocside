@@ -95,6 +95,10 @@ h4 {
     cursor: pointer !important;
 }
 
+.center {
+  margin: auto!important;
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;
@@ -436,7 +440,6 @@ hr.courses {
 .coursecard {
     border: 1px solid #a1a1a1 !important;
     min-height: fit-content !important;
-    padding: 5px!important;
 }
 
 .width {
@@ -828,6 +831,12 @@ thead.problemtable {
 
 .publish-all {
     margin: 0 0 25px 12px !important;
+}
+
+.editcoursecard {
+  border: 1px solid #a1a1a1 !important;
+  min-height: 200px !important;
+  padding: 10px;
 }
 
 /*============= FOOTER =============*/
