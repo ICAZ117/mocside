@@ -75,6 +75,7 @@ export default {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data.data;
       await this.getStudent();
+      return 0;
     },
     Unmounting() {
       this.childisOpen = false;
@@ -112,6 +113,8 @@ export default {
       this.fscID = this.authUser.fsc_user.fsc_id;
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
       this.progress = res.data;
+      console.log(this.progress);
+      return this.progress;
     },
     async getPercent(lab) {
       var d = JSON.parse(this.progress.labs);
