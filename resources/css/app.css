@@ -423,6 +423,7 @@ nav {
 
 .card-title {
     font-size: large !important;
+    max-height: 239.5px!important;
 }
 
 .card {
@@ -837,6 +838,15 @@ thead.problemtable {
   border: 1px solid #a1a1a1 !important;
   min-height: 200px !important;
   padding: 10px;
+}
+
+.card-body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card-footer {
+  
 }
 
 /*============= FOOTER =============*/
