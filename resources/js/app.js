@@ -13,10 +13,15 @@ import VuelidatePlugin from '@vuelidate/core'
 // Font Awesome
 import "./all.min";
 
+// Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
+// Vue3 Tabs
+import Tabs from 'vue3-tabs';
+
 const app = createApp(App);
+app.use(Tabs);
 app.use(VuelidatePlugin);
 app.use(router);
 app.use(store);
