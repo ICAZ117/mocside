@@ -91,7 +91,7 @@ export default {
 		  const res = await API.apiClient.put(`/labs/${this.labID}`, payload);
 	  },
   },
-  mounted() {
+  async mounted() {
     console.log("mounted edit lab");
 	const Lab = await API.apiClient.get(`/labs/full/${this.labID}`);
 	this.labForm.name = Lab.data.name;
