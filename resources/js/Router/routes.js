@@ -76,6 +76,11 @@ const routes = [
         component: () => import("../Pages/Register.vue"),
         name: "Register"
     },
+    {
+        path: "/create-assignment",
+        component: () => import("../Pages/CreateAssignment.vue"),
+        name: "CreateAssignment"
+    },
 ]
 
 export default routes;
