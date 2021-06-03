@@ -30,7 +30,6 @@ class LabController extends Controller
     {
         if (Auth::user()->isAdmin()) {
             $validData = $request->validate([
-                'id' => 'required|int',
                 'name' => 'required',
                 'description' => 'required',
                 'course_id' => 'required|int',

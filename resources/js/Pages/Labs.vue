@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!problemisOpen">
+  <div v-if="!childisOpen">
     <!-- Main Page-->
     <div class="courses header">
       <h2>Labs</h2>
@@ -29,7 +29,7 @@
             <!-- <td>{{ lab.lastActivity }}</td> -->
             <td>4/20/0420</td>
           </tr>
-          <a class="pointer no-decor" @click="editLab">•••</a>
+          <a class="pointer no-decor" @click="editLab(lab.id)">•••</a>
           <a class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
         </template>
 
@@ -46,11 +46,7 @@
       </tbody>
     </table>
   </div>
-  <router-view
-    @problems-unmounting="problemUnmounting()"
-    v-if="problemisOpen"
-    :labID="labID"
-  ></router-view>
+  <router-view @unmounting="Unmounting()" v-if="childisOpen" :labID="labID"></router-view>
 </template>
 
 <script>
@@ -61,13 +57,13 @@ export default {
   data() {
     return {
       labs: [],
-      problemisOpen: false,
+      childisOpen: false,
       labID: null,
     };
   },
   methods: {
     goToProblems(id) {
-      this.problemisOpen = true;
+      this.childisOpen = true;
       this.labID = id;
       this.$router.push({ name: "Problems", params: { lab_id: id } });
     },
@@ -75,15 +71,27 @@ export default {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data.data;
     },
-    problemUnmounting() {
-      this.problemisOpen = false;
+    Unmounting() {
+      this.childisOpen = false;
       this.labID = null;
     },
-    addLab() {
+    async addLab() {
       console.log("add lab");
+      var payload = {
+        "name": "New Lab",
+        "description": "New Lab",
+        "course_id": this.courseID,
+      }
+      const lab = await API.apiClient.post(`/labs/`, payload);
+      this.labs.push(lab.data);
+      this.labID  = lab.data.id;
+      this.childisOpen = true;
+      this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
-    editLab() {
-      console.log("edit lab");
+    editLab(id) {
+      this.childisOpen = true;
+      this.labID = id;
+      this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
     async removeLab(lab, key) {
       //remove from lab the current course..right now we only save one course....it will need to change to be multiple courses later
@@ -99,7 +107,7 @@ export default {
     },
   },
   mounted() {
-    this.problemisOpen = false;
+    this.childisOpen = false;
     this.getLabs();
   },
   beforeUnmount() {
