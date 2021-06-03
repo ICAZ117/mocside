@@ -35,7 +35,7 @@ const routes = [
                                 name: "Assignment",
                             },
                             {
-                                path: ':problem_id/create',
+                                path: ':problem_id/edit',
                                 component: () => import("../Pages/CreateAssignment.vue"),
                                 name: "EditAssignment",
                             },
