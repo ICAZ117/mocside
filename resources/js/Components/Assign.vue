@@ -33,14 +33,12 @@
               <hr class="courses my-0" />
 
               <div class="row">
-                <small>
                   <div class="col-6">
-                    <a href="" class="no-decor">Student Preview</a>
+                    <small><a href="" class="no-decor">Student Preview</a></small>
                   </div>
                   <div class="col-6">
-                    <a href="" class="no-decor">Gradebook & Submissions</a>
+                    <small><a href="" class="no-decor">Gradebook & Submissions</a></small>
                   </div>
-                </small>
               </div>
             </div>
           </div>
