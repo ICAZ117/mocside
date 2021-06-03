@@ -21,8 +21,7 @@
       <tbody>
         <template v-for="problem in problems" :key="problem.id">
           <tr
-            class="problem"
-            style="cursor: pointer"
+            class="problem pointer"
             @click="toggleExpansion(problem.id)"
           >
             <td v-show="!isExpanded(problem.id)"><i class="fas fa-chevron-right"></i></td>
