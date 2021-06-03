@@ -29,7 +29,7 @@ class ProgressController extends Controller
         if (Auth::user()->fsc_id == $id)
         {
             // updating progress
-            $progress = Progess::where('fsc_id', $id)->first();
+            $progress = Progress::where('fsc_id', $id)->first();
             $progress->update($request->all());
             return response()->json(['data' => $progress]);
         }
