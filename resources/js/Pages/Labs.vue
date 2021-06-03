@@ -26,8 +26,8 @@
             <td>{{ getPercent(lab) }}</td>
             <!-- <td>69%</td> -->
             <td>{{ lab.due_date.split(" ")[0] }}</td>
-            <td>{{ getActivity(lab) }}</td>
-            <!-- <td>4/20/0420</td> -->
+            <!-- <td>{{ getActivity(lab) }}</td> -->
+            <td>4/20/0420</td>
           </tr>
           <a class="pointer no-decor" @click="editLab(lab.id)">•••</a>
           <a class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
@@ -116,7 +116,7 @@ export default {
       return this.progress;
     },
     async getPercent(lab) {
-      await getStudent();
+      await this.getStudent();
       console.log(this.progress);
       console.log(this.progress.labs);
       var d = this.progress.labs;
