@@ -74,7 +74,7 @@
             </td>
           </tr>
           <a @click="editProblem(problem.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
-          <a @click="deleteProblem(problem.id, problem, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
+          <a @click="deleteProblem(problem, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
         </template>
       </tbody>
     </table>
