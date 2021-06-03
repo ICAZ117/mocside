@@ -81,6 +81,7 @@ export default {
         "name": "New Lab",
         "description": "New Lab",
         "course_id": this.courseID,
+        "due_date": "2021-06-3 23:59:59",
       }
       const lab = await API.apiClient.post(`/labs/`, payload);
       this.labs.push(lab.data);
