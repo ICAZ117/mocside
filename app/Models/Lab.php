@@ -26,5 +26,6 @@ class Lab extends Model
         'description',
         'due_date',
         'course_id',
+        'publish_date',
     ];
 }
