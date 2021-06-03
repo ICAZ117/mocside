@@ -60,8 +60,8 @@ html {
 
 body {
   overflow-x: hidden!important;
-  font-family: 'Montserrat';
-  font-weight: normal;
+  font-family: 'Montserrat'!important;
+  font-weight: normal!important;
   color: #616971!important;
   background-image: url("../img/background.jpg")!important;
   background-size: cover!important;
