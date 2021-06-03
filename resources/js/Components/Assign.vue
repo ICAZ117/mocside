@@ -13,8 +13,12 @@
 
               <hr class="courses my-0" />
 
-              <label class="form-check-label" for="publish">Publish: </label>
-              <input class="form-check-input" type="checkbox" id="publish" />
+              <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+
+              <br />
 
               <label for="dueDate">Due Date</label>
               <input type="date" id="dueDate" />
