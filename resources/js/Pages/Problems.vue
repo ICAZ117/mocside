@@ -100,6 +100,17 @@ export default {
     };
   },
   methods: {
+    async addProblem() {
+
+    },
+    editProblems(id) {
+      this.chidlIsOpen = true;
+      this.problemID = id;
+      this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
+    },
+    async deleteProblem() {
+
+    },
     goToProblem(id) {
       this.childisOpen = true;
       this.problemID = id;
