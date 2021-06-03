@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('courses', CourseController::class);
     
     Route::get('/labs/{course_id}', [LabController::class, 'showCourse']);
+    Route::get('/labs/full/{id}', [LabController::class, 'show']);
     Route::post('/labs', [LabController::class, 'store']);
     Route::put('/labs/{id}', [LabController::class, 'update']);
     Route::delete('/labs/{id}', [LabController::class, 'destroy']);
