@@ -115,7 +115,7 @@ export default {
       this.progress = res.data;
       return this.progress;
     },
-    getPercent(lab) {
+    async getPercent(lab) {
       await getStudent();
       console.log(this.progress);
       console.log(this.progress.labs);
