@@ -92,11 +92,10 @@ export default {
 	  },
   },
   async mounted() {
-    console.log("mounted edit lab");
 	const Lab = await API.apiClient.get(`/labs/full/${this.labID}`);
 	this.labForm.name = Lab.data.name;
 	this.labForm.description = Lab.data.description;
-	this.labForm.dateDue = Lab.data.due_date;
+	this.labForm.dateDue = Lab.data.due_date.split(" ")[0];
 	this.labForm.datePublish = Lab.data.publish_date;
   },
   beforeUnmount() {
