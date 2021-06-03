@@ -139,9 +139,9 @@ export default {
       }
     },
   },
-  beforeMount() {
+  async beforeMount() {
     this.childisOpen = false;
-    this.getLabs();
+    await this.getLabs();
   },
   beforeUnmount() {
     this.$emit("unmounting");
