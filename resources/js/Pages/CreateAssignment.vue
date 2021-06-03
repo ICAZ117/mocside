@@ -11,8 +11,23 @@
     />
   </tabs>
   <tab-panels v-model="selectedTab" :animate="true">
-    <tab-panel v-for="(tab, i) in tabs" :key="`tp${i}`" :val="tab">
-      {{ tab }}
+    <tab-panel>
+      1
+    </tab-panel>
+    <tab-panel>
+      2
+    </tab-panel>
+    <tab-panel>
+      3
+    </tab-panel>
+    <tab-panel>
+      4
+    </tab-panel>
+    <tab-panel>
+      5
+    </tab-panel>
+    <tab-panel>
+      6
     </tab-panel>
   </tab-panels>
 </template>
