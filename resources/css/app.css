@@ -435,7 +435,8 @@ hr.courses {
 
 .coursecard {
     border: 1px solid #a1a1a1 !important;
-    min-height: 277.5px !important;
+    min-height: fit-content !important;
+    padding: 5px!important;
 }
 
 .width {
