@@ -62,7 +62,7 @@ export default {
       labID: null,
       authUser: null,
       fscID: null,
-      progress: null,
+      progress: [],
     };
   },
   methods: {
