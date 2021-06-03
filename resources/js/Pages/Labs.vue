@@ -83,8 +83,9 @@ export default {
         "due_date": "2021-06-3 23:59:59",
       }
       const lab = await API.apiClient.post(`/labs/`, payload);
-      this.labs.push(lab.data);
-      this.labID  = lab.data.id;
+      this.labs.push(lab.data.data);
+      console.log(lab.data.data);
+      this.labID  = lab.data.data.id;
       console.log(this.labID);
       this.childisOpen = true;
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
