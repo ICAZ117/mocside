@@ -11,31 +11,26 @@
     />
   </tabs>
   <tab-panels v-model="selectedTab" :animate="true">
-    <tab-panel>
-      1
-    </tab-panel>
-    <tab-panel>
-      2
-    </tab-panel>
-    <tab-panel>
-      3
-    </tab-panel>
-    <tab-panel>
-      4
-    </tab-panel>
-    <tab-panel>
-      5
-    </tab-panel>
-    <tab-panel>
-      6
-    </tab-panel>
+    <tab-panel :val="'Overview'"> 1 </tab-panel>
+    <tab-panel :val="'Assign'"> 2 </tab-panel>
+    <tab-panel :val="'Template'"> 3 </tab-panel>
+    <tab-panel :val="'Test Bench'"> 4 </tab-panel>
+    <tab-panel :val="'Model Solution'"> 5 </tab-panel>
+    <tab-panel :val="'Grade Book'"> 6 </tab-panel>
   </tab-panels>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 
-const tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "Grade Book"];
+const tabs = [
+  "Overview",
+  "Assign",
+  "Template",
+  "Test Bench",
+  "Model Solution",
+  "Grade Book",
+];
 
 export default defineComponent({
   name: "Example",
