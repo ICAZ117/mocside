@@ -84,6 +84,7 @@ export default {
       }
       const lab = await API.apiClient.post(`/labs/`, payload);
       this.labs.push(lab.data);
+      console.log(lab.data);
       this.labID  = lab.data.id;
       console.log(this.labID);
       this.childisOpen = true;
