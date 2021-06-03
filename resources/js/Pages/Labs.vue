@@ -120,7 +120,6 @@ export default {
     },
     async getPercent(lab) {
       var d = JSON.parse(this.progress.labs);
-      console.log(d);
       var c;
       for (let i = 0; i<=d.length; i++) {
         if (d[i].lab_id == lab.id) {
