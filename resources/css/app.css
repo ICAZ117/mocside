@@ -298,7 +298,7 @@ nav {
   text-transform: uppercase!important;
   font-size: 1rem!important;
   border-width: medium!important;
-  width: 8rem!important;
+  min-width: 8rem!important;
 }
 
 .btn-danger {
@@ -728,6 +728,10 @@ thead.labtable, thead.problemtable {
     border-bottom-width: 2px!important;
     border-style: solid!important;
     border-color: white!important;
+}
+
+.assignment-description {
+  height: 300px!important;
 }
 
 /*============= FOOTER =============*/

@@ -1,11 +1,12 @@
 <template>
-  <div class="container overview">
-    <h4 class="assignment-description">Description:</h4>
-    <QuillEditor theme="snow" toolbar="full" />
-    <hr />
-    <h6>Proceed with caution!</h6>
-    <br />
-    <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
+  <div class="overview">
+    <div class="container">
+      <h4>Description:</h4>
+      <QuillEditor theme="snow" toolbar="full" class="assignment-description"/>
+      <hr />
+      <h5>Proceed with caution!</h5>
+      <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
+    </div>
   </div>
 </template>
 
