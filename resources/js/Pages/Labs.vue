@@ -132,7 +132,7 @@ export default {
         return "0%";
       }
       else {
-        return parseInt(c.num_completed / lab.num_problems) + "%";
+        return (parseInt(c.num_completed / lab.num_problems) * 100 )+ "%";
       }
 
     },
