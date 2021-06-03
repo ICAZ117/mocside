@@ -16,4 +16,9 @@ class Professor extends Model
         'pronouns',
         'courses',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'fsc_id', 'fsc_id');
+    }
 }
