@@ -1,8 +1,6 @@
 <template>
   <h3>Basic Example</h3>
-  <tabs
-    v-model="selectedTab"
-  >
+  <tabs v-model="selectedTab">
     <tab
       class="tab"
       v-for="(tab, i) in tabs"
@@ -12,41 +10,30 @@
       :indicator="true"
     />
   </tabs>
-  <tab-panels
-    v-model="selectedTab"
-    :animate="true"
-  >
-    <tab-panel
-      v-for="(tab, i) in tabs"
-      :key="`tp${i}`"
-      :val="tab"
-    >
+  <tab-panels v-model="selectedTab" :animate="true">
+    <tab-panel v-for="(tab, i) in tabs" :key="`tp${i}`" :val="tab">
       {{ tab }}
     </tab-panel>
   </tab-panels>
 </template>
- 
+
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue';
- 
-const tabs = ['A', 'B', 'C'];
- 
+import { defineComponent, reactive, toRefs } from "vue";
+
+const tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "Grade Book"];
+
 export default defineComponent({
-  name: 'Example',
+  name: "Example",
   setup() {
     const state = reactive({
-      selectedTab: tabs[1]
+      selectedTab: tabs[1],
     });
     return {
       tabs,
-      ...toRefs(state)
+      ...toRefs(state),
     };
-  }
+  },
 });
 </script>
- 
-<style scoped>
-.tab {
-  padding: 10px 20px;
-}
-</style>
+
+<style></style>
