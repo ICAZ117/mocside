@@ -23,11 +23,11 @@
               <a>{{ lab.name }}</a>
             </td>
             <td>{{ lab.num_problems }}</td>
-            <td>{{ getPercent(lab) }}</td>
+            <td>{{ lab.percent }}</td>
             <!-- <td>69%</td> -->
             <td>{{ lab.due_date.split(" ")[0] }}</td>
-            <!-- <td>{{ getActivity(lab) }}</td> -->
-            <td>4/20/0420</td>
+            <td>{{ lab.activity }}</td>
+            <!-- <td>4/20/0420</td> -->
           </tr>
           <a class="pointer no-decor" @click="editLab(lab.id)">•••</a>
           <a class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
@@ -74,8 +74,11 @@ export default {
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data.data;
-      // await this.getStudent();
-      return 0;
+      const prog = await this.getStudent();
+      for (let i = 0; i <= this.labs; i++) {
+        this.labs[i]['percent'] = await this.getPercent(this.labs[i]);
+        this.labs[i]['activity'] = await this.getActivity(this.labs[i]);
+      }
     },
     Unmounting() {
       this.childisOpen = false;
@@ -116,7 +119,6 @@ export default {
       return this.progress;
     },
     async getPercent(lab) {
-      await this.getStudent();
       console.log(this.progress);
       console.log(this.progress.labs);
       var d = this.progress.labs;
@@ -137,6 +139,7 @@ export default {
 
     },
     getActivity(lab) {
+      console.log(this.progress);
       var d = JSON.parse(this.progress.labs);
       for (let i = 0; i<=d.length; i++) {
         if (d[i].lab_id == lab.id) {
