@@ -716,8 +716,7 @@ thead.labtable, thead.problemtable {
 }
 
 .overview {
-  height: calc((100vh - var(--nav-height) - 89px))!important;
-  flex: auto!important;
+  background-color: white;
 }
 
 .tab {
