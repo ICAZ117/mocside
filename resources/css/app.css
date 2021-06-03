@@ -90,6 +90,7 @@ h1, h4 {
 .pointer {
   cursor: pointer!important;
 }
+
 /*============= NAVIGATION =============*/
 
 nav {
@@ -330,6 +331,7 @@ nav {
 }
 
 /*============= COURSES =============*/
+
 .courses.header {
   width: 100%!important;
   background-color: var(--FSCblue)!important;
@@ -520,6 +522,7 @@ thead.labtable, thead.problemtable {
   border: none!important;
   text-decoration: none!important;
 }
+
 /*============= LOGIN PAGE =============*/
 
 .login {
@@ -716,7 +719,9 @@ thead.labtable, thead.problemtable {
 }
 
 .overview {
-  background-color: white;
+  padding-top: 2rem!important;
+  background-color: white!important;
+  height: calc(100vh - (var(--nav-height) + 88px));
 }
 
 .tab {
@@ -724,10 +729,10 @@ thead.labtable, thead.problemtable {
 }
 
 .active {
-    border-width: 0!important;
-    border-bottom-width: 2px!important;
-    border-style: solid!important;
-    border-color: white!important;
+  border-width: 0!important;
+  border-bottom-width: 2px!important;
+  border-style: solid!important;
+  border-color: white!important;
 }
 
 .assignment-description {
