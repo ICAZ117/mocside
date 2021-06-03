@@ -55,6 +55,8 @@ const tabs = [
 ];
 
 export default defineComponent({
+  props: ['problemID'],
+  emits: ['unmounting'],
   components: { Overview, Assign, Template, TestBench, ModelSolution, GradeBook },
   name: "Example",
   setup() {
@@ -72,6 +74,9 @@ export default defineComponent({
         title: "",
       },
     };
+  },
+  beforeUnmount() {
+    this.$emit("unmounting");
   },
 });
 </script>
