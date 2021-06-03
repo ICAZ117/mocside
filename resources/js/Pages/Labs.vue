@@ -116,6 +116,8 @@ export default {
       return this.progress;
     },
     getPercent(lab) {
+      console.log(this.progress);
+      console.log(this.progress.labs);
       var d = this.progress.labs;
       console.log(d);
       var c;
