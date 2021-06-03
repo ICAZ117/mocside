@@ -119,9 +119,7 @@ export default {
       return this.progress;
     },
     async getPercent(lab) {
-      console.log(this.progress);
-      console.log(this.progress.labs);
-      var d = this.progress.labs;
+      var d = JSON.parse(this.progress.labs);
       console.log(d);
       var c;
       for (let i = 0; i<=d.length; i++) {
@@ -139,7 +137,6 @@ export default {
 
     },
     async getActivity(lab) {
-      console.log(this.progress);
       var d = JSON.parse(this.progress.labs);
       for (let i = 0; i<=d.length; i++) {
         if (d[i].lab_id == lab.id) {
