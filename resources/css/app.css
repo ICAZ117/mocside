@@ -91,6 +91,10 @@ h4 {
     flex-wrap: wrap;
 }
 
+.move-up {
+  padding-top: 10px!important;
+}
+
 .pointer {
     cursor: pointer !important;
 }
@@ -224,7 +228,7 @@ nav {
 .nav-link {
     color: #555555 !important;
     height: 60px !important;
-    padding-top: 17px !important;
+    padding-top: 17px!important;
     width: 150px !important;
     text-align: center !important;
 }
@@ -843,6 +847,11 @@ thead.problemtable {
 .card-body {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.card-footer {
+  margin: auto!important;
+  border: none!important;
 }
 
 /*============= FOOTER =============*/

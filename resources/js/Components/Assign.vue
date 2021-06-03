@@ -29,9 +29,10 @@
                 <label for="dueDate">Due Date: </label>
                 <input type="date" id="dueDate" />
               </div>
-              <div class="card-footer">
-                <hr class="courses my-0" />
 
+              <hr class="courses my-0" />
+              
+              <div class="card-footer">
                 <div class="row center">
                   <div class="col-6">
                     <small><a href="" class="no-decor">Student Preview</a></small>
