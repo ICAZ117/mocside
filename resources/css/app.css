@@ -718,7 +718,7 @@ thead.labtable, thead.problemtable {
   border-bottom: 2px solid white!important;
 }
 
-.overview {
+.create-assignment {
   padding-top: 2rem!important;
   background-color: white!important;
   height: calc(100vh - (var(--nav-height) + 88px));

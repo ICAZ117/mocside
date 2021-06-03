@@ -1,5 +1,5 @@
 <template>
-  <div class="overview">
+  <div class="create-assignment">
     <div class="container">
       <h4>Description:</h4>
       <QuillEditor theme="snow" toolbar="full" class="assignment-description"/>
