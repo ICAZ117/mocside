@@ -75,7 +75,7 @@ export default {
       this.childisOpen = false;
       this.labID = null;
     },
-    addLab() {
+    async addLab() {
       console.log("add lab");
       var payload = {
         "name": "New Lab",
