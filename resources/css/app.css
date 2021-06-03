@@ -92,7 +92,7 @@ h4 {
 }
 
 .move-up {
-  padding-top: 10px!important;
+    padding-top: 10px !important;
 }
 
 .pointer {
@@ -100,7 +100,7 @@ h4 {
 }
 
 .center {
-  margin: auto!important;
+    margin: auto !important;
 }
 
 /* The switch - the box around the slider */
@@ -228,13 +228,33 @@ nav {
 .nav-link {
     color: #555555 !important;
     height: 60px !important;
-    padding-top: 17px!important;
+    padding-top: 17px !important;
     width: 150px !important;
     text-align: center !important;
 }
 
 .nav-link.active,
 .nav-link:hover {
+    color: white !important;
+    background-color: var(--FSCred) !important;
+    transition-timing-function: linear !important;
+    transition-duration: 200ms !important;
+}
+
+.move-up {
+    color: #555555 !important;
+    height: 60px !important;
+    padding-top: 10px !important;
+    width: 150px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out !important;
+    padding-bottom: 0.5rem !important;
+}
+
+.move-up.active,
+.move-up:hover {
     color: white !important;
     background-color: var(--FSCred) !important;
     transition-timing-function: linear !important;
@@ -275,6 +295,25 @@ nav {
 
 .dark-nav-link.active,
 .dark-nav-link:hover {
+    color: var(--FSCred) !important;
+    background-color: white !important;
+    transition-timing-function: linear !important;
+    transition-duration: 200ms !important;
+}
+
+.dark-move-up {
+    color: white !important;
+    height: 60px !important;
+    padding-top: 10px !important;
+    width: 150px !important;
+    text-align: center !important;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out !important;
+    padding-bottom: 0.5rem !important;
+}
+
+.dark-move-up.active,
+.dark-move-up:hover {
     color: var(--FSCred) !important;
     background-color: white !important;
     transition-timing-function: linear !important;
@@ -427,7 +466,7 @@ nav {
 
 .card-title {
     font-size: large !important;
-    max-height: 239.5px!important;
+    max-height: 239.5px !important;
 }
 
 .card {
@@ -839,19 +878,19 @@ thead.problemtable {
 }
 
 .editcoursecard {
-  border: 1px solid #a1a1a1 !important;
-  min-height: 285px !important;
-  padding: 10px;
+    border: 1px solid #a1a1a1 !important;
+    min-height: 285px !important;
+    padding: 10px;
 }
 
 .card-body {
-  padding-top: 10px;
-  padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .card-footer {
-  margin: auto!important;
-  border: none!important;
+    margin: auto !important;
+    border: none !important;
 }
 
 /*============= FOOTER =============*/
