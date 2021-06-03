@@ -1,13 +1,7 @@
-<template>
-  This is an overview in a component
-</template>
+<template>Overview</template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -25,17 +25,25 @@
 
   <tab-panels v-model="selectedTab" :animate="true">
     <tab-panel :val="'Overview'"> <Overview /> </tab-panel>
-    <tab-panel :val="'Assign'"> 2 {{ this.test }} </tab-panel>
-    <tab-panel :val="'Template'"> 3 {{ this.test }} </tab-panel>
-    <tab-panel :val="'Test Bench'"> 4 {{ this.test }} </tab-panel>
-    <tab-panel :val="'Model Solution'"> 5 {{ this.test }} </tab-panel>
-    <tab-panel :val="'Grade Book'"> 6 {{ this.test }} </tab-panel>
+    <tab-panel :val="'Assign'"> <Assign /> </tab-panel>
+    <tab-panel :val="'Template'"> <Template /> </tab-panel>
+    <tab-panel :val="'Test Bench'"> <TestBench /> </tab-panel>
+    <tab-panel :val="'Model Solution'"> <ModelSolution /> </tab-panel>
+    <tab-panel :val="'Grade Book'"> <GradeBook /> </tab-panel>
   </tab-panels>
 </template>
 
 <script lang="ts">
+// Imports for tab functionality. Note: VScode is wrong, there's no error here smh
 import { defineComponent, reactive, toRefs } from "vue";
+
+// Assignment components
 import Overview from "../Components/Overview.vue";
+import Assign from "../Components/Assign.vue";
+import Template from "../Components/Template.vue";
+import TestBench from "../Components/TestBench.vue";
+import ModelSolution from "../Components/ModelSolution.vue";
+import GradeBook from "../Components/GradeBook.vue";
 
 const tabs = [
   "Overview",
@@ -47,7 +55,7 @@ const tabs = [
 ];
 
 export default defineComponent({
-  components: { Overview },
+  components: { Overview, Assign, Template, TestBench, ModelSolution, GradeBook },
   name: "Example",
   setup() {
     const state = reactive({
