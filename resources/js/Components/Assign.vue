@@ -11,9 +11,9 @@
                 CSC 2290: Object Oriented Programming
               </h4>
 
-              <div class="card-body center">
-                <hr class="courses my-0" />
+              <hr class="courses my-0" />
 
+              <div class="card-body center">
                 <div class="row">
                   <div class="col-4">Publish:</div>
                   <div class="col-8">
@@ -30,7 +30,6 @@
                 <input type="date" id="dueDate" />
               </div>
               <div class="card-footer">
-
                 <hr class="courses my-0" />
 
                 <div class="row center">
