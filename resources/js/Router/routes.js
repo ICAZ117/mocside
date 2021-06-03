@@ -35,7 +35,12 @@ const routes = [
                                 name: "Assignment",
                             }
                         ]
-                    }
+                    },
+                    {
+                        path: ':lab_id/edit',
+                        component: () => import("../Pages/EditLab.vue"),
+                        name: "EditLab",
+                    },
                 ]
             },
             {
@@ -75,6 +80,11 @@ const routes = [
         path: "/register",
         component: () => import("../Pages/Register.vue"),
         name: "Register"
+    },
+    {
+        path: "/create-assignment",
+        component: () => import("../Pages/CreateAssignment.vue"),
+        name: "CreateAssignment"
     },
 ]
 

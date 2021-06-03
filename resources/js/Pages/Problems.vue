@@ -89,7 +89,7 @@
 import * as API from "../services/API";
 export default {
   props: ["labID"],
-  emits: ["problems-unmounting"],
+  emits: ["unmounting"],
   data() {
     return {
       problems: [],
@@ -136,7 +136,7 @@ export default {
     this.getProblems();
   },
   beforeUnmount() {
-    this.$emit("problems-unmounting");
+    this.$emit("unmounting");
   },
 };
 </script>
