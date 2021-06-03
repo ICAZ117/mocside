@@ -139,7 +139,7 @@ export default {
       }
     },
   },
-  mounted() {
+  beforeMount() {
     this.childisOpen = false;
     this.getLabs();
   },
