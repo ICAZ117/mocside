@@ -35,7 +35,12 @@ const routes = [
                                 name: "Assignment",
                             }
                         ]
-                    }
+                    },
+                    {
+                        path: ':lab_id/edit',
+                        component: () => import("../Pages/EditLab.vue"),
+                        name: "EditLab",
+                    },
                 ]
             },
             {
