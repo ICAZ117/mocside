@@ -137,7 +137,7 @@ import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
 export default {
   props: ["courseID"],
-  emits: ["edit-unmounting"],
+  emits: ["unmounting"],
   components: {
     FlashMessage,
     FileUpload,
@@ -278,7 +278,7 @@ export default {
     this.getStudents();
   },
   beforeUnmount() {
-    this.$emit("edit-unmounting");
+    this.$emit("unmounting");
   },
 };
 </script>

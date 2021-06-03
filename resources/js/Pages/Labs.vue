@@ -53,7 +53,7 @@
 import * as API from "../services/API";
 export default {
   props: ["courseID"],
-  emits: ["lab-unmounting"],
+  emits: ["unmounting"],
   data() {
     return {
       labs: [],
@@ -107,7 +107,7 @@ export default {
     this.getLabs();
   },
   beforeUnmount() {
-    this.$emit("lab-unmounting");
+    this.$emit("unmounting");
   },
 };
 </script>
