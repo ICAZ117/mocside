@@ -96,12 +96,7 @@ export default {
     },
     async removeLab(lab, key) {
       //remove from lab the current course..right now we only save one course....it will need to change to be multiple courses later
-      var payload = {
-        "course_id": null,
-      }
-
-      //update the  courses labs list
-      const res = await API.apiClient.put(`/labs/${lab}`, payload);
+      const res = await API.apiClient.delete(`/labs/${lab}`);
 
       //filter from labs
       this.labs = this.labs.filter((l, i) => i  != key);
