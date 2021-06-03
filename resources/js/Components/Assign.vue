@@ -5,7 +5,7 @@
       <br />
       <div class="no-decor">
         <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-          <div class="card coursecard w-100">
+          <div class="card editcoursecard w-100">
             <div class="courses card-content">
               <h4 class="card-title my-3 mx-2 mb-0">
                 CSC 2290: Object Oriented Programming
@@ -27,12 +27,12 @@
 
               <br />
 
-              <label for="dueDate">Due Date</label>
+              <label for="dueDate">Due Date: </label>
               <input type="date" id="dueDate" />
 
               <hr class="courses my-0" />
 
-              <div class="row">
+              <div class="row center">
                   <div class="col-6">
                     <small><a href="" class="no-decor">Student Preview</a></small>
                   </div>
