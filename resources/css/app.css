@@ -739,6 +739,10 @@ thead.labtable, thead.problemtable {
   height: 300px!important;
 }
 
+.publish-all {
+  margin: 0 0 25px 12px!important;
+}
+
 /*============= FOOTER =============*/
 
 footer {
