@@ -95,7 +95,7 @@ export default {
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
     async removeLab(lab, key) {
-      //remove from lab the current course..right now we only save one course....it will need to change to be multiple courses later
+      //remove from lab the current course
       const res = await API.apiClient.delete(`/labs/${lab}`);
 
       //filter from labs

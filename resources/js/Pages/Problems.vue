@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="problem in problems" :key="problem.id">
+        <template v-for="(problem, key) in problems" :key="problem.id">
           <tr
             class="problem pointer"
             @click="toggleExpansion(problem.id)"
@@ -73,6 +73,8 @@
               </div>
             </td>
           </tr>
+          <a @click="editProblem(problem.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
+          <a @click="deleteProblem(problem.id, problem, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
         </template>
       </tbody>
     </table>
@@ -101,15 +103,27 @@ export default {
   },
   methods: {
     async addProblem() {
-
+      var payload = {
+        "name": "New Problem",
+        "description": "New Problem",
+        "lab_id": this.labID,
+      }
+      const problem = await API.apiClient.post(`/problems`, payload);
+      this.problemID = problem.data.id;
+      this.problems.push(problem.data);
+      this.childIsOpen = true;
+      this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
     },
-    editProblems(id) {
+    editProblem(id) {
       this.chidlIsOpen = true;
       this.problemID = id;
       this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
     },
-    async deleteProblem() {
+    async deleteProblem(problem, key) {
+      const res = await API.apiClient.delete(`/problems/${problem.id}`);
 
+      //filter the problems list
+      this.problems = this.problems.filter((p, i) => i  != key);
     },
     goToProblem(id) {
       this.childisOpen = true;
