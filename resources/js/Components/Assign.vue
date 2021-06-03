@@ -14,6 +14,7 @@
               <hr class="courses my-0" />
 
               <label class="switch">
+                Publish:
                 <input type="checkbox" />
                 <span class="slider round"></span>
               </label>
@@ -26,12 +27,14 @@
               <hr class="courses my-0" />
 
               <div class="row">
-                <div class="col-6">
-                  <a href="">Student Preview</a>
-                </div>
-                <div class="col-6">
-                  <a href="">Gradebook & Submissions</a>
-                </div>
+                <small>
+                  <div class="col-6">
+                    <a href="" class="no-decor">Student Preview</a>
+                  </div>
+                  <div class="col-6">
+                    <a href="" class="no-decor">Gradebook & Submissions</a>
+                  </div>
+                </small>
               </div>
             </div>
           </div>
