@@ -20,6 +20,7 @@ class LabResource extends JsonResource
           'description' => $this->description,
           'num_problems' => $this->assignments->count(),
           'due_date' => $this->due_date,
+          'publish_date' => $this->publish_date,
         ];
     }
 }
