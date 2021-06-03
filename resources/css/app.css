@@ -721,6 +721,13 @@ thead.labtable, thead.problemtable {
   padding: 0px 20px!important;
 }
 
+.active {
+    border-width: 0!important;
+    border-bottom-width: 2px!important;
+    border-style: solid!important;
+    border-color: white!important;
+}
+
 /*============= FOOTER =============*/
 
 footer {
