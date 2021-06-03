@@ -13,11 +13,17 @@
 
               <hr class="courses my-0" />
 
-              <label class="switch">
-                Publish:
-                <input type="checkbox" />
-                <span class="slider round"></span>
-              </label>
+              <div class="row">
+                <div class="col-4">
+                  Publish: 
+                </div>
+                <div class="col-8">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
 
               <br />
 
