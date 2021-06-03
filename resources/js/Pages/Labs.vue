@@ -23,11 +23,11 @@
               <a>{{ lab.name }}</a>
             </td>
             <td>{{ lab.num_problems }}</td>
-            <!-- <td>{{ lab.percentComplete }}</td> -->
-            <td>69%</td>
+            <td>{{ getPercent(lab) }}</td>
+            <!-- <td>69%</td> -->
             <td>{{ lab.due_date.split(" ")[0] }}</td>
-            <!-- <td>{{ lab.lastActivity }}</td> -->
-            <td>4/20/0420</td>
+            <td>{{ getActivity(lab) }}</td>
+            <!-- <td>4/20/0420</td> -->
           </tr>
           <a class="pointer no-decor" @click="editLab(lab.id)">•••</a>
           <a class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
@@ -59,6 +59,9 @@ export default {
       labs: [],
       childisOpen: false,
       labID: null,
+      authUser: null,
+      fscID: null,
+      progress: null,
     };
   },
   methods: {
@@ -70,6 +73,7 @@ export default {
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data.data;
+      await this.getStudent();
     },
     Unmounting() {
       this.childisOpen = false;
@@ -101,6 +105,37 @@ export default {
 
       //filter from labs
       this.labs = this.labs.filter((l, i) => i  != key);
+    },
+    async getStudent() {
+      this.authUser = store.getters["auth/authUser"];
+      this.fscID = this.authUser.fsc_user.fsc_id;
+      const res = await APi.apiClient.get(`/progress/${this.fscID}`);
+      this.progress = res.data;
+    },
+    async getPercent(lab) {
+      var d = JSON.parse(this.progress.labs);
+      var c;
+      for (let i = 0; i<=d.length; i++) {
+        if (d[i].lab_id == lab.id) {
+          c = d[i];
+          break;
+        }
+      }
+      if(lab.numProblems == 0) {
+        return "0%";
+      }
+      else {
+        return parseInt(c.num_completed / lab.num_problems) + "%";
+      }
+
+    },
+    async getActivity(lab) {
+      var d = JSON.parse(this.progress.labs);
+      for (let i = 0; i<=d.length; i++) {
+        if (d[i].lab_id == lab.id) {
+          return d[i].last_progress;
+        }
+      }
     },
   },
   mounted() {
