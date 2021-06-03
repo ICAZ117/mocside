@@ -76,7 +76,6 @@ export default {
       this.labID = null;
     },
     async addLab() {
-      console.log("add lab");
       var payload = {
         "name": "New Lab",
         "description": "New Lab",
@@ -86,6 +85,7 @@ export default {
       const lab = await API.apiClient.post(`/labs/`, payload);
       this.labs.push(lab.data);
       this.labID  = lab.data.id;
+      console.log(this.labID);
       this.childisOpen = true;
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
