@@ -68,7 +68,9 @@ export default defineComponent({
   },
   data() {
     return {
-      test: "test",
+      assignment: {
+        title: "",
+      },
     };
   },
 });
