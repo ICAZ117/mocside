@@ -74,7 +74,7 @@ export default {
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data.data;
-      await this.getStudent();
+      // await this.getStudent();
       return 0;
     },
     Unmounting() {
@@ -116,6 +116,7 @@ export default {
       return this.progress;
     },
     getPercent(lab) {
+      await getStudent();
       console.log(this.progress);
       console.log(this.progress.labs);
       var d = this.progress.labs;
