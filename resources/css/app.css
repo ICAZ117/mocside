@@ -719,6 +719,10 @@ thead.labtable, thead.problemtable {
   flex: auto;
 }
 
+.tab {
+  padding: 10px 20px;
+}
+
 /*============= FOOTER =============*/
 
 footer {

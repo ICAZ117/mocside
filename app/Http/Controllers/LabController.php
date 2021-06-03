@@ -33,6 +33,7 @@ class LabController extends Controller
                 'name' => 'required',
                 'description' => 'required',
                 'course_id' => 'required|int',
+                'due_date' => 'required',
             ]);
             return Lab::create($validData);
         }
