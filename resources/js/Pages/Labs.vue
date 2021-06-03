@@ -62,7 +62,7 @@ export default {
       labID: null,
       authUser: null,
       fscID: null,
-      progress: null,
+      progress: [],
     };
   },
   methods: {
@@ -75,6 +75,7 @@ export default {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data.data;
       await this.getStudent();
+      return 0;
     },
     Unmounting() {
       this.childisOpen = false;
@@ -112,8 +113,9 @@ export default {
       this.fscID = this.authUser.fsc_user.fsc_id;
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
       this.progress = res.data;
+      return this.progress;
     },
-    async getPercent(lab) {
+    getPercent(lab) {
       var d = JSON.parse(this.progress.labs);
       var c;
       for (let i = 0; i<=d.length; i++) {
@@ -130,7 +132,7 @@ export default {
       }
 
     },
-    async getActivity(lab) {
+    getActivity(lab) {
       var d = JSON.parse(this.progress.labs);
       for (let i = 0; i<=d.length; i++) {
         if (d[i].lab_id == lab.id) {
