@@ -156,7 +156,7 @@ export default {
       this.courses.push(course.data);
       // this.courses.reverse();
       // this.courses.reverse();
-      Unmounting();
+      this.Unmounting();
     },
   },
   computed: {
