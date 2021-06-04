@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use App\Models\Professor;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -47,16 +48,21 @@ class UserController extends Controller
         return  response()->json(["message" => "Forbidden"], 403);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function update($id)
     {
-        //
+        // elevate user to professor
+        if (Auth::user()->isProf())
+        {
+            $user = User::where('fsc_id', $id)->first();
+            $fsc_id = $user->fsc_id;
+            // create prof object for elevated user
+            $prof = Professor::create(['fsc_id' => $fsc_id]);
+            $user->fsc_role = 'professor';
+            $user->save();
+            return new UserResource($user);
+        }
+        return response()->json(['message' => 'You must be a professor to complete this action.'])
     }
 
     /**
