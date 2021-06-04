@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <IDE :lang="lang" showSubmit="false"/>
+      <IDE :lang="lang" :showSubmit="false"/>
 
     </div>
   </div>

@@ -18,7 +18,7 @@
       </p>
     </div>
 
-    <IDE class="col-8" :lang="lang" showSubmit="true"/>
+    <IDE class="col-8" :lang="lang" :showSubmit="true"/>
 
   </div>
 </template>
