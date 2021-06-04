@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div v-if="!showEditor" class="lang-select">
       <div class="row">
         <div class="col-9">
@@ -34,6 +35,7 @@
 
       <IDE :lang="lang" :showSubmit="false" />
     </div>
+  </div>
 </template>
 
 <script>
