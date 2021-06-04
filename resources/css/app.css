@@ -896,7 +896,7 @@ thead.problemtable {
 .lang-select {
     width: 600px!important;
     margin: auto!important;
-    margin-top: calc(0.4 * (100vh - (var(--nav-height) + 88.2px))) !important;
+    padding-top: calc(0.4 * (100vh - (var(--nav-height) + 88.2px))) !important;
 }
 
 /*============= FOOTER =============*/
