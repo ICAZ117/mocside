@@ -910,7 +910,7 @@ thead.problemtable {
 
 .test-cases {
     font-size: 10pt!important;
-    margin-left: 2rem;
+    margin-left: 2rem!important;
 }
 
 .tc-card-title {
@@ -919,6 +919,25 @@ thead.problemtable {
     margin: auto!important;
     margin-top: 25px!important;
 }
+
+.tc-card {
+    position: relative!important;
+    display: flex!important;
+    flex-direction: column!important;
+    min-width: 200px!important;
+    word-wrap: break-word!important;
+    background-color: var(--FSCred)!important;
+    background-clip: border-box!important;
+    border: 1px solid rgba(0,0,0,.125)!important;
+    border-radius: .25rem!important;
+}
+
+.tc-card-body {
+    background-color: white!important;
+    margin: 0!important;
+    padding: 1rem!important;
+}
+
 /*============= FOOTER =============*/
 
 footer {
