@@ -28,9 +28,9 @@
             <td v-show="isExpanded(problem.id)"><i class="fas fa-chevron-down"></i></td>
             <td>{{ problem.name }}</td>
             <td>{{ problem.test_cases }}</td>
-            <td>69%</td>
+            <td>{{ problem.percent }}</td>
             <td>{{ problem.due_date.split(" ")[0] }}</td>
-            <td>1/24/2021</td>
+            <td>{{ problem.activity }}</td>
           </tr>
           <tr v-show="isExpanded(problem.id)" class="description-data">
             <td colspan="5" class="description-data">
@@ -99,6 +99,9 @@ export default {
       problemID: null,
       expandedProblem: null,
       lang: "",
+      progress: [],
+      authUser: null,
+      fscID: null,
     };
   },
   methods: {
@@ -133,6 +136,43 @@ export default {
     async getProblems() {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
       this.problems = rawProblems.data.data;
+      const prog = await this.getStudent();
+      for (let i = 0; i <= this.problems.length; i++) {
+        this.problems[i]['percent'] = await this.getPercent(this.problems[i]);
+        this.problems[i]['activity'] = await this.getActivity(this.problems[i]);
+      }
+    },
+    async getStudent() {
+      this.authUser = store.getters["auth/authUser"];
+      this.fscID = this.authUser.fsc_user.fsc_id;
+      const res = await API.apiClient.get(`/progress/${this.fscID}`);
+      this.progress = res.data;
+      return this.progress;
+    },
+    async getPercent(problem) {
+      var d = JSON.parse(this.progress.assignments);
+      var c;
+      for (let i = 0; i<=d.length; i++) {
+        if (d[i].assignment_id == problem.id) {
+          c = d[i];
+          break;
+        }
+      }
+      if(problem.test_cases == 0) {
+        return "0%";
+      }
+      else {
+        return (parseInt(c.cases_passed / problem.test_cases) * 100 )+ "%";
+      }
+
+    },
+    async getActivity(problem) {
+      var d = JSON.parse(this.progress.assignments);
+      for (let i = 0; i<=d.length; i++) {
+        if (d[i].assignment_id == problem.id) {
+          return d[i].last_progress;
+        }
+      }
     },
     Unmounting() {
       this.childisOpen = false;
@@ -156,7 +196,7 @@ export default {
       }
     },
   },
-  mounted() {
+  beforeMount() {
     this.childisOpen = false;
     this.getProblems();
   },
