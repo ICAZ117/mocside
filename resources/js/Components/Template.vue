@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div v-if="!lang.length" class="template-workspace">
+    <div v-if="showEditor" class="template-workspace">
       <div class="save-template">
         <div class="row">
           <button class="btn btn-primary btn-md col-4" @click="saveTemplate()">
@@ -44,10 +44,12 @@ export default {
     return {
       saveStatus: "All changes have been saved",
       lang: "",
+      showEditor: false,
     };
   },
   methods: {
     launchEditor() {
+      showEditor = true;
       this.$forceUpdate();
     },
     saveTemplate() {
