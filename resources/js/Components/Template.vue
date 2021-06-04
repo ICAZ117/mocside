@@ -1,6 +1,6 @@
 <template>
   <div class="create-assignment" style="padding: 0 !important">
-    <div class="lang-select center">
+    <div v-if="!showEditor" class="lang-select center">
       <div class="row">
         <div class="col-9">
           <select v-model="lang" id="lang" class="form-select">
