@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestCaseController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/{id}', function ($id) {
         return User::findOrFail($id);
     });
+    Route::post('/users/elevate/{id}', [UserController::class, 'update']);
 
     Route::resource('courses', CourseController::class);
     
