@@ -148,7 +148,7 @@ export default {
       this.childIsOpen = false;
       this.courseID = null;
     },
-    courseEdited() {
+    async courseEdited() {
       ///update the list of courses
       this.courses = this.courses.filter((c) => c.id  != this.courseID);
       const course = await API.apiClient.get(`/courses/${this.courseID}`);
