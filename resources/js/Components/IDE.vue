@@ -344,7 +344,7 @@ export default {
             theme: "gob",
             content: "",
             editorLangauge: "",
-            style: "width: " + ((this.showSubmit) ? "78%" : "80%") + "!important",
+            style: "width: " + ((this.showSubmit) ? "78%" : "89%") + "!important",
         };
     },
     components: {
