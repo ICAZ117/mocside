@@ -91,10 +91,6 @@ h4 {
     flex-wrap: wrap;
 }
 
-.move-up {
-    padding-top: 10px !important;
-}
-
 .pointer {
     cursor: pointer !important;
 }
@@ -134,10 +130,10 @@ h4 {
 .slider:before {
     position: absolute;
     content: "";
-    height: 15px;
-    width: 15px;
+    height: 14px;
+    width: 14px;
     left: 3px;
-    bottom: 2.5px;
+    bottom: 2.6px;
     background-color: white;
     -webkit-transition: 0.4s;
     transition: 0.4s;
@@ -245,7 +241,7 @@ nav {
     color: #555555 !important;
     height: 60px !important;
     padding-top: 10px !important;
-    width: 150px !important;
+    width: 110px !important;
     text-align: center !important;
     text-decoration: none !important;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -305,7 +301,7 @@ nav {
     color: white !important;
     height: 60px !important;
     padding-top: 10px !important;
-    width: 150px !important;
+    width: 110px !important;
     text-align: center !important;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out !important;
@@ -891,6 +887,10 @@ thead.problemtable {
 .card-footer {
     margin: auto !important;
     border: none !important;
+}
+
+.submit-spacer {
+    width: 110.5px!important;
 }
 
 /*============= FOOTER =============*/
