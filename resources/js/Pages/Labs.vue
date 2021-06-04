@@ -46,7 +46,7 @@
       </tbody>
     </table>
   </div>
-  <router-view @unmounting="Unmounting()" v-if="childisOpen" :labID="labID" :labName="labName"></router-view>
+  <router-view @unmounting="Unmounting()" @labEdited="labEdited()" v-if="childisOpen" :labID="labID" :labName="labName"></router-view>
 </template>
 
 <script>
@@ -86,6 +86,13 @@ export default {
       this.childisOpen = false;
       this.labID = null;
       this.labName = null;
+    },
+    async labEdited() {
+      ///update the list of courses
+      this.labs = this.labs.filter((l) => l.id  != this.labID);
+      const lab = await API.apiClient.get(`/labs/full/${this.labID}`);
+      this.labs.push(lab.data);
+      this.Unmounting();
     },
     async addLab() {
       var payload = {

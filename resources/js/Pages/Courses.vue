@@ -147,16 +147,14 @@ export default {
     Unmounting() {
       this.childIsOpen = false;
       this.courseID = null;
+      this.$router.push({ name: "Courses" });
     },
     async courseEdited() {
       ///update the list of courses
       this.courses = this.courses.filter((c) => c.id  != this.courseID);
       const course = await API.apiClient.get(`/courses/${this.courseID}`);
       this.courses.push(course.data);
-      // this.courses.reverse();
-      // this.courses.reverse();
-      this.childIsOpen = false;
-      this.courseID = null;
+      this.Unmounting();
     },
   },
   computed: {
