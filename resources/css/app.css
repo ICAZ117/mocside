@@ -907,6 +907,18 @@ thead.problemtable {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
 }
+
+.test-cases {
+    font-size: 8pt!important;
+    margin-left: 2rem;
+}
+
+.tc-card-title {
+    background-color: var(--FSCred)!important;
+    color: #383131!important;
+    margin: auto!important;
+    margin-top: 25px!important;
+}
 /*============= FOOTER =============*/
 
 footer {

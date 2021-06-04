@@ -1,8 +1,8 @@
 <template>
   <div class="create-assignment">
-    <div class="row">
+    <div class="row test-cases">
       <div class="card col-1">
-        <div class="card-title">
+        <div class="card-title tc-card-title">
           <p>tc1</p>
         </div>
 
