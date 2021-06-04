@@ -51,8 +51,8 @@ class AssignmentController extends Controller
      */
     public function show($id)
     {
-        if (Auth::user()->isAdmin()) {
-            return Assignment::find($id);
+        if (Auth::user()->isProf()) {
+            return new AssignmentResource(Assignment::find($id));
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
