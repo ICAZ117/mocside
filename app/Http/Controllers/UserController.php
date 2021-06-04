@@ -62,7 +62,7 @@ class UserController extends Controller
             $user->save();
             return new UserResource($user);
         }
-        return response()->json(['message' => 'You must be a professor to complete this action.'])
+        return response()->json(['message' => 'You must be a professor to complete this action.']);
     }
 
     /**
