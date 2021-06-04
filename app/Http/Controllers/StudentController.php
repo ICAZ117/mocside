@@ -24,7 +24,7 @@ class StudentController extends Controller
             ]);
             return Student::create($validData);
         }
-        return resonse()->json(['message' => 'This is not your user!'], 403);
+        return response()->json(['message' => 'This is not your user!'], 403);
     }
 
     public function show($id)
@@ -41,7 +41,7 @@ class StudentController extends Controller
         {
             return Student::where('fsc_id', $request_id)->first();
         }
-        return resonse()->json(['message' => 'This is not your user!'], 403);
+        return response()->json(['message' => 'This is not your user!'], 403);
     }
 
     public function update(Request $request, $id)
@@ -60,7 +60,7 @@ class StudentController extends Controller
             $student->update($request->all());
             return $student;
         }
-        return resonse()->json(['message' => 'This is not your user!'], 403);
+        return response()->json(['message' => 'This is not your user!'], 403);
     }
 
     public function destroy($id)
