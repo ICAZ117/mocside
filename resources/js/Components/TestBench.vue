@@ -7,7 +7,6 @@
         </div>
 
         <div class="tc-card-body">
-          <hr />
           <p>
             Input/Output Comparison
             <br /><br />
