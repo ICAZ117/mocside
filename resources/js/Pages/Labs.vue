@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <template v-for="(lab, key) in labs" :key="lab.id">
-          <tr class="lab pointer" @click="goToProblems(lab.id)">
+          <tr class="lab pointer" @click="goToProblems(lab.id, lab.name)">
             <td>
               <a>{{ lab.name }}</a>
             </td>
@@ -29,7 +29,7 @@
             <td>{{ lab.activity }}</td>
             <!-- <td>4/20/0420</td> -->
           </tr>
-          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id)">•••</a>
+          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)">•••</a>
           <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
         </template>
 
@@ -46,7 +46,7 @@
       </tbody>
     </table>
   </div>
-  <router-view @unmounting="Unmounting()" v-if="childisOpen" :labID="labID"></router-view>
+  <router-view @unmounting="Unmounting()" v-if="childisOpen" :labID="labID" :labName="labName"></router-view>
 </template>
 
 <script>
@@ -60,15 +60,17 @@ export default {
       labs: [],
       childisOpen: false,
       labID: null,
+      labName: null,
       authUser: null,
       fscID: null,
       progress: [],
     };
   },
   methods: {
-    goToProblems(id) {
+    goToProblems(id, name) {
       this.childisOpen = true;
       this.labID = id;
+      this.labName = name;
       this.$router.push({ name: "Problems", params: { lab_id: id } });
     },
     async getLabs() {
@@ -83,6 +85,7 @@ export default {
     Unmounting() {
       this.childisOpen = false;
       this.labID = null;
+      this.labName = null;
     },
     async addLab() {
       var payload = {
@@ -95,13 +98,15 @@ export default {
       this.labs.push(lab.data.data);
       console.log(lab.data.data);
       this.labID  = lab.data.data.id;
+      this.labName = lab.data.data.name;
       console.log(this.labID);
       this.childisOpen = true;
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
-    editLab(id) {
+    editLab(id, name) {
       this.childisOpen = true;
       this.labID = id;
+      this.labName = name;
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
     async removeLab(lab, key) {

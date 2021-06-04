@@ -3,7 +3,7 @@
     <!-- Main Page-->
 
     <div class="courses header">
-      <h2>Lab {{ this.labID }}: Problems</h2>
+      <h2>{{ this.labName }}</h2>
       <hr />
     </div>
     <a v-if="isProf" class="pointer no-decor" @click="addProblem">ADD</a>
@@ -91,7 +91,7 @@
 import * as API from "../services/API";
 import store from "../Store/index";
 export default {
-  props: ["labID"],
+  props: ["labID", "labName"],
   emits: ["unmounting"],
   data() {
     return {
