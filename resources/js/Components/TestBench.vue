@@ -1,14 +1,13 @@
 <template>
   <div class="create-assignment">
-    <div class="center row test-cases">
+    <div class="row test-cases">
       <div v-for="i in 12" :key="i" class="tc-card col-1">
         <div class="tc-card-title">
           <p>tc{{ i }}</p>
         </div>
 
-        <hr />
-
         <div class="tc-card-body">
+          <hr />
           <p>
             Input/Output Comparison
             <br /><br />
