@@ -900,8 +900,7 @@ thead.problemtable {
 }
 
 .save-template .row {
-    flex: nowrap !important;
-    margin: 0px 2px !important;
+    flex-wrap: nowrap !important;
 }
 
 .save-template .row .btn {
