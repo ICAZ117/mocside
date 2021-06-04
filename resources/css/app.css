@@ -889,6 +889,10 @@ thead.problemtable {
     border: none !important;
 }
 
+.submit-spacer {
+    width: 110.5px!important;
+}
+
 /*============= FOOTER =============*/
 
 footer {
