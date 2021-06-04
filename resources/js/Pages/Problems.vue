@@ -81,6 +81,7 @@
   </div>
   <router-view
     @unmounting="Unmounting()"
+    @problemEdited="problemEdited()"
     v-if="childisOpen"
     :problemID="problemID"
     :lang="lang"
