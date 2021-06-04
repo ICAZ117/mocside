@@ -91,4 +91,7 @@ export const getters = {
     if (storageItem === "isGuest") return true;
     if (storageItem === "isNotGuest") return false;
   },
+  isProf: (state) => {
+    return state.user.isProfessor;
+  },
 };
