@@ -5,7 +5,7 @@
       <h2>Labs</h2>
       <hr />
     </div>
-    <a class="pointer no-decor" @click="addLab">ADD</a>
+    <a v-if="isProf" class="pointer no-decor" @click="addLab">ADD</a>
     <table class="table labtable">
       <thead class="labtable">
         <tr>
@@ -29,8 +29,8 @@
             <td>{{ lab.activity }}</td>
             <!-- <td>4/20/0420</td> -->
           </tr>
-          <a class="pointer no-decor" @click="editLab(lab.id)">•••</a>
-          <a class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
+          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id)">•••</a>
+          <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
         </template>
 
         <!-- <tr
@@ -143,6 +143,11 @@ export default {
         }
       }
     },
+  },
+  computed: {
+    isProf: function() {
+      return store.getters["auth/isProf"];
+    }
   },
   async beforeMount() {
     this.childisOpen = false;

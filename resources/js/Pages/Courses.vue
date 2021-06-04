@@ -30,10 +30,10 @@
                 </div>
               </div>
             </a>
-            <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
-            <a @click="deleteCourse(course.id, course, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
+            <a v-if="isProf" @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
+            <a v-if="isProf" @click="deleteCourse(course.id, course, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
           </div>
-          <div class="add-course fixed-course-width">
+          <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
@@ -147,6 +147,11 @@ export default {
       this.childIsOpen = false;
       this.courseID = null;
     },
+  },
+  computed: {
+    isProf: function() {
+      return store.getters["auth/isProf"];
+    }
   },
   mounted() {
     this.childIsOpen = false;
