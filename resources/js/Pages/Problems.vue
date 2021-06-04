@@ -138,7 +138,7 @@ export default {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
       this.problems = rawProblems.data.data;
       const prog = await this.getStudent();
-      for (let i = 0; i <= this.problems.length; i++) {
+      for (let i = 0; i < this.problems.length; i++) {
         this.problems[i]['percent'] = await this.getPercent(this.problems[i]);
         this.problems[i]['activity'] = await this.getActivity(this.problems[i]);
       }
