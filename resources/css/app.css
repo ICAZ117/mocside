@@ -849,7 +849,7 @@ thead.problemtable {
 }
 
 .create-assignment {
-    padding-top: 2rem !important;
+    padding-top: 2rem;
     background-color: white !important;
     height: calc(100vh - (var(--nav-height) + 88px));
 }
@@ -887,6 +887,10 @@ thead.problemtable {
 .card-footer {
     margin: auto !important;
     border: none !important;
+}
+
+.saveStatus {
+    margin-left: 20px!important;
 }
 
 /*============= FOOTER =============*/
