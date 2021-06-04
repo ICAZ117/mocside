@@ -1,18 +1,20 @@
 <template>
   <div class="create-assignment">
-    <div class="card">
-      <div class="card-title">
-        <p>tc1</p>
-      </div>
+    <div class="row">
+      <div class="card col-1">
+        <div class="card-title">
+          <p>tc1</p>
+        </div>
 
-      <hr>
+        <hr />
 
-      <div class="card-body">
-        <p>
-          Input/Output Comparison
-          <br />
-          100 Points
-        </p>
+        <div class="card-body">
+          <p>
+            Input/Output Comparison
+            <br />
+            100 Points
+          </p>
+        </div>
       </div>
     </div>
   </div>
