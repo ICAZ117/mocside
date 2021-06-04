@@ -31,6 +31,7 @@ class CourseController extends Controller
             $validData = $request->validate([
                 'name' => 'required',
                 'description' => 'required',
+                'owner_id' => 'required|int',
             ]);
             return course::create($validData);
         }
@@ -74,9 +75,17 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
+        $course = Course::find($id);
+        $owner_id = $course->owner_id;
         // I want to restrict course deletion to admins
-        if (Auth::user()->isAdmin()) {
-            return course::destroy($id);
+        if (Auth::user()->fsc_id == $owner_id) {
+            // also delete course picture
+            $fileURL = $course->img_loc;
+            $sections = explode("/", $fileURL);
+            $fileID = end($sections);
+            Storage::disk('public')->delete('images/' . $fileID);
+            $course->delete();
+            return response()->json(['message' => 'Successfully deleted course.'], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
