@@ -86,6 +86,7 @@ export default {
       this.childisOpen = false;
       this.labID = null;
       this.labName = null;
+      this.$router.push({ name: "Labs" });
     },
     async labEdited() {
       ///update the list of courses

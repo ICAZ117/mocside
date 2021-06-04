@@ -178,6 +178,7 @@ export default {
     Unmounting() {
       this.childisOpen = false;
       this.problemID = null;
+      this.$router.push({ name: "Problems" });
     },
     isExpanded(key) {
       // return this.expandedProblem.indexOf(key) !== -1;
