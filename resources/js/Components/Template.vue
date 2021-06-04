@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     launchEditor() {
-      showEditor = true;
+      this.showEditor = true;
       this.$forceUpdate();
     },
     saveTemplate() {
