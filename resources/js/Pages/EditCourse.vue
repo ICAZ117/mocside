@@ -173,6 +173,8 @@ export default {
         end_date: this.courseForm.dateEnd,
       };
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
+      alert("Processed finished with status code: " + res.statusCode);
+      this.$emit("unmounting");
     },
     updateImage() {
       console.log("updated the image");
