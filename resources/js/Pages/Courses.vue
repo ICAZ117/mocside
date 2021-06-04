@@ -147,6 +147,7 @@ export default {
     Unmounting() {
       this.childIsOpen = false;
       this.courseID = null;
+      this.$router.push({ name: "Courses" });
     },
     async courseEdited() {
       ///update the list of courses
@@ -155,8 +156,7 @@ export default {
       this.courses.push(course.data);
       // this.courses.reverse();
       // this.courses.reverse();
-      this.childIsOpen = false;
-      this.courseID = null;
+      Unmounting();
     },
   },
   computed: {
