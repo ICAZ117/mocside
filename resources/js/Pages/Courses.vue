@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-    <router-view @unmounting="Unmounting()" v-if="childIsOpen" :courseID="courseID"></router-view>
+    <router-view @unmounting="Unmounting()" @courseEdited="courseEdited" v-if="childIsOpen" :courseID="courseID"></router-view>
   </div>
 </template>
 
@@ -144,6 +144,13 @@ export default {
       }
     },
     Unmounting() {
+      this.childIsOpen = false;
+      this.courseID = null;
+    },
+    courseEdited() {
+      ///update the list of courses
+      this.courses.reverse();
+      this.courses.reverse();
       this.childIsOpen = false;
       this.courseID = null;
     },
