@@ -9,8 +9,7 @@
             <button v-show="showSubmit" type="submit" name="submit" class="submit-code col-1 btn btn-success">
                 Submit
             </button>
-            <div v-show="!showSubmit" class="col-1 submit-spacer"></div>
-            <div style="width: 78% !important">
+            <div :style="style">
                 <div style="float: right !important">
                     <div class="configure-editor">
                         <label for="theme" class="workspace-label">Theme: </label>
@@ -345,7 +344,14 @@ export default {
             theme: "gob",
             content: "",
             editorLangauge: "",
+            style: "",
         };
+    },
+    computed: {
+        fixSpacing() {
+            this.style = "width: " + ((this.showSubmit) ? "78%" : "80%") + "!important";
+            console.log(this.style);
+        }
     },
     components: {
         VAceEditor,
