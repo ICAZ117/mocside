@@ -76,6 +76,7 @@ export default {
       this.labs = rawLabs.data.data;
       const prog = await this.getStudent();
       for (let i = 0; i <= this.labs.length; i++) {
+        console.log(this.labs[i]);
         this.labs[i]['percent'] = await this.getPercent(this.labs[i]);
         this.labs[i]['activity'] = await this.getActivity(this.labs[i]);
       }
@@ -121,6 +122,7 @@ export default {
     async getPercent(lab) {
       var d = JSON.parse(this.progress.labs);
       var c;
+      console.log(lab);
       for (let i = 0; i<=d.length; i++) {
         if (d[i].lab_id == lab.id) {
           c = d[i];

@@ -89,6 +89,7 @@
 
 <script>
 import * as API from "../services/API";
+import store from "../Store/index";
 export default {
   props: ["labID"],
   emits: ["unmounting"],
