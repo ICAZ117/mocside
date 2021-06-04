@@ -9,7 +9,7 @@
 
       <div class="coursecontainer">
         <div class="courserow row my-5">
-          <div class="fixed-course-width" v-for="(course, key) in courses" :key="course.id">
+          <div class="fixed-course-width" v-for="(course, key) in courses" :key="course.id" :course="course">
             <a @click="goToLabs(course.id)" class="no-decor pointer">
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
