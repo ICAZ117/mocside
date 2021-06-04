@@ -17,6 +17,11 @@ class Professor extends Model
         'courses',
     ];
 
+    public function ownedCourses()
+    {
+        return $this->hasMany(Course::class, 'fsc_id', 'owner_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'fsc_id', 'fsc_id');
