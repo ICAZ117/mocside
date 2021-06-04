@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="create-assignment" style="padding: 0 !important">
     <div v-if="!showEditor" class="lang-select">
       <div class="row">
         <div class="col-9">
