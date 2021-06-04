@@ -893,6 +893,12 @@ thead.problemtable {
     margin-left: 20px!important;
 }
 
+.lang-select {
+    width: 600px!important;
+    margin: auto!important;
+    padding-top: calc(0.4 * (100vh - (var(--nav-height) + 88.2px))) !important;
+}
+
 /*============= FOOTER =============*/
 
 footer {

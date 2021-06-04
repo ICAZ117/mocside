@@ -19,6 +19,7 @@ class Course extends Model
         'img_loc',
         'start_date',
         'end_date',
+        'owner_id',
     ];
 
     // not sure if this will be helpful, leaving commented.
@@ -31,6 +32,11 @@ class Course extends Model
     // public function owner() {
     //     return $this->belongsTo('user', 'user_id');
     // }
+
+    public function owner()
+    {
+        return $this->hasOne(Professor::class, 'owner_id', 'fsc_id');
+    }
 
     public function labs()
     {
