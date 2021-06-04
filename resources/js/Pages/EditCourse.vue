@@ -137,7 +137,7 @@ import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
 export default {
   props: ["courseID"],
-  emits: ["unmounting"],
+  emits: ["unmounting", "courseEdited"],
   components: {
     FlashMessage,
     FileUpload,
@@ -174,7 +174,7 @@ export default {
       };
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
       alert("Processed finished with status code: " + res.statusCode);
-      this.$emit("unmounting");
+      this.$emit("courseEdited");
     },
     updateImage() {
       console.log("updated the image");
