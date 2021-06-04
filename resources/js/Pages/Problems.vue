@@ -120,7 +120,7 @@ export default {
       this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
     },
     editProblem(id) {
-      this.chidlIsOpen = true;
+      this.childIsOpen = true;
       this.problemID = id;
       this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
     },
