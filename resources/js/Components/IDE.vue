@@ -344,14 +344,8 @@ export default {
             theme: "gob",
             content: "",
             editorLangauge: "",
-            style: "",
+            style: "width: " + ((this.showSubmit) ? "78%" : "80%") + "!important",
         };
-    },
-    computed: {
-        fixSpacing() {
-            this.style = "width: " + ((this.showSubmit) ? "78%" : "80%") + "!important";
-            console.log(this.style);
-        }
     },
     components: {
         VAceEditor,
