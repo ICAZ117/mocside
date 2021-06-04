@@ -1,9 +1,9 @@
 <template>
   <div class="create-assignment">
     <div class="row test-cases">
-      <div class="card col-1">
+      <div v-for="i in 12" :key="i" class="card col-1">
         <div class="card-title tc-card-title">
-          <p>tc1</p>
+          <p>tc{{ i }}</p>
         </div>
 
         <hr />
@@ -21,7 +21,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style></style>

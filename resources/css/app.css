@@ -909,13 +909,13 @@ thead.problemtable {
 }
 
 .test-cases {
-    font-size: 8pt!important;
+    font-size: 10pt!important;
     margin-left: 2rem;
 }
 
 .tc-card-title {
     background-color: var(--FSCred)!important;
-    color: #383131!important;
+    color: white!important;
     margin: auto!important;
     margin-top: 25px!important;
 }
