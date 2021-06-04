@@ -186,7 +186,7 @@ export default {
     Unmounting() {
       this.childisOpen = false;
       this.problemID = null;
-      this.$router.push({ name: "Problems" });
+      this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
     },
     isExpanded(key) {
       // return this.expandedProblem.indexOf(key) !== -1;
