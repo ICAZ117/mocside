@@ -75,7 +75,7 @@ export default {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data.data;
       const prog = await this.getStudent();
-      for (let i = 0; i <= this.labs; i++) {
+      for (let i = 0; i <= this.labs.length; i++) {
         this.labs[i]['percent'] = await this.getPercent(this.labs[i]);
         this.labs[i]['activity'] = await this.getActivity(this.labs[i]);
       }
@@ -119,10 +119,7 @@ export default {
       return this.progress;
     },
     async getPercent(lab) {
-      console.log(this.progress);
-      console.log(this.progress.labs);
-      var d = this.progress.labs;
-      console.log(d);
+      var d = JSON.parse(this.progress.labs);
       var c;
       for (let i = 0; i<=d.length; i++) {
         if (d[i].lab_id == lab.id) {
@@ -134,12 +131,11 @@ export default {
         return "0%";
       }
       else {
-        return parseInt(c.num_completed / lab.num_problems) + "%";
+        return (parseInt(c.num_completed / lab.num_problems) * 100 )+ "%";
       }
 
     },
-    getActivity(lab) {
-      console.log(this.progress);
+    async getActivity(lab) {
       var d = JSON.parse(this.progress.labs);
       for (let i = 0; i<=d.length; i++) {
         if (d[i].lab_id == lab.id) {
