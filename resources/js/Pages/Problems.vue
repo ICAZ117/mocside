@@ -81,6 +81,7 @@
   </div>
   <router-view
     @unmounting="Unmounting()"
+    @problemEdited="problemEdited()"
     v-if="childisOpen"
     :problemID="problemID"
     :lang="lang"
@@ -119,7 +120,7 @@ export default {
       this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
     },
     editProblem(id) {
-      this.chidlIsOpen = true;
+      this.childIsOpen = true;
       this.problemID = id;
       this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
     },
@@ -174,6 +175,13 @@ export default {
           return d[i].last_progress;
         }
       }
+    },
+    async problemEdited() {
+      ///update the list of courses
+      this.problems = this.problems.filter((p) => p.id  != this.problemID);
+      const problem = await API.apiClient.get(`/problem/full/${this.problemID}`);
+      this.problems.push(problem.data.data);
+      this.Unmounting();
     },
     Unmounting() {
       this.childisOpen = false;
