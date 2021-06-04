@@ -79,6 +79,7 @@ export default {
       var payload = {
         name: "New Course",
         description: "New Course",
+        owner_id: this.authUser.fsc_user.fsc_id,
       };
       const course = await API.apiClient.post(`/courses`, payload);
       this.courseID = course.data.id;
