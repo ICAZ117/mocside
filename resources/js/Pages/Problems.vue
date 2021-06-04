@@ -3,10 +3,10 @@
     <!-- Main Page-->
 
     <div class="courses header">
-      <h2>Lab {{ this.labID }}: Problems</h2>
+      <h2>{{ this.labName }}</h2>
       <hr />
     </div>
-
+    <a v-if="isProf" class="pointer no-decor" @click="addProblem">ADD</a>
     <table class="table problemtable">
       <thead class="problemtable">
         <tr>
@@ -73,8 +73,8 @@
               </div>
             </td>
           </tr>
-          <a @click="editProblem(problem.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
-          <a @click="deleteProblem(problem, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
+          <a v-if="isProf" @click="editProblem(problem.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
+          <a v-if="isProf" @click="deleteProblem(problem, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
         </template>
       </tbody>
     </table>
@@ -91,7 +91,7 @@
 import * as API from "../services/API";
 import store from "../Store/index";
 export default {
-  props: ["labID"],
+  props: ["labID", "labName"],
   emits: ["unmounting"],
   data() {
     return {
@@ -196,6 +196,11 @@ export default {
         this.expandedProblem = key;
       }
     },
+  },
+  computed: {
+    isProf: function() {
+      return store.getters["auth/isProf"];
+    }
   },
   beforeMount() {
     this.childisOpen = false;

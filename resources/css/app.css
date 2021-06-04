@@ -91,10 +91,6 @@ h4 {
     flex-wrap: wrap;
 }
 
-.move-up {
-    padding-top: 10px !important;
-}
-
 .pointer {
     cursor: pointer !important;
 }
@@ -245,7 +241,7 @@ nav {
     color: #555555 !important;
     height: 60px !important;
     padding-top: 10px !important;
-    width: 150px !important;
+    width: 110px !important;
     text-align: center !important;
     text-decoration: none !important;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -305,7 +301,7 @@ nav {
     color: white !important;
     height: 60px !important;
     padding-top: 10px !important;
-    width: 150px !important;
+    width: 110px !important;
     text-align: center !important;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out !important;
@@ -853,7 +849,7 @@ thead.problemtable {
 }
 
 .create-assignment {
-    padding-top: 2rem !important;
+    padding-top: 2rem;
     background-color: white !important;
     height: calc(100vh - (var(--nav-height) + 88px));
 }
@@ -891,6 +887,10 @@ thead.problemtable {
 .card-footer {
     margin: auto !important;
     border: none !important;
+}
+
+.saveStatus {
+    margin-left: 20px!important;
 }
 
 /*============= FOOTER =============*/

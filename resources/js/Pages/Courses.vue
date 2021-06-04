@@ -9,7 +9,7 @@
 
       <div class="coursecontainer">
         <div class="courserow row my-5">
-          <div class="fixed-course-width" v-for="(course, key) in courses" :key="course.id">
+          <div class="fixed-course-width" v-for="(course, key) in courses" :key="course.id" :course="course">
             <a @click="goToLabs(course.id)" class="no-decor pointer">
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -30,10 +30,10 @@
                 </div>
               </div>
             </a>
-            <a @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
-            <a @click="deleteCourse(course.id, course, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
+            <a v-if="isProf" @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
+            <a v-if="isProf" @click="deleteCourse(course.id, course, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
           </div>
-          <div class="add-course fixed-course-width">
+          <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-    <router-view @unmounting="Unmounting()" v-if="childIsOpen" :courseID="courseID"></router-view>
+    <router-view @unmounting="Unmounting()" @courseEdited="courseEdited" v-if="childIsOpen" :courseID="courseID"></router-view>
   </div>
 </template>
 
@@ -79,6 +79,7 @@ export default {
       var payload = {
         name: "New Course",
         description: "New Course",
+        owner_id: this.authUser.fsc_user.fsc_id,
       };
       const course = await API.apiClient.post(`/courses`, payload);
       this.courseID = course.data.id;
@@ -147,6 +148,18 @@ export default {
       this.childIsOpen = false;
       this.courseID = null;
     },
+    courseEdited() {
+      ///update the list of courses
+      this.courses.reverse();
+      this.courses.reverse();
+      this.childIsOpen = false;
+      this.courseID = null;
+    },
+  },
+  computed: {
+    isProf: function() {
+      return store.getters["auth/isProf"];
+    }
   },
   mounted() {
     this.childIsOpen = false;
