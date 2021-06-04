@@ -95,10 +95,10 @@ export default {
   },
   async mounted() {
 	const Lab = await API.apiClient.get(`/labs/full/${this.labID}`);
-	this.labForm.name = Lab.data.name;
-	this.labForm.description = Lab.data.description;
-	this.labForm.dateDue = Lab.data.due_date.split(" ")[0];
-	this.labForm.datePublish = Lab.data.publish_date;
+	this.labForm.name = Lab.data.data.name;
+	this.labForm.description = Lab.data.data.description;
+	this.labForm.dateDue = Lab.data.data.due_date.split(" ")[0];
+	this.labForm.datePublish = Lab.data.data.publish_date;
   },
   beforeUnmount() {
     this.$emit("unmounting");
