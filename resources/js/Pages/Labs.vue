@@ -92,7 +92,7 @@ export default {
       ///update the list of courses
       this.labs = this.labs.filter((l) => l.id  != this.labID);
       const lab = await API.apiClient.get(`/labs/full/${this.labID}`);
-      this.labs.push(lab.data);
+      this.labs.push(lab.data.data);
       this.Unmounting();
     },
     async addLab() {
