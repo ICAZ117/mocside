@@ -42,7 +42,7 @@ class LabController extends Controller
 
     public function show($id)
     {
-        return Lab::find($id);
+        return new LabResource(Lab::find($id));
     }
 
     public function update(Request $request, $id)
