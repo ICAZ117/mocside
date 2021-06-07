@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
+
+use App\Models\Course;
+use App\Http\Resources\CourseResource;
 
 class CourseController extends Controller
 {
@@ -16,7 +18,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return course::all();
+        return Course::all();
     }
 
     /**
@@ -27,14 +29,14 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        // I only want admins to be able to create a course
-        if (Auth::user()->isAdmin()) {
+        // I only want professors to be able to create a course
+        if (Auth::user()->isProf()) {
             $validData = $request->validate([
                 'name' => 'required',
                 'description' => 'required',
                 'owner_id' => 'required|int',
             ]);
-            return course::create($validData);
+            return Course::create($validData);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
@@ -47,7 +49,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        return course::find($id);
+        return new CourseResource(Course::find($id));
     }
 
     /**
@@ -59,10 +61,19 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Only admins update courses
-        if (Auth::user()->isAdmin()) {
-            $cou = course::find($id);
-            $cou->update($request->all());
+        $course = Course::find($id);
+        $owner = $cou->owner;
+        $user = Auth::user();
+
+        // I will include an admin check that can override the owner check.
+        if ($user->isAdmin()) {
+            $course->update($request->all());
+            return response()->json(["message" => "Updated sucessfully."], 200);
+        }
+
+        // This logic checks for professor role as well as course ownership.
+        if ($user->isProf() && $owner->fsc_id == $user->fsc_id) { 
+            $course->update($request->all());
             return response()->json(['message' => 'Updated sucessfully.'], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
