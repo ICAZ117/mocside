@@ -31,6 +31,8 @@
     <tab-panel :val="'Model Solution'"> <ModelSolution /> </tab-panel>
     <tab-panel :val="'Grade Book'"> <GradeBook /> </tab-panel>
   </tab-panels>
+
+  <button class="btn btn-md btn-primary">Save & Exit</button>
 </template>
 
 <script lang="ts">
