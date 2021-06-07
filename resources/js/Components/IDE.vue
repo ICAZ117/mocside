@@ -338,7 +338,19 @@ import "ace-builds/src-noconflict/mode-python";
 
 export default {
     name: "IDE",
-    props: ["lang", "showSubmit"],
+    props: {
+        lang: {
+            type: String,
+            required: true,
+        },
+        showSubmit: {
+            type: Boolean,
+        },
+        content: {
+            type: String,
+        },
+    }
+    ["lang", "showSubmit"],
     data() {
         return {
             theme: "gob",
@@ -356,6 +368,11 @@ export default {
         } else {
             this.editorLangauge = "python";
         }
+    },
+    methods: {
+        updateValue: function (content) {
+        this.$emit('input', content)
+      }
     },
 };
 </script>
