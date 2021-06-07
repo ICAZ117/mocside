@@ -37,10 +37,17 @@ export default {
   },
   computed: {
     text: function() {
+
+      //choice 1
       var con = _.debounce(function() {
-        console.log("text changed");
-      }, 100);
+        //save overview to problem in database
+        console.log("Debounced");
+      }, 3000);
       con();
+
+
+      //choice 2
+      //send data to parent and let parent send upon clicking save button
       this.$emit("update", this.state.content);
       return this.state.content;
     }
