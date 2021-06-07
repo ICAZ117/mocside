@@ -345,14 +345,14 @@ export default {
         showSubmit: {
             type: Boolean,
         },
-        content: {
+        lastSave: {
             type: String,
         },
     },
     data() {
         return {
             theme: "gob",
-            content: "",
+            content: lastSave,
             editorLangauge: "",
             style: "width: " + ((this.showSubmit) ? "78%" : "89%") + "!important",
         };
