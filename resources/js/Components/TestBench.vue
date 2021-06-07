@@ -14,25 +14,31 @@
           </p>
         </div>
       </div>
+      <div class="tc-card col-1">
+        <div class="tc-card-title">
+          <p>Add Test Case</p>
+          <p>+</p>
+        </div>
+      </div>
     </div>
 
     <div class="container">
       <h4>Test Case ({{ currentTC }}/{{ totalTC }})</h4>
       <hr />
       <label for="tcTitle">Title: </label>
-      <input type="text" id="tcTitle" />
+      <input type="text" id="tcTitle" v-model="testCase.tcTitle"/>
       <br />
 
       <label for="tcPoints">Points: </label>
-      <input type="number" id="tcPoints" />
+      <input type="number" id="tcPoints" v-model="testCase.tcPoints"/>
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <QuillEditor theme="snow" toolbar="full" class="assignment-description" />
+      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model="testCase.tcDescription"/>
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
-      <select name="compareMethod" id="compareMethod">
+      <select class="form-select" name="compareMethod" id="compareMethod" v-model="testCase.tcCompareMethod">
         <option value="" selected disabled hidden>Select One...</option>
         <option value="flexible">
           Flexible equality (ignores: case, whitespace, and special characters)
@@ -44,11 +50,11 @@
       <br /><br />
 
       <label for="tcInput">Input (Will be passed into the student's program's stdin)</label>
-      <v-ace-editor class="editor" id="tcInput" />
+      <v-ace-editor class="editor" id="tcInput" v-model="testCase.tcInput"/>
       <br /><br />
 
       <label for="tcOutput">Output (Will be matched against the output of the student's program)</label>
-      <v-ace-editor class="editor" id="tcOutput" />
+      <v-ace-editor class="editor" id="tcOutput" v-model="testCase.tcOutput"/>
       <br /><br />
     </div>
   </div>
@@ -62,7 +68,18 @@ import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 export default {
   data() {
-    return {};
+    return {
+      currentTC: 0,
+      totalTC: 0,
+      testCase: {
+        tcTitle: "",
+        tcPoints: 0,
+        tcDescription: "",
+        tcCompareMethod: "",
+        tcInput: "",
+        tcOutput: "",
+      }
+    };
   },
   components: {
     VAceEditor
