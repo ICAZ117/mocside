@@ -18,7 +18,7 @@
                   <div class="col-4">Publish:</div>
                   <div class="col-8">
                     <label class="switch">
-                      <input type="checkbox" />
+                      <input type="checkbox" v-model="publish"/>
                       <span class="slider round"></span>
                     </label>
                   </div>
@@ -27,7 +27,7 @@
                 <br />
 
                 <label for="dueDate">Due Date: </label>
-                <input type="date" id="dueDate" />
+                <input type="date" id="dueDate" v-model="dueDate"/>
               </div>
 
               <hr class="courses my-0" />
@@ -53,7 +53,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      publish: "",
+      dueDate: "",
+    }
+  },
+};
 </script>
 
 <style></style>
