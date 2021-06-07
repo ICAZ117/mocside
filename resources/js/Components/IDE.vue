@@ -349,21 +349,11 @@ import "ace-builds/src-noconflict/mode-python";
 
 export default {
     name: "IDE",
-    props: {
-        lang: {
-            type: String,
-        },
-        showSubmit: {
-            type: Boolean,
-        },
-        lastSave: {
-            type: String,
-        },
-    },
+    props: ["lang", "showSubmit", "value"],
     data() {
         return {
             theme: "gob",
-            content: "",
+            content: this.value,
             editorLangauge: "",
             style: "width: " + ((this.showSubmit) ? "78%" : "89%") + "!important",
         };
@@ -379,11 +369,10 @@ export default {
         }
     },
     computed: {
-        updateValue: {
-            get() {
-                this.$emit('input', content)
-            }
-        }
+        updateValue: function() {
+            this.$emit('input', this.content);
+            return this.content;
+        },
     },
 };
 </script>
