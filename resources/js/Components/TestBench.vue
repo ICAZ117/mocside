@@ -34,7 +34,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model="testCase.tcDescription"/>
+      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model:content="state.content"/>
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
@@ -61,12 +61,19 @@
 </template>
 
 <script>
+import { reactive } from "vue";
+
 import { VAceEditor } from "vue3-ace-editor";
 
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 export default {
+  setup() {
+    const state = reactive({ content: "" });
+
+    return { state };
+  },
   data() {
     return {
       currentTC: 0,
