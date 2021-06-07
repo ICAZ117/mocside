@@ -109,7 +109,7 @@ export default defineComponent({
     title: function() {
       var test = debounce(function () {
         console.log("change finished");
-      }, 3000);
+      }, 1);
       return this.assignment.title;
     },
   },
