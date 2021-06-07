@@ -379,12 +379,8 @@ export default {
         }
     },
     computed: {
-        updateValue: {
-            get() {
-                this.$emit('input', this.content)
-            }
-        },
-        change: function() {
+        updateValue: function() {
+            this.$emit('input', this.content);
             return this.content;
         },
     },
