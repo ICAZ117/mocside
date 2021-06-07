@@ -341,7 +341,6 @@ export default {
     props: {
         lang: {
             type: String,
-            required: true,
         },
         showSubmit: {
             type: Boolean,
@@ -349,8 +348,7 @@ export default {
         content: {
             type: String,
         },
-    }
-    ["lang", "showSubmit"],
+    },
     data() {
         return {
             theme: "gob",
