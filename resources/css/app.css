@@ -909,16 +909,38 @@ thead.problemtable {
 }
 
 .test-cases {
-    font-size: 8pt!important;
-    margin-left: 2rem;
+    font-size: 10pt!important;
+    margin-left: 2rem!important;
 }
 
 .tc-card-title {
     background-color: var(--FSCred)!important;
-    color: #383131!important;
+    color: white!important;
     margin: auto!important;
     margin-top: 25px!important;
 }
+
+.tc-card {
+    position: relative!important;
+    display: flex!important;
+    flex-direction: column!important;
+    min-width: 150px!important;
+    word-wrap: break-word!important;
+    background-color: var(--FSCred)!important;
+    background-clip: border-box!important;
+    border-radius: .25rem!important;
+    margin: 1rem!important;
+    padding: 3px!important;
+}
+
+.tc-card-body {
+    background-color: white!important;
+    margin: 0!important;
+    padding: 1rem 1rem 0 1rem!important;
+    border-radius: .17rem!important;
+    border-top: 1px solid rgba(0, 0, 0, 0.3)!important;
+}
+
 /*============= FOOTER =============*/
 
 footer {
