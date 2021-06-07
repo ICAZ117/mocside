@@ -381,7 +381,7 @@ export default {
     computed: {
         updateValue: {
             get() {
-                this.$emit('input', content)
+                this.$emit('input', this.content)
             }
         }
     },
