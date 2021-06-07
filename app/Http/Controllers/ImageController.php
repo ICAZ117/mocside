@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class AvatarController extends Controller
+class ImageController extends Controller
 {
     public function store(Request $request)
     {

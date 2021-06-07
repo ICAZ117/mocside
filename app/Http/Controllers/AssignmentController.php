@@ -99,7 +99,7 @@ class AssignmentController extends Controller
     {
         if (Auth::user()->isProf()) {
             $affectedAssignments = Assignment::destroy($id);
-            return response()->json(["message" => "Delete successful."])
+            return response()->json(["message" => "Delete successful."]);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }

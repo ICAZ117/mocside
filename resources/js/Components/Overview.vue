@@ -2,7 +2,12 @@
   <div class="create-assignment">
     <div class="container">
       <h4>Description:</h4>
-      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model:value="state.content"/>
+      <QuillEditor
+        theme="snow"
+        toolbar="full"
+        class="assignment-description"
+        v-model:content="state.content"
+      />
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
@@ -11,42 +16,22 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive } from "vue";
 
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 export default {
-  props: ['overview'],
+  props: ["overview"],
   setup() {
-    const state = reactive({
-      dynamicComponent: null,
-      content: '',
-      _content: '',
-      editorOption: {
-        placeholder: 'core',
-        modules: {
-          toolbar: [
-            // custom toolbars options
-            // will override the default configuration
-          ],
-          // other moudle options here
-        }
-        // more options
-      },
-      disabled: false
-    })
+    const state = reactive({ content: "" });
 
-    const onEditorChange = ({ text }) => {
-      state._content = text
-    }
-
-    return { state, onEditorChange }
+    return { state };
   },
   data() {
     return {
-
-    }
+      description: "",
+    };
   },
   computed: {
     description: {
