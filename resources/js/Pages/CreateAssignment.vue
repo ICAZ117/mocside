@@ -54,6 +54,7 @@ const tabs = [
   "Test Bench",
   "Model Solution",
   "Grade Book",
+  "Save & Exit"
 ];
 
 export default defineComponent({
