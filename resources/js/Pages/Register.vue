@@ -261,7 +261,7 @@ export default {
       this.message = null;
       const payload = {
         name: this.userForm.fname + " " + this.userForm.lname,
-        // username: this.userForm.username,
+        username: this.userForm.username,
         email: this.userForm.email,
         fsc_id: this.userForm.fscid,
         password: this.userForm.password,

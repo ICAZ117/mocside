@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <IDE :lang="lang" :showSubmit="false" />
+      <IDE :lang="lang" :showSubmit="false" v-model="content"/>
     </div>
   </div>
 </template>
@@ -45,6 +45,7 @@ export default {
       saveStatus: "All changes have been saved",
       lang: "",
       showEditor: false,
+      content: "",
     };
   },
   methods: {
