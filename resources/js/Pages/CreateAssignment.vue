@@ -30,9 +30,8 @@
     <tab-panel :val="'Test Bench'"> <TestBench /> </tab-panel>
     <tab-panel :val="'Model Solution'"> <ModelSolution /> </tab-panel>
     <tab-panel :val="'Grade Book'"> <GradeBook /> </tab-panel>
+    <button class="btn btn-md btn-primary">Save & Exit</button>
   </tab-panels>
-
-  <button class="btn btn-md btn-primary">Save & Exit</button>
 </template>
 
 <script lang="ts">
