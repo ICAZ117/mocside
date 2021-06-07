@@ -44,7 +44,7 @@ export default {
     },
     text: function() {
       console.log("change in state text?");
-      return state.content;
+      return this.state.content;
     }
   }
 };
