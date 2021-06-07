@@ -352,7 +352,7 @@ export default {
     data() {
         return {
             theme: "gob",
-            content: lastSave,
+            content: "",
             editorLangauge: "",
             style: "width: " + ((this.showSubmit) ? "78%" : "89%") + "!important",
         };
