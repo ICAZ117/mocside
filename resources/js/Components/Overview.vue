@@ -41,7 +41,7 @@ export default {
       state._content = text
     }
 
-    return { state, onEditorBlur, onEditorFocus, onEditorReady, onEditorChange }
+    return { state, onEditorChange }
   },
   data() {
     return {
