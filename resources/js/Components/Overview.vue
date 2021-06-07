@@ -16,6 +16,31 @@ import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 export default {
   props: ['overview'],
+  setup() {
+    const state = reactive({
+      dynamicComponent: null,
+      content: '',
+      _content: '',
+      editorOption: {
+        placeholder: 'core',
+        modules: {
+          toolbar: [
+            // custom toolbars options
+            // will override the default configuration
+          ],
+          // other moudle options here
+        }
+        // more options
+      },
+      disabled: false
+    })
+
+    const onEditorChange = ({ text }) => {
+      state._content = text
+    }
+
+    return { state, onEditorBlur, onEditorFocus, onEditorReady, onEditorChange }
+  },
   data() {
     return {
       description: "",
