@@ -128,7 +128,6 @@ import "ace-builds/src-noconflict/theme-xcode";
 //////////////////////////////////////////////////////////////////////
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-python";
-import func from 'vue-editor-bridge';
 {
   // import "ace-builds/src-noconflict/mode-abap";
   // import "ace-builds/src-noconflict/mode-abc";
