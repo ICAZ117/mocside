@@ -271,12 +271,12 @@ export default {
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
-    this.courseForm.name = course.data.name;
-    this.courseForm.description = course.data.description;
-    this.courseForm.img = course.data.img_loc;
-    this.courseForm.dateStart = course.data.start_date;
-    this.courseForm.dateEnd = course.data.end_date;
-    this.courseForm.roster = JSON.parse(course.data.roster).roster;
+    this.courseForm.name = course.data.data.name;
+    this.courseForm.description = course.data.data.description;
+    this.courseForm.img = course.data.data.img_loc;
+    this.courseForm.dateStart = course.data.data.start_date;
+    this.courseForm.dateEnd = course.data.data.end_date;
+    this.courseForm.roster = JSON.parse(course.data.data.roster).roster;
     this.getStudents();
   },
   beforeUnmount() {

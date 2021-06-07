@@ -141,7 +141,7 @@ export default {
       for (i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
-        this.courses.push(course.data);
+        this.courses.push(course.data.data);
       }
     },
     Unmounting() {
@@ -153,7 +153,7 @@ export default {
       ///update the list of courses
       this.courses = this.courses.filter((c) => c.id  != this.courseID);
       const course = await API.apiClient.get(`/courses/${this.courseID}`);
-      this.courses.push(course.data);
+      this.courses.push(course.data.data);
       this.Unmounting();
     },
   },
