@@ -208,7 +208,12 @@ export default {
   },
   computed: {
     isProf: function() {
-      return store.getters["auth/isProf"];
+      if (store.getters["auth/isProf"] == null) {
+        return false;
+      }
+      else {
+        return store.getter["auth/isProf"];
+      }
     }
   },
   beforeMount() {
