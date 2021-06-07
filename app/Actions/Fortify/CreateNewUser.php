@@ -31,6 +31,7 @@ class CreateNewUser implements CreatesNewUsers
             ],
             'password' => $this->passwordRules(),
             'fsc_id' => ['required', 'int'],
+            'username' => ['required', 'string', 'max:255', Rule::unique(User::class)],
         ])->validate();
 
         return User::create([
@@ -38,6 +39,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'fsc_id' => $input['fsc_id'],
+            'username' => $input['username'],
         ]);
     }
 }

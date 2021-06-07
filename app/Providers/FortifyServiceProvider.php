@@ -52,5 +52,17 @@ class FortifyServiceProvider extends ServiceProvider
 
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
         $this->app->singleton(RegisterResponseContract::class, RegisterResponse::class);
+
+        // allow users to use email or username
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)
+                ->orWhere('username', $request->email)
+                ->first();
+    
+            if ($user &&
+                Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+        });
     }
 }
