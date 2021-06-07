@@ -26,8 +26,8 @@ class CourseResource extends JsonResource
             'img_loc' => $this->img_loc,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
-            // 'owner_id' => $this->owner_id,
-            'owner' => $this->owner->screen_name,
+            'owner_id' => $this->owner_id,
+            // 'owner' => $this->owner->screen_name,
             'num_labs' => $this->labs->count(),
         ];
     }
