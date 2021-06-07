@@ -101,7 +101,7 @@ export default defineComponent({
 
       var test = debounce(function () {
         console.log("change finished");
-      }, 3000);
+      }, 1);
 
     }
   },
