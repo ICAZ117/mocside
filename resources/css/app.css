@@ -851,7 +851,7 @@ thead.problemtable {
 .create-assignment {
     padding-top: 2rem;
     background-color: white !important;
-    height: calc(100vh - (var(--nav-height) + 88px));
+    min-height: calc(100vh - (var(--nav-height) + 88px));
 }
 
 .tab {
