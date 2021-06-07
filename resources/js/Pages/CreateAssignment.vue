@@ -85,7 +85,8 @@ export default defineComponent({
       //perhaps later replace this with a debounce method for autosaving
       //save information before returning to the problems page
       var payload = {
-        title: this.title,
+        "name": this.title,
+        "description": this.overview,
 
       }
       const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
@@ -98,12 +99,9 @@ export default defineComponent({
     }
   },
   computed: {
-    title: {
-      get() {
-        console.log("changing");
-        return this.assignment.title;
-      }
-    }
+    title: function() {
+      return this.assignment.title;
+    },
   },
   beforeUnmount() {
     this.$emit("unmounting");
