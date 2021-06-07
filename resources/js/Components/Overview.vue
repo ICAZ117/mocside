@@ -2,7 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <h4>Description:</h4>
-      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model:value="text"/>
+      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model:value="description"/>
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
