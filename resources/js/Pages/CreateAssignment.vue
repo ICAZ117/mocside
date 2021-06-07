@@ -30,7 +30,6 @@
     <tab-panel :val="'Test Bench'"> <TestBench /> </tab-panel>
     <tab-panel :val="'Model Solution'"> <ModelSolution /> </tab-panel>
     <tab-panel :val="'Grade Book'"> <GradeBook /> </tab-panel>
-    <tab-panel :val="save">Save & Exit</tab-panel>
   </tab-panels>
 </template>
 
@@ -53,6 +52,7 @@ const tabs = [
   "Test Bench",
   "Model Solution",
   "Grade Book",
+  "Save & Exit"
 ];
 
 export default defineComponent({
