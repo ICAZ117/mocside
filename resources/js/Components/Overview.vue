@@ -21,6 +21,19 @@ export default {
       description: "",
     }
   },
+  computed: {
+    text: {
+      get() {
+        return this.overview;
+      },
+      set(v) {
+        this.$emit("update", v);
+      },
+    },
+    description: {
+      
+    },
+  }
 };
 </script>
 
