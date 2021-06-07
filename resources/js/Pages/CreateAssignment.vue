@@ -84,7 +84,7 @@ export default defineComponent({
       //perhaps later replace this with a debounce method for autosaving
       //save information before returning to the problems page
       var payload = {
-        title = this.title,
+        title: this.title,
 
       }
       const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
