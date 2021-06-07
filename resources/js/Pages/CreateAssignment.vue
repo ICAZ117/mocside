@@ -47,6 +47,7 @@ import ModelSolution from "../Components/ModelSolution.vue";
 import GradeBook from "../Components/GradeBook.vue";
 
 import * as API from "../services/API";
+import { debounce } from 'lodash';
 
 const tabs = [
   "Overview",
@@ -86,7 +87,7 @@ export default defineComponent({
       //save information before returning to the problems page
       var payload = {
         "name": this.title,
-        "description": this.overview,
+        // "description": this.overview,
 
       }
       const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
@@ -96,10 +97,19 @@ export default defineComponent({
     updateOverview(e) {
       this.overview = e;
       console.log("event complete did the value change?");
+
+
+      var test = debounce(function () {
+        console.log("change finished");
+      }, 3000);
+
     }
   },
   computed: {
     title: function() {
+      var test = debounce(function () {
+        console.log("change finished");
+      }, 3000);
       return this.assignment.title;
     },
   },
