@@ -45,11 +45,11 @@ export default {
   },
   data() {
     return {
-      description: "",
+
     }
   },
   computed: {
-    text: {
+    description: {
       get() {
         return this.overview;
       },
@@ -57,6 +57,10 @@ export default {
         this.$emit("update", v);
       },
     },
+    text: function() {
+      console.log("change in state text?");
+      return state.content;
+    }
   }
 };
 </script>
