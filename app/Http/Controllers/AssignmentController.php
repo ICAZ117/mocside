@@ -12,11 +12,14 @@ class AssignmentController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * This should be a debugging exclusive,
+     * if the route is registered at all.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        // This check is remaining isAdmin because of the scope.
         if (Auth::user()->isAdmin()) {
             return Assignment::all();
         }
@@ -24,21 +27,22 @@ class AssignmentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage,
+     * and returns it as it's properly formatted
+     * JSON resource as defined elsewhere.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if (Auth::user()->isAdmin()) {
+        if (Auth::user()->isProf()) {
             $validData = $request->validate([
-                'id' => 'required',
                 'name' => 'required',
                 'description' => 'required',
-                'lab_id' => 'required',
+                'lab_id' => 'required|int',
             ]);
-            return Assignment::create($validData);
+            return new AssignmentResource(Assignment::create($validData));
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
@@ -57,20 +61,19 @@ class AssignmentController extends Controller
         return  response()->json(["message" => "Forbidden"], 403);
     }
 
+
+    // shows listing of assignments by LAB ID and then returns
+    // a collection of JSON resources.
     public function showRes($id)
     {
         $listOfAssignments = Lab::find($id)->assignments;
         $assignmentRes = AssignmentResource::collection($listOfAssignments);
-        // $assignment = Assignment::find($id);
-        // // I can abstract in here by creating a resource (like User Res.)
-        // // And choose what I want in the return array, including things
-        // // from the eloquent relationships.
-        // $assignmentRes = new AssignmentResource($assignment); 
         return $assignmentRes;
     }
 
     /**
      * Update the specified resource in storage.
+     * Will return updated resource in a .data.data
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -78,10 +81,10 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::user()->isAdmin()) {
+        if (Auth::user()->isProf()) {
             $ass = Assignment::find($id);
             $ass->update($request->all());
-            return $ass;
+            return response()->json(['data', $ass], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
@@ -94,8 +97,9 @@ class AssignmentController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()->isAdmin()) {
-            return Assignment::destroy($id);
+        if (Auth::user()->isProf()) {
+            $affectedAssignments = Assignment::destroy($id);
+            return response()->json(["message" => "Delete successful."]);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }

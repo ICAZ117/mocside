@@ -6,6 +6,7 @@
       class="assignment-title form-control"
       name="assignment-title"
       placeholder="Assignment Title"
+      v-model="assignment.title"
     />
     <hr />
 
@@ -84,6 +85,8 @@ export default defineComponent({
       //perhaps later replace this with a debounce method for autosaving
       //save information before returning to the problems page
       var payload = {
+        "name": this.title,
+        "description": this.overview,
 
       }
       const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
@@ -94,6 +97,11 @@ export default defineComponent({
       this.overview = e;
       console.log("event complete did the value change?");
     }
+  },
+  computed: {
+    title: function() {
+      return this.assignment.title;
+    },
   },
   beforeUnmount() {
     this.$emit("unmounting");

@@ -1,13 +1,17 @@
 <?php
 
-use App\Http\Controllers\AssignmentController;
-use App\Models\User;
-
+// builtins
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+// models
+use App\Models\User;
+
+// controllers
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
@@ -68,7 +72,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/students/{id}', [StudentController::class, 'show']);
     Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
-    Route::post('/images/store', [AvatarController::class, 'store']);
+    Route::post('/images/store', [ImageController::class, 'store']);
 
     Route::get('/progress/{id}', [ProgressController::class, 'show']);
     Route::post('/progress', [ProgressController::class, 'store']);
