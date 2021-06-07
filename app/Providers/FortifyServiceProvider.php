@@ -18,6 +18,8 @@ use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use App\Http\Responses\RegisterResponse;
 use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 
+use App\Models\User;
+
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
