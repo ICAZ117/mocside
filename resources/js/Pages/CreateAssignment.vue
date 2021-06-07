@@ -84,6 +84,7 @@ export default defineComponent({
       //perhaps later replace this with a debounce method for autosaving
       //save information before returning to the problems page
       var payload = {
+        title = this.title,
 
       }
       const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
@@ -93,6 +94,14 @@ export default defineComponent({
     updateOverview(e) {
       this.overview = e;
       console.log("event complete did the value change?");
+    }
+  },
+  computed: {
+    title: {
+      get() {
+        console.log("changing");
+        return this.assignment.title;
+      }
     }
   },
   beforeUnmount() {
