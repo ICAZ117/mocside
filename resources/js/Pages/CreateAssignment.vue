@@ -45,6 +45,8 @@ import TestBench from "../Components/TestBench.vue";
 import ModelSolution from "../Components/ModelSolution.vue";
 import GradeBook from "../Components/GradeBook.vue";
 
+import * as API from "../services/API";
+
 const tabs = [
   "Overview",
   "Assign",
@@ -77,6 +79,12 @@ export default defineComponent({
   },
   methods: {
     async handleSubmit(){
+      //perhaps later replace this with a debounce method for autosaving
+      //save information before returning to the problems page
+      var payload = {
+
+      }
+      const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
 
       this.$emit("problemEdited");
     },
