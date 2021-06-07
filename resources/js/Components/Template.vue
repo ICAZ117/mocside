@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <IDE :lang="lang" :showSubmit="false" v-model:input="content"/>
+      <IDE :lang="lang" :showSubmit="false" v-model="content"/>
     </div>
   </div>
 </template>

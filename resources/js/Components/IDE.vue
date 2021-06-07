@@ -370,6 +370,7 @@ export default {
     },
     computed: {
         updateValue: function() {
+            console.log("anything");
             this.$emit('input', this.content);
             return this.content;
         },
