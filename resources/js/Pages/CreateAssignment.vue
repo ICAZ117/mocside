@@ -47,7 +47,7 @@ import ModelSolution from "../Components/ModelSolution.vue";
 import GradeBook from "../Components/GradeBook.vue";
 
 import * as API from "../services/API";
-import { debounce } from 'lodash';
+import _ from 'lodash';
 
 const tabs = [
   "Overview",
@@ -99,7 +99,7 @@ export default defineComponent({
       console.log("event complete did the value change?");
 
 
-      var test = debounce(function () {
+      var test = _.debounce(function () {
         console.log("change finished");
       }, 1);
 
@@ -107,9 +107,6 @@ export default defineComponent({
   },
   computed: {
     title: function() {
-      var test = debounce(function () {
-        console.log("change finished");
-      }, 1);
       return this.assignment.title;
     },
   },

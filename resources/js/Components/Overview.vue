@@ -21,6 +21,8 @@ import { reactive } from "vue";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
+import _ from "lodash";
+
 export default {
   props: ["overview"],
   setup() {
@@ -35,6 +37,9 @@ export default {
   },
   computed: {
     text: function() {
+      var con = _.debounce(function() {
+        console.log("text changed");
+      }, 100);
       this.$emit("update", this.state.content);
       return this.state.content;
     }
