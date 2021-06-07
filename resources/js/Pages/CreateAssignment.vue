@@ -6,6 +6,7 @@
       class="assignment-title form-control"
       name="assignment-title"
       placeholder="Assignment Title"
+      v-model="assignment.title"
     />
     <hr />
 
