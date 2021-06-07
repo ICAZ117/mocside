@@ -92,6 +92,7 @@ export default defineComponent({
     },
     updateOverview(e) {
       this.overview = e;
+      console.log("event complete did the value change?");
     }
   },
   beforeUnmount() {
