@@ -77,7 +77,7 @@ export default defineComponent({
       assignment: {
         title: "",
       },
-      overview: "",
+      overview: {},
     };
   },
   methods: {

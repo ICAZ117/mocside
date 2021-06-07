@@ -34,18 +34,13 @@ export default {
     };
   },
   computed: {
-    description: {
-      get() {
-        return this.overview;
-      },
-      set(v) {
-        this.$emit("update", v);
-      },
-    },
     text: function() {
-      console.log("change in state text?");
+      this.$emit("update", this.state.content);
       return this.state.content;
     }
+  },
+  mounted() {
+    this.state.content = this.overview;
   }
 };
 </script>
