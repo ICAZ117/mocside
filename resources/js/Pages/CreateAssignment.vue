@@ -24,7 +24,7 @@
   </div>
 
   <tab-panels v-model="selectedTab" :animate="true">
-    <tab-panel :val="'Overview'"> <Overview /> </tab-panel>
+    <tab-panel :val="'Overview'"> <Overview :overview="overview"/> </tab-panel>
     <tab-panel :val="'Assign'"> <Assign /> </tab-panel>
     <tab-panel :val="'Template'"> <Template /> </tab-panel>
     <tab-panel :val="'Test Bench'"> <TestBench /> </tab-panel>
@@ -76,6 +76,7 @@ export default defineComponent({
       assignment: {
         title: "",
       },
+      overview: "",
     };
   },
   methods: {
