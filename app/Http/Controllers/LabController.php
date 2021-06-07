@@ -44,7 +44,7 @@ class LabController extends Controller
             if ($user->fsc_id == $owner->fsc_id) {
                 return new LabResource(Lab::create($validData));
             }
-            return response()->json(['message' => 'Action failed: this is not your course.'], 403)
+            return response()->json(['message' => 'Action failed: this is not your course.'], 403);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
