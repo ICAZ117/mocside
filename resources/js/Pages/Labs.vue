@@ -163,7 +163,7 @@ export default {
         return false;
       }
       else {
-        return store.getter["auth/isProf"];
+        return store.getters["auth/isProf"];
       }
     }
   },
