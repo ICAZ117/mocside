@@ -37,7 +37,7 @@ export default {
   props: ['authUser'],
   data() {
     return {
-      dark: "dark-",
+      dark: "",
     };
   },
   methods: {
