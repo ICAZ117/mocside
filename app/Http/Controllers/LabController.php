@@ -85,8 +85,11 @@ class LabController extends Controller
 
     public function destroy($id)
     {
-        if (Auth::user()->isAdmin()) {
-            $lab = Lab::destroy($id);
+        $user = Auth::user();
+        $lab = Lab::find($id);
+        $owner = $lab->course->owner_id;
+        if ($user->isAdmin() || $user->fsc_id == $owner) {
+            $lab->delete();
             return response()->json(['message' => "Delete sucessful", "data" => $lab], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
