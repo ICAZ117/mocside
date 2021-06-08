@@ -39,7 +39,15 @@ export default {
   },
   methods: {
     async save() {
-      console.log("saved?");
+      var timeout = _.debounce(async function() {
+        //save overview to problem in database
+        var payload = {
+          "description": this.text,
+        }
+        console.log(this.assignmentID);
+        const res = await API.apiClient.put(`/problems/${this.assignmentID}`, payload);
+      }, 3000);
+      timeout();
     },
   },
   computed: {
