@@ -39,25 +39,23 @@ export default {
   },
   methods: {
     async save() {
-      var payload = {
-        "description": this.text,
-      }
-      const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
+      console.log("saved?");
     },
   },
   computed: {
     text: function() {
 
       //choice 1
-      var timeout = _.debounce(async function() {
-        //save overview to problem in database
-        var payload = {
-          "description": this.text,
-        }
-        console.log(this.assignmentID);
-        const res = await API.apiClient.put(`/problems/${this.assignmentID}`, payload);
-      }, 3000);
-      timeout();
+      // var timeout = _.debounce(async function() {
+      //   //save overview to problem in database
+      //   var payload = {
+      //     "description": this.text,
+      //   }
+      //   console.log(this.assignmentID);
+      //   const res = await API.apiClient.put(`/problems/${this.assignmentID}`, payload);
+      // }, 3000);
+      // timeout();
+      this.save();
 
 
       //choice 2
