@@ -33,7 +33,7 @@ class ProgressController extends Controller
             // updating progress
             $progress = Progress::where('fsc_id', $id)->first();
             $progress->update($request->all());
-            return response()->json(['message' => 'Update sucessfull.', 'data' => $progress], 200);
+            return response()->json(['message' => 'Update successfull.', 'data' => $progress], 200);
         }
         return response()->json(['message' => 'This is not your user!'], 403);
     }

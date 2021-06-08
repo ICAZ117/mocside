@@ -25,13 +25,13 @@ class ProfessorController extends Controller
         if ($user->isAdmin())
         {
             $newProf = Professor::create($validData);
-            return response()->json(["message" => 'Sucessfully created.', "data" => $newProf], 200);
+            return response()->json(["message" => 'Successfully created.', "data" => $newProf], 200);
         }
 
         if ($user->isProf() && $user->fsc_id == $validData['fsc_id'])
         {
             $newProf = Professor::create($validData);
-            return response()->json(["message" => 'Sucessfully created.', "data" => $newProf], 200);
+            return response()->json(["message" => 'Successfully created.', "data" => $newProf], 200);
         }
         return response()->json(['message' => 'Forbidden. Is this your user?'], 403);
     }
@@ -50,13 +50,13 @@ class ProfessorController extends Controller
         if ($user->isAdmin())
         {
             $prof->update($request->all());
-            return response()->json(['message' => 'Updated sucessfully.', 'data' => $prof], 200);
+            return response()->json(['message' => 'Updated successfully.', 'data' => $prof], 200);
         }
 
         if ($user->isProf() && $user->fsc_id == $prof->fsc_id)
         {
             $prof->update($request->all());
-            return response()->json(['message' => 'Updated sucessfully.', 'data' => $prof], 200);
+            return response()->json(['message' => 'Updated successfully.', 'data' => $prof], 200);
         }
         return response()->json(['message' => 'Forbidden. Is this your user?'], 403);
     }
@@ -67,7 +67,7 @@ class ProfessorController extends Controller
         if (Auth::user()->isAdmin())
         {
             $deletedProfs = Professor::where('fsc_id', $id)->delete();
-            return response()->json(['message' => 'Sucessfully deleted.', 'data' => $deletedProfs], 200);
+            return response()->json(['message' => 'Successfully deleted.', 'data' => $deletedProfs], 200);
         }
         return response()->json(['message' => 'Forbidden'], 403);
     }

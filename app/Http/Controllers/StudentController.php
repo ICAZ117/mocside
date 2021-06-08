@@ -30,13 +30,13 @@ class StudentController extends Controller
         if ($user->isAdmin())
         {
             $stud = Student::create($validData);
-            return response()->json(['message' => 'Sucessfully created student.', 'data' => $stud], 200);
+            return response()->json(['message' => 'Successfully created student.', 'data' => $stud], 200);
         }
 
         if ($user->fsc_id == $validData['fsc_id'])
         {
             $stud = Student::create($validData);
-            return response()->json(['message' => 'Sucessfully created student.', 'data' => $stud], 200);
+            return response()->json(['message' => 'Successfully created student.', 'data' => $stud], 200);
         }
         return response()->json(['message' => 'This is not your user!'], 403);
     }
@@ -87,7 +87,7 @@ class StudentController extends Controller
         if (Auth::user()->isAdmin())
         {
             $stud = Student::where('fsc_id', $id)->delete();
-            return response()->json(['message' => 'delete sucessfull', 'data' => $stud], 200);
+            return response()->json(['message' => 'delete successfull', 'data' => $stud], 200);
         }
         return response()->json(['message' => 'Forbidden.'], 403);
     }
