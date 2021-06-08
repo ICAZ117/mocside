@@ -112,6 +112,7 @@ export default {
         "name": "New Problem",
         "description": "New Problem",
         "lab_id": this.labID,
+        "due_date": "2021-05-29 13:04:03",
       }
       const problem = await API.apiClient.post(`/problems`, payload);
       this.problemID = problem.data.id;
