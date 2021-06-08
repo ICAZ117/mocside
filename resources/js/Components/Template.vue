@@ -33,12 +33,14 @@
         </div>
       </div>
 
-      <IDE :lang="lang" :showSubmit="false" @input="updateContent"/>
+      <IDE :lang="lang" :showSubmit="false" @update="updateContent" />
     </div>
   </div>
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
   data() {
     return {
@@ -64,11 +66,10 @@ export default {
       console.log(this.content);
       console.log("\n\n---------- Update Completed ----------");
 
-
-      var test = _.debounce(function () {
-        console.log("Code has been debounced");
-      }, 1000);
-
+      var timeout = _.debounce(function () {
+        console.log("Debounce complete");
+      }, 3000);
+      timeout();
     },
   },
 };
