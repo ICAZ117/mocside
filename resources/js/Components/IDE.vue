@@ -9,7 +9,6 @@
         v-model:value="content"
         :lang="editorLangauge"
         :theme="theme"
-        @update="updateContent"
       />
       <div class="row px-1 my-1">
         <button type="run" name="run" class="run-code col-1 btn btn-success">Run</button>
@@ -348,7 +347,7 @@ import "ace-builds/src-noconflict/mode-python";
 export default {
   name: "IDE",
   props: ["lang", "showSubmit", "savedCode"],
-  emits: ["input"],
+  emits: ["update"],
   data() {
     return {
       theme: "gob",
@@ -367,7 +366,7 @@ export default {
       this.editorLangauge = "python";
     }
   },
-  method: {
+  computed: {
     updateContent: function () {
       this.$emit("update", this.content);
       return this.content;
