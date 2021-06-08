@@ -26,8 +26,8 @@ import * as API from "../services/API";
 
 export default {
   props: {
-    overview: {}, 
-    problemID: Int,
+    overview: Object, 
+    problemID: Number,
   },
   setup(props) {
     console.log(props);
