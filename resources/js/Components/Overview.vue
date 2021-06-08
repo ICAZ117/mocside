@@ -7,6 +7,7 @@
         toolbar="full"
         class="assignment-description"
         v-model:content="state.content"
+        :content="this.overview"
       />
       <hr />
       <h5>Proceed with caution!</h5>
