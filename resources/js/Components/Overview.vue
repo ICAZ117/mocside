@@ -49,7 +49,7 @@ export default {
       //choice 1
       var timeout = _.debounce(function() {
         //save overview to problem in database
-        save();
+        this.save();
       }, 3000);
       timeout();
 
