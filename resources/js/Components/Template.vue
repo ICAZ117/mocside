@@ -43,6 +43,7 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
+  props: ["problemID"],
   data() {
     return {
       saveStatus: "All changes have been saved",
@@ -53,7 +54,7 @@ export default {
   },
   watch: {
     content: function(val) {
-      this.timeout(this.assignmentID);
+      this.timeout(this.problemID);
     }
   },
   methods: {

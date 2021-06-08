@@ -26,11 +26,11 @@
 
   <tab-panels v-model="selectedTab" :animate="true">
     <tab-panel :val="'Overview'"> <Overview @update="updateOverview" :overview="overview" :problemID="assignmentID"/> </tab-panel>
-    <tab-panel :val="'Assign'"> <Assign /> </tab-panel>
-    <tab-panel :val="'Template'"> <Template /> </tab-panel>
-    <tab-panel :val="'Test Bench'"> <TestBench /> </tab-panel>
-    <tab-panel :val="'Model Solution'"> <ModelSolution /> </tab-panel>
-    <tab-panel :val="'Grade Book'"> <GradeBook /> </tab-panel>
+    <tab-panel :val="'Assign'"> <Assign :problemID="problemID"/> </tab-panel>
+    <tab-panel :val="'Template'"> <Template :problemID="problemID"/> </tab-panel>
+    <tab-panel :val="'Test Bench'"> <TestBench :problemID="problemID"/> </tab-panel>
+    <tab-panel :val="'Model Solution'"> <ModelSolution :problemID="problemID"/> </tab-panel>
+    <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID"/> </tab-panel>
   </tab-panels>
 </template>
 
