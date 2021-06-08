@@ -22,6 +22,7 @@ import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 import _ from "lodash";
+import * as API from "../services/API";
 
 export default {
   props: ["overview", "problemID"],
@@ -49,7 +50,10 @@ export default {
       //choice 1
       var timeout = _.debounce(async function() {
         //save overview to problem in database
-        await this.save();
+        var payload = {
+          "description": this.text,
+        }
+        const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
       }, 3000);
       timeout();
 
