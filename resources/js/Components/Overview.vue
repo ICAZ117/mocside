@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    save() {
+    async save() {
       var payload = {
         "description": this.text,
       }
