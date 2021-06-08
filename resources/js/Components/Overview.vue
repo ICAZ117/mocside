@@ -53,6 +53,7 @@ export default {
         var payload = {
           "description": this.text,
         }
+        console.log(this.problemID);
         const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
       }, 3000);
       timeout();
@@ -66,6 +67,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.problemID);
     this.state.content = this.overview;
   }
 };
