@@ -31,6 +31,19 @@ class LabController extends Controller
     {
         // prof check for lab creation
         $user = Auth::user();
+
+        // admin bypass
+        if ($user->isAdmin())
+        {
+            $validData = $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+                'course_id' => 'required|int',
+                'due_date' => 'required',
+            ]);
+            return new LabResource(Lab::create($validData));
+        }
+
         if ($user->isProf()) {
             $validData = $request->validate([
                 'name' => 'required',
