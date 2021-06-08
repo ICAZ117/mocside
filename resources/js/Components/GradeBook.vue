@@ -11,55 +11,40 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="student" style="cursor: pointer">
-          <td><a>Lab 1: Hour of Code</a></td>
-          <td>3</td>
-          <td>66%</td>
-          <td>1/24/2021</td>
-          <td>1/24/2021</td>
+        <tr v-for="student in students" :key="student.id" class="student" style="cursor: pointer">
+          <td>{{ student.name }}</td>
+          <td>{{ student.ID }}</td>
+          <td>{{ student.grade }}</td>
+          <td>{{ student.letterGrade }}</td>
+          <td><a :href="'mailto:' + student.email"></a>{{ student.email }}</td>
         </tr>
-        <tr class="student" style="cursor: pointer">
-          <td><a>Lab 2: Printing & I/O</a></td>
-          <td>5</td>
-          <td>100%</td>
-          <td>1/31/2021</td>
-          <td>1/31/2021</td>
-        </tr>
-        <tr class="student" style="cursor: pointer">
-          <td><a>Lab 3: If-Else</a></td>
-          <td>6</td>
-          <td>100%</td>
-          <td>2/7/2021</td>
-          <td>2/5/2021</td>
-        </tr>
-        <tr class="student" style="cursor: pointer">
-          <td><a>Lab 4: Loops</a></td>
-          <td>5</td>
-          <td>80%</td>
-          <td>2/14/2021</td>
-          <td>2/11/2021</td>
-        </tr>
-        <tr class="student" style="cursor: pointer">
-          <td><a>Lab 5: Methods</a></td>
-          <td>8</td>
-          <td>0%</td>
-          <td>2/21/2021</td>
-          <td></td>
-        </tr>
-        <tr class="student" style="cursor: pointer">
-          <td><a>Lab 6: Arrays</a></td>
-          <td>4</td>
-          <td>0%</td>
-          <td>3/1/2021</td>
-          <td></td>
-        </tr>
+        
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      students: [{
+        name: "Darth Vader",
+        ID: "6666666",
+        grade: "83%",
+        letterGrade: "B",
+        email: "UnicornKitty22@gmail.com"
+      },
+      {
+        name: "Bruh",
+        ID: "0000000",
+        grade: "100%",
+        letterGrade: "A",
+        email: "bruh@gmail.com"
+      }]
+    }
+  },
+};
 </script>
 
 <style></style>
