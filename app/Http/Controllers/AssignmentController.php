@@ -40,6 +40,7 @@ class AssignmentController extends Controller
             $validData = $request->validate([
                 'name' => 'required',
                 'description' => 'required',
+                'due_date' => 'required',
                 'lab_id' => 'required|int',
             ]);
             return new AssignmentResource(Assignment::create($validData));

@@ -9,6 +9,7 @@
         v-model:value="content"
         :lang="editorLangauge"
         :theme="theme"
+        :value="'undefined'"
       />
       <div class="row px-1 my-1">
         <button type="run" name="run" class="run-code col-1 btn btn-success">Run</button>
@@ -346,12 +347,12 @@ import "ace-builds/src-noconflict/mode-python";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "value"],
+  props: ["lang", "showSubmit", "savedCode"],
   emits: ["input"],
   data() {
     return {
       theme: "gob",
-      content: this.value,
+      content: this.savedCode,
       editorLangauge: "",
       style: "width: " + (this.showSubmit ? "78%" : "89%") + "!important",
     };
