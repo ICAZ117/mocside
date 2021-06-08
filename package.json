@@ -21,12 +21,14 @@
         "@popperjs/core": "^2.9.2",
         "@vuelidate/core": "^2.0.0-alpha.17",
         "@vuelidate/validators": "^2.0.0-alpha.14",
+        "@vueup/vue-quill": "^1.0.0-beta.5",
         "bootstrap": "^5.0.0-beta3",
         "vue": "^3.0.11",
         "vue-date-fns": "^2.0.1",
         "vue-router": "^4.0.8",
         "vue-template-compiler": "^2.6.12",
         "vue3-ace-editor": "^2.0.2",
+        "vue3-tabs": "^0.1.9",
         "vuex": "^4.0.0"
     }
 }
