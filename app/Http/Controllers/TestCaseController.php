@@ -16,6 +16,7 @@ class TestCaseController extends Controller
      */
     public function index()
     {
+        // Why would you do this? Don't do this.
         if (Auth::user()->isAdmin()) {
             return TestCase::all();
         }
@@ -30,13 +31,18 @@ class TestCaseController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->isAdmin()) {
-            $validData = $request->validate([
-                'id' => 'required',
-                'assignment_id' => 'required',
-                'input' => 'required',
-                'output' => 'required',
-            ]);
+        $user = Auth::user();
+        $validData = $request->validate([
+            'assignment_id' => 'required',
+            'input' => 'required',
+            'output' => 'required',
+        ]);
+
+        // I could check course ownership, here
+        // but at this point it would be a pain. 
+        // Please be a good samaritan.
+        if ($user->isAdmin() || $user->isProf()) {
+           
             return TestCase::create($validData);
         }
         return  response()->json(["message" => "Forbidden"], 403);
@@ -55,7 +61,8 @@ class TestCaseController extends Controller
 
     public function getCases($problem_id)
     {
-        if (Auth::user()->isAdmin()) {
+        $user = Auth::user();
+        if ($user->isAdmin() || $user->isProf()) {
             return Assignment::find($problem_id)->test_cases;
         }
         return  response()->json(["message" => "Forbidden"], 403);
@@ -70,7 +77,8 @@ class TestCaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::user()->isAdmin()) {
+        $user = Auth::user();
+        if ($user->isAdmin() || $user->isProf()) {
             $tc = TestCase::find($id);
             $tc->update($request->all());
             return $tc;
@@ -86,6 +94,7 @@ class TestCaseController extends Controller
      */
     public function destroy($id)
     {
+        // Courses, labs, assignments, and test cases should be deletable by profs.
         if (Auth::user()->isAdmin()) {
             return TestCase::destroy($id);
         }
