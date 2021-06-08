@@ -70,7 +70,7 @@ export default {
     },
     timeout: _.debounce(async function(assignmentID) {
       var payload = {};
-      if(lang =="Java") {
+      if(this.lang =="Java") {
         payload = {
           "java_starter": this.content,
         }
