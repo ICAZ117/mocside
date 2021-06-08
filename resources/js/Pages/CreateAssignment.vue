@@ -63,7 +63,7 @@ export default defineComponent({
   props: ['problemID'],
   emits: ['unmounting', "problemEdited"],
   components: { Overview, Assign, Template, TestBench, ModelSolution, GradeBook },
-  name: "Example",
+  name: "Create Assignment",
   setup() {
     const state = reactive({
       selectedTab: tabs[0],
