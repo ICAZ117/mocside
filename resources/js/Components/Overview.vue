@@ -35,7 +35,6 @@ export default {
     return {
       description: "",
       assignmentID: this.problemID,
-      timeout: console.log("empty"),
     };
   },
   watch: {
