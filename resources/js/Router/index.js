@@ -5,6 +5,7 @@ import routes from "./routes";
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    linkActiveClass: 'active',
 })
 
 router.beforeEach((to, from, next) => {
