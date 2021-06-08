@@ -55,10 +55,15 @@ export default {
       }
     },
     navbarColor() {
+      console.log("HERE");
+      console.log(this.$route.path);
+      console.log("\n\n");
       if (this.$route.path !== "/") {
+        console.log("DARK");
         this.dark = "dark-";
       }
       else {
+        console.log("LIGHT");
         this.dark = "";
       }
     }
