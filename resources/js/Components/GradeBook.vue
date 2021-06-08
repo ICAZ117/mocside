@@ -16,7 +16,7 @@
           <td>{{ student.ID }}</td>
           <td>{{ student.grade }}</td>
           <td>{{ student.letterGrade }}</td>
-          <td><a :href="'mailto:' + student.email"></a>{{ student.email }}</td>
+          <td><a :href="'mailto:' + student.email">{{ student.email }}</a></td>
         </tr>
         
       </tbody>
