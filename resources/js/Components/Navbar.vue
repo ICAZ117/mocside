@@ -67,7 +67,10 @@ export default {
         this.dark = "";
       }
     }
-  }
+  },
+  mounted() {
+    this.navbarColor();
+  },
 };
 </script>
 
