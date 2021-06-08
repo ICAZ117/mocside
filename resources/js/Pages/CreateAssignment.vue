@@ -106,12 +106,21 @@ export default defineComponent({
         console.log("change finished");
       }, 1);
 
-    }
+    },
+    async getInfo() {
+      const rawproblem = await API.apiClient.get(`/problems/${this.problemID}`);
+      var problem = rawproblem.data.data;
+      this.assignment.title = problem.name;
+      this.overview = problem.description;
+    },
   },
   computed: {
     title: function() {
       return this.assignment.title;
     },
+  },
+  mounted() {
+    this.getInfo();
   },
   beforeUnmount() {
     this.$emit("unmounting");

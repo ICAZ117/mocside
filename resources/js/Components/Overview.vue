@@ -35,40 +35,36 @@ export default {
     return {
       description: "",
       assignmentID: this.problemID,
-      test: console.log("the test of tests"),
-      timeout: _.debounce(this.save(), 3000),
     };
   },
+  watch: {
+    description: function(val) {
+      this.timeout(this.assignmentID);
+    }
+  },
   methods: {
-    async save() {
-      var timeout = _.debounce(async function(assignmentID) {
-        //save overview to problem in database
-        var payload = {
-          "description": this.text,
-        }
-        console.log(assignmentID);
-        const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-      }, 3000);
-      timeout(this.assignmentID);
-    },
+    timeout: _.debounce(async function(assignmentID) {
+      var payload = {
+        "description": this.text,
+      }
+      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+    }, 500),
   },
   computed: {
-    text: function() {
-
+    text() {
+      this.description = this.state.content;
+      return this.state.content;
       //choice 1
-      this.timeout();
+      // this.timeout;
       // this.save();
 
 
       //choice 2
       //send data to parent and let parent send upon clicking save button
       // this.$emit("update", this.state.content);
-
-      return this.state.content;
     }
   },
   mounted() {
-    console.log(this.problemID);
     this.state.content = this.overview;
   }
 };
