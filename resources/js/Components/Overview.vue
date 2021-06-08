@@ -25,9 +25,13 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
-  props: ["overview", "problemID"],
+  props: {
+    overview: {}, 
+    problemID: Int,
+  },
   setup(props) {
-    console.log(props[0]);
+    console.log(props);
+    console.log(props.overview);
     const state = reactive({ content: props.overview });
 
     return { state };
