@@ -47,9 +47,9 @@ export default {
     text: function() {
 
       //choice 1
-      var timeout = _.debounce(function() {
+      var timeout = _.debounce(async function() {
         //save overview to problem in database
-        save();
+        await this.save();
       }, 3000);
       timeout();
 
