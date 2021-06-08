@@ -25,7 +25,7 @@
   </div>
 
   <tab-panels v-model="selectedTab" :animate="true">
-    <tab-panel :val="'Overview'"> <Overview @update="updateOverview" :overview="overview" :problemID="problemID"/> </tab-panel>
+    <tab-panel :val="'Overview'"> <Overview @update="updateOverview" :overview="overview" :problemID="assignmentID"/> </tab-panel>
     <tab-panel :val="'Assign'"> <Assign /> </tab-panel>
     <tab-panel :val="'Template'"> <Template /> </tab-panel>
     <tab-panel :val="'Test Bench'"> <TestBench /> </tab-panel>
@@ -63,7 +63,7 @@ export default defineComponent({
   props: ['problemID'],
   emits: ['unmounting', "problemEdited"],
   components: { Overview, Assign, Template, TestBench, ModelSolution, GradeBook },
-  name: "Example",
+  name: "Create Assignment",
   setup() {
     const state = reactive({
       selectedTab: tabs[0],
@@ -75,6 +75,7 @@ export default defineComponent({
   },
   data() {
     return {
+      assignmentID: this.problemID,
       assignment: {
         title: "",
       },

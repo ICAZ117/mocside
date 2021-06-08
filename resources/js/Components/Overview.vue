@@ -22,6 +22,7 @@ import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 import _ from "lodash";
+import * as API from "../services/API";
 
 export default {
   props: ["overview", "problemID"],
@@ -33,25 +34,36 @@ export default {
   data() {
     return {
       description: "",
+      assignmentID: this.problemID,
     };
   },
   methods: {
     async save() {
-      var payload = {
-        "description": this.text,
-      }
-      const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
+      var timeout = _.debounce(async function(assignmentID) {
+        //save overview to problem in database
+        var payload = {
+          "description": this.text,
+        }
+        console.log(assignmentID);
+        const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+      }, 3000);
+      timeout(this.assignmentID);
     },
   },
   computed: {
     text: function() {
 
       //choice 1
-      var timeout = _.debounce(function() {
+      var timeout = _.debounce(async function(assignmentID) {
         //save overview to problem in database
-        save();
+        var payload = {
+          "description": this.text,
+        }
+        console.log(assignmentID);
+        const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
       }, 3000);
-      timeout();
+      timeout(this.assignmentID);
+      // this.save();
 
 
       //choice 2
@@ -62,6 +74,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.problemID);
     this.state.content = this.overview;
   }
 };

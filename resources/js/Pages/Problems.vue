@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!childisOpen">
+  <div v-if="!childIsOpen">
     <!-- Main Page-->
 
     <div class="courses header">
@@ -82,7 +82,7 @@
   <router-view
     @unmounting="Unmounting()"
     @problemEdited="problemEdited()"
-    v-if="childisOpen"
+    v-if="childIsOpen"
     :problemID="problemID"
     :lang="lang"
   ></router-view>
@@ -97,7 +97,7 @@ export default {
   data() {
     return {
       problems: [],
-      childisOpen: false,
+      childIsOpen: false,
       problemID: null,
       expandedProblem: null,
       lang: "",
@@ -132,7 +132,7 @@ export default {
       this.problems = this.problems.filter((p, i) => i  != key);
     },
     goToProblem(id) {
-      this.childisOpen = true;
+      this.childiIsOpen = true;
       this.problemID = id;
       this.$router.push({ name: "Assignment", params: { problem_id: id } });
     },
@@ -185,7 +185,7 @@ export default {
       this.Unmounting();
     },
     Unmounting() {
-      this.childisOpen = false;
+      this.childIsOpen = false;
       this.problemID = null;
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
     },
@@ -218,7 +218,7 @@ export default {
     }
   },
   beforeMount() {
-    this.childisOpen = false;
+    this.childIsOpen = false;
     this.getProblems();
   },
   beforeUnmount() {

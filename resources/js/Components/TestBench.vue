@@ -50,11 +50,11 @@
       <br /><br />
 
       <label for="tcInput">Input (Will be passed into the student's program's stdin)</label>
-      <v-ace-editor class="editor" id="tcInput" v-model="testCase.tcInput"/>
+      <VAceEditor class="editor" id="tcInput" v-model:value="testCase.tcInput"/>
       <br /><br />
 
       <label for="tcOutput">Output (Will be matched against the output of the student's program)</label>
-      <v-ace-editor class="editor" id="tcOutput" v-model="testCase.tcOutput"/>
+      <VAceEditor class="editor" id="tcOutput" v-model:value="testCase.tcOutput"/>
       <br /><br />
     </div>
   </div>

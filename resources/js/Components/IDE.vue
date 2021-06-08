@@ -4,7 +4,7 @@
       class="editor row"
       style="padding: 0 !important; background-color: rgb(58, 58, 58)"
     >
-      <v-ace-editor
+      <VAceEditor
         class="editor"
         v-model:value="content"
         :lang="editorLangauge"
@@ -347,11 +347,11 @@ import "ace-builds/src-noconflict/mode-python";
 export default {
   name: "IDE",
   props: ["lang", "showSubmit", "savedCode"],
-  emits: ["input"],
+  emits: ["update"],
   data() {
     return {
       theme: "gob",
-      content: this.savedCode,
+      content: "",
       editorLangauge: "",
       style: "width: " + (this.showSubmit ? "78%" : "89%") + "!important",
     };
@@ -366,9 +366,9 @@ export default {
       this.editorLangauge = "python";
     }
   },
-  method: {
+  computed: {
     updateContent: function () {
-      this.$emit("input", this.content);
+      this.$emit("update", this.content);
       return this.content;
     },
   },
