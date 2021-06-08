@@ -22,6 +22,7 @@ import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 import _ from "lodash";
+import * as API from "../services/API";
 
 export default {
   props: ["overview", "problemID"],
