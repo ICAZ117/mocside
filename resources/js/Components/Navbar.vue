@@ -67,7 +67,12 @@ export default {
         this.dark = "";
       }
     }
-  }
+  },
+  mounted() {
+    // console.log("beforeCall");
+    // this.navbarColor();
+    // console.log("afterCall");
+  },
 };
 </script>
 

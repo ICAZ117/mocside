@@ -25,18 +25,9 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
-  props: {
-    overview: Object, 
-    problemID: Number,
-  },
-  setup(props) {
-    console.log(props);
-    console.log(props.overview);
-    console.log(this.overview);
-    console.log("   ");
-    console.log(JSON.stringify(props));
-    console.log(JSON.stringify(props.overview));
-    const state = reactive({ content: props.overview });
+  props: ['overview', "problemID"],
+  setup() {
+    const state = reactive({ content: "" });
 
     return { state };
   },
@@ -63,14 +54,6 @@ export default {
     text() {
       this.description = this.state.content;
       return this.state.content;
-      //choice 1
-      // this.timeout;
-      // this.save();
-
-
-      //choice 2
-      //send data to parent and let parent send upon clicking save button
-      // this.$emit("update", this.state.content);
     }
   },
   mounted() {
