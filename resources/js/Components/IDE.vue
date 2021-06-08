@@ -9,7 +9,7 @@
         v-model:value="content"
         :lang="editorLangauge"
         :theme="theme"
-        :value="'undefined'"
+        @update="updateContent"
       />
       <div class="row px-1 my-1">
         <button type="run" name="run" class="run-code col-1 btn btn-success">Run</button>
@@ -352,7 +352,7 @@ export default {
   data() {
     return {
       theme: "gob",
-      content: this.savedCode,
+      content: "",
       editorLangauge: "",
       style: "width: " + (this.showSubmit ? "78%" : "89%") + "!important",
     };
@@ -369,7 +369,7 @@ export default {
   },
   method: {
     updateContent: function () {
-      this.$emit("input", this.content);
+      this.$emit("update", this.content);
       return this.content;
     },
   },
