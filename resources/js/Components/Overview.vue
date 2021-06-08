@@ -32,7 +32,6 @@ export default {
   setup(props) {
     console.log(props);
     console.log(props.overview);
-    console.log(this.overview);
     console.log("   ");
     console.log(JSON.stringify(props));
     console.log(JSON.stringify(props.overview));
