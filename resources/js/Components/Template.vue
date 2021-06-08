@@ -72,12 +72,12 @@ export default {
       var payload = {};
       if(lang =="Java") {
         payload = {
-          "java_starter": this.text,
+          "java_starter": this.content,
         }
       }
       else {
         payload = {
-          "python_starter": this.text,
+          "python_starter": this.content,
         }
       };
       console.log(payload);
