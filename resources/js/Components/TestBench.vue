@@ -68,6 +68,8 @@ import { VAceEditor } from "vue3-ace-editor";
 import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
+import * as API from "../services/API";
+
 export default {
   setup() {
     const state = reactive({ content: "" });

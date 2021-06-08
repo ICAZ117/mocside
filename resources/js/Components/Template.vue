@@ -40,6 +40,7 @@
 
 <script>
 import _ from "lodash";
+import * as API from "../services/API";
 
 export default {
   data() {
