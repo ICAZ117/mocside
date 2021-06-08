@@ -87,7 +87,7 @@ class StudentController extends Controller
         if (Auth::user()->isAdmin())
         {
             $stud = Student::where('fsc_id', $id)->delete();
-            return response()->json(['message' => 'delete successfull', 'data' => $stud], 200);
+            return response()->json(['message' => 'Delete successful', 'data' => $stud], 200);
         }
         return response()->json(['message' => 'Forbidden.'], 403);
     }

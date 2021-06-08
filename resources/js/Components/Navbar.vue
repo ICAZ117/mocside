@@ -69,9 +69,9 @@ export default {
     }
   },
   mounted() {
-    console.log("beforeCall");
-    this.navbarColor();
-    console.log("afterCall");
+    // console.log("beforeCall");
+    // this.navbarColor();
+    // console.log("afterCall");
   },
 };
 </script>

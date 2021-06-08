@@ -27,7 +27,7 @@ class ProgressController extends Controller
     public function update(Request $request, $id)
     {
         $user = Auth::user();
-        // $id is STUDENT->fsc_id
+        // check to make sure user sending update owns the progress object
         if ($user->fsc_id == $id || $user->isAdmin())
         {
             // updating progress
@@ -40,13 +40,10 @@ class ProgressController extends Controller
 
     public function store()
     {
-        $user = Auth::user();
-        // $id is STUDENT->fsc_id
-        if ($user->fsc_id == $id || $user->isAdmin())
-        {
-            return Progress::firstOrCreate(['fsc_id' => Auth::user()->fsc_id]);
-        }
-        return response()->json(['message' => 'This is not your user!'], 403);
+        // this function doesn't take a payload, and either creates or finds
+        // a progress object for the requester.
+        $user = Auth::user();   
+        return Progress::firstOrCreate(['fsc_id' => $user->fsc_id]);
     }
 
     public function destroy($id)

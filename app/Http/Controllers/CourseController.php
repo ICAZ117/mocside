@@ -62,7 +62,7 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $course = Course::find($id);
-        $owner = $cou->owner_id;
+        $owner = $course->owner_id;
         $user = Auth::user();
 
         // I will include an admin check that can override the owner check.
