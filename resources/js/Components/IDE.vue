@@ -4,7 +4,7 @@
       class="editor row"
       style="padding: 0 !important; background-color: rgb(58, 58, 58)"
     >
-      <v-ace-editor
+      <VAceEditor
         class="editor"
         v-model:value="content"
         :lang="editorLangauge"
