@@ -69,16 +69,18 @@ export default {
       this.content = e;
     },
     timeout: _.debounce(async function(assignmentID) {
-      if(lang =="Java") {
-        var payload = {
-          "java_starter": this.text,
-        };
+      var payload = {};
+      if(this.lang =="Java") {
+        payload = {
+          "java_starter": this.content,
+        }
       }
       else {
-        var payload = {
-          "python_starter": this.text,
-        };
+        payload = {
+          "python_starter": this.content,
+        }
       };
+      console.log(payload);
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 500),
   },
