@@ -7,7 +7,6 @@
         toolbar="full"
         class="assignment-description"
         v-model:content="state.content"
-        :content="this.overview"
       />
       <hr />
       <h5>Proceed with caution!</h5>
@@ -27,8 +26,9 @@ import * as API from "../services/API";
 
 export default {
   props: ["overview", "problemID"],
-  setup() {
-    const state = reactive({ content: this.overview });
+  setup(props) {
+    console.log(props);
+    const state = reactive({ content: props.overview });
 
     return { state };
   },
