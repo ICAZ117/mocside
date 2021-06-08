@@ -37,7 +37,7 @@ export default {
   props: ['authUser'],
   data() {
     return {
-      dark: this.navbarColor,
+      dark: "dark-",
     };
   },
   methods: {
