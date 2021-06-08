@@ -54,7 +54,7 @@ export default {
         return true;
       }
     },
-    navbarColor() {
+    navbarColor: function() {
       console.log("HERE");
       console.log(this.$route.path);
       console.log("\n\n");
@@ -66,6 +66,8 @@ export default {
         console.log("LIGHT");
         this.dark = "";
       }
+
+      return this.dark;
     }
   },
   mounted() {
