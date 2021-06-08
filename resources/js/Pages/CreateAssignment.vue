@@ -108,7 +108,7 @@ export default defineComponent({
 
     },
     async getInfo() {
-      const rawproblem = await API.apiClient.get(`/problems/${this.problemID}`);
+      const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var problem = rawproblem.data.data;
       this.assignment.title = problem.name;
       this.overview = problem.description;
