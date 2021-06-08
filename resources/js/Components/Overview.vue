@@ -55,7 +55,7 @@ export default {
     text: function() {
 
       //choice 1
-      this.timeout;
+      // this.timeout;
       // this.save();
 
 
@@ -67,7 +67,7 @@ export default {
     }
   },
   mounted() {
-    timeout = _.debounce(this.save(), 3000);
+    // timeout = _.debounce(this.save(), 3000);
     this.state.content = this.overview;
   }
 };
