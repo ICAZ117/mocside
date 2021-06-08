@@ -13,7 +13,8 @@ class Assignment extends Model
         'id',
         'name',
         'description',
-        'sample',
+        'python_starter',
+        'java_starter',
         'test_cases',
         'due_date',
         'lab_id'
