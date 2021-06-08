@@ -24,7 +24,7 @@ import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 import _ from "lodash";
 
 export default {
-  props: ["overview"],
+  props: ["overview", "problemID"],
   setup() {
     const state = reactive({ content: "" });
 
@@ -35,13 +35,29 @@ export default {
       description: "",
     };
   },
+  methods: {
+    save() {
+      var payload = {
+        "description": this.text,
+      }
+      const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
+    },
+  },
   computed: {
     text: function() {
-      var con = _.debounce(function() {
-        console.log("text changed");
-      }, 100);
-      con();
-      this.$emit("update", this.state.content);
+
+      //choice 1
+      var timeout = _.debounce(function() {
+        //save overview to problem in database
+        save();
+      }, 3000);
+      timeout();
+
+
+      //choice 2
+      //send data to parent and let parent send upon clicking save button
+      // this.$emit("update", this.state.content);
+
       return this.state.content;
     }
   },
