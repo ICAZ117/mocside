@@ -31,30 +31,24 @@ class LabController extends Controller
     {
         // prof check for lab creation
         $user = Auth::user();
+        $validData = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'course_id' => 'required|int',
+            'due_date' => 'required',
+        ]);
 
         // admin bypass
         if ($user->isAdmin())
         {
-            $validData = $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'course_id' => 'required|int',
-                'due_date' => 'required',
-            ]);
             return new LabResource(Lab::create($validData));
         }
 
         if ($user->isProf()) {
-            $validData = $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'course_id' => 'required|int',
-                'due_date' => 'required',
-            ]);
             // check to make sure prof owns course
             $course = Course::find($validData['course_id']);
-            $owner = $course->owner;
-            if ($user->fsc_id == $owner->fsc_id) {
+            $owner = $course->owner_id;
+            if ($user->fsc_id == $owner) {
                 return new LabResource(Lab::create($validData));
             }
             return response()->json(['message' => 'Action failed: this is not your course.'], 403);
@@ -70,7 +64,7 @@ class LabController extends Controller
     public function update(Request $request, $id)
     {
         $lab = Lab::find($id);
-        $owner = $lab->course->owner;
+        $owner = $lab->course->owner_id;
         $user = Auth::user();
 
         // admin bypass
@@ -81,7 +75,7 @@ class LabController extends Controller
         }
 
         // prof check for lab update
-        if ($user->isProf() && $owner->fsc_id == $user->fsc_id) {
+        if ($user->isProf() && $owner == $user->fsc_id) {
             $lab->update($request->all());
             $rsc = new LabResource($lab);
             return response()->json(['message' => 'Update successful', "data" => $rsc], 200);
