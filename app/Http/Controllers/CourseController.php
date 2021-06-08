@@ -62,7 +62,7 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $course = Course::find($id);
-        $owner = $cou->owner;
+        $owner = $cou->owner_id;
         $user = Auth::user();
 
         // I will include an admin check that can override the owner check.
@@ -72,7 +72,7 @@ class CourseController extends Controller
         }
 
         // This logic checks for professor role as well as course ownership.
-        if ($user->isProf() && $owner->fsc_id == $user->fsc_id) { 
+        if ($user->isProf() && $owner == $user->fsc_id) { 
             $course->update($request->all());
             return response()->json(['message' => 'Updated sucessfully.'], 200);
         }

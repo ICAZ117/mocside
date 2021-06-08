@@ -11,24 +11,39 @@ class StudentController extends Controller
 {
     public function index()
     {
-        return Student::all();
+        if (Auth::user()->isAdmin())
+        {
+            return Student::all();
+        }
     }
 
     public function store(Request $request)
     {
-        $request_id = Auth::user()->fsc_id;
-        if ($request_id == $id)
+        // Auth::user() is the user who made the request,
+        // and I know they are authorized because of the
+        // earlier middleware.
+        $user = Auth::user();
+        $validData = $request->validate([
+            'fsc_id' => 'required|int',
+        ]);
+
+        if ($user->isAdmin())
         {
-            $validData = $request->validate([
-                'fsc_id' => 'required|int',
-            ]);
-            return Student::create($validData);
+            $stud = Student::create($validData);
+            return response()->json(['message' => 'Sucessfully created student.', 'data' => $stud], 200);
+        }
+
+        if ($user->fsc_id == $validData['fsc_id'])
+        {
+            $stud = Student::create($validData);
+            return response()->json(['message' => 'Sucessfully created student.', 'data' => $stud], 200);
         }
         return response()->json(['message' => 'This is not your user!'], 403);
     }
 
     public function show($id)
     {
+        // as an admin, this will return the user that contains the student
         if (Auth::user()->isAdmin())
         {
             $user = Student::where('fsc_id', $id)->first()->user;
@@ -39,7 +54,10 @@ class StudentController extends Controller
         $request_id = Auth::user()->fsc_id;
         if ($request_id == $id)
         {
-            return Student::where('fsc_id', $request_id)->first();
+            // return Student::where('fsc_id', $request_id)->first();
+            // this should, in theory, create a student user if one doesn't exist
+            // the first time we try and get info from it.
+            return Student::firstOrCreate(['fsc_id' => $id]);
         }
         return response()->json(['message' => 'This is not your user!'], 403);
     }
@@ -65,6 +83,7 @@ class StudentController extends Controller
 
     public function destroy($id)
     {
+        // This will follow the "only admins can delete users" logic until otherwise needed.
         if (Auth::user()->isAdmin())
         {
             $stud = Student::where('fsc_id', $id)->delete();
