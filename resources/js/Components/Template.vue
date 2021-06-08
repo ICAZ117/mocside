@@ -73,13 +73,14 @@ export default {
       if(lang =="Java") {
         payload = {
           "java_starter": this.text,
-        };
+        }
       }
       else {
         payload = {
           "python_starter": this.text,
-        };
+        }
       };
+      console.log(payload);
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 500),
   },
