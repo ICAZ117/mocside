@@ -9,7 +9,7 @@
         v-model:value="content"
         :lang="editorLangauge"
         :theme="theme"
-        :value="savedCode"
+        :value="undefined"
       />
       <div class="row px-1 my-1">
         <button type="run" name="run" class="run-code col-1 btn btn-success">Run</button>
