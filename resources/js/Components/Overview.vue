@@ -27,7 +27,7 @@ import * as API from "../services/API";
 export default {
   props: ["overview", "problemID"],
   setup(props) {
-    console.log(props.data);
+    console.log(props);
     const state = reactive({ content: props.overview });
 
     return { state };
