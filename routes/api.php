@@ -11,11 +11,11 @@ use App\Models\User;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestCaseController;
 use App\Http\Controllers\UserController;
@@ -72,7 +72,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/students/{id}', [StudentController::class, 'show']);
     Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 
-    Route::post('/images/store', [ImageController::class, 'store']);
+    Route::post('/images/store', [StorageController::class, 'storeImage']);
+    Route::post('/code/store', [StorageController::class, 'storeCode']);
 
     Route::get('/progress/{id}', [ProgressController::class, 'show']);
     Route::post('/progress', [ProgressController::class, 'store']);
