@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <IDE :lang="lang" :showSubmit="false" v-model="content"/>
+      <IDE :lang="lang" :showSubmit="false" @input="updateContent"/>
     </div>
   </div>
 </template>
@@ -55,6 +55,20 @@ export default {
     },
     saveTemplate() {
       console.log("Inside saveTemplate()");
+    },
+    updateContent(e) {
+      console.log("Before update:");
+      console.log(this.content);
+      this.content = e;
+      console.log("After update:");
+      console.log(this.content);
+      console.log("\n\n---------- Update Completed ----------");
+
+
+      var test = _.debounce(function () {
+        console.log("Code has been debounced");
+      }, 1000);
+
     },
   },
 };
