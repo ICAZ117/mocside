@@ -68,13 +68,13 @@ class CourseController extends Controller
         // I will include an admin check that can override the owner check.
         if ($user->isAdmin()) {
             $course->update($request->all());
-            return response()->json(["message" => "Updated sucessfully."], 200);
+            return response()->json(["message" => "Updated successfully."], 200);
         }
 
         // This logic checks for professor role as well as course ownership.
         if ($user->isProf() && $owner == $user->fsc_id) { 
             $course->update($request->all());
-            return response()->json(['message' => 'Updated sucessfully.'], 200);
+            return response()->json(['message' => 'Updated successfully.'], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
@@ -87,10 +87,11 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
+        $user = Auth::user();
         $course = Course::find($id);
         $owner_id = $course->owner_id;
         // I want to restrict course deletion to admins
-        if (Auth::user()->fsc_id == $owner_id) {
+        if ($user->fsc_id == $owner_id || $user->isAdmin()) {
             // also delete course picture
             $fileURL = $course->img_loc;
             $sections = explode("/", $fileURL);

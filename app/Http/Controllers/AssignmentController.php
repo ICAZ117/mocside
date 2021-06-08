@@ -99,13 +99,13 @@ class AssignmentController extends Controller
 
         if ($user->isAdmin()) {
             $assignment->update($request->all());
-            return response()->json(["message" => "Update sucessfull.", 'data' => $assignment], 200);
+            return response()->json(["message" => "Update successful.", 'data' => $assignment], 200);
         }
 
         if ($user->isProf() && $user->fsc_id == $owner)
         {
             $assignment->update($request->all());
-            return response()->json(["message" => "Update sucessfull.", 'data' => $assignment], 200);
+            return response()->json(["message" => "Update successful.", 'data' => $assignment], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
