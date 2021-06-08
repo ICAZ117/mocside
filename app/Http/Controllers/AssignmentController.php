@@ -36,13 +36,24 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->isProf()) {
-            $validData = $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'due_date' => 'required',
-                'lab_id' => 'required|int',
-            ]);
+        $user = Auth::user();
+        $validData = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'due_date' => 'required',
+            'lab_id' => 'required|int',
+        ]);
+        $lab = Lab::find($validData['lab_id']);
+        $owner = $lab->course->owner_id;
+
+        if ($user->isAdmin())
+        {
+            $assignment =  Assignment::create($validData);
+            return new AssignmentResource($assignment);
+        }
+
+        if ($user->isProf() && $user->fsc_id == $owner) 
+        {
             return new AssignmentResource(Assignment::create($validData));
         }
         return  response()->json(["message" => "Forbidden"], 403);
@@ -53,7 +64,7 @@ class AssignmentController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function show($id)
     {
         if (Auth::user()->isProf()) {
