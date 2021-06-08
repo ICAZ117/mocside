@@ -35,6 +35,8 @@ export default {
     return {
       description: "",
       assignmentID: this.problemID,
+      test: console.log("the test of tests"),
+      timeout: _.debounce(this.save(), 3000),
     };
   },
   methods: {
@@ -54,15 +56,7 @@ export default {
     text: function() {
 
       //choice 1
-      var timeout = _.debounce(async function(assignmentID) {
-        //save overview to problem in database
-        var payload = {
-          "description": this.text,
-        }
-        console.log(assignmentID);
-        const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-      }, 3000);
-      timeout(this.assignmentID);
+      this.timeout();
       // this.save();
 
 
