@@ -69,13 +69,14 @@ export default {
       this.content = e;
     },
     timeout: _.debounce(async function(assignmentID) {
+      var payload = {};
       if(lang =="Java") {
-        var payload = {
+        payload = {
           "java_starter": this.text,
         };
       }
       else {
-        var payload = {
+        payload = {
           "python_starter": this.text,
         };
       };
