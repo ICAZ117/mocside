@@ -132,7 +132,7 @@ export default {
       this.problems = this.problems.filter((p, i) => i  != key);
     },
     goToProblem(id) {
-      this.childiIsOpen = true;
+      this.childIsOpen = true;
       this.problemID = id;
       this.$router.push({ name: "Assignment", params: { problem_id: id } });
     },
