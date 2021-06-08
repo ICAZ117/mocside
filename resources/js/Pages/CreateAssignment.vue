@@ -25,7 +25,7 @@
   </div>
 
   <tab-panels v-model="selectedTab" :animate="true">
-    <tab-panel :val="'Overview'"> <Overview @update="updateOverview" :overview="overview" :assignmentID="problemID"/> </tab-panel>
+    <tab-panel :val="'Overview'"> <Overview @update="updateOverview" :overview="overview" :problemID="assignmentID"/> </tab-panel>
     <tab-panel :val="'Assign'"> <Assign /> </tab-panel>
     <tab-panel :val="'Template'"> <Template /> </tab-panel>
     <tab-panel :val="'Test Bench'"> <TestBench /> </tab-panel>

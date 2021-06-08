@@ -66,6 +66,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.problemID);
     this.state.content = this.overview;
   }
 };
