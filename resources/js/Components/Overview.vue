@@ -66,7 +66,6 @@ export default {
   },
   mounted() {
     this.state.content = this.overview;
-    this.description = this.overview;
   }
 };
 </script>
