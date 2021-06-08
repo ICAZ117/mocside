@@ -55,7 +55,7 @@ export default {
     text: function() {
 
       //choice 1
-      this.timeout();
+      this.timeout;
       // this.save();
 
 
