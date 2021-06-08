@@ -39,15 +39,15 @@ export default {
   },
   methods: {
     async save() {
-      var timeout = _.debounce(async function() {
+      var timeout = _.debounce(async function(assignmentID) {
         //save overview to problem in database
         var payload = {
           "description": this.text,
         }
-        console.log(this.assignmentID);
-        const res = await API.apiClient.put(`/problems/${this.assignmentID}`, payload);
+        console.log(assignmentID);
+        const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
       }, 3000);
-      timeout();
+      timeout(this.assignmentID);
     },
   },
   computed: {
