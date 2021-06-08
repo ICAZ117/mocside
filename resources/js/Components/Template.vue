@@ -51,6 +51,11 @@ export default {
       content: "",
     };
   },
+  watch: {
+    content: function(val) {
+      this.timeout(this.assignmentID);
+    }
+  },
   methods: {
     launchEditor() {
       this.showEditor = true;
@@ -60,18 +65,21 @@ export default {
       console.log("Inside saveTemplate()");
     },
     updateContent(e) {
-      console.log("Before update:");
-      console.log(this.content);
       this.content = e;
-      console.log("After update:");
-      console.log(this.content);
-      console.log("\n\n---------- Update Completed ----------");
-
-      var timeout = _.debounce(function () {
-        console.log("Debounce complete");
-      }, 3000);
-      timeout();
     },
+    timeout: _.debounce(async function(assignmentID) {
+      if(lang =="Java") {
+        var payload = {
+          "java_starter": this.text,
+        };
+      }
+      else {
+        var payload = {
+          "python_starter": this.text,
+        };
+      };
+      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+    }, 500),
   },
 };
 </script>
