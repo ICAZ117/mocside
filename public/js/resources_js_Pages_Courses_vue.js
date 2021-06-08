@@ -45,7 +45,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 payload = {
                   name: "New Course",
-                  description: "New Course"
+                  description: "New Course",
+                  owner_id: _this.authUser.fsc_user.fsc_id
                 };
                 _context.next = 3;
                 return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.post("/courses", payload);
@@ -60,6 +61,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.childIsOpen = true;
 
+                _this.courses.push(course.data);
+
                 _this.$router.push({
                   name: "EditCourse",
                   params: {
@@ -67,7 +70,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -114,7 +117,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       });
     },
-    deleteCourse: function deleteCourse(id, course) {
+    deleteCourse: function deleteCourse(id, course, key) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
@@ -152,10 +155,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.addProfessor();
 
                 delete _this3.courses.course;
-                _this3.courseID = null;
+                _this3.courseID = null; // this.getCourses();
+                //filter the courses list
 
-                _this3.getCourses();
-
+                _this3.courses = _this3.courses.filter(function (c, i) {
+                  return i != key;
+                });
                 _context3.next = 18;
                 break;
 
@@ -205,7 +210,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 course = _context4.sent;
 
-                _this4.courses.push(course.data);
+                _this4.courses.push(course.data.data);
 
               case 8:
                 i++;
@@ -220,9 +225,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4);
       }))();
     },
-    childUnmounting: function childUnmounting() {
+    Unmounting: function Unmounting() {
       this.childIsOpen = false;
       this.courseID = null;
+      this.$router.push({
+        name: "Courses"
+      });
+    },
+    courseEdited: function courseEdited() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var course;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                ///update the list of courses
+                _this5.courses = _this5.courses.filter(function (c) {
+                  return c.id != _this5.courseID;
+                });
+                _context5.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/courses/".concat(_this5.courseID));
+
+              case 3:
+                course = _context5.sent;
+
+                _this5.courses.push(course.data.data);
+
+                _this5.Unmounting();
+
+              case 6:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    }
+  },
+  computed: {
+    isProf: function isProf() {
+      if (_Store_index__WEBPACK_IMPORTED_MODULE_1__.default.getters["auth/isProf"] == null) {
+        return false;
+      } else {
+        return _Store_index__WEBPACK_IMPORTED_MODULE_1__.default.getters["auth/isProf"];
+      }
     }
   },
   mounted: function mounted() {
@@ -288,6 +336,7 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_10 = {
+  key: 0,
   "class": "add-course fixed-course-width"
 };
 
@@ -302,7 +351,7 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_12 = {
-  key: 0
+  key: 1
 };
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "No Registered Courses", -1
@@ -312,15 +361,16 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Main Page"), !$data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.courses, function (course) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Main Page"), !$data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.courses, function (course, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": "fixed-course-width",
-      key: course.id
+      key: course.id,
+      course: course
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
       onClick: function onClick($event) {
         return $options.goToLabs(course.id);
       },
-      "class": "no-decor"
+      "class": "no-decor pointer"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" :to=\"{ name: 'Labs', params: { id: course.id } }\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
       "class": "courses card-img-top",
       style: {
@@ -332,40 +382,42 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a href=\"Labs.vue\" class=\"courselaunch text-danger mx-2 my-1 no-decor\"\n                      >Get Started</a\n                    > ")])])])], 8
     /* PROPS */
-    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    , ["onClick"]), $options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
+      key: 0,
       onClick: function onClick($event) {
         return $options.editCourse(course.id);
       },
-      "class": "courselaunch text-danger mx-2 my-1 no-decor"
+      "class": "courselaunch text-danger mx-2 my-1 no-decor pointer"
     }, "•••", 8
     /* PROPS */
-    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
+      key: 1,
       onClick: function onClick($event) {
-        return $options.deleteCourse(course.id, course);
+        return $options.deleteCourse(course.id, course, key);
       },
-      "class": "courselaunch text-danger mx-2 my-1 no-decor"
+      "class": "courselaunch text-danger mx-2 my-1 no-decor pointer"
     }, "X", 8
     /* PROPS */
-    , ["onClick"])]);
+    , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
+    /* PROPS */
+    , ["course"]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  )), $options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.addCourse();
     }),
-    "class": "no-decor"
-  }, [_hoisted_11])]), $data.courses.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_12, [_hoisted_13])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, {
+    "class": "no-decor pointer"
+  }, [_hoisted_11])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.courses.length == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_12, [_hoisted_13])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, {
     key: 1,
-    onLabUnmounting: _cache[2] || (_cache[2] = function ($event) {
-      return $options.childUnmounting();
+    onUnmounting: _cache[2] || (_cache[2] = function ($event) {
+      return $options.Unmounting();
     }),
-    onEditUnmounting: _cache[3] || (_cache[3] = function ($event) {
-      return $options.childUnmounting();
-    }),
+    onCourseEdited: $options.courseEdited,
     courseID: $data.courseID
   }, null, 8
   /* PROPS */
-  , ["courseID"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  , ["onCourseEdited", "courseID"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
