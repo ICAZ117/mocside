@@ -60,7 +60,10 @@ export default {
     }
   },
   mounted() {
+    console.log("window.location.pathname:");
     console.log(window.location.pathname);
+    console.log("\n\nthis.$router.path:");
+    console.log(this.$router.path);
   },
 };
 </script>
