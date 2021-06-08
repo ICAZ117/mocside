@@ -82,10 +82,19 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::user()->isProf()) {
-            $ass = Assignment::find($id);
-            $ass->update($request->all());
-            return response()->json(['data', $ass], 200);
+        $user = Auth::user();
+        $assignment = Assignment::find($id);
+        $owner = $assignment->lab->course->owner_id;
+
+        if ($user->isAdmin()) {
+            $assignment->update($request->all());
+            return response()->json(["message" => "Update sucessfull.", 'data' => $assignment], 200);
+        }
+
+        if ($user->isProf() && $user->fsc_id == $owner)
+        {
+            $assignment->update($request->all());
+            return response()->json(["message" => "Update sucessfull.", 'data' => $assignment], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
@@ -98,9 +107,10 @@ class AssignmentController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()->isProf()) {
+        $user = Auth::user();
+        if ($user->isProf() || $user->isAdmin()) {
             $affectedAssignments = Assignment::destroy($id);
-            return response()->json(["message" => "Delete successful."]);
+            return response()->json(["message" => "Delete successful.", "data" => $affectedAssignments], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }

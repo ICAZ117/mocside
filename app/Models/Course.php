@@ -29,7 +29,7 @@ class Course extends Model
 
     public function owner()
     {
-        return $this->hasOne(Professor::class, 'owner_id', 'fsc_id');
+        return $this->belongsTo(Professor::class, 'owner_id', 'fsc_id');
     }
 
     public function labs()
