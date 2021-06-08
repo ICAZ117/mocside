@@ -35,8 +35,7 @@ export default {
     return {
       description: "",
       assignmentID: this.problemID,
-      test: console.log("the test of tests"),
-      timeout: _.debounce(this.save(), 3000),
+      timeout: console.log("empty"),
     };
   },
   methods: {
@@ -68,7 +67,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.problemID);
+    timeout = _.debounce(this.save(), 3000);
     this.state.content = this.overview;
   }
 };
