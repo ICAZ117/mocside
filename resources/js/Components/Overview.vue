@@ -35,7 +35,7 @@ export default {
       //     },
       //   ],
       // }",
-      content: "",
+      content: JSON.parse(this.overview),
     });
 
     return { state };
