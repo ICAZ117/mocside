@@ -67,10 +67,10 @@ export default {
     }, 3000),
   },
   computed: {
-    // text() {
-    //   this.description = this.state.content;
-    //   return this.state.content;
-    // },
+    text() {
+      this.description = this.state.content;
+      return this.state.content;
+    },
     propChange() {
       return this.overview;
     }
