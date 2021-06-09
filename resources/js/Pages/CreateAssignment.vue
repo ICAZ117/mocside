@@ -117,7 +117,6 @@ export default defineComponent({
     this.getInfo();
   },
   beforeUnmount() {
-    console.log("beforeUnmount");
     this.$emit("problemEdited");
   },
 });
