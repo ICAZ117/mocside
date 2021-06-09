@@ -82,7 +82,7 @@ export default {
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 500),
     async getStarter() {
-      const res = await API.apiClient.get(`/problems/${this.problemID}`);
+      const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.templates = res.data.data;
       if(lang == "Java") {
         this.template = templates.java_starter;
