@@ -38,7 +38,7 @@ export default {
       //     },
       //   ],
       // }",
-      content: JSON.parse(props.overview),
+      content: JSON.parse(props.overview.replace(/^"(.+(?="$))"$/, '$1')),
     });
 
     return { state };
