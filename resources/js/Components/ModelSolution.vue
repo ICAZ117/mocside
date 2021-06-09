@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <IDE :lang="lang" :showSubmit="false" />
+      <IDE :lang="lang" :showSubmit="false" @update="updateContent"/>
     </div>
   </div>
 </template>
@@ -46,7 +46,13 @@ export default {
       saveStatus: "All changes have been saved",
       lang: "",
       showEditor: false,
+      content: "",
     };
+  },
+  watch: {
+    content: function(val) {
+      this.timeout(this.problemID);
+    }
   },
   methods: {
     launchEditor() {
@@ -56,6 +62,24 @@ export default {
     saveTemplate() {
       console.log("Inside saveTemplate()");
     },
+    updateContent(e) {
+      this.content = e;
+    },
+    timeout: _.debounce(async function(assignmentID) {
+      var payload = {};
+      if(this.lang =="Java") {
+        payload = {
+          "java_starter": this.content,
+        }
+      }
+      else {
+        payload = {
+          "python_starter": this.content,
+        }
+      };
+      console.log(payload);
+      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+    }, 500),
   },
 };
 </script>
