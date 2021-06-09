@@ -62,27 +62,30 @@ export default {
   computed: {
     text() {
       this.description = this.state.content;
+      console.log(this.description);
+      this.description = this.overview;
+      console.log(this.description);
       return this.state.content;
     },
   },
   mounted() {
-    console.log("\n\n----------------------- Before -----------------------");
-    console.log("this.overview");
-    console.log(this.overview);
+    // console.log("\n\n----------------------- Before -----------------------");
+    // console.log("this.overview");
+    // console.log(this.overview);
     // console.log("json parse this.overview");
     // console.log(JSON.parse(this.overview));
-    console.log("\n\nthis.state.content");
-    console.log(this.state.content);
+    // console.log("\n\nthis.state.content");
+    // console.log(this.state.content);
 
     this.state.content = this.overview;
 
-    console.log("\n\n----------------------- After -----------------------");
-    console.log("this.overview");
-    console.log(this.overview);
+    // console.log("\n\n----------------------- After -----------------------");
+    // console.log("this.overview");
+    // console.log(this.overview);
     // console.log("json parse this.overview");
     // console.log(JSON.parse(this.overview));
-    console.log("\n\nthis.state.content");
-    console.log(this.state.content);
+    // console.log("\n\nthis.state.content");
+    // console.log(this.state.content);
   },
 };
 </script>
