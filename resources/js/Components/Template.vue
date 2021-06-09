@@ -87,7 +87,7 @@ export default {
     }, 500),
     async getStarter() {
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      this.templates = res.data.data;
+      var templates = res.data.data;
       if(lang == "Java") {
         this.template = templates.java_starter;
       }
