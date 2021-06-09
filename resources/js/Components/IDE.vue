@@ -346,12 +346,12 @@ import "ace-builds/src-noconflict/mode-python";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "savedCode", "modelValue"],
+  props: ["lang", "showSubmit", "savedCode"],
   emits: ["update"],
   data() {
     return {
       theme: "gob",
-      content: this.modelValue,
+      content: "",
       editorLangauge: "",
       style: "width: " + (this.showSubmit ? "78%" : "89%") + "!important",
     };
@@ -362,8 +362,10 @@ export default {
   beforeMount() {
     if (this.lang == "Java") {
       this.editorLangauge = "java";
+      console.log(this.savedCode);
     } else {
       this.editorLangauge = "python";
+      console.log(this.savedCode);
     }
   },
   computed: {
