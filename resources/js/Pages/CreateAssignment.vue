@@ -112,6 +112,7 @@ export default defineComponent({
       var problem = rawproblem.data.data;
       this.assignment.title = problem.name;
       this.overview = problem.description;
+      console.log(this.overview);
     },
   },
   computed: {
