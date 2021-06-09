@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Assignment;
 use App\Models\Lab;
 use App\Http\Resources\AssignmentResource;
+use App\Http\Resources\FullAssignmentResource;
 
 class AssignmentController extends Controller
 {
@@ -67,8 +68,13 @@ class AssignmentController extends Controller
      */ 
     public function show($id)
     {
-        if (Auth::user()->isProf()) {
-            return new AssignmentResource(Assignment::find($id));
+        // this resource contains the gradbook.
+        $user = Auth::user();
+        $assignment = Assignment::find($id);
+        // as such I am protecting it behind course ownership.
+        $owner = $assignment->lab->course->owner_id;  // with an admin bypass, of course.
+        if ( ($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
+            return new FullAssignmentResource($assignment);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }

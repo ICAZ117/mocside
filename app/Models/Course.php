@@ -20,6 +20,7 @@ class Course extends Model
         'start_date',
         'end_date',
         'owner_id',
+        'gradebook',
     ];
 
     // not sure if this will be helpful, leaving commented.

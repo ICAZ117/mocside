@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AssignmentResource extends JsonResource
+class LabResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,13 +18,10 @@ class AssignmentResource extends JsonResource
           'id' => $this->id,
           'name' => $this->name,
           'description' => $this->description,
-          'test_cases' => $this->test_cases->count(),
-          'python_starter' => $this->python_starter,
-          'python_model' => $this->python_model,
-          'java_starter' => $this->java_starter,
-          'java_model' => $this->java_model,
+          'num_problems' => $this->assignments->count(),
           'due_date' => $this->due_date,
-          'lab_id' => $this->lab_id,
+          'publish_date' => $this->publish_date,
+          'gradebook' => $this->gradebook,
         ];
     }
 }

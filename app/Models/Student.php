@@ -15,6 +15,7 @@ class Student extends Model
         'screen_name',
         'pronouns',
         'courses',
+        'gradebook',
     ];
 
     public function progress()

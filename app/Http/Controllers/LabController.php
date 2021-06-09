@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LabResource;
+use App\Http\Resources\FullLabResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
@@ -58,7 +59,16 @@ class LabController extends Controller
 
     public function show($id)
     {
-        return new LabResource(Lab::find($id));
+        // return new LabResource(Lab::find($id));
+        $user = Auth::user();
+        $lab = Lab::find($id);
+        $owner = $lab->course->owner_id;
+
+        if ($user->isAdmin() || ($user->fsc_id == $owner && $user->isProf()))
+        {
+            return new FullLabResource($lab);
+        }
+        return response()->json(['message' => 'Unathorized. Is this your lab?'], 403);
     }
 
     public function update(Request $request, $id)
