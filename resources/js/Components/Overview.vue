@@ -61,7 +61,7 @@ export default {
         description: this.description,
       };
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-    }, 999999999),
+    }, 3000),
   },
   computed: {
     text() {
