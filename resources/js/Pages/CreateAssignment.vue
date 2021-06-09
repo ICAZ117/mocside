@@ -102,11 +102,6 @@ export default defineComponent({
       this.overview = e;
       console.log("event complete did the value change?");
 
-
-      var test = _.debounce(function () {
-        console.log("change finished");
-      }, 99999999);
-
     },
     async getInfo() {
       console.log("\nENTERING GETINFO");
