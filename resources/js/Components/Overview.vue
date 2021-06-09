@@ -25,8 +25,11 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
-  props: ["overview", "problemID"],
-  setup() {
+  props: {
+    overview: String, 
+    problemID: Number,
+  },
+  setup(props) {
     const state = reactive({
       // content: "{
       //   "ops": [
@@ -35,7 +38,7 @@ export default {
       //     },
       //   ],
       // }",
-      content: "",
+      content: JSON.parse(props.overview),
     });
 
     return { state };
