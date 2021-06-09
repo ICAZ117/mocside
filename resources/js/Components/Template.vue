@@ -50,6 +50,7 @@ export default {
       lang: "",
       showEditor: false,
       content: "",
+      template: "",
     };
   },
   watch: {
@@ -60,6 +61,7 @@ export default {
   methods: {
     launchEditor() {
       this.showEditor = true;
+      this.getStarter();
       // this.$forceUpdate();
     },
     saveTemplate() {
@@ -83,6 +85,16 @@ export default {
       console.log(payload);
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 500),
+    async getStarter() {
+      const res = await API.apiClient.get(`/problems/${this.problemID}`);
+      this.templates = res.data.data;
+      if(lang == "Java") {
+        this.template = templates.java_starter;
+      }
+      else {
+        this.template = templates.python_starter;
+      }
+    },
   },
 };
 </script>
