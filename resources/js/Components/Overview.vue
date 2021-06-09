@@ -69,29 +69,24 @@ export default {
     }
   },
 
-  beforeMount() {
-    console.log("\n\n\n\n------------------------ BEFORE MOUNT ------------------------");
-    console.log(this.overview);
-    console.log("\n\n\n\n");
-  },
   mounted() {
-    // console.log("\n\n----------------------- Before -----------------------");
-    // console.log("this.overview");
-    // console.log(this.overview);
-    // console.log("json parse this.overview");
-    // console.log(JSON.parse(this.overview));
-    // console.log("\n\nthis.state.content");
-    // console.log(this.state.content);
+    console.log("\n\n----------------------- Before -----------------------");
+    console.log("this.overview");
+    console.log(this.overview);
+    console.log("json parse this.overview");
+    console.log(JSON.parse(this.overview));
+    console.log("\n\nthis.state.content");
+    console.log(this.state.content);
 
     this.state.content = JSON.parse(this.overview);
 
-    // console.log("\n\n----------------------- After -----------------------");
-    // console.log("this.overview");
-    // console.log(this.overview);
-    // console.log("json parse this.overview");
-    // console.log(JSON.parse(this.overview));
-    // console.log("\n\nthis.state.content");
-    // console.log(this.state.content);
+    console.log("\n\n----------------------- After -----------------------");
+    console.log("this.overview");
+    console.log(this.overview);
+    console.log("json parse this.overview");
+    console.log(JSON.parse(this.overview));
+    console.log("\n\nthis.state.content");
+    console.log(this.state.content);
   },
 };
 </script>
