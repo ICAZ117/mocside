@@ -68,6 +68,12 @@ export default {
       return this.overview;
     }
   },
+
+  beforeMount() {
+    console.log("\n\n\n\n------------------------ BEFORE MOUNT ------------------------");
+    console.log(this.overview);
+    console.log("\n\n\n\n");
+  },
   mounted() {
     // console.log("\n\n----------------------- Before -----------------------");
     // console.log("this.overview");
@@ -77,7 +83,7 @@ export default {
     // console.log("\n\nthis.state.content");
     // console.log(this.state.content);
 
-    this.state.content = this.overview;
+    this.state.content = JSON.parse(this.overview);
 
     // console.log("\n\n----------------------- After -----------------------");
     // console.log("this.overview");
