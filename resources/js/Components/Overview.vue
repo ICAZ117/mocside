@@ -26,7 +26,7 @@ import * as API from "../services/API";
 
 export default {
   props: {
-    overview: Object, 
+    overview: String, 
     problemID: Number,
   },
   setup(props) {
