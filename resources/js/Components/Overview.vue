@@ -25,9 +25,17 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
-  props: ['overview', "problemID"],
+  props: ["overview", "problemID"],
   setup() {
-    const state = reactive({ content: "aestjasertjsztrejgzsrdej" });
+    const state = reactive({
+      content: {
+        "ops": [
+          {
+            "insert": "Gandalf the Grey\n",
+          },
+        ],
+      },
+    });
 
     return { state };
   },
@@ -38,15 +46,15 @@ export default {
     };
   },
   watch: {
-    description: function(val) {
+    description: function (val) {
       this.timeout(this.assignmentID);
-    }
+    },
   },
   methods: {
-    timeout: _.debounce(async function(assignmentID) {
+    timeout: _.debounce(async function (assignmentID) {
       var payload = {
-        "description": this.text,
-      }
+        description: this.text,
+      };
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 500),
   },
@@ -54,11 +62,11 @@ export default {
     text() {
       this.description = this.state.content;
       return this.state.content;
-    }
+    },
   },
   mounted() {
     this.state.content = this.overview;
-  }
+  },
 };
 </script>
 
