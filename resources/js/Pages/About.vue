@@ -11,6 +11,7 @@
 
 <script>
 import Tabs from "../Components/Tabs";
+import Tab from "../Components/Tab";
 export default {
   components: {
     Tab, 
