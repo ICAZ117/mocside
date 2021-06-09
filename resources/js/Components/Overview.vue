@@ -38,7 +38,7 @@ export default {
       //     },
       //   ],
       // }",
-      content: props.overview,
+      content: JSON.parse(props.overview),
     });
 
     return { state };
