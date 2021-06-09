@@ -346,12 +346,12 @@ import "ace-builds/src-noconflict/mode-python";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "savedCode"],
+  props: ["lang", "showSubmit", "savedCode", "modelValue"],
   emits: ["update"],
   data() {
     return {
       theme: "gob",
-      content: "",
+      content: this.modelValue,
       editorLangauge: "",
       style: "width: " + (this.showSubmit ? "78%" : "89%") + "!important",
     };
