@@ -119,7 +119,7 @@ export default defineComponent({
       return this.assignment.title;
     },
   },
-  mounted() {
+  created() {
     this.getInfo();
   },
   beforeUnmount() {

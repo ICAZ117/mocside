@@ -54,7 +54,7 @@ export default {
   methods: {
     timeout: _.debounce(async function (assignmentID) {
       var payload = {
-        description: this.text,
+        description: this.description,
       };
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 500),
@@ -62,11 +62,11 @@ export default {
   computed: {
     text() {
       this.description = this.state.content;
-      console.log(this.description);
-      this.description = this.overview;
-      console.log(this.description);
       return this.state.content;
     },
+    propChange() {
+      return this.overview;
+    }
   },
   mounted() {
     // console.log("\n\n----------------------- Before -----------------------");
