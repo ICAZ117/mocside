@@ -41,6 +41,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/users/elevate/{id}', [UserController::class, 'update']);
 
     Route::resource('courses', CourseController::class);
+    // I hope this works.
+    Route::get('/courses/full/{id}', [CourseController::class, 'showFull']);
     
     Route::get('/labs/{course_id}', [LabController::class, 'showCourse']);
     Route::get('/labs/full/{id}', [LabController::class, 'show']);
