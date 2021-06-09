@@ -38,7 +38,7 @@ export default {
       //     },
       //   ],
       // }",
-      content: JSON.parse(props.overview),
+      content: JSON.parse(props.overview.substring(1, props.overview.length-1)),
     });
     console.log("overview" + props.overview);
     console.log(props.overview);
