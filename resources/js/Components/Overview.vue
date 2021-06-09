@@ -54,6 +54,9 @@ export default {
     description: function (val) {
       this.timeout(this.assignmentID);
     },
+    state.content: function(val) {
+      this.description = this.state.content;
+    }
   },
   methods: {
     timeout: _.debounce(async function (assignmentID) {
@@ -64,10 +67,10 @@ export default {
     }, 3000),
   },
   computed: {
-    text() {
-      this.description = this.state.content;
-      return this.state.content;
-    },
+    // text() {
+    //   this.description = this.state.content;
+    //   return this.state.content;
+    // },
     propChange() {
       return this.overview;
     }
