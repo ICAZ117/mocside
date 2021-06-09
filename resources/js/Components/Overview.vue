@@ -54,7 +54,7 @@ export default {
     description: function (val) {
       this.timeout(this.assignmentID);
     },
-    state.content: function(val) {
+    state: function(val) {
       this.description = this.state.content;
     }
   },
