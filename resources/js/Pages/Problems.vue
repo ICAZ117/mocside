@@ -184,10 +184,13 @@ export default {
       this.problems = this.problems.filter((p) => p.id  != this.problemID);
       const problem = await API.apiClient.get(`/problem/full/${this.problemID}`);
       this.problems.push(problem.data.data);
+      console.log("calling unmounting");
       this.Unmounting();
     },
     Unmounting() {
+      console.log("childIsOpen" + childIsOpen);
       this.childIsOpen = false;
+      console.log("childIsOpen" + childIsOpen);
       this.problemID = null;
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
     },
