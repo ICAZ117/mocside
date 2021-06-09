@@ -30,6 +30,7 @@ export default {
     problemID: Number,
   },
   setup(props) {
+    console.log(props.overview);
     const state = reactive({
       // content: "{
       //   "ops": [
