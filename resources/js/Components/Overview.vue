@@ -40,7 +40,7 @@ export default {
       // }",
       content: JSON.parse(props.overview),
     });
-    console.log(JSON.parse(props.overview.substring(1, props.overview.length-1)));
+    console.log(JSON.parse(props.overview));
     return { state };
   },
   data() {
