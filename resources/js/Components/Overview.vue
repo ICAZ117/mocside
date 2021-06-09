@@ -40,8 +40,8 @@ export default {
       // }",
       content: JSON.parse(props.overview),
     });
-    console.log("overview" + this.overview);
-    console.log(this.overview);
+    console.log("overview" + props.overview);
+    console.log(props.overview);
     console.log("parse" + JSON.parse(props.overview));
     console.log(JSON.parse(props.overview));
     return { state };
