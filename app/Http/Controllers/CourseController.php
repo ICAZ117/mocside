@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\Course;
 use App\Http\Resources\CourseResource;
+use App\Http\Resources\FullCourseResource;
 
 class CourseController extends Controller
 {
@@ -50,6 +51,21 @@ class CourseController extends Controller
     public function show($id)
     {
         return new CourseResource(Course::find($id));
+    }
+
+    // displays course with gradebook, for admins and owners only.
+    public function showFull($id)
+    {
+        $user = Auth::user();
+        $course = Course::find($id);
+        $owner = $course->owner_id;
+        
+        // prof check is unnecesary *in theory* which is why I've included it.
+        if ($user->isAdmin() || ($user->fsc_id == $owner && $user->isProf()))
+        {
+            return new FullCourseResource($course);
+        }
+        return response()->json(["message" => 'Forbidden'], 403);
     }
 
     /**

@@ -14,10 +14,13 @@ class Assignment extends Model
         'name',
         'description',
         'python_starter',
+        'python_model',
         'java_starter',
+        'java_model',
         'test_cases',
         'due_date',
-        'lab_id'
+        'lab_id',
+        'gradebook',
     ];
 
     public function lab() 
