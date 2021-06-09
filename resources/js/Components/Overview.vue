@@ -25,8 +25,12 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
-  props: ["overview", "problemID"],
-  setup() {
+  props: {
+    overview: String, 
+    problemID: Number,
+  },
+  setup(props) {
+    console.log(props.overview);
     const state = reactive({
       // content: "{
       //   "ops": [
@@ -35,7 +39,7 @@ export default {
       //     },
       //   ],
       // }",
-      content: "",
+      content: JSON.parse(props.overview),
     });
 
     return { state };
@@ -57,7 +61,7 @@ export default {
         description: this.description,
       };
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-    }, 999999999),
+    }, 3000),
   },
   computed: {
     text() {
@@ -70,23 +74,23 @@ export default {
   },
 
   mounted() {
-    console.log("\n\n----------------------- Before -----------------------");
-    console.log("this.overview");
-    console.log(this.overview);
-    console.log("json parse this.overview");
-    console.log(JSON.parse(this.overview));
-    console.log("\n\nthis.state.content");
-    console.log(this.state.content);
+    // console.log("\n\n----------------------- Before -----------------------");
+    // console.log("this.overview");
+    // console.log(this.overview);
+    // console.log("json parse this.overview");
+    // console.log(JSON.parse(this.overview));
+    // console.log("\n\nthis.state.content");
+    // console.log(this.state.content);
 
-    this.state.content = JSON.parse(this.overview);
+    // this.state.content = JSON.parse(this.overview);
 
-    console.log("\n\n----------------------- After -----------------------");
-    console.log("this.overview");
-    console.log(this.overview);
-    console.log("json parse this.overview");
-    console.log(JSON.parse(this.overview));
-    console.log("\n\nthis.state.content");
-    console.log(this.state.content);
+    // console.log("\n\n----------------------- After -----------------------");
+    // console.log("this.overview");
+    // console.log(this.overview);
+    // console.log("json parse this.overview");
+    // console.log(JSON.parse(this.overview));
+    // console.log("\n\nthis.state.content");
+    // console.log(this.state.content);
   },
 };
 </script>
