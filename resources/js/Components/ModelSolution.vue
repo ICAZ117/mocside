@@ -69,12 +69,12 @@ export default {
       var payload = {};
       if(this.lang =="Java") {
         payload = {
-          "java_starter": this.content,
+          "java_model": this.content,
         }
       }
       else {
         payload = {
-          "python_starter": this.content,
+          "python_model": this.content,
         }
       };
       console.log(payload);
