@@ -29,7 +29,7 @@
       <tab-panel :val="'Overview'">
         <Overview
           @update="updateOverview"
-          :overview="overview"
+          :overview="JSON.stringify(overview)"
           :problemID="assignmentID"
         />
       </tab-panel>
