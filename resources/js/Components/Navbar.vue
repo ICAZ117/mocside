@@ -64,6 +64,8 @@ export default {
     console.log(window.location.pathname);
     console.log("\n\nthis.$router.currentRoute.path:");
     console.log(this.$router.currentRoute.path);
+    console.log("\n\ndocument.location:");
+    console.log(document.location);
   },
 };
 </script>
