@@ -29,9 +29,9 @@ export default {
   setup() {
     const state = reactive({
       content: {
-        "ops": [
+        ops: [
           {
-            "insert": "Gandalf the Grey\n",
+            insert: "Gandalf the Grey\n",
           },
         ],
       },
