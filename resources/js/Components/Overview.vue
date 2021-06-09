@@ -57,7 +57,7 @@ export default {
         description: this.description,
       };
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-    }, 500),
+    }, 50000),
   },
   computed: {
     text() {
