@@ -38,9 +38,8 @@ export default {
       //     },
       //   ],
       // }",
-      content: props.overview.replace(/^"(.+(?="$))"$/, '$1'),
+      content: JSON.parse(props.overview),
     });
-    console.log(props.overview.replace(/^"(.+(?="$))"$/, '$1'));
     return { state };
   },
   data() {
