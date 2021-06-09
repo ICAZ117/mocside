@@ -25,9 +25,18 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
-  props: ['overview', "problemID"],
+  props: ["overview", "problemID"],
   setup() {
-    const state = reactive({ content: "aestjasertjsztrejgzsrdej" });
+    const state = reactive({
+      // content: "{
+      //   "ops": [
+      //     {
+      //       "insert": "Gandalf the Grey\n",
+      //     },
+      //   ],
+      // }",
+      content: "",
+    });
 
     return { state };
   },
@@ -38,15 +47,15 @@ export default {
     };
   },
   watch: {
-    description: function(val) {
+    description: function (val) {
       this.timeout(this.assignmentID);
-    }
+    },
   },
   methods: {
-    timeout: _.debounce(async function(assignmentID) {
+    timeout: _.debounce(async function (assignmentID) {
       var payload = {
-        "description": this.text,
-      }
+        description: this.description,
+      };
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 500),
   },
@@ -54,11 +63,30 @@ export default {
     text() {
       this.description = this.state.content;
       return this.state.content;
+    },
+    propChange() {
+      return this.overview;
     }
   },
   mounted() {
+    // console.log("\n\n----------------------- Before -----------------------");
+    // console.log("this.overview");
+    // console.log(this.overview);
+    // console.log("json parse this.overview");
+    // console.log(JSON.parse(this.overview));
+    // console.log("\n\nthis.state.content");
+    // console.log(this.state.content);
+
     this.state.content = this.overview;
-  }
+
+    // console.log("\n\n----------------------- After -----------------------");
+    // console.log("this.overview");
+    // console.log(this.overview);
+    // console.log("json parse this.overview");
+    // console.log(JSON.parse(this.overview));
+    // console.log("\n\nthis.state.content");
+    // console.log(this.state.content);
+  },
 };
 </script>
 
