@@ -42,7 +42,7 @@ class CourseResource extends JsonResource
             'end_date' => $this->end_date,
             'owner_id' => $this->owner_id,
             'num_labs' => $this->labs->count(),
-            'total_points' => 0,
+            'total_points' => $total,
         ];
     }
 }
