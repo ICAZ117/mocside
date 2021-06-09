@@ -362,10 +362,10 @@ export default {
   beforeMount() {
     if (this.lang == "Java") {
       this.editorLangauge = "java";
-      console.log(this.savedCode);
+      console.log("savedCode" + this.savedCode);
     } else {
       this.editorLangauge = "python";
-      console.log(this.savedCode);
+      console.log("savedCode" + this.savedCode);
     }
   },
   computed: {
