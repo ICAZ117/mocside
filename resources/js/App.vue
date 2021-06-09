@@ -1,6 +1,8 @@
 <template>
   <div class="app">
-    <Navbar :authUser="authUser" />
+    <div @click="key = !key">
+      <Navbar :authUser="authUser" :key="key" />
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -13,6 +15,7 @@ export default {
   components: { Navbar },
   data() {
     return {
+      key: true,
     };
   },
   methods: {
@@ -24,18 +27,16 @@ export default {
     await this.$store.dispatch("auth/getAuthUser");
   },
   computed: {
-    authUser: function() {
+    authUser: function () {
       var flag = store.getters["auth/isGuest"];
-      if(flag || flag == null) {
+      if (flag || flag == null) {
         return null;
-      }
-      else {
+      } else {
         return this.getAuthUser();
       }
-    }  
-  }
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
