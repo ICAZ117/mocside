@@ -105,7 +105,7 @@ export default defineComponent({
 
       var test = _.debounce(function () {
         console.log("change finished");
-      }, 1);
+      }, 99999999);
 
     },
     async getInfo() {
