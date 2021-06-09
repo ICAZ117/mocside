@@ -13,9 +13,9 @@
           <th><i class="fas fa-chevron-down spacer"></i></th>
           <th>Title</th>
           <th># Test Cases</th>
-          <th v-if="isProf">% Successful</th>
+          <th v-if="!isProf">% Successful</th>
           <th>Due Date</th>
-          <th v-if="isProf">Last Activity</th>
+          <th v-if="!isProf">Last Activity</th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +28,9 @@
             <td v-show="isExpanded(problem.id)"><i class="fas fa-chevron-down"></i></td>
             <td>{{ problem.name }}</td>
             <td>{{ problem.test_cases }}</td>
-            <td v-if="isProf">{{ problem.percent }}</td>
+            <td v-if="!isProf">{{ problem.percent }}</td>
             <td>{{ problem.due_date.split(" ")[0] }}</td>
-            <td v-if="isProf">{{ problem.activity }}</td>
+            <td v-if="!isProf">{{ problem.activity }}</td>
           </tr>
           <tr v-show="isExpanded(problem.id)" class="description-data">
             <td colspan="5" class="description-data">
