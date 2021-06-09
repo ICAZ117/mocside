@@ -22,7 +22,7 @@ class RedirectWWW
     public function handle($request, Closure $next)
     {
         if (substr($request->header('host'), 0, 4) == 'www.') {
-            $request->headers->set('host', 'mocside.com');
+            $request->headers->set('host', 'mocside.com:8000');
 
             return Redirect::to($request->path());
         }
