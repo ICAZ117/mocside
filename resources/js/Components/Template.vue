@@ -88,7 +88,7 @@ export default {
     async getStarter() {
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var templates = res.data.data;
-      if(lang == "Java") {
+      if(this.lang == "Java") {
         this.template = templates.java_starter;
       }
       else {
