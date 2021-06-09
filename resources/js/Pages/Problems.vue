@@ -181,6 +181,7 @@ export default {
     },
     async problemEdited() {
       ///update the list of courses
+      console.log("caught problemEdited");
       this.problems = this.problems.filter((p) => p.id  != this.problemID);
       const problem = await API.apiClient.get(`/problem/full/${this.problemID}`);
       this.problems.push(problem.data.data);
