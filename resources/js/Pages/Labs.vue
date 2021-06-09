@@ -11,9 +11,9 @@
         <tr>
           <th>Title</th>
           <th># Problems</th>
-          <th>% Complete</th>
+          <th v-if="!isProf">% Complete</th>
           <th>Due Date</th>
-          <th>Last Activity</th>
+          <th v-if="!isProf">Last Activity</th>
         </tr>
       </thead>
       <tbody>
@@ -23,10 +23,10 @@
               <a>{{ lab.name }}</a>
             </td>
             <td>{{ lab.num_problems }}</td>
-            <td>{{ lab.percent }}</td>
+            <td v-if="!isProf">{{ lab.percent }}</td>
             <!-- <td>69%</td> -->
             <td>{{ lab.due_date.split(" ")[0] }}</td>
-            <td>{{ lab.activity }}</td>
+            <td v-if="!isProf">{{ lab.activity }}</td>
             <!-- <td>4/20/0420</td> -->
           </tr>
           <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)">•••</a>
@@ -77,9 +77,11 @@ export default {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       this.labs = rawLabs.data.data;
       const prog = await this.getStudent();
-      for (let i = 0; i < this.labs.length; i++) {
-        this.labs[i]['percent'] = await this.getPercent(this.labs[i]);
-        this.labs[i]['activity'] = await this.getActivity(this.labs[i]);
+      if(!this.isProf) {
+        for (let i = 0; i < this.labs.length; i++) {
+          this.labs[i]['percent'] = await this.getPercent(this.labs[i]);
+          this.labs[i]['activity'] = await this.getActivity(this.labs[i]);
+        }
       }
     },
     Unmounting() {
