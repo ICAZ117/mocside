@@ -123,7 +123,7 @@ export default defineComponent({
     this.getInfo();
   },
   beforeUnmount() {
-    this.$emit("unmounting");
+    this.$emit("problemEdited");
   },
 });
 </script>
