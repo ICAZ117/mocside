@@ -98,20 +98,14 @@ export default defineComponent({
     },
     updateOverview(e) {
       //will be removing this in place of using debounce on each specific tab and then saving only that tab at a time
-      console.log(e);
       this.overview = e;
-      console.log("event complete did the value change?");
 
     },
     async getInfo() {
-      console.log("\nENTERING GETINFO");
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problem = rawproblem.data.data;
-      console.log(this.problem);
       this.assignment.title = this.problem.name;
       this.overview = this.problem.description;
-      console.log(this.overview);
-      console.log("EXITING GETINFO\n");
     },
   },
   computed: {

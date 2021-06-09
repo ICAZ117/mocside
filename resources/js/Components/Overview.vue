@@ -30,7 +30,6 @@ export default {
     problemID: Number,
   },
   setup(props) {
-    console.log(props.overview);
     const state = reactive({
       // content: "{
       //   "ops": [
@@ -74,26 +73,6 @@ export default {
     propChange() {
       return this.overview;
     }
-  },
-
-  mounted() {
-    // console.log("\n\n----------------------- Before -----------------------");
-    // console.log("this.overview");
-    // console.log(this.overview);
-    // console.log("json parse this.overview");
-    // console.log(JSON.parse(this.overview));
-    // console.log("\n\nthis.state.content");
-    // console.log(this.state.content);
-
-    // this.state.content = JSON.parse(this.overview);
-
-    // console.log("\n\n----------------------- After -----------------------");
-    // console.log("this.overview");
-    // console.log(this.overview);
-    // console.log("json parse this.overview");
-    // console.log(JSON.parse(this.overview));
-    // console.log("\n\nthis.state.content");
-    // console.log(this.state.content);
   },
 };
 </script>
