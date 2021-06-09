@@ -1,25 +1,25 @@
-<template>
-  <div v-show="isActive">
-	  <slot></slot>
+<template lang="html">
+  <div class='tab' v-show='isActive'>
+    <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-	props: {
-		title: {
-			type: String,
-			default: "Tab"
-		}
-	},
-	data() {
-		return {
-			isActive: true,
-		}
-	},
+  props: {
+    title: {
+      type: String,
+      default: 'Tab'
+    }
+  },
+  data () {
+    return {
+      isActive: true
+    }
+  }
 }
 </script>
 
-<style>
-
+<style lang="css">
+  
 </style>
