@@ -1,37 +1,47 @@
 <template>
-  <div class="assignment header">
-    <input
-      id="assignment-title"
-      type="text"
-      class="assignment-title form-control"
-      name="assignment-title"
-      placeholder="Assignment Title"
-      v-model="assignment.title"
-    />
-    <hr />
+  <div>
+    <div class="assignment header">
+      <input
+        id="assignment-title"
+        type="text"
+        class="assignment-title form-control"
+        name="assignment-title"
+        placeholder="Assignment Title"
+        v-model="assignment.title"
+      />
+      <hr />
 
-    <div class="assignment navbar-nav">
-      <tabs v-model="selectedTab">
-        <tab
-          class="tab"
-          v-for="(tab, i) in tabs"
-          :key="`t${i}`"
-          :val="tab"
-          :label="tab"
-          :indicator="true"
-        />
-      </tabs>
+      <div class="assignment navbar-nav">
+        <tabs v-model="selectedTab">
+          <tab
+            class="tab"
+            v-for="(tab, i) in tabs"
+            :key="`t${i}`"
+            :val="tab"
+            :label="tab"
+            :indicator="true"
+          />
+        </tabs>
+      </div>
     </div>
-  </div>
 
-  <tab-panels v-model="selectedTab" :animate="true">
-    <tab-panel :val="'Overview'"> <Overview @update="updateOverview" :overview="overview" :problemID="assignmentID"/> </tab-panel>
-    <tab-panel :val="'Assign'"> <Assign :problemID="problemID"/> </tab-panel>
-    <tab-panel :val="'Template'"> <Template :problemID="problemID"/> </tab-panel>
-    <tab-panel :val="'Test Bench'"> <TestBench :problemID="problemID"/> </tab-panel>
-    <tab-panel :val="'Model Solution'"> <ModelSolution :problemID="problemID"/> </tab-panel>
-    <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID"/> </tab-panel>
-  </tab-panels>
+    <tab-panels v-model="selectedTab" :animate="true">
+      <tab-panel :val="'Overview'">
+        <Overview
+          @update="updateOverview"
+          :overview="overview"
+          :problemID="assignmentID"
+        />
+      </tab-panel>
+      <tab-panel :val="'Assign'"> <Assign :problemID="problemID" /> </tab-panel>
+      <tab-panel :val="'Template'"> <Template :problemID="problemID" /> </tab-panel>
+      <tab-panel :val="'Test Bench'"> <TestBench :problemID="problemID" /> </tab-panel>
+      <tab-panel :val="'Model Solution'">
+        <ModelSolution :problemID="problemID" />
+      </tab-panel>
+      <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID" /> </tab-panel>
+    </tab-panels>
+  </div>
 </template>
 
 <script lang="ts">
@@ -47,7 +57,7 @@ import ModelSolution from "../Components/ModelSolution.vue";
 import GradeBook from "../Components/GradeBook.vue";
 
 import * as API from "../services/API";
-import _ from 'lodash';
+import _ from "lodash";
 
 const tabs = [
   "Overview",
@@ -56,12 +66,12 @@ const tabs = [
   "Test Bench",
   "Model Solution",
   "Grade Book",
-  "Save & Exit"
+  "Save & Exit",
 ];
 
 export default defineComponent({
-  props: ['problemID'],
-  emits: ['unmounting', "problemEdited"],
+  props: ["problemID"],
+  emits: ["unmounting", "problemEdited"],
   components: { Overview, Assign, Template, TestBench, ModelSolution, GradeBook },
   name: "Create Assignment",
   setup() {
@@ -84,14 +94,13 @@ export default defineComponent({
     };
   },
   methods: {
-    async handleSubmit(){
+    async handleSubmit() {
       //perhaps later replace this with a debounce method for autosaving
       //save information before returning to the problems page
       var payload = {
-        "name": this.title,
+        name: this.title,
         // "description": this.overview,
-
-      }
+      };
       const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
 
       this.$emit("problemEdited");
@@ -99,7 +108,6 @@ export default defineComponent({
     updateOverview(e) {
       //will be removing this in place of using debounce on each specific tab and then saving only that tab at a time
       this.overview = e;
-
     },
     async getInfo() {
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
@@ -109,7 +117,7 @@ export default defineComponent({
     },
   },
   computed: {
-    title: function() {
+    title: function () {
       return this.assignment.title;
     },
   },
