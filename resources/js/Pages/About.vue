@@ -34,25 +34,3 @@ export default {
   }
 };
 </script>
-
-<style lang="css">
-  * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Karla', sans-serif;
-  }
-  .wrapper {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 20px;
-  }
-
-  .change__style {
-    background-color: #eee;
-    font-size: 1em;
-    margin-bottom: 10px;
-    padding: 5px;
-  }
-</style>

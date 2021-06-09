@@ -54,6 +54,9 @@ export default {
     description: function (val) {
       this.timeout(this.assignmentID);
     },
+    state: function(val) {
+      this.description = this.state.content;
+    }
   },
   methods: {
     timeout: _.debounce(async function (assignmentID) {
@@ -61,13 +64,13 @@ export default {
         description: this.description,
       };
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-    }, 999999999),
+    }, 3000),
   },
   computed: {
-    text() {
-      this.description = this.state.content;
-      return this.state.content;
-    },
+    // text() {
+    //   this.description = this.state.content;
+    //   return this.state.content;
+    // },
     propChange() {
       return this.overview;
     }
