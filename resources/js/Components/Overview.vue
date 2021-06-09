@@ -27,7 +27,7 @@ import * as API from "../services/API";
 export default {
   props: ['overview', "problemID"],
   setup() {
-    const state = reactive({ content: "" });
+    const state = reactive({ content: "aestjasertjsztrejgzsrdej" });
 
     return { state };
   },

@@ -38,6 +38,7 @@
                 <h4>
                   <b>{{ problem.name }}</b>
                 </h4>
+                <!-- get text from .description object -->
                 <p>
                   {{ problem.description }}
                   <br />
