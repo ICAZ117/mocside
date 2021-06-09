@@ -42,7 +42,7 @@ export default {
   },
   data() {
     return {
-      description: "",
+      description: this.overview,
       assignmentID: this.problemID,
     };
   },
