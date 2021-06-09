@@ -111,7 +111,7 @@ export default {
     async addProblem() {
       var payload = {
         "name": "New Problem",
-        "description": "New Problem",
+        "description": JSON.stringify({"ops": [{"insert": "New Problem"}]}),
         "lab_id": this.labID,
         "due_date": "2021-05-29 13:04:03",
       }
