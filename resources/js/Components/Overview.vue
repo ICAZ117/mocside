@@ -38,12 +38,9 @@ export default {
       //     },
       //   ],
       // }",
-      content: JSON.parse(props.overview.substring(1, props.overview.length-1)),
+      content: JSON.parse(props.overview),
     });
-    console.log("overview" + props.overview);
-    console.log(props.overview);
-    console.log("parse" + JSON.parse(props.overview));
-    console.log(JSON.parse(props.overview));
+    console.log(JSON.parse(props.overview.substring(1, props.overview.length-1)));
     return { state };
   },
   data() {
