@@ -18,11 +18,13 @@ class FullAssignmentResource extends JsonResource
           'id' => $this->id,
           'name' => $this->name,
           'description' => $this->description,
-          'test_cases' => $this->test_cases->count(),
           'python_starter' => $this->python_starter,
+          'python_model' => $this->python_model,
           'java_starter' => $this->java_starter,
+          'java_model' => $this->java_model,
           'due_date' => $this->due_date,
           'lab_id' => $this->lab_id,
+          'test_cases' => $this->test_cases->count(),
           'gradebook' => $this->gradebook,
         ];
     }
