@@ -83,7 +83,7 @@ export default {
     // console.log("\n\nthis.state.content");
     // console.log(this.state.content);
 
-    this.state.content = this.overview;
+    this.state.content = JSON.parse(this.overview);
 
     // console.log("\n\n----------------------- After -----------------------");
     // console.log("this.overview");
