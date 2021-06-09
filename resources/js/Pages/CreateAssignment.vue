@@ -80,6 +80,7 @@ export default defineComponent({
         title: "",
       },
       overview: {},
+      problem: {},
     };
   },
   methods: {
@@ -109,10 +110,10 @@ export default defineComponent({
     },
     async getInfo() {
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      var problem = rawproblem.data.data;
-      console.log(problem);
-      this.assignment.title = problem.name;
-      this.overview = problem.description;
+      this.problem = rawproblem.data.data;
+      console.log(this.problem);
+      this.assignment.title = this.problem.name;
+      this.overview = this.problem.description;
       console.log(this.overview);
     },
   },
