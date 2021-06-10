@@ -128,7 +128,7 @@ export default {
         "input": "New Input",
         "output": "New Output",
       }
-      const res = await API.apiClient.post(`/test-cases/${this.tc.id}`, payload);
+      const res = await API.apiClient.post(`/test-cases/${this.problemID}`, payload);
       this.cases.push(res.data);
 
     },
