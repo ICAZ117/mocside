@@ -84,6 +84,7 @@ export default {
       currentTC: 0,
       totalTC: 0,
       tc: {
+        id: "",
         Title: "",
         Points: 0,
         Feedback: "",
@@ -101,12 +102,10 @@ export default {
     tc: {
       deep: true,
       handler() {
-        // this.timeout(this.problemID);
-        console.log("tc changed");
+        this.timeout(this.problemID);
       },
     },
     state: function(val) {
-      console.log("state changed");
       this.tc.Feedback = this.state.content;
     }
   },
@@ -128,6 +127,7 @@ export default {
     setCurrent(idx) {
       console.log("setCurrent");
       this.currentTC =  idx + 1;
+      this.tc.id = this.cases[idx].id;
       this.tc.Title = this.cases[idx].title;
       this.tc.Points = this.cases[idx].points;
       this.state.content = this.cases[idx].feedback;
@@ -141,12 +141,12 @@ export default {
       var payload = {
         "title": this.tc.Title,
         "points": this.tc.Points,
-        "feedback": this.state.content,
+        "feedback": this.tc.Feedback,
         "compare_method": this.tc.CompareMethod,
         "input": this.tc.Input,
         "output": this.tc.Output,
       };
-      const res = await API.apiClient.put(`/problems/${problemID}`, payload);
+      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
     }, 500),
   },
   mounted() {
@@ -158,11 +158,6 @@ export default {
       this.tc.Feedback = this.state.content;
       return this.state.content;
     },
-    other() {
-      return this.tc.Input;
-    }
-
-
   },
 };
 </script>
