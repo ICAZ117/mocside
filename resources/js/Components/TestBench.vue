@@ -117,7 +117,7 @@ export default {
       this.testCase.tcTitle = this.cases[idx].title;
       this.testCase.tcPoints = this.cases[idx].points;
       this.testCase.tcDescription = "input description into object here";
-      this.testCase.tcCompareMethod = this.cases[idx].compareTpye;
+      this.testCase.tcCompareMethod = this.cases[idx].compareType;
       this.testCase.tcInput = this.cases.input;
       this.testCase.tcOutput = this.cases.output;
     },
