@@ -116,10 +116,12 @@ export default {
       this.currentTC =  idx + 1;
       this.testCase.tcTitle = this.cases[idx].title;
       this.testCase.tcPoints = this.cases[idx].points;
+      this.state.content = this.cases[idx].feedback;
       this.testCase.tcDescription = "input description into object here";
-      this.testCase.tcCompareMethod = this.cases[idx].compareType;
+      this.testCase.tcCompareMethod = this.cases[idx].compare_method;
       this.testCase.tcInput = this.cases[idx].input;
       this.testCase.tcOutput = this.cases[idx].output;
+      console.log(this.cases[idx]);
     },
   },
   mounted() {
