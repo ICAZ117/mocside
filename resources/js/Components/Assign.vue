@@ -104,6 +104,7 @@ export default {
     async getLabs(courseID) {
       const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
       this.labs = rawLabs.data.data;
+      console.log("---------------------------------------------- FINISHED GETLABS WITH COURSEID" + courseID);
     },
   },
   mounted() {
