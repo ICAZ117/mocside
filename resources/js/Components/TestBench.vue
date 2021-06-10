@@ -94,6 +94,7 @@ export default {
         Input: "",
         Output: "",
       },
+      feedback: {},
       cases: [],
     };
   },
@@ -109,12 +110,13 @@ export default {
         }
       },
     },
-    state: {
-      deep: true,
-      handler() {
-        this.tc.Feedback = this.state.content;
+    feedback: function(val) {
+      console.log("feedback changed");
+      this.tc.Feedback = this.feedback;
+    },
+    state: function(val) {
+        this.feedback = this.state.content;
       }
-    }
   },
   methods: {
     async getCases() {
@@ -193,7 +195,7 @@ export default {
   },
   computed: {
     quill() {
-      this.tc.Feedback = this.state.content;
+      this.feedback = this.state.content;
       return this.state.content;
     },
   },
