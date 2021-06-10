@@ -99,9 +99,8 @@ export default {
   methods: {
     async getCases() {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
-      console.log(res)
       var rawCases = res.data;
-      console.log(rawCases);
+      this.cases = rawCases;
     },
     addTest() {
       console.log("addTest");
@@ -119,13 +118,12 @@ export default {
       this.testCase.tcPoints = this.cases[idx].points;
       this.testCase.tcDescription = "input description into object here";
       this.testCase.tcCompareMethod = this.cases[idx].compareTpye;
-      this.testCase.tcInput = "input here";
-      this.testCase.tcOutput = "output here";
+      this.testCase.tcInput = this.cases.input;
+      this.testCase.tcOutput = this.cases.output;
     },
   },
   mounted() {
     this.getCases();
-    this.cases = [{"id": 1, "title": "first", "compareType": "exact", "points": 100}, {"id": 2, "title": "Second", "compareType": "exact", "points": 200}, {"id": 3, "title": "Third", "compareType": "exact", "points": 400}, {"id": 4, "title": "Fourth", "compareType": "exact", "points": 800},];
     this.totalTC = this.cases.length;
   }
 };
