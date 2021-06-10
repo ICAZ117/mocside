@@ -51,12 +51,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/labs/{id}', [LabController::class, 'destroy']);
     // Route::get('/labs', [LabController::class, 'index']);
 
-    Route::get('/problems/{id}', [AssignmentController::class, 'showRes']);
+    Route::get('/problems/{lab_id}', [AssignmentController::class, 'showRes']);
     Route::post('/problems', [AssignmentController::class, 'store']);
     Route::put('/problems/{id}', [AssignmentController::class, 'update']);
     Route::delete('/problems/{id}', [AssignmentController::class, 'destroy']);
     // we need this route for populating the workspace, but not for displaying list.
     Route::get('/problems/full/{id}', [AssignmentController::class, 'show']);
+    Route::get('/problems/copies/{id}', [AssignmentController::class, 'showCopies']);
 
     Route::get('/test-cases/{problem_id}', [TestCaseController::class, 'getCases']);
     Route::get('/test-cases/full/{id}', [TestCaseController::class, 'show']);

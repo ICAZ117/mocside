@@ -11,13 +11,15 @@ class Assignment extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
-        'name',
+        // these are nonspecific across copied instances.
+        'name', // we can search for copies by name.
         'description',
         'python_starter',
         'python_model',
         'java_starter',
         'java_model',
         'test_cases',
+        // v-- these are specific across copied instances.
         'due_date',
         'lab_id',
         'gradebook',
