@@ -58,6 +58,9 @@
 </template>
 
 <script>
+import store from "../Store/index";
+import * as API from "../services/API";
+
 export default {
   data() {
     return {
