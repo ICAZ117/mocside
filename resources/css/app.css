@@ -885,11 +885,14 @@ thead.gradebook {
     border: 1px solid #a1a1a1 !important;
     min-height: 350px !important;
     padding: 10px;
-    margin: 0 15px 0 15px!important;
 }
 
 #lab-select {
     width: 200px!important;
+}
+
+.margin {
+    margin: 0 15px!important;
 }
 
 .card-body {

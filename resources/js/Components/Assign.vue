@@ -9,7 +9,7 @@
           <div
             v-for="course in courses"
             :key="course.id"
-            class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
+            class="margin width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
           >
             <div class="card editcoursecard w-100">
               <div class="courses card-content">
