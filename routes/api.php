@@ -58,6 +58,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // we need this route for populating the workspace, but not for displaying list.
     Route::get('/problems/full/{id}', [AssignmentController::class, 'show']);
     Route::get('/problems/copies/{id}', [AssignmentController::class, 'test']);
+    Route::put('/problems/copies/{id}', [AssignmentController::class, 'updateChildren']);
 
     Route::get('/test-cases/{problem_id}', [TestCaseController::class, 'getCases']);
     Route::get('/test-cases/full/{id}', [TestCaseController::class, 'show']);
