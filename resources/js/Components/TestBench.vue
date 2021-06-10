@@ -24,7 +24,7 @@
     </div>
 
     <div class="container">
-      <h4>Test Case ({{ currentTC }}/{{ totalTC }})</h4>
+      <h4>Test Case ({{ currentTC }}/{{ cases.length }})</h4>
       <hr />
       <label for="tcTitle">Title: </label>
       <input type="text" id="tcTitle" v-model="tc.Title"/>
@@ -55,6 +55,9 @@
       <label for="tcOutput">Output (Will be matched against the output of the student's program)</label>
       <VAceEditor class="editor" id="tcOutput" v-model:value="tc.Output"/>
       <br /><br />
+      <hr />
+      <button @click="deleteTest()" class="btn btn-md btn-danger">Delete</button>
+      <br />
     </div>
   </div>
 </template>
@@ -82,7 +85,6 @@ export default {
   data() {
     return {
       currentTC: 0,
-      totalTC: 0,
       tc: {
         id: "",
         Title: "",
@@ -115,17 +117,44 @@ export default {
       var rawCases = res.data;
       this.cases = rawCases;
     },
-    addTest() {
+    async addTest() {
       console.log("addTest");
-      this.cases.push({"id": this.cases.length, "title": this.cases.length, "compareType": "exact", "points": 450});
-      this.totalTC = this.totalTC + 1;
+      var payload = {
+        "title": "New Test Case",
+        "points": 10,
+        "feedback": "",
+        "compare_method": "",
+        "input": "",
+        "output": "",
+      }
+      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+      console.log(res);
+      // this.cases.push(res.data);
+
     },
-    deleteTest() {
+    async deleteTest() {
       console.log("delete test");
-      this.totalTC = this.totalTC - 1;
+      const res = await API.apiClient.delete(`/test-cases/${this.tc.id}`);
+      
+      var key;
+      for(let i = 0; i < this.cases.length; i++) {
+        if(this.tc.id == this.cases[i].id) {
+          key = i;
+        }
+      }
+      this.cases = this.cases.filter((c, i) => i  != key);
+      //set current to null
+      this.currentTC =  "";
+      this.tc.id = "";
+      this.tc.Title = "";
+      this.tc.Points = "";
+      this.state.content = "";
+      this.tc.Feedback = "";
+      this.tc.CompareMethod = "";
+      this.tc.Input = "";
+      this.tc.Output = "";
     },
     setCurrent(idx) {
-      console.log("setCurrent");
       this.currentTC =  idx + 1;
       this.tc.id = this.cases[idx].id;
       this.tc.Title = this.cases[idx].title;
@@ -151,7 +180,6 @@ export default {
   },
   mounted() {
     this.getCases();
-    this.totalTC = this.cases.length;
   },
   computed: {
     quill() {
