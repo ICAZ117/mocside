@@ -4,9 +4,13 @@
       <button class="btn btn-primary btn-md publish-all">PUBLISH TO ALL</button>
       <br />
 
-      <div v-for="course in courses" :key="course.id">
-        <div class="no-decor">
-          <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      <div class="no-decor">
+        <div class="row">
+          <div
+            v-for="course in courses"
+            :key="course.id"
+            class="margin width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
+          >
             <div class="card editcoursecard w-100">
               <div class="courses card-content">
                 <h4 class="card-title my-3 mx-2 mb-0">
@@ -28,9 +32,18 @@
 
                   <br />
 
-                  <!-- <select id="labs">
-                      <option value=""></option>
-                  </select> -->
+                  <label for="lab-select">Lab:</label>
+                  <br />
+                  <small>
+                    <select id="lab-select" v-model="course.publish">
+                      <option value="" selected hidden disabled>Select a lab...</option>
+                      <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
+                        {{ lab.name }}
+                      </option>
+                    </select>
+                  </small>
+
+                  <br /><br />
 
                   <label for="dueDate">Due Date: </label>
                   <input type="date" id="dueDate" v-model="dueDate" />
@@ -84,27 +97,14 @@ export default {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
-        // this.getLabs(this.courses[i].id);
-
-        console.log("\n\n\n\n\n\n\n\n\n");
-        console.log("----- GET CALL WITH 2280 -----");
-        await this.getLabs(2280);
-        console.log(this.labs);
-
-        console.log("\n\n----- GET CALL WITH 2290 -----");
-        await this.getLabs(2290);
-        console.log(this.labs);
-        console.log("\n\n\n\n\n\n\n\n\n");
-
+        await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
         this.courses[i].publish = "";
-        console.log(this.courses[i]);
       }
     },
     async getLabs(courseID) {
       const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
       this.labs = rawLabs.data.data;
-      console.log("---------------------------------------------- FINISHED GETLABS WITH COURSEID" + courseID);
       return rawLabs.data.data;
     },
   },

@@ -27,11 +27,11 @@
       <h4>Test Case ({{ currentTC }}/{{ totalTC }})</h4>
       <hr />
       <label for="tcTitle">Title: </label>
-      <input type="text" id="tcTitle" v-model="testCase.tcTitle"/>
+      <input type="text" id="tcTitle" v-model="tc.Title"/>
       <br />
 
       <label for="tcPoints">Points: </label>
-      <input type="number" id="tcPoints" v-model="testCase.tcPoints"/>
+      <input type="number" id="tcPoints" v-model="tc.Points"/>
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
@@ -39,11 +39,9 @@
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
-      <select class="form-select" name="compareMethod" id="compareMethod" v-model="testCase.tcCompareMethod">
+      <select class="form-select" name="compareMethod" id="compareMethod" v-model="tc.CompareMethod">
         <option value="" selected disabled hidden>Select One...</option>
-        <option value="flexible">
-          Flexible equality (ignores: case, whitespace, and special characters)
-        </option>
+        <option value="flexible">Flexible equality (ignores: case, whitespace, and special characters)</option>
         <option value="exact">Equals exactly</option>
         <option value="contains">Contains an exact value (at least once)</option>
         <option value="regex">Regex (Write a regular expression to match outputs)</option>
@@ -51,11 +49,11 @@
       <br /><br />
 
       <label for="tcInput">Input (Will be passed into the student's program's stdin)</label>
-      <VAceEditor class="editor" id="tcInput" v-model:value="testCase.tcInput"/>
+      <VAceEditor class="editor" id="tcInput" v-model:value="tc.Input"/>
       <br /><br />
 
       <label for="tcOutput">Output (Will be matched against the output of the student's program)</label>
-      <VAceEditor class="editor" id="tcOutput" v-model:value="testCase.tcOutput"/>
+      <VAceEditor class="editor" id="tcOutput" v-model:value="tc.Output"/>
       <br /><br />
     </div>
   </div>
@@ -70,31 +68,46 @@ import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 import * as API from "../services/API";
+import _ from "lodash";
 
 export default {
+  props: {
+    problemID: Number,
+  },
   setup() {
     const state = reactive({ content: "" });
 
     return { state };
   },
-  props: ['problemID'],
   data() {
     return {
       currentTC: 0,
       totalTC: 0,
-      testCase: {
-        tcTitle: "",
-        tcPoints: 0,
-        tcDescription: "",
-        tcCompareMethod: "",
-        tcInput: "",
-        tcOutput: "",
+      tc: {
+        id: "",
+        Title: "",
+        Points: 0,
+        Feedback: "",
+        CompareMethod: "",
+        Input: "",
+        Output: "",
       },
       cases: [],
     };
   },
   components: {
     VAceEditor
+  },
+  watch: {
+    tc: {
+      deep: true,
+      handler() {
+        this.timeout(this.problemID);
+      },
+    },
+    state: function(val) {
+      this.tc.Feedback = this.state.content;
+    }
   },
   methods: {
     async getCases() {
@@ -114,18 +127,38 @@ export default {
     setCurrent(idx) {
       console.log("setCurrent");
       this.currentTC =  idx + 1;
-      this.testCase.tcTitle = this.cases[idx].title;
-      this.testCase.tcPoints = this.cases[idx].points;
-      this.testCase.tcDescription = "input description into object here";
-      this.testCase.tcCompareMethod = this.cases[idx].compareType;
-      this.testCase.tcInput = this.cases[idx].input;
-      this.testCase.tcOutput = this.cases[idx].output;
+      this.tc.id = this.cases[idx].id;
+      this.tc.Title = this.cases[idx].title;
+      this.tc.Points = this.cases[idx].points;
+      this.state.content = this.cases[idx].feedback;
+      this.tc.Feedback = this.cases[idx].feedback;
+      this.tc.CompareMethod = this.cases[idx].compare_method;
+      this.tc.Input = this.cases[idx].input;
+      this.tc.Output = this.cases[idx].output;
+      console.log(this.cases[idx]);
     },
+    timeout: _.debounce(async function(problemID) {
+      var payload = {
+        "title": this.tc.Title,
+        "points": this.tc.Points,
+        "feedback": this.tc.Feedback,
+        "compare_method": this.tc.CompareMethod,
+        "input": this.tc.Input,
+        "output": this.tc.Output,
+      };
+      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+    }, 500),
   },
   mounted() {
     this.getCases();
     this.totalTC = this.cases.length;
-  }
+  },
+  computed: {
+    quill() {
+      this.tc.Feedback = this.state.content;
+      return this.state.content;
+    },
+  },
 };
 </script>
 
