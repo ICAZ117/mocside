@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <IDE :lang="lang" :showSubmit="false" v-model:savedCode="template" @update="updateContent" />
+      <IDE :lang="lang" :showSubmit="false" v-model:saved_j="template_j" v-model:saved_p="template_p" @update="updateContent" />
     </div>
   </div>
 </template>
@@ -50,7 +50,8 @@ export default {
       lang: "",
       showEditor: false,
       content: "",
-      template: "",
+      template_j: "",
+      template_p: "",
     };
   },
   watch: {
@@ -61,7 +62,6 @@ export default {
   methods: {
     launchEditor() {
       this.showEditor = true;
-      this.getStarter();
       // this.$forceUpdate();
     },
     saveTemplate() {
@@ -88,12 +88,8 @@ export default {
     async getStarter() {
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var templates = res.data.data;
-      if(this.lang == "Java") {
-        this.template = templates.java_starter;
-      }
-      else {
-        this.template = templates.python_starter;
-      }
+      this.template_j = templates.java_starter;
+      this.template_p = templates.python_starter;
     },
   },
   beforeMount() {

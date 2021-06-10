@@ -346,7 +346,7 @@ import "ace-builds/src-noconflict/mode-python";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "savedCode"],
+  props: ["lang", "showSubmit", "saved_j", "saved_p"],
   emits: ["update"],
   data() {
     return {
@@ -362,10 +362,10 @@ export default {
   beforeMount() {
     if (this.lang == "Java") {
       this.editorLangauge = "java";
-      console.log("savedCode" + this.savedCode);
+      this.content = this.saved_j;
     } else {
       this.editorLangauge = "python";
-      console.log("savedCode" + this.savedCode);
+      this.content = this.saved_p;
     }
   },
   computed: {
