@@ -17,6 +17,8 @@ class TestCase extends Model
         'output',
         'points',
         'title',
+        'compare_method',
+        'feedback',
     ];
 
     public function assignment()
