@@ -82,11 +82,37 @@ class AssignmentController extends Controller
 
     // shows listing of assignments by LAB ID and then returns
     // a collection of JSON resources.
-    public function showRes($id)
+    public function showRes($lab_id)
     {
-        $listOfAssignments = Lab::find($id)->assignments;
+        $listOfAssignments = Lab::find($lab_id)->assignments;
         $assignmentRes = AssignmentResource::collection($listOfAssignments);
         return $assignmentRes;
+    }
+
+    // shows listing of assignments that prof has copied to other courses.
+    public function showCopies($id)
+    {
+        // some of this functionality could live in the assignment model instead, 
+        // but here is good for now
+        $user = Auth::user();
+        $assignment = Assignment::find($id);
+        $owner = $assignment->lab->course->owner_id;
+        // copies inclues $assignment
+        $copies = Assignment::where('name', $assignment->name);
+        
+        // I'm going to leave extras from FullAssignmentResource out for now.
+        if ($user->isAdmin())
+        {
+            return AssignmentResource::collection($copies);
+        }
+
+        // this is split into two if statements to accomodate a future logic change.
+        if ($user->isProf() && $user->fsc_id == $owner)
+        {
+            return AssignmentResource::collection($copies);
+        }
+
+        return response()->json(['message' => 'Forbidden. Is this your assignment?'], 403);
     }
 
     /**

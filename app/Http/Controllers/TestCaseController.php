@@ -37,6 +37,7 @@ class TestCaseController extends Controller
             'input' => 'required',
             'output' => 'required',
         ]);
+        // $owner = Assignment::find($validData['assignment_id'])->lab->course->owner_id;
 
         // I could check course ownership, here
         // but at this point it would be a pain. 
