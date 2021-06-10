@@ -127,7 +127,7 @@ export default {
         "input": "",
         "output": "",
       }
-      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+      const res = await API.apiClient.post(`/test-cases/${this.tc.id}`, payload);
       console.log(res);
       // this.cases.push(res.data);
 
