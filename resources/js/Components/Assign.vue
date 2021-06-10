@@ -84,7 +84,8 @@ export default {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
-        this.getLabs(this.courses[i].id);
+        // this.getLabs(this.courses[i].id);
+        this.getLabs(2280);
         this.courses[i].labs = this.labs;
         this.courses[i].publish = "";
         console.log(this.courses[i]);
