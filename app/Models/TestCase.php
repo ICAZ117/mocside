@@ -16,6 +16,7 @@ class TestCase extends Model
         'input',
         'output',
         'points',
+        'title',
     ];
 
     public function assignment()
