@@ -117,7 +117,6 @@ class AssignmentController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * Will return updated resource in a .data.data
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -127,19 +126,55 @@ class AssignmentController extends Controller
     {
         $user = Auth::user();
         $assignment = Assignment::find($id);
-        $owner = $assignment->lab->course->owner_id;
+        $lab = $assignment->lab;
+        $owner = $lab->course->owner_id;
 
-        if ($user->isAdmin()) {
-            $assignment->update($request->all());
-            return response()->json(["message" => "Update successful."], 200);
+        $isOriginal = $assignment->copy_id == $assignment->id;
+        $hasChildren = count(Assignment::where('copy_id', $assignment->id)->get()) > 1;
+        $copies = Assignment::where('copy_id', $assignment->copy_id)->orderBy('id')->get();
+
+        if ($isOriginal && $hasChildren)
+        {
+            // create new object with edited data
+            $new_assignment = $assignment->replicate();
+            $new_assignment->push();
+            $new_assignment->update($request->all());
+
+            // point lab 1 at new object
+            // this should already happen from the replicate
+
+            // point lab 2 at old object,
+            $lab2_id = $copies[1]->lab->id;
+            $assignment->lab_id = $lab2_id;
+
+            // and then delete husk.
+            $copies[1]->delete();
         }
 
-        if ($user->isProf() && $user->fsc_id == $owner)
-        {
+        if ($user->isAdmin() || ($user->isProf() && $user->fsc_id == $owner)) {
             $assignment->update($request->all());
+            $assignment->copy_id = $assignment->id;
+            $assignment->save();
             return response()->json(["message" => "Update successful."], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
+    }
+
+    public function updateChildren(Request $request, $id)
+    {
+        $user = Auth::user();
+        $assignment = Assignment::find($id);
+        $copies = Assignment::where('copy_id', $assignment->copy_id)->orderBy('id')->get();
+        $lab = $assignment->lab;
+        $owner = $lab->course->owner_id;
+
+        if ($user->isAdmin() || ($user->isProf() && $user->fsc_id == $owner)) {
+            for ($i = 0; $i < count($copies); $i++) {
+                $copies[$i]->update($request->all());
+            }
+            return response()->json(['messsage' => 'Updated all copies.'], 200);
+        }
+        return response()->json(['message' => 'Forbidden.'], 403);
     }
 
     /**
@@ -152,18 +187,36 @@ class AssignmentController extends Controller
     {
         $user = Auth::user();
         if ($user->isProf() || $user->isAdmin()) {
+            // $first = Assignment::find($id)->first();
+            // $copies = Assignment::where('copy_id', $first->copy_id)->get();
+            // $affectedAssignments = Assignment::destroy($id);
+
+            // // we need to cleanup copy_ids
+            // $newFirst = $copies[0];
+            // for ($i = 0; $i < count($copies); $i++) {
+            //     $copies[$i]->copy_id = $newFirst->id;
+            //     $copies[$i]->save();
+            // }   
+
             $first = Assignment::find($id)->first();
-            $copies = Assignment::where('copy_id', $first->copy_id)->get();
-            $affectedAssignments = Assignment::destroy($id);
-
-            // we need to cleanup copy_ids
-            $newFirst = $copies[0];
-            for ($i = 0; $i < count($copies); $i++) {
-                $copies[$i]->copy_id = $newFirst->id;
-                $copies[$i]->save();
-            }   
-
-            return response()->json(["message" => "Delete successful.", "data" => $affectedAssignments], 200);
+            $copies = Assignment::where('copy_id', $first->copy_id)->orderBy('id')->get();
+            // $copies[0] is the original
+            // $copies[1] is the successor in case of original delete.
+            $isOriginal = $first->copy_id == $first->id;
+            if ($isOriginal) {
+                // fix pointers
+                // $course1 = $first->course;
+                $lab2 = $copies[1]->lab;
+                $first->lab_id = $lab2->id;
+                $first->save();
+                // delete copies[1]
+                $husk = $copies[1];
+                $husk->delete();
+                return response()->json(['message' => 'Delete successful and pointers cleaned.', 'data' => $husk], 200);
+            }
+            // delete $id
+            $first->delete();
+            return response()->json(['message' => 'Delete sucessful with no cleanup.', 'data' => $first], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
@@ -178,9 +231,17 @@ class AssignmentController extends Controller
         $isOriginal = $first->copy_id == $first->id;
         if ($isOriginal) {
             // fix pointers
+            // $course1 = $first->course;
+            $course2 = $copies[1]->course;
+            $first->assignment_id = $course2->id;
+            $first->save();
             // delete copies[1]
+            $husk = $copies[1];
+            $husk->delete();
+            return response()->json(['message' => 'Delete successful and pointers cleaned.'], 200);
         }
         // delete $id
-        return response()->json(['data' => $request->request], 200);
+        $first->delete();
+        return response()->json(['message' => 'Delete sucessful with no cleanup.'], 200);
     }
 }
