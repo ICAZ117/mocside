@@ -85,7 +85,17 @@ export default {
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
         // this.getLabs(this.courses[i].id);
+
+        console.log("\n\n\n\n\n\n\n\n\n");
+        console.log("----- GET CALL WITH 2280 -----");
         this.getLabs(2280);
+        console.log(this.labs);
+
+        console.log("\n\n----- GET CALL WITH 2290 -----");
+        this.getLabs(2290);
+        console.log(this.labs);
+        console.log("\n\n\n\n\n\n\n\n\n");
+
         this.courses[i].labs = this.labs;
         this.courses[i].publish = "";
         console.log(this.courses[i]);
