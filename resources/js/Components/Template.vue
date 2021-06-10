@@ -57,6 +57,7 @@ export default {
   watch: {
     content: function(val) {
       this.saveStatus = "Saving..."
+      console.log("Change status to saving");
       this.timeout(this.problemID);
     }
   },
