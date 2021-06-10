@@ -229,7 +229,7 @@ nav {
     text-align: center !important;
 }
 
-.nav-link.active,
+.nav-link.activeNav,
 .nav-link:hover {
     color: white !important;
     background-color: var(--FSCred) !important;
@@ -249,7 +249,7 @@ nav {
     padding-bottom: 0.5rem !important;
 }
 
-.move-up.active,
+.move-up.activeNav,
 .move-up:hover {
     color: white !important;
     background-color: var(--FSCred) !important;
@@ -289,7 +289,7 @@ nav {
     text-align: center !important;
 }
 
-.dark-nav-link.active,
+.dark-nav-link.activeNav,
 .dark-nav-link:hover {
     color: var(--FSCred) !important;
     background-color: white !important;
@@ -308,7 +308,7 @@ nav {
     padding-bottom: 0.5rem !important;
 }
 
-.dark-move-up.active,
+.dark-move-up.activeNav,
 .dark-move-up:hover {
     color: var(--FSCred) !important;
     background-color: white !important;
