@@ -97,6 +97,7 @@ export default {
   },
   methods: {
     addTest() {
+      console.log("addTest");
       this.cases.push({"id": this.cases.length, "title": this.cases.length, "compareType": "exact", "points": 450});
     },
   },
