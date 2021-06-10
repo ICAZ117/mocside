@@ -129,8 +129,7 @@ export default {
         "output": "New Output",
       }
       const res = await API.apiClient.post(`/test-cases/${this.tc.id}`, payload);
-      console.log(res);
-      // this.cases.push(res.data);
+      this.cases.push(res.data);
 
     },
     async deleteTest() {
