@@ -88,11 +88,11 @@ export default {
 
         console.log("\n\n\n\n\n\n\n\n\n");
         console.log("----- GET CALL WITH 2280 -----");
-        this.getLabs(2280);
+        await this.getLabs(2280);
         console.log(this.labs);
 
         console.log("\n\n----- GET CALL WITH 2290 -----");
-        this.getLabs(2290);
+        await this.getLabs(2290);
         console.log(this.labs);
         console.log("\n\n\n\n\n\n\n\n\n");
 
@@ -105,6 +105,7 @@ export default {
       const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
       this.labs = rawLabs.data.data;
       console.log("---------------------------------------------- FINISHED GETLABS WITH COURSEID" + courseID);
+      return rawLabs.data.data;
     },
   },
   mounted() {
