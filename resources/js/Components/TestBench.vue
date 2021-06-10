@@ -1,16 +1,17 @@
 <template>
   <div class="create-assignment">
     <div class="row test-cases">
-      <div v-for="i in 12" :key="i" class="tc-card col-1">
+      <div v-for="(tc, key) in cases" :key="tc.id" :tc="tc" class="tc-card col-1">
         <div class="tc-card-title">
-          <p>tc{{ i }}</p>
+          <!-- <p>tc{{ i }}</p> -->
+          <p>{{ tc.title }}</p>
         </div>
 
         <div class="tc-card-body">
           <p>
-            Input/Output Comparison
+            {{ tc.compareType }}
             <br /><br />
-            100 Points
+            {{ tc.points }} Points
           </p>
         </div>
       </div>
@@ -87,11 +88,15 @@ export default {
         tcCompareMethod: "",
         tcInput: "",
         tcOutput: "",
-      }
+      },
+      cases: [],
     };
   },
   components: {
     VAceEditor
+  },
+  mounted() {
+    this.cases = [{"id": 1, "title": "first", "compareType": "exact", "points": 100}, {"id": 2, "title": "Second", "compareType": "exact", "points": 200}, {"id": 3, "title": "Third", "compareType": "exact", "points": 400}, {"id": 4, "title": "Fourth", "compareType": "exact", "points": 800},];
   }
 };
 </script>
