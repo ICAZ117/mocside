@@ -104,7 +104,7 @@ export default {
     tc: {
       deep: true,
       handler() {
-        if(tc.id != "") {
+        if(this.tc.id != "") {
           this.timeout(this.problemID);
         }
       },
