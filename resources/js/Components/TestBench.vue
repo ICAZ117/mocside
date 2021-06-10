@@ -109,8 +109,11 @@ export default {
         }
       },
     },
-    state: function(val) {
-      this.tc.Feedback = this.state.content;
+    state: {
+      deep: true,
+      handler() {
+        this.tc.Feedback = this.state.content;
+      }
     }
   },
   methods: {
