@@ -99,9 +99,8 @@ export default {
   methods: {
     async getCases() {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
-      console.log(res)
       var rawCases = res.data;
-      console.log(rawCases);
+      this.cases = rawCases;
     },
     addTest() {
       console.log("addTest");
@@ -125,7 +124,6 @@ export default {
   },
   mounted() {
     this.getCases();
-    this.cases = [{"id": 1, "title": "first", "compareType": "exact", "points": 100}, {"id": 2, "title": "Second", "compareType": "exact", "points": 200}, {"id": 3, "title": "Third", "compareType": "exact", "points": 400}, {"id": 4, "title": "Fourth", "compareType": "exact", "points": 800},];
     this.totalTC = this.cases.length;
   }
 };
