@@ -71,12 +71,14 @@ import * as API from "../services/API";
 import _ from "lodash";
 
 export default {
+  props: {
+    problemID: Number,
+  },
   setup() {
     const state = reactive({ content: "" });
 
     return { state };
   },
-  props: ['problemID'],
   data() {
     return {
       currentTC: 0,
@@ -95,7 +97,7 @@ export default {
   components: {
     VAceEditor
   },
-  watches: {
+  watch: {
     tc: {
       deep: true,
       handler() {
@@ -152,10 +154,14 @@ export default {
     this.totalTC = this.cases.length;
   },
   computed: {
-    text() {
+    quill() {
       this.tc.Feedback = this.state.content;
       return this.state.content;
     },
+    other() {
+      return this.tc.Input;
+    }
+
 
   },
 };
