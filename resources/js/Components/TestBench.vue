@@ -133,9 +133,6 @@ export default {
 
     },
     async deleteTest() {
-      console.log("delete test");
-      const res = await API.apiClient.delete(`/test-cases/${this.tc.id}`);
-      
       var key;
       for(let i = 0; i < this.cases.length; i++) {
         if(this.tc.id == this.cases[i].id) {
@@ -153,6 +150,9 @@ export default {
       this.tc.CompareMethod = "";
       this.tc.Input = "";
       this.tc.Output = "";
+
+      // I do this after to ensure that it doesn't try to repost to the test case after it has been deleted
+      const res = await API.apiClient.delete(`/test-cases/${this.tc.id}`);
     },
     setCurrent(idx) {
       this.currentTC =  idx + 1;
