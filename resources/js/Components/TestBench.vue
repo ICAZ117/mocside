@@ -97,11 +97,11 @@ export default {
   },
   watches: {
     tc: {
-      handler: function(val) {
+      deep: true,
+      handler() {
         // this.timeout(this.problemID);
         console.log("tc changed");
       },
-      deep: true
     },
     state: function(val) {
       console.log("state changed");
