@@ -98,7 +98,7 @@ class AssignmentController extends Controller
         $assignment = Assignment::find($id);
         $owner = $assignment->lab->course->owner_id;
         // copies inclues $assignment
-        $copies = Assignment::where('name', $assignment->name);
+        $copies = Assignment::where('copy_id', $assignment->copy_id);
         
         // I'm going to leave extras from FullAssignmentResource out for now.
         if ($user->isAdmin())
@@ -152,9 +152,29 @@ class AssignmentController extends Controller
     {
         $user = Auth::user();
         if ($user->isProf() || $user->isAdmin()) {
+            $first = Assignment::find($id)->first();
+            $copies = Assignment::where('copy_id', $first->copy_id)->get();
             $affectedAssignments = Assignment::destroy($id);
+
+            // we need to cleanup copy_ids
+            $newFirst = $copies[0];
+            for ($i = 0; $i < count($copies); $i++) {
+                $copies[$i]->copy_id = $newFirst->id;
+                $copies[$i]->save();
+            }   
+
             return response()->json(["message" => "Delete successful.", "data" => $affectedAssignments], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
+    }
+
+    public function test(Request $request, $id)
+    {
+        // $user = Auth::user();
+        $first = Assignment::find($id)->first();
+        $copies = Assignment::where('copy_id', $first->copy_id)->orderBy('id')->get();
+        // $copies[0] is the original
+        // $copies[1] is the successor in case of original delete.
+        return response()->json(['data' => $copies], 200);
     }
 }

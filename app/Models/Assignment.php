@@ -19,6 +19,7 @@ class Assignment extends Model
         'java_starter',
         'java_model',
         'test_cases',
+        'copy_id',
         // v-- these are specific across copied instances.
         'due_date',
         'lab_id',
