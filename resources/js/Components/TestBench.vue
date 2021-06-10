@@ -35,7 +35,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model:content="tc.feedback"/>
+      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model:content="state.content"/>
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
@@ -109,12 +109,12 @@ export default {
         }
       },
     },
-    // state: {
-    //   deep: true,
-    //   handler() {
-    //     this.tc.Feedback = this.state.content;
-    //   }
-    // }
+    state: {
+      deep: true,
+      handler() {
+        this.tc.Feedback = this.state.content;
+      }
+    }
   },
   methods: {
     async getCases() {
@@ -192,10 +192,10 @@ export default {
     this.getCases();
   },
   computed: {
-    // quill() {
-    //   this.tc.Feedback = this.state.content;
-    //   return this.state.content;
-    // },
+    quill() {
+      this.tc.Feedback = this.state.content;
+      return this.state.content;
+    },
   },
 };
 </script>
