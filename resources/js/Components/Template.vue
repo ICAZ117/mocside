@@ -29,7 +29,8 @@
           <button class="btn btn-primary btn-md col-4" @click="saveTemplate()">
             CHANGE LANGUAGE
           </button>
-          <small class="col-8 saveStatus">{{ saveStatus }}</small>
+          <!-- <small class="col-8 saveStatus">{{ saveStatus }}</small> -->
+          <small class="col-8 saveStatus">save status not working quite yet</small>
         </div>
       </div>
 
@@ -46,7 +47,7 @@ export default {
   props: ["problemID"],
   data() {
     return {
-      saveStatus: "All changes have been saved",
+      saveStatus: "All changes have been saved",  //not working quite yet
       lang: "",
       showEditor: false,
       content: "",
@@ -56,6 +57,8 @@ export default {
   },
   watch: {
     content: function(val) {
+      this.saveStatus = "Saving..."
+      console.log("Change status to saving");
       this.timeout(this.problemID);
     }
   },
@@ -84,6 +87,7 @@ export default {
       };
       console.log(payload);
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+      this.saveStatus = "All changes have been saved";
     }, 500),
     async getStarter() {
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
