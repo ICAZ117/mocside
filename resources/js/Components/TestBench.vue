@@ -176,6 +176,11 @@ export default {
         "output": this.tc.Output,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+      for(let i = 0; i < this.cases.length; i++) {
+        if (this.cases[i].id == res.data.id ) {
+          this.cases[i] = res.data;
+        }
+      }
     }, 500),
   },
   mounted() {
