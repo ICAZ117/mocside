@@ -180,7 +180,7 @@ nav {
     padding: 0 !important;
     padding-top: 60px !important;
     z-index: 1 !important;
-    background-color: red !important;
+    background-color: #00000000 !important;
 }
 
 .navbar {
@@ -465,10 +465,6 @@ nav {
     max-height: 239.5px !important;
 }
 
-.card {
-    margin: 0px 10px !important;
-}
-
 .courses hr {
     border-top: 2px solid #ffffff !important;
 }
@@ -487,8 +483,8 @@ hr.courses {
 }
 
 .coursecard:hover {
-    border: 1px solid red !important;
-    border-bottom: 3px solid red !important;
+    border: 1px solid var(--FSCred) !important;
+    border-bottom: 3px solid var(--FSCred) !important;
     transition-timing-function: ease !important;
     transition-duration: 100ms !important;
 }
