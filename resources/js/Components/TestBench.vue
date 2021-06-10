@@ -35,7 +35,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <QuillEditor theme="snow" toolbar="full" class="assignment-description" v-model:content="state.content"/>
+      <QuillEditor ref="myEditor" theme="snow" toolbar="full" class="assignment-description" v-model:content="state.content"/>
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
@@ -168,6 +168,7 @@ export default {
       this.tc.Title = this.cases[idx].title;
       this.tc.Points = this.cases[idx].points;
       this.state.content = this.cases[idx].feedback;
+      this.$refs.myEditor.setContents(this.cases[idx].feedback);
       this.tc.Feedback = this.cases[idx].feedback;
       this.tc.CompareMethod = this.cases[idx].compare_method;
       this.tc.Input = this.cases[idx].input;
