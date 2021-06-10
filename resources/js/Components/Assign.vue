@@ -24,7 +24,7 @@
                     <div class="col-4">Publish:</div>
                     <div class="col-8">
                       <label class="switch">
-                        <input type="checkbox" v-model="publish" />
+                        <input type="checkbox" v-model="course.publish.isPublished" />
                         <span class="slider round"></span>
                       </label>
                     </div>
@@ -35,7 +35,7 @@
                   <label for="lab-select">Lab:</label>
                   <br />
                   <small>
-                    <select id="lab-select" v-model="course.publish">
+                    <select id="lab-select" v-model="course.publish.lab">
                       <option value="" selected hidden disabled>Select a lab...</option>
                       <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
                         {{ lab.name }}
@@ -46,7 +46,7 @@
                   <br /><br />
 
                   <label for="dueDate">Due Date: </label>
-                  <input type="date" id="dueDate" v-model="dueDate" />
+                  <input type="date" id="dueDate" v-model="course.publish.dueDate" />
                 </div>
 
                 <hr class="courses my-0" />
@@ -85,8 +85,6 @@ export default {
       courses: [],
       authUser: null,
       enrolledCourses: [],
-      publish: "",
-      dueDate: "",
     };
   },
   methods: {
@@ -99,7 +97,11 @@ export default {
         this.courses.push(course.data.data);
         await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
-        this.courses[i].publish = "";
+        this.courses[i].publish = {
+          isPublished: false,
+          lab: "",
+          dueDate: "",
+        };
       }
     },
     async getLabs(courseID) {
