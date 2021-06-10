@@ -15,7 +15,7 @@
           </p>
         </div>
       </div>
-      <div class="tc-card col-1">
+      <div @click="addTest()" class="tc-card col-1">
         <div class="tc-card-title">
           <p>Add Test Case</p>
           <p>+</p>
@@ -94,6 +94,11 @@ export default {
   },
   components: {
     VAceEditor
+  },
+  methods: {
+    addTest() {
+      this.cases.push({"id": this.cases.length, "title": this.cases.length, "compareType": "exact", "points": 450});
+    },
   },
   mounted() {
     this.cases = [{"id": 1, "title": "first", "compareType": "exact", "points": 100}, {"id": 2, "title": "Second", "compareType": "exact", "points": 200}, {"id": 3, "title": "Third", "compareType": "exact", "points": 400}, {"id": 4, "title": "Fourth", "compareType": "exact", "points": 800},];
