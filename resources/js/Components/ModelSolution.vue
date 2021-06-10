@@ -92,6 +92,9 @@ export default {
       }
     },
   },
+  beforeMount() {
+    this.getStarter();
+  }
 };
 </script>
 
