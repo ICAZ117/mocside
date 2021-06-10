@@ -104,7 +104,9 @@ export default {
     tc: {
       deep: true,
       handler() {
-        this.timeout(this.problemID);
+        if(tc.id != "") {
+          this.timeout(this.problemID);
+        }
       },
     },
     state: function(val) {
@@ -140,6 +142,7 @@ export default {
         }
       }
       this.cases = this.cases.filter((c, i) => i  != key);
+      var temp = this.tc.id;
       //set current to null
       this.currentTC =  "";
       this.tc.id = "";
@@ -152,7 +155,7 @@ export default {
       this.tc.Output = "";
 
       // I do this after to ensure that it doesn't try to repost to the test case after it has been deleted
-      const res = await API.apiClient.delete(`/test-cases/${this.tc.id}`);
+      const res = await API.apiClient.delete(`/test-cases/${temp}`);
     },
     setCurrent(idx) {
       this.currentTC =  idx + 1;
