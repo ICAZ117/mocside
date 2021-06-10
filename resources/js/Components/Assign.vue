@@ -84,7 +84,18 @@ export default {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
-        this.getLabs(this.courses[i].id);
+        // this.getLabs(this.courses[i].id);
+
+        console.log("\n\n\n\n\n\n\n\n\n");
+        console.log("----- GET CALL WITH 2280 -----");
+        await this.getLabs(2280);
+        console.log(this.labs);
+
+        console.log("\n\n----- GET CALL WITH 2290 -----");
+        await this.getLabs(2290);
+        console.log(this.labs);
+        console.log("\n\n\n\n\n\n\n\n\n");
+
         this.courses[i].labs = this.labs;
         this.courses[i].publish = "";
         console.log(this.courses[i]);
@@ -93,6 +104,8 @@ export default {
     async getLabs(courseID) {
       const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
       this.labs = rawLabs.data.data;
+      console.log("---------------------------------------------- FINISHED GETLABS WITH COURSEID" + courseID);
+      return rawLabs.data.data;
     },
   },
   mounted() {
