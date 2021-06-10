@@ -118,8 +118,8 @@ export default {
       this.testCase.tcPoints = this.cases[idx].points;
       this.testCase.tcDescription = "input description into object here";
       this.testCase.tcCompareMethod = this.cases[idx].compareTpye;
-      this.testCase.tcInput = "input here";
-      this.testCase.tcOutput = "output here";
+      this.testCase.tcInput = this.cases.input;
+      this.testCase.tcOutput = this.cases.output;
     },
   },
   mounted() {
