@@ -69,9 +69,6 @@ export default {
       this.description = this.state.content;
       return this.state.content;
     },
-    propChange() {
-      return this.overview;
-    }
   },
 };
 </script>
