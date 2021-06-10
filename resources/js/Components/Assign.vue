@@ -28,14 +28,14 @@
 
                   <br />
 
-                  <select id="labs">
-                    <option value="" selected hidden disabled>
-                      <small>Select a lab...</small>
-                    </option>
-                    <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
-                      <small>{{ lab.name }}</small>
-                    </option>
-                  </select>
+                  <small>
+                    <select id="labs">
+                      <option value="" selected hidden disabled>Select a lab...</option>
+                      <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
+                        {{ lab.name }}
+                      </option>
+                    </select>
+                  </small>
 
                   <label for="dueDate">Due Date: </label>
                   <input type="date" id="dueDate" v-model="dueDate" />
