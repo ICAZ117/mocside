@@ -24,7 +24,7 @@
     </div>
 
     <div v-if="showEditor" class="template-workspace">
-      <div class="save-template">
+      <div class="save-model">
         <div class="row">
           <button class="btn btn-primary btn-md col-4" @click="saveTemplate()">
             SAVE CHANGES
