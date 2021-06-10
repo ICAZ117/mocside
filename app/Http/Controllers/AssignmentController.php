@@ -181,6 +181,6 @@ class AssignmentController extends Controller
             // delete copies[1]
         }
         // delete $id
-        return response()->json(['data' => $request], 200);
+        return response()->json(['data' => $request->request], 200);
     }
 }
