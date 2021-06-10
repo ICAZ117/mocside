@@ -120,12 +120,13 @@ export default {
     async addTest() {
       console.log("addTest");
       var payload = {
+        "assignment_id": this.problemID,
         "title": "New Test Case",
         "points": 10,
         "feedback": "",
         "compare_method": "",
-        "input": "",
-        "output": "",
+        "input": "New Input",
+        "output": "New Output",
       }
       const res = await API.apiClient.post(`/test-cases/${this.tc.id}`, payload);
       console.log(res);
