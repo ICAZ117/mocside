@@ -175,6 +175,12 @@ class AssignmentController extends Controller
         $copies = Assignment::where('copy_id', $first->copy_id)->orderBy('id')->get();
         // $copies[0] is the original
         // $copies[1] is the successor in case of original delete.
-        return response()->json(['data' => $copies], 200);
+        $isOriginal = $first->copy_id == $first->id;
+        if ($isOriginal) {
+            // fix pointers
+            // delete copies[1]
+        }
+        // delete $id
+        return response()->json(['data' => $request], 200);
     }
 }
