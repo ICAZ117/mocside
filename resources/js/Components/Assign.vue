@@ -7,7 +7,7 @@
       <div class="no-decor">
         <div class="row">
           <div
-            v-for="course in courses"
+            v-for="(course, i) in courses"
             :key="course.id"
             class="margin width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
           >
@@ -35,7 +35,7 @@
                   <label for="lab-select">Lab:</label>
                   <br />
                   <small>
-                    <select id="lab-select">
+                    <select id="lab-select" v-model="course.publish" @click="log(i)">
                       <option value="" selected hidden disabled>Select a lab...</option>
                       <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
                         {{ lab.name }}
@@ -100,7 +100,6 @@ export default {
         await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
         this.courses[i].publish = "";
-        console.log(this.courses[i]);
       }
     },
     async getLabs(courseID) {
@@ -108,6 +107,9 @@ export default {
       this.labs = rawLabs.data.data;
       return rawLabs.data.data;
     },
+    log(i) {
+      console.log(this.courses[i].publish);
+    }
   },
   mounted() {
     this.authUser = store.getters["auth/authUser"];
