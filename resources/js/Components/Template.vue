@@ -56,6 +56,7 @@ export default {
   },
   watch: {
     content: function(val) {
+      this.saveStatus = "Saving..."
       this.timeout(this.problemID);
     }
   },
@@ -84,6 +85,7 @@ export default {
       };
       console.log(payload);
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+      this.saveStatus = "All changes have been saved";
     }, 500),
     async getStarter() {
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
