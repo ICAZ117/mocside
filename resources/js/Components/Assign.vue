@@ -28,9 +28,10 @@
 
                   <br />
 
-                  <!-- <select id="labs">
-                      <option value=""></option>
-                  </select> -->
+                  <select id="labs">
+                      <option value="" selected hidden disabled>Select a lab...</option>
+                      <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">{{ lab.name }}</option>
+                  </select>
 
                   <label for="dueDate">Due Date: </label>
                   <input type="date" id="dueDate" v-model="dueDate" />
@@ -84,18 +85,7 @@ export default {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
-        // this.getLabs(this.courses[i].id);
-
-        console.log("\n\n\n\n\n\n\n\n\n");
-        console.log("----- GET CALL WITH 2280 -----");
-        await this.getLabs(2280);
-        console.log(this.labs);
-
-        console.log("\n\n----- GET CALL WITH 2290 -----");
-        await this.getLabs(2290);
-        console.log(this.labs);
-        console.log("\n\n\n\n\n\n\n\n\n");
-
+        await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
         this.courses[i].publish = "";
         console.log(this.courses[i]);
@@ -104,7 +94,6 @@ export default {
     async getLabs(courseID) {
       const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
       this.labs = rawLabs.data.data;
-      console.log("---------------------------------------------- FINISHED GETLABS WITH COURSEID" + courseID);
       return rawLabs.data.data;
     },
   },
