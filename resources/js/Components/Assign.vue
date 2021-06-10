@@ -87,7 +87,7 @@ export default {
         this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
         this.courses[i].publish = "";
-        console.log(courses[i]);
+        console.log(this.courses[i]);
       }
     },
     async getLabs(courseID) {
