@@ -1,7 +1,7 @@
 <template>
   <div class="create-assignment">
     <div class="row test-cases">
-      <div v-for="(tc, key) in cases" :key="tc.id" :tc="tc" class="tc-card col-1" @click="setCurrent()">
+      <div v-for="(tc, idx) in cases" :key="tc.id" :tc="tc" class="tc-card col-1" @click="setCurrent(idx)">
         <div class="tc-card-title">
           <!-- <p>tc{{ i }}</p> -->
           <p>{{ tc.title }}</p>
@@ -99,24 +99,26 @@ export default {
     addTest() {
       console.log("addTest");
       this.cases.push({"id": this.cases.length, "title": this.cases.length, "compareType": "exact", "points": 450});
+      this.totalTC = this.totalTC + 1;
     },
     deleteTest() {
       console.log("delete test");
       this.totalTC = this.totalTC - 1;
     },
-    setCurrent(id) {
+    setCurrent(idx) {
       console.log("setCurrent");
-      this.currentTC =  id; //this needs to be indx/key not id
-      this.testCase.tcTitle = this.cases[0].title;
-      this.testCase.tcPoints = this.cases[0].points;
+      this.currentTC =  idx + 1;
+      this.testCase.tcTitle = this.cases[idx].title;
+      this.testCase.tcPoints = this.cases[idx].points;
       this.testCase.tcDescription = "input description into object here";
-      this.testCase.tcCompareMethod = this.cases[0].compareTpye;
+      this.testCase.tcCompareMethod = this.cases[idx].compareTpye;
       this.testCase.tcInput = "input here";
       this.testCase.tcOutput = "output here";
     },
   },
   mounted() {
     this.cases = [{"id": 1, "title": "first", "compareType": "exact", "points": 100}, {"id": 2, "title": "Second", "compareType": "exact", "points": 200}, {"id": 3, "title": "Third", "compareType": "exact", "points": 400}, {"id": 4, "title": "Fourth", "compareType": "exact", "points": 800},];
+    this.totalTC = this.cases.length;
   }
 };
 </script>
