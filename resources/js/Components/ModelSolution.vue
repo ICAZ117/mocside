@@ -29,7 +29,8 @@
           <button class="btn btn-primary btn-md col-4" @click="saveTemplate()">
             SAVE CHANGES
           </button>
-          <small class="col-8 saveStatus">{{ saveStatus }}</small>
+          <!-- <small class="col-8 saveStatus">{{ saveStatus }}</small> -->
+          <small class="col-8 saveStatus">save status not working quite yet</small>
         </div>
       </div>
 
@@ -44,7 +45,7 @@ export default {
   props: ["problemID"],
   data() {
     return {
-      saveStatus: "All changes have been saved",
+      saveStatus: "All changes have been saved",  //not working quite yet
       lang: "",
       showEditor: false,
       content: "",
