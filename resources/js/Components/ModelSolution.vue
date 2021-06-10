@@ -41,6 +41,7 @@
 <script>
 import * as API from "../services/API";
 export default {
+  props: ["problemID"],
   data() {
     return {
       saveStatus: "All changes have been saved",
