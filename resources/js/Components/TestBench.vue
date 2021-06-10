@@ -164,7 +164,6 @@ export default {
       this.tc.CompareMethod = this.cases[idx].compare_method;
       this.tc.Input = this.cases[idx].input;
       this.tc.Output = this.cases[idx].output;
-      console.log(this.cases[idx]);
     },
     timeout: _.debounce(async function(problemID) {
       var payload = {
@@ -175,6 +174,7 @@ export default {
         "input": this.tc.Input,
         "output": this.tc.Output,
       };
+      console.log(this.tc.id);
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
       for(let i = 0; i < this.cases.length; i++) {
         if (this.cases[i].id == res.data.id ) {
