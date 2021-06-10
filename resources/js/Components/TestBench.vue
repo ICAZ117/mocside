@@ -1,7 +1,7 @@
 <template>
   <div class="create-assignment">
     <div class="row test-cases">
-      <div v-for="(tc, key) in cases" :key="tc.id" :tc="tc" class="tc-card col-1">
+      <div v-for="(tc, key) in cases" :key="tc.id" :tc="tc" class="tc-card col-1" @click="setCurrent()">
         <div class="tc-card-title">
           <!-- <p>tc{{ i }}</p> -->
           <p>{{ tc.title }}</p>
@@ -99,6 +99,20 @@ export default {
     addTest() {
       console.log("addTest");
       this.cases.push({"id": this.cases.length, "title": this.cases.length, "compareType": "exact", "points": 450});
+    },
+    deleteTest() {
+      console.log("delete test");
+      this.totalTC = this.totalTC - 1;
+    },
+    setCurrent(id) {
+      console.log("setCurrent");
+      this.currentTC =  id; //this needs to be indx/key not id
+      this.testCase.tcTitle = this.cases[0].title;
+      this.testCase.tcPoints = this.cases[0].points;
+      this.testCase.tcDescription = "input description into object here";
+      this.testCase.tcCompareMethod = this.cases[0].compareTpye;
+      this.testCase.tcInput = "input here";
+      this.testCase.tcOutput = "output here";
     },
   },
   mounted() {
