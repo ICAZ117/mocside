@@ -28,6 +28,10 @@
 
                   <br />
 
+                  <!-- <select id="labs">
+                      <option value=""></option>
+                  </select> -->
+
                   <label for="dueDate">Due Date: </label>
                   <input type="date" id="dueDate" v-model="dueDate" />
                 </div>
@@ -64,6 +68,7 @@ import * as API from "../services/API";
 export default {
   data() {
     return {
+      labs: [],
       courses: [],
       authUser: null,
       enrolledCourses: [],
@@ -78,9 +83,16 @@ export default {
       for (i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
-        console.log(course);
         this.courses.push(course.data.data);
+        this.getLabs(this.courses[i].id);
+        this.courses[i].labs = this.labs;
+        this.courses[i].publish = "";
+        console.log(courses[i]);
       }
+    },
+    async getLabs(courseID) {
+      const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
+      this.labs = rawLabs.data.data;
     },
   },
   mounted() {
