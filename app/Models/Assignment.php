@@ -26,6 +26,10 @@ class Assignment extends Model
         'published',
     ];
 
+    protected $casts = [
+        'published' => 'boolean',
+    ];
+
     public function lab() 
     {
         return $this->belongsTo(Lab::class);
