@@ -37,7 +37,7 @@
                   <small>
                     <select id="lab-select" v-model="course.publishLab">
                       <option value="" selected hidden disabled>Select a lab...</option>
-                      <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
+                      <option v-for="lab in course.labs" :key="lab.id" :value="lab">
                         {{ lab.name }}
                       </option>
                     </select>
@@ -115,8 +115,13 @@ export default {
       return rawLabs.data.data;
     },
     async publish(course) {
-      console.log(course.id + " " + course.name);
-      console.log(course.publishLab.id + " " + course.publishLab.name);
+      if(course.publishLab != undefined) {
+        console.log("published");
+        var payload = {
+          "published": !course.isPublished,
+        }
+        //api call
+      }
     }
   },
   mounted() {
