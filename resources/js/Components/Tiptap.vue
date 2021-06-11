@@ -8,7 +8,6 @@
 <script>
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
-import Highlight from "@tiptap/extension-highlight";
 import MenuBar from "./MenuBar.vue";
 
 export default {
@@ -29,7 +28,6 @@ export default {
         StarterKit.configure({
           history: true,
         }),
-        Highlight,
       ],
     });
   },
