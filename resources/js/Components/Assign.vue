@@ -110,9 +110,8 @@ export default {
         this.courses[i].publishLab = "";
         this.courses[i].publishDueDate = "";
 
-        await this.splitCourses();
-
       }
+      await this.splitCourses();
     },
     async splitCourses() {
       const res = await API.apiClient.get(`/problems/copies/${this.problemID}`);
