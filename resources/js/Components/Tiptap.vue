@@ -8,10 +8,7 @@
 <script>
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
-import TaskList from "@tiptap/extension-task-list";
-import TaskItem from "@tiptap/extension-task-item";
 import Highlight from "@tiptap/extension-highlight";
-import CharacterCount from "@tiptap/extension-character-count";
 import MenuBar from "./MenuBar.vue";
 
 export default {
@@ -33,11 +30,6 @@ export default {
           history: true,
         }),
         Highlight,
-        TaskList,
-        TaskItem,
-        CharacterCount.configure({
-          limit: 500000,
-        }),
       ],
     });
   },
