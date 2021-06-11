@@ -24,7 +24,7 @@
                     <div class="col-4">Publish:</div>
                     <div class="col-8">
                       <label class="switch">
-                        <input type="checkbox" v-model="course.isPublished" />
+                        <input type="checkbox" @click="publish(course)" v-model="course.isPublished" />
                         <span class="slider round"></span>
                       </label>
                     </div>
@@ -114,6 +114,10 @@ export default {
       this.labs = rawLabs.data.data;
       return rawLabs.data.data;
     },
+    async publish(course) {
+      console.log(course.id + " " + course.name);
+      console.log(course.publishLab.id + " " + course.publishLab.name);
+    }
   },
   mounted() {
     this.authUser = store.getters["auth/authUser"];
