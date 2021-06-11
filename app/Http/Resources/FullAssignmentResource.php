@@ -23,6 +23,7 @@ class FullAssignmentResource extends JsonResource
           'java_starter' => $this->java_starter,
           'java_model' => $this->java_model,
           'due_date' => $this->due_date,
+          'isPublished' => $this->isPublished(),
           'lab_id' => $this->lab_id,
           'test_cases' => $this->test_cases->count(),
           'gradebook' => $this->gradebook,

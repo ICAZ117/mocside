@@ -23,6 +23,7 @@ class Assignment extends Model
         'due_date',
         'lab_id',
         'gradebook',
+        'published',
     ];
 
     public function lab() 
@@ -43,5 +44,9 @@ class Assignment extends Model
             $total = $total + $test_cases[$i]->points;
         }
         return $total;
+    }
+
+    public function isPublished() {
+        return $this->published;
     }
 }

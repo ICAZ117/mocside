@@ -24,7 +24,7 @@
                     <div class="col-4">Publish:</div>
                     <div class="col-8">
                       <label class="switch">
-                        <input type="checkbox" v-model="course.publish.isPublished" />
+                        <input type="checkbox" v-model="course.isPublished" />
                         <span class="slider round"></span>
                       </label>
                     </div>
@@ -35,7 +35,7 @@
                   <label for="lab-select">Lab:</label>
                   <br />
                   <small>
-                    <select id="lab-select" v-model="course.publish.lab">
+                    <select id="lab-select" v-model="course.publishLab">
                       <option value="" selected hidden disabled>Select a lab...</option>
                       <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
                         {{ lab.name }}
@@ -46,7 +46,7 @@
                   <br /><br />
 
                   <label for="dueDate">Due Date: </label>
-                  <input type="date" id="dueDate" v-model="course.publish.dueDate" />
+                  <input type="date" id="dueDate" v-model="course.publishDueDate" />
                 </div>
 
                 <hr class="courses my-0" />
@@ -90,18 +90,15 @@ export default {
   methods: {
     async getCourses() {
       this.courses = [];
-      var i;
-      for (i = 0; i < this.enrolledCourses.length; i++) {
+      for (let i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
         await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
-        this.courses[i].publish = {
-          isPublished: false,
-          lab: "",
-          dueDate: "",
-        };
+        this.courses[i].publishLab = "";
+        this.courses[i].publishDueDate = "";
+
       }
     },
     async getLabs(courseID) {
