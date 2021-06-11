@@ -23,6 +23,7 @@ class AssignmentResource extends JsonResource
           'due_date' => $this->due_date,
           'lab_id' => $this->lab_id,
           'test_cases' => $this->test_cases->count(),
+          'worth' => $this->worth(),
         ];
     }
 }

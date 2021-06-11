@@ -186,19 +186,10 @@ class AssignmentController extends Controller
     public function destroy($id)
     {
         $user = Auth::user();
-        if ($user->isProf() || $user->isAdmin()) {
-            // $first = Assignment::find($id)->first();
-            // $copies = Assignment::where('copy_id', $first->copy_id)->get();
-            // $affectedAssignments = Assignment::destroy($id);
-
-            // // we need to cleanup copy_ids
-            // $newFirst = $copies[0];
-            // for ($i = 0; $i < count($copies); $i++) {
-            //     $copies[$i]->copy_id = $newFirst->id;
-            //     $copies[$i]->save();
-            // }   
-
-            $first = Assignment::find($id)->first();
+        $first = Assignment::find($id)->first();
+        $lab = $first->lab;
+        $owner = $lab->course->owner_id;
+        if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) { 
             $copies = Assignment::where('copy_id', $first->copy_id)->orderBy('id')->get();
             // $copies[0] is the original
             // $copies[1] is the successor in case of original delete.
@@ -221,27 +212,19 @@ class AssignmentController extends Controller
         return  response()->json(["message" => "Forbidden"], 403);
     }
 
-    public function test(Request $request, $id)
+
+    // get copies by assignment ID
+    // assumes you know the ID of some assignment, finds all sibilings.
+    public function getCopies($id)
     {
-        // $user = Auth::user();
-        $first = Assignment::find($id)->first();
-        $copies = Assignment::where('copy_id', $first->copy_id)->orderBy('id')->get();
-        // $copies[0] is the original
-        // $copies[1] is the successor in case of original delete.
-        $isOriginal = $first->copy_id == $first->id;
-        if ($isOriginal) {
-            // fix pointers
-            // $course1 = $first->course;
-            $course2 = $copies[1]->course;
-            $first->assignment_id = $course2->id;
-            $first->save();
-            // delete copies[1]
-            $husk = $copies[1];
-            $husk->delete();
-            return response()->json(['message' => 'Delete successful and pointers cleaned.'], 200);
+        $user = Auth::user();
+        $assignment = Assignment::find($id);
+        $copies = Assignment::where('copy_id', $assignment->copy_id)->orderBy('id')->get();
+        $lab = $assignment->lab;
+        $owner = $lab->course->owner_id;
+        if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
+            return AssignmentResource::collection($copies);
         }
-        // delete $id
-        $first->delete();
-        return response()->json(['message' => 'Delete sucessful with no cleanup.'], 200);
+        return response()->json(['message' => 'Forbidden. Are these your assignments?'], 403);
     }
 }
