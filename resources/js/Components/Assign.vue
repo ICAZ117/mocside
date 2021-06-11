@@ -124,6 +124,8 @@ export default {
       for(let i = 0; i < this.courses.length; i++) {
         var flag = false;
         for(let j = 0; j < tempList.length; j++) {
+          console.log("courses[i]: " + this.courses[i].id);
+          console.log("templist: " + tempList[j]);
           if(this.courses[i].id == tempList[j]) {
             this.coursesPresent.push(this.courses[i]);
             flag = true;
