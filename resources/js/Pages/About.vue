@@ -2,7 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <p>BEFORE</p>
-      <quill-editor></quill-editor>
+      <quillEditor></quillEditor>
       <p>AFTER</p>
     </div>
   </div>
