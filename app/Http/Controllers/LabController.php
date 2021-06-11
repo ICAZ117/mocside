@@ -40,8 +40,7 @@ class LabController extends Controller
         ]);
 
         // admin bypass
-        if ($user->isAdmin())
-        {
+        if ($user->isAdmin()) {
             return new LabResource(Lab::create($validData));
         }
 
@@ -64,8 +63,7 @@ class LabController extends Controller
         $lab = Lab::find($id);
         $owner = $lab->course->owner_id;
 
-        if ($user->isAdmin() || ($user->fsc_id == $owner && $user->isProf()))
-        {
+        if ($user->isAdmin() || ($user->fsc_id == $owner && $user->isProf())) {
             return new FullLabResource($lab);
         }
         return response()->json(['message' => 'Unathorized. Is this your lab?'], 403);
@@ -103,5 +101,44 @@ class LabController extends Controller
             return response()->json(['message' => "Delete sucessful", "data" => $lab], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
+    }
+
+    public function copy(Request $request, $id)
+    {
+        $user = Auth::user();
+        $validData = $request->validate([
+            'course_id' => 'required|int',
+        ]);
+        $seed = Lab::find($id);
+        $assignments = $seed->assignments;
+
+        $owner = Course::find($validData['course_id'])->owner_id;
+        if ($user->isAdmin() || ($user->isProf() && $owner == $user->fsc_id)) {
+            // First, create a copy of the lab
+            $new_lab = $seed->replicate();
+            $new_lab->push();
+            // then, update course pointer and cleanse grades
+            $new_lab->course_id = $validData['course_id'];
+            $new_lab->gradebook = "[]";
+            $new_lab->save();
+            // now, make assignment copies
+            for ($i = 0; $i < count($assignments); $i++) {
+                $temp_assignment = $assignments[$i]->replicate();
+                $temp_assignment->push();
+                $temp_assignment->lab_id = $new_lab->id;
+                $temp_assignment->gradebook = "[]";
+                $temp_assignment->save();
+                // and test case copies
+                $test_cases = $assignments[$i]->test_cases;
+                for ($j = 0; $j < count($test_cases); $j++) {
+                    $temp_case = $test_cases[$i]->replicate();
+                    $temp_case->push();
+                    $temp_case->assignment_id = $temp_assignment->id;
+                    $temp_case->save();
+                }
+            }
+            return response()->json(['message' => "Copy Successful.", 'data' => new LabResource($new_lab)], 200);
+        }
+        return reponse()->json(['message' => 'Forbidden.'], 403);
     }
 }

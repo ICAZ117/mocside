@@ -7,7 +7,7 @@
   >
     <svg class="remix">
       <use
-        :xlink:href="require('remixicon/fonts/remixicon.symbol.svg') + `#ri-${icon}`"
+        :xlink:href="require('../../assets/remixicon/remixicon.symbol.svg') + `#ri-${icon}`"
       />
     </svg>
   </button>

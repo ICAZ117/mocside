@@ -242,6 +242,10 @@ class AssignmentController extends Controller
             $new_assignment->push();
             $new_assignment->update($validData);
 
+            // cleanse gradebook
+            $new_assignment->gradebook = "[]";
+            $new_assignment->save();
+
             // create copy of all test cases
             $test_cases = $seed->test_cases;
             for ($i = 0; $i < count($test_cases); $i++) {
