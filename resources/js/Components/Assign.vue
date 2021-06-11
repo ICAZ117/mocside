@@ -90,17 +90,16 @@ export default {
   methods: {
     async getCourses() {
       this.courses = [];
-      var i;
-      for (i = 0; i < this.enrolledCourses.length; i++) {
+      for (let i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
         await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
         this.courses[i].publish = {
-          isPublished: false,
-          lab: "",
-          dueDate: "",
+          "isPublished": false,
+          "lab": "",
+          "dueDate": "",
         };
       }
     },
