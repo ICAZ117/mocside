@@ -70,6 +70,11 @@
           </div>
         </div>
       </div>
+      <div class="coursesAbsent">
+        <ul>
+          <li v-for="course in coursesAbsent" :key="course.id">{{ course.name }}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -110,16 +115,17 @@ export default {
         this.courses[i].publishLab = "";
         this.courses[i].publishDueDate = "";
 
-        await this.splitCourses();
-
       }
+      await this.splitCourses();
     },
     async splitCourses() {
       const res = await API.apiClient.get(`/problems/copies/${this.problemID}`);
+      console.log(res);
       var raw = res.data.data;
+      console.log(raw);
       var tempList = [];
       for(let i = 0; i < raw.length; i++) {
-        tempList.push(raw.course_id);
+        tempList.push(raw[i].course_id);
       }
       for(let i = 0; i < this.courses.length; i++) {
         var flag = false;
