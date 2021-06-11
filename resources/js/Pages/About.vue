@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Tiptap from "../Components/TipTap.vue";
+import Tiptap from "../Components/Tiptap.vue";
 export default {
   components: {
     Tiptap,
