@@ -70,6 +70,11 @@
           </div>
         </div>
       </div>
+      <div class="coursesAbsent">
+        <ul>
+          <li v-for="course in coursesAbsent" :key="course.id">{{ course.name }}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
