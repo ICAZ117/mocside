@@ -116,7 +116,7 @@ export default {
     },
     async splitCourses() {
       const res = await API.apiClient.get(`/problems/copies/${this.problemID}`);
-      var raw = JSON.parse(res.data).data;
+      var raw = JSON.parse(res.data.data);
       console.log(raw);
       var tempList = [];
       for(let i = 0; i < raw.length; i++) {
