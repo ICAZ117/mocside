@@ -37,7 +37,7 @@
                   <small>
                     <select id="lab-select" v-model="course.publishLab">
                       <option value="" selected hidden disabled>Select a lab...</option>
-                      <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
+                      <option v-for="lab in course.labs" :key="lab.id" :value="lab">
                         {{ lab.name }}
                       </option>
                     </select>
