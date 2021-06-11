@@ -119,7 +119,7 @@ export default {
       var raw = res.data.data;
       var tempList = [];
       for(let i = 0; i < raw.length; i++) {
-        tempList.push(raw.course_id);
+        tempList.push(raw[i].course_id);
       }
       for(let i = 0; i < this.courses.length; i++) {
         var flag = false;
