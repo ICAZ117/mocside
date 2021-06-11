@@ -1,5 +1,6 @@
 <template>
   <Tiptap />
+  
 </template>
 
 <script>
