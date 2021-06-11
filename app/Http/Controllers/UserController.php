@@ -65,6 +65,20 @@ class UserController extends Controller
         return response()->json(['message' => 'You must be a professor to complete this action.']);
     }
 
+    public function updateProfile(Request $request, $id)
+    {
+        $user = Auth::user();
+        if ($user->isAdmin() || $user->id == $id) {
+            $user_object = User::find($id);
+            $user_object->update($request->all());
+            return response()->json(['message' => "Updated Profile", 'data' => new UserResource($user_object)], 200);
+        }
+        return response()->json(['message' => 'Forbidden.'], 403);
+    }
+
+    // public function updatePFP($id)
+    // this should be achieved by storing the image and sending the updateProfile request with the correct path
+
     /**
      * Remove the specified resource from storage.
      *
