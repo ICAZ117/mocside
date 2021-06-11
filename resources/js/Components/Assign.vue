@@ -96,10 +96,12 @@ export default {
         this.courses.push(course.data.data);
         await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
+        console.log(this.courses[i]);
         this.courses[i].publish = {
           "lab": "",
           "dueDate": "",
         };
+        console.log(this.courses[i]);
 
       }
     },
