@@ -1,36 +1,8 @@
 <template lang="html">
-  <div class='wrapper'>
-    <button class='change__style' @click='changeStyle()'>Change Style</button>
-    <tabs :mode="mode">
-      <tab title="Tab 1">Hello From Tab 1</tab>
-      <tab title="Tab 2">Hello From Tab 2</tab>
-      <tab title="Tab 3">Hello From Tab 3</tab>
-      <tab title="Tab 4">Hello From Tab 4</tab>
-    </tabs>
-  </div>
+  
 </template>
 
 <script>
-import Tabs from "../Components/Tabs.vue";
-import Tab from "../Components/Tab.vue";
-export default {
-  components: {
-    Tab, 
-    Tabs
-  },
-  data () {
-    return {
-      mode: 'dark'
-    }
-  },
-  methods: {
-    changeStyle () {
-      if (this.mode === 'dark') {
-        this.mode = 'light'
-      } else {
-        this.mode = 'dark'
-      }
-    }
-  }
-};
+
+export default {};
 </script>
