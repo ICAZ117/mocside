@@ -1,5 +1,8 @@
 <template>
+
+  <p>BEFORE</p>
   <quill-editor></quill-editor>
+  <p>AFTER</p>
 
 
   <!-- <quill-editor
