@@ -35,7 +35,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <QuillEditor ref="myEditor" theme="snow" toolbar="full" class="assignment-description" v-model:content="state.content"/>
+      <!-- editor here -->
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
@@ -66,9 +66,6 @@
 import { reactive } from "vue";
 
 import { VAceEditor } from "vue3-ace-editor";
-
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
-import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 import * as API from "../services/API";
 import _ from "lodash";
