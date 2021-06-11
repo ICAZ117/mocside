@@ -24,6 +24,11 @@
 </template>
 
 <script>
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+
+import { quillEditor } from "vue-quill-editor";
 // You can also register Quill modules in the component
 // import Quill from 'quill'
 
@@ -35,6 +40,9 @@ export default {
       //   // Some Quill options...
       // }
     };
+  },
+  components: {
+    quillEditor,
   },
   // methods: {
   //   onEditorBlur(quill) {
