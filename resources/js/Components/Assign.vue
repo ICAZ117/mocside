@@ -87,6 +87,14 @@ export default {
       enrolledCourses: [],
     };
   },
+  watch: {
+    courses: {
+      deep: true,
+      handler() {
+        console.log("Published Changed");
+      }
+    }
+  },
   methods: {
     async getCourses() {
       this.courses = [];
