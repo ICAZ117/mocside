@@ -2,12 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <h4>Description:</h4>
-      <QuillEditor
-        theme="snow"
-        toolbar="full"
-        class="assignment-description"
-        v-model:content="state.content"
-      />
+      //editor here
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
@@ -17,9 +12,6 @@
 
 <script>
 import { reactive } from "vue";
-
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
-import "@vueup/vue-quill/dist/vue-quill.bubble.css";
 
 import _ from "lodash";
 import * as API from "../services/API";
