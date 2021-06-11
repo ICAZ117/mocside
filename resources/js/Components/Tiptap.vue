@@ -127,8 +127,6 @@ import HardBreak from "@tiptap/extension-hard-break";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import OrderedList from "@tiptap/extension-ordered-list";
 import Text from "@tiptap/extension-text";
-import { ColorHighlighter } from "./ColorHighlighter";
-import { SmilieReplacer } from "./SmilieReplacer";
 
 export default {
   components: {
@@ -163,8 +161,6 @@ export default {
         HorizontalRule,
         OrderedList,
         Text,
-        ColorHighlighter,
-        SmilieReplacer,
       ],
       content: "This is cool!",
     });
