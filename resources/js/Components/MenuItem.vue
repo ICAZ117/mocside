@@ -50,13 +50,11 @@ export default {
   padding: 0.25rem;
   margin-right: 0.25rem;
 }
-
 .menu-item svg {
   width: 100%;
   height: 100%;
   fill: currentColor;
 }
-
 .menu-item.is-active,
 .menu-item:hover {
   color: #fff;
