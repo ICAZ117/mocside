@@ -53,6 +53,7 @@ class User extends Authenticatable
         'password',
         'fsc_id',
         'fsc_role',
+        'pfp_path',
     ];
 
     /**
