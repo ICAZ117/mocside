@@ -115,8 +115,13 @@ export default {
       return rawLabs.data.data;
     },
     async publish(course) {
-      console.log(course.id + " " + course.name);
-      console.log(course.publishLab.id + " " + course.publishLab.name);
+      if(course.publishLab != undefined) {
+        console.log("published");
+        var payload = {
+          "published": !course.isPublished,
+        }
+        //api call
+      }
     }
   },
   mounted() {
