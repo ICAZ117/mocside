@@ -19,9 +19,7 @@
 
 <script>
   // You can also register Quill modules in the component
-  import Quill from 'quill'
-  import someModule from '../yourModulePath/someQuillModule.js'
-  Quill.register('modules/someModule', someModule)
+  // import Quill from 'quill'
   
   export default {
     data () {
