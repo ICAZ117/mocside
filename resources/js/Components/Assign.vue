@@ -35,7 +35,7 @@
                   <label for="lab-select">Lab:</label>
                   <br />
                   <small>
-                    <select id="lab-select" v-model="course.publish.lab">
+                    <select id="lab-select" v-model="course.publishLab">
                       <option value="" selected hidden disabled>Select a lab...</option>
                       <option v-for="lab in course.labs" :key="lab.id" :value="lab.id">
                         {{ lab.name }}
@@ -46,7 +46,7 @@
                   <br /><br />
 
                   <label for="dueDate">Due Date: </label>
-                  <input type="date" id="dueDate" v-model="course.publish.dueDate" />
+                  <input type="date" id="dueDate" v-model="course.publishDueDate" />
                 </div>
 
                 <hr class="courses my-0" />
@@ -96,12 +96,8 @@ export default {
         this.courses.push(course.data.data);
         await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
-        console.log(this.courses[i]);
-        this.courses[i].publish = {
-          "lab": "",
-          "dueDate": "",
-        };
-        console.log(this.courses[i]);
+        this.courses[i].publishLab = "";
+        this.courses[i].publishDueDate = "";
 
       }
     },
