@@ -1,5 +1,6 @@
 {
     "intelephense.diagnostics.undefinedTypes": false,
     "intelephense.diagnostics.undefinedMethods": false,
-    "intelephense.diagnostics.undefinedFunctions": false
+    "intelephense.diagnostics.undefinedFunctions": false,
+    "vue3snippets.enable-compile-vue-file-on-did-save-code": false
 }
