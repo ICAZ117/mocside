@@ -47,14 +47,12 @@ class AssignmentController extends Controller
         $lab = Lab::find($validData['lab_id']);
         $owner = $lab->course->owner_id;
 
-        if ($user->isAdmin())
-        {
+        if ($user->isAdmin()) {
             $assignment =  Assignment::create($validData);
             return new AssignmentResource($assignment);
         }
 
-        if ($user->isProf() && $user->fsc_id == $owner) 
-        {
+        if ($user->isProf() && $user->fsc_id == $owner) {
             return new AssignmentResource(Assignment::create($validData));
         }
         return  response()->json(["message" => "Forbidden"], 403);
@@ -65,7 +63,7 @@ class AssignmentController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */ 
+     */
     public function show($id)
     {
         // this resource contains the gradbook.
@@ -73,7 +71,7 @@ class AssignmentController extends Controller
         $assignment = Assignment::find($id);
         // as such I am protecting it behind course ownership.
         $owner = $assignment->lab->course->owner_id;  // with an admin bypass, of course.
-        if ( ($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
+        if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
             return new FullAssignmentResource($assignment);
         }
         return  response()->json(["message" => "Forbidden"], 403);
@@ -99,16 +97,14 @@ class AssignmentController extends Controller
         $owner = $assignment->lab->course->owner_id;
         // copies inclues $assignment
         $copies = Assignment::where('copy_id', $assignment->copy_id);
-        
+
         // I'm going to leave extras from FullAssignmentResource out for now.
-        if ($user->isAdmin())
-        {
+        if ($user->isAdmin()) {
             return AssignmentResource::collection($copies);
         }
 
         // this is split into two if statements to accomodate a future logic change.
-        if ($user->isProf() && $user->fsc_id == $owner)
-        {
+        if ($user->isProf() && $user->fsc_id == $owner) {
             return AssignmentResource::collection($copies);
         }
 
@@ -133,8 +129,7 @@ class AssignmentController extends Controller
         $hasChildren = count(Assignment::where('copy_id', $assignment->id)->get()) > 1;
         $copies = Assignment::where('copy_id', $assignment->copy_id)->orderBy('id')->get();
 
-        if ($isOriginal && $hasChildren)
-        {
+        if ($isOriginal && $hasChildren) {
             // create new object with edited data
             $new_assignment = $assignment->replicate();
             $new_assignment->push();
@@ -189,7 +184,7 @@ class AssignmentController extends Controller
         $first = Assignment::find($id)->first();
         $lab = $first->lab;
         $owner = $lab->course->owner_id;
-        if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) { 
+        if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
             $copies = Assignment::where('copy_id', $first->copy_id)->orderBy('id')->get();
             // $copies[0] is the original
             // $copies[1] is the successor in case of original delete.
@@ -226,5 +221,38 @@ class AssignmentController extends Controller
             return AssignmentResource::collection($copies);
         }
         return response()->json(['message' => 'Forbidden. Are these your assignments?'], 403);
+    }
+
+    // creates a copy of an assignment and attaches it to a new lab.
+    public function copy(Request $request, $id)
+    {
+        // Request with new lab ID
+        $validData = $request->validate([
+            'lab_id' => 'required|int',
+        ]);
+        $seed = Assignment::find($id);
+        
+        // owner/admin gate
+        $user = Auth::user();
+        $owner = $seed->lab->course->owner_id;
+        if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
+
+            // create copy of assignment
+            $new_assignment = $seed->replicate();
+            $new_assignment->push();
+            $new_assignment->update($validData);
+
+            // create copy of all test cases
+            $test_cases = $seed->test_cases;
+            for ($i = 0; $i < count($test_cases); $i++) {
+                $temp_case = $test_cases[$i]->replicate();
+                $temp_case->push();
+                $temp_case->assignment_id = $new_assignment->id;
+                $temp_case->save();
+            }
+            return new FullAssignmentResource($new_assignment);
+
+        }
+        return response()->json(['message' => 'Forbidden. Is this your assignment?'], 403);
     }
 }
