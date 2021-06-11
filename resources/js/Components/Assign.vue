@@ -7,7 +7,7 @@
       <div class="no-decor">
         <div class="row">
           <div
-            v-for="course in courses"
+            v-for="course in coursesPresent"
             :key="course.id"
             class="margin width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
           >
@@ -79,10 +79,13 @@ import store from "../Store/index";
 import * as API from "../services/API";
 
 export default {
+  props: ['problemID'],
   data() {
     return {
       labs: [],
       courses: [],
+      coursesPresent: [], //assignment present in course
+      coursesAbsent: [], //assignment not present in course
       authUser: null,
       enrolledCourses: [],
     };
@@ -107,6 +110,30 @@ export default {
         this.courses[i].publishLab = "";
         this.courses[i].publishDueDate = "";
 
+        await this.splitCourses();
+
+      }
+    },
+    async splitCourses() {
+      const res = await API.apiClient.get(`/problems/copies/${this.problemID}`);
+      var raw = res.data.data;
+      var tempList = [];
+      for(let i = 0; i < raw.length; i++) {
+        tempList.push(raw.course_id);
+      }
+      for(let i = 0; i < this.courses.length; i++) {
+        var flag = false;
+        for(let j = 0; j < tempList.length; j++) {
+          console.log("courses[i]: " + this.courses[i].id);
+          console.log("templist: " + tempList[j]);
+          if(this.courses[i].id == tempList[j]) {
+            this.coursesPresent.push(this.courses[i]);
+            flag = true;
+          }
+        }
+        if(!flag) {
+          this.coursesAbsent.push(this.courses[i]);
+        }
       }
     },
     async getLabs(courseID) {
