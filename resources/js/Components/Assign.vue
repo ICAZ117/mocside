@@ -286,6 +286,7 @@ export default {
     this.getCourses();
   },
 };
+// when publishing to a lab that does not have the problem it adds and publishes properly, but the front end button "ADD" does not turn on like it should
 </script>
 
 <style></style>
