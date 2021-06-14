@@ -6,7 +6,7 @@
     </template>
     <template>
       <menu-item v-bind="heading" />
-      <div v-show="dropdownVisible" style="background-color: white; padding: 10px">
+      <div v-if="dropdownVisible" style="background-color: white; padding: 10px">
         <button
           v-for="(item, index) in headings"
           :key="item.id"
@@ -80,7 +80,7 @@ export default {
           icon: "heading",
           title: "Headings",
           action: () => (this.dropdownVisible = !this.dropdownVisible, console.log("INSIDE HEADING")),
-          isActive: () => this.editor.isActive("heading"),
+          isActive: () => this.editor.isActive("heading", {level: 0}),
         },
       ],
       headings: [
