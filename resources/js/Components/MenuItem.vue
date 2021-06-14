@@ -5,7 +5,10 @@
     @click="action"
     :title="title"
   >
-    <span :class="'fas fa-' + icon"></span>
+    <span v-if="!isText" :class="'fas fa-' + icon"></span>
+    <div v-if="isText">
+      {{ icon }}
+    </div>
   </button>
 </template>
 
@@ -31,6 +34,10 @@ export default {
       type: Function,
       default: null,
     },
+
+    isText: {
+      type: Boolean,
+    }
   },
 };
 </script>
