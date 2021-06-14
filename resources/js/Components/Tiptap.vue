@@ -60,6 +60,7 @@ export default {
         }),
         TextAlign,
       ],
+      content: "eeee",
     });
   },
 
@@ -76,8 +77,9 @@ export default {
   max-height: 400px;
   color: #0d0d0d;
   background-color: #fff;
-  border: 1px solid #0d0d0d;
-  border-radius: 10px;
+  border: 2px solid #0d0d0d;
+  border-radius: 5px;
+  box-shadow: 0px 0px 3px black;
   /* Some information about the status */
 }
 .editor__header {
@@ -86,7 +88,7 @@ export default {
   flex: 0 0 auto;
   flex-wrap: wrap;
   padding: 0.25rem;
-  border-bottom: 1px solid #0d0d0d;
+  border-bottom: 2px solid #0d0d0d;
 }
 .editor__content {
   padding: 1.25rem 1rem;
