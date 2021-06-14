@@ -60,10 +60,23 @@ export default {
         }),
         TextAlign,
       ],
-      content: "eeee",
+      content: {
+        type: "doc",
+        content: [
+          {
+            type: "paragraph",
+            content: [
+              {
+                type: "text",
+                text: "Wow, this editor instance exports its content as JSON.",
+              },
+            ],
+          },
+        ],
+      },
       onUpdate() {
         console.log(this.getJSON());
-      }
+      },
     });
   },
 
