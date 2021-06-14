@@ -235,8 +235,8 @@ export default {
   margin: 1rem 0;
 }
 .ProseMirror blockquote {
-  padding-left: 1rem;
-  border-left: 2px solid rgba(13, 13, 13, 0.1);
+  padding-left: 3rem;
+  border-left: 2px solid rgba(78, 78, 78, 0.582);
 }
 .ProseMirror hr {
   border: none;
