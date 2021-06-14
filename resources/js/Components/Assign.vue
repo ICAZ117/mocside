@@ -44,7 +44,7 @@
                   <label for="lab-select">Lab:</label>
                   <br />
                   <small>
-                    <select id="lab-select" @click="temp()" v-model="course.currentLab">
+                    <select id="lab-select" @change="temp()" v-model="course.currentLab">
                       <option value="" selected hidden disabled>Select a lab...</option>
                       <option v-for="lab in labs[index]" :key="lab.id" :value="lab">
                         {{ lab.name }}
