@@ -112,16 +112,20 @@ export default {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
-        await this.getLabs(this.courses[i].id);
-        this.courses[i].labs = this.labs;
-        this.courses[i].publishedLabs = await this.getPublishedList();
-        this.courses[i].addedLabs = await this.getLabIDs();
+        this.courses[i].labs = await this.getLabs(this.courses[i].id);
+        this.labs.push(this.courses[i]);
+        this.courses[i].publishedLabs = await this.getPublishedList(); // list of booleans for each assignment on whether they are published or not
+        this.courses[i].addedLabs = await this.getLabIDs(); //list of all lab ids(from any course) that have the problem in them
         this.courses[i].currentLab = "";
         this.courses[i].publishDueDate = "";
         this.courses[i].isAdded = false;
         this.courses[i].isPublished = false;
 
       }
+    },
+    async getLabs(courseID) {
+      const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
+      return rawLabs.data.data;
     },
     getDueDate() {
 
@@ -154,17 +158,17 @@ export default {
       return false;
     },
     getIsPublished(course, lab) {
-      for(let i = 0; i < course.publishedLabs.length; i++) {
-        if(course.publishedLabs[i] == lab.id) {
-          return true;
-        }
-      }
-      return false;
-    },
-    async getLabs(courseID) {
-      const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
-      this.labs = rawLabs.data.data;
-      return rawLabs.data.data;
+      // for(let i = 0; i < course.publishedLabs.length; i++) {
+      //   if(course.publishedLabs[i] == lab.id) {
+      //     return true;
+      //   }
+      // }
+      // return false;
+
+      var index;
+
+      return course.publishedLabs[index];
+
     },
     async publish(course) {
       if(course.currentLab != "") {
@@ -231,7 +235,7 @@ export default {
 
       // }
 
-      course.isAdded = getIsAdded(course, course.currentLab);
+      course.isAdded = this.getIsAdded(course, course.currentLab);
       course.isPublished = this.getIsPublished(course, course.currentLab);
     },
   },
