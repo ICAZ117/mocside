@@ -5,9 +5,14 @@
       <menu-item v-else :key="index" v-bind="item" />
     </template>
     <template>
-      <menu-item v-bind="heading"/>
-      <div v-show="dropdownVisible" style="background-color: white; padding: 10px;">
-        <button v-for="(item, index) in headings" :key="item.id" @click="action" style="margin: auto!important;">
+      <menu-item v-bind="heading" />
+      <div v-show="dropdownVisible" style="background-color: white; padding: 10px">
+        <button
+          v-for="(item, index) in headings"
+          :key="item.id"
+          @click="action"
+          style="margin: auto !important"
+        >
           <p>H{{ index }}</p>
         </button>
       </div>
@@ -71,12 +76,13 @@ export default {
         {
           type: "divider",
         },
+        {
+          icon: "heading",
+          title: "Headings",
+          action: () => (this.dropdownVisible = !this.dropdownVisible, console.log("INSIDE HEADING")),
+          isActive: () => this.editor.isActive("heading"),
+        },
       ],
-      heading: {
-        icon: "heading",
-        title: "Headings",
-        action: () => this.dropdownVisible = !this.dropdownVisible,
-      },
       headings: [
         {
           icon: "h1",
