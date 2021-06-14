@@ -117,7 +117,7 @@ export default {
         const labs = await this.getLabs(this.courses[i].id);
         this.labs.push(labs);
         this.courses[i].DDate = "",
-        this.course[i].isAdded = false;
+        this.courses[i].isAdded = false;
         this.courses[i].isPublished = false;
       }
 
