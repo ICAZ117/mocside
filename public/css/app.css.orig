@@ -173,7 +173,11 @@ nav {
     padding: 0 !important;
     padding-top: 60px !important;
     z-index: 1 !important;
+<<<<<<< HEAD
     background-color: #00000000 !important;
+=======
+    background-color: red !important;
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 }
 
 .navbar {
@@ -221,7 +225,11 @@ nav {
     text-align: center !important;
 }
 
+<<<<<<< HEAD
 .nav-link.activeNav,
+=======
+.nav-link.active,
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 .nav-link:hover {
     color: white !important;
     background-color: var(--FSCred) !important;
@@ -241,7 +249,11 @@ nav {
     padding-bottom: 0.5rem !important;
 }
 
+<<<<<<< HEAD
 .move-up.activeNav,
+=======
+.move-up.active,
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 .move-up:hover {
     color: white !important;
     background-color: var(--FSCred) !important;
@@ -281,7 +293,11 @@ nav {
     text-align: center !important;
 }
 
+<<<<<<< HEAD
 .dark-nav-link.activeNav,
+=======
+.dark-nav-link.active,
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 .dark-nav-link:hover {
     color: var(--FSCred) !important;
     background-color: white !important;
@@ -300,7 +316,11 @@ nav {
     padding-bottom: 0.5rem !important;
 }
 
+<<<<<<< HEAD
 .dark-move-up.activeNav,
+=======
+.dark-move-up.active,
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 .dark-move-up:hover {
     color: var(--FSCred) !important;
     background-color: white !important;
@@ -457,6 +477,13 @@ nav {
     max-height: 239.5px !important;
 }
 
+<<<<<<< HEAD
+=======
+.card {
+    margin: 0px 10px !important;
+}
+
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 .courses hr {
     border-top: 2px solid #ffffff !important;
 }
@@ -477,8 +504,13 @@ hr.courses {
 }
 
 .coursecard:hover {
+<<<<<<< HEAD
     border: 1px solid var(--FSCred) !important;
     border-bottom: 3px solid var(--FSCred) !important;
+=======
+    border: 1px solid red !important;
+    border-bottom: 3px solid red !important;
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
     transition-timing-function: ease !important;
     transition-duration: 100ms !important;
 }
@@ -875,7 +907,13 @@ thead.gradebook {
 .create-assignment {
     padding-top: 2rem;
     background-color: white !important;
+<<<<<<< HEAD
     min-height: calc(100vh - (var(--nav-height) + 88px));
+=======
+    min-height: calc(100vh - (var(--nav-height) + 88px)) !important;
+    height: calc(100vh - (var(--nav-height) + 88px)) !important;
+    max-height: calc(100vh - (var(--nav-height) + 88px)) !important;
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 }
 
 .tab {
@@ -903,6 +941,7 @@ thead.gradebook {
     padding: 10px;
 }
 
+<<<<<<< HEAD
 #lab-select {
     width: 200px!important;
 }
@@ -911,6 +950,8 @@ thead.gradebook {
     margin: 0 15px!important;
 }
 
+=======
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 .card-body {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -931,6 +972,7 @@ thead.gradebook {
     padding-top: calc(0.4 * (100vh - (var(--nav-height) + 88.2px))) !important;
 }
 
+<<<<<<< HEAD
 .save-template,
 .save-model {
     width: 100vw !important;
@@ -952,6 +994,15 @@ thead.gradebook {
 .saveStatus {
     float: right !important;
     width: 20vw !important;
+=======
+.save-template .row {
+    flex-wrap: nowrap !important;
+}
+
+.save-template .row .btn {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
 }
 
 .test-cases {
@@ -1167,4 +1218,7 @@ footer .svg-inline--fa:hover {
     transform: translateZ(0) !important;
     will-change: transform !important;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> be1be15e0af3fc06dc200f9a616a37e2f819f143
