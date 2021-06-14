@@ -110,7 +110,7 @@ export default {
     async getCourses() {
       for(let i = 0;  i < this.enrolledCourses.length; i++) {
         var currentCourse = this.enrolledCourses[i];
-        const course = await  API.apiClient.get(`/courses/${currenCourse}`);
+        const course = await  API.apiClient.get(`/courses/${currentCourse}`);
         this.courses.push(course.data.data);
         const labs = await this.getLabs(this.courses[i].id);
         this.labs.push(labs);
