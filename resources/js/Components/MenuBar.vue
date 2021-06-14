@@ -5,7 +5,7 @@
       <menu-item v-else :key="index" v-bind="item" />
     </template>
     <template>
-      <div v-if="dropdownVisible" style="background-color: white; padding: 10px; z-index: 50!important;">
+      <div v-if="dropdownVisible" style="background-color: white; padding: 10px; z-index: 50!important; height: 500px!important; width: 300px!important;">
         <button
           v-for="(item, index) in headings"
           :key="item.id"
