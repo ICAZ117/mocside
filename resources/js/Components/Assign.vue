@@ -140,12 +140,17 @@ export default {
         }
       }
 
-      console.log(ind);
-      //ispublished needs to be set
-      course.isPublished = this.copies[ind].isPublished;
+      if(ind != undefined) {
+        //ispublished needs to be set
+        course.isPublished = this.copies[ind].isPublished;
 
-      //due date needs to be set
-      course.DDate = this.copies[ind].due_date.split(" ")[0];
+        //due date needs to be set
+        course.DDate = this.copies[ind].due_date.split(" ")[0];
+      }
+      else {
+        course.isPublished = false;
+        course.DDate = "";
+      }
     }
 
 
