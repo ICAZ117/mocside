@@ -203,7 +203,7 @@ export default {
       }
       //delete from database
       const res = await API.apiClient.delete(`/problems/${tempID}`);
-      console.log(res.message);
+      console.log(res.data.message);
 
       //reset copies list
       const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
