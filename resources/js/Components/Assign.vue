@@ -159,8 +159,10 @@ export default {
   },
   async mounted() {
     this.authUser = store.getters["auth/authUser"];
-    this.problem = await API.apiClient.get(`/problems/full/${this.problemID}`).data.data;
-    this.copies = await API.apiClient.get(`/problems/copies/${this.problemID}`).data.data;
+    const pro = await API.apiClient.get(`/problems/full/${this.problemID}`);
+    this.problem = pro.data.data;
+    const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
+    this.copies = co.data.data;
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
