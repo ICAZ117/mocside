@@ -54,13 +54,6 @@ export default {
           isText: false,
         },
         {
-          icon: "highlighter",
-          title: "Highlight",
-          action: () => this.editor.chain().focus().toggleHighlight().run(),
-          isActive: () => this.editor.isActive("highlight"),
-          isText: false,
-        },
-        {
           type: "divider",
         },
         {
