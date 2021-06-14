@@ -5,11 +5,7 @@
     @click="action"
     :title="title"
   >
-    <svg class="remix">
-      <use
-        :xlink:href="require('../../assets/remixicon/remixicon.symbol.svg') + `#ri-${icon}`"
-      />
-    </svg>
+    <span :class="'fas fa-' + icon"></span>
   </button>
 </template>
 

@@ -93,12 +93,7 @@ export default {
   border-radius: 50%;
   margin-right: 0.5rem;
 }
-.editor__status--connecting::before {
-  background: #616161;
-}
-.editor__status--connected::before {
-  background: #b9f18d;
-}
+
 .editor__name button {
   background: none;
   border: none;
