@@ -24,7 +24,7 @@
                     <div class="col-4">Publish:</div>
                     <div class="col-8">
                       <label class="switch">
-                        <input type="checkbox" v-model="course.isPublished" />
+                        <input type="checkbox" @click="togglePublish(course)" v-model="course.isPublished" />
                         <span class="slider round"></span>
                       </label>
                     </div>
