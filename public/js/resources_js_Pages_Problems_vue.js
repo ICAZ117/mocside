@@ -50,7 +50,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 payload = {
                   "name": "New Problem",
-                  "description": "New Problem",
+                  "description": JSON.stringify({
+                    "ops": [{
+                      "insert": "New Problem"
+                    }]
+                  }),
                   "lab_id": _this.labID,
                   "due_date": "2021-05-29 13:04:03"
                 };
@@ -59,9 +63,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 problem = _context.sent;
-                _this.problemID = problem.data.id;
+                _this.problemID = problem.data.data.id;
 
-                _this.problems.push(problem.data);
+                _this.problems.push(problem.data.data);
 
                 _this.childIsOpen = true;
 
@@ -118,7 +122,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     goToProblem: function goToProblem(id) {
-      this.childiIsOpen = true;
+      this.childIsOpen = true;
       this.problemID = id;
       this.$router.push({
         name: "Assignment",
@@ -147,31 +151,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 prog = _context3.sent;
-                i = 0;
 
-              case 8:
-                if (!(i < _this3.problems.length)) {
-                  _context3.next = 18;
+                if (_this3.isProf) {
+                  _context3.next = 19;
                   break;
                 }
 
-                _context3.next = 11;
+                i = 0;
+
+              case 9:
+                if (!(i < _this3.problems.length)) {
+                  _context3.next = 19;
+                  break;
+                }
+
+                _context3.next = 12;
                 return _this3.getPercent(_this3.problems[i]);
 
-              case 11:
+              case 12:
                 _this3.problems[i]['percent'] = _context3.sent;
-                _context3.next = 14;
+                _context3.next = 15;
                 return _this3.getActivity(_this3.problems[i]);
 
-              case 14:
+              case 15:
                 _this3.problems[i]['activity'] = _context3.sent;
 
-              case 15:
+              case 16:
                 i++;
-                _context3.next = 8;
+                _context3.next = 9;
                 break;
 
-              case 18:
+              case 19:
               case "end":
                 return _context3.stop();
             }
@@ -215,40 +225,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
+                console.log(_this5.progress);
                 d = JSON.parse(_this5.progress.assignments);
                 i = 0;
 
-              case 2:
+              case 3:
                 if (!(i <= d.length)) {
-                  _context5.next = 9;
+                  _context5.next = 10;
                   break;
                 }
 
                 if (!(d[i].assignment_id == problem.id)) {
-                  _context5.next = 6;
+                  _context5.next = 7;
                   break;
                 }
 
                 c = d[i];
-                return _context5.abrupt("break", 9);
+                return _context5.abrupt("break", 10);
 
-              case 6:
+              case 7:
                 i++;
-                _context5.next = 2;
+                _context5.next = 3;
                 break;
 
-              case 9:
+              case 10:
                 if (!(problem.test_cases == 0)) {
-                  _context5.next = 13;
+                  _context5.next = 14;
                   break;
                 }
 
                 return _context5.abrupt("return", "0%");
 
-              case 13:
+              case 14:
                 return _context5.abrupt("return", parseInt(c.cases_passed / problem.test_cases) * 100 + "%");
 
-              case 14:
+              case 15:
               case "end":
                 return _context5.stop();
             }
@@ -304,20 +315,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context7.prev = _context7.next) {
               case 0:
                 ///update the list of courses
+                console.log("caught problemEdited");
                 _this7.problems = _this7.problems.filter(function (p) {
                   return p.id != _this7.problemID;
                 });
-                _context7.next = 3;
+                _context7.next = 4;
                 return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/problem/full/".concat(_this7.problemID));
 
-              case 3:
+              case 4:
                 problem = _context7.sent;
 
                 _this7.problems.push(problem.data.data);
 
+                console.log("calling unmounting");
+
                 _this7.Unmounting();
 
-              case 6:
+              case 8:
               case "end":
                 return _context7.stop();
             }
@@ -326,7 +340,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     Unmounting: function Unmounting() {
+      console.log("childIsOpen" + this.childIsOpen);
       this.childIsOpen = false;
+      console.log("childIsOpen" + this.childIsOpen);
       this.problemID = null;
       this.$router.push({
         name: "Problems",
@@ -399,63 +415,90 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_4 = {
   "class": "table problemtable"
 };
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", {
+var _hoisted_5 = {
   "class": "problemtable"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+};
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-chevron-down spacer"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Title"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "# Test Cases"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "% Successful"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Due Date"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Last Activity")])], -1
+})], -1
 /* HOISTED */
 );
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Title", -1
+/* HOISTED */
+);
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "# Test Cases", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = {
+  key: 0
+};
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Due Date", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = {
+  key: 1
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-chevron-right"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-chevron-down"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_8 = {
+var _hoisted_14 = {
+  key: 0
+};
+var _hoisted_15 = {
+  key: 1
+};
+var _hoisted_16 = {
   "class": "description-data"
 };
-var _hoisted_9 = {
+var _hoisted_17 = {
   colspan: "5",
   "class": "description-data"
 };
-var _hoisted_10 = {
+var _hoisted_18 = {
   "class": "problem-description"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_14 = {
+var _hoisted_22 = {
   style: {
     "width": "50% !important"
   }
 };
-var _hoisted_15 = {
+var _hoisted_23 = {
   "class": "row"
 };
-var _hoisted_16 = {
+var _hoisted_24 = {
   "class": "col-9"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "",
   selected: "",
   disabled: "",
@@ -464,19 +507,19 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "Java"
 }, "Java", -1
 /* HOISTED */
 );
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "Python"
 }, "Python", -1
 /* HOISTED */
 );
 
-var _hoisted_20 = {
+var _hoisted_28 = {
   "class": "col-3 ml-1"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -490,7 +533,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.addProblem && $options.addProblem.apply($options, arguments);
     })
-  }, "ADD")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.problems, function (problem, key) {
+  }, "ADD")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [_hoisted_6, _hoisted_7, _hoisted_8, !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", _hoisted_9, "% Successful")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_10, !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", _hoisted_11, "Last Activity")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.problems, function (problem, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       key: problem.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", {
@@ -498,39 +541,39 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: function onClick($event) {
         return $options.toggleExpansion(problem.id);
       }
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [_hoisted_6], 512
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [_hoisted_12], 512
     /* NEED_PATCH */
-    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$options.isExpanded(problem.id)]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [_hoisted_7], 512
+    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$options.isExpanded(problem.id)]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [_hoisted_13], 512
     /* NEED_PATCH */
     ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.isExpanded(problem.id)]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.test_cases), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.percent), 1
+    ), !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.percent), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]), 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.activity), 1
+    ), !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.activity), 1
     /* TEXT */
-    )], 8
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
     /* PROPS */
-    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.name), 1
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.name), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.description) + " ", 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" get text from .description object "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.description) + " ", 1
     /* TEXT */
-    ), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Due Date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]) + " ", 1
+    ), _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Due Date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]) + " ", 1
     /* TEXT */
-    ), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Test Cases: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.test_cases) + " ", 1
+    ), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Test Cases: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.test_cases) + " ", 1
     /* TEXT */
-    ), _hoisted_13]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+    ), _hoisted_21]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
       "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
         return $data.lang = $event;
       }),
       id: "lang",
       "class": "form-select"
-    }, [_hoisted_17, _hoisted_18, _hoisted_19], 512
+    }, [_hoisted_25, _hoisted_26, _hoisted_27], 512
     /* NEED_PATCH */
-    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.lang]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.lang]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
       type: "launch",
       name: "launch",
       "class": "launch-workspace btn btn-success",
