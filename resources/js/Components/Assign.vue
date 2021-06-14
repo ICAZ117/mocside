@@ -44,7 +44,7 @@
                   <label for="lab-select">Lab:</label>
                   <br />
                   <small>
-                    <select id="lab-select" @change="temp()" v-model="course.currentLab">
+                    <select id="lab-select" @change="switchedLab(course, lab)" v-model="course.currentLab">
                       <option value="" selected hidden disabled>Select a lab...</option>
                       <option v-for="lab in labs[index]" :key="lab.id" :value="lab">
                         {{ lab.name }}
@@ -55,7 +55,7 @@
                   <br /><br />
 
                   <label for="dueDate">Due Date: </label>
-                  <input type="date" id="dueDate" v-model="course.publishDueDate" />
+                  <input type="date" id="dueDate" v-model="course.DDate" />
                 </div>
 
                 <hr class="courses my-0" />
@@ -92,6 +92,8 @@ export default {
   data() {
     return {
       authUser: null,
+      problem: {},
+      copies: [],
       enrolledCourses: [],
       courses: [],
       labs: [], //list of lists
@@ -114,6 +116,9 @@ export default {
         this.courses.push(course.data.data);
         const labs = await this.getLabs(this.courses[i].id);
         this.labs.push(labs);
+        this.courses[i].DDate = "",
+        this.course[i].isAdded = false;
+        this.courses[i].isPublished = false;
       }
 
     },
@@ -122,8 +127,23 @@ export default {
 	    return rawLabs.data.data;
     },
 
-    temp() {
-      console.log("its been clicked");
+    switchedLab(course, lab) {
+      var ind;
+      //isAdded needs to be set
+      course.isAdded = false;
+      for(let i = 0; i < this.copies.length; i++) {
+        if(copies[i].lab_id == lab.id) {
+          course.isAdded = true;
+          ind = i;
+          break;
+        }
+      }
+
+      //ispublished needs to be set
+      course.isPublished = copies[ind].isPublished;
+
+      //due date needs to be set
+      course.DDate = copies[ind].due_date.split(" ")[0];
     }
 
 
@@ -137,8 +157,10 @@ export default {
     //Delete Methods
 
   },
-  mounted() {
+  async mounted() {
     this.authUser = store.getters["auth/authUser"];
+    this.problem = await API.apiClient.get(`/problems/full/${this.problemID}`).data.data;
+    this.copies = await API.apiClient.get(`/problems/copies/${this.problemID}`).data.data;
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
