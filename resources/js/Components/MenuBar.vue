@@ -12,7 +12,7 @@
           @click="action"
           style="margin: auto !important"
         >
-          <p>H{{ index }}</p>
+          H{{ index }}
         </button>
       </div>
     </template>
