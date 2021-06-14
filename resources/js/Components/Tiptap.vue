@@ -75,7 +75,7 @@ export default {
         ],
       },
       onUpdate() {
-        console.log(this.getJSON());
+        console.log(JSON.stringify(this.getJSON()));
       },
     });
   },
