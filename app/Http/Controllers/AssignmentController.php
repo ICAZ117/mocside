@@ -182,7 +182,7 @@ class AssignmentController extends Controller
     public function destroy($id)
     {
         $user = Auth::user();
-        $first = Assignment::find($id)->first();
+        $first = Assignment::find($id);
         $lab = Lab::find($first->lab_id);
         $owner = $lab->course->owner_id;
         if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
