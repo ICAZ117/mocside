@@ -6,8 +6,5 @@
 <script>
 
 export default {
-  components: {
-    Tiptap,
-  },
 };
 </script>
