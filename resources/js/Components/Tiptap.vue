@@ -1,19 +1,77 @@
 <template>
-  <div class="rtf-editor" v-if="editor">
-    <menu-bar class="editor__header" :editor="editor" />
-    <editor-content class="editor__content" :editor="editor" />
+  <div>
+    <bubble-menu
+      class="bubble-menu"
+      :tippy-options="{ duration: 100 }"
+      :editor="editor"
+      v-if="editor"
+    >
+      <button
+        @click="editor.chain().focus().toggleBold().run()"
+        :class="{ 'is-active': editor.isActive('bold') }"
+      >
+        Bold
+      </button>
+      <button
+        @click="editor.chain().focus().toggleItalic().run()"
+        :class="{ 'is-active': editor.isActive('italic') }"
+      >
+        Italic
+      </button>
+      <button
+        @click="editor.chain().focus().toggleStrike().run()"
+        :class="{ 'is-active': editor.isActive('strike') }"
+      >
+        Strike
+      </button>
+    </bubble-menu>
+
+    <floating-menu
+      class="floating-menu"
+      :tippy-options="{ duration: 100 }"
+      :editor="editor"
+      v-if="editor"
+    >
+      <button
+        @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+        :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }"
+      >
+        H1
+      </button>
+      <button
+        @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+        :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
+      >
+        H2
+      </button>
+      <button
+        @click="editor.chain().focus().toggleBulletList().run()"
+        :class="{ 'is-active': editor.isActive('bulletList') }"
+      >
+        Bullet List
+      </button>
+    </floating-menu>
+
+    <div class="rtf-editor" v-if="editor">
+      <menu-bar class="editor__header" :editor="editor" />
+      <editor-content class="editor__content" :editor="editor" />
+    </div>
   </div>
 </template>
 
 <script>
-import { Editor, EditorContent } from "@tiptap/vue-3";
+import { Editor, EditorContent, BubbleMenu, FloatingMenu } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
+import Highlight from "@tiptap/extension-highlight";
+import TextAlign from "@tiptap/extension-text-align";
 
 export default {
   components: {
     EditorContent,
     MenuBar,
+    BubbleMenu,
+    FloatingMenu,
   },
 
   data() {
@@ -28,11 +86,13 @@ export default {
         StarterKit.configure({
           history: true,
         }),
+        Highlight,
+        TextAlign,
       ],
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.editor.destroy();
   },
 };
@@ -112,6 +172,44 @@ export default {
 </style>
 
 <style>
+.bubble-menu {
+  display: flex;
+  background-color: #0d0d0d;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+}
+.bubble-menu button {
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0 0.2rem;
+  opacity: 0.6;
+}
+.bubble-menu button:hover,
+.bubble-menu button.is-active {
+  opacity: 1;
+}
+.floating-menu {
+  display: flex;
+  background-color: #0d0d0d10;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+}
+.floating-menu button {
+  border: none;
+  background: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0 0.2rem;
+  opacity: 0.6;
+}
+.floating-menu button:hover,
+.floating-menu button.is-active {
+  opacity: 1;
+}
+
 [contenteditable] {
   outline: 0px solid transparent;
 }
@@ -132,6 +230,11 @@ export default {
 .ProseMirror h5,
 .ProseMirror h6 {
   line-height: 1.1;
+}
+.ProseMirror p {
+  margin: 0 !important;
+  margin-block: 0 !important;
+  margin-inline: 0 !important;
 }
 .ProseMirror code {
   background-color: rgba(97, 97, 97, 0.1);
