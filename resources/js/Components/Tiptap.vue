@@ -1,5 +1,5 @@
 <template>
-  <div class="editor" v-if="editor">
+  <div class="rtf-editor" v-if="editor">
     <menu-bar class="editor__header" :editor="editor" />
     <editor-content class="editor__content" :editor="editor" />
   </div>
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style scoped>
-.editor {
+.rtf-editor {
   display: flex;
   flex-direction: column;
   max-height: 400px;
@@ -62,6 +62,7 @@ export default {
   flex: 1 1 auto;
   overflow-x: hidden;
   overflow-y: auto;
+
   -webkit-overflow-scrolling: touch;
 }
 .editor__footer {
