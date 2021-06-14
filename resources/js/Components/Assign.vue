@@ -168,11 +168,11 @@ export default {
 
         if(!course.isAdded) {
           //add to course/lab
-          addToCourse(lab);
+          this.addToCourse(lab);
         }
         else {
           //delete from course/lab
-          deleteFromCourse(course, lab);
+          this.deleteFromCourse(course, lab);
         }
 
       }
