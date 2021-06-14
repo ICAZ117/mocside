@@ -229,7 +229,7 @@ export default {
         console.log("can't publish/unpublish to undefined lab");
       }
     },
-    addPublish(course, lab) {
+    async addPublish(course, lab) {
       //call addToCourse(lab) if necessary
       var flag = true;
       var tempID;
