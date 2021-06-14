@@ -193,7 +193,21 @@ export default {
 
     },
     deleteFromCourse(course, lab) {
-      console.log("delete this from lab copy or not");
+      //get assignment id of the one i want to remove
+      var tempID = "";
+      for(let i = 0; i < this.copies.length; i++) {
+        if(this.copies[i].lab_id == lab.id) {
+          tempID = this.copies[i].id;
+          break;
+        }
+      }
+      //delete from database
+      const res = await API.apiClient.delete(`/problems/${tempID}`);
+      console.log(res.message);
+
+      //reset copies list
+      const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
+      this.copies = co.data.data;
     },
 
 
