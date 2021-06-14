@@ -1,7 +1,13 @@
 <template>
   <div class="create-assignment">
     <div class="row test-cases">
-      <div v-for="(tc, idx) in cases" :key="tc.id" :tc="tc" class="tc-card col-1" @click="setCurrent(idx)">
+      <div
+        v-for="(tc, idx) in cases"
+        :key="tc.id"
+        :tc="tc"
+        class="tc-card col-1"
+        @click="setCurrent(idx)"
+      >
         <div class="tc-card-title">
           <!-- <p>tc{{ i }}</p> -->
           <p>{{ tc.title }}</p>
@@ -27,33 +33,44 @@
       <h4>Test Case ({{ currentTC }}/{{ cases.length }})</h4>
       <hr />
       <label for="tcTitle">Title: </label>
-      <input type="text" id="tcTitle" v-model="tc.Title"/>
+      <input type="text" id="tcTitle" v-model="tc.Title" />
       <br />
 
       <label for="tcPoints">Points: </label>
-      <input type="number" id="tcPoints" v-model="tc.Points"/>
+      <input type="number" id="tcPoints" v-model="tc.Points" />
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <!-- editor here -->
+      <Tiptap />
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
-      <select class="form-select" name="compareMethod" id="compareMethod" v-model="tc.CompareMethod">
+      <select
+        class="form-select"
+        name="compareMethod"
+        id="compareMethod"
+        v-model="tc.CompareMethod"
+      >
         <option value="" selected disabled hidden>Select One...</option>
-        <option value="flexible">Flexible equality (ignores: case, whitespace, and special characters)</option>
+        <option value="flexible">
+          Flexible equality (ignores: case, whitespace, and special characters)
+        </option>
         <option value="exact">Equals exactly</option>
         <option value="contains">Contains an exact value (at least once)</option>
         <option value="regex">Regex (Write a regular expression to match outputs)</option>
       </select>
       <br /><br />
 
-      <label for="tcInput">Input (Will be passed into the student's program's stdin)</label>
-      <VAceEditor class="editor" id="tcInput" v-model:value="tc.Input"/>
+      <label for="tcInput"
+        >Input (Will be passed into the student's program's stdin)</label
+      >
+      <VAceEditor class="editor" id="tcInput" v-model:value="tc.Input" />
       <br /><br />
 
-      <label for="tcOutput">Output (Will be matched against the output of the student's program)</label>
-      <VAceEditor class="editor" id="tcOutput" v-model:value="tc.Output"/>
+      <label for="tcOutput"
+        >Output (Will be matched against the output of the student's program)</label
+      >
+      <VAceEditor class="editor" id="tcOutput" v-model:value="tc.Output" />
       <br /><br />
       <hr />
       <button @click="deleteTest()" class="btn btn-md btn-danger">Delete</button>
@@ -96,24 +113,24 @@ export default {
     };
   },
   components: {
-    VAceEditor
+    VAceEditor,
   },
   watch: {
     tc: {
       deep: true,
       handler() {
-        if(this.tc.id != "") {
+        if (this.tc.id != "") {
           this.timeout(this.problemID);
         }
       },
     },
-    feedback: function(val) {
+    feedback: function (val) {
       console.log("feedback changed");
       this.tc.Feedback = this.feedback;
     },
-    state: function(val) {
-        this.feedback = this.state.content;
-      }
+    state: function (val) {
+      this.feedback = this.state.content;
+    },
   },
   methods: {
     async getCases() {
@@ -124,29 +141,28 @@ export default {
     async addTest() {
       console.log("addTest");
       var payload = {
-        "assignment_id": this.problemID,
-        "title": "New Test Case",
-        "points": 10,
-        "feedback": "",
-        "compare_method": "",
-        "input": "New Input",
-        "output": "New Output",
-      }
+        assignment_id: this.problemID,
+        title: "New Test Case",
+        points: 10,
+        feedback: "",
+        compare_method: "",
+        input: "New Input",
+        output: "New Output",
+      };
       const res = await API.apiClient.post(`/test-cases/`, payload);
       this.cases.push(res.data);
-
     },
     async deleteTest() {
       var key;
-      for(let i = 0; i < this.cases.length; i++) {
-        if(this.tc.id == this.cases[i].id) {
+      for (let i = 0; i < this.cases.length; i++) {
+        if (this.tc.id == this.cases[i].id) {
           key = i;
         }
       }
-      this.cases = this.cases.filter((c, i) => i  != key);
+      this.cases = this.cases.filter((c, i) => i != key);
       var temp = this.tc.id;
       //set current to null
-      this.currentTC =  "";
+      this.currentTC = "";
       this.tc.id = "";
       this.tc.Title = "";
       this.tc.Points = "";
@@ -160,7 +176,7 @@ export default {
       const res = await API.apiClient.delete(`/test-cases/${temp}`);
     },
     setCurrent(idx) {
-      this.currentTC =  idx + 1;
+      this.currentTC = idx + 1;
       this.tc.id = this.cases[idx].id;
       this.tc.Title = this.cases[idx].title;
       this.tc.Points = this.cases[idx].points;
@@ -171,18 +187,18 @@ export default {
       this.tc.Input = this.cases[idx].input;
       this.tc.Output = this.cases[idx].output;
     },
-    timeout: _.debounce(async function(problemID) {
+    timeout: _.debounce(async function (problemID) {
       var payload = {
-        "title": this.tc.Title,
-        "points": this.tc.Points,
-        "feedback": this.tc.Feedback,
-        "compare_method": this.tc.CompareMethod,
-        "input": this.tc.Input,
-        "output": this.tc.Output,
+        title: this.tc.Title,
+        points: this.tc.Points,
+        feedback: this.tc.Feedback,
+        compare_method: this.tc.CompareMethod,
+        input: this.tc.Input,
+        output: this.tc.Output,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-      for(let i = 0; i < this.cases.length; i++) {
-        if (this.cases[i].id == res.data.id ) {
+      for (let i = 0; i < this.cases.length; i++) {
+        if (this.cases[i].id == res.data.id) {
           this.cases[i] = res.data;
         }
       }

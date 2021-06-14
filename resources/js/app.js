@@ -19,13 +19,15 @@ import "bootstrap";
 // Vue3 Tabs
 import Tabs from "vue3-tabs";
 
-
-
 // IDE
 import IDE from "./Components/IDE.vue";
 
+// Tiptap
+import Tiptap from "./Components/Tiptap.vue";
+
 const app = createApp(App);
 app.component("IDE", IDE);
+app.component("Tiptap", Tiptap);
 app.use(Tabs);
 app.use(VuelidatePlugin);
 app.use(router);

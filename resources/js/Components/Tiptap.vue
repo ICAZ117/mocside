@@ -26,32 +26,6 @@
       </button>
     </bubble-menu>
 
-    <floating-menu
-      class="floating-menu"
-      :tippy-options="{ duration: 100 }"
-      :editor="editor"
-      v-if="editor"
-    >
-      <button
-        @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-        :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }"
-      >
-        H1
-      </button>
-      <button
-        @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-        :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }"
-      >
-        H2
-      </button>
-      <button
-        @click="editor.chain().focus().toggleBulletList().run()"
-        :class="{ 'is-active': editor.isActive('bulletList') }"
-      >
-        Bullet List
-      </button>
-    </floating-menu>
-
     <div class="rtf-editor" v-if="editor">
       <menu-bar class="editor__header" :editor="editor" />
       <editor-content class="editor__content" :editor="editor" />
@@ -60,17 +34,16 @@
 </template>
 
 <script>
-import { Editor, EditorContent, BubbleMenu, FloatingMenu } from "@tiptap/vue-3";
+import { Editor, EditorContent, BubbleMenu } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
-import Text from "@tiptap/extension-text";
+import TextAlign from "@tiptap/extension-text-align";
 
 export default {
   components: {
     EditorContent,
     MenuBar,
     BubbleMenu,
-    FloatingMenu,
   },
 
   data() {
@@ -85,7 +58,7 @@ export default {
         StarterKit.configure({
           history: true,
         }),
-        Text,
+        TextAlign,
       ],
     });
   },
