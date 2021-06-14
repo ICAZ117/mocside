@@ -191,6 +191,7 @@ export default {
       const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
       this.copies = co.data.data;
 
+      return res;
     },
     async deleteFromCourse(course, lab) {
       //get assignment id of the one i want to remove
@@ -208,6 +209,65 @@ export default {
       //reset copies list
       const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
       this.copies = co.data.data;
+    },
+    togglePublish(course) {
+      var lab = course.currentLab;
+      if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
+        console.log("can publish/unpublish to defined lab");
+
+        if(!course.isAdded) {
+          //add to course/lab
+          this.addPublish(course, lab);
+        }
+        else {
+          //delete from course/lab
+          this.deletePublish(course, lab);
+        }
+
+      }
+      else {
+        console.log("can't publish/unpublish to undefined lab");
+      }
+    },
+    addPublish(course, lab) {
+      //call addToCourse(lab) if necessary
+      var flag = true;
+      var tempID;
+      for(let i = 0; i < this.copies.length; i++) {
+        if(this.copies[i].lab_id == lab.id) {
+          flag = false;
+          tempID = this.copies[i].id;
+          break;
+        }
+      }
+
+      if(flag) {
+        const res = await this.addToCourse(lab);
+        tempID = res.data.data.id;
+      }
+
+
+      //then change boolean
+      var payload = {
+        "is_published": true,
+      }
+      const res = await API.apiClient.put(`/problems/${tempID}`, payload);
+
+    },
+    async deletePublish(course, lab) {
+      //change boolean
+      var tempID = "";
+      for(let i = 0; i < this.copies.length; i++) {
+        if(this.copies[i].lab_id == lab.id) {
+          tempID = this.copies[i].id;
+          break;
+        }
+      }
+      var payload = {
+        "is_published": false,
+      }
+      const res = await API.apiClient.put(`/problems/${tempID}`, payload);
+
     },
 
 
