@@ -1,6 +1,18 @@
 <template>
   <div>
-    <template v-for="(item, index) in items">
+    <template v-for="(item, index) in essentials">
+      <div class="divider" v-if="item.type === 'divider'" :key="index" />
+      <menu-item v-else :key="index" v-bind="item" />
+    </template>
+    <template>
+      <menu-item v-bind="heading"/>
+      <div v-show="dropdownVisible" style="background-color: white; padding: 10px;">
+        <button v-for="(item, index) in headings" :key="item.id" @click="action" style="margin: auto!important;">
+          <p>H{{ index }}</p>
+        </button>
+      </div>
+    </template>
+    <template v-for="(item, index) in extras">
       <div class="divider" v-if="item.type === 'divider'" :key="index" />
       <menu-item v-else :key="index" v-bind="item" />
     </template>
@@ -24,7 +36,8 @@ export default {
 
   data() {
     return {
-      items: [
+      dropdownVisible: false,
+      essentials: [
         {
           icon: "bold",
           title: "Bold",
@@ -58,6 +71,13 @@ export default {
         {
           type: "divider",
         },
+      ],
+      heading: {
+        icon: "heading",
+        title: "Headings",
+        action: () => this.dropdownVisible = !this.dropdownVisible,
+      },
+      headings: [
         {
           icon: "h1",
           title: "Heading 1",
@@ -94,6 +114,8 @@ export default {
           action: () => this.editor.chain().focus().toggleHeading({ level: 6 }).run(),
           isActive: () => this.editor.isActive("heading", { level: 6 }),
         },
+      ],
+      extras: [
         {
           icon: "paragraph",
           title: "Paragraph",
