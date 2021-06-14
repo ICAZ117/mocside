@@ -132,7 +132,7 @@ export default {
       //isAdded needs to be set
       course.isAdded = false;
       for(let i = 0; i < this.copies.length; i++) {
-        if(copies[i].lab_id == lab.id) {
+        if(this.copies[i].lab_id == lab.id) {
           course.isAdded = true;
           ind = i;
           break;
@@ -140,10 +140,10 @@ export default {
       }
 
       //ispublished needs to be set
-      course.isPublished = copies[ind].isPublished;
+      course.isPublished = this.copies[ind].isPublished;
 
       //due date needs to be set
-      course.DDate = copies[ind].due_date.split(" ")[0];
+      course.DDate = this.copies[ind].due_date.split(" ")[0];
     }
 
 
