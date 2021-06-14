@@ -64,11 +64,23 @@ export default {
         type: "doc",
         content: [
           {
-            type: "paragraph",
+            type: "bulletList",
             content: [
               {
-                type: "text",
-                text: "Wow, this editor instance exports its content as JSON.",
+                type: "listItem",
+                content: [
+                  {
+                    type: "paragraph",
+                    attrs: { textAlign: "center" },
+                    content: [
+                      {
+                        type: "text",
+                        marks: [{ type: "bold" }, { type: "italic" }, { type: "strike" }],
+                        text: "Wow, this editor instance exports its content as JSON. ",
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
