@@ -192,7 +192,7 @@ export default {
       this.copies = co.data.data;
 
     },
-    deleteFromCourse(course, lab) {
+    async deleteFromCourse(course, lab) {
       //get assignment id of the one i want to remove
       var tempID = "";
       for(let i = 0; i < this.copies.length; i++) {
