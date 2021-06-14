@@ -180,7 +180,7 @@ export default {
         console.log("can't add/delete to undefined lab");
       }
     },
-    addToCourse(lab) {
+    async addToCourse(lab) {
       //create a copy with a lab id of lab.id, and a copy id of problemID and post to database
       var payload = {
         "lab_id": lab.id,
