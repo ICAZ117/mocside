@@ -63,8 +63,7 @@
 import { Editor, EditorContent, BubbleMenu, FloatingMenu } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
-import Highlight from "@tiptap/extension-highlight";
-import TextAlign from "@tiptap/extension-text-align";
+import Text from "@tiptap/extension-text";
 
 export default {
   components: {
@@ -86,8 +85,7 @@ export default {
         StarterKit.configure({
           history: true,
         }),
-        Highlight,
-        TextAlign,
+        Text,
       ],
     });
   },
