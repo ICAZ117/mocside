@@ -133,6 +133,11 @@ export default {
 .ProseMirror h6 {
   line-height: 1.1;
 }
+.ProseMirror p {
+  margin: 0!important;
+  margin-block: 0!important;
+  margin-inline: 0!important;
+}
 .ProseMirror code {
   background-color: rgba(97, 97, 97, 0.1);
   color: #616161;
