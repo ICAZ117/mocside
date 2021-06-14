@@ -140,6 +140,7 @@ export default {
         }
       }
 
+      console.log(ind);
       //ispublished needs to be set
       course.isPublished = this.copies[ind].isPublished;
 
