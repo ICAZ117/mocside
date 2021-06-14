@@ -33,7 +33,7 @@
                     <div class="col-4">Add:</div>
                     <div class="col-8">
                       <label class="switch">
-                        <input type="checkbox" v-model="course.isAdded" />
+                        <input type="checkbox" @click="toggleToCourse(course)" v-model="course.isAdded" />
                         <span class="slider round"></span>
                       </label>
                     </div>
@@ -128,6 +128,11 @@ export default {
 	    return rawLabs.data.data;
     },
 
+
+    //Setter Methods
+
+
+    //Functional Methods
     switchedLab(course) {
       var ind;
       //isAdded needs to be set
@@ -151,14 +156,45 @@ export default {
         course.isPublished = false;
         course.DDate = "";
       }
-    }
-
-
-    //Setter Methods
+    },
 
 
 
     //Adder Methods
+    toggleToCourse(course) {
+      var lab = course.currentLab;
+      if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
+        console.log("can add/delete to defined lab");
+
+        if(!course.isAdded) {
+          //add to course/lab
+          this.addToCourse(lab);
+        }
+        else {
+          //delete from course/lab
+          this.deleteFromCourse(course, lab);
+        }
+
+      }
+      else {
+        console.log("can't add/delete to undefined lab");
+      }
+    },
+    async addToCourse(lab) {
+      //create a copy with a lab id of lab.id, and a copy id of problemID and post to database
+      var payload = {
+        "lab_id": lab.id,
+      }
+      const res = await API.apiClient.post(`/problems/copies/${this.problemID}`, payload);
+
+      //reset copies list
+      const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
+      this.copies = co.data.data;
+
+    },
+    deleteFromCourse(course, lab) {
+      console.log("delete this from lab copy or not");
+    },
 
 
     //Delete Methods
