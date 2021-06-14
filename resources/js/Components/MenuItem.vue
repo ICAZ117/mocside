@@ -4,10 +4,19 @@
     :class="{ 'is-active': isActive ? isActive() : null }"
     @click="action"
     :title="title"
+    style="padding: 2px 4px 4px 3px !important"
   >
-    <span v-if="!isText" :class="'fas fa-' + icon"></span>
+    <span
+      v-if="!isText"
+      style="margin: 2px 0 0 1px !important"
+      :class="'fas fa-' + icon"
+    ></span>
     <div v-if="isText">
-      {{ icon }}
+      <h5
+        style="font-weight: 700; margin-bottom: 15px !important; margin: auto !important"
+      >
+        {{ icon }}
+      </h5>
     </div>
   </button>
 </template>
@@ -37,7 +46,7 @@ export default {
 
     isText: {
       type: Boolean,
-    }
+    },
   },
 };
 </script>
