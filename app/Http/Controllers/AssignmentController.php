@@ -43,6 +43,7 @@ class AssignmentController extends Controller
             'description' => 'required',
             'due_date' => 'required',
             'lab_id' => 'required|int',
+            'copy_id' => 'required|int',
         ]);
         $lab = Lab::find($validData['lab_id']);
         $owner = $lab->course->owner_id;
@@ -181,8 +182,8 @@ class AssignmentController extends Controller
     public function destroy($id)
     {
         $user = Auth::user();
-        $first = Assignment::find($id)->first();
-        $lab = $first->lab;
+        $first = Assignment::find($id);
+        $lab = Lab::find($first->lab_id);
         $owner = $lab->course->owner_id;
         if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
             $copies = Assignment::where('copy_id', $first->copy_id)->orderBy('id')->get();

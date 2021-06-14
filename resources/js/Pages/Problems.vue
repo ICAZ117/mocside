@@ -114,6 +114,7 @@ export default {
         "description": JSON.stringify({"ops": [{"insert": "New Problem"}]}),
         "lab_id": this.labID,
         "due_date": "2021-05-29 13:04:03",
+        "copy_id": this.labID,
       }
       const problem = await API.apiClient.post(`/problems`, payload);
       this.problemID = problem.data.data.id;
