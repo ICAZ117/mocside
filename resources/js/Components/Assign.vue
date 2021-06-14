@@ -7,7 +7,7 @@
       <div class="no-decor">
         <div class="row">
           <div
-            v-for="course in coursesPresent"
+            v-for="course in courses"
             :key="course.id"
             class="margin width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
           >
@@ -25,6 +25,15 @@
                     <div class="col-8">
                       <label class="switch">
                         <input type="checkbox" @click="publish(course)" v-model="course.isPublished" />
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">Add:</div>
+                    <div class="col-8">
+                      <label class="switch">
+                        <input type="checkbox" @click="toggleToCourse(course)" v-model="course.isAdded" />
                         <span class="slider round"></span>
                       </label>
                     </div>
@@ -70,11 +79,6 @@
           </div>
         </div>
       </div>
-      <div class="coursesAbsent">
-        <ul>
-          <li v-for="course in coursesAbsent" :key="course.id">{{ course.name }}</li>
-        </ul>
-      </div>
     </div>
   </div>
 </template>
@@ -89,8 +93,6 @@ export default {
     return {
       labs: [],
       courses: [],
-      coursesPresent: [], //assignment present in course
-      coursesAbsent: [], //assignment not present in course
       authUser: null,
       enrolledCourses: [],
     };
@@ -114,32 +116,8 @@ export default {
         this.courses[i].labs = this.labs;
         this.courses[i].publishLab = "";
         this.courses[i].publishDueDate = "";
+        this.courses[i].isAdded = "";
 
-      }
-      await this.splitCourses();
-    },
-    async splitCourses() {
-      const res = await API.apiClient.get(`/problems/copies/${this.problemID}`);
-      console.log(res);
-      var raw = res.data.data;
-      console.log(raw);
-      var tempList = [];
-      for(let i = 0; i < raw.length; i++) {
-        tempList.push(raw[i].course_id);
-      }
-      for(let i = 0; i < this.courses.length; i++) {
-        var flag = false;
-        for(let j = 0; j < tempList.length; j++) {
-          console.log("courses[i]: " + this.courses[i].id);
-          console.log("templist: " + tempList[j]);
-          if(this.courses[i].id == tempList[j]) {
-            this.coursesPresent.push(this.courses[i]);
-            flag = true;
-          }
-        }
-        if(!flag) {
-          this.coursesAbsent.push(this.courses[i]);
-        }
       }
     },
     async getLabs(courseID) {
@@ -154,6 +132,14 @@ export default {
           "published": !course.isPublished,
         }
         //api call
+      }
+    },
+    async toggleToCourse(course) {
+      if(course.publishLab != undefined) {
+        console.log("added/removed to " + course.name + " " + course.publishLab);
+      }
+      else {
+        console.log("must choose lab");
       }
     }
   },
