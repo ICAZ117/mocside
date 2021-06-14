@@ -64,6 +64,13 @@ export default {
           type: "divider",
         },
         {
+          icon: "paragraph",
+          title: "Paragraph",
+          action: () => this.editor.chain().focus().setParagraph().run(),
+          isActive: () => this.editor.isActive("paragraph"),
+          isText: false,
+        },
+        {
           icon: "H1",
           title: "Heading 1",
           action: () => this.editor.chain().focus().toggleHeading({ level: 1 }).run(),
@@ -106,11 +113,38 @@ export default {
           isText: true,
         },
         {
-          icon: "paragraph",
-          title: "Paragraph",
-          action: () => this.editor.chain().focus().setParagraph().run(),
-          isActive: () => this.editor.isActive("paragraph"),
-          isText: false,
+          type: "divider",
+        },
+        {
+          icon: "align-left",
+          title: "Left",
+          action: () => this.editor.chain().focus().setTextAlign('left').run(),
+          isActive: () => this.editor.isActive({ textAlign: 'left' }),
+          isText: true,
+        },
+        {
+          icon: "align-center",
+          title: "Center",
+          action: () => this.editor.chain().focus().setTextAlign('center').run(),
+          isActive: () => this.editor.isActive({ textAlign: 'center' }),
+          isText: true,
+        },
+        {
+          icon: "align-right",
+          title: "Right",
+          action: () => this.editor.chain().focus().setTextAlign('right').run(),
+          isActive: () => this.editor.isActive({ textAlign: 'right' }),
+          isText: true,
+        },
+        {
+          icon: "align-justify",
+          title: "Justify",
+          action: () => this.editor.chain().focus().setTextAlign('justify').run(),
+          isActive: () => this.editor.isActive({ textAlign: 'justify' }),
+          isText: true,
+        },
+        {
+          type: "divider",
         },
         {
           icon: "list-ul",
