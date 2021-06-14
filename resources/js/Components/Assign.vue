@@ -44,7 +44,7 @@
                   <label for="lab-select">Lab:</label>
                   <br />
                   <small>
-                    <select id="lab-select" v-model="course.publishLab">
+                    <select id="lab-select" @click="switchLab(course)" v-model="course.currentLab">
                       <option value="" selected hidden disabled>Select a lab...</option>
                       <option v-for="lab in course.labs" :key="lab.id" :value="lab">
                         {{ lab.name }}
@@ -114,11 +114,52 @@ export default {
         this.courses.push(course.data.data);
         await this.getLabs(this.courses[i].id);
         this.courses[i].labs = this.labs;
-        this.courses[i].publishLab = "";
+        this.courses[i].publishedLabs = await this.getPublishedList();
+        this.courses[i].addedLabs = await this.getLabIDs();
+        this.courses[i].currentLab = "";
         this.courses[i].publishDueDate = "";
-        this.courses[i].isAdded = "";
+        this.courses[i].isAdded = false;
+        this.courses[i].isPublished = false;
 
       }
+    },
+    getDueDate() {
+
+      return Date.now();
+    },
+    async getLabIDs() {
+      const res = await API.apiClient.get(`/problems/copies/${this.problemID}`);
+      var copies = res.data.data;
+      var temp = [];
+      for(let i = 0; i < copies.length; i++) {
+        temp.push(copies[i].lab_id);
+      }
+      return temp;
+    },
+    async getPublishedList() {
+      const res = await API.apiClient.get(`/problems/copies/${this.problemID}`);
+      var copies = res.data.data;
+      var temp = [];
+      for(let i = 0; i < copies.length; i++) {
+        temp.push(copies[i].isPublished);
+      }
+      return temp;
+    },
+    getIsAdded(course, lab) {
+      for(let i = 0; i < course.addedLabs.length; i++) {
+        if(course.addedLabs[i] == lab.id) {
+          return true;
+        }
+      }
+      return false;
+    },
+    getIsPublished(course, lab) {
+      for(let i = 0; i < course.publishedLabs.length; i++) {
+        if(course.publishedLabs[i] == lab.id) {
+          return true;
+        }
+      }
+      return false;
     },
     async getLabs(courseID) {
       const rawLabs = await API.apiClient.get(`/labs/${courseID}`);
@@ -126,8 +167,8 @@ export default {
       return rawLabs.data.data;
     },
     async publish(course) {
-      if(course.publishLab != undefined) {
-        console.log("published");
+      if(course.currentLab != "") {
+        console.log("published or unpublished");
         var payload = {
           "published": !course.isPublished,
         }
@@ -135,13 +176,64 @@ export default {
       }
     },
     async toggleToCourse(course) {
-      if(course.publishLab != undefined) {
-        console.log("added/removed to " + course.name + " " + course.publishLab);
+      if(course.currentLab != "") {
+        console.log("added/removed to " + course.name + " " + course.currentLab);
       }
       else {
         console.log("must choose lab");
       }
-    }
+    },
+    removeAdded(course, id) {
+      for(let i = 0; i < course.addedLabs.length; i++) {
+        if(course.addedLabs[i] == id) {
+          course.addedLabs.splice(i, 1);
+        }
+      }
+    },
+    removePublished(course, id) {
+      for(let i = 0; i < course.publishedLabs.length; i++) {
+        if(course.publishedLabs[i] == id) {
+          course.publishedLabs.splice(i, 1);
+        }
+      }
+    },
+    extendAdded(course, id) {
+      course.addedLabs.push(id);
+    },
+    extendPublished(course, id) {
+      course.publishedLabs.push(id);
+    },
+    switchLab(course) {
+      // for addding or removing/publishing unpublishing to a course
+      // if(course.currentLab == "" || course.currentLab == undefined) {
+      //   console.log("must choose lab");
+      // }
+      // else {
+      //   //remove or add to lists
+      //   if(course.isAdded == true) {
+      //     removeAdded(course, course.currentlab.id);
+      //   }
+      //   else {
+      //     extendeAdded(course, course.currentlab.id);
+      //   }
+      //   if(course.isPublished == true) {
+      //     removePublished(course, course.currentlab.id);
+      //   }
+      //   else {
+      //     extendePublished(course, course.currentlab.id);
+      //   }
+
+      //   //change quick value
+      //   course.isAdded = !course.isAdded;
+      //   course.isPublished = !course.isPublished;
+
+      //   //change in database
+
+      // }
+
+      course.isAdded = getIsAdded(course, course.currentLab);
+      course.isPublished = this.getIsPublished(course, course.currentLab);
+    },
   },
   mounted() {
     this.authUser = store.getters["auth/authUser"];
