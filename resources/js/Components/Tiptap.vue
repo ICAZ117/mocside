@@ -1,5 +1,5 @@
 <template>
-  <div class="editor" v-if="editor" style="z-index: 1!important">
+  <div class="editor" v-if="editor">
     <menu-bar class="editor__header" :editor="editor" />
     <editor-content class="editor__content" :editor="editor" />
   </div>

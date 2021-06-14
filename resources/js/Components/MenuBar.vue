@@ -1,22 +1,6 @@
 <template>
   <div>
-    <template v-for="(item, index) in essentials">
-      <div class="divider" v-if="item.type === 'divider'" :key="index" />
-      <menu-item v-else :key="index" v-bind="item" />
-    </template>
-    <template>
-      <div v-if="dropdownVisible" style="background-color: white; padding: 10px; z-index: 50!important; height: 500px!important; width: 300px!important;">
-        <button
-          v-for="(item, index) in headings"
-          :key="item.id"
-          @click="action"
-          style="margin: auto !important"
-        >
-          H{{ index }}
-        </button>
-      </div>
-    </template>
-    <template v-for="(item, index) in extras">
+    <template v-for="(item, index) in items">
       <div class="divider" v-if="item.type === 'divider'" :key="index" />
       <menu-item v-else :key="index" v-bind="item" />
     </template>
@@ -40,8 +24,7 @@ export default {
 
   data() {
     return {
-      dropdownVisible: false,
-      essentials: [
+      items: [
         {
           icon: "bold",
           title: "Bold",
@@ -76,51 +59,41 @@ export default {
           type: "divider",
         },
         {
-          icon: "heading",
-          title: "Headings",
-          action: () => (this.dropdownVisible = !this.dropdownVisible, console.log("INSIDE HEADING")),
-          isActive: () => this.editor.isActive("heading", {level: 0}),
-        },
-      ],
-      headings: [
-        {
-          icon: "h1",
+          icon: "1",
           title: "Heading 1",
           action: () => this.editor.chain().focus().toggleHeading({ level: 1 }).run(),
           isActive: () => this.editor.isActive("heading", { level: 1 }),
         },
         {
-          icon: "h2",
+          icon: "2",
           title: "Heading 2",
           action: () => this.editor.chain().focus().toggleHeading({ level: 2 }).run(),
           isActive: () => this.editor.isActive("heading", { level: 2 }),
         },
         {
-          icon: "h3",
+          icon: "3",
           title: "Heading 3",
           action: () => this.editor.chain().focus().toggleHeading({ level: 3 }).run(),
           isActive: () => this.editor.isActive("heading", { level: 3 }),
         },
         {
-          icon: "h4",
+          icon: "4",
           title: "Heading 4",
           action: () => this.editor.chain().focus().toggleHeading({ level: 4 }).run(),
           isActive: () => this.editor.isActive("heading", { level: 4 }),
         },
         {
-          icon: "h5",
+          icon: "5",
           title: "Heading 5",
           action: () => this.editor.chain().focus().toggleHeading({ level: 5 }).run(),
           isActive: () => this.editor.isActive("heading", { level: 5 }),
         },
         {
-          icon: "h6",
+          icon: "6",
           title: "Heading 6",
           action: () => this.editor.chain().focus().toggleHeading({ level: 6 }).run(),
           isActive: () => this.editor.isActive("heading", { level: 6 }),
         },
-      ],
-      extras: [
         {
           icon: "paragraph",
           title: "Paragraph",
@@ -169,7 +142,7 @@ export default {
           type: "divider",
         },
         {
-          icon: "page-break",
+          icon: "file-arrow-down",
           title: "Page Break",
           action: () => this.editor.chain().focus().setHardBreak().run(),
         },
