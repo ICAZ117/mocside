@@ -76,8 +76,8 @@ export default {
   max-height: 400px;
   color: #0d0d0d;
   background-color: #fff;
-  border: 3px solid #0d0d0d;
-  border-radius: 0.75rem;
+  border: 1px solid #0d0d0d;
+  border-radius: 10px;
   /* Some information about the status */
 }
 .editor__header {
@@ -86,7 +86,7 @@ export default {
   flex: 0 0 auto;
   flex-wrap: wrap;
   padding: 0.25rem;
-  border-bottom: 3px solid #0d0d0d;
+  border-bottom: 1px solid #0d0d0d;
 }
 .editor__content {
   padding: 1.25rem 1rem;
@@ -109,21 +109,6 @@ export default {
   color: #0d0d0d;
   white-space: nowrap;
   padding: 0.25rem 0.75rem;
-}
-.editor__status {
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
-}
-.editor__status::before {
-  content: " ";
-  flex: 0 0 auto;
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  background: rgba(13, 13, 13, 0.5);
-  border-radius: 50%;
-  margin-right: 0.5rem;
 }
 
 .editor__name button {
