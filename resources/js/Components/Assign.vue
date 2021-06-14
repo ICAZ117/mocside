@@ -215,7 +215,7 @@ export default {
       if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
         console.log("can publish/unpublish to defined lab");
 
-        if(!course.isAdded) {
+        if(!course.isPublished) {
           //add to course/lab
           this.addPublish(course, lab);
         }
