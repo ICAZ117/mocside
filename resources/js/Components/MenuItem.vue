@@ -12,9 +12,7 @@
       :class="'fas fa-' + icon"
     ></span>
     <div v-if="isText">
-      <h5
-        style="font-weight: 700; margin-bottom: 15px !important; margin: auto !important"
-      >
+      <h5 style="font-weight: 1000; margin: auto !important; font-family: monospace">
         {{ icon }}
       </h5>
     </div>
