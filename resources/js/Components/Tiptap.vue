@@ -61,6 +61,9 @@ export default {
         TextAlign,
       ],
       content: "eeee",
+      onUpdate() {
+        console.log(this.getJSON());
+      }
     });
   },
 
