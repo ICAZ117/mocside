@@ -855,7 +855,9 @@ thead.gradebook {
 .create-assignment {
     padding-top: 2rem;
     background-color: white !important;
-    min-height: calc(100vh - (var(--nav-height) + 88px));
+    min-height: calc(100vh - (var(--nav-height) + 88px)) !important;
+    height: calc(100vh - (var(--nav-height) + 88px)) !important;
+    max-height: calc(100vh - (var(--nav-height) + 88px)) !important;
 }
 
 .tab {
@@ -884,11 +886,11 @@ thead.gradebook {
 }
 
 #lab-select {
-    width: 200px!important;
+    width: 200px !important;
 }
 
 .margin {
-    margin: 0 15px!important;
+    margin: 0 15px !important;
 }
 
 .card-body {
