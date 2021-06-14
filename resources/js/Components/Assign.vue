@@ -44,7 +44,7 @@
                   <label for="lab-select">Lab:</label>
                   <br />
                   <small>
-                    <select id="lab-select" @change="switchedLab(course, lab)" v-model="course.currentLab">
+                    <select id="lab-select" @change="switchedLab(course)" v-model="course.currentLab">
                       <option value="" selected hidden disabled>Select a lab...</option>
                       <option v-for="lab in labs[index]" :key="lab.id" :value="lab">
                         {{ lab.name }}
@@ -119,6 +119,7 @@ export default {
         this.courses[i].DDate = "",
         this.courses[i].isAdded = false;
         this.courses[i].isPublished = false;
+        this.courses[i].currentLab = {};
       }
 
     },
@@ -127,12 +128,12 @@ export default {
 	    return rawLabs.data.data;
     },
 
-    switchedLab(course, lab) {
+    switchedLab(course) {
       var ind;
       //isAdded needs to be set
       course.isAdded = false;
       for(let i = 0; i < this.copies.length; i++) {
-        if(this.copies[i].lab_id == lab.id) {
+        if(this.copies[i].lab_id == course.currentLab.id) {
           course.isAdded = true;
           ind = i;
           break;
