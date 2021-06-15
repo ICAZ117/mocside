@@ -63,32 +63,7 @@ export default {
         TextAlign,
       ],
       content: this.savedText,
-      // { // OBTAINABLE FROM this.getJSON();
-      //   type: "doc",
-      //   content: [
-      //     {
-      //       type: "bulletList",
-      //       content: [
-      //         {
-      //           type: "listItem",
-      //           content: [
-      //             {
-      //               type: "paragraph",
-      //               attrs: { textAlign: "center" },
-      //               content: [
-      //                 {
-      //                   type: "text",
-      //                   marks: [{ type: "bold" }, { type: "italic" }, { type: "strike" }],
-      //                   text: "Wow, this editor instance exports its content as JSON. ",
-      //                 },
-      //               ],
-      //             },
-      //           ],
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // },
+      // 
       onUpdate() {
         self.$emit('input', this.getJSON());
       },
