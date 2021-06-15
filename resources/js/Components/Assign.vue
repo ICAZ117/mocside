@@ -255,7 +255,7 @@ export default {
       var payload = {
         "is_published": true,
       }
-      const res = await API.apiClient.put(`/problems/${tempID}`, payload);
+      const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
 
     },
     async deletePublish(course, lab) {
@@ -270,7 +270,7 @@ export default {
       var payload = {
         "is_published": false,
       }
-      const res = await API.apiClient.put(`/problems/${tempID}`, payload);
+      const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
 
     },
 
