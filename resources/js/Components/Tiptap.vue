@@ -60,7 +60,7 @@ export default {
         }),
         TextAlign,
       ],
-      content: {
+      content: { // OBTAINABLE FROM this.getJSON();
         type: "doc",
         content: [
           {
