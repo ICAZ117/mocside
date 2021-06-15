@@ -84,7 +84,7 @@ export default {
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 3000),
     save(e) {
-      console.log(e);
+      // console.log(e);
     }
   },
   computed: {
