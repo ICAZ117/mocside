@@ -41,7 +41,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap :savedText="{'text': 'EEEEE'}" @input="save" />
+      <Tiptap :savedText="tc.Feedback" @input="save" />
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
@@ -191,7 +191,7 @@ export default {
       var payload = {
         title: this.tc.Title,
         points: this.tc.Points,
-        feedback: this.tc.Feedback,
+        feedback: "" + this.tc.Feedback,
         compare_method: this.tc.CompareMethod,
         input: this.tc.Input,
         output: this.tc.Output,
@@ -203,18 +203,12 @@ export default {
         }
       }
     }, 500),
-    save() {
-      console.log("AWERHBNSETNA");
+    save(e) {
+      this.tc.Feedback = e;
     }
   },
   mounted() {
     this.getCases();
-  },
-  computed: {
-    quill() {
-      this.feedback = this.state.content;
-      return this.state.content;
-    },
   },
 };
 </script>
