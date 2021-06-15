@@ -247,7 +247,8 @@ export default {
       }
 
 
-      //then change boolean
+      //then change boolean on front and back end
+      course.isAdded = true;
       var payload = {
         "is_published": true,
       }
@@ -271,7 +272,6 @@ export default {
     },
 
 
-    //Delete Methods
 
   },
   async mounted() {
