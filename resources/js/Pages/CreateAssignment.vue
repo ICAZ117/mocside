@@ -7,7 +7,7 @@
         class="assignment-title form-control"
         name="assignment-title"
         placeholder="Assignment Title"
-        v-model="assignment.title"
+        v-model="assignmentTitle"
       />
       <hr />
 
@@ -86,12 +86,17 @@ export default defineComponent({
   data() {
     return {
       assignmentID: this.problemID,
-      assignment: {
-        title: "",
-      },
+      assignmentTitle: "",
       overview: {},
       problem: {},
     };
+  },
+  watch: {
+    assignmentTitle: function(val) {
+      if(this.assignmentTitle != "") {
+        this.timeout(this.problemID);
+      }
+    },
   },
   methods: {
     async handleSubmit() {
@@ -114,14 +119,15 @@ export default defineComponent({
     async getInfo() {
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problem = rawproblem.data.data;
-      this.assignment.title = this.problem.name;
+      this.assignmentTitle = this.problem.name;
       this.overview = this.problem.description;
     },
-  },
-  computed: {
-    title: function () {
-      return this.assignment.title;
-    },
+    timeout: _.debounce(async function (assignmentID) {
+      var payload = {
+        "name": this.assignmentTitle,
+      };
+      const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
+    }, 500),
   },
   beforeMount() {
     this.getInfo();
