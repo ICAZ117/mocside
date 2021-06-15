@@ -277,7 +277,7 @@ export default {
       //then change boolean on front and back end
       course.isAdded = true;
       var payload = {
-        "is_published": true,
+        "published": true,
       }
       const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
 
@@ -292,7 +292,7 @@ export default {
         }
       }
       var payload = {
-        "is_published": false,
+        "published": false,
       }
       const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
 
@@ -304,6 +304,7 @@ export default {
           if(!this.courses[i].isAdded) {
             //add to course/lab
             this.addToCourse(this.courses[i].currentLab);
+            this.courses[i].isAdded = true;
           }
         }
         else {
@@ -318,7 +319,8 @@ export default {
         if(this.courses[i].currentLab != undefined && (JSON.stringify(this.courses[i].currentLab) != JSON.stringify({}))) {
           if(!this.courses[i].isPublished) {
             //add to course/lab
-            this.addPublish(this.courses[i], courses[i].lab);
+            this.addPublish(this.courses[i], this.courses[i].currentLab);
+            this.courses[i].isPublished = true;
           }
         }
         else {
