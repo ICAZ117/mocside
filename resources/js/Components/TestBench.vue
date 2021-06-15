@@ -92,11 +92,6 @@ export default {
   props: {
     problemID: Number,
   },
-  setup() {
-    const state = reactive({ content: "" });
-
-    return { state };
-  },
   data() {
     return {
       currentTC: 0,
@@ -104,7 +99,7 @@ export default {
         id: "",
         Title: "",
         Points: 0,
-        Feedback: "",
+        Feedback: {},
         CompareMethod: "",
         Input: "",
         Output: "",
@@ -121,16 +116,10 @@ export default {
       deep: true,
       handler() {
         if (this.tc.id != "") {
-          this.timeout(this.problemID);
+          // this.timeout(this.problemID);
+          console.log("something changed");
         }
       },
-    },
-    feedback: function (val) {
-      console.log("feedback changed");
-      this.tc.Feedback = this.feedback;
-    },
-    state: function (val) {
-      this.feedback = this.state.content;
     },
   },
   methods: {
@@ -143,15 +132,12 @@ export default {
       console.log("addTest");
       var payload = {
         assignment_id: this.problemID,
-        title: "New Test Case",
-        points: 10,
-        feedback: "",
-        compare_method: "",
-        input: "New Input",
-        output: "New Output",
+        input: "",
+        output: "",
       };
       const res = await API.apiClient.post(`/test-cases/`, payload);
       this.cases.push(res.data);
+      this.setCurrent(this.cases.length-1);
     },
     async deleteTest() {
       var key;
@@ -192,7 +178,7 @@ export default {
       var payload = {
         // title: this.tc.Title,
         // points: this.tc.Points,
-        feedback: "" + this.tc.Feedback,
+        feedback: this.tc.Feedback,
         // compare_method: this.tc.CompareMethod,
         // input: this.tc.Input,
         // output: this.tc.Output,
