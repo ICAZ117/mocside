@@ -2,7 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <h4>Description:</h4>
-      <Tiptap :savedText="savedText" @input="save()"/>
+      <Tiptap :savedText="savedText" @input="save"/>
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
@@ -84,7 +84,7 @@ export default {
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 3000),
     save(e) {
-      console.log(e);
+      // console.log(e);
     }
   },
   computed: {
