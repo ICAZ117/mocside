@@ -29,6 +29,8 @@ import * as API from "../services/API";
 export default {
   data() {
     return {
+      authUser: {},
+      gradebook: {},
       students: [{
         name: "Darth Vader",
         ID: "6666666",
@@ -43,6 +45,19 @@ export default {
         letterGrade: "A",
         email: "bruh@gmail.com"
       }]
+    }
+  },
+  methods: {
+    async getStudents(){
+      if(authUser.isProf() == true) {
+        const res = await API.apiClient.get(`/problems/full/${assignmentID}`);
+        this.gradebook = res.data.data;
+        
+      }
+
+    },
+    mounted() {
+      this.authUser = store.getters["auth/authUser"];
     }
   },
 };
