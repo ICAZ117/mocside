@@ -15,13 +15,11 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
-  props: {
-    overview: Object,
-    problemID: Number,
-  },
+  props: ["overview", "problemID"],
+  self: this,
   data() {
     return {
-      savedText: this.overview,
+      savedText: self.overview,
       assignmentID: this.problemID,
       newText: {},
     };
@@ -37,6 +35,12 @@ export default {
       this.newText = e;
       this.timeout(this.assignmentID);
     },
+  },
+  mounted() {
+    console.log("\nthis.overview");
+    console.log(this.overview);
+    console.log("\nself.overview");
+    console.log(self.overview);
   },
 };
 </script>

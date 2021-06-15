@@ -106,6 +106,8 @@ export default defineComponent({
       this.$emit("problemEdited");
     },
     updateOverview(e) {
+      console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEE");
+      
       //will be removing this in place of using debounce on each specific tab and then saving only that tab at a time
       this.overview = e;
     },
@@ -113,10 +115,11 @@ export default defineComponent({
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problem = rawproblem.data.data;
       this.assignment.title = this.problem.name;
+      console.log("\nJSON.parse(this.problem.description)");
       console.log(JSON.parse(this.problem.description));
       this.overview = JSON.parse(this.problem.description);
+      console.log("\nthis.overview");
       console.log(this.overview);
-      
     },
   },
   computed: {
