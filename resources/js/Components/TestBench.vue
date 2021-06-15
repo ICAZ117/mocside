@@ -1,5 +1,5 @@
 <template>
-  <div class="create-assignment">
+  <div class="create-test-bench">
     <div class="row test-cases">
       <div
         v-for="(tc, idx) in cases"
@@ -41,7 +41,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap />
+      <Tiptap :savedText="JSON.parse(overview)" @input="save" />
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>

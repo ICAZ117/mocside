@@ -936,6 +936,11 @@ thead.gradebook {
     width: 20vw !important;
 }
 
+.create-test-cases {
+    padding-top: 2rem;
+    background-color: white !important;
+}
+
 .test-cases {
     font-size: 10pt !important;
     margin-left: 2rem !important;
