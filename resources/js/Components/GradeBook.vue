@@ -103,7 +103,7 @@ export default {
     }
   },
   mounted() {
-    this.authUser = store.getters["auth/authUser"];
+    this.authUser = this.$store.getters["auth/authUser"];
     this.getStudents();
   }
 };
