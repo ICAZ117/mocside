@@ -163,6 +163,8 @@ export default {
     },
     setCurrent(idx) {
       this.currentTC = idx + 1;
+      console.log(this.tc);
+      console.log(this.cases[idx]);
       this.tc.id = this.cases[idx].id;
       this.tc.Title = this.cases[idx].title;
       this.tc.Points = this.cases[idx].points;
