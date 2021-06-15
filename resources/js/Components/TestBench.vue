@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div v-if="currentTC != '' && currentTC != 0" class="container">
       <h4>Test Case ({{ currentTC }}/{{ cases.length }})</h4>
       <hr />
       <label for="tcTitle">Title: </label>
