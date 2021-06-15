@@ -205,6 +205,7 @@ export default {
     }, 500),
     save(e) {
       this.tc.Feedback = e;
+      this.timeout(this.problemID);
     }
   },
   mounted() {
