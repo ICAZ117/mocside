@@ -2,7 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <h4>Description:</h4>
-      <Tiptap />
+      <Tiptap :savedText="savedText" @input="save()"/>
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
@@ -18,7 +18,7 @@ import * as API from "../services/API";
 
 export default {
   props: {
-    overview: String, 
+    overview: String,
     problemID: Number,
   },
   setup(props) {
@@ -38,15 +38,43 @@ export default {
     return {
       description: this.overview,
       assignmentID: this.problemID,
+      newText: {},
+      savedText: {
+        // OBTAINABLE FROM this.getJSON();
+        type: "doc",
+        content: [
+          {
+            type: "bulletList",
+            content: [
+              {
+                type: "listItem",
+                content: [
+                  {
+                    type: "paragraph",
+                    attrs: { textAlign: "center" },
+                    content: [
+                      {
+                        type: "text",
+                        marks: [{ type: "bold" }, { type: "italic" }, { type: "strike" }],
+                        text: "Wow, this editor instance exports its content as JSON. ",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     };
   },
   watch: {
     description: function (val) {
       this.timeout(this.assignmentID);
     },
-    state: function(val) {
+    state: function (val) {
       this.description = this.state.content;
-    }
+    },
   },
   methods: {
     timeout: _.debounce(async function (assignmentID) {
@@ -55,6 +83,9 @@ export default {
       };
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 3000),
+    save(e) {
+      console.log(e);
+    }
   },
   computed: {
     text() {

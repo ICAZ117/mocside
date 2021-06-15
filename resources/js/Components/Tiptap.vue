@@ -40,6 +40,7 @@ import MenuBar from "./MenuBar.vue";
 import TextAlign from "@tiptap/extension-text-align";
 
 export default {
+  props: ["savedText"],
   components: {
     EditorContent,
     MenuBar,
@@ -60,34 +61,35 @@ export default {
         }),
         TextAlign,
       ],
-      content: { // OBTAINABLE FROM this.getJSON();
-        type: "doc",
-        content: [
-          {
-            type: "bulletList",
-            content: [
-              {
-                type: "listItem",
-                content: [
-                  {
-                    type: "paragraph",
-                    attrs: { textAlign: "center" },
-                    content: [
-                      {
-                        type: "text",
-                        marks: [{ type: "bold" }, { type: "italic" }, { type: "strike" }],
-                        text: "Wow, this editor instance exports its content as JSON. ",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
+      content: this.savedText,
+      // { // OBTAINABLE FROM this.getJSON();
+      //   type: "doc",
+      //   content: [
+      //     {
+      //       type: "bulletList",
+      //       content: [
+      //         {
+      //           type: "listItem",
+      //           content: [
+      //             {
+      //               type: "paragraph",
+      //               attrs: { textAlign: "center" },
+      //               content: [
+      //                 {
+      //                   type: "text",
+      //                   marks: [{ type: "bold" }, { type: "italic" }, { type: "strike" }],
+      //                   text: "Wow, this editor instance exports its content as JSON. ",
+      //                 },
+      //               ],
+      //             },
+      //           ],
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
       onUpdate() {
-        console.log(JSON.stringify(this.getJSON()));
+        this.$emit('input', this.getJSON());
       },
     });
   },
