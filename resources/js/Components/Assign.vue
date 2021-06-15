@@ -24,7 +24,7 @@
                     <div class="col-4">Publish:</div>
                     <div class="col-8">
                       <label class="switch">
-                        <input type="checkbox" v-model="course.isPublished" />
+                        <input type="checkbox" @click="togglePublish(course)" v-model="course.isPublished" />
                         <span class="slider round"></span>
                       </label>
                     </div>
@@ -191,6 +191,7 @@ export default {
       const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
       this.copies = co.data.data;
 
+      return res;
     },
     async deleteFromCourse(course, lab) {
       //get assignment id of the one i want to remove
@@ -203,15 +204,77 @@ export default {
       }
       //delete from database
       const res = await API.apiClient.delete(`/problems/${tempID}`);
-      console.log(res.message);
+      console.log(res.data.message);
 
       //reset copies list
       const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
       this.copies = co.data.data;
+
+      //change isPublished just in case on front end
+      course.isPublished = false;
+    },
+    togglePublish(course) {
+      var lab = course.currentLab;
+      if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
+        console.log("can publish/unpublish to defined lab");
+
+        if(!course.isPublished) {
+          //add to course/lab
+          this.addPublish(course, lab);
+        }
+        else {
+          //delete from course/lab
+          this.deletePublish(course, lab);
+        }
+
+      }
+      else {
+        console.log("can't publish/unpublish to undefined lab");
+      }
+    },
+    async addPublish(course, lab) {
+      //call addToCourse(lab) if necessary
+      var flag = true;
+      var tempID;
+      for(let i = 0; i < this.copies.length; i++) {
+        if(this.copies[i].lab_id == lab.id) {
+          flag = false;
+          tempID = this.copies[i].id;
+          break;
+        }
+      }
+
+      if(flag) {
+        const res = await this.addToCourse(lab);
+        tempID = res.data.data.id;
+      }
+
+
+      //then change boolean on front and back end
+      course.isAdded = true;
+      var payload = {
+        "is_published": true,
+      }
+      const res = await API.apiClient.put(`/problems/${tempID}`, payload);
+
+    },
+    async deletePublish(course, lab) {
+      //change boolean
+      var tempID = "";
+      for(let i = 0; i < this.copies.length; i++) {
+        if(this.copies[i].lab_id == lab.id) {
+          tempID = this.copies[i].id;
+          break;
+        }
+      }
+      var payload = {
+        "is_published": false,
+      }
+      const res = await API.apiClient.put(`/problems/${tempID}`, payload);
+
     },
 
 
-    //Delete Methods
 
   },
   async mounted() {
@@ -226,6 +289,7 @@ export default {
     this.getCourses();
   },
 };
+// when publishing to a lab that does not have the problem it adds and publishes properly, but the front end button "ADD" does not turn on like it should
 </script>
 
 <style></style>
