@@ -209,6 +209,9 @@ export default {
       //reset copies list
       const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
       this.copies = co.data.data;
+
+      //change isPublished just in case on front end
+      course.isPublished = false;
     },
     togglePublish(course) {
       var lab = course.currentLab;
