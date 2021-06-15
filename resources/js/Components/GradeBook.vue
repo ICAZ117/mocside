@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     async getStudents(){
-      if(authUser.isProf() == true) {
+      if(this.authUser.isProf() == true) {
         const res = await API.apiClient.get(`/problems/full/${assignmentID}`);
         this.gradebook = res.data.data.gradebook;
 
