@@ -132,8 +132,8 @@ export default {
       console.log("addTest");
       var payload = {
         assignment_id: this.problemID,
-        input: "",
-        output: "",
+        input: "New Input",
+        output: "New Output",
       };
       const res = await API.apiClient.post(`/test-cases/`, payload);
       this.cases.push(res.data);
