@@ -153,7 +153,6 @@ export default {
       this.tc.id = "";
       this.tc.Title = "";
       this.tc.Points = "";
-      this.state.content = "";
       this.tc.Feedback = "";
       this.tc.CompareMethod = "";
       this.tc.Input = "";
@@ -167,7 +166,6 @@ export default {
       this.tc.id = this.cases[idx].id;
       this.tc.Title = this.cases[idx].title;
       this.tc.Points = this.cases[idx].points;
-      this.state.content = this.cases[idx].feedback;
       this.$refs.myEditor.setContents(this.cases[idx].feedback);
       this.tc.Feedback = this.cases[idx].feedback;
       this.tc.CompareMethod = this.cases[idx].compare_method;
