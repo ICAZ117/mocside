@@ -166,7 +166,6 @@ export default {
       this.tc.id = this.cases[idx].id;
       this.tc.Title = this.cases[idx].title;
       this.tc.Points = this.cases[idx].points;
-      this.$refs.myEditor.setContents(this.cases[idx].feedback);
       this.tc.Feedback = this.cases[idx].feedback;
       this.tc.CompareMethod = this.cases[idx].compare_method;
       this.tc.Input = this.cases[idx].input;
