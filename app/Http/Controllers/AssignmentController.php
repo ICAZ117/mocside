@@ -156,6 +156,21 @@ class AssignmentController extends Controller
         return  response()->json(["message" => "Forbidden"], 403);
     }
 
+    public function updateUniques(Request $request, $id) {
+        // assuming we want local edit w/o copy_id change
+        $user = Auth::user();
+        $assignment = Assignment::find($id);
+        $lab = $assignment->lab;
+        $owner = $lab->course->owner_id;
+
+        if ($user->isAdmin() || ($user->isProf() && $user->fsc_id == $owner)) {
+            $assignment->update($request->all());
+            return response()->json(["message" => "Update successful."], 200);
+        }
+        return response()->json(['message' => 'Forbidden'], 403);
+    }
+
+    // 
     public function updateChildren(Request $request, $id)
     {
         $user = Auth::user();

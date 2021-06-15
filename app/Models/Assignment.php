@@ -12,7 +12,6 @@ class Assignment extends Model
     protected $fillable = [
         'id',
         // these are nonspecific across copied instances.
-        'name', // we can search for copies by name.
         'description',
         'python_starter',
         'python_model',
@@ -20,6 +19,7 @@ class Assignment extends Model
         'java_model',
         'copy_id',
         // v-- these are specific across copied instances.
+        'name',
         'due_date',
         'lab_id',
         'gradebook',
