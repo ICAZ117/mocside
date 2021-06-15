@@ -2,7 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <h4>Description:</h4>
-      <Tiptap :savedText="savedText" @input="save()"/>
+      <Tiptap :savedText="savedText" @input="save"/>
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
