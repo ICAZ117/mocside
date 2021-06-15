@@ -277,7 +277,7 @@ export default {
       //then change boolean on front and back end
       course.isAdded = true;
       var payload = {
-        "is_published": true,
+        "is_published": 1,
       }
       const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
 
@@ -292,7 +292,7 @@ export default {
         }
       }
       var payload = {
-        "is_published": false,
+        "is_published": 0,
       }
       const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
 
