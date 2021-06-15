@@ -55,8 +55,6 @@ export default {
 
   mounted() {
     var self = this;
-    console.log("\nSaved text:");
-    console.log(this.savedText);
     this.editor = new Editor({
       extensions: [
         StarterKit.configure({
@@ -64,7 +62,7 @@ export default {
         }),
         TextAlign,
       ],
-      content: JSON.parse(this.savedText),
+      content: this.savedText,
       // 
       onUpdate() {
         self.$emit('input', this.getJSON());
