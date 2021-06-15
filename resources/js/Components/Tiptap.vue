@@ -62,7 +62,7 @@ export default {
         }),
         TextAlign,
       ],
-      content: this.savedText,
+      content: this.savedText.overview,
       // 
       onUpdate() {
         self.$emit('input', JSON.parse("overview: " + JSON.stringify(this.getJSON())));
