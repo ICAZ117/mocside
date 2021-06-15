@@ -41,7 +41,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap :savedText="JSON.parse(overview)" @input="save" />
+      <Tiptap :savedText="{'text': 'EEEEE'}" @input="save" />
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
@@ -203,6 +203,9 @@ export default {
         }
       }
     }, 500),
+    save() {
+      console.log("AWERHBNSETNA");
+    }
   },
   mounted() {
     this.getCases();
