@@ -65,7 +65,7 @@ export default {
       content: this.savedText,
       // 
       onUpdate() {
-        self.$emit('input', this.getJSON());
+        self.$emit('input', JSON.parse("overview: " + JSON.stringify(this.getJSON())));
       },
     });
   },
