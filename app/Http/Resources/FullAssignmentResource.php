@@ -28,6 +28,7 @@ class FullAssignmentResource extends JsonResource
           'course_id' => $this->lab->course_id,
           'test_cases' => $this->test_cases->count(),
           'gradebook' => $this->gradebook,
+          'worth' => $this->worth(),
         ];
     }
 }
