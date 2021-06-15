@@ -212,6 +212,9 @@ export default {
 
       //change isPublished just in case on front end
       course.isPublished = false;
+
+      //remove date showing on front end
+      course.DDate = "";
     },
     togglePublish(course) {
       var lab = course.currentLab;
