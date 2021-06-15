@@ -1,7 +1,8 @@
 <template>
   <div class="create-assignment">
     <div class="container">
-      <button class="btn btn-primary btn-md publish-all">PUBLISH TO ALL</button>
+      <button @click="publishToAll()" class="btn btn-primary btn-md publish-all">PUBLISH TO ALL SELECTED LABS</button>
+      <button @click="addToALL()" class="btn btn-primary btn-md publish-all">ADD TO ALL SELECTED LABS</button>
       <br />
 
       <div class="no-decor">
@@ -295,6 +296,35 @@ export default {
       }
       const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
 
+    },
+
+    addToAll() {
+      for(let i = 0; i < this.courses.length; i++) {
+        if(courses[i].currentLab != undefined && (JSON.stringify(courses[i].currentLab) != JSON.stringify({}))) {
+          if(!courses[i].isAdded) {
+            //add to course/lab
+            this.addToCourse(courses[i].currentLab);
+          }
+        }
+        else {
+          console.log("No Selected Lab for this course");
+        }
+      }
+
+    },
+
+    publishToAll() {
+      for(let i = 0; i < this.courses.length; i++) {
+        if(courses[i].currentLab != undefined && (JSON.stringify(courses[i].currentLab) != JSON.stringify({}))) {
+          if(!courses[i].isPublished) {
+            //add to course/lab
+            this.addPublish(courses[i], courses[i].lab);
+          }
+        }
+        else {
+          console.log("No Selected Lab for this course");
+        }
+      }
     },
 
 
