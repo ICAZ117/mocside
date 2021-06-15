@@ -131,10 +131,24 @@ export default {
 
     //Setter Methods
     async updateDate(course) {
-      var payload = {
-        "due_date": course.DDate,
+      var lab = course.currentLab;
+      if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
+        var tempID = "";
+        for(let i = 0; i < this.copies.length; i++) {
+          if(this.copies[i].lab_id == lab.id) {
+            tempID = this.copies[i].id;
+            break;
+          }
+        }
+        var payload = {
+          "due_date": course.DDate,
+        }
+        const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
       }
-      const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
+      else {
+        console.log("can't change date to undefined lab");
+        course.DDate = "";
+      }
     },
 
 
@@ -170,7 +184,6 @@ export default {
     toggleToCourse(course) {
       var lab = course.currentLab;
       if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
-        console.log("can add/delete to defined lab");
 
         if(!course.isAdded) {
           //add to course/lab
@@ -184,6 +197,7 @@ export default {
       }
       else {
         console.log("can't add/delete to undefined lab");
+        course.isAdded = false;
       }
     },
     async addToCourse(lab) {
@@ -225,7 +239,6 @@ export default {
     togglePublish(course) {
       var lab = course.currentLab;
       if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
-        console.log("can publish/unpublish to defined lab");
 
         if(!course.isPublished) {
           //add to course/lab
@@ -239,6 +252,7 @@ export default {
       }
       else {
         console.log("can't publish/unpublish to undefined lab");
+        course.isPublished = false;
       }
     },
     async addPublish(course, lab) {
