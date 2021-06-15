@@ -54,6 +54,7 @@ export default {
   },
 
   mounted() {
+    var self = this;
     this.editor = new Editor({
       extensions: [
         StarterKit.configure({
@@ -89,7 +90,7 @@ export default {
       //   ],
       // },
       onUpdate() {
-        this.$emit('input', this.getJSON());
+        self.$emit('input', this.getJSON());
       },
     });
   },
