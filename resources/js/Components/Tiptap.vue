@@ -62,10 +62,10 @@ export default {
         }),
         TextAlign,
       ],
-      content: this.savedText.overview,
+      content: JSON.parse(this.savedText),
       // 
       onUpdate() {
-        self.$emit('input', JSON.parse("overview: " + JSON.stringify(this.getJSON())));
+        self.$emit('input', this.getJSON());
       },
     });
   },
