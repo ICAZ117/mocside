@@ -319,7 +319,7 @@ export default {
         if(this.courses[i].currentLab != undefined && (JSON.stringify(this.courses[i].currentLab) != JSON.stringify({}))) {
           if(!this.courses[i].isPublished) {
             //add to course/lab
-            this.addPublish(this.courses[i], this.courses[i].lab);
+            this.addPublish(this.courses[i], this.courses[i].currentLab);
             this.courses[i].isPublished = true;
           }
         }
