@@ -120,11 +120,7 @@ export default defineComponent({
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problem = rawproblem.data.data;
       this.assignmentTitle = this.problem.name;
-      console.log("\nJSON.parse(this.problem.description)");
-      console.log(JSON.parse(this.problem.description));
-      this.overview = JSON.parse(this.problem.description);
-      console.log("\nthis.overview");
-      console.log(this.overview);
+      this.overview = this.problem.description;
     },
     timeout: _.debounce(async function (assignmentID) {
       var payload = {
