@@ -55,6 +55,8 @@ export default {
 
   mounted() {
     var self = this;
+    console.log("\nSaved text:");
+    console.log(this.savedText);
     this.editor = new Editor({
       extensions: [
         StarterKit.configure({

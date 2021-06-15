@@ -17,7 +17,7 @@ import * as API from "../services/API";
 export default {
   props: {
     overview: {
-      type: String,
+      type: Object,
       required: true,
     },
     problemID: {
