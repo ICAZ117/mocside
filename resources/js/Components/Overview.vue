@@ -45,6 +45,7 @@ export default {
     },
   },
   beforeMount() {
+    console.log("HERE");
     console.log(this.savedText);
   },
 };
