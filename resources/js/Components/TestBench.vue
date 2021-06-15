@@ -180,6 +180,8 @@ export default {
         // input: this.tc.Input,
         // output: this.tc.Output,
       };
+      console.log("TC id:");
+      console.log(this.tc.id);
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
       for (let i = 0; i < this.cases.length; i++) {
         if (this.cases[i].id == res.data.id) {
