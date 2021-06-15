@@ -130,8 +130,11 @@ export default {
 
 
     //Setter Methods
-    updateDate(course) {
-      console.log(course.name);
+    async updateDate(course) {
+      var payload = {
+        "due_date": course.DDate,
+      }
+      const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
     },
 
 
