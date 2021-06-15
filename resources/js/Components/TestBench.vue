@@ -1,5 +1,5 @@
 <template>
-  <div class="create-test-cases">
+  <div class="create-test-cases create-assignment">
     <div class="row test-cases">
       <div
         v-for="(tc, idx) in cases"

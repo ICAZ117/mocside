@@ -939,6 +939,8 @@ thead.gradebook {
 .create-test-cases {
     padding-top: 2rem;
     background-color: white !important;
+    height: fit-content!important;
+    max-height: fit-content!important;
 }
 
 .test-cases {
