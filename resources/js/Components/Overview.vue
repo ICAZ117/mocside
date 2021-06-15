@@ -23,7 +23,7 @@ export default {
     problemID: {
       type: Number,
       required: true,
-    }
+    },
   },
   data() {
     return {
