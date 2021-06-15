@@ -2,7 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <button @click="publishToAll()" class="btn btn-primary btn-md publish-all">PUBLISH TO ALL SELECTED LABS</button>
-      <button @click="addToALL()" class="btn btn-primary btn-md publish-all">ADD TO ALL SELECTED LABS</button>
+      <button @click="addToAll()" class="btn btn-primary btn-md publish-all">ADD TO ALL SELECTED LABS</button>
       <br />
 
       <div class="no-decor">
@@ -300,10 +300,10 @@ export default {
 
     addToAll() {
       for(let i = 0; i < this.courses.length; i++) {
-        if(courses[i].currentLab != undefined && (JSON.stringify(courses[i].currentLab) != JSON.stringify({}))) {
-          if(!courses[i].isAdded) {
+        if(this.courses[i].currentLab != undefined && (JSON.stringify(this.courses[i].currentLab) != JSON.stringify({}))) {
+          if(!this.courses[i].isAdded) {
             //add to course/lab
-            this.addToCourse(courses[i].currentLab);
+            this.addToCourse(this.courses[i].currentLab);
           }
         }
         else {
@@ -315,10 +315,10 @@ export default {
 
     publishToAll() {
       for(let i = 0; i < this.courses.length; i++) {
-        if(courses[i].currentLab != undefined && (JSON.stringify(courses[i].currentLab) != JSON.stringify({}))) {
-          if(!courses[i].isPublished) {
+        if(this.courses[i].currentLab != undefined && (JSON.stringify(this.courses[i].currentLab) != JSON.stringify({}))) {
+          if(!this.courses[i].isPublished) {
             //add to course/lab
-            this.addPublish(courses[i], courses[i].lab);
+            this.addPublish(this.courses[i], courses[i].lab);
           }
         }
         else {
