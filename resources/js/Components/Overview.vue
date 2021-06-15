@@ -2,7 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <h4>Description:</h4>
-      <Tiptap :savedText="JSON.stringify(overview)" @input="save" />
+      <Tiptap :savedText="overview" @input="save" />
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
@@ -17,7 +17,7 @@ import * as API from "../services/API";
 export default {
   props: {
     overview: {
-      type: String,
+      type: Object,
       required: true,
     },
     problemID: {
