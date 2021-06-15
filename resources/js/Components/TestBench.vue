@@ -33,11 +33,11 @@
       <h4>Test Case ({{ currentTC }}/{{ cases.length }})</h4>
       <hr />
       <label for="tcTitle">Title: </label>
-      <input type="text" id="tcTitle" v-model="tc.Title" />
+      <input type="text" id="tcTitle" @change="changeTitle()" v-model="tc.Title" />
       <br />
 
       <label for="tcPoints">Points: </label>
-      <input type="number" id="tcPoints" v-model="tc.Points" />
+      <input type="number" id="tcPoints" @change="changePoints()" v-model="tc.Points" />
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
@@ -49,6 +49,7 @@
         class="form-select"
         name="compareMethod"
         id="compareMethod"
+        @change="changeCompare()"
         v-model="tc.CompareMethod"
       >
         <option value="" selected disabled hidden>Select One...</option>
@@ -189,12 +190,12 @@ export default {
     },
     timeout: _.debounce(async function (problemID) {
       var payload = {
-        title: this.tc.Title,
-        points: this.tc.Points,
+        // title: this.tc.Title,
+        // points: this.tc.Points,
         feedback: "" + this.tc.Feedback,
-        compare_method: this.tc.CompareMethod,
-        input: this.tc.Input,
-        output: this.tc.Output,
+        // compare_method: this.tc.CompareMethod,
+        // input: this.tc.Input,
+        // output: this.tc.Output,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
       for (let i = 0; i < this.cases.length; i++) {
@@ -203,8 +204,18 @@ export default {
         }
       }
     }, 500),
+    changeTitle() {
+      console.log("title");
+    },
+    changePoints() {
+      console.log("points");
+    },
+    changeCompare() {
+      console.log("compare");
+    },
     save(e) {
       this.tc.Feedback = e;
+      console.log(e);
       this.timeout(this.problemID);
     }
   },
