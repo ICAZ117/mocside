@@ -17,17 +17,16 @@ import * as API from "../services/API";
 export default {
   props: {
     overview: {
-      type: String,
+      type: Object,
       required: true,
     },
     problemID: {
       type: Number,
       required: true,
-    }
+    },
   },
   data() {
     return {
-      savedText: JSON.parse(this.overview),
       assignmentID: this.problemID,
       newText: {},
     };
@@ -45,12 +44,8 @@ export default {
     },
   },
   beforeMount() {
-    console.log("before");
-    console.log(this.savedText);
   },
   mounted() {
-    console.log("After");
-    console.log(this.savedText);
   },
 };
 </script>
