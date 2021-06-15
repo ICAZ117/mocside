@@ -32,6 +32,7 @@
 
 <script>
 import * as API from "../services/API";
+import store from "../Store/index";
 export default {
   data() {
     return {
@@ -103,7 +104,7 @@ export default {
     }
   },
   mounted() {
-    this.authUser = this.$store.getters["auth/authUser"];
+    this.authUser = store.getters["auth/authUser"];
     this.getStudents();
   }
 };
