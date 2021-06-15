@@ -149,7 +149,7 @@ export default {
       this.cases = this.cases.filter((c, i) => i != key);
       var temp = this.tc.id;
       //set current to null
-      this.currentTC = "";
+      this.currentTC--;
       this.tc.id = "";
       this.tc.Title = "";
       this.tc.Points = "";
