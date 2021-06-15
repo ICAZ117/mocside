@@ -115,7 +115,7 @@ export default defineComponent({
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problem = rawproblem.data.data;
       this.assignment.title = this.problem.name;
-      this.overview = JSON.parse(this.problem.description);
+      this.overview = this.problem.description;
     },
   },
   computed: {
