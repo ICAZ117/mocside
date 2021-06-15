@@ -63,7 +63,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/problems/copies/{id}', [AssignmentController::class, 'updateChildren']);
     Route::post('/problems/copies/{id}', [AssignmentController::class, 'copy']);
 
-    Route::put('/problems/unique/{id}', [AssignmentController::class, 'updateUnique']);
+    Route::put('/problems/unique/{id}', [AssignmentController::class, 'updateUniques']);
 
     Route::get('/test-cases/{problem_id}', [TestCaseController::class, 'getCases']);
     Route::get('/test-cases/full/{id}', [TestCaseController::class, 'show']);
