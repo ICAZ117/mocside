@@ -2,7 +2,7 @@
   <div class="create-assignment">
     <div class="container">
       <button @click="publishToAll()" class="btn btn-primary btn-md publish-all">PUBLISH TO ALL SELECTED LABS</button>
-      <button @click="addToALL()" class="btn btn-primary btn-md publish-all">ADD TO ALL SELECTED LABS</button>
+      <button @click="addToAll()" class="btn btn-primary btn-md publish-all">ADD TO ALL SELECTED LABS</button>
       <br />
 
       <div class="no-decor">
