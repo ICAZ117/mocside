@@ -41,7 +41,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap :savedText="JSON.parse(tc.feedback)" @input="save" />
+      <Tiptap :savedText="JSON.parse(tc.Feedback)" @input="save" />
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
@@ -204,7 +204,7 @@ export default {
       }
     }, 500),
     save(e) {
-      this.feedback = e;
+      this.tc.Feedback = e;
     }
   },
   mounted() {
