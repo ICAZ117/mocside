@@ -126,7 +126,7 @@ export default defineComponent({
       var payload = {
         "name": this.assignmentTitle,
       };
-      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+      const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
     }, 500),
   },
   beforeMount() {
