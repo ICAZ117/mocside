@@ -84,7 +84,9 @@ export default {
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
     }, 3000),
     save(e) {
-      // console.log(e);
+      this.newText = e;
+      console.log("Saved text");
+      console.log(this.newText);
     }
   },
   computed: {
