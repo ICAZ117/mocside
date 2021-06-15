@@ -55,7 +55,7 @@
                   <br /><br />
 
                   <label for="dueDate">Due Date: </label>
-                  <input type="date" id="dueDate" v-model="course.DDate" />
+                  <input type="date" id="dueDate" @change="updateDate(course)" v-model="course.DDate" />
                 </div>
 
                 <hr class="courses my-0" />
@@ -130,6 +130,9 @@ export default {
 
 
     //Setter Methods
+    updateDate(course) {
+      console.log(course.name);
+    },
 
 
     //Functional Methods
