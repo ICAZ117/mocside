@@ -146,7 +146,8 @@ export default {
         const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
       }
       else {
-        console.log("can't publish/unpublish to undefined lab");
+        console.log("can't change date to undefined lab");
+        course.DDate = "";
       }
     },
 
@@ -196,6 +197,7 @@ export default {
       }
       else {
         console.log("can't add/delete to undefined lab");
+        course.isAdded = false;
       }
     },
     async addToCourse(lab) {
@@ -250,6 +252,7 @@ export default {
       }
       else {
         console.log("can't publish/unpublish to undefined lab");
+        course.isPublished = false;
       }
     },
     async addPublish(course, lab) {
