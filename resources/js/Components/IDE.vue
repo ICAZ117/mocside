@@ -7,7 +7,7 @@
       <VAceEditor
         class="editor"
         v-model:value="code"
-        @update="updateContent"
+        @input="updateContent"
         :lang="editorLangauge"
         :theme="theme"
         :key="forceReload"
@@ -84,7 +84,7 @@
         :theme="'chaos'"
         v-model:value="input"
         :key="forceReload"
-        @update="updateContent"
+        @input="updateContent"
       />
     </div>
   </div>
