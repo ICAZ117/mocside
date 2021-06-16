@@ -254,6 +254,7 @@ export default {
         input: this.input,
       };
       console.log("HERE");
+      console.log(data);
       this.$emit("update", data);
       return "";
     },
