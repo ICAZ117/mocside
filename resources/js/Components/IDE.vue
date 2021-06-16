@@ -11,7 +11,7 @@
         :theme="theme"
       />
       <div class="row px-1 my-1">
-        <button @click="toggleIO" class="toggleIO col-1 btn btn-success">
+        <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
         <button type="run" name="run" class="run-code col-1 btn btn-success">Run</button>
@@ -78,7 +78,7 @@
     </div>
     <div v-if="!showInput" class="console row"></div>
     <div v-else>
-      <VAceEditor :theme="chaos" v-model:value="input" />
+      <VAceEditor :theme="'chaos'" v-model:value="input" />
     </div>
   </div>
 </template>
@@ -189,9 +189,10 @@ export default {
       theme: "gob",
       content: "",
       editorLangauge: "",
-      style: "width: " + (this.showSubmit ? "67%" : "89%") + "!important",
+      style: "",
       IOmessage: "Show Input",
       showInput: false,
+      input: "",
     };
   },
   methods: {
@@ -199,6 +200,12 @@ export default {
       this.showInput = !this.showInput;
       this.IOmessage = this.showInput ? "Show Output" : "Show Input";
     },
+    getStyle() {
+      // width: " + (this.showSubmit ? "67%" : "89%") + "!important
+      var button = document.getElementById("buttonWidth");
+      var numButtons = showInput ? 3 : 2;
+      this.style = "width: calc((100% - " + numButtons + "%) - " + numButtons * button.clientWidth + "px)!important;" 
+    }
   },
   components: {
     VAceEditor,
@@ -211,6 +218,9 @@ export default {
       this.editorLangauge = "python";
       this.content = this.saved_p;
     }
+  },
+  mounted() {
+    this.getStyle();
   },
   computed: {
     updateContent: function () {
