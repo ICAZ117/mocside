@@ -31,7 +31,6 @@
         </div>
       </div>
     </div>
-
     <!-- ---------------------------------------- -->
     <!-- -------------- TC FIELDS --------------- -->
     <!-- ---------------------------------------- -->
@@ -152,6 +151,9 @@ export default {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
       var rawCases = res.data;
       this.cases = rawCases;
+      if(this.cases.length != 0) {
+        this.setCurrent(0);
+      }
     },
     async addTest() {
       console.log("addTest");
