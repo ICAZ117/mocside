@@ -100,7 +100,7 @@ export default {
         }
       }
     },
-    sortLabs() {
+    async sortLabs() {
       const sortedLabs = this.labs.sort(function(a,b){
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.
@@ -197,7 +197,8 @@ export default {
   async beforeMount() {
     this.childisOpen = false;
     await this.getLabs();
-    this.sortLabs();
+    const sorted = await this.sortLabs();
+    console.log(sorted);
   },
   beforeUnmount() {
     this.$emit("unmounting");
