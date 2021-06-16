@@ -42,12 +42,12 @@
 
       <!------------ TC Title ------------>
       <label for="tcTitle">Title: </label>
-      <input type="text" id="tcTitle" @input="changeTitle" v-model="tc.Title" />
+      <input type="text" id="tcTitle" @change="changeTitle" v-model="tc.Title" />
       <br />
 
       <!------------ TC Points ------------>
       <label for="tcPoints">Points: </label>
-      <input type="number" id="tcPoints" @input="changePoints" v-model="tc.Points" />
+      <input type="number" id="tcPoints" @change="changePoints" v-model="tc.Points" />
       <br /><br />
 
       <!------------ TC Feedback ------------>
@@ -61,7 +61,7 @@
         class="form-select"
         name="compareMethod"
         id="compareMethod"
-        @input="changeCompare"
+        @change="changeCompare"
         v-model="tc.CompareMethod"
       >
         <option value="" selected disabled hidden>Select One...</option>
@@ -81,7 +81,7 @@
       <VAceEditor
         class="editor"
         id="tcInput"
-        @input="changeInput"
+        @change="changeInput"
         v-model:value="tc.Input"
       />
       <br /><br />
@@ -93,7 +93,7 @@
       <VAceEditor
         class="editor"
         id="tcOutput"
-        @input="changeOutput"
+        @change="changeOutput"
         v-model:value="tc.Output"
       />
       <br /><br />
