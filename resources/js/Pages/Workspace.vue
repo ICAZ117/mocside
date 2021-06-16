@@ -39,18 +39,17 @@ export default {
       this.assignment = rawAssignment.data.data;
       this.workspace.title = this.assignment.name;
       this.workspace.description = this.assignment.description;
-      const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      this.workspace.code_j = this.getJava(res.data.data);
-      this.workspace.code_p = this.getPython(res.data.data);
+      this.workspace.code_j = this.getJava();
+      this.workspace.code_p = this.getPython();
     },
-    getJava(templates) {
+    getJava() {
       //if first time opening grab template, else grab student code
-      return templates.java_starter;
+      return this.assignment.java_starter;
       // return "";
     },
-    getPython(templates) {
+    getPython() {
       //if first time opening grab template, else grab student code
-      return templates.python_starter;
+      return this.assignment.python_starter;
       // return "";
     },
     updateContent(e) {
