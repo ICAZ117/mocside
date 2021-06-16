@@ -784,6 +784,10 @@ thead.gradebook {
     width: 308px !important;
 }
 
+.inputHeight {
+    min-height: calc((100vh - var(--nav-height)) / 2) !important;
+}
+
 /*========= ADD ASSIGNMENT =========*/
 
 .assignment-title {
@@ -940,8 +944,8 @@ thead.gradebook {
 .create-test-cases {
     padding-top: 2rem;
     background-color: white !important;
-    height: fit-content!important;
-    max-height: fit-content!important;
+    height: fit-content !important;
+    max-height: fit-content !important;
 }
 
 .test-cases {

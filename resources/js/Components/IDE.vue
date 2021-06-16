@@ -77,7 +77,7 @@
       </div>
     </div>
     <div v-if="!showInput" class="console row"></div>
-    <div v-if="showInput" class="console row">
+    <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" />
     </div>
   </div>
