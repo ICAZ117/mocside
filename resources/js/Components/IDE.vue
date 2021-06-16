@@ -7,6 +7,7 @@
       <VAceEditor
         class="editor"
         v-model:value="code"
+        @update="updateContent"
         :lang="editorLangauge"
         :theme="theme"
         :key="forceReload"
@@ -79,7 +80,12 @@
     </div>
     <div v-if="!showInput" class="console row"></div>
     <div v-if="showInput" class="inputHeight row">
-      <VAceEditor :theme="'chaos'" v-model:value="input" :key="forceReload" />
+      <VAceEditor
+        :theme="'chaos'"
+        v-model:value="input"
+        :key="forceReload"
+        @update="updateContent"
+      />
     </div>
   </div>
 </template>
@@ -213,6 +219,15 @@ export default {
         (numButtons * button.clientWidth + 2) +
         "px)!important;";
     },
+    updateContent() {
+      var data = {
+        code: this.code,
+        input: this.input,
+      };
+      console.log("HERE");
+      console.log(data);
+      this.$emit("update", data);
+    },
   },
   components: {
     VAceEditor,
@@ -238,26 +253,13 @@ export default {
       console.log("saved_j:");
       console.log(this.saved_j);
       console.log("\n\n\n\n\n");
-
     } else {
       console.log("PYTHON");
       this.editorLangauge = "python";
       this.code = this.saved_p;
     }
     this.getStyle();
-    this.forceReload = 1
-  },
-  computed: {
-    updateContent: function () {
-      var data = {
-        code: this.code,
-        input: this.input,
-      };
-      console.log("HERE");
-      console.log(data);
-      this.$emit("update", data);
-      return "";
-    },
+    this.forceReload = 1;
   },
 };
 </script>
