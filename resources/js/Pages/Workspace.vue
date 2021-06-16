@@ -25,8 +25,8 @@ export default {
       workspace: {
         title: "",
         description: "",
-        code_j: {},
-        code_p: {},
+        code_j: "",
+        code_p: "",
         theme: "",
         input: "",
       },
@@ -53,12 +53,15 @@ export default {
       // return templates.python_starter;
       return "";
     },
+    updateContent(e) {
+      console.log(e);
+    },
   },
   beforeUnmount() {
     this.$emit("unmounting");
   },
-  mount() {
-    this.getAssignment();
+  async mount() {
+    await this.getAssignment();
   },
 };
 </script>
