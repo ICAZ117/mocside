@@ -9,6 +9,7 @@
         v-model:value="code"
         :lang="editorLangauge"
         :theme="theme"
+        :key="forceReload"
       />
       <div class="row px-1 my-1">
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
@@ -78,7 +79,7 @@
     </div>
     <div v-if="!showInput" class="console row"></div>
     <div v-if="showInput" class="inputHeight row">
-      <VAceEditor :theme="'chaos'" v-model:value="input" />
+      <VAceEditor :theme="'chaos'" v-model:value="input" :key="forceReload" />
     </div>
   </div>
 </template>
@@ -193,6 +194,7 @@ export default {
       showInput: false,
       code: "",
       input: "",
+      forceReload: 0,
     };
   },
   methods: {
@@ -215,7 +217,7 @@ export default {
   components: {
     VAceEditor,
   },
-  beforeMount() {
+  mounted() {
     console.log("BEFORE MOUNT");
     if (this.lang == "Java") {
       console.log("JAVA");
@@ -242,9 +244,8 @@ export default {
       this.editorLangauge = "python";
       this.code = this.saved_p;
     }
-  },
-  mounted() {
     this.getStyle();
+    this.forceReload = 1
   },
   computed: {
     updateContent: function () {
