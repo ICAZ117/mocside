@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div v-if="currentTC != '' && currentTC != 0" class="container">
       <h4>Test Case ({{ currentTC }}/{{ cases.length }})</h4>
       <hr />
       <label for="tcTitle">Title: </label>
@@ -41,7 +41,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap :savedText="tc.Feedback" @input="save" />
+      <Tiptap :savedText="JSON.parse(tc.Feedback)" @input="save" />
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
@@ -149,7 +149,7 @@ export default {
       this.cases = this.cases.filter((c, i) => i != key);
       var temp = this.tc.id;
       //set current to null
-      this.currentTC = "";
+      this.currentTC--;
       this.tc.id = "";
       this.tc.Title = "";
       this.tc.Points = "";
@@ -163,10 +163,11 @@ export default {
     },
     setCurrent(idx) {
       this.currentTC = idx + 1;
+      console.log(this.tc);
+      console.log(this.cases[idx]);
       this.tc.id = this.cases[idx].id;
       this.tc.Title = this.cases[idx].title;
       this.tc.Points = this.cases[idx].points;
-      this.$refs.myEditor.setContents(this.cases[idx].feedback);
       this.tc.Feedback = this.cases[idx].feedback;
       this.tc.CompareMethod = this.cases[idx].compare_method;
       this.tc.Input = this.cases[idx].input;
@@ -181,6 +182,8 @@ export default {
         // input: this.tc.Input,
         // output: this.tc.Output,
       };
+      console.log("TC id:");
+      console.log(this.tc.id);
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
       for (let i = 0; i < this.cases.length; i++) {
         if (this.cases[i].id == res.data.id) {
