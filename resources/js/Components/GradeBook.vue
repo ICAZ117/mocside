@@ -34,6 +34,7 @@
 import * as API from "../services/API";
 import store from "../Store/index";
 export default {
+  props: ['problemID'],
   data() {
     return {
       authUser: {},
@@ -57,8 +58,8 @@ export default {
   },
   methods: {
     async getStudents(){
-      if(this.authUser.isProf() == true) {
-        const res = await API.apiClient.get(`/problems/full/${assignmentID}`);
+      if(this.isProf == true) {
+        const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
         this.gradebook = res.data.data.gradebook;
 
 
@@ -101,6 +102,16 @@ export default {
       }
 
       return [letterGrade, grade];
+    }
+  },
+  computed: {
+    isProf: function() {
+      if (store.getters["auth/isProf"] == null) {
+        return false;
+      }
+      else {
+        return store.getters["auth/isProf"];
+      }
     }
   },
   mounted() {
