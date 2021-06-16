@@ -158,7 +158,7 @@ export default {
       console.log("addTest");
       var payload = {
         assignment_id: this.problemID,
-        feedback: {},
+        feedback: JSON.stringify({}),
         input: "New Input",
         output: "New Output",
       };
