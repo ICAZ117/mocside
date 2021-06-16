@@ -58,6 +58,7 @@ export default {
           curr = student_ids[i];
           const res2 = await API.apiClient.get(`/students/${curr}`) // this will return USER objects that contain student
           var student = res2.data.data;
+          console.log(student.fsc_id);
           var points = this.gradebook.grades[curr];
           var calcGrades = this.calcGrade(res.data.data, points)
           this.students.push({
