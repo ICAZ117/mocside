@@ -60,13 +60,11 @@ export default {
     async getStudents(){
       if(this.isProf == true) {
         const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
-        this.gradebook = res.data.data.gradebook;
+        this.gradebook = JSON.parse(res.data.data.gradebook);
 
 
         // this logic is populating front-end gradebook
-        console.log(this.gradebook);
-        console.log(this.gradebook.students);
-        var student_ids = JSON.parse(this.gradebook).students; // list of ids in gradebook 
+        var student_ids = this.gradebook.students; // list of ids in gradebook 
         var curr;
         for (let i = 0; i < student_ids.length; i++) {
           curr = student_ids[i];
