@@ -63,6 +63,7 @@ export default {
 
 
         // this logic is populating front-end gradebook
+        console.log(this.gradebook);
         var student_ids = this.gradebook.students; // list of ids in gradebook 
         var curr;
         for (let i = 0; i < student_ids.length; i++) {
