@@ -115,6 +115,8 @@ export default {
         "lab_id": this.labID,
         "due_date": "2021-05-29 13:04:03",
         "copy_id": this.labID,
+        "java_starter": "public static void main(String[] args) {\n \n}",
+        "python_starter": "def main():\n  ",
       }
       const problem = await API.apiClient.post(`/problems`, payload);
       this.problemID = problem.data.data.id;
