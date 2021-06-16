@@ -94,21 +94,22 @@ export default {
     },
     updateContent(e) {
       console.log(e);
+      //this.timeout();
     },
      timeout: _.debounce(async function(assignmentID) {
       var payload = {};
       if(this.lang =="Java") {
         payload = {
-          "java_starter": this.content,
+          "code": this.code_j,
         }
+        const res = await API.apiClient.put(`/code/${this.jID}`, payload);
       }
       else {
         payload = {
-          "python_starter": this.content,
+          "code": this.code_p,
         }
+        const res = await API.apiClient.put(`/code/${this.pID}`, payload);
       };
-      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-      this.saveStatus = "All changes have been saved";
     }, 500),
   },
   beforeUnmount() {
