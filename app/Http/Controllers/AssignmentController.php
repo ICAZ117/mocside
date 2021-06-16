@@ -44,6 +44,8 @@ class AssignmentController extends Controller
             'due_date' => 'required',
             'lab_id' => 'required|int',
             'copy_id' => 'required|int',
+            'java_starter' => 'required',
+            'python_starter' => 'required',
         ]);
         $lab = Lab::find($validData['lab_id']);
         $owner = $lab->course->owner_id;
