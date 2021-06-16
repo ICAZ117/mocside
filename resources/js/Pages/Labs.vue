@@ -84,6 +84,11 @@ export default {
         }
       }
     },
+    sortLabs() {
+      const sortedLabs = this.labs.sort((a, b) => Date(b.due_date) - Date(a.due_date));
+      // redundant, .sort() is in place, but also returns.
+      return sortedLabs;
+    },
     Unmounting() {
       this.childisOpen = false;
       this.labID = null;
@@ -172,6 +177,7 @@ export default {
   async beforeMount() {
     this.childisOpen = false;
     await this.getLabs();
+    this.sortLabs();
   },
   beforeUnmount() {
     this.$emit("unmounting");
