@@ -78,14 +78,24 @@
       <label for="tcInput"
         >Input (Will be passed into the student's program's stdin)</label
       >
-      <VAceEditor class="editor" id="tcInput" @input="changeInput" v-model:value="tc.Input" />
+      <VAceEditor
+        class="editor"
+        id="tcInput"
+        @input="changeInput"
+        v-model:value="tc.Input"
+      />
       <br /><br />
 
       <!------------ TC Output ------------>
       <label for="tcOutput"
         >Output (Will be matched against the output of the student's program)</label
       >
-      <VAceEditor class="editor" id="tcOutput" @input="changeOutput" v-model:value="tc.Output" />
+      <VAceEditor
+        class="editor"
+        id="tcOutput"
+        @input="changeOutput"
+        v-model:value="tc.Output"
+      />
       <br /><br />
 
       <hr />
@@ -152,7 +162,7 @@ export default {
       };
       const res = await API.apiClient.post(`/test-cases/`, payload);
       this.cases.push(res.data);
-      this.setCurrent(this.cases.length-1);
+      this.setCurrent(this.cases.length - 1);
     },
     async deleteTest() {
       var key;
@@ -188,44 +198,94 @@ export default {
       this.tc.Input = this.cases[idx].input;
       this.tc.Output = this.cases[idx].output;
     },
-    timeout: _.debounce(async function (problemID) {
+    // timeout: _.debounce(async function (problemID) {
+    //   var payload = {
+    //     // title: this.tc.Title,
+    //     // points: this.tc.Points,
+    //     feedback: this.tc.Feedback,
+    //     // compare_method: this.tc.CompareMethod,
+    //     // input: this.tc.Input,
+    //     // output: this.tc.Output,
+    //   };
+    //   const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+    //   for (let i = 0; i < this.cases.length; i++) {
+    //     if (this.cases[i].id == res.data.id) {
+    //       this.cases[i] = res.data;
+    //     }
+    //   }
+    // }, 500),
+    changeTitle(e) {
+      this.tc.title = e;
       var payload = {
-        // title: this.tc.Title,
-        // points: this.tc.Points,
-        feedback: this.tc.Feedback,
-        // compare_method: this.tc.CompareMethod,
-        // input: this.tc.Input,
-        // output: this.tc.Output,
+        title: this.tc.Title,
       };
-      console.log("TC id:");
-      console.log(this.tc.id);
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
       for (let i = 0; i < this.cases.length; i++) {
         if (this.cases[i].id == res.data.id) {
           this.cases[i] = res.data;
         }
       }
-    }, 500),
-    changeTitle(e) {
-      console.log("title");
     },
     changePoints(e) {
-      console.log("points");
+      this.tc.Points = e;
+      var payload = {
+        points: this.tc.Points,
+      };
+      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+      for (let i = 0; i < this.cases.length; i++) {
+        if (this.cases[i].id == res.data.id) {
+          this.cases[i] = res.data;
+        }
+      }
     },
     changeFeedback(e) {
       this.tc.Feedback = e;
-      console.log(e);
-      this.timeout(this.problemID);
+      var payload = {
+        feedback: this.tc.Feedback,
+      };
+      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+      for (let i = 0; i < this.cases.length; i++) {
+        if (this.cases[i].id == res.data.id) {
+          this.cases[i] = res.data;
+        }
+      }
     },
     changeCompare(e) {
-      console.log("compare");
+      this.tc.CompareMethod = e;
+      var payload = {
+        compare_method: this.tc.CompareMethod,
+      };
+      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+      for (let i = 0; i < this.cases.length; i++) {
+        if (this.cases[i].id == res.data.id) {
+          this.cases[i] = res.data;
+        }
+      }
     },
     changeInput(e) {
-      console.log("input");
+      this.tc.Input = e;
+      var payload = {
+        input: this.tc.Input,
+      };
+      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+      for (let i = 0; i < this.cases.length; i++) {
+        if (this.cases[i].id == res.data.id) {
+          this.cases[i] = res.data;
+        }
+      }
     },
     changeOutput(e) {
-      console.log("output");
-    }
+      this.tc.Output = e;
+      var payload = {
+        output: this.tc.Output,
+      };
+      const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+      for (let i = 0; i < this.cases.length; i++) {
+        if (this.cases[i].id == res.data.id) {
+          this.cases[i] = res.data;
+        }
+      }
+    },
   },
   mounted() {
     this.getCases();
