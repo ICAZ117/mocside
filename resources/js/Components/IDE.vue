@@ -11,7 +11,7 @@
         :theme="theme"
       />
       <div class="row px-1 my-1">
-        <button @click="toggleIO" class="toggleIO col-1 btn btn-primary">
+        <button @click="toggleIO" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
         <button type="run" name="run" class="run-code col-1 btn btn-success">Run</button>
@@ -189,15 +189,15 @@ export default {
       theme: "gob",
       content: "",
       editorLangauge: "",
-      style: "width: " + (this.showSubmit ? "78%" : "89%") + "!important",
+      style: "width: " + (this.showSubmit ? "67%" : "89%") + "!important",
       IOmessage: "Show Input",
       showInput: false,
     };
   },
   methods: {
     toggleIO() {
-      showInput = !showInput;
-      IOmessage = showInput ? "Show Output" : "Show Input";
+      this.showInput = !this.showInput;
+      this.IOmessage = this.showInput ? "Show Output" : "Show Input";
     },
   },
   components: {
