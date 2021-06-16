@@ -261,6 +261,18 @@ export default {
     this.getStyle();
     this.forceReload = 1;
   },
+  beforeCreate() {
+    console.log(this.saved_p);
+    console.log(this.saved_j);
+  },
+  created() {
+    console.log(this.saved_p);
+    console.log(this.saved_j);
+  },
+  beforeMount() {
+    console.log(this.saved_p);
+    console.log(this.saved_j);
+  },
 };
 </script>
 
