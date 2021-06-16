@@ -6,7 +6,7 @@
     >
       <VAceEditor
         class="editor"
-        v-model:value="data.code"
+        v-model:value="code"
         :lang="editorLangauge"
         :theme="theme"
       />
@@ -78,7 +78,7 @@
     </div>
     <div v-if="!showInput" class="console row"></div>
     <div v-if="showInput" class="inputHeight row">
-      <VAceEditor :theme="'chaos'" v-model:value="data.input" />
+      <VAceEditor :theme="'chaos'" v-model:value="input" />
     </div>
   </div>
 </template>
@@ -191,10 +191,8 @@ export default {
       style: "",
       IOmessage: "Show Input",
       showInput: false,
-      data: {
-        code: "",
-        input: "",
-      }
+      code: "",
+      input: "",
     };
   },
   methods: {
@@ -206,8 +204,13 @@ export default {
       // width: " + (this.showSubmit ? "67%" : "89%") + "!important
       var button = document.getElementById("buttonWidth");
       var numButtons = this.showSubmit ? 3 : 2;
-      this.style = "width: calc((100% - " + numButtons + "%) - " + ((numButtons * button.clientWidth) + 2) + "px)!important;" 
-    }
+      this.style =
+        "width: calc((100% - " +
+        numButtons +
+        "%) - " +
+        (numButtons * button.clientWidth + 2) +
+        "px)!important;";
+    },
   },
   components: {
     VAceEditor,
@@ -217,11 +220,27 @@ export default {
     if (this.lang == "Java") {
       console.log("JAVA");
       this.editorLangauge = "java";
-      this.data.code = this.saved_j;
+      console.log("\n\n\n\n\n");
+      console.log("\n------------- BEFORE SAVE --------------");
+      console.log("code:");
+      console.log(this.code);
+      console.log("saved_j:");
+      console.log(this.saved_j);
+
+      console.log("\n\nSaving...\n\n");
+      this.code = this.saved_j;
+
+      console.log("\n------------- AFTER SAVE --------------");
+      console.log("code:");
+      console.log(this.code);
+      console.log("saved_j:");
+      console.log(this.saved_j);
+      console.log("\n\n\n\n\n");
+
     } else {
       console.log("PYTHON");
       this.editorLangauge = "python";
-      this.data.code = this.saved_p;
+      this.code = this.saved_p;
     }
   },
   mounted() {
@@ -229,8 +248,12 @@ export default {
   },
   computed: {
     updateContent: function () {
-      this.$emit("update", this.data);
-      return this.data;
+      var data = {
+        code: this.code,
+        input: this.input,
+      };
+      this.$emit("update", data);
+      return "";
     },
   },
 };
