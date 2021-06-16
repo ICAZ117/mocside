@@ -63,11 +63,10 @@
         @change="changeCompare"
         v-model="tc.CompareMethod"
       >
-        <option value="" selected disabled hidden>Select One...</option>
         <option value="flexible">
           Flexible equality (ignores: case, whitespace, and special characters)
         </option>
-        <option value="exact">Equals exactly</option>
+        <option value="exact" selected>Equals exactly</option>
         <option value="contains">Contains an exact value (at least once)</option>
         <option value="regex">Regex (Write a regular expression to match outputs)</option>
       </select>
