@@ -19,9 +19,11 @@ class StorageController extends Controller
     }
 
     public function storeCode(Request $request)
-    {
+    {   
+        $user = Auth::user();
+        $head = $user->fsc_id . '//code//' . $request->problem_id;
         try {
-            $filePath = Storage::disk('local')->putFile('code', $request->file);
+            $filePath = Storage::disk('local')->putFile($head, $request->file);
             return response()->json(['message' => $filePath], 200);
         } catch (Exception $exception) {
             return response()->json(['message' => $exception->getMessage()], 409);
