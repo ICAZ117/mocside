@@ -253,6 +253,7 @@ export default {
         code: this.code,
         input: this.input,
       };
+      console.log("HERE");
       this.$emit("update", data);
       return "";
     },
