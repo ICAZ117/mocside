@@ -21,7 +21,7 @@
           <td>{{ student.name }}</td>
           <td>{{ student.ID }}</td>
           <td>{{ student.percent }}%</td>
-          <td>{{ student.grade }}</td>
+          <td>{{ student.grade }} / {{ worth }}</td>
           <td>{{ student.letterGrade }}</td>
           <td>
             <a :href="'mailto:' + student.email">{{ student.email }}</a>
@@ -42,6 +42,7 @@ export default {
       authUser: {},
       gradebook: {},
       students: [],
+      worth: 0,
     }
   },
   methods: {
@@ -49,7 +50,7 @@ export default {
       if(this.isProf == true) {
         const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
         this.gradebook = JSON.parse(res.data.data.gradebook);
-
+        this.worth = res.data.data.worth;
 
         // this logic is populating front-end gradebook
         var student_ids = this.gradebook.students; // list of ids in gradebook 
