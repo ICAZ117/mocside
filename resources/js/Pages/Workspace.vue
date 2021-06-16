@@ -45,11 +45,13 @@ export default {
     },
     async getJava(templates) {
       //if first time opening grab template, else grab student code
-      return templates.java_starter;
+      // return templates.java_starter;
+      return "";
     },
     async getPython(templates) {
       //if first time opening grab template, else grab student code
-      return templates.python_starter;
+      // return templates.python_starter;
+      return "";
     },
   },
   beforeUnmount() {
