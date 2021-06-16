@@ -77,7 +77,7 @@
       </div>
     </div>
     <div v-if="!showInput" class="console row"></div>
-    <div v-else>
+    <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" />
     </div>
   </div>
@@ -203,7 +203,7 @@ export default {
     getStyle() {
       // width: " + (this.showSubmit ? "67%" : "89%") + "!important
       var button = document.getElementById("buttonWidth");
-      var numButtons = this.showInput ? 2 : 3;
+      var numButtons = this.showSubmit ? 3 : 2;
       this.style = "width: calc((100% - " + numButtons + "%) - " + ((numButtons * button.clientWidth) + 2) + "px)!important;" 
     }
   },
