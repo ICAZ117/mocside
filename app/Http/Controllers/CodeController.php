@@ -45,7 +45,7 @@ class CodeController extends Controller
             ['fsc_id', '=', $user->fsc_id],
             ['lang', '=', $validData['lang']],
             ['assignment_id', '=', $validData['problem_id']],
-        ]);
+        ])->get();
         if ($user->isAdmin() || ($user->fsc_id == $code->fsc_id)) {
             return response()->json(['data' => $code], 200);
         }
