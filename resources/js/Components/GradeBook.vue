@@ -4,7 +4,8 @@
       <thead class="gradebook">
         <tr>
           <th>Name</th>
-          <th>ID</th>
+          <th>FSC ID</th>
+          <th>Percent</th>
           <th>Grade</th>
           <th>Letter Grade</th>
           <th>Email</th>
@@ -19,7 +20,8 @@
         >
           <td>{{ student.name }}</td>
           <td>{{ student.ID }}</td>
-          <td>{{ student.grade }}%</td>
+          <td>{{ student.percent }}%</td>
+          <td>{{ student.grade }}</td>
           <td>{{ student.letterGrade }}</td>
           <td>
             <a :href="'mailto:' + student.email">{{ student.email }}</a>
@@ -60,8 +62,9 @@ export default {
           var calcGrades = this.calcGrade(res.data.data, points)
           this.students.push({
             name: student.name,
-            ID: student.id,
+            ID: student.fsc_id,
             grade: calcGrades[1],
+            percent: calcGrades[2],
             letterGrade: calcGrades[0],
             email: student.email,
           });
@@ -71,27 +74,28 @@ export default {
     calcGrade(assignment, points) {
       // calc numbers
       var worth = assignment.worth;
-      var grade;
-      grade = points*100;
-      grade = grade / (worth*100);
-      grade = Math.floor(grade);
-      grade = grade / 100;
+      var percent;
+      percent = points*100;
+      percent = percent / worth * 100;
+      percent = Math.floor(percent);
+      percent = percent / 100;
+
 
       // calc letters
       var letterGrade;
-      if (grade > 90) {
+      if (percent > 90) {
         letterGrade = 'A';
-      } else if (grade > 80) {
+      } else if (percent > 80) {
         letterGrade = 'B';
-      } else if (grade > 70) {
+      } else if (percent > 70) {
         letterGrade = 'C';
-      } else if (grade > 60) {
+      } else if (percent > 60) {
         letterGrade = 'D';
       } else {
         letterGrade = "F";
       }
 
-      return [letterGrade, grade];
+      return [letterGrade, points, percent];
     }
   },
   computed: {
