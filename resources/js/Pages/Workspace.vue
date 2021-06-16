@@ -9,7 +9,7 @@
       </p>
     </div>
 
-    <IDE class="col-8" :lang="lang" :showSubmit="true" v-model:saved_j="code_j" v-model:saved_p="code_p" @update="updateContent"/>
+    <IDE class="col-8" :lang="lang" :showSubmit="true" :saved_j="code_j" :saved_p="code_p" @update="updateContent"/>
 
   </div>
 </template>
@@ -54,16 +54,19 @@ export default {
       if (progress.length == 0) {
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
+        console.log("Got Java");
         return this.assignment.java_starter;
       }
       else {
         for(let i=0; i < progress.length; i++) {
           if(progress[i].lang == "java") {
+            console.log("Got Java");
             return progress[i].code;
           }
         }
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
+        console.log("Got Java");
         return this.assignment.java_starter;
       }
     },
