@@ -85,7 +85,15 @@ export default {
     calcGrade(assignment, points) {
       // calc numbers
       var worth = assignment.worth;
-      var grade = Math.floor((points*100) / (worth*100)) / 100;
+      var grade;
+      grade = points*100;
+      console.log(grade);
+      grade = grade / worth*100;
+      console.log(grade);
+      grade = Math.floor(grade);
+      console.log(grade);
+      grade = grade / 100;
+      console.log(grade);
 
       // calc letters
       var letterGrade;
