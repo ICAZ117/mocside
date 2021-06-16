@@ -29,8 +29,18 @@
             <td v-if="!isProf">{{ lab.activity }}</td>
             <!-- <td>4/20/0420</td> -->
           </tr>
-          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)">•••</a>
-          <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
+          <a
+            v-if="isProf"
+            class="pointer no-decor"
+            @click="editLab(lab.id, lab.name)"
+            >•••</a
+          >
+          <a
+            v-if="isProf"
+            class="pointer no-decor"
+            @click="removeLab(lab.id, key)"
+            >X</a
+          >
         </template>
 
         <!-- <tr
@@ -46,7 +56,13 @@
       </tbody>
     </table>
   </div>
-  <router-view @unmounting="Unmounting()" @labEdited="labEdited()" v-if="childisOpen" :labID="labID" :labName="labName"></router-view>
+  <router-view
+    @unmounting="Unmounting()"
+    @labEdited="labEdited()"
+    v-if="childisOpen"
+    :labID="labID"
+    :labName="labName"
+  ></router-view>
 </template>
 
 <script>
@@ -85,7 +101,11 @@ export default {
       }
     },
     sortLabs() {
-      const sortedLabs = this.labs.sort((a, b) => Date(b.due_date) - Date(a.due_date));
+      const sortedLabs = this.labs.sort(function(a,b){
+          // Turn your strings into dates, and then subtract them
+          // to get a value that is either negative, positive, or zero.
+          return new Date(b.due_date) - new Date(a.due_date);
+      });
       // redundant, .sort() is in place, but also returns.
       return sortedLabs;
     },
