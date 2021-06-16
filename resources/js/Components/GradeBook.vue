@@ -63,7 +63,7 @@ export default {
           var calcGrades = this.calcGrade(res.data.data, points)
           this.students.push({
             name: student.name,
-            ID: student.fsc_id,
+            ID: curr,
             grade: calcGrades[1],
             percent: calcGrades[2],
             letterGrade: calcGrades[0],
