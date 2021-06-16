@@ -1,5 +1,8 @@
 <template>
   <div class="create-test-cases create-assignment">
+    <!-- ---------------------------------------- -->
+    <!-- --------------- TC CARDS --------------- -->
+    <!-- ---------------------------------------- -->
     <div class="row test-cases">
       <div
         v-for="(tc, idx) in cases"
@@ -29,27 +32,36 @@
       </div>
     </div>
 
+    <!-- ---------------------------------------- -->
+    <!-- -------------- TC FIELDS --------------- -->
+    <!-- ---------------------------------------- -->
     <div v-if="currentTC != '' && currentTC != 0" class="container">
+      <!------------ Header ------------>
       <h4>Test Case ({{ currentTC }}/{{ cases.length }})</h4>
       <hr />
+
+      <!------------ TC Title ------------>
       <label for="tcTitle">Title: </label>
-      <input type="text" id="tcTitle" @change="changeTitle()" v-model="tc.Title" />
+      <input type="text" id="tcTitle" @input="changeTitle" v-model="tc.Title" />
       <br />
 
+      <!------------ TC Points ------------>
       <label for="tcPoints">Points: </label>
-      <input type="number" id="tcPoints" @change="changePoints()" v-model="tc.Points" />
+      <input type="number" id="tcPoints" @input="changePoints" v-model="tc.Points" />
       <br /><br />
 
+      <!------------ TC Feedback ------------>
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap :savedText="JSON.parse(tc.Feedback)" @input="save" />
+      <Tiptap :savedText="JSON.parse(tc.Feedback)" @input="changeFeedback" />
       <br /><br />
 
+      <!------------ TC Compare Method ------------>
       <label for="compareMethod">Compare Method: </label>
       <select
         class="form-select"
         name="compareMethod"
         id="compareMethod"
-        @change="changeCompare()"
+        @input="changeCompare"
         v-model="tc.CompareMethod"
       >
         <option value="" selected disabled hidden>Select One...</option>
@@ -62,18 +74,23 @@
       </select>
       <br /><br />
 
+      <!------------ TC Input ------------>
       <label for="tcInput"
         >Input (Will be passed into the student's program's stdin)</label
       >
-      <VAceEditor class="editor" id="tcInput" v-model:value="tc.Input" />
+      <VAceEditor class="editor" id="tcInput" @input="changeInput" v-model:value="tc.Input" />
       <br /><br />
 
+      <!------------ TC Output ------------>
       <label for="tcOutput"
         >Output (Will be matched against the output of the student's program)</label
       >
-      <VAceEditor class="editor" id="tcOutput" v-model:value="tc.Output" />
+      <VAceEditor class="editor" id="tcOutput" @input="changeOutput" v-model:value="tc.Output" />
       <br /><br />
+
       <hr />
+
+      <!------------ DELETE TC ------------>
       <button @click="deleteTest()" class="btn btn-md btn-danger">Delete</button>
       <br />
     </div>
@@ -81,8 +98,6 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-
 import { VAceEditor } from "vue3-ace-editor";
 
 import * as API from "../services/API";
@@ -111,17 +126,17 @@ export default {
   components: {
     VAceEditor,
   },
-  watch: {
-    tc: {
-      deep: true,
-      handler() {
-        if (this.tc.id != "") {
-          // this.timeout(this.problemID);
-          console.log("something changed");
-        }
-      },
-    },
-  },
+  // watch: {
+  //   tc: {
+  //     deep: true,
+  //     handler() {
+  //       if (this.tc.id != "") {
+  //         // this.timeout(this.problemID);
+  //         console.log("something changed");
+  //       }
+  //     },
+  //   },
+  // },
   methods: {
     async getCases() {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
@@ -191,19 +206,25 @@ export default {
         }
       }
     }, 500),
-    changeTitle() {
+    changeTitle(e) {
       console.log("title");
     },
-    changePoints() {
+    changePoints(e) {
       console.log("points");
     },
-    changeCompare() {
-      console.log("compare");
-    },
-    save(e) {
+    changeFeedback(e) {
       this.tc.Feedback = e;
       console.log(e);
       this.timeout(this.problemID);
+    },
+    changeCompare(e) {
+      console.log("compare");
+    },
+    changeInput(e) {
+      console.log("input");
+    },
+    changeOutput(e) {
+      console.log("output");
     }
   },
   mounted() {
