@@ -41,6 +41,7 @@ export default {
       this.workspace.description = this.assignment.description;
       const res = await API.apiClient.get(`/code/search/${this.problemID}`);
       var progress = res.data.data;
+      console.log(progress);
       this.workspace.code_j = this.getJava(progress);
       this.workspace.code_p = this.getPython(progress);
     },
@@ -65,6 +66,7 @@ export default {
       }
       else {
         for(let i =0; i < progress.length; i++) {
+          console.log(progress[i]);
           if(progress[i].lang == "python") {
             return progress[i].code;
           }
