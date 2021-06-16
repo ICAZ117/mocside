@@ -36,7 +36,7 @@ export default {
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      this.assignment = rawAssignment.data;
+      this.assignment = rawAssignment.data.data;
       this.workspace.title = this.assignment.name;
       this.workspace.description = this.assignment.description;
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
