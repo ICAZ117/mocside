@@ -40,7 +40,7 @@ import MenuBar from "./MenuBar.vue";
 import TextAlign from "@tiptap/extension-text-align";
 
 export default {
-  props: ["savedText"],
+  props: ["savedText", "editable"],
   components: {
     EditorContent,
     MenuBar,
@@ -63,6 +63,7 @@ export default {
         TextAlign,
       ],
       content: this.savedText,
+      editable: this.editable,
       // 
       onUpdate() {
         self.$emit('input', this.getJSON());
