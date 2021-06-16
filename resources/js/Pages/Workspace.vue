@@ -42,8 +42,8 @@ export default {
       const res = await API.apiClient.get(`/code/search/${this.problemID}`);
       var progress = res.data.data;
       console.log(progress);
-      this.code_j = this.getJava(progress);
-      this.code_p = this.getPython(progress);
+      this.code_j = await this.getJava(progress);
+      this.code_p = await this.getPython(progress);
     },
     async getJava(progress) {
       //if first time opening grab template, else grab student code
