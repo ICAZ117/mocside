@@ -41,6 +41,11 @@ class User extends Authenticatable
         return $this->hasOne(Student::class, 'fsc_id', 'fsc_id');
     }
 
+    public function code_snaps()
+    {
+        return $this->hasMany(Code::class, 'fsc_id', 'fsc_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
