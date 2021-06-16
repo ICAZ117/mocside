@@ -40,7 +40,7 @@
                 </h4>
                 <!-- get text from .description object -->
                 <p>
-                  {{ problem.description }}
+                  <!-- {{ problem.description }} -->
                   <br />
                   Due Date: {{ problem.due_date.split(" ")[0] }}
                   <br />
