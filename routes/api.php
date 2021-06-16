@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CodeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
@@ -88,6 +89,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/progress', [ProgressController::class, 'store']);
     Route::put('/progress/{id}', [ProgressController::class, 'update']);
     Route::delete('/progress/{id}', [ProgressController::class, 'destroy']);
+
+    Route::get('/code/{id}', [CodeController::class, 'show']);
+    Route::get('/code/find', [CodeController::class, 'find']);
+    Route::post('/code', [CodeController::class, 'store']);
+    Route::put('/code/{id}', [CodeController::class, 'update']);
+    Route::delete('/code/{id}', [CodeController::class, 'delete']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
