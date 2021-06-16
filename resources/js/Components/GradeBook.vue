@@ -40,20 +40,6 @@ export default {
       authUser: {},
       gradebook: {},
       students: [],
-      // students: [{
-      //   name: "Darth Vader",
-      //   ID: "6666666",
-      //   grade: "83%",
-      //   letterGrade: "B",
-      //   email: "UnicornKitty22@gmail.com"
-      // },
-      // {
-      //   name: "Bruh",
-      //   ID: "0000000",
-      //   grade: "100%",
-      //   letterGrade: "A",
-      //   email: "bruh@gmail.com"
-      // }]
     }
   },
   methods: {
@@ -87,13 +73,9 @@ export default {
       var worth = assignment.worth;
       var grade;
       grade = points*100;
-      console.log(grade);
-      grade = grade / worth*100;
-      console.log(grade);
+      grade = grade / (worth*100);
       grade = Math.floor(grade);
-      console.log(grade);
       grade = grade / 100;
-      console.log(grade);
 
       // calc letters
       var letterGrade;
