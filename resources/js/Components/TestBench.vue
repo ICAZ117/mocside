@@ -214,7 +214,7 @@ export default {
     //     }
     //   }
     // }, 500),
-    changeTitle(e) {
+    async changeTitle(e) {
       this.tc.title = e;
       var payload = {
         title: this.tc.Title,
@@ -226,7 +226,7 @@ export default {
         }
       }
     },
-    changePoints(e) {
+    async changePoints(e) {
       this.tc.Points = e;
       var payload = {
         points: this.tc.Points,
@@ -238,7 +238,7 @@ export default {
         }
       }
     },
-    changeFeedback(e) {
+    async changeFeedback(e) {
       this.tc.Feedback = e;
       var payload = {
         feedback: this.tc.Feedback,
@@ -250,7 +250,7 @@ export default {
         }
       }
     },
-    changeCompare(e) {
+    async changeCompare(e) {
       this.tc.CompareMethod = e;
       var payload = {
         compare_method: this.tc.CompareMethod,
@@ -262,7 +262,7 @@ export default {
         }
       }
     },
-    changeInput(e) {
+    async changeInput(e) {
       this.tc.Input = e;
       var payload = {
         input: this.tc.Input,
@@ -274,7 +274,7 @@ export default {
         }
       }
     },
-    changeOutput(e) {
+    async changeOutput(e) {
       this.tc.Output = e;
       var payload = {
         output: this.tc.Output,
