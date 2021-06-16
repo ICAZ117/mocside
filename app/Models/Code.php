@@ -9,6 +9,7 @@ class Code extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
+    protected $table = 'code';
     protected $fillable = [
         'id',
         'fsc_id',
