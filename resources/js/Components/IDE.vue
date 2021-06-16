@@ -6,7 +6,7 @@
     >
       <VAceEditor
         class="editor"
-        v-model:value="content"
+        v-model:value="data.code"
         :lang="editorLangauge"
         :theme="theme"
       />
@@ -78,7 +78,7 @@
     </div>
     <div v-if="!showInput" class="console row"></div>
     <div v-if="showInput" class="inputHeight row">
-      <VAceEditor :theme="'chaos'" v-model:value="input" />
+      <VAceEditor :theme="'chaos'" v-model:value="data.input" />
     </div>
   </div>
 </template>
@@ -187,12 +187,14 @@ export default {
   data() {
     return {
       theme: "gob",
-      content: "",
       editorLangauge: "",
       style: "",
       IOmessage: "Show Input",
       showInput: false,
-      input: "",
+      data: {
+        code: "",
+        input: "",
+      }
     };
   },
   methods: {
@@ -211,12 +213,15 @@ export default {
     VAceEditor,
   },
   beforeMount() {
+    console.log("BEFORE MOUNT");
     if (this.lang == "Java") {
+      console.log("JAVA");
       this.editorLangauge = "java";
-      this.content = this.saved_j;
+      this.data.code = this.saved_j;
     } else {
+      console.log("PYTHON");
       this.editorLangauge = "python";
-      this.content = this.saved_p;
+      this.data.code = this.saved_p;
     }
   },
   mounted() {
@@ -224,11 +229,7 @@ export default {
   },
   computed: {
     updateContent: function () {
-      const data = {
-        input: this.input,
-        code: this.content,
-      };
-      this.$emit("update", data);
+      this.$emit("update", this.data);
       return this.data;
     },
   },
