@@ -123,7 +123,7 @@ class AssignmentController extends Controller
     {
         $user = Auth::user();
         $assignment = Assignment::find($id);
-        $lab = $assignment->lab;
+        $lab = Lab::find($assignment->lab_id);
         $owner = $lab->course->owner_id;
 
         $isOriginal = $assignment->copy_id == $assignment->id;
