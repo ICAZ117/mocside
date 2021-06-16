@@ -39,18 +39,38 @@ export default {
       this.assignment = rawAssignment.data.data;
       this.workspace.title = this.assignment.name;
       this.workspace.description = this.assignment.description;
-      this.workspace.code_j = this.getJava();
-      this.workspace.code_p = this.getPython();
+      const res = await API.apiClient.get(`/code/search/${this.problemID}`);
+      var progress = res.data.data;
+      this.workspace.code_j = this.getJava(progress);
+      this.workspace.code_p = this.getPython(progress);
     },
-    getJava() {
+    getJava(progress) {
       //if first time opening grab template, else grab student code
-      return this.assignment.java_starter;
-      // return "";
+      if (progress.length == 0) {
+        return this.assignment.java_starter;
+      }
+      else {
+        for(let i=0; i < progress.length; i++) {
+          if(progress[i].lang == "java") {
+            return progress[i].code;
+          }
+        }
+        return this.assignment.java_starter;
+      }
     },
-    getPython() {
+    getPython(progress) {
       //if first time opening grab template, else grab student code
-      return this.assignment.python_starter;
-      // return "";
+      if (progress.length == 0) {
+        return this.assignment.python_starter;
+      }
+      else {
+        for(let i =0; i < progress.length; i++) {
+          if(progress[i].lang == "python") {
+            return progress[i].code;
+          }
+        }
+        return this.assignment.python_starter;
+      }
     },
     updateContent(e) {
       console.log(e);
