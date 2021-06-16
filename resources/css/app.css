@@ -767,6 +767,7 @@ thead.gradebook {
     color: lightgray !important;
 }
 
+.toggleIO,
 .run-code,
 .submit-code {
     border: none !important;
