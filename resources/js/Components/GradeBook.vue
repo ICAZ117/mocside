@@ -60,7 +60,7 @@ export default {
     async getStudents(){
       if(this.isProf == true) {
         const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
-        this.gradebook = res.data.data.gradebook;
+        this.gradebook = JSON.parse(res.data.data.gradebook);
 
 
         // this logic is populating front-end gradebook
@@ -85,7 +85,7 @@ export default {
     calcGrade(assignment, points) {
       // calc numbers
       var worth = assignment.worth;
-      var grade = int((points*100) / (worth*100)) / 100;
+      var grade = Math.floor((points*100) / (worth*100)) / 100;
 
       // calc letters
       var letterGrade;
