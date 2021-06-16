@@ -73,7 +73,7 @@ export default {
       var worth = assignment.worth;
       var grade;
       grade = points*100;
-      grade = grade / (worth*100);
+      grade = grade / worth*100;
       grade = Math.floor(grade);
       grade = grade / 100;
 
