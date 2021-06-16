@@ -25,7 +25,7 @@
             <td>{{ lab.num_problems }}</td>
             <td v-if="!isProf">{{ lab.percent }}</td>
             <!-- <td>69%</td> -->
-            <td>{{ lab.due_date.split(" ")[0] }}</td>
+            <td>{{ lab.due_date }}</td>
             <td v-if="!isProf">{{ lab.activity }}</td>
             <!-- <td>4/20/0420</td> -->
           </tr>
@@ -100,7 +100,7 @@ export default {
         }
       }
     },
-    sortLabs() {
+    async sortLabs() {
       const sortedLabs = this.labs.sort(function(a,b){
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.
@@ -127,7 +127,7 @@ export default {
         "name": "New Lab",
         "description": "New Lab",
         "course_id": this.courseID,
-        "due_date": "2021-06-3 23:59:59",
+        "due_date": "2021-06-03",
       }
       const lab = await API.apiClient.post(`/labs/`, payload);
       this.labs.push(lab.data.data);
@@ -197,7 +197,8 @@ export default {
   async beforeMount() {
     this.childisOpen = false;
     await this.getLabs();
-    this.sortLabs();
+    const sorted = await this.sortLabs();
+    console.log(sorted);
   },
   beforeUnmount() {
     this.$emit("unmounting");
