@@ -35,7 +35,7 @@ export default {
   methods: {
     async getAssignment() {
       //this route needs to be worked on and adjusted
-      const rawAssignment = await API.apiClient.get(`/problems/${this.labID}`);
+      const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.assignment = rawAssignment.data;
       this.workspace.title = this.assignment.name;
       this.workspace.description = this.assignment.description;
