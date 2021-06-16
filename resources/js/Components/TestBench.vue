@@ -176,14 +176,29 @@ export default {
       this.cases = this.cases.filter((c, i) => i != key);
       var temp = this.tc.id;
       //set current to null
-      this.currentTC--;
-      this.tc.id = "";
-      this.tc.Title = "";
-      this.tc.Points = "";
-      this.tc.Feedback = "";
-      this.tc.CompareMethod = "";
-      this.tc.Input = "";
-      this.tc.Output = "";
+      if(this.currentTC != 1 && this.currentTC.length != 0) {
+        this.currentTC--;
+      };
+      if(this.currentTC.length != 0) {
+        var idx = this.currentTC - 1;
+        this.tc.id = this.cases[idx].id;
+        this.tc.Title = this.cases[idx].title;
+        this.tc.Points = this.cases[idx].points;
+        this.tc.Feedback = this.cases[idx].feedback;
+        this.tc.CompareMethod = this.cases[idx].compare_method;
+        this.tc.Input = this.cases[idx].input;
+        this.tc.Output = this.cases[idx].output;
+      }
+      else {
+        this.currentTC = 0;
+        this.tc.id = "";
+        this.tc.Title = "";
+        this.tc.Points = "";
+        this.tc.Feedback = "";
+        this.tc.CompareMethod = "";
+        this.tc.Input = "";
+        this.tc.Output = "";
+      }
 
       // I do this after to ensure that it doesn't try to repost to the test case after it has been deleted
       const res = await API.apiClient.delete(`/test-cases/${temp}`);
