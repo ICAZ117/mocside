@@ -91,7 +91,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/progress/{id}', [ProgressController::class, 'destroy']);
 
     Route::get('/code/{id}', [CodeController::class, 'show']);
-    Route::get('/search/code', [CodeController::class, 'find']);
+    Route::get('/code/search/{problem_id}', [CodeController::class, 'find']);
     Route::post('/code', [CodeController::class, 'store']);
     Route::put('/code/{id}', [CodeController::class, 'update']);
     Route::delete('/code/{id}', [CodeController::class, 'delete']);

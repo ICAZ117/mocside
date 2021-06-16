@@ -34,17 +34,12 @@ class CodeController extends Controller
         return reponse()->json(['message' => 'This is not your code!'], 403);
     }
 
-    public function find(Request $request)
+    public function find($problem_id)
     {
         $user = Auth::user();
-        $validData = $request->validate([
-            'lang' => 'required',
-            'problem_id' => 'required',
-        ]);
         $code = Code::where([
             ['fsc_id', '=', $user->fsc_id],
-            ['lang', '=', $validData['lang']],
-            ['assignment_id', '=', $validData['problem_id']],
+            ['assignment_id', '=', $problem_id],
         ])->get();
         if ($user->isAdmin() || ($user->fsc_id == $code->fsc_id)) {
             return response()->json(['data' => $code], 200);
