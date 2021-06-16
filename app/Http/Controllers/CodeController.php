@@ -47,7 +47,7 @@ class CodeController extends Controller
             ['assignment_id', '=', $validData['problem_id']],
         ]);
         if ($user->isAdmin() || ($user->fsc_id == $code->fsc_id)) {
-            return $code->fsc_id;
+            return response()->json(['data' => $code], 200);
         }
         return reponse()->json(['message' => 'This is not your code!'], 403);
     }
