@@ -140,7 +140,7 @@ class AssignmentController extends Controller
             // this should already happen from the replicate
 
             // point lab 2 at old object,
-            $lab2_id = $copies[1]->lab->id;
+            $lab2_id = $copies[1]->lab_id;
             $assignment->lab_id = $lab2_id;
 
             // and then delete husk.
