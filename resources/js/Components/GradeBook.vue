@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     async getStudents(){
-      if(this.authUser.isProf() == true) {
+      if(this.isProf == true) {
         const res = await API.apiClient.get(`/problems/full/${assignmentID}`);
         this.gradebook = res.data.data.gradebook;
 
@@ -101,6 +101,16 @@ export default {
       }
 
       return [letterGrade, grade];
+    }
+  },
+  computed: {
+    isProf: function() {
+      if (store.getters["auth/isProf"] == null) {
+        return false;
+      }
+      else {
+        return store.getters["auth/isProf"];
+      }
     }
   },
   mounted() {
