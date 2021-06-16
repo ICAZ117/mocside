@@ -28,6 +28,8 @@ export default {
       code_p: "",
       theme: "",
       input: "",
+      jID: "",
+      pID: "",
     };
   },
   methods: {
@@ -43,9 +45,16 @@ export default {
       this.code_j = this.getJava(progress);
       this.code_p = this.getPython(progress);
     },
-    getJava(progress) {
+    async getJava(progress) {
       //if first time opening grab template, else grab student code
+      var payload = {
+        lang: "java",
+        problem_id: this.problemID,
+        code: this.assignment.java_starter,
+      }
       if (progress.length == 0) {
+        const res = await API.apiClient.post(`/code/`, payload);
+        this.jID = res.data.id;
         return this.assignment.java_starter;
       }
       else {
@@ -54,12 +63,21 @@ export default {
             return progress[i].code;
           }
         }
+        const res = await API.apiClient.post(`/code/`, payload);
+        this.jID = res.data.id;
         return this.assignment.java_starter;
       }
     },
-    getPython(progress) {
+    async getPython(progress) {
       //if first time opening grab template, else grab student code
+      var payload = {
+        lang: "python",
+        problem_id: this.problemID,
+        code: this.assignment.python_starter,
+      }
       if (progress.length == 0) {
+        const res = await API.apiClient.post(`/code/`, payload);
+        this.pID = res.data.id;
         return this.assignment.python_starter;
       }
       else {
@@ -69,12 +87,30 @@ export default {
             return progress[i].code;
           }
         }
+        const res = await API.apiClient.post(`/code/`, payload);
+        this.pID = res.data.id;
         return this.assignment.python_starter;
       }
     },
     updateContent(e) {
       console.log(e);
+      //this.timeout();
     },
+     timeout: _.debounce(async function(assignmentID) {
+      var payload = {};
+      if(this.lang =="Java") {
+        payload = {
+          "code": this.code_j,
+        }
+        const res = await API.apiClient.put(`/code/${this.jID}`, payload);
+      }
+      else {
+        payload = {
+          "code": this.code_p,
+        }
+        const res = await API.apiClient.put(`/code/${this.pID}`, payload);
+      };
+    }, 500),
   },
   beforeUnmount() {
     this.$emit("unmounting");
