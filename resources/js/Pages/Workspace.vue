@@ -2,14 +2,14 @@
   <!-- Main Page-->
   <div class="row">
     <div class="instructions col-4 p-4">
-      <h4>{{ workspace.title }}</h4>
+      <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <p>
-        {{ workspace.description }}
+        {{ description }}
       </p>
     </div>
 
-    <IDE class="col-8" :lang="lang" :showSubmit="true" v-model:saved_j="workspace.code_j" v-model:saved_p="workspace.code_p" @update="updateContent"/>
+    <IDE class="col-8" :lang="lang" :showSubmit="true" v-model:saved_j="code_j" v-model:saved_p="code_p" @update="updateContent"/>
 
   </div>
 </template>
@@ -22,14 +22,12 @@ export default {
   data() {
     return {
       assignment: {},
-      workspace: {
-        title: "",
-        description: "",
-        code_j: "",
-        code_p: "",
-        theme: "",
-        input: "",
-      },
+      title: "",
+      description: "",
+      code_j: "",
+      code_p: "",
+      theme: "",
+      input: "",
     };
   },
   methods: {
@@ -37,13 +35,13 @@ export default {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.assignment = rawAssignment.data.data;
-      this.workspace.title = this.assignment.name;
-      this.workspace.description = this.assignment.description;
+      this.title = this.assignment.name;
+      this.description = this.assignment.description;
       const res = await API.apiClient.get(`/code/search/${this.problemID}`);
       var progress = res.data.data;
       console.log(progress);
-      this.workspace.code_j = this.getJava(progress);
-      this.workspace.code_p = this.getPython(progress);
+      this.code_j = this.getJava(progress);
+      this.code_p = this.getPython(progress);
     },
     getJava(progress) {
       //if first time opening grab template, else grab student code
