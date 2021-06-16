@@ -31,7 +31,6 @@
         </div>
       </div>
     </div>
-
     <!-- ---------------------------------------- -->
     <!-- -------------- TC FIELDS --------------- -->
     <!-- ---------------------------------------- -->
@@ -42,12 +41,12 @@
 
       <!------------ TC Title ------------>
       <label for="tcTitle">Title: </label>
-      <input type="text" id="tcTitle" @input="changeTitle" v-model="tc.Title" />
+      <input type="text" id="tcTitle" @change="changeTitle" v-model="tc.Title" />
       <br />
 
       <!------------ TC Points ------------>
       <label for="tcPoints">Points: </label>
-      <input type="number" id="tcPoints" @input="changePoints" v-model="tc.Points" />
+      <input type="number" id="tcPoints" @change="changePoints" v-model="tc.Points" />
       <br /><br />
 
       <!------------ TC Feedback ------------>
@@ -61,7 +60,7 @@
         class="form-select"
         name="compareMethod"
         id="compareMethod"
-        @input="changeCompare"
+        @change="changeCompare"
         v-model="tc.CompareMethod"
       >
         <option value="" selected disabled hidden>Select One...</option>
@@ -81,7 +80,7 @@
       <VAceEditor
         class="editor"
         id="tcInput"
-        @input="changeInput"
+        @change="changeInput"
         v-model:value="tc.Input"
       />
       <br /><br />
@@ -93,7 +92,7 @@
       <VAceEditor
         class="editor"
         id="tcOutput"
-        @input="changeOutput"
+        @change="changeOutput"
         v-model:value="tc.Output"
       />
       <br /><br />
@@ -152,6 +151,9 @@ export default {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
       var rawCases = res.data;
       this.cases = rawCases;
+      if(this.cases.length != 0) {
+        this.setCurrent(0);
+      }
     },
     async addTest() {
       console.log("addTest");
@@ -214,8 +216,7 @@ export default {
     //     }
     //   }
     // }, 500),
-    async changeTitle(e) {
-      this.tc.title = e;
+    async changeTitle() {
       var payload = {
         title: this.tc.Title,
       };
@@ -226,8 +227,7 @@ export default {
         }
       }
     },
-    async changePoints(e) {
-      this.tc.Points = e;
+    async changePoints() {
       var payload = {
         points: this.tc.Points,
       };
@@ -250,8 +250,7 @@ export default {
         }
       }
     },
-    async changeCompare(e) {
-      this.tc.CompareMethod = e;
+    async changeCompare() {
       var payload = {
         compare_method: this.tc.CompareMethod,
       };
@@ -262,8 +261,7 @@ export default {
         }
       }
     },
-    async changeInput(e) {
-      this.tc.Input = e;
+    async changeInput() {
       var payload = {
         input: this.tc.Input,
       };
@@ -274,8 +272,7 @@ export default {
         }
       }
     },
-    async changeOutput(e) {
-      this.tc.Output = e;
+    async changeOutput() {
       var payload = {
         output: this.tc.Output,
       };
