@@ -4,7 +4,7 @@
       class="bubble-menu"
       :tippy-options="{ duration: 100 }"
       :editor="editor"
-      v-if="editor"
+      v-if="editor && showMenuBar"
     >
       <button
         @click="editor.chain().focus().toggleBold().run()"
@@ -27,7 +27,7 @@
     </bubble-menu>
 
     <div class="rtf-editor" v-if="editor">
-      <menu-bar class="editor__header" :editor="editor" />
+      <menu-bar class="editor__header" :editor="editor" v-if="showMenuBar"/>
       <editor-content class="editor__content" :editor="editor" />
     </div>
   </div>
@@ -40,7 +40,7 @@ import MenuBar from "./MenuBar.vue";
 import TextAlign from "@tiptap/extension-text-align";
 
 export default {
-  props: ["savedText", "editable"],
+  props: ["savedText", "editable", "showMenuBar", "isDark"],
   components: {
     EditorContent,
     MenuBar,
@@ -83,7 +83,7 @@ export default {
   flex-direction: column;
   max-height: 400px;
   color: #0d0d0d;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0);
   border: 2px solid #0d0d0d;
   border-radius: 5px;
   box-shadow: 0px 0px 3px black;

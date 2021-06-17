@@ -80,12 +80,7 @@
     </div>
     <div v-if="!showInput" class="console row"></div>
     <div v-if="showInput" class="inputHeight row">
-      <VAceEditor
-        :theme="'chaos'"
-        v-model:value="input"
-        :key="forceReload"
-        @input="updateContent"
-      />
+      <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
     </div>
   </div>
 </template>
@@ -224,8 +219,6 @@ export default {
         code: this.code,
         input: this.input,
       };
-      console.log("HERE");
-      console.log(data);
       this.$emit("update", data);
     },
   },
@@ -234,32 +227,20 @@ export default {
   },
   mounted() {
     console.log("BEFORE MOUNT");
-    if (this.lang == "Java") {
-      console.log("JAVA");
-      this.editorLangauge = "java";
-      console.log("\n\n\n\n\n");
-      console.log("\n------------- BEFORE SAVE --------------");
-      console.log("code:");
-      console.log(this.code);
-      console.log("saved_j:");
-      console.log(this.saved_j);
-
-      console.log("\n\nSaving...\n\n");
-      this.code = this.saved_j;
-
-      console.log("\n------------- AFTER SAVE --------------");
-      console.log("code:");
-      console.log(this.code);
-      console.log("saved_j:");
-      console.log(this.saved_j);
-      console.log("\n\n\n\n\n");
-    } else {
-      console.log("PYTHON");
-      this.editorLangauge = "python";
-      this.code = this.saved_p;
+    try {
+      if (this.lang == "Java") {
+        this.editorLangauge = "java";
+        this.code = this.saved_j;
+      } else {
+        this.editorLangauge = "python";
+        this.code = this.saved_p;
+      }
+      console.log("Try");
+    } catch (e) {
+      console.log("Catch");
     }
     this.getStyle();
-    this.forceReload = 1;
+    this.forceReload++;
   },
   beforeCreate() {
     console.log(this.saved_p);

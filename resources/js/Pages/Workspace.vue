@@ -5,11 +5,11 @@
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <p>
-        <!-- <Tiptap :savedText="JSON.parse(description)" :editable="false"/> -->
+        <Tiptap :savedText="JSON.parse(description)" :editable="false" :showMenuBar="false" />
       </p>
     </div>
 
-    <IDE class="col-8" :lang="lang" :showSubmit="true" v-model:saved_j="code_j" v-model:saved_p="code_p" @update="updateContent"/>
+    <IDE class="col-8" :lang="lang" :showSubmit="true" :saved_j="code_j" :saved_p="code_p" @update="updateContent" :key="forceReload"/>
 
   </div>
 </template>
@@ -30,6 +30,7 @@ export default {
       input: "",
       jID: "",
       pID: "",
+      forceReload: 0,
     };
   },
   methods: {
@@ -43,6 +44,7 @@ export default {
       var progress = res.data.data;
       this.code_j = await this.getJava(progress);
       this.code_p = await this.getPython(progress);
+      this.forceReload = 1;
     },
     async getJava(progress) {
       //if first time opening grab template, else grab student code
@@ -54,16 +56,19 @@ export default {
       if (progress.length == 0) {
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
+        console.log("Got Java");
         return this.assignment.java_starter;
       }
       else {
         for(let i=0; i < progress.length; i++) {
           if(progress[i].lang == "java") {
+            console.log("Got Java");
             return progress[i].code;
           }
         }
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
+        console.log("Got Java");
         return this.assignment.java_starter;
       }
     },
@@ -114,7 +119,7 @@ export default {
   beforeUnmount() {
     this.$emit("unmounting");
   },
-  async mounted() {
+  async created() {
     await this.getAssignment();
   },
 };
