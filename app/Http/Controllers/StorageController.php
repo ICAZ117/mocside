@@ -53,7 +53,7 @@ class StorageController extends Controller
             fwrite($file, $code);
             // can I send the file to Laravel storage?
             $filePath = Storage::disk('local')
-                ->put('submissions/'.$user->fsc_id.$id.'/{md5(microtime())}.py', new File("submission.py"));
+                ->put('submissions/'.$user->fsc_id.$id."/submission.py", new File("submission.py"));
             fclose($file);
             return response()->json(['message' => 'Python code stored.', 'path' => $filePath], 200);
         } else {
