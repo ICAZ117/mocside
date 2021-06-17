@@ -47,6 +47,9 @@ class StorageController extends Controller
         $head = "/home/max/mocside/storage/app/submissions/" . $user->fsc_id . "/code/" . $id . '/';
         if ($validData['lang'] == 'python') { // because python is best
             // make python file
+            if (!file_exists($head . "submission.py")) {
+                touch($head . "submission.py");
+            }
             $file = fopen($head . "submission.py", "w");
             $code = $progress->code;
             fwrite($file, $code->__toString());
