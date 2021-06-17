@@ -95,6 +95,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/code', [CodeController::class, 'store']);
     Route::put('/code/{id}', [CodeController::class, 'update']);
     Route::delete('/code/{id}', [CodeController::class, 'delete']);
+
+    Route::post('/code/submit', [StorageController::class, 'createFile']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

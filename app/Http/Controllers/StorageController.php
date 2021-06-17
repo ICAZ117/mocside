@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Progress;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,6 +28,33 @@ class StorageController extends Controller
             return response()->json(['message' => $filePath], 200);
         } catch (Exception $exception) {
             return response()->json(['message' => $exception->getMessage()], 409);
+        }
+    }
+
+    public function createFile(Request $request, $id)
+    {
+        // $id is problem_id
+        $user = Auth::user();
+        $progress = Code::where([
+            ['fsc_id', '=', $user->fsc_id],
+            ['lang', '=', $request->lang],
+            ['problem_id', '=', $id],
+        ])->get();
+        $head = "/home/max/mocside/storage/app/submissions" . $user->fsc_id . "/code/" . $id;
+        if ($progress->lang == 'python') { // because python is best
+            // make python file
+            $file = fopen($head . "submission.py", "w");
+            $code = $progress->code;
+            fwrite($file, $code->__toString());
+            fclose($file);
+            return response()->json(['message' => 'Python code stored.', 'path' => $head], 200);
+        } else {
+            // make java file
+            $file = fopen($head . "submission.java", "w");
+            $code = $progress->code;
+            fwrite($file, $code->__toString());
+            fclose($file);
+            return response()->json(['message' => 'Python code stored.', 'path' => $head], 200);
         }
     }
 }
