@@ -4,13 +4,23 @@
     <div class="instructions col-4 p-4">
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
-      <p>
-        <Tiptap :savedText="JSON.parse(description)" :editable="false" :showMenuBar="false" :isDark="true" />
-      </p>
+      <Tiptap
+        :savedText="JSON.parse(description)"
+        :editable="false"
+        :showMenuBar="false"
+        :isDark="true"
+      />
     </div>
 
-    <IDE class="col-8" :lang="lang" :showSubmit="true" :saved_j="code_j" :saved_p="code_p" @update="updateContent" :key="forceReload"/>
-
+    <IDE
+      class="col-8"
+      :lang="lang"
+      :showSubmit="true"
+      :saved_j="code_j"
+      :saved_p="code_p"
+      @update="updateContent"
+      :key="forceReload"
+    />
   </div>
 </template>
 
@@ -52,16 +62,15 @@ export default {
         lang: "java",
         problem_id: this.problemID,
         code: this.assignment.java_starter,
-      }
+      };
       if (progress.length == 0) {
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
         console.log("Got Java");
         return this.assignment.java_starter;
-      }
-      else {
-        for(let i=0; i < progress.length; i++) {
-          if(progress[i].lang == "java") {
+      } else {
+        for (let i = 0; i < progress.length; i++) {
+          if (progress[i].lang == "java") {
             console.log("Got Java");
             this.jID = progress[i].id;
             return progress[i].code;
@@ -79,15 +88,14 @@ export default {
         lang: "python",
         problem_id: this.problemID,
         code: this.assignment.python_starter,
-      }
+      };
       if (progress.length == 0) {
         const res = await API.apiClient.post(`/code/`, payload);
         this.pID = res.data.id;
         return this.assignment.python_starter;
-      }
-      else {
-        for(let i =0; i < progress.length; i++) {
-          if(progress[i].lang == "python") {
+      } else {
+        for (let i = 0; i < progress.length; i++) {
+          if (progress[i].lang == "python") {
             this.pID = progress[i].id;
             return progress[i].code;
           }
@@ -100,30 +108,28 @@ export default {
     updateContent(e) {
       console.log(e);
       //e is {code: "...", input: "..."}
-      if(this.lang == "Java") {
+      if (this.lang == "Java") {
         console.log(e.code);
         this.code_j = e.code;
-      }
-      else {
+      } else {
         console.log(e.code);
-        this.code_p = e.code
+        this.code_p = e.code;
       }
       this.timeout();
     },
-     timeout: _.debounce(async function() {
+    timeout: _.debounce(async function () {
       var payload = {};
-      if(this.lang =="Java") {
+      if (this.lang == "Java") {
         payload = {
-          "code": this.code_j,
-        }
+          code: this.code_j,
+        };
         const res = await API.apiClient.put(`/code/${this.jID}`, payload);
-      }
-      else {
+      } else {
         payload = {
-          "code": this.code_p,
-        }
+          code: this.code_p,
+        };
         const res = await API.apiClient.put(`/code/${this.pID}`, payload);
-      };
+      }
     }, 1000),
   },
   beforeUnmount() {

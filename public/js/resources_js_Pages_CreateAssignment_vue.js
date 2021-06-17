@@ -120,6 +120,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     //Setter Methods
+    updateDate: function updateDate(course) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var lab, tempID, i, payload, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                lab = course.currentLab;
+
+                if (!(lab != undefined && JSON.stringify(lab) != JSON.stringify({}))) {
+                  _context3.next = 17;
+                  break;
+                }
+
+                tempID = "";
+                i = 0;
+
+              case 4:
+                if (!(i < _this2.copies.length)) {
+                  _context3.next = 11;
+                  break;
+                }
+
+                if (!(_this2.copies[i].lab_id == lab.id)) {
+                  _context3.next = 8;
+                  break;
+                }
+
+                tempID = _this2.copies[i].id;
+                return _context3.abrupt("break", 11);
+
+              case 8:
+                i++;
+                _context3.next = 4;
+                break;
+
+              case 11:
+                payload = {
+                  "due_date": course.DDate
+                };
+                _context3.next = 14;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/problems/unique/".concat(tempID), payload);
+
+              case 14:
+                res = _context3.sent;
+                _context3.next = 19;
+                break;
+
+              case 17:
+                console.log("can't change date to undefined lab");
+                course.DDate = "";
+
+              case 19:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
     //Functional Methods
     switchedLab: function switchedLab(course) {
       var ind; //isAdded needs to be set
@@ -149,8 +211,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var lab = course.currentLab;
 
       if (lab != undefined && JSON.stringify(lab) != JSON.stringify({})) {
-        console.log("can add/delete to defined lab");
-
         if (!course.isAdded) {
           //add to course/lab
           this.addToCourse(lab);
@@ -160,84 +220,300 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       } else {
         console.log("can't add/delete to undefined lab");
+        course.isAdded = false;
       }
     },
     addToCourse: function addToCourse(lab) {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         var payload, res, co;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 //create a copy with a lab id of lab.id, and a copy id of problemID and post to database
                 payload = {
                   "lab_id": lab.id
                 };
-                _context3.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.post("/problems/copies/".concat(_this2.problemID), payload);
+                _context4.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.post("/problems/copies/".concat(_this3.problemID), payload);
 
               case 3:
-                res = _context3.sent;
-                _context3.next = 6;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/problems/copies/".concat(_this2.problemID));
+                res = _context4.sent;
+                _context4.next = 6;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/problems/copies/".concat(_this3.problemID));
 
               case 6:
-                co = _context3.sent;
-                _this2.copies = co.data.data;
+                co = _context4.sent;
+                _this3.copies = co.data.data;
+                return _context4.abrupt("return", res);
 
-              case 8:
+              case 9:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     deleteFromCourse: function deleteFromCourse(course, lab) {
-      console.log("delete this from lab copy or not");
-    } //Delete Methods
+      var _this4 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var tempID, i, res, co;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                //get assignment id of the one i want to remove
+                tempID = "";
+                i = 0;
+
+              case 2:
+                if (!(i < _this4.copies.length)) {
+                  _context5.next = 9;
+                  break;
+                }
+
+                if (!(_this4.copies[i].lab_id == lab.id)) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                tempID = _this4.copies[i].id;
+                return _context5.abrupt("break", 9);
+
+              case 6:
+                i++;
+                _context5.next = 2;
+                break;
+
+              case 9:
+                _context5.next = 11;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.delete("/problems/".concat(tempID));
+
+              case 11:
+                res = _context5.sent;
+                console.log(res.data.message); //reset copies list
+
+                _context5.next = 15;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/problems/copies/".concat(_this4.problemID));
+
+              case 15:
+                co = _context5.sent;
+                _this4.copies = co.data.data; //change isPublished just in case on front end
+
+                course.isPublished = false; //remove date showing on front end
+
+                course.DDate = "";
+
+              case 19:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    togglePublish: function togglePublish(course) {
+      var lab = course.currentLab;
+
+      if (lab != undefined && JSON.stringify(lab) != JSON.stringify({})) {
+        if (!course.isPublished) {
+          //add to course/lab
+          this.addPublish(course, lab);
+        } else {
+          //delete from course/lab
+          this.deletePublish(course, lab);
+        }
+      } else {
+        console.log("can't publish/unpublish to undefined lab");
+        course.isPublished = false;
+      }
+    },
+    addPublish: function addPublish(course, lab) {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var flag, tempID, i, _res, payload, res;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                //call addToCourse(lab) if necessary
+                flag = true;
+                i = 0;
+
+              case 2:
+                if (!(i < _this5.copies.length)) {
+                  _context6.next = 10;
+                  break;
+                }
+
+                if (!(_this5.copies[i].lab_id == lab.id)) {
+                  _context6.next = 7;
+                  break;
+                }
+
+                flag = false;
+                tempID = _this5.copies[i].id;
+                return _context6.abrupt("break", 10);
+
+              case 7:
+                i++;
+                _context6.next = 2;
+                break;
+
+              case 10:
+                if (!flag) {
+                  _context6.next = 15;
+                  break;
+                }
+
+                _context6.next = 13;
+                return _this5.addToCourse(lab);
+
+              case 13:
+                _res = _context6.sent;
+                tempID = _res.data.data.id;
+
+              case 15:
+                //then change boolean on front and back end
+                course.isAdded = true;
+                payload = {
+                  "published": true
+                };
+                _context6.next = 19;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/problems/unique/".concat(tempID), payload);
+
+              case 19:
+                res = _context6.sent;
+
+              case 20:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    deletePublish: function deletePublish(course, lab) {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var tempID, i, payload, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                //change boolean
+                tempID = "";
+                i = 0;
+
+              case 2:
+                if (!(i < _this6.copies.length)) {
+                  _context7.next = 9;
+                  break;
+                }
+
+                if (!(_this6.copies[i].lab_id == lab.id)) {
+                  _context7.next = 6;
+                  break;
+                }
+
+                tempID = _this6.copies[i].id;
+                return _context7.abrupt("break", 9);
+
+              case 6:
+                i++;
+                _context7.next = 2;
+                break;
+
+              case 9:
+                payload = {
+                  "published": false
+                };
+                _context7.next = 12;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/problems/unique/".concat(tempID), payload);
+
+              case 12:
+                res = _context7.sent;
+
+              case 13:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    addToAll: function addToAll() {
+      for (var i = 0; i < this.courses.length; i++) {
+        if (this.courses[i].currentLab != undefined && JSON.stringify(this.courses[i].currentLab) != JSON.stringify({})) {
+          if (!this.courses[i].isAdded) {
+            //add to course/lab
+            this.addToCourse(this.courses[i].currentLab);
+            this.courses[i].isAdded = true;
+          }
+        } else {
+          console.log("No Selected Lab for this course");
+        }
+      }
+    },
+    publishToAll: function publishToAll() {
+      for (var i = 0; i < this.courses.length; i++) {
+        if (this.courses[i].currentLab != undefined && JSON.stringify(this.courses[i].currentLab) != JSON.stringify({})) {
+          if (!this.courses[i].isPublished) {
+            //add to course/lab
+            this.addPublish(this.courses[i], this.courses[i].currentLab);
+            this.courses[i].isPublished = true;
+          }
+        } else {
+          console.log("No Selected Lab for this course");
+        }
+      }
+    }
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this7 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
       var pro, co;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
-              _this3.authUser = _Store_index__WEBPACK_IMPORTED_MODULE_1__.default.getters["auth/authUser"];
-              _context4.next = 3;
-              return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/problems/full/".concat(_this3.problemID));
+              _this7.authUser = _Store_index__WEBPACK_IMPORTED_MODULE_1__.default.getters["auth/authUser"];
+              _context8.next = 3;
+              return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/problems/full/".concat(_this7.problemID));
 
             case 3:
-              pro = _context4.sent;
-              _this3.problem = pro.data.data;
-              _context4.next = 7;
-              return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/problems/copies/".concat(_this3.problemID));
+              pro = _context8.sent;
+              _this7.problem = pro.data.data;
+              _context8.next = 7;
+              return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/problems/copies/".concat(_this7.problemID));
 
             case 7:
-              co = _context4.sent;
-              _this3.copies = co.data.data;
+              co = _context8.sent;
+              _this7.copies = co.data.data;
 
-              if (_this3.authUser.fsc_user.courses) {
-                _this3.enrolledCourses = JSON.parse(_this3.authUser.fsc_user.courses).courses;
+              if (_this7.authUser.fsc_user.courses) {
+                _this7.enrolledCourses = JSON.parse(_this7.authUser.fsc_user.courses).courses;
               }
 
-              _this3.getCourses();
+              _this7.getCourses();
 
             case 11:
             case "end":
-              return _context4.stop();
+              return _context8.stop();
           }
         }
-      }, _callee4);
+      }, _callee8);
     }))();
   }
-});
+}); // when publishing to a lab that does not have the problem it adds and publishes properly, but the front end button "ADD" does not turn on like it should
 
 /***/ }),
 
@@ -252,25 +528,133 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _services_API__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/API */ "./resources/js/services/API.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_API__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/API */ "./resources/js/services/API.js");
+/* harmony import */ var _Store_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Store/index */ "./resources/js/Store/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['problemID'],
   data: function data() {
     return {
-      students: [{
-        name: "Darth Vader",
-        ID: "6666666",
-        grade: "83%",
-        letterGrade: "B",
-        email: "UnicornKitty22@gmail.com"
-      }, {
-        name: "Bruh",
-        ID: "0000000",
-        grade: "100%",
-        letterGrade: "A",
-        email: "bruh@gmail.com"
-      }]
+      authUser: {},
+      gradebook: {},
+      students: [],
+      worth: 0
     };
+  },
+  methods: {
+    getStudents: function getStudents() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var res, student_ids, curr, i, res2, student, points, calcGrades;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(_this.isProf == true)) {
+                  _context.next = 21;
+                  break;
+                }
+
+                _context.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/problems/full/".concat(_this.problemID));
+
+              case 3:
+                res = _context.sent;
+                _this.gradebook = JSON.parse(res.data.data.gradebook);
+                _this.worth = res.data.data.worth; // this logic is populating front-end gradebook
+
+                student_ids = _this.gradebook.students; // list of ids in gradebook 
+
+                i = 0;
+
+              case 8:
+                if (!(i < student_ids.length)) {
+                  _context.next = 21;
+                  break;
+                }
+
+                curr = student_ids[i];
+                _context.next = 12;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/students/".concat(curr));
+
+              case 12:
+                res2 = _context.sent;
+                // this will return USER objects that contain student
+                student = res2.data.data;
+                console.log(student.fsc_id);
+                points = _this.gradebook.grades[curr];
+                calcGrades = _this.calcGrade(res.data.data, points);
+
+                _this.students.push({
+                  name: student.name,
+                  ID: curr,
+                  grade: calcGrades[1],
+                  percent: calcGrades[2],
+                  letterGrade: calcGrades[0],
+                  email: student.email
+                });
+
+              case 18:
+                i++;
+                _context.next = 8;
+                break;
+
+              case 21:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    calcGrade: function calcGrade(assignment, points) {
+      // calc numbers
+      var worth = assignment.worth;
+      var percent;
+      percent = points * 100;
+      percent = percent / worth * 100;
+      percent = Math.floor(percent);
+      percent = percent / 100; // calc letters
+
+      var letterGrade;
+
+      if (percent > 90) {
+        letterGrade = 'A';
+      } else if (percent > 80) {
+        letterGrade = 'B';
+      } else if (percent > 70) {
+        letterGrade = 'C';
+      } else if (percent > 60) {
+        letterGrade = 'D';
+      } else {
+        letterGrade = "F";
+      }
+
+      return [letterGrade, points, percent];
+    }
+  },
+  computed: {
+    isProf: function isProf() {
+      if (_Store_index__WEBPACK_IMPORTED_MODULE_2__.default.getters["auth/isProf"] == null) {
+        return false;
+      } else {
+        return _Store_index__WEBPACK_IMPORTED_MODULE_2__.default.getters["auth/isProf"];
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.authUser = _Store_index__WEBPACK_IMPORTED_MODULE_2__.default.getters["auth/authUser"];
+    this.getStudents();
   }
 });
 
@@ -413,10 +797,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_API__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/API */ "./resources/js/services/API.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_API__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/API */ "./resources/js/services/API.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -425,43 +808,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    overview: String,
-    problemID: Number
-  },
-  setup: function setup(props) {
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
-      // content: "{
-      //   "ops": [
-      //     {
-      //       "insert": "Gandalf the Grey\n",
-      //     },
-      //   ],
-      // }",
-      content: JSON.parse(props.overview)
-    });
-    return {
-      state: state
-    };
+    overview: {
+      type: Object,
+      required: true
+    },
+    problemID: {
+      type: Number,
+      required: true
+    }
   },
   data: function data() {
     return {
-      description: this.overview,
-      assignmentID: this.problemID
+      assignmentID: this.problemID,
+      newText: {}
     };
   },
-  watch: {
-    description: function description(val) {
-      this.timeout(this.assignmentID);
-    },
-    state: function state(val) {
-      this.description = this.state.content;
-    }
-  },
   methods: {
-    timeout: lodash__WEBPACK_IMPORTED_MODULE_2___default().debounce( /*#__PURE__*/function () {
+    timeout: lodash__WEBPACK_IMPORTED_MODULE_1___default().debounce( /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(assignmentID) {
         var payload, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -469,10 +834,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 payload = {
-                  description: this.description
+                  description: this.newText
                 };
                 _context.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_3__.apiClient.put("/problems/".concat(assignmentID), payload);
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/problems/".concat(assignmentID), payload);
 
               case 3:
                 res = _context.sent;
@@ -488,14 +853,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return function (_x) {
         return _ref.apply(this, arguments);
       };
-    }(), 3000)
-  },
-  computed: {
-    text: function text() {
-      this.description = this.state.content;
-      return this.state.content;
+    }(), 3000),
+    save: function save(e) {
+      this.newText = e;
+      this.timeout(this.assignmentID);
     }
-  }
+  },
+  beforeMount: function beforeMount() {},
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -641,11 +1006,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vue3_ace_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue3-ace-editor */ "./node_modules/vue3-ace-editor/index.js");
-/* harmony import */ var _services_API__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/API */ "./resources/js/services/API.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue3_ace_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue3-ace-editor */ "./node_modules/vue3-ace-editor/index.js");
+/* harmony import */ var _services_API__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/API */ "./resources/js/services/API.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -655,18 +1019,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     problemID: Number
-  },
-  setup: function setup() {
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
-      content: ""
-    });
-    return {
-      state: state
-    };
   },
   data: function data() {
     return {
@@ -675,7 +1030,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         id: "",
         Title: "",
         Points: 0,
-        Feedback: "",
+        Feedback: {},
         CompareMethod: "",
         Input: "",
         Output: ""
@@ -685,25 +1040,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   components: {
-    VAceEditor: vue3_ace_editor__WEBPACK_IMPORTED_MODULE_2__.VAceEditor
+    VAceEditor: vue3_ace_editor__WEBPACK_IMPORTED_MODULE_1__.VAceEditor
   },
-  watch: {
-    tc: {
-      deep: true,
-      handler: function handler() {
-        if (this.tc.id != "") {
-          this.timeout(this.problemID);
-        }
-      }
-    },
-    feedback: function feedback(val) {
-      console.log("feedback changed");
-      this.tc.Feedback = this.feedback;
-    },
-    state: function state(val) {
-      this.feedback = this.state.content;
-    }
-  },
+  // watch: {
+  //   tc: {
+  //     deep: true,
+  //     handler() {
+  //       if (this.tc.id != "") {
+  //         // this.timeout(this.problemID);
+  //         console.log("something changed");
+  //       }
+  //     },
+  //   },
+  // },
   methods: {
     getCases: function getCases() {
       var _this = this;
@@ -715,14 +1064,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _services_API__WEBPACK_IMPORTED_MODULE_3__.apiClient.get("/test-cases/".concat(_this.problemID));
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/test-cases/".concat(_this.problemID));
 
               case 2:
                 res = _context.sent;
                 rawCases = res.data;
                 _this.cases = rawCases;
 
-              case 5:
+                if (_this.cases.length != 0) {
+                  _this.setCurrent(0);
+                }
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -742,22 +1095,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 console.log("addTest");
                 payload = {
                   assignment_id: _this2.problemID,
-                  title: "New Test Case",
-                  points: 10,
-                  feedback: "",
-                  compare_method: "",
+                  feedback: JSON.stringify({}),
                   input: "New Input",
                   output: "New Output"
                 };
                 _context2.next = 4;
-                return _services_API__WEBPACK_IMPORTED_MODULE_3__.apiClient.post("/test-cases/", payload);
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.post("/test-cases/", payload);
 
               case 4:
                 res = _context2.sent;
 
                 _this2.cases.push(res.data);
 
-              case 6:
+                _this2.setCurrent(_this2.cases.length - 1);
+
+              case 7:
               case "end":
                 return _context2.stop();
             }
@@ -769,7 +1121,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var key, i, temp, res;
+        var key, i, temp, idx, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -785,23 +1137,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
                 temp = _this3.tc.id; //set current to null
 
-                _this3.currentTC = "";
-                _this3.tc.id = "";
-                _this3.tc.Title = "";
-                _this3.tc.Points = "";
-                _this3.state.content = "";
-                _this3.tc.Feedback = "";
-                _this3.tc.CompareMethod = "";
-                _this3.tc.Input = "";
-                _this3.tc.Output = ""; // I do this after to ensure that it doesn't try to repost to the test case after it has been deleted
+                if (_this3.currentTC != 1 && _this3.currentTC.length != 0) {
+                  _this3.currentTC--;
+                }
 
-                _context3.next = 14;
-                return _services_API__WEBPACK_IMPORTED_MODULE_3__.apiClient.delete("/test-cases/".concat(temp));
+                ;
 
-              case 14:
+                if (_this3.currentTC.length != 0) {
+                  idx = _this3.currentTC - 1;
+                  _this3.tc.id = _this3.cases[idx].id;
+                  _this3.tc.Title = _this3.cases[idx].title;
+                  _this3.tc.Points = _this3.cases[idx].points;
+                  _this3.tc.Feedback = _this3.cases[idx].feedback;
+                  _this3.tc.CompareMethod = _this3.cases[idx].compare_method;
+                  _this3.tc.Input = _this3.cases[idx].input;
+                  _this3.tc.Output = _this3.cases[idx].output;
+                } else {
+                  _this3.currentTC = 0;
+                  _this3.tc.id = "";
+                  _this3.tc.Title = "";
+                  _this3.tc.Points = "";
+                  _this3.tc.Feedback = "";
+                  _this3.tc.CompareMethod = "";
+                  _this3.tc.Input = "";
+                  _this3.tc.Output = "";
+                } // I do this after to ensure that it doesn't try to repost to the test case after it has been deleted
+
+
+                _context3.next = 8;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.delete("/test-cases/".concat(temp));
+
+              case 8:
                 res = _context3.sent;
 
-              case 15:
+              case 9:
               case "end":
                 return _context3.stop();
             }
@@ -811,40 +1180,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setCurrent: function setCurrent(idx) {
       this.currentTC = idx + 1;
+      console.log(this.tc);
+      console.log(this.cases[idx]);
       this.tc.id = this.cases[idx].id;
       this.tc.Title = this.cases[idx].title;
       this.tc.Points = this.cases[idx].points;
-      this.state.content = this.cases[idx].feedback;
-      this.$refs.myEditor.setContents(this.cases[idx].feedback);
       this.tc.Feedback = this.cases[idx].feedback;
       this.tc.CompareMethod = this.cases[idx].compare_method;
       this.tc.Input = this.cases[idx].input;
       this.tc.Output = this.cases[idx].output;
     },
-    timeout: lodash__WEBPACK_IMPORTED_MODULE_4___default().debounce( /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(problemID) {
+    // timeout: _.debounce(async function (problemID) {
+    //   var payload = {
+    //     // title: this.tc.Title,
+    //     // points: this.tc.Points,
+    //     feedback: this.tc.Feedback,
+    //     // compare_method: this.tc.CompareMethod,
+    //     // input: this.tc.Input,
+    //     // output: this.tc.Output,
+    //   };
+    //   const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
+    //   for (let i = 0; i < this.cases.length; i++) {
+    //     if (this.cases[i].id == res.data.id) {
+    //       this.cases[i] = res.data;
+    //     }
+    //   }
+    // }, 500),
+    changeTitle: function changeTitle() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         var payload, res, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 payload = {
-                  title: this.tc.Title,
-                  points: this.tc.Points,
-                  feedback: this.tc.Feedback,
-                  compare_method: this.tc.CompareMethod,
-                  input: this.tc.Input,
-                  output: this.tc.Output
+                  title: _this4.tc.Title
                 };
                 _context4.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_3__.apiClient.put("/test-cases/".concat(this.tc.id), payload);
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this4.tc.id), payload);
 
               case 3:
                 res = _context4.sent;
 
-                for (i = 0; i < this.cases.length; i++) {
-                  if (this.cases[i].id == res.data.id) {
-                    this.cases[i] = res.data;
+                for (i = 0; i < _this4.cases.length; i++) {
+                  if (_this4.cases[i].id == res.data.id) {
+                    _this4.cases[i] = res.data;
                   }
                 }
 
@@ -853,22 +1235,173 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context4.stop();
             }
           }
-        }, _callee4, this);
-      }));
+        }, _callee4);
+      }))();
+    },
+    changePoints: function changePoints() {
+      var _this5 = this;
 
-      return function (_x) {
-        return _ref.apply(this, arguments);
-      };
-    }(), 500)
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var payload, res, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                payload = {
+                  points: _this5.tc.Points
+                };
+                _context5.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this5.tc.id), payload);
+
+              case 3:
+                res = _context5.sent;
+
+                for (i = 0; i < _this5.cases.length; i++) {
+                  if (_this5.cases[i].id == res.data.id) {
+                    _this5.cases[i] = res.data;
+                  }
+                }
+
+              case 5:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    changeFeedback: function changeFeedback(e) {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        var payload, res, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _this6.tc.Feedback = e;
+                payload = {
+                  feedback: _this6.tc.Feedback
+                };
+                _context6.next = 4;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this6.tc.id), payload);
+
+              case 4:
+                res = _context6.sent;
+
+                for (i = 0; i < _this6.cases.length; i++) {
+                  if (_this6.cases[i].id == res.data.id) {
+                    _this6.cases[i] = res.data;
+                  }
+                }
+
+              case 6:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    changeCompare: function changeCompare() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var payload, res, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                payload = {
+                  compare_method: _this7.tc.CompareMethod
+                };
+                _context7.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this7.tc.id), payload);
+
+              case 3:
+                res = _context7.sent;
+
+                for (i = 0; i < _this7.cases.length; i++) {
+                  if (_this7.cases[i].id == res.data.id) {
+                    _this7.cases[i] = res.data;
+                  }
+                }
+
+              case 5:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    changeInput: function changeInput() {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var payload, res, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                payload = {
+                  input: _this8.tc.Input
+                };
+                _context8.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this8.tc.id), payload);
+
+              case 3:
+                res = _context8.sent;
+
+                for (i = 0; i < _this8.cases.length; i++) {
+                  if (_this8.cases[i].id == res.data.id) {
+                    _this8.cases[i] = res.data;
+                  }
+                }
+
+              case 5:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
+      }))();
+    },
+    changeOutput: function changeOutput() {
+      var _this9 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+        var payload, res, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                payload = {
+                  output: _this9.tc.Output
+                };
+                _context9.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this9.tc.id), payload);
+
+              case 3:
+                res = _context9.sent;
+
+                for (i = 0; i < _this9.cases.length; i++) {
+                  if (_this9.cases[i].id == res.data.id) {
+                    _this9.cases[i] = res.data;
+                  }
+                }
+
+              case 5:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9);
+      }))();
+    }
   },
   mounted: function mounted() {
     this.getCases();
-  },
-  computed: {
-    quill: function quill() {
-      this.feedback = this.state.content;
-      return this.state.content;
-    }
   }
 });
 
@@ -944,12 +1477,17 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
   data: function data() {
     return {
       assignmentID: this.problemID,
-      assignment: {
-        title: ""
-      },
+      assignmentTitle: "",
       overview: {},
       problem: {}
     };
+  },
+  watch: {
+    assignmentTitle: function assignmentTitle(val) {
+      if (this.assignmentTitle != "") {
+        this.timeout(this.problemID);
+      }
+    }
   },
   methods: {
     handleSubmit: function handleSubmit() {
@@ -984,7 +1522,8 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
       }))();
     },
     updateOverview: function updateOverview(e) {
-      //will be removing this in place of using debounce on each specific tab and then saving only that tab at a time
+      console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEE"); //will be removing this in place of using debounce on each specific tab and then saving only that tab at a time
+
       this.overview = e;
     },
     getInfo: function getInfo() {
@@ -1002,7 +1541,7 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
               case 2:
                 rawproblem = _context2.sent;
                 _this2.problem = rawproblem.data.data;
-                _this2.assignment.title = _this2.problem.name;
+                _this2.assignmentTitle = _this2.problem.name;
                 _this2.overview = _this2.problem.description;
 
               case 6:
@@ -1012,12 +1551,35 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
           }
         }, _callee2);
       }))();
-    }
-  },
-  computed: {
-    title: function title() {
-      return this.assignment.title;
-    }
+    },
+    timeout: lodash__WEBPACK_IMPORTED_MODULE_9___default().debounce( /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(assignmentID) {
+        var payload, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                payload = {
+                  "name": this.assignmentTitle
+                };
+                _context3.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_8__.apiClient.put("/problems/unique/".concat(assignmentID), payload);
+
+              case 3:
+                res = _context3.sent;
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }(), 500)
   },
   beforeMount: function beforeMount() {
     this.getInfo();
@@ -1049,102 +1611,96 @@ var _hoisted_2 = {
   "class": "container"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  "class": "btn btn-primary btn-md publish-all"
-}, "PUBLISH TO ALL", -1
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_5 = {
+var _hoisted_4 = {
   "class": "no-decor"
 };
-var _hoisted_6 = {
+var _hoisted_5 = {
   "class": "row"
 };
-var _hoisted_7 = {
+var _hoisted_6 = {
   "class": "card editcoursecard w-100"
 };
-var _hoisted_8 = {
+var _hoisted_7 = {
   "class": "courses card-content"
 };
-var _hoisted_9 = {
+var _hoisted_8 = {
   "class": "card-title my-3 mx-2 mb-0"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", {
   "class": "courses my-0"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_11 = {
+var _hoisted_10 = {
   "class": "card-body center"
 };
-var _hoisted_12 = {
+var _hoisted_11 = {
   "class": "row"
 };
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "col-4"
 }, "Publish:", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = {
+var _hoisted_13 = {
   "class": "col-8"
 };
-var _hoisted_15 = {
+var _hoisted_14 = {
   "class": "switch"
 };
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "slider round"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_17 = {
+var _hoisted_16 = {
   "class": "row"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "col-4"
 }, "Add:", -1
 /* HOISTED */
 );
 
-var _hoisted_19 = {
+var _hoisted_18 = {
   "class": "col-8"
 };
-var _hoisted_20 = {
+var _hoisted_19 = {
   "class": "switch"
 };
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "slider round"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "lab-select"
 }, "Lab:", -1
 /* HOISTED */
 );
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "",
   selected: "",
   hidden: "",
@@ -1153,37 +1709,50 @@ var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
 var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "dueDate"
 }, "Due Date: ", -1
 /* HOISTED */
 );
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<hr class=\"courses my-0\"><div class=\"card-footer\"><div class=\"row center\"><div class=\"col-6\"><small><a href=\"\" class=\"no-decor\">Student Preview</a></small></div><div class=\"col-6\"><small><a href=\"\" class=\"no-decor\">Gradebook &amp;<br>Submissions</a></small></div></div></div>", 2);
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<hr class=\"courses my-0\"><div class=\"card-footer\"><div class=\"row center\"><div class=\"col-6\"><small><a href=\"\" class=\"no-decor\">Student Preview</a></small></div><div class=\"col-6\"><small><a href=\"\" class=\"no-decor\">Gradebook &amp;<br>Submissions</a></small></div></div></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.courses, function (course, index) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.publishToAll();
+    }),
+    "class": "btn btn-primary btn-md publish-all"
+  }, "PUBLISH TO ALL SELECTED LABS"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $options.addToAll();
+    }),
+    "class": "btn btn-primary btn-md publish-all"
+  }, "ADD TO ALL SELECTED LABS"), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.courses, function (course, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: course.id,
       "class": "margin width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(course.name), 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(course.name), 1
     /* TEXT */
-    ), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    ), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
       type: "checkbox",
+      onClick: function onClick($event) {
+        return $options.togglePublish(course);
+      },
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return course.isPublished = $event;
       }
     }, null, 8
     /* PROPS */
-    , ["onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, course.isPublished]]), _hoisted_16])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    , ["onClick", "onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, course.isPublished]]), _hoisted_15])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
       type: "checkbox",
       onClick: function onClick($event) {
         return $options.toggleToCourse(course);
@@ -1193,7 +1762,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, null, 8
     /* PROPS */
-    , ["onClick", "onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, course.isAdded]]), _hoisted_21])])]), _hoisted_22, _hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+    , ["onClick", "onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, course.isAdded]]), _hoisted_20])])]), _hoisted_21, _hoisted_22, _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
       id: "lab-select",
       onChange: function onChange($event) {
         return $options.switchedLab(course);
@@ -1201,7 +1770,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return course.currentLab = $event;
       }
-    }, [_hoisted_25, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.labs[index], function (lab) {
+    }, [_hoisted_24, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.labs[index], function (lab) {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("option", {
         key: lab.id,
         value: lab
@@ -1212,15 +1781,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* KEYED_FRAGMENT */
     ))], 40
     /* PROPS, HYDRATE_EVENTS */
-    , ["onChange", "onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, course.currentLab]])]), _hoisted_26, _hoisted_27, _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    , ["onChange", "onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, course.currentLab]])]), _hoisted_25, _hoisted_26, _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
       type: "date",
       id: "dueDate",
+      onChange: function onChange($event) {
+        return $options.updateDate(course);
+      },
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return course.DDate = $event;
       }
-    }, null, 8
-    /* PROPS */
-    , ["onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, course.DDate]])]), _hoisted_29])])]);
+    }, null, 40
+    /* PROPS, HYDRATE_EVENTS */
+    , ["onChange", "onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, course.DDate]])]), _hoisted_28])])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])])])]);
@@ -1250,7 +1822,7 @@ var _hoisted_2 = {
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", {
   "class": "gradebook"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "ID"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Grade"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Letter Grade"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Email")])], -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Name"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "FSC ID"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Percent"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Grade"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Letter Grade"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Email")])], -1
 /* HOISTED */
 );
 
@@ -1266,7 +1838,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.ID), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.grade), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.percent) + "%", 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.grade) + " / " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.worth), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.letterGrade), 1
     /* TEXT */
@@ -1439,7 +2013,14 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Tiptap = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tiptap");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tiptap), _hoisted_4, _hoisted_5, _hoisted_6])]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tiptap, {
+    savedText: JSON.parse($props.overview),
+    onInput: $options.save,
+    showMenuBar: true,
+    isDark: false
+  }, null, 8
+  /* PROPS */
+  , ["savedText", "onInput"]), _hoisted_4, _hoisted_5, _hoisted_6])]);
 }
 
 /***/ }),
@@ -1574,7 +2155,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "create-assignment"
+  "class": "create-test-cases create-assignment"
 };
 var _hoisted_2 = {
   "class": "row test-cases"
@@ -1601,6 +2182,7 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_8 = {
+  key: 0,
   "class": "container"
 };
 
@@ -1650,19 +2232,46 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"\" selected disabled hidden>Select One...</option><option value=\"flexible\"> Flexible equality (ignores: case, whitespace, and special characters) </option><option value=\"exact\">Equals exactly</option><option value=\"contains\">Contains an exact value (at least once)</option><option value=\"regex\">Regex (Write a regular expression to match outputs)</option>", 5);
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "flexible"
+}, " Flexible equality (ignores: case, whitespace, and special characters) ", -1
+/* HOISTED */
+);
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "exact",
+  selected: ""
+}, "Equals exactly", -1
+/* HOISTED */
+);
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "contains"
+}, "Contains an exact value (at least once)", -1
+/* HOISTED */
+);
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "regex"
+}, "Regex (Write a regular expression to match outputs)", -1
+/* HOISTED */
+);
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
 
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "tcInput"
+}, "Input (Will be passed into the student's program's stdin)", -1
 /* HOISTED */
 );
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "for": "tcInput"
-}, "Input (Will be passed into the student's program's stdin)", -1
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -1670,13 +2279,13 @@ var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "tcOutput"
+}, "Output (Will be matched against the output of the student's program)", -1
 /* HOISTED */
 );
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "for": "tcOutput"
-}, "Output (Will be matched against the output of the student's program)", -1
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -1684,15 +2293,11 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -1701,7 +2306,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_VAceEditor = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("VAceEditor");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.cases, function (tc, idx) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ---------------------------------------- "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" --------------- TC CARDS --------------- "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ---------------------------------------- "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.cases, function (tc, idx) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: tc.id,
       tc: tc,
@@ -1725,57 +2330,75 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.addTest();
     }),
     "class": "tc-card col-1"
-  }, [_hoisted_7])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, "Test Case (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currentTC) + "/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cases.length) + ")", 1
+  }, [_hoisted_7])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ---------------------------------------- "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" -------------- TC FIELDS --------------- "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ---------------------------------------- "), $data.currentTC != '' && $data.currentTC != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- Header ----------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, "Test Case (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.currentTC) + "/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.cases.length) + ")", 1
   /* TEXT */
-  ), _hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- TC Title ----------"), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     id: "tcTitle",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    onChange: _cache[2] || (_cache[2] = function () {
+      return $options.changeTitle && $options.changeTitle.apply($options, arguments);
+    }),
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.tc.Title = $event;
     })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.tc.Title]]), _hoisted_11, _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.tc.Title]]), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- TC Points ----------"), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "number",
     id: "tcPoints",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+    onChange: _cache[4] || (_cache[4] = function () {
+      return $options.changePoints && $options.changePoints.apply($options, arguments);
+    }),
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.tc.Points = $event;
     })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.tc.Points]]), _hoisted_13, _hoisted_14, _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tiptap), _hoisted_16, _hoisted_17, _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.tc.Points]]), _hoisted_13, _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- TC Feedback ----------"), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tiptap, {
+    savedText: JSON.parse($data.tc.Feedback),
+    onInput: $options.changeFeedback,
+    showMenuBar: true,
+    isDark: false
+  }, null, 8
+  /* PROPS */
+  , ["savedText", "onInput"]), _hoisted_16, _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- TC Compare Method ----------"), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
     "class": "form-select",
     name: "compareMethod",
     id: "compareMethod",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    onChange: _cache[6] || (_cache[6] = function () {
+      return $options.changeCompare && $options.changeCompare.apply($options, arguments);
+    }),
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.tc.CompareMethod = $event;
     })
-  }, [_hoisted_19], 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.tc.CompareMethod]]), _hoisted_24, _hoisted_25, _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VAceEditor, {
+  }, [_hoisted_19, _hoisted_20, _hoisted_21, _hoisted_22], 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.tc.CompareMethod]]), _hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- TC Input ----------"), _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VAceEditor, {
     "class": "editor",
     id: "tcInput",
+    onChange: $options.changeInput,
     value: $data.tc.Input,
-    "onUpdate:value": _cache[5] || (_cache[5] = function ($event) {
+    "onUpdate:value": _cache[8] || (_cache[8] = function ($event) {
       return $data.tc.Input = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["value"]), _hoisted_27, _hoisted_28, _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VAceEditor, {
+  , ["onChange", "value"]), _hoisted_26, _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- TC Output ----------"), _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VAceEditor, {
     "class": "editor",
     id: "tcOutput",
+    onChange: $options.changeOutput,
     value: $data.tc.Output,
-    "onUpdate:value": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:value": _cache[9] || (_cache[9] = function ($event) {
       return $data.tc.Output = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["value"]), _hoisted_30, _hoisted_31, _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-    onClick: _cache[7] || (_cache[7] = function ($event) {
+  , ["onChange", "value"]), _hoisted_29, _hoisted_30, _hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- DELETE TC ----------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    onClick: _cache[10] || (_cache[10] = function ($event) {
       return $options.deleteTest();
     }),
     "class": "btn btn-md btn-danger"
-  }, "Delete"), _hoisted_33])]);
+  }, "Delete"), _hoisted_32])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -1832,11 +2455,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "assignment-title",
     placeholder: "Assignment Title",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.assignment.title = $event;
+      return _ctx.assignmentTitle = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.assignment.title]]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_tabs, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.assignmentTitle]]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_tabs, {
     modelValue: _ctx.selectedTab,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return _ctx.selectedTab = $event;

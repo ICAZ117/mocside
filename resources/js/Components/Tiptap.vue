@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 100%!important;">
     <bubble-menu
       class="bubble-menu"
       :tippy-options="{ duration: 100 }"
@@ -89,7 +89,7 @@ export default {
 .rtf-editor {
   display: flex;
   flex-direction: column;
-  max-height: 400px;
+  max-height: 90%;
   background-color: rgba(255, 255, 255, 0);
   border-radius: 5px;
   /* Some information about the status */
