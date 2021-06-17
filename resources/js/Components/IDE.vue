@@ -240,7 +240,7 @@ export default {
     } catch (e) {
       console.log("Catch");
     }
-    forceReload++;
+    this.forceReload++;
   },
   beforeCreate() {
     console.log(this.saved_p);
