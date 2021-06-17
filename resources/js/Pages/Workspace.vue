@@ -9,7 +9,7 @@
       </p>
     </div>
 
-    <IDE class="col-8" :lang="lang" :showSubmit="true" :saved_j="code_j" :saved_p="code_p" @update="updateContent"/>
+    <IDE class="col-8" :lang="lang" :showSubmit="true" :saved_j="code_j" :saved_p="code_p" @update="updateContent" :key="forceReload"/>
 
   </div>
 </template>
@@ -30,6 +30,7 @@ export default {
       input: "",
       jID: "",
       pID: "",
+      forceReload: 0,
     };
   },
   methods: {
@@ -43,6 +44,7 @@ export default {
       var progress = res.data.data;
       this.code_j = await this.getJava(progress);
       this.code_p = await this.getPython(progress);
+      this.forceReload = 1;
     },
     async getJava(progress) {
       //if first time opening grab template, else grab student code
