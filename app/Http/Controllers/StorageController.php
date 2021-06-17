@@ -44,7 +44,7 @@ class StorageController extends Controller
         $validData = $request->validate([
             'lang' => 'required',
         ]);
-        $head = "/home/max/mocside/storage/app/submissions" . $user->fsc_id . "/code/" . $id;
+        $head = "/home/max/mocside/storage/app/submissions/" . $user->fsc_id . "/code/" . $id . '/';
         if ($validData['lang'] == 'python') { // because python is best
             // make python file
             $file = fopen($head . "submission.py", "w");
