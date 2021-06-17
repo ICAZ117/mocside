@@ -63,7 +63,7 @@ class StorageController extends Controller
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File("submission.java"), "submission.java");
             fclose($file);
-            return response()->json(['message' => 'Java code stored.', 'path' => $head], 200);
+            return response()->json(['message' => 'Java code stored.', 'path' => $filePath], 200);
         }
     }
 }
