@@ -1,0 +1,21 @@
+upon submit
+
+lets assume we have a file with:
+	student code
+	some input
+	proper output?....not needed if student running own tests
+
+for now assume we have:
+	student code
+	student input
+	no output to test against....jsut return output
+
+
+assuming we already have the image to run it:
+	we grab either java or python image
+	we create a new instance(container) of the docker image
+	it grabs the code and input
+	(in java we would compile)
+	in python we just run the python code and pass the input...
+	docker receives/or produces output
+	docker saves output in file for back end to grab
