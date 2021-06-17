@@ -40,26 +40,26 @@ class StorageController extends Controller
             ['fsc_id', '=', $user->fsc_id],
             ['lang', '=', $request->lang],
             ['assignment_id', '=', $id],
-        ])->get();
+        ])->first();
         $validData = $request->validate([
             'lang' => 'required',
         ]);
         $head = "/home/max/mocside/storage/app/submissions/" . $user->fsc_id . "/code/" . $id . '/';
         if ($validData['lang'] == 'python') { // because python is best
             // make python file
-            if (!file_exists($head . "submission.py")) {
-                touch($head . "submission.py");
-            }
-            $file = fopen($head . "submission.py", "w");
+            // if (!file_exists($head . "submission.py")) {
+            //     touch($head . "submission.py");
+            // }
+            $file = fopen("submission.py", "w");
             $code = $progress->code;
-            fwrite($file, $code->__toString());
+            fwrite($file, $code);
             fclose($file);
             return response()->json(['message' => 'Python code stored.', 'path' => $head], 200);
         } else {
             // make java file
             $file = fopen($head . "submission.java", "w");
             $code = $progress->code;
-            fwrite($file, $code->__toString());
+            fwrite($file, $code);
             fclose($file);
             return response()->json(['message' => 'Python code stored.', 'path' => $head], 200);
         }
