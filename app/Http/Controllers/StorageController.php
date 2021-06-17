@@ -39,7 +39,7 @@ class StorageController extends Controller
         $progress = Code::where([
             ['fsc_id', '=', $user->fsc_id],
             ['lang', '=', $request->lang],
-            ['problem_id', '=', $id],
+            ['assignment_id', '=', $id],
         ])->get();
         $head = "/home/max/mocside/storage/app/submissions" . $user->fsc_id . "/code/" . $id;
         if ($progress->lang == 'python') { // because python is best
