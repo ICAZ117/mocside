@@ -5,7 +5,7 @@
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <p>
-        <Tiptap :savedText="JSON.parse(description)" :editable="false"/>
+        <Tiptap :savedText="JSON.parse(description)" :editable="false" :showMenuBar="false" />
       </p>
     </div>
 
@@ -96,6 +96,7 @@ export default {
       }
     },
     updateContent(e) {
+      console.log("Back in Workspace");
       console.log(e);
       //this.timeout();
     },
