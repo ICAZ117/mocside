@@ -10,7 +10,6 @@
         @input="updateContent"
         :lang="editorLangauge"
         :theme="theme"
-        :key="forceReload"
       />
       <div class="row px-1 my-1">
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
@@ -83,7 +82,6 @@
       <VAceEditor
         :theme="'chaos'"
         v-model:value="input"
-        :key="forceReload"
         @input="updateContent"
       />
     </div>
@@ -200,7 +198,6 @@ export default {
       showInput: false,
       code: "",
       input: "",
-      forceReload: 0,
     };
   },
   methods: {
@@ -224,8 +221,6 @@ export default {
         code: this.code,
         input: this.input,
       };
-      console.log("HERE");
-      console.log(data);
       this.$emit("update", data);
     },
   },
@@ -235,31 +230,13 @@ export default {
   mounted() {
     console.log("BEFORE MOUNT");
     if (this.lang == "Java") {
-      console.log("JAVA");
       this.editorLangauge = "java";
-      console.log("\n\n\n\n\n");
-      console.log("\n------------- BEFORE SAVE --------------");
-      console.log("code:");
-      console.log(this.code);
-      console.log("saved_j:");
-      console.log(this.saved_j);
-
-      console.log("\n\nSaving...\n\n");
-      this.code = this.saved_j;
-
-      console.log("\n------------- AFTER SAVE --------------");
-      console.log("code:");
-      console.log(this.code);
-      console.log("saved_j:");
-      console.log(this.saved_j);
-      console.log("\n\n\n\n\n");
+      this.code = JSON.parse(this.saved_j).code;
     } else {
-      console.log("PYTHON");
       this.editorLangauge = "python";
-      this.code = this.saved_p;
+      this.code = JSON.parse(this.saved_p).code;
     }
     this.getStyle();
-    this.forceReload = 1;
   },
   beforeCreate() {
     console.log(this.saved_p);
