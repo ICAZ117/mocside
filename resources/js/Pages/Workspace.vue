@@ -63,6 +63,7 @@ export default {
         for(let i=0; i < progress.length; i++) {
           if(progress[i].lang == "java") {
             console.log("Got Java");
+            this.jID = progress[i].id;
             return progress[i].code;
           }
         }
@@ -87,6 +88,7 @@ export default {
       else {
         for(let i =0; i < progress.length; i++) {
           if(progress[i].lang == "python") {
+            this.pID = progress[i].id;
             return progress[i].code;
           }
         }
