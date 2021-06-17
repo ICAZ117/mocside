@@ -100,15 +100,15 @@ export default {
       //e is {code: "...", input: "..."}
       if(this.lang == "Java") {
         console.log(e.code);
-        // this.code_j = e.code;
+        this.code_j = e.code;
       }
       else {
         console.log(e.code);
-        // this.code_p = e.code
+        this.code_p = e.code
       }
-      //this.timeout();
+      this.timeout();
     },
-     timeout: _.debounce(async function(assignmentID) {
+     timeout: _.debounce(async function() {
       var payload = {};
       if(this.lang =="Java") {
         payload = {
@@ -122,7 +122,7 @@ export default {
         }
         const res = await API.apiClient.put(`/code/${this.pID}`, payload);
       };
-    }, 500),
+    }, 1000),
   },
   beforeUnmount() {
     this.$emit("unmounting");
