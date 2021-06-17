@@ -96,8 +96,16 @@ export default {
       }
     },
     updateContent(e) {
-      console.log("Back in Workspace");
       console.log(e);
+      //e is {code: "...", input: "..."}
+      if(this.lang == "Java") {
+        console.log(e.code);
+        // this.code_j = e.code;
+      }
+      else {
+        console.log(e.code);
+        // this.code_p = e.code
+      }
       //this.timeout();
     },
      timeout: _.debounce(async function(assignmentID) {
