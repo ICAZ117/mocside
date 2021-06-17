@@ -40,7 +40,7 @@ class StorageController extends Controller
             ['fsc_id', '=', $user->fsc_id],
             ['lang', '=', $request->lang],
             ['assignment_id', '=', $id],
-        ])->get();
+        ])->first();
         $validData = $request->validate([
             'lang' => 'required',
         ]);
