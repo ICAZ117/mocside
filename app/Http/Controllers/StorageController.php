@@ -41,8 +41,11 @@ class StorageController extends Controller
             ['lang', '=', $request->lang],
             ['assignment_id', '=', $id],
         ])->get();
-        $head = "/home/max/mocside/storage/app/submissions" . $user->fsc_id . "/code/" . $id;
-        if ($progress->lang == 'python') { // because python is best
+        $validData = $request->validate([
+            'lang' => 'required',
+        ]);
+        $head = "/home/max/mocside/storage/app/submissions/" . $user->fsc_id . "/code/" . $id . '/';
+        if ($validData['lang'] == 'python') { // because python is best
             // make python file
             $file = fopen($head . "submission.py", "w");
             $code = $progress->code;
