@@ -107,6 +107,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
+    sortLabs: function sortLabs() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var sortedLabs;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                sortedLabs = _this2.labs.sort(function (a, b) {
+                  // Turn your strings into dates, and then subtract them
+                  // to get a value that is either negative, positive, or zero.
+                  return new Date(a.due_date) - new Date(b.due_date);
+                }); // redundant, .sort() is in place, but also returns.
+
+                return _context2.abrupt("return", sortedLabs);
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
     Unmounting: function Unmounting() {
       this.childisOpen = false;
       this.labID = null;
@@ -119,78 +144,78 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     labEdited: function labEdited() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var lab;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                ///update the list of courses
-                _this2.labs = _this2.labs.filter(function (l) {
-                  return l.id != _this2.labID;
-                });
-                _context2.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/labs/full/".concat(_this2.labID));
-
-              case 3:
-                lab = _context2.sent;
-
-                _this2.labs.push(lab.data.data);
-
-                _this2.Unmounting();
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    addLab: function addLab() {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var payload, lab;
+        var lab;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                payload = {
-                  "name": "New Lab",
-                  "description": "New Lab",
-                  "course_id": _this3.courseID,
-                  "due_date": "2021-06-3 23:59:59"
-                };
+                ///update the list of courses
+                _this3.labs = _this3.labs.filter(function (l) {
+                  return l.id != _this3.labID;
+                });
                 _context3.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.post("/labs/", payload);
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/labs/full/".concat(_this3.labID));
 
               case 3:
                 lab = _context3.sent;
 
                 _this3.labs.push(lab.data.data);
 
-                console.log(lab.data.data);
-                _this3.labID = lab.data.data.id;
-                _this3.labName = lab.data.data.name;
-                console.log(_this3.labID);
-                _this3.childisOpen = true;
+                _this3.Unmounting();
 
-                _this3.$router.push({
-                  name: "EditLab",
-                  params: {
-                    lab_id: _this3.labID
-                  }
-                });
-
-              case 11:
+              case 6:
               case "end":
                 return _context3.stop();
             }
           }
         }, _callee3);
+      }))();
+    },
+    addLab: function addLab() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var payload, lab;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                payload = {
+                  "name": "New Lab",
+                  "description": "New Lab",
+                  "course_id": _this4.courseID,
+                  "due_date": "2021-06-03"
+                };
+                _context4.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.post("/labs/", payload);
+
+              case 3:
+                lab = _context4.sent;
+
+                _this4.labs.push(lab.data.data);
+
+                console.log(lab.data.data);
+                _this4.labID = lab.data.data.id;
+                _this4.labName = lab.data.data.name;
+                console.log(_this4.labID);
+                _this4.childisOpen = true;
+
+                _this4.$router.push({
+                  name: "EditLab",
+                  params: {
+                    lab_id: _this4.labID
+                  }
+                });
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     },
     editLab: function editLab(id, name) {
@@ -205,33 +230,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     removeLab: function removeLab(lab, key) {
-      var _this4 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.delete("/labs/".concat(lab));
-
-              case 2:
-                res = _context4.sent;
-                //filter from labs
-                _this4.labs = _this4.labs.filter(function (l, i) {
-                  return i != key;
-                });
-
-              case 4:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }))();
-    },
-    getStudent: function getStudent() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
@@ -240,17 +238,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _this5.authUser = _Store_index__WEBPACK_IMPORTED_MODULE_2__.default.getters["auth/authUser"];
-                _this5.fscID = _this5.authUser.fsc_user.fsc_id;
-                _context5.next = 4;
-                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/progress/".concat(_this5.fscID));
+                _context5.next = 2;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.delete("/labs/".concat(lab));
+
+              case 2:
+                res = _context5.sent;
+                //filter from labs
+                _this5.labs = _this5.labs.filter(function (l, i) {
+                  return i != key;
+                });
 
               case 4:
-                res = _context5.sent;
-                _this5.progress = res.data;
-                return _context5.abrupt("return", _this5.progress);
-
-              case 7:
               case "end":
                 return _context5.stop();
             }
@@ -258,49 +256,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee5);
       }))();
     },
-    getPercent: function getPercent(lab) {
+    getStudent: function getStudent() {
       var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
-        var d, c, i;
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                d = JSON.parse(_this6.progress.labs);
-                i = 0;
+                _this6.authUser = _Store_index__WEBPACK_IMPORTED_MODULE_2__.default.getters["auth/authUser"];
+                _this6.fscID = _this6.authUser.fsc_user.fsc_id;
+                _context6.next = 4;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/progress/".concat(_this6.fscID));
 
-              case 2:
-                if (!(i <= d.length)) {
-                  _context6.next = 9;
-                  break;
-                }
+              case 4:
+                res = _context6.sent;
+                _this6.progress = res.data;
+                return _context6.abrupt("return", _this6.progress);
 
-                if (!(d[i].lab_id == lab.id)) {
-                  _context6.next = 6;
-                  break;
-                }
-
-                c = d[i];
-                return _context6.abrupt("break", 9);
-
-              case 6:
-                i++;
-                _context6.next = 2;
-                break;
-
-              case 9:
-                if (!(lab.numProblems == 0)) {
-                  _context6.next = 13;
-                  break;
-                }
-
-                return _context6.abrupt("return", "0%");
-
-              case 13:
-                return _context6.abrupt("return", parseInt(c.num_completed / lab.num_problems) * 100 + "%");
-
-              case 14:
+              case 7:
               case "end":
                 return _context6.stop();
             }
@@ -308,11 +283,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee6);
       }))();
     },
-    getActivity: function getActivity(lab) {
+    getPercent: function getPercent(lab) {
       var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-        var d, i;
+        var d, c, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
           while (1) {
             switch (_context7.prev = _context7.next) {
@@ -322,28 +297,78 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 if (!(i <= d.length)) {
-                  _context7.next = 8;
+                  _context7.next = 9;
                   break;
                 }
 
                 if (!(d[i].lab_id == lab.id)) {
-                  _context7.next = 5;
+                  _context7.next = 6;
                   break;
                 }
 
-                return _context7.abrupt("return", d[i].last_progress);
+                c = d[i];
+                return _context7.abrupt("break", 9);
 
-              case 5:
+              case 6:
                 i++;
                 _context7.next = 2;
                 break;
 
-              case 8:
+              case 9:
+                if (!(lab.numProblems == 0)) {
+                  _context7.next = 13;
+                  break;
+                }
+
+                return _context7.abrupt("return", "0%");
+
+              case 13:
+                return _context7.abrupt("return", parseInt(c.num_completed / lab.num_problems) * 100 + "%");
+
+              case 14:
               case "end":
                 return _context7.stop();
             }
           }
         }, _callee7);
+      }))();
+    },
+    getActivity: function getActivity(lab) {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        var d, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                d = JSON.parse(_this8.progress.labs);
+                i = 0;
+
+              case 2:
+                if (!(i <= d.length)) {
+                  _context8.next = 8;
+                  break;
+                }
+
+                if (!(d[i].lab_id == lab.id)) {
+                  _context8.next = 5;
+                  break;
+                }
+
+                return _context8.abrupt("return", d[i].last_progress);
+
+              case 5:
+                i++;
+                _context8.next = 2;
+                break;
+
+              case 8:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
       }))();
     }
   },
@@ -357,23 +382,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   beforeMount: function beforeMount() {
-    var _this8 = this;
+    var _this9 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+      var sorted;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
         while (1) {
-          switch (_context8.prev = _context8.next) {
+          switch (_context9.prev = _context9.next) {
             case 0:
-              _this8.childisOpen = false;
-              _context8.next = 3;
-              return _this8.getLabs();
+              _this9.childisOpen = false;
+              _context9.next = 3;
+              return _this9.getLabs();
 
             case 3:
+              _context9.next = 5;
+              return _this9.sortLabs();
+
+            case 5:
+              sorted = _context9.sent;
+              console.log(sorted);
+
+            case 7:
             case "end":
-              return _context8.stop();
+              return _context9.stop();
           }
         }
-      }, _callee8);
+      }, _callee9);
     }))();
   },
   beforeUnmount: function beforeUnmount() {
@@ -461,7 +495,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(lab.percent), 1
     /* TEXT */
-    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <td>69%</td> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(lab.due_date.split(" ")[0]), 1
+    )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <td>69%</td> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(lab.due_date), 1
     /* TEXT */
     ), !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(lab.activity), 1
     /* TEXT */

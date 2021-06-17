@@ -56,7 +56,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     }]
                   }),
                   "lab_id": _this.labID,
-                  "due_date": "2021-05-29 13:04:03"
+                  "due_date": "2021-05-29 13:04:03",
+                  "copy_id": _this.labID,
+                  "java_starter": "public static void main(String[] args) {\n \n}",
+                  "python_starter": "def main():\n  "
                 };
                 _context.next = 3;
                 return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.post("/problems", payload);
@@ -559,9 +562,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.name), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" get text from .description object "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.description) + " ", 1
-    /* TEXT */
-    ), _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Due Date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]) + " ", 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" get text from .description object "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ problem.description }} "), _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Due Date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]) + " ", 1
     /* TEXT */
     ), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Test Cases: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.test_cases) + " ", 1
     /* TEXT */
