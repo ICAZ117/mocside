@@ -41,7 +41,7 @@
       <br /><br />
 
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap :savedText="{'text': 'EEEEE'}" @input="save" :showMenuBar="true" />
+      <Tiptap :savedText="{'text': 'EEEEE'}" @input="save" :showMenuBar="true" :isDark="false" />
       <br /><br />
 
       <label for="compareMethod">Compare Method: </label>
