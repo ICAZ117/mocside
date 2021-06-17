@@ -230,10 +230,10 @@ export default {
     try {
       if (this.lang == "Java") {
         this.editorLangauge = "java";
-        this.code = JSON.parse(this.saved_j).code;
+        this.code = this.saved_j;
       } else {
         this.editorLangauge = "python";
-        this.code = JSON.parse(this.saved_p).code;
+        this.code = this.saved_p;
       }
       console.log("Try");
     } catch (e) {
