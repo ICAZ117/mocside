@@ -48,20 +48,27 @@ class StorageController extends Controller
         $head = 'submissions/' . $user->fsc_id . '/' . $id;
         if ($validData['lang'] == 'python') { // because python is best
             // make python file
-            $file = fopen("submission" . $user->fsc_id . ".py", "w");
+            $path = "submission" . $user->fsc_id . ".py";
+            $file = fopen($path, "w");
             $code = $progress->code;
             fwrite($file, $code);
             $filePath = Storage::disk('local')
-                ->putFileAs($head, new File("submission.py"), "submission.py");
+                ->putFileAs($head, new File($path), "submission.py");
             fclose($file);
-            return response()->json(['message' => 'Python code stored.', 'path' => $filePath, "code" => $code, 'contents' => file_get_contents("submission" . $user->fsc_id . ".py")], 200);
+            return response()->json([
+                'message' => 'Python code stored.', 
+                'path' => $filePath, 
+                "code" => $code, 
+                'contents' => file_get_contents("submission" . $user->fsc_id . ".py")
+            ], 200);
         } else {
             // make java file
-            $file = fopen("submission" . $user->fsc_id . ".java", "w");
+            $path = "submission" . $user->fsc_id . ".java";
+            $file = fopen($path, "w");
             $code = $progress->code;
             fwrite($file, $code);
             $filePath = Storage::disk('local')
-                ->putFileAs($head, new File("submission.java"), "submission.java");
+                ->putFileAs($head, new File($path), "main.java");
             fclose($file);
             return response()->json(['message' => 'Java code stored.', 'path' => $filePath], 200);
         }
