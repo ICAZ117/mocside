@@ -26,17 +26,17 @@
       </button>
     </bubble-menu>
 
-    <div class="rtf-editor" v-if="editor">
+    <div
+      class="rtf-editor"
+      v-if="editor"
+      :style="
+        isDark
+          ? 'border: none!important;'
+          : 'border: 2px solid #0d0d0d; box-shadow: 0px 0px 3px black;'
+      "
+    >
       <menu-bar class="editor__header" :editor="editor" v-if="showMenuBar" />
-      <editor-content
-        class="editor__content"
-        :editor="editor"
-        :style="
-          isDark
-            ? 'border: none!important;'
-            : 'border: 2px solid #0d0d0d; box-shadow: 0px 0px 3px black;'
-        "
-      />
+      <editor-content class="editor__content" :editor="editor" />
     </div>
   </div>
 </template>
