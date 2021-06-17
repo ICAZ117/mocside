@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\File;
 use App\Models\Code;
 
 class StorageController extends Controller
@@ -47,14 +48,11 @@ class StorageController extends Controller
         $head = "/home/max/mocside/storage/app/submissions/" . $user->fsc_id . "/code/" . $id . '/';
         if ($validData['lang'] == 'python') { // because python is best
             // make python file
-            // if (!file_exists($head . "submission.py")) {
-            //     touch($head . "submission.py");
-            // }
             $file = fopen("submission.py", "w");
             $code = $progress->code;
             fwrite($file, $code);
             // can I send the file to Laravel storage?
-            $filePath = Storage::disk('local')->putFile('submissions/'. $user->fsc_id . "/code/" . $id, new \Illuminate\Http\File($file));
+            $filePath = Storage::disk('local')->putFile('submissions/'. $user->fsc_id . "/code/" . $id, new File("submission.py"));
             fclose($file);
             return response()->json(['message' => 'Python code stored.', 'path' => $filePath], 200);
         } else {
