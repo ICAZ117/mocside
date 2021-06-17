@@ -5,11 +5,11 @@
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <p>
-        {{ description }}
+        <!-- <Tiptap :savedText="JSON.parse(description)" :editable="false"/> -->
       </p>
     </div>
 
-    <IDE class="col-8" :lang="lang" :showSubmit="true" v-model:saved_j="code_j" v-model:saved_p="code_p" @update="updateContent"/>
+    <IDE class="col-8" :lang="lang" :showSubmit="true" :saved_j="code_j" :saved_p="code_p" @update="updateContent" :key="forceReload"/>
 
   </div>
 </template>
@@ -30,6 +30,7 @@ export default {
       input: "",
       jID: "",
       pID: "",
+      forceReload: 0,
     };
   },
   methods: {
@@ -41,9 +42,9 @@ export default {
       this.description = this.assignment.description;
       const res = await API.apiClient.get(`/code/search/${this.problemID}`);
       var progress = res.data.data;
-      console.log(progress);
-      this.code_j = this.getJava(progress);
-      this.code_p = this.getPython(progress);
+      this.code_j = await this.getJava(progress);
+      this.code_p = await this.getPython(progress);
+      this.forceReload = 1;
     },
     async getJava(progress) {
       //if first time opening grab template, else grab student code
@@ -55,16 +56,19 @@ export default {
       if (progress.length == 0) {
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
+        console.log("Got Java");
         return this.assignment.java_starter;
       }
       else {
         for(let i=0; i < progress.length; i++) {
           if(progress[i].lang == "java") {
+            console.log("Got Java");
             return progress[i].code;
           }
         }
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
+        console.log("Got Java");
         return this.assignment.java_starter;
       }
     },
@@ -82,7 +86,6 @@ export default {
       }
       else {
         for(let i =0; i < progress.length; i++) {
-          console.log(progress[i]);
           if(progress[i].lang == "python") {
             return progress[i].code;
           }
@@ -115,7 +118,7 @@ export default {
   beforeUnmount() {
     this.$emit("unmounting");
   },
-  async mounted() {
+  async created() {
     await this.getAssignment();
   },
 };

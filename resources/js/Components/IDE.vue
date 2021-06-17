@@ -6,7 +6,8 @@
     >
       <VAceEditor
         class="editor"
-        v-model:value="data.code"
+        v-model:value="code"
+        @input="updateContent"
         :lang="editorLangauge"
         :theme="theme"
       />
@@ -78,7 +79,7 @@
     </div>
     <div v-if="!showInput" class="console row"></div>
     <div v-if="showInput" class="inputHeight row">
-      <VAceEditor :theme="'chaos'" v-model:value="data.input" />
+      <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
     </div>
   </div>
 </template>
@@ -191,10 +192,8 @@ export default {
       style: "",
       IOmessage: "Show Input",
       showInput: false,
-      data: {
-        code: "",
-        input: "",
-      }
+      code: "",
+      input: "",
     };
   },
   methods: {
@@ -206,32 +205,51 @@ export default {
       // width: " + (this.showSubmit ? "67%" : "89%") + "!important
       var button = document.getElementById("buttonWidth");
       var numButtons = this.showSubmit ? 3 : 2;
-      this.style = "width: calc((100% - " + numButtons + "%) - " + ((numButtons * button.clientWidth) + 2) + "px)!important;" 
-    }
+      this.style =
+        "width: calc((100% - " +
+        numButtons +
+        "%) - " +
+        (numButtons * button.clientWidth + 2) +
+        "px)!important;";
+    },
+    updateContent() {
+      var data = {
+        code: this.code,
+        input: this.input,
+      };
+      this.$emit("update", data);
+    },
   },
   components: {
     VAceEditor,
   },
-  beforeMount() {
+  mounted() {
     console.log("BEFORE MOUNT");
-    if (this.lang == "Java") {
-      console.log("JAVA");
-      this.editorLangauge = "java";
-      this.data.code = this.saved_j;
-    } else {
-      console.log("PYTHON");
-      this.editorLangauge = "python";
-      this.data.code = this.saved_p;
+    try {
+      if (this.lang == "Java") {
+        this.editorLangauge = "java";
+        this.code = JSON.parse(this.saved_j).code;
+      } else {
+        this.editorLangauge = "python";
+        this.code = JSON.parse(this.saved_p).code;
+      }
+      this.getStyle();
+      console.log("Try");
+    } catch (e) {
+      console.log("Catch");
     }
   },
-  mounted() {
-    this.getStyle();
+  beforeCreate() {
+    console.log(this.saved_p);
+    console.log(this.saved_j);
   },
-  computed: {
-    updateContent: function () {
-      this.$emit("update", this.data);
-      return this.data;
-    },
+  created() {
+    console.log(this.saved_p);
+    console.log(this.saved_j);
+  },
+  beforeMount() {
+    console.log(this.saved_p);
+    console.log(this.saved_j);
   },
 };
 </script>
