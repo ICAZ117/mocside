@@ -52,14 +52,14 @@ class StorageController extends Controller
             // }
             $file = fopen("submission.py", "w");
             $code = $progress->code;
-            fwrite($file, $code->__toString());
+            fwrite($file, $code);
             fclose($file);
             return response()->json(['message' => 'Python code stored.', 'path' => $head], 200);
         } else {
             // make java file
             $file = fopen($head . "submission.java", "w");
             $code = $progress->code;
-            fwrite($file, $code->__toString());
+            fwrite($file, $code);
             fclose($file);
             return response()->json(['message' => 'Python code stored.', 'path' => $head], 200);
         }
