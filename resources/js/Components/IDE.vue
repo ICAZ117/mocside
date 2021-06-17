@@ -235,11 +235,11 @@ export default {
         this.editorLangauge = "python";
         this.code = JSON.parse(this.saved_p).code;
       }
-      this.getStyle();
       console.log("Try");
     } catch (e) {
       console.log("Catch");
     }
+    this.getStyle();
     this.forceReload++;
   },
   beforeCreate() {
