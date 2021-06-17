@@ -91,6 +91,7 @@ export default {
       }
     },
     updateContent(e) {
+      console.log("Back in Workspace");
       console.log(e);
       //this.timeout();
     },
