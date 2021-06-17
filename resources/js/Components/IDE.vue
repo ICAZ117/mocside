@@ -10,6 +10,7 @@
         @input="updateContent"
         :lang="editorLangauge"
         :theme="theme"
+        :key="forceReload"
       />
       <div class="row px-1 my-1">
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
@@ -194,6 +195,7 @@ export default {
       showInput: false,
       code: "",
       input: "",
+      forceReload: 0,
     };
   },
   methods: {
@@ -238,6 +240,7 @@ export default {
     } catch (e) {
       console.log("Catch");
     }
+    forceReload++;
   },
   beforeCreate() {
     console.log(this.saved_p);
