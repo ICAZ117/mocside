@@ -5,7 +5,7 @@
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <p>
-        <Tiptap :savedText="JSON.parse(description)" :editable="false" :showMenuBar="false" />
+        <Tiptap :savedText="JSON.parse(description)" :editable="false" :showMenuBar="false" :isDark="true" />
       </p>
     </div>
 

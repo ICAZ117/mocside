@@ -26,8 +26,16 @@
       </button>
     </bubble-menu>
 
-    <div class="rtf-editor" v-if="editor">
-      <menu-bar class="editor__header" :editor="editor" v-if="showMenuBar"/>
+    <div
+      class="rtf-editor"
+      v-if="editor"
+      :style="
+        isDark
+          ? 'border: none!important;'
+          : 'border: 2px solid #0d0d0d; box-shadow: 0px 0px 3px black;'
+      "
+    >
+      <menu-bar class="editor__header" :editor="editor" v-if="showMenuBar" />
       <editor-content class="editor__content" :editor="editor" />
     </div>
   </div>
@@ -64,9 +72,9 @@ export default {
       ],
       content: this.savedText,
       editable: this.editable,
-      // 
+      //
       onUpdate() {
-        self.$emit('input', this.getJSON());
+        self.$emit("input", this.getJSON());
       },
     });
   },
@@ -82,11 +90,8 @@ export default {
   display: flex;
   flex-direction: column;
   max-height: 400px;
-  color: #0d0d0d;
   background-color: rgba(255, 255, 255, 0);
-  border: 2px solid #0d0d0d;
   border-radius: 5px;
-  box-shadow: 0px 0px 3px black;
   /* Some information about the status */
 }
 .editor__header {
@@ -202,8 +207,8 @@ export default {
   margin-inline: 0 !important;
 }
 .ProseMirror code {
-  background-color: rgba(97, 97, 97, 0.1);
-  color: #616161;
+  background-color: rgba(199, 198, 198, 0.18);
+  color: unset;
 }
 .ProseMirror pre {
   background: #0d0d0d;
