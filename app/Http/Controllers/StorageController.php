@@ -54,7 +54,9 @@ class StorageController extends Controller
             $code = $progress->code;
             fwrite($file, $code);
             fclose($file);
-            return response()->json(['message' => 'Python code stored.', 'path' => $head], 200);
+            // can I send the file to Laravel storage?
+            $filePath = Storage::disk('local')->putFile('submissions/'. $user->fsc_id . "/code/" . $id, $file);
+            return response()->json(['message' => 'Python code stored.', 'path' => $filePath], 200);
         } else {
             // make java file
             $file = fopen($head . "submission.java", "w");
