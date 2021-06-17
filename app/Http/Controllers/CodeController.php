@@ -52,7 +52,7 @@ class CodeController extends Controller
         $user = Auth::user();
         $code = Code::find($id);
         if ($user->isAdmin() || ($user->fsc_id == $code->fsc_id)) {
-            $code->update($request->all);
+            $code->update($request->all());
             return $code;
         }
         return reponse()->json(['message' => 'This is not your code!'], 403);
