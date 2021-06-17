@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="testingtesting">
     <bubble-menu
       class="bubble-menu"
       :tippy-options="{ duration: 100 }"
