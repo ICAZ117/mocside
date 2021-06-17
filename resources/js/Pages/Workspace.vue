@@ -116,7 +116,7 @@ export default {
   beforeUnmount() {
     this.$emit("unmounting");
   },
-  async mounted() {
+  async created() {
     await this.getAssignment();
   },
 };
