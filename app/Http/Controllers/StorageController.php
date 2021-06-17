@@ -45,24 +45,25 @@ class StorageController extends Controller
         $validData = $request->validate([
             'lang' => 'required',
         ]);
-        $head = "/home/max/mocside/storage/app/submissions/" . $user->fsc_id . "/code/" . $id . '/';
+        $head = 'submissions/' . $user->fsc_id . '/' . $id;
         if ($validData['lang'] == 'python') { // because python is best
             // make python file
-            $file = fopen("submission.py", "w");
+            $file = fopen("submission" . $user->fsc_id . ".py", "w");
             $code = $progress->code;
             fwrite($file, $code);
-            // can I send the file to Laravel storage?
             $filePath = Storage::disk('local')
-                ->putFileAs('submissions/' . $user->fsc_id . '/' . $id, new File("submission.py"), "/submission.py");
+                ->putFileAs($head, new File("submission.py"), "submission.py");
             fclose($file);
-            return response()->json(['message' => 'Python code stored.', 'path' => $filePath], 200);
+            return response()->json(['message' => 'Python code stored.', 'path' => $filePath, "code" => $code, 'contents' => file_get_contents("submission" . $user->fsc_id . ".py")], 200);
         } else {
             // make java file
-            $file = fopen($head . "submission.java", "w");
+            $file = fopen("submission" . $user->fsc_id . ".java", "w");
             $code = $progress->code;
             fwrite($file, $code);
+            $filePath = Storage::disk('local')
+                ->putFileAs($head, new File("submission.java"), "submission.java");
             fclose($file);
-            return response()->json(['message' => 'Python code stored.', 'path' => $head], 200);
+            return response()->json(['message' => 'Java code stored.', 'path' => $filePath], 200);
         }
     }
 }
