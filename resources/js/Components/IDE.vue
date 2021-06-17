@@ -79,11 +79,7 @@
     </div>
     <div v-if="!showInput" class="console row"></div>
     <div v-if="showInput" class="inputHeight row">
-      <VAceEditor
-        :theme="'chaos'"
-        v-model:value="input"
-        @input="updateContent"
-      />
+      <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
     </div>
   </div>
 </template>
@@ -229,14 +225,19 @@ export default {
   },
   mounted() {
     console.log("BEFORE MOUNT");
-    if (this.lang == "Java") {
-      this.editorLangauge = "java";
-      this.code = JSON.parse(this.saved_j).code;
-    } else {
-      this.editorLangauge = "python";
-      this.code = JSON.parse(this.saved_p).code;
+    try {
+      if (this.lang == "Java") {
+        this.editorLangauge = "java";
+        this.code = JSON.parse(this.saved_j).code;
+      } else {
+        this.editorLangauge = "python";
+        this.code = JSON.parse(this.saved_p).code;
+      }
+      this.getStyle();
+      console.log("Try");
+    } catch (e) {
+      console.log("Catch");
     }
-    this.getStyle();
   },
   beforeCreate() {
     console.log(this.saved_p);
