@@ -54,7 +54,7 @@ class StorageController extends Controller
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File("submission.py"), "submission.py");
             fclose($file);
-            return response()->json(['message' => 'Python code stored.', 'path' => $filePath], 200);
+            return response()->json(['message' => 'Python code stored.', 'path' => $filePath, "code" => $code], 200);
         } else {
             // make java file
             $file = fopen("submission" . $user->fsc_id . ".java", "w");
