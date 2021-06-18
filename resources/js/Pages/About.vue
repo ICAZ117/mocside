@@ -44,6 +44,7 @@ export default {
       convertEol: true,
       scrollback: true,
       cursorStyle: "bar",
+      selectToClipboard: true,
     });
     const fitAddon = new FitAddon();
     const webLinksAddon = new WebLinksAddon();
@@ -148,7 +149,8 @@ export default {
           } else {
             _this.order = _this.order.substr(0, _this.order.length-1);
           }
-        } else if (ev.keyCode == 38 || ev.keyCode == 40) {
+        } 
+        else if (ev.keyCode == 38 || ev.keyCode == 40) {
           let len ​​= _this.inputList.length;
           let code = ev.keyCode;
 
@@ -172,10 +174,25 @@ export default {
             let inputVal = _this.inputList[last];
             term.write(inputVal);
           }
-        } else if (ev.keyCode === 9) {
+        } 
+        else if (ev.keyCode === 9) {
           // If you enter the first character of the string returned by the backend before pressing the tab key, this command will be displayed
           if (_this.order !== "" && show.indexOf(_this.order) == 0) {
             term.write(_this.showOrder);
+          }
+        }
+        else if (ev.ctrlKey) {
+          // Copy (c)
+          if (ev.keyCode == 67) {
+            console.log("ctrl + c");
+          }
+          // Cut (x)
+          else if (ev.keyCode == 88) {
+            console.log("ctrl + x");
+          }
+          // Paste (v)
+          else if (ev.keycode == 87) {
+            console.log("ctrl + v");
           }
         }
         // else if (printable) {
