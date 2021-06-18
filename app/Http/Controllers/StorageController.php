@@ -58,8 +58,6 @@ class StorageController extends Controller
             return response()->json([
                 'message' => 'Python code stored.', 
                 'path' => $filePath, 
-                "code" => $code, 
-                'contents' => file_get_contents("submission" . $user->fsc_id . ".py")
             ], 200);
         } else {
             // make java file
