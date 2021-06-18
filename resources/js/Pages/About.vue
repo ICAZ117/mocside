@@ -149,9 +149,8 @@ export default {
           } else {
             _this.order = _this.order.substr(0, _this.order.length-1);
           }
-        } 
-        else if (ev.keyCode == 38 || ev.keyCode == 40) {
-          let len ​​= _this.inputList.length;
+        } else if (ev.keyCode == 38 || ev.keyCode == 40) {
+          let len = _this.inputList.length;
           let code = ev.keyCode;
 
           if (code === 38 && last <= len && last >= 0) {
@@ -180,6 +179,12 @@ export default {
           if (_this.order !== "" && show.indexOf(_this.order) == 0) {
             term.write(_this.showOrder);
           }
+        } else if (printable) {
+          // When it is printable content
+          // Save the input content variable
+          _this.order = _this.order + key;
+          // Write variables into the terminal
+          term.write(key);
         }
         else if (ev.ctrlKey) {
           // Copy (c)
@@ -210,11 +215,11 @@ export default {
       _this.term = term;
 
       // Paste event
-      term.onData(function (data) {
-        _this.order = data;
-        console.log(data);
-        term.write(data);
-      });
+      // term.onData(function (data) {
+      //   _this.order = data;
+      //   console.log(data);
+      //   term.write(data);
+      // });
     }
     runFakeTerminal(_this);
   },
