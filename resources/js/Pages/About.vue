@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import { Terminal } from "xterm";
-import { FitAddon } from "xterm-addon-fit";
-// import { AttachAddon } from "xterm-addon-attach";
-import { WebLinksAddon } from "xterm-addon-web-links";
-import { SearchAddon } from "xterm-addon-search";
+import {Terminal} from "xterm";
+import {FitAddon} from "xterm-addon-fit";
+// import {AttachAddon} from "xterm-addon-attach";
+import {WebLinksAddon} from "xterm-addon-web-links";
+import {SearchAddon} from "xterm-addon-search";
 
 import "xterm/css/xterm.css";
 import "xterm/lib/xterm.js";
@@ -24,10 +24,10 @@ export default {
         namespace: "",
         podName: ""
       },
-      shellWs: "", // ws实例
-      term: "", // 保存terminal实例
-      showOrder: "", // 保存服务端返回的命令
-      inputList: [] // 保存用户输入的命令，用以上下健切换
+      shellWs: "", // ws instance
+      term: "", // save the terminal instance
+      showOrder: "", // Save the command returned by the server
+      inputList: [] // Save the commands entered by the user to switch between the upper and lower keys
     };
   },
 
@@ -57,7 +57,7 @@ export default {
     term.loadAddon(searchAddon);
     // terminal.loadAddon(attachAddon);
 
-    // 换行并输入起始符“$”
+    // wrap and enter the start character "$"
     term.prompt = () => {
       term.write("\r\n$ ");
     };
@@ -87,36 +87,36 @@ export default {
       term.writeln("");
       term.prompt();
 
-      // 监控键盘输入事件
+      // monitor keyboard input events
       // / **
-      //     *添加事件监听器，用于按下键时的事件。事件值包含
-      //     *将在data事件以及DOM事件中发送的字符串
-      //     *触发了它。
-      //     * @返回一个IDisposable停止监听。
-      //  * /
+      // *Add an event listener for events when the key is pressed. Event value contains
+      // *The string that will be sent in the data event and DOM event
+      // * Triggered it.
+      // * @Return an IDisposable to stop monitoring.
+      // * /
       let last = 0;
 
       term.onKey(function (k) {
-        // 可打印状态，即不是alt键ctrl等功能健时
+        // Printable status, that is, not the alt key ctrl and other functions are healthy
         let ev = k.domEvent;
         let key = k.domEvent.key;
         console.log(ev);
         const printable =
           !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
 
-        // 因服务端返回命令包含乱码，但使用write方法输出时并不显示，故将真实显示内容截取出来
+        // Because the server return command contains garbled characters, but it is not displayed when using the write method to output, so the actual display content is intercepted
         let index = _this.showOrder.indexOf("sh");
-        let show = _this.showOrder.substr(index, _this.showOrder.length - 1);
+        let show = _this.showOrder.substr(index, _this.showOrder.length-1);
 
-        //  当输入回车时
+        //
         if (ev.keyCode === 13) {
           if (_this.order == "cls" || _this.order == "clear") {
             _this.order = "";
             return false;
           }
-          //先将数据发送
+          //Send the data first
           term.prompt();
-          // 判断如果不是英文给出提醒
+          // Determine if it is not in English and give a reminder
           let reg = /[a-zA-Z]/;
           let order = {
             Data: _this.order,
@@ -124,48 +124,48 @@ export default {
           };
 
           if (!reg.test(_this.order)) {
-            term.writeln("请输入有效指令~");
+            term.writeln("Please enter a valid command~");
           } else {
-            // 发送数据
+            // send data
             _this.inputList.push(_this.order);
-            last = _this.inputList.length - 1;
+            last = _this.inputList.length-1;
             _this.onSend(order);
-            // 清空输入内容变量
+            // Clear the input content variable
           }
         } else if (ev.keyCode === 8) {
-          // 当输入退
+          // When the input exit
 
           // Do not delete the prompt
-          // 当前行字符长度如果等于后端返回字符就不进行删除
-          if (term._core.buffer.x > _this.showOrder.length) {
-            term.write("\b \b"); // 输出退格
+          // If the character length of the current line is equal to the character returned by the backend, it will not be deleted
+          if (term._core.buffer.x> _this.showOrder.length) {
+            term.write("\b \b"); // output backspace
           }
 
-          // 将输入内容变量删除
+          // delete the input content variable
 
           if (_this.trim(_this.order) == _this.trim(_this.showOrder)) {
             return false;
           } else {
-            _this.order = _this.order.substr(0, _this.order.length - 1);
+            _this.order = _this.order.substr(0, _this.order.length-1);
           }
         } else if (ev.keyCode == 38 || ev.keyCode == 40) {
-          let len = _this.inputList.length;
+          let len ​​= _this.inputList.length;
           let code = ev.keyCode;
 
           if (code === 38 && last <= len && last >= 0) {
-            // 直接取出字符串数组最后一个元素
+            // Take out the last element of the string array directly
             let inputVal = _this.inputList[last];
             term.write(inputVal);
-            if (last > 0) {
+            if (last> 0) {
               last--;
             }
           }
-          if (code === 40 && last < len) {
-            // last现在为当前元素
-            if (last == len - 1) {
+          if (code === 40 && last <len) {
+            // last is now the current element
+            if (last == len-1) {
               return;
             }
-            if (last < len - 1) {
+            if (last <len-1) {
               last++;
             }
 
@@ -173,26 +173,26 @@ export default {
             term.write(inputVal);
           }
         } else if (ev.keyCode === 9) {
-          // 如果按tab键前输入了之前后端返回字符串的第一个字符，就显示此命令
+          // If you enter the first character of the string returned by the backend before pressing the tab key, this command will be displayed
           if (_this.order !== "" && show.indexOf(_this.order) == 0) {
             term.write(_this.showOrder);
           }
-        } 
+        }
         // else if (printable) {
-        //   // 当为可打印内容时
-        //   if (/[a-zA-Z]/.test(key)) {
-        //     key = key.toLowerCase();
-        //   }
-        //   // 存入输入内容变量
-        //   _this.order = _this.order + key;
-        //   // 将变量写入终端内
+        // // When it is printable content
+        // if (/[a-zA-Z]/.test(key)) {
+        // key = key.toLowerCase();
+        //}
+        // // Save the input content variable
+        // _this.order = _this.order + key;
+        // // Write variables into the terminal
         //   term.write(key);
         // }
       });
 
       _this.term = term;
 
-      // 粘贴事件
+      // Paste event
       term.onData(function (data) {
         _this.order = data;
         console.log(data);
@@ -210,5 +210,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
