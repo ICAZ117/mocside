@@ -199,6 +199,12 @@ export default {
     }
     runFakeTerminal(_this);
   },
+
+  methods: {
+    trim(str) {
+      return str.replace(/(^\s*)|(\s*$)/g, "");
+    }
+  },
 };
 </script>
 
