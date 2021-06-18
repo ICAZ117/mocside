@@ -52,6 +52,7 @@ export default {
     terminal.prompt = () => {
       terminal.write('\r\n$ ');
     };
+    terminal.prompt();
   },
 };
 </script>
