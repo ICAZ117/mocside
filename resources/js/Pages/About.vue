@@ -18,10 +18,16 @@ export default {
   name: "Shell",
   data() {
     return {
-      shellWs: "",
-      term: "",
-      rows: 40,
-      cols: 100,
+      order: "",
+      urlParam: {
+        fullTag: "",
+        namespace: "",
+        podName: ""
+      },
+      shellWs: "", // ws实例
+      term: "", // 保存terminal实例
+      showOrder: "", // 保存服务端返回的命令
+      inputList: [] // 保存用户输入的命令，用以上下健切换
     };
   },
 
@@ -30,13 +36,14 @@ export default {
   },
 
   mounted() {
+    let _this = this;
     console.log("Mounted xterm page");
-    const terminal = new Terminal({
+    const term = new Terminal({
       rows: this.rows,
       cursorBlink: true,
       convertEol: true,
       scrollback: true,
-      cursorStyle: "pipe",
+      cursorStyle: "bar",
     });
     const fitAddon = new FitAddon();
     const webLinksAddon = new WebLinksAddon();
@@ -45,9 +52,9 @@ export default {
     // const socket = new WebSocket("");
     // const attachAddon = new AttachAddon(socket);
 
-    terminal.loadAddon(fitAddon);
-    terminal.loadAddon(webLinksAddon);
-    terminal.loadAddon(searchAddon);
+    term.loadAddon(fitAddon);
+    term.loadAddon(webLinksAddon);
+    term.loadAddon(searchAddon);
     // terminal.loadAddon(attachAddon);
 
     // 换行并输入起始符“$”
