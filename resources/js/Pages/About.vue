@@ -195,6 +195,7 @@ export default {
       // 粘贴事件
       term.onData(function (data) {
         _this.order = data;
+        console.log(data);
         term.write(data);
       });
     }
