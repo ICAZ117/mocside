@@ -96,7 +96,7 @@ export default {
       //  * /
       let last = 0;
 
-      term.on("key", function (key, ev) {
+      term.onKey(function (key, ev) {
         // 可打印状态，即不是alt键ctrl等功能健时
         const printable =
           !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
