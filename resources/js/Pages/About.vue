@@ -192,10 +192,10 @@ export default {
       _this.term = term;
 
       // 粘贴事件
-      term.onData(function (data) {
-        _this.order = data;
-        term.write(data);
-      });
+      // term.onData(function (data) {
+      //   _this.order = data;
+      //   term.write(data);
+      // });
     }
     runFakeTerminal(_this);
   },
