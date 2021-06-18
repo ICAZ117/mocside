@@ -16,7 +16,9 @@
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
-        <button type="run" name="run" class="run-code col-1 btn btn-success">Run</button>
+        <button @click="run" type="run" name="run" class="run-code col-1 btn btn-success">
+          Run
+        </button>
         <button
           v-show="showSubmit"
           type="submit"
@@ -190,7 +192,7 @@ import Xterm from "../Components/Xterm.vue";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "saved_j", "saved_p"],
+  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID"],
   emits: ["update"],
   data() {
     return {
@@ -226,6 +228,13 @@ export default {
         input: this.input,
       };
       this.$emit("update", data);
+    },
+    async run() {
+      var payload = {
+        lang: this.lang,
+      }
+      const res = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
+      console.log(res);
     },
   },
   components: {
