@@ -189,6 +189,7 @@ import "ace-builds/src-noconflict/mode-python";
 }
 
 import Xterm from "../Components/Xterm.vue";
+import * as API from "../services/API";
 
 export default {
   name: "IDE",
