@@ -183,10 +183,10 @@ export default {
           _this.order = _this.order + key;
           // Write variables into the terminal
           term.write(key);
-        } else if (ev.ctrlKey) {
+        } else if (ev.ctrlKey && ev.altKey) {
           // Copy (c)
-          if (ev.keyCode == 66) {
-            console.log("ctrl + b");
+          if (ev.keyCode == 67) {
+            console.log("ctrl + c");
             document.execCommand("copy");
           }
           // Cut (x)
@@ -195,8 +195,8 @@ export default {
             document.execCommand("cut");
           }
           // Paste (v)
-          else if (ev.keycode == 86) {
-            console.log("ctrl + v");
+          else if (ev.keycode == 66) {
+            console.log("ctrl + b");
             document.execCommand("paste");
           }
         }
