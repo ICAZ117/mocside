@@ -184,22 +184,15 @@ export default {
           // Write variables into the terminal
           term.write(key);
         } else if (ev.ctrlKey) {
-          if (ev.altKey) {
-            // Copy (c)
-            if (ev.keyCode == 67) {
-              console.log("ctrl + c");
-              document.execCommand("copy");
-            }
-            // Cut (x)
-            else if (ev.keyCode == 88) {
-              console.log("ctrl + x");
-              document.execCommand("cut");
-            }
-            // Paste (v)
-            else if (ev.keycode == 66) {
-              console.log("ctrl + b");
-              document.execCommand("paste");
-            }
+          // Copy (c)
+          if (ev.keyCode == 81) {
+            console.log("ctrl + q (qopy text)");
+            document.execCommand("copy");
+          }
+          // Paste (v)
+          else if (ev.keycode == 89) {
+            console.log("ctrl + y (yank text)");
+            document.execCommand("paste");
           }
         }
 
