@@ -186,7 +186,7 @@ export default {
           // Write variables into the terminal
           term.write(key);
         }
-        else if (ev.ctrlKey) {
+        else if (ev.ctrlKey && ev.shiftKey) {
           // Copy (c)
           if (ev.keyCode == 67) {
             console.log("ctrl + c");
