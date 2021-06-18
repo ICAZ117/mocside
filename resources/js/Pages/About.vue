@@ -49,7 +49,9 @@ export default {
     fitAddon.fit();
 
     terminal.write("Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ");
-    prompt(terminal);
+    terminal.prompt = () => {
+      terminal.write('\r\n$ ');
+    };
   },
 };
 </script>
