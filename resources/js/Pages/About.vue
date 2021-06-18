@@ -177,27 +177,23 @@ export default {
           if (_this.order !== "" && show.indexOf(_this.order) == 0) {
             term.write(_this.showOrder);
           }
+        } else if (printable) {
+          // When it is printable content
+          // Save the input content variable
+          _this.order = _this.order + key;
+          // Write variables into the terminal
+          term.write(key);
         }
-        // else if (printable) {
-        // // When it is printable content
-        // if (/[a-zA-Z]/.test(key)) {
-        // key = key.toLowerCase();
-        //}
-        // // Save the input content variable
-        // _this.order = _this.order + key;
-        // // Write variables into the terminal
-        //   term.write(key);
-        // }
       });
 
       _this.term = term;
 
       // Paste event
-      term.onData(function (data) {
-        _this.order = data;
-        console.log(data);
-        term.write(data);
-      });
+      // term.onData(function (data) {
+      //   _this.order = data;
+      //   console.log(data);
+      //   term.write(data);
+      // });
     }
     runFakeTerminal(_this);
   },
