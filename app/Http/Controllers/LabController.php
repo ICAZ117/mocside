@@ -97,6 +97,14 @@ class LabController extends Controller
         $lab = Lab::find($id);
         $owner = $lab->course->owner_id;
         if ($user->isAdmin() || $user->fsc_id == $owner) {
+
+            // cleanup all assignments and test cases
+            $assignments = $lab->assignments;
+            $test_cases = [];
+            for ($i = 0; $i < count($assignments); $i++) {
+                array_push($test_cases, $assignments[$i]->test_cases);
+            }
+
             $lab->delete();
             return response()->json(['message' => "Delete sucessful", "data" => $lab], 200);
         }
