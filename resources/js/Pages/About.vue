@@ -98,7 +98,7 @@ export default {
 
       term.onKey(function (key) {
         // 可打印状态，即不是alt键ctrl等功能健时
-        let ev = key.domEvent.keydown;
+        let ev = key.domEvent;
         console.log(ev);
         const printable =
           !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
