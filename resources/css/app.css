@@ -785,7 +785,7 @@ thead.gradebook {
 }
 
 .inputHeight {
-    min-height: calc((100vh - var(--nav-height)) / 2) !important;
+    height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important;
 }
 
 /*========= ADD ASSIGNMENT =========*/
