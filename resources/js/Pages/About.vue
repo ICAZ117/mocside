@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import {Terminal} from "xterm";
-import {FitAddon} from "xterm-addon-fit";
+import { Terminal } from "xterm";
+import { FitAddon } from "xterm-addon-fit";
 // import {AttachAddon} from "xterm-addon-attach";
-import {WebLinksAddon} from "xterm-addon-web-links";
-import {SearchAddon} from "xterm-addon-search";
+import { WebLinksAddon } from "xterm-addon-web-links";
+import { SearchAddon } from "xterm-addon-search";
 
 import "xterm/css/xterm.css";
 import "xterm/lib/xterm.js";
@@ -22,12 +22,12 @@ export default {
       urlParam: {
         fullTag: "",
         namespace: "",
-        podName: ""
+        podName: "",
       },
       shellWs: "", // ws instance
       term: "", // save the terminal instance
       showOrder: "", // Save the command returned by the server
-      inputList: [] // Save the commands entered by the user to switch between the upper and lower keys
+      inputList: [], // Save the commands entered by the user to switch between the upper and lower keys
     };
   },
 
@@ -102,12 +102,11 @@ export default {
         let ev = k.domEvent;
         let key = k.domEvent.key;
         console.log(ev);
-        const printable =
-          !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
+        const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
 
         // Because the server return command contains garbled characters, but it is not displayed when using the write method to output, so the actual display content is intercepted
         let index = _this.showOrder.indexOf("sh");
-        let show = _this.showOrder.substr(index, _this.showOrder.length-1);
+        let show = _this.showOrder.substr(index, _this.showOrder.length - 1);
 
         //
         if (ev.keyCode === 13) {
@@ -129,7 +128,7 @@ export default {
           } else {
             // send data
             _this.inputList.push(_this.order);
-            last = _this.inputList.length-1;
+            last = _this.inputList.length - 1;
             _this.onSend(order);
             // Clear the input content variable
           }
@@ -138,7 +137,7 @@ export default {
 
           // Do not delete the prompt
           // If the character length of the current line is equal to the character returned by the backend, it will not be deleted
-          if (term._core.buffer.x> _this.showOrder.length) {
+          if (term._core.buffer.x > _this.showOrder.length) {
             term.write("\b \b"); // output backspace
           }
 
@@ -147,7 +146,7 @@ export default {
           if (_this.trim(_this.order) == _this.trim(_this.showOrder)) {
             return false;
           } else {
-            _this.order = _this.order.substr(0, _this.order.length-1);
+            _this.order = _this.order.substr(0, _this.order.length - 1);
           }
         } else if (ev.keyCode == 38 || ev.keyCode == 40) {
           let len = _this.inputList.length;
@@ -157,24 +156,23 @@ export default {
             // Take out the last element of the string array directly
             let inputVal = _this.inputList[last];
             term.write(inputVal);
-            if (last> 0) {
+            if (last > 0) {
               last--;
             }
           }
-          if (code === 40 && last <len) {
+          if (code === 40 && last < len) {
             // last is now the current element
-            if (last == len-1) {
+            if (last == len - 1) {
               return;
             }
-            if (last <len-1) {
+            if (last < len - 1) {
               last++;
             }
 
             let inputVal = _this.inputList[last];
             term.write(inputVal);
           }
-        } 
-        else if (ev.keyCode === 9) {
+        } else if (ev.keyCode === 9) {
           // If you enter the first character of the string returned by the backend before pressing the tab key, this command will be displayed
           if (_this.order !== "" && show.indexOf(_this.order) == 0) {
             term.write(_this.showOrder);
@@ -185,23 +183,38 @@ export default {
           _this.order = _this.order + key;
           // Write variables into the terminal
           term.write(key);
-        }
-        else if (ev.ctrlKey && ev.shiftKey) {
+        } else if (ev.ctrlKey) {
           // Copy (c)
-          if (ev.keyCode == 67) {
-            console.log("ctrl + c");
-            document.execCommand('copy')
+          if (ev.keyCode == 66) {
+            console.log("ctrl + b");
+            document.execCommand("copy");
           }
           // Cut (x)
           else if (ev.keyCode == 88) {
             console.log("ctrl + x");
-            document.execCommand('cut')
+            document.execCommand("cut");
           }
           // Paste (v)
           else if (ev.keycode == 86) {
             console.log("ctrl + v");
-            document.execCommand('paste')
+            document.execCommand("paste");
           }
+        }
+
+        function mypasteEvent(ev) {
+          ev.stopPropagation();
+          if (copiedText === undefined || copiedText === "") {
+            copiedText = ev.clipboardData.getData("text/plain");
+            if (copiedText === undefined || copiedText === "") {
+              copiedText = window.getSelection("Text").toString();
+              if (copiedText === undefined || copiedText === "") {
+                console.log("clipboard has no data!");
+              }
+            }
+          }
+          commands.push(copiedText);
+          copiedText = "";
+          ev.preventDefault();
         }
         // else if (printable) {
         // // When it is printable content
@@ -230,7 +243,7 @@ export default {
   methods: {
     trim(str) {
       return str.replace(/(^\s*)|(\s*$)/g, "");
-    }
+    },
   },
 };
 </script>
