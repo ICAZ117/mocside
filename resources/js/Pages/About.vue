@@ -190,14 +190,17 @@ export default {
           // Copy (c)
           if (ev.keyCode == 67) {
             console.log("ctrl + c");
+            document.execCommand('copy')
           }
           // Cut (x)
           else if (ev.keyCode == 88) {
             console.log("ctrl + x");
+            document.execCommand('cut')
           }
           // Paste (v)
           else if (ev.keycode == 86) {
             console.log("ctrl + v");
+            document.execCommand('paste')
           }
         }
         // else if (printable) {
