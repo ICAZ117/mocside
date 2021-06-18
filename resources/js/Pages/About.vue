@@ -196,7 +196,7 @@ export default {
             console.log("ctrl + x");
           }
           // Paste (v)
-          else if (ev.keycode == 87) {
+          else if (ev.keycode == 86) {
             console.log("ctrl + v");
           }
         }
