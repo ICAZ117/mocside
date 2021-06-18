@@ -232,7 +232,7 @@ export default {
     },
     async run() {
       var payload = {
-        lang: this.lang,
+        lang: this.lang.toLowerCase(),
       }
       const res = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res);
