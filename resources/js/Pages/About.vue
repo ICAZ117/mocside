@@ -96,11 +96,10 @@ export default {
       //  * /
       let last = 0;
 
-      term.onKey(function (ev) {
+      term.onKey(function (key) {
         // 可打印状态，即不是alt键ctrl等功能健时
+        let ev = key.domEvent.keydown;
         console.log(ev);
-        console.log(ev.domEvent);
-        console.log(ev.altKey);
         const printable =
           !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
 
