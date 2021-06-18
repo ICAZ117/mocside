@@ -177,16 +177,17 @@ export default {
           if (_this.order !== "" && show.indexOf(_this.order) == 0) {
             term.write(_this.showOrder);
           }
-        } else if (printable) {
-          // 当为可打印内容时
-          if (/[a-zA-Z]/.test(key)) {
-            key = key.toLowerCase();
-          }
-          // 存入输入内容变量
-          _this.order = _this.order + key;
-          // 将变量写入终端内
-          term.write(key);
-        }
+        } 
+        // else if (printable) {
+        //   // 当为可打印内容时
+        //   if (/[a-zA-Z]/.test(key)) {
+        //     key = key.toLowerCase();
+        //   }
+        //   // 存入输入内容变量
+        //   _this.order = _this.order + key;
+        //   // 将变量写入终端内
+        //   term.write(key);
+        // }
       });
 
       _this.term = term;
