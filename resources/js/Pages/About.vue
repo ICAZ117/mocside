@@ -96,98 +96,98 @@ export default {
       //  * /
       let last = 0;
 
-      // term.onKey(function (k) {
-      //   // 可打印状态，即不是alt键ctrl等功能健时
-      //   let ev = k.domEvent;
-      //   let key = k.domEvent.key;
-      //   console.log(ev);
-      //   const printable =
-      //     !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
+      term.onKey(function (k) {
+        // 可打印状态，即不是alt键ctrl等功能健时
+        let ev = k.domEvent;
+        let key = k.domEvent.key;
+        console.log(ev);
+        const printable =
+          !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
 
-      //   // 因服务端返回命令包含乱码，但使用write方法输出时并不显示，故将真实显示内容截取出来
-      //   let index = _this.showOrder.indexOf("sh");
-      //   let show = _this.showOrder.substr(index, _this.showOrder.length - 1);
+        // 因服务端返回命令包含乱码，但使用write方法输出时并不显示，故将真实显示内容截取出来
+        let index = _this.showOrder.indexOf("sh");
+        let show = _this.showOrder.substr(index, _this.showOrder.length - 1);
 
-      //   //  当输入回车时
-      //   if (ev.keyCode === 13) {
-      //     if (_this.order == "cls" || _this.order == "clear") {
-      //       _this.order = "";
-      //       return false;
-      //     }
-      //     //先将数据发送
-      //     term.prompt();
-      //     // 判断如果不是英文给出提醒
-      //     let reg = /[a-zA-Z]/;
-      //     let order = {
-      //       Data: _this.order,
-      //       Op: "stdin",
-      //     };
+        //  当输入回车时
+        if (ev.keyCode === 13) {
+          if (_this.order == "cls" || _this.order == "clear") {
+            _this.order = "";
+            return false;
+          }
+          //先将数据发送
+          term.prompt();
+          // 判断如果不是英文给出提醒
+          let reg = /[a-zA-Z]/;
+          let order = {
+            Data: _this.order,
+            Op: "stdin",
+          };
 
-      //     if (!reg.test(_this.order)) {
-      //       term.writeln("请输入有效指令~");
-      //     } else {
-      //       // 发送数据
-      //       _this.inputList.push(_this.order);
-      //       last = _this.inputList.length - 1;
-      //       _this.onSend(order);
-      //       // 清空输入内容变量
-      //     }
-      //   } else if (ev.keyCode === 8) {
-      //     // 当输入退
+          if (!reg.test(_this.order)) {
+            term.writeln("请输入有效指令~");
+          } else {
+            // 发送数据
+            _this.inputList.push(_this.order);
+            last = _this.inputList.length - 1;
+            _this.onSend(order);
+            // 清空输入内容变量
+          }
+        } else if (ev.keyCode === 8) {
+          // 当输入退
 
-      //     // Do not delete the prompt
-      //     // 当前行字符长度如果等于后端返回字符就不进行删除
-      //     if (term._core.buffer.x > _this.showOrder.length) {
-      //       term.write("\b \b"); // 输出退格
-      //     }
+          // Do not delete the prompt
+          // 当前行字符长度如果等于后端返回字符就不进行删除
+          if (term._core.buffer.x > _this.showOrder.length) {
+            term.write("\b \b"); // 输出退格
+          }
 
-      //     // 将输入内容变量删除
+          // 将输入内容变量删除
 
-      //     if (_this.trim(_this.order) == _this.trim(_this.showOrder)) {
-      //       return false;
-      //     } else {
-      //       _this.order = _this.order.substr(0, _this.order.length - 1);
-      //     }
-      //   } else if (ev.keyCode == 38 || ev.keyCode == 40) {
-      //     let len = _this.inputList.length;
-      //     let code = ev.keyCode;
+          if (_this.trim(_this.order) == _this.trim(_this.showOrder)) {
+            return false;
+          } else {
+            _this.order = _this.order.substr(0, _this.order.length - 1);
+          }
+        } else if (ev.keyCode == 38 || ev.keyCode == 40) {
+          let len = _this.inputList.length;
+          let code = ev.keyCode;
 
-      //     if (code === 38 && last <= len && last >= 0) {
-      //       // 直接取出字符串数组最后一个元素
-      //       let inputVal = _this.inputList[last];
-      //       term.write(inputVal);
-      //       if (last > 0) {
-      //         last--;
-      //       }
-      //     }
-      //     if (code === 40 && last < len) {
-      //       // last现在为当前元素
-      //       if (last == len - 1) {
-      //         return;
-      //       }
-      //       if (last < len - 1) {
-      //         last++;
-      //       }
+          if (code === 38 && last <= len && last >= 0) {
+            // 直接取出字符串数组最后一个元素
+            let inputVal = _this.inputList[last];
+            term.write(inputVal);
+            if (last > 0) {
+              last--;
+            }
+          }
+          if (code === 40 && last < len) {
+            // last现在为当前元素
+            if (last == len - 1) {
+              return;
+            }
+            if (last < len - 1) {
+              last++;
+            }
 
-      //       let inputVal = _this.inputList[last];
-      //       term.write(inputVal);
-      //     }
-      //   } else if (ev.keyCode === 9) {
-      //     // 如果按tab键前输入了之前后端返回字符串的第一个字符，就显示此命令
-      //     if (_this.order !== "" && show.indexOf(_this.order) == 0) {
-      //       term.write(_this.showOrder);
-      //     }
-      //   } else if (printable) {
-      //     // 当为可打印内容时
-      //     if (/[a-zA-Z]/.test(key)) {
-      //       key = key.toLowerCase();
-      //     }
-      //     // 存入输入内容变量
-      //     _this.order = _this.order + key;
-      //     // 将变量写入终端内
-      //     term.write(key);
-      //   }
-      // });
+            let inputVal = _this.inputList[last];
+            term.write(inputVal);
+          }
+        } else if (ev.keyCode === 9) {
+          // 如果按tab键前输入了之前后端返回字符串的第一个字符，就显示此命令
+          if (_this.order !== "" && show.indexOf(_this.order) == 0) {
+            term.write(_this.showOrder);
+          }
+        } else if (printable) {
+          // 当为可打印内容时
+          if (/[a-zA-Z]/.test(key)) {
+            key = key.toLowerCase();
+          }
+          // 存入输入内容变量
+          _this.order = _this.order + key;
+          // 将变量写入终端内
+          term.write(key);
+        }
+      });
 
       _this.term = term;
 
