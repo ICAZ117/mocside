@@ -189,7 +189,7 @@ export default {
       _this.term = term;
 
       // 粘贴事件
-      term.on("paste", function (data) {
+      term.onData(function (data) {
         _this.order = data;
         term.write(data);
       });
