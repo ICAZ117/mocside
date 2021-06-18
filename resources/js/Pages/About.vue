@@ -63,7 +63,7 @@ export default {
     };
 
     term.open(this.$refs["terminal"]);
-    term.fit();
+    fitAddon.fit();
 
     term.writeln("Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ");
     term.prompt();
