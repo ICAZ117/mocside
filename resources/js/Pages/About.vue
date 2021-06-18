@@ -149,7 +149,7 @@ export default {
             _this.order = _this.order.substr(0, _this.order.length-1);
           }
         } else if (ev.keyCode == 38 || ev.keyCode == 40) {
-          let len ​​= _this.inputList.length;
+          let len = _this.inputList.length;
           let code = ev.keyCode;
 
           if (code === 38 && last <= len && last >= 0) {
