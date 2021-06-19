@@ -189,6 +189,7 @@ export default {
       this.problems = this.problems.filter((p) => p.id  != this.problemID);
       const problem = await API.apiClient.get(`/problem/full/${this.problemID}`);
       this.problems.push(problem.data.data);
+      console.log(problem.data.data);
       await this.Unmounting();
     },
     async Unmounting() {
