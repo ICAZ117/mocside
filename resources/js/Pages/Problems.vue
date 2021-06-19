@@ -194,9 +194,7 @@ export default {
       this.Unmounting();
     },
     Unmounting() {
-      console.log("childIsOpen" + this.childIsOpen);
       this.childIsOpen = false;
-      console.log("childIsOpen" + this.childIsOpen);
       this.problemID = null;
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
     },

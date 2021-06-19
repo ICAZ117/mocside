@@ -33,13 +33,11 @@
           :problemID="assignmentID"
         />
       </tab-panel>
-      <tab-panel :val="'Assign'"> <Assign :problemID="problemID" /> </tab-panel>
-      <tab-panel :val="'Template'"> <Template :problemID="problemID" /> </tab-panel>
-      <tab-panel :val="'Test Bench'"> <TestBench :problemID="problemID" /> </tab-panel>
-      <tab-panel :val="'Model Solution'">
-        <ModelSolution :problemID="problemID" />
-      </tab-panel>
-      <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID" /> </tab-panel>
+      <tab-panel v-if="childIsOpen" :val="'Assign'"> <Assign :problemID="problemID" /> </tab-panel>
+      <tab-panel v-if="childIsOpen" :val="'Template'"> <Template :problemID="problemID" /> </tab-panel>
+      <tab-panel v-if="childIsOpen" :val="'Test Bench'"> <TestBench :problemID="problemID" /> </tab-panel>
+      <tab-panel v-if="childIsOpen" :val="'Model Solution'"><ModelSolution :problemID="problemID" /></tab-panel>
+      <tab-panel v-if="childIsOpen" :val="'Grade Book'"> <GradeBook :problemID="problemID" /> </tab-panel>
     </tab-panels>
   </div>
 </template>
@@ -85,6 +83,7 @@ export default defineComponent({
   },
   data() {
     return {
+      childIsOpen: true,
       assignmentID: this.problemID,
       assignmentTitle: "",
       overview: {},
@@ -128,11 +127,15 @@ export default defineComponent({
       };
       const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
     }, 500),
+    Unmounting() {
+      this.childIsOpen = false;
+    },
   },
   beforeMount() {
     this.getInfo();
   },
   beforeUnmount() {
+    this.Unmounting();
     this.$emit("problemEdited");
   },
 });
