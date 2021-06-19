@@ -186,14 +186,12 @@ export default {
     },
     async problemEdited() {
       ///update the list of courses
-      console.log("caught problemEdited");
       this.problems = this.problems.filter((p) => p.id  != this.problemID);
       const problem = await API.apiClient.get(`/problem/full/${this.problemID}`);
       this.problems.push(problem.data.data);
-      console.log("calling unmounting");
-      this.Unmounting();
+      await this.Unmounting();
     },
-    Unmounting() {
+    async Unmounting() {
       this.childIsOpen = false;
       this.problemID = null;
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
