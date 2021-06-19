@@ -39,7 +39,6 @@ export default {
     let _this = this;
     console.log("Mounted xterm page");
     const term = new Terminal({
-      rows: 40,
       cursorBlink: true,
       convertEol: true,
       scrollback: true,

@@ -18,6 +18,7 @@
       :showSubmit="true"
       :saved_j="code_j"
       :saved_p="code_p"
+      :problemID="problemID"
       @update="updateContent"
       :key="forceReload"
     />
