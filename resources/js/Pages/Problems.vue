@@ -187,7 +187,7 @@ export default {
     async problemEdited() {
       ///update the list of courses
       this.problems = this.problems.filter((p) => p.id  != this.problemID);
-      const problem = await API.apiClient.get(`/problem/full/${this.problemID}`);
+      const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problems.push(problem.data.data);
       console.log(problem.data.data);
       await this.Unmounting();
