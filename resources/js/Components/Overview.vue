@@ -46,7 +46,7 @@ export default {
   beforeMount() {
   },
   beforeUnmount() {
-    console.log("overview unmount")
+    console.log("overview unmount");
   },
   mounted() {
   },
