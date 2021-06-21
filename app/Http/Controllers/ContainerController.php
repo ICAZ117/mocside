@@ -37,7 +37,7 @@ class ContainerController extends Controller
             $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
             $packet .= "Connection: Keep-Alive\r\n\r\n";
             $packet .= $convertedArgs;
-            echo $packet;
+            echo $packet . "\r\n\r\n";
             fwrite($socket, $packet);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
