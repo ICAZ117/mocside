@@ -17,16 +17,15 @@ class ContainerController extends Controller
         // spin up container
         $socketPath = 'unix:///var/run/docker.sock';
         $socket = stream_socket_client($socketPath, $errno, $errstr);
-        if(!$socket) {
-            echo "$errstr ($errno)<br />\n";
-        }
+
         $host = '127.0.0.1';
         $path = '/containers/create';
         
         $packet  = "POST {$path} HTTP/1.0\r\n";
         $packet .= "Host: {$host}\r\n";
-        $packet .= "Connection: close\r\n\r\n";
-        $packet .= "Content-type: application/x-www-form-urlencoded\r\n";
+        $packet .= "Content-type: application/json\r\n";
+        
+        
 
         if (strcasecmp($validData['lang'], 'python') == 0)
         {
@@ -34,18 +33,11 @@ class ContainerController extends Controller
                 "Image" => "python", 
                 "Cmd" => ["echo", "hello world"]
             );
-            $options = array(
-                'http' => array(
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'  => 'POST',
-                    'content' => http_build_query($dockerArgs),
-                )
-            );
-
-            $context  = stream_context_create($options);
-
-            $socket = stream_socket_client($socketPath, $errno, $errstr, ini_get("default_socket_timeout"), STREAM_CLIENT_CONNECT, $context);
-
+            $convertedArgs = json_encode($dockerArgs);
+            $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
+            $packet .= "Connection: Keep-Alive\r\n\r\n";
+            $packet .= $convertedArgs;
+            echo $packet;
             fwrite($socket, $packet);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
@@ -80,7 +72,7 @@ class ContainerController extends Controller
     {
         // test sockets
         $socketPath = 'unix:///var/run/docker.sock';
-        echo $socketPath . '\n';
+        // echo $socketPath . '\n';
         // $socket = stream_socket_client($socketPath, $errno, $errstr);
         // $host = '127.0.0.1';
         $path = 'http://localhost/v1.41/containers/json?all=true';
@@ -101,9 +93,9 @@ class ContainerController extends Controller
         // );
         // curl_setopt($stream, CURLOPT_POST, true);
         // curl_setopt($stream, CURLOPT_POSTFIELDS, )
-        echo curl_setopt($stream, CURLOPT_URL, $path);
-        echo curl_setopt($stream, CURLOPT_RETURNTRANSFER, true);
-        echo curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
+        curl_setopt($stream, CURLOPT_URL, $path);
+        curl_setopt($stream, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
 
         $dockerArgs = array(
             "Image" => "python", 
