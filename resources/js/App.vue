@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div @click="key = !key">
-      <Navbar :authUser="authUser" :key="key" />
+      <Navbar :authUser="authUser" :key="key" @forceReload="reload" />
     </div>
     <router-view></router-view>
   </div>
@@ -15,13 +15,16 @@ export default {
   components: { Navbar },
   data() {
     return {
-      key: true,
+      forceReload: 0,
     };
   },
   methods: {
     async getAuthUser() {
       return await this.$store.dispatch("auth/getAuthUser");
     },
+    reload() {
+      this.forceReload++;
+    }
   },
   async mounted() {
     await this.$store.dispatch("auth/getAuthUser");

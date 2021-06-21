@@ -135,6 +135,7 @@ export default {
       else {
         this.isDark = false;
       }
+      this.$emit("forceReload");
     },
   },
   mounted() {
