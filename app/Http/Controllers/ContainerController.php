@@ -105,6 +105,12 @@ class ContainerController extends Controller
         echo curl_setopt($stream, CURLOPT_RETURNTRANSFER, true);
         echo curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
 
+        $dockerArgs = array(
+            "Image" => "python", 
+            "Cmd" => ["echo", "hello world"]
+        );
+        echo http_build_query($dockerArgs);
+
         $res = curl_exec($stream);
         curl_close($stream);
         return response()->json(['message' => $res], 200);
