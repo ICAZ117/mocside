@@ -107,7 +107,7 @@ export default {
         let index = _this.showOrder.indexOf("sh");
         let show = _this.showOrder.substr(index, _this.showOrder.length - 1);
 
-        //
+        //check if Enter
         if (ev.keyCode === 13) {
           if (_this.order == "cls" || _this.order == "clear") {
             _this.order = "";
@@ -131,6 +131,7 @@ export default {
             _this.onSend(order);
             // Clear the input content variable
           }
+          //check if backspace
         } else if (ev.keyCode === 8) {
           // When the input exit
 
@@ -147,6 +148,7 @@ export default {
           } else {
             _this.order = _this.order.substr(0, _this.order.length - 1);
           }
+          //check if up arrow or down arrow
         } else if (ev.keyCode == 38 || ev.keyCode == 40) {
           let len = _this.inputList.length;
           let code = ev.keyCode;
@@ -171,18 +173,23 @@ export default {
             let inputVal = _this.inputList[last];
             term.write(inputVal);
           }
+          //check if tab
         } else if (ev.keyCode === 9) {
           // If you enter the first character of the string returned by the backend before pressing the tab key, this command will be displayed
           if (_this.order !== "" && show.indexOf(_this.order) == 0) {
             term.write(_this.showOrder);
           }
+          //check if it does not have ctrl, alt, altgraph, or meta
         } else if (printable) {
           // When it is printable content
           // Save the input content variable
           _this.order = _this.order + key;
           // Write variables into the terminal
           term.write(key);
+          //check if the ctrl key is pressed
         } else if (ev.ctrlKey) {
+          console.log("ctrl is pressed");
+          console.log("keycode: " + ev.keyCode + " keyValue is: " + ev.key);
           // Copy (c)
           if (ev.keyCode == 81) {
             console.log("ctrl + q (qopy text)");
