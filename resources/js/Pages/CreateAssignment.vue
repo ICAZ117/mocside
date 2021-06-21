@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="childIsOpen">
     <div class="assignment header">
       <input
         id="assignment-title"
@@ -36,9 +36,7 @@
       <tab-panel :val="'Assign'"> <Assign :problemID="problemID" /> </tab-panel>
       <tab-panel :val="'Template'"> <Template :problemID="problemID" /> </tab-panel>
       <tab-panel :val="'Test Bench'"> <TestBench :problemID="problemID" /> </tab-panel>
-      <tab-panel :val="'Model Solution'">
-        <ModelSolution :problemID="problemID" />
-      </tab-panel>
+      <tab-panel :val="'Model Solution'"><ModelSolution :problemID="problemID" /></tab-panel>
       <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID" /> </tab-panel>
     </tab-panels>
   </div>
@@ -85,6 +83,7 @@ export default defineComponent({
   },
   data() {
     return {
+      childIsOpen: true,
       assignmentID: this.problemID,
       assignmentTitle: "",
       overview: {},
@@ -102,12 +101,12 @@ export default defineComponent({
     async handleSubmit() {
       //perhaps later replace this with a debounce method for autosaving
       //save information before returning to the problems page
-      var payload = {
-        name: this.title,
-        // "description": this.overview,
-      };
-      const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
-
+      // var payload = {
+      //   name: this.title,
+      //   // "description": this.overview,
+      // };
+      // const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
+      this.childIsOpen = false;
       this.$emit("problemEdited");
     },
     updateOverview(e) {
@@ -133,6 +132,7 @@ export default defineComponent({
     this.getInfo();
   },
   beforeUnmount() {
+    this.childIsOpen = false;
     this.$emit("problemEdited");
   },
 });

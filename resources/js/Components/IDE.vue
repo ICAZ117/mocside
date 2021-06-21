@@ -16,9 +16,12 @@
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
-        <button type="run" name="run" class="run-code col-1 btn btn-success">Run</button>
+        <button @click="runCode()" type="run" name="run" class="run-code col-1 btn btn-success">
+          Run
+        </button>
         <button
           v-show="showSubmit"
+          @click="submitCode()"
           type="submit"
           name="submit"
           class="submit-code col-1 btn btn-success"
@@ -78,7 +81,9 @@
         </div>
       </div>
     </div>
-    <div v-if="!showInput" class="console row"></div>
+    <div v-if="!showInput" class="console row">
+      <Xterm />
+    </div>
     <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
     </div>
@@ -137,54 +142,59 @@ import "ace-builds/src-noconflict/theme-xcode";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-python";
 
-//////////////////////////////////////////////////////////////////////
-//                            EXTRAS                                //
-//////////////////////////////////////////////////////////////////////
-// import "ace-builds/src-noconflict/ext-beautify";
-// import "ace-builds/src-noconflict/ext-code_lens";
-// import "ace-builds/src-noconflict/ext-elastic_tabstops_lite";
-// import "ace-builds/src-noconflict/ext-emmet";
-// import "ace-builds/src-noconflict/ext-error_marker";
-// import "ace-builds/src-noconflict/ext-keybinding_menu";
-// import "ace-builds/src-noconflict/ext-language_tools";
-// import "ace-builds/src-noconflict/ext-linking";
-// import "ace-builds/src-noconflict/ext-modelist";
-// import "ace-builds/src-noconflict/ext-options";
-// import "ace-builds/src-noconflict/ext-prompt";
-// import "ace-builds/src-noconflict/ext-rtl";
-// import "ace-builds/src-noconflict/ext-searchbox";
-// import "ace-builds/src-noconflict/ext-settings_menu";
-// import "ace-builds/src-noconflict/ext-spellcheck";
-// import "ace-builds/src-noconflict/ext-split";
-// import "ace-builds/src-noconflict/ext-static_highlight";
-// import "ace-builds/src-noconflict/ext-statusbar";
-// import "ace-builds/src-noconflict/ext-textarea";
-// import "ace-builds/src-noconflict/ext-themelist";
-// import "ace-builds/src-noconflict/ext-whitespace";
-// //////////////////////////////////////////////////////////////////////
-// //                           KEYBINDINGS                            //
-// //////////////////////////////////////////////////////////////////////
-// import "ace-builds/src-noconflict/keybinding-emacs.";
-// import "ace-builds/src-noconflict/keybinding-sublime.";
-// import "ace-builds/src-noconflict/keybinding-vim.";
-// import "ace-builds/src-noconflict/keybinding-vscode.";
-// //////////////////////////////////////////////////////////////////////
-// //                             WORKERS                              //
-// //////////////////////////////////////////////////////////////////////
-// import "ace-builds/src-noconflict/worker-base";
-// import "ace-builds/src-noconflict/worker-coffee";
-// import "ace-builds/src-noconflict/worker-css";
-// import "ace-builds/src-noconflict/worker-html";
-// import "ace-builds/src-noconflict/worker-javascript";
-// import "ace-builds/src-noconflict/worker-json";
-// import "ace-builds/src-noconflict/worker-lua";
-// import "ace-builds/src-noconflict/worker-php";
-// import "ace-builds/src-noconflict/worker-xml";
-// import "ace-builds/src-noconflict/worker-xquery";
+{
+  //////////////////////////////////////////////////////////////////////
+  //                            EXTRAS                                //
+  //////////////////////////////////////////////////////////////////////
+  // import "ace-builds/src-noconflict/ext-beautify";
+  // import "ace-builds/src-noconflict/ext-code_lens";
+  // import "ace-builds/src-noconflict/ext-elastic_tabstops_lite";
+  // import "ace-builds/src-noconflict/ext-emmet";
+  // import "ace-builds/src-noconflict/ext-error_marker";
+  // import "ace-builds/src-noconflict/ext-keybinding_menu";
+  // import "ace-builds/src-noconflict/ext-language_tools";
+  // import "ace-builds/src-noconflict/ext-linking";
+  // import "ace-builds/src-noconflict/ext-modelist";
+  // import "ace-builds/src-noconflict/ext-options";
+  // import "ace-builds/src-noconflict/ext-prompt";
+  // import "ace-builds/src-noconflict/ext-rtl";
+  // import "ace-builds/src-noconflict/ext-searchbox";
+  // import "ace-builds/src-noconflict/ext-settings_menu";
+  // import "ace-builds/src-noconflict/ext-spellcheck";
+  // import "ace-builds/src-noconflict/ext-split";
+  // import "ace-builds/src-noconflict/ext-static_highlight";
+  // import "ace-builds/src-noconflict/ext-statusbar";
+  // import "ace-builds/src-noconflict/ext-textarea";
+  // import "ace-builds/src-noconflict/ext-themelist";
+  // import "ace-builds/src-noconflict/ext-whitespace";
+  // //////////////////////////////////////////////////////////////////////
+  // //                           KEYBINDINGS                            //
+  // //////////////////////////////////////////////////////////////////////
+  // import "ace-builds/src-noconflict/keybinding-emacs.";
+  // import "ace-builds/src-noconflict/keybinding-sublime.";
+  // import "ace-builds/src-noconflict/keybinding-vim.";
+  // import "ace-builds/src-noconflict/keybinding-vscode.";
+  // //////////////////////////////////////////////////////////////////////
+  // //                             WORKERS                              //
+  // //////////////////////////////////////////////////////////////////////
+  // import "ace-builds/src-noconflict/worker-base";
+  // import "ace-builds/src-noconflict/worker-coffee";
+  // import "ace-builds/src-noconflict/worker-css";
+  // import "ace-builds/src-noconflict/worker-html";
+  // import "ace-builds/src-noconflict/worker-javascript";
+  // import "ace-builds/src-noconflict/worker-json";
+  // import "ace-builds/src-noconflict/worker-lua";
+  // import "ace-builds/src-noconflict/worker-php";
+  // import "ace-builds/src-noconflict/worker-xml";
+  // import "ace-builds/src-noconflict/worker-xquery";
+}
+
+import Xterm from "../Components/Xterm.vue";
+import * as API from "../services/API";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "saved_j", "saved_p"],
+  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID"],
   emits: ["update"],
   data() {
     return {
@@ -221,9 +231,42 @@ export default {
       };
       this.$emit("update", data);
     },
+    async runCode() {
+      var payload = {
+        code: this.code,
+      }
+      const res = API.apiClient.put(`/code/${this.codeID}`, payload);
+      console.log(res);
+
+      payload = {
+        lang: this.lang.toLowerCase(),
+      }
+      const res2 = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
+      console.log(res2);
+
+      //code is saved....now need to run it
+
+    },
+    async submitCode() {
+      var payload = {
+        code: this.code,
+      }
+      const res = API.apiClient.put(`/code/${this.codeID}`, payload);
+      console.log(res);
+
+      payload = {
+        lang: this.lang.toLowerCase(),
+      }
+      const res2 = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
+      console.log(res2);
+
+      //code is saved now need to run and compare it
+      
+    },
   },
   components: {
     VAceEditor,
+    Xterm,
   },
   mounted() {
     console.log("BEFORE MOUNT");

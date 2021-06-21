@@ -741,12 +741,11 @@ thead.gradebook {
 }
 
 .console {
-    background-color: rgb(58, 58, 58) !important;
+    /* background-color: rgb(58, 58, 58) !important;
     color: lightgray !important;
-    font-family: consolas !important;
+    font-family: consolas !important; */
     height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important;
     margin: 0 !important;
-    padding: 2rem !important;
 }
 
 .workspace-label {

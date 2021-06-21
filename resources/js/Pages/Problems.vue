@@ -186,17 +186,14 @@ export default {
     },
     async problemEdited() {
       ///update the list of courses
-      console.log("caught problemEdited");
       this.problems = this.problems.filter((p) => p.id  != this.problemID);
-      const problem = await API.apiClient.get(`/problem/full/${this.problemID}`);
+      const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problems.push(problem.data.data);
-      console.log("calling unmounting");
-      this.Unmounting();
+      console.log(problem.data.data);
+      await this.Unmounting();
     },
-    Unmounting() {
-      console.log("childIsOpen" + this.childIsOpen);
+    async Unmounting() {
       this.childIsOpen = false;
-      console.log("childIsOpen" + this.childIsOpen);
       this.problemID = null;
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
     },
