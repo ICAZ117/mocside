@@ -59,7 +59,7 @@ class ContainerController extends Controller
         echo $res;
         $parts = explode("\n", $res);
         $idLoc = count($parts) - 3;
-        $id = json_decode($parts[$idLoc])->id;
+        $id = json_decode($parts[$idLoc])->Id;
         return $id;
 
         // attach to ws?
