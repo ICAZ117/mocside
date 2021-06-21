@@ -243,6 +243,9 @@ export default {
       }
       const res2 = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
+
+      //code is saved....now need to run it
+
     },
     async submitCode() {
       var payload = {
@@ -256,6 +259,9 @@ export default {
       }
       const res2 = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
+
+      //code is saved now need to run and compare it
+      
     },
   },
   components: {
