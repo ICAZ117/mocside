@@ -61,7 +61,7 @@ class ContainerController extends Controller
         echo $res;
         $parts = explode("\n", $res);
         $last = count($parts) - 1;
-        return $parts[$last];
+        return $parts;
 
         // attach to ws?
     }
