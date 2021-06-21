@@ -190,15 +190,14 @@ export default {
         } else if (ev.ctrlKey) {
           console.log("ctrl is pressed");
           console.log("keycode: " + ev.keyCode + " keyValue is: " + ev.key);
-          // Copy (c)
-          if (ev.keyCode == 81) {
-            console.log("ctrl + q (qopy text)");
-            document.execCommand("copy");
-          }
-          // Paste (v)
-          else if (ev.keycode == 89) {
+          console.log("keycode checks")
+          if(ev.keyCode == 89) {
             console.log("ctrl + y (yank text)");
             document.execCommand("paste");
+          }
+          if(ev.keyCode == 81) {
+            console.log("ctrl + q (qopy text)");
+            document.execCommand("copy");
           }
         }
 
