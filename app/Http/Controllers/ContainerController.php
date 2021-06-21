@@ -83,7 +83,7 @@ class ContainerController extends Controller
         echo $socketPath . '\n';
         // $socket = stream_socket_client($socketPath, $errno, $errstr);
         // $host = '127.0.0.1';
-        $path = 'http://localhost/v1.41/containers/json?all=true';
+        $path = '/containers/json?all=true';
         // $packet  = "GET {$path} HTTP/1.0\r\n";
         // $packet .= "Host: {$host}\r\n";
         // $packet .= "Connection: close\r\n\r\n";
