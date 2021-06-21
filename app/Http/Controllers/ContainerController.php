@@ -80,7 +80,7 @@ class ContainerController extends Controller
     {
         // test sockets
         $socketPath = 'unix:///var/run/docker.sock';
-        echo $socketPath;
+        echo $socketPath . '\n';
         // $socket = stream_socket_client($socketPath, $errno, $errstr);
         // $host = '127.0.0.1';
         $path = 'http://localhost/v1.41/containers/json?all=true';
@@ -94,6 +94,7 @@ class ContainerController extends Controller
 
         // curl
         $stream = curl_init();
+        echo $stream . '\n';
         curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
         // curl_setopt($stream, CURLOPT_POST, true);
         // curl_setopt($stream, CURLOPT_POSTFIELDS, )
