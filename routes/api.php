@@ -12,6 +12,7 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CodeController;
+use App\Http\Controllers\ContainerController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
@@ -97,6 +98,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/code/{id}', [CodeController::class, 'delete']);
 
     Route::post('/code/submit/{id}', [StorageController::class, 'createFile']);
+
+    Route::get('/containers/test', [ContainerController::class, 'test']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
