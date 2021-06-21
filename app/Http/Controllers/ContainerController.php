@@ -29,7 +29,7 @@ class ContainerController extends Controller
         {
             $dockerArgs = array(
                 "Image" => "python", 
-                "Cmd" => ["echo", "hello world"]
+                "Cmd" => "bash",
             );
             $convertedArgs = json_encode($dockerArgs);
             $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
@@ -73,6 +73,7 @@ class ContainerController extends Controller
         echo $res2."\n";
 
         // currently expecting this to die immediately upon echo.
+        // how do we create the container that can persist as a workspace? Investigate next.
 
         // attach to ws? -> from front end w/ ID
         return $id;
