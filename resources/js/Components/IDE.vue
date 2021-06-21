@@ -16,11 +16,12 @@
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
-        <button @click="run" type="run" name="run" class="run-code col-1 btn btn-success">
+        <button @click="runCode()" type="run" name="run" class="run-code col-1 btn btn-success">
           Run
         </button>
         <button
           v-show="showSubmit"
+          @click="submitCode()"
           type="submit"
           name="submit"
           class="submit-code col-1 btn btn-success"
@@ -193,7 +194,7 @@ import * as API from "../services/API";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID"],
+  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID"],
   emits: ["update"],
   data() {
     return {
@@ -230,12 +231,31 @@ export default {
       };
       this.$emit("update", data);
     },
-    async run() {
+    async runCode() {
       var payload = {
+        code: this.code,
+      }
+      const res = API.apiClient.put(`/code/${this.codeID}`, payload);
+      console.log(res);
+
+      payload = {
         lang: this.lang.toLowerCase(),
       }
-      const res = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
+      const res2 = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
+      console.log(res2);
+    },
+    async submitCode() {
+      var payload = {
+        code: this.code,
+      }
+      const res = API.apiClient.put(`/code/${this.codeID}`, payload);
       console.log(res);
+
+      payload = {
+        lang: this.lang.toLowerCase(),
+      }
+      const res2 = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
+      console.log(res2);
     },
   },
   components: {
