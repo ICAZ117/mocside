@@ -232,10 +232,10 @@ export default {
         console.log(data);
         // term.write(data);
         if (data == "") {
+          _this.order = data;
+          term.write(data);
           console.log("Paste");
-        } else {
-          console.log("Not Paste");
-        }
+        } 
       });
     }
     runFakeTerminal(_this);
