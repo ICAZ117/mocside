@@ -233,7 +233,8 @@ export default {
         // term.write(data);
         if (data == "") {
           _this.order = data;
-          term.write(data);
+          // term.write(data);
+          document.execCommand("paste");
           console.log("Paste");
         } 
       });
