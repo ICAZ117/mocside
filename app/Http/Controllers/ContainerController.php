@@ -83,7 +83,7 @@ class ContainerController extends Controller
         echo $socketPath . '\n';
         // $socket = stream_socket_client($socketPath, $errno, $errstr);
         // $host = '127.0.0.1';
-        $path = '/containers/json?all=true';
+        $path = 'http://localhost/v1.41/containers/json?all=true';
         // $packet  = "GET {$path} HTTP/1.0\r\n";
         // $packet .= "Host: {$host}\r\n";
         // $packet .= "Connection: close\r\n\r\n";
@@ -99,12 +99,11 @@ class ContainerController extends Controller
         //     'Accept: application/json',
         //     'Content-Type: application/json',
         // );
-        echo $stream . '\n';
         // curl_setopt($stream, CURLOPT_POST, true);
         // curl_setopt($stream, CURLOPT_POSTFIELDS, )
-        curl_setopt($stream, CURLOPT_URL, $path);
-        curl_setopt($stream, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
+        echo curl_setopt($stream, CURLOPT_URL, $path);
+        echo curl_setopt($stream, CURLOPT_RETURNTRANSFER, true);
+        echo curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
 
         $res = curl_exec($stream);
         curl_close($stream);
