@@ -38,7 +38,7 @@ class ContainerController extends Controller
             $packet .= "Connection: Keep-Alive\r\n\r\n";
             $packet .= $convertedArgs;
 
-            echo $packet . "\r\n\r\n"; // for debug/demonstration 
+            // echo $packet . "\r\n\r\n"; // for debug/demonstration 
 
             fwrite($socket, $packet);
             $res = fread($socket, 4096)."\n";
@@ -60,8 +60,8 @@ class ContainerController extends Controller
         // get ID of newly created 
         echo $res;
         $parts = explode("\n", $res);
-        $last = count($parts) - 1;
-        return $parts;
+        $idLoc = count($parts) - 3;
+        return $parts[$idLoc];
 
         // attach to ws?
     }
