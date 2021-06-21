@@ -24,8 +24,6 @@ class ContainerController extends Controller
         $packet  = "POST {$path} HTTP/1.0\r\n";
         $packet .= "Host: {$host}\r\n";
         $packet .= "Content-type: application/json\r\n";
-        
-        
 
         if (strcasecmp($validData['lang'], 'python') == 0)
         {
@@ -61,7 +59,8 @@ class ContainerController extends Controller
         echo $res;
         $parts = explode("\n", $res);
         $idLoc = count($parts) - 3;
-        return $parts[$idLoc];
+        $id = json_decode($parts[$idLoc])->id;
+        return $id;
 
         // attach to ws?
     }
