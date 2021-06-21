@@ -41,7 +41,7 @@ class ContainerController extends Controller
         fwrite($socket, $packet);
         $res = fread($socket, 4096)."\n";
         fclose($socket);
-        return response()->json(['message' => $res], 200);
+        return $res;
 
         // test with laravel http to local unix path
     }
