@@ -26,7 +26,7 @@ class ContainerController extends Controller
     public function test()
     {
         // test sockets
-        $socketPath = '/var/run/docker.sock';
+        $socketPath = 'unix:///var/run/docker.sock';
         $socket = stream_socket_client($socketPath, $errno, $errstr);
         $cmd = 'http://localhost/1.41/containers/json?all=true';
         fwrite($socket, $cmd."\r\n");
