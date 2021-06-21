@@ -190,6 +190,21 @@ export default {
         } else if (ev.ctrlKey) {
           console.log("ctrl is pressed");
           console.log("keycode: " + ev.keyCode + " keyValue is: " + ev.key);
+          console.log("keycode checks")
+          if(ev.keyCode == 89) {
+            console.log("ctrl + y");
+          }
+          if(ev.keyCode == 81) {
+            console.log("ctrl + q");
+          }
+          console.log("key checks");
+          if(ev.key == 'y' || ev.key == 'Y') {
+            console.log("ctrl + y");
+          }
+          if(ev.key == 'q' || ev.key == 'Q') {
+            console.log("ctrl + y");
+          }
+          console.log("end");
           // Copy (c)
           if (ev.keyCode == 81) {
             console.log("ctrl + q (qopy text)");
