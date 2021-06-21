@@ -29,7 +29,7 @@ class ContainerController extends Controller
         {
             $dockerArgs = array(
                 "Image" => "python", 
-                "Cmd" => "bash",
+                "Cmd" => "/bin/bash",
             );
             $convertedArgs = json_encode($dockerArgs);
             $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
