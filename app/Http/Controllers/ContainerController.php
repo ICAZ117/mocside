@@ -16,7 +16,10 @@ class ContainerController extends Controller
         ]);
         // spin up container
         $socketPath = 'unix:///var/run/docker.sock';
-
+        $socket = stream_socket_client($socketPath, $errno, $errstr);
+        if(!$socket) {
+            echo "$errstr ($errno)<br />\n";
+        }
         $host = '127.0.0.1';
         $path = '/containers/create';
         
