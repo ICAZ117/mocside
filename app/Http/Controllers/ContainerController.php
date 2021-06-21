@@ -37,22 +37,32 @@ class ContainerController extends Controller
             $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
             $packet .= "Connection: Keep-Alive\r\n\r\n";
             $packet .= $convertedArgs;
-            echo $packet . "\r\n\r\n";
+
+            echo $packet . "\r\n\r\n"; // for debug/demonstration 
+
             fwrite($socket, $packet);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
-            return $res;
         } else {
             $dockerArgs = http_build_query([
                 "Image" => "java", 
                 "Cmd" => ["echo", "hello world"]
             ]);
+            $convertedArgs = json_encode($dockerArgs);
+            $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
+            $packet .= "Connection: Keep-Alive\r\n\r\n";
+            $packet .= $convertedArgs;
             fwrite($socket, $packet);
             fwrite($socket, $dockerArgs);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
-            return $res;
         }
+        // get ID of newly created 
+        echo $res;
+        $parts = explode("\n", $res);
+        $last = count($parts) - 1;
+        return $parts[$last];
+
         // attach to ws?
     }
 
