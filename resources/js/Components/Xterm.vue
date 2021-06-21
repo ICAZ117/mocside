@@ -231,7 +231,11 @@ export default {
         console.log("\nData:");
         console.log(data);
         // term.write(data);
-
+        if (data == "") {
+          console.log("Paste");
+        } else {
+          console.log("Not Paste");
+        }
       });
     }
     runFakeTerminal(_this);
