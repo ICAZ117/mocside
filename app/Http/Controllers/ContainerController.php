@@ -17,11 +17,9 @@ class ContainerController extends Controller
         // spin up container
         $socketPath = 'unix:///var/run/docker.sock';
         $socket = stream_socket_client($socketPath, $errno, $errstr);
-        if(!$socket) {
-            echo "$errstr ($errno)<br />\n";
-        }
         $host = '127.0.0.1';
         $path = '/containers/create';
+        
         $packet  = "POST {$path} HTTP/1.0\r\n";
         $packet .= "Host: {$host}\r\n";
         $packet .= "Connection: close\r\n\r\n";
@@ -32,8 +30,10 @@ class ContainerController extends Controller
                 "Image" => "python", 
                 "Cmd" => ["echo", "hello world"]
             ]);
+            $packet .= '{"Image": "python", "Cmd": ["echo", "hello world"]}';
+            // $packet .= $dockerArgs;
             fwrite($socket, $packet);
-            fwrite($socket, $dockerArgs);
+            // fwrite($socket, $dockerArgs);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
             return $res;
