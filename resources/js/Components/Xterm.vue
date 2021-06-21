@@ -195,6 +195,7 @@ export default {
           }
         }
 
+
         function mypasteEvent(ev) {
           ev.stopPropagation();
           if (copiedText === undefined || copiedText === "") {
@@ -225,11 +226,13 @@ export default {
       _this.term = term;
 
       // Paste event
-      // term.onData(function (data) {
-      //   _this.order = data;
-      //   console.log(data);
-      //   term.write(data);
-      // });
+      term.onData(function (data) {
+        // _this.order = data;
+        console.log("\nData:");
+        console.log(data);
+        // term.write(data);
+
+      });
     }
     runFakeTerminal(_this);
   },
