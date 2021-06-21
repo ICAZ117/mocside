@@ -100,6 +100,7 @@ class ContainerController extends Controller
         curl_setopt($stream, CURLOPT_RETURNTRANSFER, true);
 
         $res = curl_exec($stream);
-        return $res;
+        curl_close($stream);
+        return response()->json(['message' => $res], 200);
     }
 }
