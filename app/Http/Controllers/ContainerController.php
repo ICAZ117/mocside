@@ -34,7 +34,7 @@ class ContainerController extends Controller
             // $packet .= '{"Image": "python", "Cmd": ["echo", "hello world"]}';
             $packet .= $dockerArgs;
             fwrite($socket, $packet);
-            fwrite($socket, $dockerArgs);
+            // fwrite($socket, $dockerArgs);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
             return $res;
