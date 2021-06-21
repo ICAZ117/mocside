@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar bg-light navbar-light navbar-expand-xl">
       <router-link to="/" class="navbar-brand">
-        <img src="../../img/logo/brandlight.png" alt="Mocs-IDE" title="Logo"/>
+        <img src="../../img/logo/brandlight.png" alt="Mocs-IDE" title="Logo" />
       </router-link>
 
       <button
@@ -18,11 +18,23 @@
         <div class="navbar-nav">
           <div class="nav-item">
             <router-link @click="update" to="/" class="nav-link">Home</router-link>
-            <router-link v-if="isLoggedIn" @click="update" to="/courses" class="nav-link">Courses</router-link>
-            <router-link v-if="!isLoggedIn" @click="update" to="/login" class="nav-link">Login</router-link>
-            <router-link v-if="!isLoggedIn" @click="update" to="/register" class="nav-link">Sign Up</router-link>
-            <router-link v-if="isLoggedIn" @click="update" to="/about" class="move-up"><img class="pfp" src="../../img/DefaultPFP.png" alt="Profile"></router-link>
-            <a @click="logout" v-if="isLoggedIn" class="nav-link" >Logout</a>
+            <router-link v-if="isLoggedIn" @click="update" to="/courses" class="nav-link"
+              >Courses</router-link
+            >
+            <router-link v-if="!isLoggedIn" @click="update" to="/login" class="nav-link"
+              >Login</router-link
+            >
+            <router-link
+              v-if="!isLoggedIn"
+              @click="update"
+              to="/register"
+              class="nav-link"
+              >Sign Up</router-link
+            >
+            <router-link v-if="isLoggedIn" @click="update" to="/about" class="move-up"
+              ><img class="pfp" src="../../img/DefaultPFP.png" alt="Profile"
+            /></router-link>
+            <a @click="logout" v-if="isLoggedIn" class="nav-link">Logout</a>
           </div>
         </div>
       </div>
@@ -34,7 +46,7 @@
 
 <script>
 export default {
-  props: ['authUser'],
+  props: ["authUser"],
   data() {
     return {
       dark: "",
@@ -50,14 +62,21 @@ export default {
     },
   },
   computed: {
-    isLoggedIn: function() {
+    isLoggedIn: function () {
       if (this.authUser == null) {
         return false;
-      }
-      else {
+      } else {
         return true;
       }
-    }
+    },
+  },
+  watch: {
+    $route(to, from) {
+      console.log("\nTo:");
+      console.log(to);
+      console.log("\nFrom:");
+      console.log(from);
+    },
   },
   mounted() {
     console.log("window.location.pathname:");
