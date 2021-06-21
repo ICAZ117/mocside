@@ -16,7 +16,6 @@ class ContainerController extends Controller
         ]);
         // spin up container
         $socketPath = 'unix:///var/run/docker.sock';
-        $socket = stream_socket_client($socketPath, $errno, $errstr);
 
         $host = '127.0.0.1';
         $path = '/containers/create';
@@ -24,17 +23,27 @@ class ContainerController extends Controller
         $packet  = "POST {$path} HTTP/1.0\r\n";
         $packet .= "Host: {$host}\r\n";
         $packet .= "Connection: close\r\n\r\n";
+        $packet .= "Content-type: application/x-www-form-urlencoded\r\n";
 
         if (strcasecmp($validData['lang'], 'python') == 0)
         {
-            $dockerArgs = http_build_query([
+            $dockerArgs = array(
                 "Image" => "python", 
                 "Cmd" => ["echo", "hello world"]
-            ]);
-            $packet .= '{"Image": "python", "Cmd": ["echo", "hello world"]}';
-            // $packet .= $dockerArgs;
+            );
+            $options = array(
+                'http' => array(
+                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method'  => 'POST',
+                    'content' => http_build_query($dockerArgs),
+                )
+            );
+
+            $context  = stream_context_create($options);
+
+            $socket = stream_socket_client($socketPath, $errno, $errstr, ini_get("default_socket_timeout"), STREAM_CLIENT_CONNECT, $context);
+
             fwrite($socket, $packet);
-            // fwrite($socket, $dockerArgs);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
             return $res;
@@ -68,17 +77,26 @@ class ContainerController extends Controller
     {
         // test sockets
         $socketPath = 'unix:///var/run/docker.sock';
-        $socket = stream_socket_client($socketPath, $errno, $errstr);
-        $host = '127.0.0.1';
-        $path = '/containers/json?all=true';
-        $packet  = "GET {$path} HTTP/1.0\r\n";
-        $packet .= "Host: {$host}\r\n";
-        $packet .= "Connection: close\r\n\r\n";
-        fwrite($socket, $packet);
-        $res = fread($socket, 4096)."\n";
-        fclose($socket);
-        return $res;
+        // $socket = stream_socket_client($socketPath, $errno, $errstr);
+        // $host = '127.0.0.1';
+        $path = 'http://localhost/v1.41/containers/json?all=true';
+        // $packet  = "GET {$path} HTTP/1.0\r\n";
+        // $packet .= "Host: {$host}\r\n";
+        // $packet .= "Connection: close\r\n\r\n";
+        // fwrite($socket, $packet);
+        // $res = fread($socket, 4096)."\n";
+        // fclose($socket);
+        // return $res;
 
-        
+        // curl
+        $stream = curl_init();
+        curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
+        // curl_setopt($stream, CURLOPT_POST, true);
+        // curl_setopt($stream, CURLOPT_POSTFIELDS, )
+        curl_setopt($stream, CURLOPT_URL, $path);
+        curl_setopt($stream, CURLOPT_RETURNTRANSFER, true);
+
+        $res = curl_exec($stream);
+        return $res;
     }
 }
