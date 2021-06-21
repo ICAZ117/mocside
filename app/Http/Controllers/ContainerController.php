@@ -25,16 +25,22 @@ class ContainerController extends Controller
 
         if (strcasecmp($validData['lang'], 'python') == 0)
         {
-            $dockerArgs = '{"Image": "python", "Cmd": ["echo", "hello world"]}\r\n';
-            $packet .= $dockerArgs;
+            $dockerArgs = http_build_query([
+                "Image" => "python", 
+                "Cmd" => ["echo", "hello world"]
+            ]);
             fwrite($socket, $packet);
+            fwrite($socket, $dockerArgs);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
             return $res;
         } else {
-            $dockerArgs = '{"Image": "java", "Cmd": ["echo", "hello world"]}\r\n';
-            $packet .= $dockerArgs;
+            $dockerArgs = http_build_query([
+                "Image" => "java", 
+                "Cmd" => ["echo", "hello world"]
+            ]);
             fwrite($socket, $packet);
+            fwrite($socket, $dockerArgs);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
             return $res;
