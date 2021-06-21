@@ -80,6 +80,7 @@ class ContainerController extends Controller
     {
         // test sockets
         $socketPath = 'unix:///var/run/docker.sock';
+        echo $socketPath;
         // $socket = stream_socket_client($socketPath, $errno, $errstr);
         // $host = '127.0.0.1';
         $path = 'http://localhost/v1.41/containers/json?all=true';
