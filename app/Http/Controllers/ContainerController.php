@@ -51,18 +51,38 @@ class ContainerController extends Controller
             $packet .= "Connection: Keep-Alive\r\n\r\n";
             $packet .= $convertedArgs;
             fwrite($socket, $packet);
-            fwrite($socket, $dockerArgs);
             $res = fread($socket, 4096)."\n";
             fclose($socket);
         }
         // get ID of newly created 
-        echo $res;
+        echo $res."\n";
         $parts = explode("\n", $res);
         $idLoc = count($parts) - 3;
         $id = json_decode($parts[$idLoc])->Id;
-        return $id;
 
-        // attach to ws?
+        // start container
+        $path = "/containers/" . $id . "/start";
+        $packet2 = "POST {$path} HTTP/1.0\r\n";
+        $packet2 .= "Host: {$host}\r\n";
+        $packet2 .= "Connection: Keep-Alive\r\n\r\n";
+        // re-open socket
+        $socket = stream_socket_client($socketPath, $errno, $errstr);
+        fwrite($socket, $packet2);
+        $res2 = fread($socket, 4096)."\n";
+        fclose($socket);
+        echo $res2."\n";
+
+        // currently expecting this to die immediately upon echo.
+
+        // attach to ws? -> from front end w/ ID
+        return $id;
+    }
+
+    public function spinDown($id)
+    {
+        // shutdown active container by ID
+
+        // delete container
     }
 
     public function runTest()
