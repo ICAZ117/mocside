@@ -1,5 +1,6 @@
 <template>
-  <div v-if="!isDark">
+  <!-- <div v-if="!isDark"> -->
+    <div>
     <div>
       <nav class="navbar bg-light navbar-light navbar-expand-xl">
         <router-link to="/" class="navbar-brand">
@@ -50,7 +51,7 @@
 
 
 
-    <!-- DARK NAVBAR -->
+    <!-- DARK NAVBAR
     <div v-if="isDark">
       <nav class="dark-navbar bg-light navbar-light navbar-expand-xl">
         <router-link to="/" class="navbar-brand">
@@ -97,7 +98,7 @@
       </nav>
 
       <div class="navbar-spacer"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
