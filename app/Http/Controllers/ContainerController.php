@@ -94,12 +94,17 @@ class ContainerController extends Controller
 
         // curl
         $stream = curl_init();
+
+        // $headers = array(
+        //     'Accept: application/json',
+        //     'Content-Type: application/json',
+        // );
         echo $stream . '\n';
-        curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
         // curl_setopt($stream, CURLOPT_POST, true);
         // curl_setopt($stream, CURLOPT_POSTFIELDS, )
         curl_setopt($stream, CURLOPT_URL, $path);
         curl_setopt($stream, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($stream, CURLOPT_UNIX_SOCKET_PATH, $socketPath);
 
         $res = curl_exec($stream);
         curl_close($stream);
