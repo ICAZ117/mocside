@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ContainerController extends Controller
 {
-    public function spinUp(Request $request)
+    public function spinUp(Request $request, $id)
     {   
+        $user = Auth::user();
         $validData = $request->validate([
             'lang' => 'required',
         ]);
@@ -29,14 +30,26 @@ class ContainerController extends Controller
         {
             $dockerArgs = array(
                 "Image" => "python", 
-                "Cmd" => "/bin/bash",
+                "Cmd" => "python submission.py",
+                "Entrypoint" => "",
+                "AttachStdin" => true,
+                "AttachStdout" => true,
+                "AttachStderr" => true,
+                "OpenStdin" => true,
+                "Tty" => true,
+                "WorkingDir" => "/usr/src",
+                "Volume" => array(
+                    // "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/" => "/usr/src",
+                    "Destination" => "/usr/src",
+                    "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
+                ),
             );
             $convertedArgs = json_encode($dockerArgs);
             $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
             $packet .= "Connection: Keep-Alive\r\n\r\n";
             $packet .= $convertedArgs;
 
-            // echo $packet . "\r\n\r\n"; // for debug/demonstration 
+            echo $packet . "\r\n\r\n"; // for debug/demonstration 
 
             fwrite($socket, $packet);
             $res = fread($socket, 4096)."\n";

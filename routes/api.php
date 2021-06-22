@@ -100,7 +100,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/code/submit/{id}', [StorageController::class, 'createFile']);
 
     Route::get('/containers/test', [ContainerController::class, 'test']);
-    Route::post('/containers/spin-up', [ContainerController::class, 'spinUp']);
+    Route::post('/containers/spin-up/{id}', [ContainerController::class, 'spinUp']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
