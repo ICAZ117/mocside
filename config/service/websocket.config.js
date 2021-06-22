@@ -1,22 +1,23 @@
+
 /**
- * ** WebSocket 封装
- * @ url         请求地址                   类型:string         默认:''       备注: 'web/msg'
- * @ isInit      是否自动执行                类型:boolean        默认:false    备注: false|true
- * @ openFn      自动执行open回调函数         类型:function       默认 : null    备注: 如果onOpen没有callBack,默认调用openFn
- * @ messageFn   自动执行消息回调函数         类型:function       默认: null    备注: 如果onMessage没有callBack,默认调用messageFn
- * @ errorFn     自动执行错误回调函数         类型:function       默认: null    备注: 如果onErrorFn没有callBack,默认调用errorFn
+ * ** WebSocket package
+ * @ url Request address type: string Default:'' Remarks:'web/msg'
+ * @isInit Whether to execute automatically Type: boolean Default: false Remarks: false|true
+ * @ openFn automatically executes the open callback function Type: function Default: null Note: If onOpen does not have a callBack, openFn is called by default
+ * @messageFn automatically executes the message callback function Type: function Default: null Note: If onMessage does not have a callBack, messageFn is called by default
+ * @errorFn Automatically execute error callback function Type: function Default: null Note: If onErrorFn does not have a callBack, errorFn is called by default
  *
  *
- * 方法:
- * isWebsocket   判断websocket 是否存在         返回 true|false      参数:无
- * onOpen        服务端与前端连接成功后触发开      返回 无              参数:callBack(e)
- * onMessage     服务端向前端发送消息时触发        返回 无              参数:callBack(e)
- * onError       WSC报错后触发                  返回 无              参数:callBack(e)
- * onClose       关闭WSC
- * onSend        前端向服务端发送消息时触发        返回 无              参数:data
- * readyState    获取WSC链接状态，只读不可修改
- * binaryType    获取WSC连接所传输二进制数据的类型,只读
- * get           获取当前实例                   返回 当前实例          参数:data
+ * Method:
+ * isWebsocket Judge whether websocket exists Return true|false Parameter: none
+ * onOpen is triggered after successful connection between the server and the front end Return None Parameter: callBack(e)
+ * onMessage is triggered when the server sends a message to the front end Return None Parameter: callBack(e)
+ * onError Triggered after WSC reports an error. Return None Parameter: callBack(e)
+ * onClose Close WSC
+ * onSend is triggered when the front end sends a message to the server. Return None Parameter: data
+ * readyState Get WSC link status, read only and cannot be modified
+ * binaryType Get the type of binary data transmitted by the WSC connection, read-only
+ * get Get the current instance Return the current instance Parameter: data
  * */
  export class WS {
     constructor({
