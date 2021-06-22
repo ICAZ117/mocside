@@ -9,45 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ContainerController extends Controller
 {
-    private function createVol($pID, $sID)
-    {
-        $socketPath = 'unix:///var/run/docker.sock';
-        $socket = stream_socket_client($socketPath, $errno, $errstr);
-
-        $host = '127.0.0.1';
-        $path = '/volumes/create';
-        
-        $packet  = "POST {$path} HTTP/1.0\r\n";
-        $packet .= "Host: {$host}\r\n";
-        $packet .= "Content-type: application/json\r\n";
-
-        $volumeArgs = array(
-            "Name" => $sID."-".$pID,
-            "Driver" => 'local',
-            "DriverOpts" => array(
-                "device" => "/home/max/mocside/storage/app/submissions/".$sID."/".$pID."/",
-                "type" => "none",
-                "o" => "bind",
-            ),
-        );
-        $convertedArgs = json_encode($volumeArgs);
-        $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
-        $packet .= "Connection: Keep-Alive\r\n\r\n";
-        $packet .= $convertedArgs;
-
-        echo $packet . "\r\n\r\n"; // for debug/demonstration 
-
-        fwrite($socket, $packet);
-        $res = fread($socket, 4096)."\n";
-        fclose($socket);
-
-        return $res;
-    }
-
     public function spinUp(Request $request, $id)
     {   
-        echo getcwd();
-        echo getmyuid();
+        // echo getcwd();
+        // echo getmyuid();
         $user = Auth::user();
         $validData = $request->validate([
             'lang' => 'required',
@@ -75,16 +40,10 @@ class ContainerController extends Controller
                 "OpenStdin" => true,
                 "Tty" => true,
                 "WorkingDir" => "/usr/src",
-                // "Volume" => array(
-                //     "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/" => "/usr/src",
-                //     // "Destination" => "/usr/src",
-                //     // "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
-                // ),
                 "HostConfig" => array(
                     "Mounts" => [array(
                         "Target" => "/usr/src",
                         "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
-                        // "Source" => "Output",
                         "Type" => "bind",
                         "ReadOnly" => false,
                     )],
@@ -101,6 +60,7 @@ class ContainerController extends Controller
             $res = fread($socket, 4096)."\n";
             fclose($socket);
         } else {
+            // come back here
             $dockerArgs = http_build_query([
                 "Image" => "java", 
                 "Cmd" => ["echo", "hello world"]
