@@ -33,7 +33,7 @@ export default {
   },
 
   created() {
-    // this.wsShell();
+    this.wsShell();
   },
 
   mounted() {
@@ -129,6 +129,8 @@ export default {
             // send data
             _this.inputList.push(_this.order);
             last = _this.inputList.length - 1;
+            //send data to websocket?
+            socket.send("this is chase's test");
             _this.onSend(order);
             // Clear the input content variable
           }
@@ -266,7 +268,7 @@ export default {
       let pod= this.urlParam.pod;
 
       let query = `?tag=${tag}&name=${name}&pod=${pod}`;
-      let url = `xxxx/xxxx${query}`；// websocket Connection Interface
+      let url = `xxxx/xxxx${query}`; // websocket Connection Interface
 
       this.shellWs = this.base.WS({
         url,
