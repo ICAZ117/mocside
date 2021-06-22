@@ -24,7 +24,9 @@ class ContainerController extends Controller
         $volumeArgs = array(
             "Name" => $sID."-".$pID,
             "Driver" => 'local',
-
+            "DriverOpts" => array(
+                ""
+            ),
         );
     }
 
@@ -67,7 +69,8 @@ class ContainerController extends Controller
                 "HostConfig" => array(
                     "Mounts" => [array(
                         "Target" => "/usr/src",
-                        "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
+                        // "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
+                        "Source" => "Output",
                         "Type" => "volume",
                         "ReadOnly" => false,
                     )],
