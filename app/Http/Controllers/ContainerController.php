@@ -9,8 +9,29 @@ use Illuminate\Support\Facades\Storage;
 
 class ContainerController extends Controller
 {
+    private function createVol($pID, $sID)
+    {
+        $socketPath = 'unix:///var/run/docker.sock';
+        $socket = stream_socket_client($socketPath, $errno, $errstr);
+
+        $host = '127.0.0.1';
+        $path = '/volumes/create';
+        
+        $packet  = "POST {$path} HTTP/1.0\r\n";
+        $packet .= "Host: {$host}\r\n";
+        $packet .= "Content-type: application/json\r\n";
+
+        $volumeArgs = array(
+            "Name" => $sID."-".$pID,
+            "Driver" => 'local',
+
+        );
+    }
+
     public function spinUp(Request $request, $id)
     {   
+        echo getcwd();
+        echo getmyuid();
         $user = Auth::user();
         $validData = $request->validate([
             'lang' => 'required',
