@@ -33,7 +33,7 @@ export default {
   },
 
   created() {
-    // this.wsShell();
+    this.wsShell();
   },
 
   mounted() {
