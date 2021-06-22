@@ -30,7 +30,7 @@ class ContainerController extends Controller
         {
             $dockerArgs = array(
                 "Image" => "python", 
-                "Cmd" => "python submission.py",
+                "Cmd" => "python3 submission.py",
                 "Entrypoint" => "",
                 "AttachStdin" => true,
                 "AttachStdout" => true,
@@ -38,10 +38,18 @@ class ContainerController extends Controller
                 "OpenStdin" => true,
                 "Tty" => true,
                 "WorkingDir" => "/usr/src",
-                "Volume" => array(
-                    "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/" => "/usr/src",
-                    // "Destination" => "/usr/src",
-                    // "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
+                // "Volume" => array(
+                //     "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/" => "/usr/src",
+                //     // "Destination" => "/usr/src",
+                //     // "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
+                // ),
+                "HostConfig" => array(
+                    "Mounts" => [array(
+                        "Target" => "/usr/src",
+                        "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
+                        "Type" => "volume",
+                        "ReadOnly" => false,
+                    )],
                 ),
             );
             $convertedArgs = json_encode($dockerArgs);
