@@ -39,9 +39,9 @@ class ContainerController extends Controller
                 "Tty" => true,
                 "WorkingDir" => "/usr/src",
                 "Volume" => array(
-                    // "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/" => "/usr/src",
-                    "Destination" => "/usr/src",
-                    "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
+                    "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/" => "/usr/src",
+                    // "Destination" => "/usr/src",
+                    // "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
                 ),
             );
             $convertedArgs = json_encode($dockerArgs);
