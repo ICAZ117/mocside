@@ -67,8 +67,8 @@ class ContainerController extends Controller
         {
             $dockerArgs = array(
                 "Image" => "python", 
-                "Cmd" => "python3 submission.py",
-                "Entrypoint" => "",
+                "Cmd" => "submission.py",
+                "Entrypoint" => ["python3"],
                 "AttachStdin" => true,
                 "AttachStdout" => true,
                 "AttachStderr" => true,
