@@ -31,7 +31,7 @@ import base from "./base";
 const app = createApp(App);
 app.component("IDE", IDE);
 app.component("Tiptap", Tiptap);
-app.use(base);
+app.provide("base", base);
 app.use(Tabs);
 app.use(VuelidatePlugin);
 app.use(router);
