@@ -25,9 +25,23 @@ class ContainerController extends Controller
             "Name" => $sID."-".$pID,
             "Driver" => 'local',
             "DriverOpts" => array(
-                ""
+                "device" => "/home/max/mocside/storage/app/submissions/".$sID."/".$pID."/",
+                "type" => "none",
+                "o" => "bind",
             ),
         );
+        $convertedArgs = json_encode($volumeArgs);
+        $packet .= "Content-length: " . strlen($convertedArgs) . "\r\n";
+        $packet .= "Connection: Keep-Alive\r\n\r\n";
+        $packet .= $convertedArgs;
+
+        echo $packet . "\r\n\r\n"; // for debug/demonstration 
+
+        fwrite($socket, $packet);
+        $res = fread($socket, 4096)."\n";
+        fclose($socket);
+
+        return $res;
     }
 
     public function spinUp(Request $request, $id)
@@ -69,9 +83,9 @@ class ContainerController extends Controller
                 "HostConfig" => array(
                     "Mounts" => [array(
                         "Target" => "/usr/src",
-                        // "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
-                        "Source" => "Output",
-                        "Type" => "volume",
+                        "Source" => "/home/max/mocside/storage/app/submissions/".$user->fsc_id."/".$id."/",
+                        // "Source" => "Output",
+                        "Type" => "bind",
                         "ReadOnly" => false,
                     )],
                 ),
