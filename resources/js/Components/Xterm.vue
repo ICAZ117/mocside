@@ -253,6 +253,48 @@ export default {
     trim(str) {
       return str.replace(/(^\s*)|(\s*$)/g, "");
     },
+    onSend(data) {
+      data = this.base.isObject(data) ? JSON.stringify(data) : data;
+      data = this.base.isArray(data) ? data.toString() : data;
+      data = data.replace(/\\\\/, "\\");
+      this.shellWs.onSend(data);
+    },
+    wsShell() {
+      const _this = this;
+      let tag = this.urlParam.Tag;
+      let name= this.urlParam.name;
+      let pod= this.urlParam.pod;
+
+      let query = `?tag=${tag}&name=${name}&pod=${pod}`;
+      let url = `xxxx/xxxx${query}`；// websocket Connection Interface
+
+      this.shellWs = this.base.WS({
+        url,
+        isInit: true,
+        openFn() {
+          //   _this.term.resize({ rows: _this.rows, cols: 100 }); //Resize the terminal window and trigger term.on("resize") 
+        },
+        messageFn(e) {
+          console.log("message", e);
+          if (e) {
+            let data = JSON.parse(e.data);
+            if (data.Data == "\n" || data.Data == "\r\nexit\r\n") {
+              _this.$message("Connection closed");
+            }
+            // Print back-end return data
+            _this.term.write(data.Data);
+          }
+        },
+        errorFn(e) {
+          //An error occurs to close the current ws, and prompt
+          console.log("error", e);
+          _this.$message.error({
+            message: "ws The request failed, please refresh and try again~",
+            duration: 5000
+          });
+        }
+      });
+    },
   },
 };
 </script>
