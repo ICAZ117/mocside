@@ -25,9 +25,13 @@ import IDE from "./Components/IDE.vue";
 // Tiptap
 import Tiptap from "./Components/Tiptap.vue";
 
+// Xterm stuff
+import base from "./base";
+
 const app = createApp(App);
 app.component("IDE", IDE);
 app.component("Tiptap", Tiptap);
+app.use(base);
 app.use(Tabs);
 app.use(VuelidatePlugin);
 app.use(router);
