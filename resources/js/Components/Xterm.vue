@@ -56,7 +56,7 @@ export default {
     term.loadAddon(fitAddon);
     term.loadAddon(webLinksAddon);
     term.loadAddon(searchAddon);
-    terminal.loadAddon(attachAddon);
+    term.loadAddon(attachAddon);
 
     // wrap and enter the start character "$"
     term.prompt = () => {
