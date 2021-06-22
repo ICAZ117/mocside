@@ -50,7 +50,7 @@ export default {
     const webLinksAddon = new WebLinksAddon();
     const searchAddon = new SearchAddon();
 
-    const socket = new WebSocket("ws://mocside.com:2376/v1.41/containers/" + this.containerID + "/attach/ws");
+    const socket = new WebSocket("ws://mocside.com:2376/v1.41/containers/" + this.containerID + "/attach/ws?stdin=true?stdout=true?stderr=true");
     const attachAddon = new AttachAddon(socket);
 
     term.loadAddon(fitAddon);
