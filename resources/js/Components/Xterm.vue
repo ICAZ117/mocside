@@ -7,7 +7,7 @@
 <script>
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
-// import {AttachAddon} from "xterm-addon-attach";
+import { AttachAddon } from "xterm-addon-attach";
 import { WebLinksAddon } from "xterm-addon-web-links";
 import { SearchAddon } from "xterm-addon-search";
 
@@ -15,6 +15,7 @@ import "xterm/css/xterm.css";
 import "xterm/lib/xterm.js";
 
 export default {
+  props: ["containerID"],
   name: "Shell",
   data() {
     return {
@@ -49,13 +50,13 @@ export default {
     const webLinksAddon = new WebLinksAddon();
     const searchAddon = new SearchAddon();
 
-    // const socket = new WebSocket("");
-    // const attachAddon = new AttachAddon(socket);
+    const socket = new WebSocket("wss://mocside.com:2376/v1.41/containers/" + this.containerID + "/attach/ws");
+    const attachAddon = new AttachAddon(socket);
 
     term.loadAddon(fitAddon);
     term.loadAddon(webLinksAddon);
     term.loadAddon(searchAddon);
-    // terminal.loadAddon(attachAddon);
+    terminal.loadAddon(attachAddon);
 
     // wrap and enter the start character "$"
     term.prompt = () => {

@@ -54,7 +54,7 @@ class ContainerController extends Controller
             $packet .= "Connection: Keep-Alive\r\n\r\n";
             $packet .= $convertedArgs;
 
-            echo $packet . "\r\n\r\n"; // for debug/demonstration 
+            // echo $packet . "\r\n\r\n"; // for debug/demonstration 
 
             fwrite($socket, $packet);
             $res = fread($socket, 4096)."\n";
@@ -74,7 +74,7 @@ class ContainerController extends Controller
             fclose($socket);
         }
         // get ID of newly created 
-        echo $res."\n";
+        // echo $res."\n";
         $parts = explode("\n", $res);
         $idLoc = count($parts) - 3;
         $id = json_decode($parts[$idLoc])->Id;
@@ -89,13 +89,13 @@ class ContainerController extends Controller
         fwrite($socket, $packet2);
         $res2 = fread($socket, 4096)."\n";
         fclose($socket);
-        echo $res2."\n";
+        // echo $res2."\n";
 
         // currently expecting this to die immediately upon echo.
         // how do we create the container that can persist as a workspace? Investigate next.
 
         // attach to ws? -> from front end w/ ID
-        return $id;
+        return response()->json(["message" => $id], 200);
     }
 
     public function spinDown($id)

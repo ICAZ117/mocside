@@ -82,7 +82,7 @@
       </div>
     </div>
     <div v-if="!showInput" class="console row">
-      <Xterm />
+      <Xterm :containerID="containerID" :key="containerID"/>
     </div>
     <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
@@ -206,6 +206,7 @@ export default {
       code: "",
       input: "",
       forceReload: 0,
+      containerID: "",
     };
   },
   methods: {
@@ -235,29 +236,30 @@ export default {
       var payload = {
         code: this.code,
       }
-      const res = API.apiClient.put(`/code/${this.codeID}`, payload);
+      const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
       console.log(res);
 
       payload = {
         lang: this.lang.toLowerCase(),
       }
-      const res2 = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
+      const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
 
       //code is saved....now need to run it
-
+      const res3 = await API.apiClient.post(`/containers/spin-up/${this.problemID}`, payload);
+      this.containerID = res3.data.message;
     },
     async submitCode() {
       var payload = {
         code: this.code,
       }
-      const res = API.apiClient.put(`/code/${this.codeID}`, payload);
+      const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
       console.log(res);
 
       payload = {
         lang: this.lang.toLowerCase(),
       }
-      const res2 = API.apiClient.post(`/code/submit/${this.problemID}`, payload);
+      const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
 
       //code is saved now need to run and compare it
