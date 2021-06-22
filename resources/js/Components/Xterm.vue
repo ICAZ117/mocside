@@ -11,6 +11,8 @@ import { AttachAddon } from "xterm-addon-attach";
 import { WebLinksAddon } from "xterm-addon-web-links";
 import { SearchAddon } from "xterm-addon-search";
 
+import { WS } from "../../../config/service/websocket.config";
+
 import "xterm/css/xterm.css";
 import "xterm/lib/xterm.js";
 
@@ -29,6 +31,7 @@ export default {
       term: "", // save the terminal instance
       showOrder: "", // Save the command returned by the server
       inputList: [], // Save the commands entered by the user to switch between the upper and lower keys
+      base: {},
     };
   },
 
@@ -256,8 +259,8 @@ export default {
       return str.replace(/(^\s*)|(\s*$)/g, "");
     },
     onSend(data) {
-      data = this.$base.isObject(data) ? JSON.stringify(data) : data;
-      data = this.$base.isArray(data) ? data.toString() : data;
+      data = this.base.isObject(data) ? JSON.stringify(data) : data;
+      data = this.base.isArray(data) ? data.toString() : data;
       data = data.replace(/\\\\/, "\\");
       this.shellWs.onSend(data);
     },
@@ -270,7 +273,7 @@ export default {
       let query = `?tag=${tag}&name=${name}&pod=${pod}`;
       let url = `xxxx/xxxx${query}`; // websocket Connection Interface
 
-      this.shellWs = this.$base.WS({
+      this.shellWs = WS({
         url,
         isInit: true,
         openFn() {
@@ -296,6 +299,7 @@ export default {
           });
         }
       });
+      this.base = this.shellWs;
     },
   },
 };
