@@ -256,8 +256,8 @@ export default {
       return str.replace(/(^\s*)|(\s*$)/g, "");
     },
     onSend(data) {
-      data = this.base.isObject(data) ? JSON.stringify(data) : data;
-      data = this.base.isArray(data) ? data.toString() : data;
+      data = this.$base.isObject(data) ? JSON.stringify(data) : data;
+      data = this.$base.isArray(data) ? data.toString() : data;
       data = data.replace(/\\\\/, "\\");
       this.shellWs.onSend(data);
     },
@@ -270,7 +270,7 @@ export default {
       let query = `?tag=${tag}&name=${name}&pod=${pod}`;
       let url = `xxxx/xxxx${query}`; // websocket Connection Interface
 
-      this.shellWs = this.base.WS({
+      this.shellWs = this.$base.WS({
         url,
         isInit: true,
         openFn() {
