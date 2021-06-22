@@ -129,6 +129,8 @@ export default {
             // send data
             _this.inputList.push(_this.order);
             last = _this.inputList.length - 1;
+            //send data to websocket?
+            socket.send("this is chase's test");
             _this.onSend(order);
             // Clear the input content variable
           }
