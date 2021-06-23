@@ -51,6 +51,9 @@ export default {
       isObject: (obj) => {
         return Object.prototype.toString.call(obj) === '[object Object]';
       },
+      isArray: (obj) => {
+        return Array.isArray(obj);
+      }
     };
     return {
       base,
