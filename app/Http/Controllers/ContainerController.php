@@ -367,8 +367,17 @@ class ContainerController extends Controller
 
         // start container
         $docker->containerStart($container_id);
-        // attach container to ws
 
-        return response()->json(["message" => $container_id], 200);
+        // attach container to ws
+        $webSocketStream = $docker->containerAttachWebsocket($container_id, [
+            "stream" => true,
+            "stdout" => true,
+            "stderr" => true,
+            "stdin" => true,
+        ]);
+        $webSocketStream->write("gg");
+        $dump = $webSocketStream->read();
+
+        return response()->json(["message" => $container_id, "cont_dump" => $dump], 200);
     }
 }
