@@ -340,7 +340,22 @@ class ContainerController extends Controller
         $docker = Docker::create();
         $containerConfig = new ContainersCreatePostBody();
         $containerConfig->setImage('python');
-        $containerConfig->setCmd(['echo', 'hello world']);
+        $containerConfig->setCmd(['submission.py']);
+        $containerConfig->setEntrypoint(["python3"]);
+        $containerConfig->setAttachStdin(true);
+        $containerConfig->setAttachStdout(true);
+        $containerConfig->setAttachStderr(true);
+        $containerConfig->setTty(true);
+        $containerConfig->setOpenStdin(true);
+        $containerConfig->setWorkingDir('/usr/src');
+        $containerConfig->setHostConfig(array(
+            "Mounts" => [array(
+                "Target" => "/usr/src",
+                "Source" => "/home/max/mocside/storage/app/submissions/1237419/23/",
+                "Type" => "bind",
+                "ReadOnly" => false,
+            )],
+        ));
         $containerCreateResult = $docker->containerCreate($containerConfig);
         return response()->json(["message" => $containerCreateResult->getId()], 200);
     }
