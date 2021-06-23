@@ -272,7 +272,7 @@ export default {
     Xterm,
   },
   mounted() {
-    console.log("BEFORE MOUNT");
+    // console.log("BEFORE MOUNT");
     try {
       if (this.lang == "Java") {
         this.editorLangauge = "java";

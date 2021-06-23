@@ -75,7 +75,7 @@ export default {
       if (progress.length == 0) {
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
-        console.log("Got Java");
+        // console.log("Got Java");
         return this.assignment.java_starter;
       } else {
         for (let i = 0; i < progress.length; i++) {
@@ -87,7 +87,7 @@ export default {
         }
         const res = await API.apiClient.post(`/code/`, payload);
         this.jID = res.data.id;
-        console.log("Got Java");
+        // console.log("Got Java");
         return this.assignment.java_starter;
       }
     },
@@ -115,13 +115,13 @@ export default {
       }
     },
     updateContent(e) {
-      console.log(e);
+      // console.log(e);
       //e is {code: "...", input: "..."}
       if (this.lang == "Java") {
-        console.log(e.code);
+        // console.log(e.code);
         this.code_j = e.code;
       } else {
-        console.log(e.code);
+        // console.log(e.code);
         this.code_p = e.code;
       }
       this.timeout();
