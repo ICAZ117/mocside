@@ -377,7 +377,6 @@ class ContainerController extends Controller
             "stdin" => true,
         ]);
         $webSocketStream->write("gg\n");
-        // $dump = $webSocketStream->read();
 
         $out = "";
         $line = $webSocketStream->read();
