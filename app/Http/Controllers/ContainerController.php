@@ -375,7 +375,7 @@ class ContainerController extends Controller
             "stderr" => true,
             "stdin" => true,
         ]);
-        $webSocketStream->write("gg");
+        $webSocketStream->write("gg\n");
         $dump = $webSocketStream->read();
 
         return response()->json(["message" => $container_id, "cont_dump" => $dump], 200);
