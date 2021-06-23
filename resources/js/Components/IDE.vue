@@ -272,7 +272,7 @@ export default {
     Xterm,
   },
   mounted() {
-    console.log("BEFORE MOUNT");
+    // console.log("BEFORE MOUNT");
     try {
       if (this.lang == "Java") {
         this.editorLangauge = "java";
@@ -281,24 +281,24 @@ export default {
         this.editorLangauge = "python";
         this.code = this.saved_p;
       }
-      console.log("Try");
+      // console.log("Try");
     } catch (e) {
-      console.log("Catch");
+      // console.log("Catch");
     }
     this.getStyle();
     this.forceReload++;
   },
   beforeCreate() {
-    console.log(this.saved_p);
-    console.log(this.saved_j);
+    // console.log(this.saved_p);
+    // console.log(this.saved_j);
   },
   created() {
-    console.log(this.saved_p);
-    console.log(this.saved_j);
+    // console.log(this.saved_p);
+    // console.log(this.saved_j);
   },
   beforeMount() {
-    console.log(this.saved_p);
-    console.log(this.saved_j);
+    // console.log(this.saved_p);
+    // console.log(this.saved_j);
   },
 };
 </script>

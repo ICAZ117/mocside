@@ -31,9 +31,18 @@ export default {
       term: "", // save the terminal instance
       showOrder: "", // Save the command returned by the server
       inputList: [], // Save the commands entered by the user to switch between the upper and lower keys
+      socket: "", // to save the socket
     };
   },
-
+  watch: {
+    containerID: function() {
+      if(containerID != "") {
+        this.socket = this.base.WS.websocket;
+        const attachAddon = new AttachAddon(this.socket);
+        this.term.loadAddon(attachAddon);
+      }
+    },
+  },
   created() {
     this.wsShell();
   },
@@ -48,6 +57,12 @@ export default {
       WS({ url, openFn, messageFn, errorFn, isInit = false } = {}) {
         return new WS({ url, openFn, messageFn, errorFn, isInit });
       },
+      isObject: (obj) => {
+        return Object.prototype.toString.call(obj) === '[object Object]';
+      },
+      isArray: (obj) => {
+        return Array.isArray(obj);
+      }
     };
     return {
       base,
@@ -56,7 +71,7 @@ export default {
 
   mounted() {
     let _this = this;
-    console.log("Mounted xterm page");
+    // console.log("Mounted xterm page");
     const term = new Terminal({
       cursorBlink: true,
       convertEol: true,
@@ -68,12 +83,11 @@ export default {
     const webLinksAddon = new WebLinksAddon();
     const searchAddon = new SearchAddon();
 
-    const socket = new WebSocket(
-      "ws://mocside.com:2376/v1.41/containers/" +
-        this.containerID +
-        "/attach/ws?stdin=true?stdout=true?stderr=true"
-    );
-    const attachAddon = new AttachAddon(socket);
+
+    this.socket = new WebSocket("ws://mocside.com:2376/v1.41/containers/" + this.containerID + "/attach/ws?stdin=true?stdout=true?stderr=true");
+    const attachAddon = new AttachAddon(this.socket);
+    // const attachAddon = new AttachAddon(this.base.WS.websocket);
+    // const attachAddon = new AttachAddon();
 
     term.loadAddon(fitAddon);
     term.loadAddon(webLinksAddon);
@@ -123,7 +137,7 @@ export default {
         // Printable status, that is, not the alt key ctrl and other functions are healthy
         let ev = k.domEvent;
         let key = k.domEvent.key;
-        console.log(ev);
+        // console.log(ev);
         const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
 
         // Because the server return command contains garbled characters, but it is not displayed when using the write method to output, so the actual display content is intercepted
@@ -152,7 +166,7 @@ export default {
             _this.inputList.push(_this.order);
             last = _this.inputList.length - 1;
             //send data to websocket?
-            socket.send("this is chase's test");
+            // socket.send("this is chase's test");
             _this.onSend(order);
             // Clear the input content variable
           }
@@ -213,9 +227,9 @@ export default {
           term.write(key);
           //check if the ctrl key is pressed
         } else if (ev.ctrlKey) {
-          console.log("ctrl is pressed");
-          console.log("keycode: " + ev.keyCode + " keyValue is: " + ev.key);
-          console.log("keycode checks");
+          // console.log("ctrl is pressed");
+          // console.log("keycode: " + ev.keyCode + " keyValue is: " + ev.key);
+          // console.log("keycode checks");
           if (ev.keyCode == 89) {
             console.log("ctrl + y (yank text)");
             document.execCommand("paste");
@@ -258,8 +272,8 @@ export default {
       // Paste event
       term.onData(function (data) {
         // _this.order = data;
-        console.log("\nData:");
-        console.log(data);
+        // console.log("\nData:");
+        // console.log(data);
         // term.write(data);
         if (data == "") {
           _this.order = data;
@@ -279,6 +293,7 @@ export default {
       data = this.base.isObject(data) ? JSON.stringify(data) : data;
       data = this.base.isArray(data) ? data.toString() : data;
       data = data.replace(/\\\\/, "\\");
+      console.log(this.shellWs.readyState());
       this.shellWs.onSend(data);
     },
     wsShell() {
@@ -294,12 +309,6 @@ export default {
       // let query = `?tag=${tag}&name=${name}&pod=${pod}`;
       let query = `?stdin=${stdin}?stdout=${stdout}?stderr=${stderr}`;
       let url = `v1.41/containers/${this.containerID}/attach/ws${query}`; // websocket Connection Interface
-
-      console.log("this.base:");
-      console.log(this.base);
-      // console.log("\nbase:");
-      // console.log(base);
-      console.log("\n");
 
       this.shellWs = this.base.WS({
         url,

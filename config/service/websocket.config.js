@@ -149,6 +149,7 @@
     console.log("dataweb--data has been sent to the backend", data, this.isWebsocket());
     if (this.isWebsocket()) {
       console.log("sendsendsend");
+      console.log(this.readyState());
       this.websocket.send(data);
     } else {
       console.error(this.error);
