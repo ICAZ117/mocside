@@ -102,6 +102,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/containers/test', [ContainerController::class, 'test']);
     Route::post('/containers/spin-up/{id}', [ContainerController::class, 'spinUp']);
     Route::delete('/containers/{id}', [ContainerController::class, 'spinDown']);
+    Route::get('/containers/list', [ContainerController::class, 'list']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

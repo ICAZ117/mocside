@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+use Docker\Docker;
+
 class ContainerController extends Controller
 {   
     /*
@@ -322,5 +324,15 @@ class ContainerController extends Controller
         fclose($socket);
         echo $res3;
         return 0;
+    }
+
+    public function list()
+    {
+        $docker = Docker::create();
+        $containers = $docker->containerList();
+
+        foreach ($containers as $container) {
+            var_dump($container->getNames());
+        }
     }
 }
