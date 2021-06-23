@@ -285,6 +285,7 @@ export default {
       data = this.base.isObject(data) ? JSON.stringify(data) : data;
       data = this.base.isArray(data) ? data.toString() : data;
       data = data.replace(/\\\\/, "\\");
+      console.log(this.shellWs.readyState());
       this.shellWs.onSend(data);
     },
     wsShell() {
