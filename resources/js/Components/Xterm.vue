@@ -36,6 +36,13 @@ export default {
     this.wsShell();
   },
 
+  setup() {
+    const base = inject(base);
+    return {
+      base,
+    };
+  },
+
   mounted() {
     let _this = this;
     console.log("Mounted xterm page");
@@ -250,7 +257,6 @@ export default {
     }
     runFakeTerminal(_this);
   },
-
   methods: {
     trim(str) {
       return str.replace(/(^\s*)|(\s*$)/g, "");
