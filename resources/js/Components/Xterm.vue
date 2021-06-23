@@ -280,10 +280,13 @@ export default {
       let query = `?tag=${tag}&name=${name}&pod=${pod}`;
       let url = `xxxx/xxxx${query}`; // websocket Connection Interface
 
-      console.log("Base:");
+      console.log("this.base:");
       console.log(this.base);
+      console.log("\nbase:");
+      console.log(this.base);
+      console.log("\n");
 
-      this.shellWs = this.base.WS({
+      this.shellWs = base.WS({
         url,
         isInit: true,
         openFn() {
