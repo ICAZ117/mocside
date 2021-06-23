@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Docker\Docker;
 use Docker\API\Model\ContainersCreatePostBody;
 use Docker\API\Model\HostConfig;
+use Docker\API\Model\Mount;
 
 class ContainerController extends Controller
 {   
@@ -341,6 +342,7 @@ class ContainerController extends Controller
         $docker = Docker::create();
         $containerConfig = new ContainersCreatePostBody();
         $hostConfig = new HostConfig();
+        $mountsConfig = new Mount();
         $containerConfig->setImage('python');
         $containerConfig->setCmd(['submission.py']);
         $containerConfig->setEntrypoint(["python3"]);
@@ -351,14 +353,13 @@ class ContainerController extends Controller
         $containerConfig->setOpenStdin(true);
         $containerConfig->setWorkingDir('/usr/src');
 
-        // // create host config
-        // $hostConfig->setMounts(array(
-        //     "Target" => "/usr/src",
-        //     "Source" => "/home/max/mocside/storage/app/submissions/1237419/23/",
-        //     "Type" => "bind",
-        //     "ReadOnly" => false,
-        // ));
-        // $containerConfig->setHostConfig($hostConfig);
+        // create host config
+        $mountsConfig->setType("bind");
+        $mountsConfig->setSource("/home/max/mocside/storage/app/submissions/1237419/23/");
+        $mountsConfig->setTarget("/usr/source");
+        $mountsConfig->setReadOnly(false);
+        $hostConfig->setMounts($mountsConfig);
+        $containerConfig->setHostConfig($hostConfig);
         $containerCreateResult = $docker->containerCreate($containerConfig);
         return response()->json(["message" => $containerCreateResult->getId()], 200);
     }
