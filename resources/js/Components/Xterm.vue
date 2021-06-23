@@ -11,6 +11,7 @@ import { AttachAddon } from "xterm-addon-attach";
 import { WebLinksAddon } from "xterm-addon-web-links";
 import { SearchAddon } from "xterm-addon-search";
 import { inject } from "vue";
+import { WS } from "../../../config/service/websocket.config";
 
 import "xterm/css/xterm.css";
 import "xterm/lib/xterm.js";
@@ -38,7 +39,16 @@ export default {
   },
 
   setup() {
-    const base = inject(base, "HERE");
+    // const base = inject(base, "HERE");
+    // return {
+    //   base,
+    // };
+    const base = {
+      // Parameters & methods
+      WS({ url, openFn, messageFn, errorFn, isInit = false } = {}) {
+        return new WS({ url, openFn, messageFn, errorFn, isInit });
+      },
+    };
     return {
       base,
     };
@@ -283,10 +293,10 @@ export default {
       console.log("this.base:");
       console.log(this.base);
       console.log("\nbase:");
-      console.log(this.base);
+      console.log(base);
       console.log("\n");
 
-      this.shellWs = base.WS({
+      this.shellWs = this.base.WS({
         url,
         isInit: true,
         openFn() {

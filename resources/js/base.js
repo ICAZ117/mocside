@@ -20,3 +20,5 @@ const base = {
 export default {
     install, base,
 };
+
+
