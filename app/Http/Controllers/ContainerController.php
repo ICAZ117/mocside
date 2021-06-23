@@ -358,7 +358,7 @@ class ContainerController extends Controller
         $mountsConfig->setSource("/home/max/mocside/storage/app/submissions/1237419/23/");
         $mountsConfig->setTarget("/usr/source");
         $mountsConfig->setReadOnly(false);
-        $hostConfig->setMounts($mountsConfig);
+        $hostConfig->setMounts([$mountsConfig]);
         $containerConfig->setHostConfig($hostConfig);
         $containerCreateResult = $docker->containerCreate($containerConfig);
         return response()->json(["message" => $containerCreateResult->getId()], 200);
