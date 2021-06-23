@@ -252,7 +252,7 @@ class ContainerController extends Controller
     }
 
 
-    public function test(Request $request, $id)
+    public function test()
     {
         $socketPath = 'unix:///var/run/docker.sock';
         $socket = stream_socket_client($socketPath, $errno, $errstr);
@@ -301,7 +301,7 @@ class ContainerController extends Controller
         $container_id = json_decode($parts[$idLoc])->Id;
 
         // start container
-        $path = "/containers/" . $id . "/start";
+        $path = "/containers/" . $container_id . "/start";
         $packet2 = "POST {$path} HTTP/1.0\r\n";
         $packet2 .= "Host: {$host}\r\n";
         $packet2 .= "Connection: Keep-Alive\r\n\r\n";
