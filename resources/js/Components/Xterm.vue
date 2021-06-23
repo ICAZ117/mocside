@@ -74,6 +74,7 @@ export default {
     const webLinksAddon = new WebLinksAddon();
     const searchAddon = new SearchAddon();
 
+
     // const socket = new WebSocket(
     //   "ws://mocside.com:2376/v1.41/containers/" +
     //     this.containerID +
@@ -84,7 +85,7 @@ export default {
     term.loadAddon(fitAddon);
     term.loadAddon(webLinksAddon);
     term.loadAddon(searchAddon);
-    // term.loadAddon(attachAddon);
+    term.loadAddon(AttachAddon);
 
     // wrap and enter the start character "$"
     term.prompt = () => {
