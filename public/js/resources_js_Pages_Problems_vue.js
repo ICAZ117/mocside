@@ -318,21 +318,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context7.prev = _context7.next) {
               case 0:
                 ///update the list of courses
-                console.log("caught problemEdited");
                 _this7.problems = _this7.problems.filter(function (p) {
                   return p.id != _this7.problemID;
                 });
-                _context7.next = 4;
-                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/problem/full/".concat(_this7.problemID));
+                _context7.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/problems/full/".concat(_this7.problemID));
 
-              case 4:
+              case 3:
                 problem = _context7.sent;
 
                 _this7.problems.push(problem.data.data);
 
-                console.log("calling unmounting");
-
-                _this7.Unmounting();
+                console.log(problem.data.data);
+                _context7.next = 8;
+                return _this7.Unmounting();
 
               case 8:
               case "end":
@@ -343,16 +342,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     Unmounting: function Unmounting() {
-      console.log("childIsOpen" + this.childIsOpen);
-      this.childIsOpen = false;
-      console.log("childIsOpen" + this.childIsOpen);
-      this.problemID = null;
-      this.$router.push({
-        name: "Problems",
-        params: {
-          lab_id: this.labID
-        }
-      });
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _this8.childIsOpen = false;
+                _this8.problemID = null;
+
+                _this8.$router.push({
+                  name: "Problems",
+                  params: {
+                    lab_id: _this8.labID
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
+      }))();
     },
     isExpanded: function isExpanded(key) {
       // return this.expandedProblem.indexOf(key) !== -1;

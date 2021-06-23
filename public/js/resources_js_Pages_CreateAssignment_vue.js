@@ -860,6 +860,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   beforeMount: function beforeMount() {},
+  beforeUnmount: function beforeUnmount() {
+    console.log("overview unmount");
+  },
   mounted: function mounted() {}
 });
 
@@ -1476,6 +1479,7 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
   },
   data: function data() {
     return {
+      childIsOpen: true,
       assignmentID: this.problemID,
       assignmentTitle: "",
       overview: {},
@@ -1494,26 +1498,22 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var payload, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 //perhaps later replace this with a debounce method for autosaving
                 //save information before returning to the problems page
-                payload = {
-                  name: _this.title // "description": this.overview,
-
-                };
-                _context.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_8__.apiClient.put("/problems/".concat(_this.problemID), payload);
-
-              case 3:
-                res = _context.sent;
+                // var payload = {
+                //   name: this.title,
+                //   // "description": this.overview,
+                // };
+                // const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
+                _this.childIsOpen = false;
 
                 _this.$emit("problemEdited");
 
-              case 5:
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -1585,6 +1585,7 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
     this.getInfo();
   },
   beforeUnmount: function beforeUnmount() {
+    this.childIsOpen = false;
     this.$emit("problemEdited");
   }
 }));
@@ -2417,14 +2418,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0
+};
+var _hoisted_2 = {
   "class": "assignment header"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", null, null, -1
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_3 = {
+var _hoisted_4 = {
   "class": "assignment navbar-nav"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2448,7 +2452,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_tab_panels = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("tab-panels");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  return _ctx.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     id: "assignment-title",
     type: "text",
     "class": "assignment-title form-control",
@@ -2459,7 +2463,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.assignmentTitle]]), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_tabs, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.assignmentTitle]]), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_tabs, {
     modelValue: _ctx.selectedTab,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return _ctx.selectedTab = $event;
@@ -2580,7 +2584,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["modelValue"])]);
+  , ["modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
