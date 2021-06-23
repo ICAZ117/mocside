@@ -152,6 +152,7 @@
     if (this.isWebsocket()) {
       console.log("sendsendsend");
       console.log(this.readyState());
+      console.log(this.websocket);
       this.websocket.send(data);
     } else {
       console.error(this.error);
