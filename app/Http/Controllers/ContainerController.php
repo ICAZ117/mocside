@@ -248,10 +248,11 @@ class ContainerController extends Controller
         $parts = explode("\n", $res);
         $idLoc = count($parts) - 3;
         $id = json_decode($parts[$idLoc])->Id;
+        return 0;
     }
 
 
-    public function test(Request $request, $id)
+    public function test()
     {
         $socketPath = 'unix:///var/run/docker.sock';
         $socket = stream_socket_client($socketPath, $errno, $errstr);
@@ -300,7 +301,7 @@ class ContainerController extends Controller
         $container_id = json_decode($parts[$idLoc])->Id;
 
         // start container
-        $path = "/containers/" . $id . "/start";
+        $path = "/containers/" . $container_id . "/start";
         $packet2 = "POST {$path} HTTP/1.0\r\n";
         $packet2 .= "Host: {$host}\r\n";
         $packet2 .= "Connection: Keep-Alive\r\n\r\n";
@@ -312,12 +313,14 @@ class ContainerController extends Controller
 
         // now, try and attach?
         // we want to make a stream out of the attach endpoint
+        $entrypoint = "localhost/v1.41";
         $query = "?stdin=1?stdout=1?stderr=1?logs=1?stream=1";
         $endpoint = "/containers/" . $container_id . "/attach";
-        $stream = stream_socket_client($endpoint . $query, $errno, $errstr);
+        $stream = stream_socket_client($entrypoint . $endpoint . $query, $errno, $errstr);
         fwrite($stream, "foo");
         $res3 = fread($socket, 4096)."\n";
         fclose($socket);
         echo $res3;
+        return 0;
     }
 }
