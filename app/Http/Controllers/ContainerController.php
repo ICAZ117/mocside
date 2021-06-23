@@ -376,20 +376,19 @@ class ContainerController extends Controller
             "stderr" => true,
             "stdin" => true,
         ]);
+        $line = "Bob";
+        $out = $webSocketStream->read();
         $webSocketStream->write("gg\n");
-        // $dump = $webSocketStream->read();
 
-        $out = "";
-        $line = $webSocketStream->read();
         while ($line != null)
-        {
-            $out .= $line;
+        {   
             try {
                 $line = $webSocketStream->read();
-            } catch (Exception $e) {
+            } catch (ErrorException $e) {
                 echo $e;
                 $line = null;
             }
+            $out .= $line;
         }
         echo $out;
         return response()->json(["message" => $container_id], 200);
