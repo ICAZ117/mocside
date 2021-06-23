@@ -248,6 +248,7 @@ class ContainerController extends Controller
         $parts = explode("\n", $res);
         $idLoc = count($parts) - 3;
         $id = json_decode($parts[$idLoc])->Id;
+        return 0;
     }
 
 
@@ -319,5 +320,6 @@ class ContainerController extends Controller
         $res3 = fread($socket, 4096)."\n";
         fclose($socket);
         echo $res3;
+        return 0;
     }
 }
