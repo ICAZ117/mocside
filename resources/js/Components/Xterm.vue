@@ -292,8 +292,8 @@ export default {
 
       console.log("this.base:");
       console.log(this.base);
-      console.log("\nbase:");
-      console.log(base);
+      // console.log("\nbase:");
+      // console.log(base);
       console.log("\n");
 
       this.shellWs = this.base.WS({
