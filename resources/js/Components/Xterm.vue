@@ -283,12 +283,17 @@ export default {
     },
     wsShell() {
       const _this = this;
-      let tag = this.urlParam.Tag;
-      let name = this.urlParam.name;
-      let pod = this.urlParam.pod;
+      // const socket = new WebSocket("ws://mocside.com:2376/v1.41/containers/" + this.containerID + "/attach/ws?stdin=true?stdout=true?stderr=true");
+      // let tag = this.urlParam.Tag;
+      // let name = this.urlParam.name;
+      // let pod = this.urlParam.pod;
+      let stdin = true;
+      let stdout = true;
+      let stderr = true;
 
-      let query = `?tag=${tag}&name=${name}&pod=${pod}`;
-      let url = `xxxx/xxxx${query}`; // websocket Connection Interface
+      // let query = `?tag=${tag}&name=${name}&pod=${pod}`;
+      let query = `?stdin=${stdin}?stdout=${stdout}?stderr=${stderr}`;
+      let url = `v1.41/containers/${this.containerID}/attach/ws${query}`; // websocket Connection Interface
 
       console.log("this.base:");
       console.log(this.base);

@@ -27,7 +27,7 @@
     isInit = false
   } = {}) {
     let loc = window.location;
-    url = loc.host + "/" + url;
+    url = "mocside.com:2376" + "/" + url;
     this.url = /https/.test(loc.protocol)? "wss://" + url: "ws://" + url;
     this.websocket = "WebSocket" in window? new WebSocket(this.url): null;
     this.error = "";
