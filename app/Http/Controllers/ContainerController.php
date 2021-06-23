@@ -360,7 +360,15 @@ class ContainerController extends Controller
         $mountsConfig->setReadOnly(false);
         $hostConfig->setMounts([$mountsConfig]);
         $containerConfig->setHostConfig($hostConfig);
+
+        // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);
-        return response()->json(["message" => $containerCreateResult->getId()], 200);
+        $container_id = $containerCreateResult->getId();
+
+        // start container
+        $docker->containerStart($container_id);
+        // attach container to ws
+
+        return response()->json(["message" => $container_id], 200);
     }
 }
