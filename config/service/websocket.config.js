@@ -119,6 +119,7 @@
     } else {
       console.error(this.error);
     }
+    return false;
   }
 
   // Custom WSC exception event: triggered after WSC reports an error
