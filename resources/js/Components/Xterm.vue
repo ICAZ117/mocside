@@ -31,9 +31,18 @@ export default {
       term: "", // save the terminal instance
       showOrder: "", // Save the command returned by the server
       inputList: [], // Save the commands entered by the user to switch between the upper and lower keys
+      socket: "", // to save the socket
     };
   },
-
+  watch: {
+    containerID: function() {
+      if(containerID != "") {
+        this.socket = this.base.WS.websocket;
+        const attachAddon = new AttachAddon(this.socket);
+        this.term.loadAddon(attachAddon);
+      }
+    },
+  },
   created() {
     this.wsShell();
   },
@@ -75,13 +84,9 @@ export default {
     const searchAddon = new SearchAddon();
 
 
-    // const socket = new WebSocket(
-    //   "ws://mocside.com:2376/v1.41/containers/" +
-    //     this.containerID +
-    //     "/attach/ws?stdin=true?stdout=true?stderr=true"
-    // );
-    // const attachAddon = new AttachAddon(socket);
-    const attachAddon = new AttachAddon(this.base.WS.websocket);
+    this.socket = new WebSocket("ws://mocside.com:2376/v1.41/containers/" + this.containerID + "/attach/ws?stdin=true?stdout=true?stderr=true");
+    const attachAddon = new AttachAddon(this.socket);
+    // const attachAddon = new AttachAddon(this.base.WS.websocket);
     // const attachAddon = new AttachAddon();
 
     term.loadAddon(fitAddon);
