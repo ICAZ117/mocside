@@ -247,6 +247,7 @@ export default {
 
       //code is saved....now need to run it
       const res3 = await API.apiClient.post(`/containers/spin-up/${this.problemID}`, payload);
+      console.log("\nspin-up complete\n");
       this.containerID = res3.data.message;
     },
     async submitCode() {
