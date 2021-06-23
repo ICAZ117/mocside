@@ -370,6 +370,7 @@ class ContainerController extends Controller
 
         // attach container to ws
         $webSocketStream = $docker->containerAttachWebsocket($container_id, [
+            "logs" => true,
             "stream" => true,
             "stdout" => true,
             "stderr" => true,
