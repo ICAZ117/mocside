@@ -71,7 +71,7 @@ export default {
 
   mounted() {
     let _this = this;
-    console.log("Mounted xterm page");
+    // console.log("Mounted xterm page");
     const term = new Terminal({
       cursorBlink: true,
       convertEol: true,
@@ -137,7 +137,7 @@ export default {
         // Printable status, that is, not the alt key ctrl and other functions are healthy
         let ev = k.domEvent;
         let key = k.domEvent.key;
-        console.log(ev);
+        // console.log(ev);
         const printable = !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey;
 
         // Because the server return command contains garbled characters, but it is not displayed when using the write method to output, so the actual display content is intercepted
@@ -227,9 +227,9 @@ export default {
           term.write(key);
           //check if the ctrl key is pressed
         } else if (ev.ctrlKey) {
-          console.log("ctrl is pressed");
-          console.log("keycode: " + ev.keyCode + " keyValue is: " + ev.key);
-          console.log("keycode checks");
+          // console.log("ctrl is pressed");
+          // console.log("keycode: " + ev.keyCode + " keyValue is: " + ev.key);
+          // console.log("keycode checks");
           if (ev.keyCode == 89) {
             console.log("ctrl + y (yank text)");
             document.execCommand("paste");
@@ -272,8 +272,8 @@ export default {
       // Paste event
       term.onData(function (data) {
         // _this.order = data;
-        console.log("\nData:");
-        console.log(data);
+        // console.log("\nData:");
+        // console.log(data);
         // term.write(data);
         if (data == "") {
           _this.order = data;
@@ -309,12 +309,6 @@ export default {
       // let query = `?tag=${tag}&name=${name}&pod=${pod}`;
       let query = `?stdin=${stdin}?stdout=${stdout}?stderr=${stderr}`;
       let url = `v1.41/containers/${this.containerID}/attach/ws${query}`; // websocket Connection Interface
-
-      console.log("this.base:");
-      console.log(this.base);
-      // console.log("\nbase:");
-      // console.log(base);
-      console.log("\n");
 
       this.shellWs = this.base.WS({
         url,
