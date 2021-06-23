@@ -74,17 +74,17 @@ export default {
     const webLinksAddon = new WebLinksAddon();
     const searchAddon = new SearchAddon();
 
-    const socket = new WebSocket(
-      "ws://mocside.com:2376/v1.41/containers/" +
-        this.containerID +
-        "/attach/ws?stdin=true?stdout=true?stderr=true"
-    );
-    const attachAddon = new AttachAddon(socket);
+    // const socket = new WebSocket(
+    //   "ws://mocside.com:2376/v1.41/containers/" +
+    //     this.containerID +
+    //     "/attach/ws?stdin=true?stdout=true?stderr=true"
+    // );
+    // const attachAddon = new AttachAddon(socket);
 
     term.loadAddon(fitAddon);
     term.loadAddon(webLinksAddon);
     term.loadAddon(searchAddon);
-    term.loadAddon(attachAddon);
+    // term.loadAddon(attachAddon);
 
     // wrap and enter the start character "$"
     term.prompt = () => {
@@ -158,7 +158,7 @@ export default {
             _this.inputList.push(_this.order);
             last = _this.inputList.length - 1;
             //send data to websocket?
-            socket.send("this is chase's test");
+            // socket.send("this is chase's test");
             _this.onSend(order);
             // Clear the input content variable
           }
