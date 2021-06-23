@@ -342,6 +342,6 @@ class ContainerController extends Controller
         $containerConfig->setImage('python');
         $containerConfig->setCmd(['echo', 'hello world']);
         $containerCreateResult = $docker->containerCreate($containerConfig);
-        return response()->json(["message" => $containerCreateResult], 200);
+        return response()->json(["message" => $containerCreateResult->getId()], 200);
     }
 }
