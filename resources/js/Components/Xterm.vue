@@ -48,6 +48,12 @@ export default {
       WS({ url, openFn, messageFn, errorFn, isInit = false } = {}) {
         return new WS({ url, openFn, messageFn, errorFn, isInit });
       },
+      isObject: (obj) => {
+        return Object.prototype.toString.call(obj) === '[object Object]';
+      },
+      isArray: (obj) => {
+        return Array.isArray(obj);
+      }
     };
     return {
       base,
