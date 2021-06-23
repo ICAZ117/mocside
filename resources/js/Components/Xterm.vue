@@ -307,7 +307,7 @@ export default {
       let stderr = true;
 
       // let query = `?tag=${tag}&name=${name}&pod=${pod}`;
-      let query = `?stdin=${stdin}?stdout=${stdout}?stderr=${stderr}`;
+      let query = `?stdin=${stdin}&stdout=${stdout}&stderr=${stderr}`;
       let url = `v1.41/containers/${this.containerID}/attach/ws${query}`; // websocket Connection Interface
 
       this.shellWs = this.base.WS({
