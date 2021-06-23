@@ -263,11 +263,11 @@ export default {
     },
     wsShell() {
       const _this = this;
-      let tag = this.urlParam.Tag;
-      let name= this.urlParam.name;
-      let pod= this.urlParam.pod;
+      // let tag = this.urlParam.Tag;
+      // let name= this.urlParam.name;
+      // let pod= this.urlParam.pod;
 
-      let query = `?tag=${tag}&name=${name}&pod=${pod}`;
+      // let query = `?tag=${tag}&name=${name}&pod=${pod}`;
       let url = `xxxx/xxxx${query}`;// websocket Connection Interface
 
       this.shellWs = this.base.WS({
