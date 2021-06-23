@@ -383,7 +383,12 @@ class ContainerController extends Controller
         while ($line != null)
         {
             $out .= $line;
-            $line = $webSocketStream->read();
+            try {
+                $line = $webSocketStream->read();
+            } catch (Exception $e) {
+                echo $e;
+                $line = null;
+            }
         }
 
         return response()->json(["message" => $container_id, "cont_dump" => $out], 200);
