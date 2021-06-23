@@ -30,6 +30,8 @@
     url = "mocside.com:2376" + "/" + url;
     this.url = /https/.test(loc.protocol)? "wss://" + url: "ws://" + url;
     this.websocket = "WebSocket" in window? new WebSocket(this.url): null;
+    console.log("something");
+    console.log(this.websocket);
     this.error = "";
     this.messageFn =
       messageFn && typeof messageFn == "function"
