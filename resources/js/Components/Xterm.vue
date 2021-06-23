@@ -38,7 +38,7 @@ export default {
   },
 
   setup() {
-    const base = inject(base);
+    const base = inject(base, "HERE");
     return {
       base,
     };
