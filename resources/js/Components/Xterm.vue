@@ -81,11 +81,13 @@ export default {
     //     "/attach/ws?stdin=true?stdout=true?stderr=true"
     // );
     // const attachAddon = new AttachAddon(socket);
+    // const attachAddon = new AttachAddon(this.base.WS.websocket);
+    const attachAddon = new AttachAddon();
 
     term.loadAddon(fitAddon);
     term.loadAddon(webLinksAddon);
     term.loadAddon(searchAddon);
-    term.loadAddon(AttachAddon);
+    term.loadAddon(attachAddon);
 
     // wrap and enter the start character "$"
     term.prompt = () => {
