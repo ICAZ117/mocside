@@ -390,7 +390,6 @@ class ContainerController extends Controller
                 $line = null;
             }
         }
-        echo $out;
-        return response()->json(["message" => $container_id], 200);
+        return response()->json(["message" => $container_id, "dump" => utf8_encode($out)], 200);
     }
 }
