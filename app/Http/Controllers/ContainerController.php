@@ -391,7 +391,7 @@ class ContainerController extends Controller
                 $line = null;
             }
         }
-
-        return response()->json(["message" => $container_id, "cont_dump" => $out], 200);
+        echo $out;
+        return response()->json(["message" => $container_id], 200);
     }
 }
