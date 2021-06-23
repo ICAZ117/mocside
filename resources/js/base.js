@@ -10,6 +10,13 @@ const install = function (Vue) {
     Vue.prototype.base = base;
 };
 
+const base = {
+     // Parameters & methods 
+     WS({ url, openFn, messageFn, errorFn, isInit = false } = {}) {
+        return new WS({ url, openFn, messageFn, errorFn, isInit });
+    },
+}
+
 export default {
-    install,
+    install, base,
 };
