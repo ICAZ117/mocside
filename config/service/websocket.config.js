@@ -85,6 +85,7 @@
 
   //Custom WSC connection event: triggered after successful connection between the server and the front end
   onOpen(callBack) {
+    console.log("open socket");
     if (this.isWebsocket()) {
       //Determine whether to pass a callback function
       if (typeof callBack == "function") {
@@ -137,6 +138,7 @@
 
   // Custom WSC close event: triggered after WSC is closed
   onClose() {
+    console.log("websocket has been closed");
     if (this.isWebsocket()) {
       this.websocket.close();
     } else {
