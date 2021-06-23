@@ -10,6 +10,8 @@ import { FitAddon } from "xterm-addon-fit";
 import { AttachAddon } from "xterm-addon-attach";
 import { WebLinksAddon } from "xterm-addon-web-links";
 import { SearchAddon } from "xterm-addon-search";
+import { inject } from "vue";
+import { WS } from "../../../config/service/websocket.config";
 
 import "xterm/css/xterm.css";
 import "xterm/lib/xterm.js";
@@ -36,6 +38,22 @@ export default {
     this.wsShell();
   },
 
+  setup() {
+    // const base = inject(base, "HERE");
+    // return {
+    //   base,
+    // };
+    const base = {
+      // Parameters & methods
+      WS({ url, openFn, messageFn, errorFn, isInit = false } = {}) {
+        return new WS({ url, openFn, messageFn, errorFn, isInit });
+      },
+    };
+    return {
+      base,
+    };
+  },
+
   mounted() {
     let _this = this;
     console.log("Mounted xterm page");
@@ -50,7 +68,11 @@ export default {
     const webLinksAddon = new WebLinksAddon();
     const searchAddon = new SearchAddon();
 
-    const socket = new WebSocket("ws://mocside.com:2376/v1.41/containers/" + this.containerID + "/attach/ws?stdin=true?stdout=true?stderr=true");
+    const socket = new WebSocket(
+      "ws://mocside.com:2376/v1.41/containers/" +
+        this.containerID +
+        "/attach/ws?stdin=true?stdout=true?stderr=true"
+    );
     const attachAddon = new AttachAddon(socket);
 
     term.loadAddon(fitAddon);
@@ -193,17 +215,16 @@ export default {
         } else if (ev.ctrlKey) {
           console.log("ctrl is pressed");
           console.log("keycode: " + ev.keyCode + " keyValue is: " + ev.key);
-          console.log("keycode checks")
-          if(ev.keyCode == 89) {
+          console.log("keycode checks");
+          if (ev.keyCode == 89) {
             console.log("ctrl + y (yank text)");
             document.execCommand("paste");
           }
-          if(ev.keyCode == 81) {
+          if (ev.keyCode == 81) {
             console.log("ctrl + q (qopy text)");
             document.execCommand("copy");
           }
         }
-
 
         function mypasteEvent(ev) {
           ev.stopPropagation();
@@ -245,12 +266,11 @@ export default {
           // term.write(data);
           document.execCommand("paste");
           console.log("Paste");
-        } 
+        }
       });
     }
     runFakeTerminal(_this);
   },
-
   methods: {
     trim(str) {
       return str.replace(/(^\s*)|(\s*$)/g, "");
@@ -263,18 +283,24 @@ export default {
     },
     wsShell() {
       const _this = this;
-      // let tag = this.urlParam.Tag;
-      // let name= this.urlParam.name;
-      // let pod= this.urlParam.pod;
+      let tag = this.urlParam.Tag;
+      let name = this.urlParam.name;
+      let pod = this.urlParam.pod;
 
-      // let query = `?tag=${tag}&name=${name}&pod=${pod}`;
-      let url = `xxxx/xxxx${query}`;// websocket Connection Interface
+      let query = `?tag=${tag}&name=${name}&pod=${pod}`;
+      let url = `xxxx/xxxx${query}`; // websocket Connection Interface
+
+      console.log("this.base:");
+      console.log(this.base);
+      // console.log("\nbase:");
+      // console.log(base);
+      console.log("\n");
 
       this.shellWs = this.base.WS({
         url,
         isInit: true,
         openFn() {
-          //   _this.term.resize({ rows: _this.rows, cols: 100 }); //Resize the terminal window and trigger term.on("resize") 
+          //   _this.term.resize({ rows: _this.rows, cols: 100 }); //Resize the terminal window and trigger term.on("resize")
         },
         messageFn(e) {
           console.log("message", e);
@@ -292,9 +318,9 @@ export default {
           console.log("error", e);
           _this.$message.error({
             message: "ws The request failed, please refresh and try again~",
-            duration: 5000
+            duration: 5000,
           });
-        }
+        },
       });
     },
   },

@@ -2,7 +2,7 @@ import { WS } from "../../config/service/websocket.config";
 
 const install = function (Vue) {
     const base = {
-        //参数&方法
+        // Parameters & methods 
         WS({ url, openFn, messageFn, errorFn, isInit = false } = {}) {
             return new WS({ url, openFn, messageFn, errorFn, isInit });
         },
@@ -10,6 +10,15 @@ const install = function (Vue) {
     Vue.prototype.base = base;
 };
 
+const base = {
+     // Parameters & methods 
+     WS({ url, openFn, messageFn, errorFn, isInit = false } = {}) {
+        return new WS({ url, openFn, messageFn, errorFn, isInit });
+    },
+}
+
 export default {
-    install,
+    install, base,
 };
+
+
