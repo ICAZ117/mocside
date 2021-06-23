@@ -313,9 +313,10 @@ class ContainerController extends Controller
 
         // now, try and attach?
         // we want to make a stream out of the attach endpoint
+        $entrypoint = "localhost/v1.41";
         $query = "?stdin=1?stdout=1?stderr=1?logs=1?stream=1";
         $endpoint = "/containers/" . $container_id . "/attach";
-        $stream = stream_socket_client($endpoint . $query, $errno, $errstr);
+        $stream = stream_socket_client($entrypoint . $endpoint . $query, $errno, $errstr);
         fwrite($stream, "foo");
         $res3 = fread($socket, 4096)."\n";
         fclose($socket);
