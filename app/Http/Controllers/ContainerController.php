@@ -351,14 +351,14 @@ class ContainerController extends Controller
         $containerConfig->setOpenStdin(true);
         $containerConfig->setWorkingDir('/usr/src');
 
-        // create host config
-        $hostConfig->setMounts(array(
-            "Target" => "/usr/src",
-            "Source" => "/home/max/mocside/storage/app/submissions/1237419/23/",
-            "Type" => "bind",
-            "ReadOnly" => false,
-        ));
-        $containerConfig->setHostConfig($hostConfig);
+        // // create host config
+        // $hostConfig->setMounts(array(
+        //     "Target" => "/usr/src",
+        //     "Source" => "/home/max/mocside/storage/app/submissions/1237419/23/",
+        //     "Type" => "bind",
+        //     "ReadOnly" => false,
+        // ));
+        // $containerConfig->setHostConfig($hostConfig);
         $containerCreateResult = $docker->containerCreate($containerConfig);
         return response()->json(["message" => $containerCreateResult->getId()], 200);
     }
