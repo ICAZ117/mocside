@@ -377,18 +377,18 @@ class ContainerController extends Controller
             "stdin" => true,
         ]);
         $webSocketStream->write("gg\n");
-        $line = $webSocketStream->read();
+        $line = $webSocketStream->read(); // this will hold user input
         $out = "";
 
         while ($line != null)
         {   
+            $out .= $line;
             try {
                 $line = $webSocketStream->read();
             } catch (ErrorException $e) {
                 echo $e;
                 $line = null;
             }
-            $out .= $line;
         }
         echo $out;
         return response()->json(["message" => $container_id], 200);
