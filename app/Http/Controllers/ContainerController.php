@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 use Docker\Docker;
+use Docker\API\Model\ContainersCreatePostBody;
 
 class ContainerController extends Controller
 {   
@@ -334,5 +333,15 @@ class ContainerController extends Controller
         foreach ($containers as $container) {
             var_dump($container->getNames());
         }
+    }
+
+    public function spinWLib()
+    {
+        $docker = Docker::create();
+        $containerConfig = new ContainersCreatePostBody();
+        $containerConfig->setImage('python');
+        $containerConfig->setCmd(['echo', 'hello world']);
+        $containerCreateResult = $docker->containerCreate($containerConfig);
+        return response()->json(["message" => $containerCreateResult], 200);
     }
 }
