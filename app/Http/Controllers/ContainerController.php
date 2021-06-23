@@ -356,7 +356,7 @@ class ContainerController extends Controller
         // create host config
         $mountsConfig->setType("bind");
         $mountsConfig->setSource("/home/max/mocside/storage/app/submissions/1237419/23/");
-        $mountsConfig->setTarget("/usr/source");
+        $mountsConfig->setTarget("/usr/src");
         $mountsConfig->setReadOnly(false);
         $hostConfig->setMounts([$mountsConfig]);
         $containerConfig->setHostConfig($hostConfig);
