@@ -288,7 +288,7 @@ class ContainerController extends Controller
         ]);
 
         // write input (get from request)
-        $webSocketStream->write($validData["input"]);
+        $webSocketStream->write("who\r\nare you\r\n");
 
         // grab program output
         $line = $webSocketStream->read(); // this will hold user input
