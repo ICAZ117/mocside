@@ -229,7 +229,6 @@ class ContainerController extends Controller
         }
     }
 
-    // a full replacement for spinUp using the docker-php lib
     public function spinWLib(Request $request, $id)
     {
         $user = Auth::user();
@@ -241,27 +240,15 @@ class ContainerController extends Controller
         $containerConfig = new ContainersCreatePostBody();
         $hostConfig = new HostConfig();
         $mountsConfig = new Mount();
-        if (strcasecmp($validData['lang'], 'python') == 0) {
-            $containerConfig->setImage('python');
-            $containerConfig->setCmd(['submission.py']);
-            $containerConfig->setEntrypoint(["python3"]);
-            $containerConfig->setAttachStdin(true);
-            $containerConfig->setAttachStdout(true);
-            $containerConfig->setAttachStderr(true);
-            $containerConfig->setTty(true);
-            $containerConfig->setOpenStdin(true);
-            $containerConfig->setWorkingDir('/usr/src');
-        } else {
-            $containerConfig->setImage('java');
-            $containerConfig->setCmd(['main.java;', 'java', 'main']);
-            $containerConfig->setEntrypoint(["javac"]);
-            $containerConfig->setAttachStdin(true);
-            $containerConfig->setAttachStdout(true);
-            $containerConfig->setAttachStderr(true);
-            $containerConfig->setTty(true);
-            $containerConfig->setOpenStdin(true);
-            $containerConfig->setWorkingDir('/usr/src');
-        }
+        $containerConfig->setImage('python');
+        $containerConfig->setCmd(['submission.py']);
+        $containerConfig->setEntrypoint(["python3"]);
+        $containerConfig->setAttachStdin(true);
+        $containerConfig->setAttachStdout(true);
+        $containerConfig->setAttachStderr(true);
+        $containerConfig->setTty(true);
+        $containerConfig->setOpenStdin(true);
+        $containerConfig->setWorkingDir('/usr/src');
 
         // create host config
         $mountsConfig->setType("bind");
