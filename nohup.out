@@ -295,3 +295,37 @@ Starting Laravel development server: http://0.0.0.0:8000
 [Tue May 18 16:36:23 2021] 65.35.197.75:53566 Accepted
 [Tue May 18 16:36:23 2021] 65.35.197.75:53566 [200]: GET /favicon.ico
 [Tue May 18 16:36:23 2021] 65.35.197.75:53566 Closing
+Starting Laravel development server: http://0.0.0.0:8000
+[Thu Jun 24 20:27:33 2021] PHP 7.4.3 Development Server (http://0.0.0.0:8000) started
+[Thu Jun 24 20:27:58 2021] 47.205.142.175:64485 Accepted
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:64485 Closing
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:61442 Accepted
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:61442 [200]: GET /css/app.css
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:61442 Closing
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:52989 Accepted
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:52989 [200]: GET /js/app.js
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:55518 Accepted
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:55518 [200]: GET /fonts/Montserrat-Regular.ttf?3cd786652b8a2e9d41f210cb1a527ff6
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:63491 Accepted
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:63491 [200]: GET /images/background.jpg?6ab5f2b6da6c237707deac8469cf3cb5
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:63491 Closing
+[Thu Jun 24 20:27:59 2021] 47.205.142.175:55518 Closing
+[Thu Jun 24 20:28:07 2021] 47.205.142.175:52989 Closing
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:51857 Accepted
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:51857 Closing
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:49354 Accepted
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:64039 Accepted
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:49354 [200]: GET /images/brandlight.png?a5e0f94df993cb65237185d6e6a1a691
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:52685 Accepted
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:64039 [200]: GET /js/resources_js_Pages_Login_vue.js
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:52685 Closing
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:49354 Closing
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:64039 Closing
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:50287 Accepted
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:50287 [200]: GET /fonts/Montserrat-Medium.ttf?e2d60bc49517598c0ce8b98f8d4e579f
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:50287 Closing
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:59635 Accepted
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:59635 [200]: GET /img/icon.png
+[Thu Jun 24 20:28:08 2021] 47.205.142.175:59635 Closing
+[Thu Jun 24 20:46:33 2021] 187.188.190.48:36372 Accepted
+[Thu Jun 24 20:46:33 2021] 187.188.190.48:36372 Closing

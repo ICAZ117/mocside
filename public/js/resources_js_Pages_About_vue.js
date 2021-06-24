@@ -20,7 +20,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var xterm_addon_search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! xterm-addon-search */ "./node_modules/xterm-addon-search/lib/xterm-addon-search.js");
 /* harmony import */ var xterm_addon_search__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(xterm_addon_search__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var xterm_css_xterm_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! xterm/css/xterm.css */ "./node_modules/xterm/css/xterm.css");
-/* harmony import */ var xterm_css_xterm_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(xterm_css_xterm_css__WEBPACK_IMPORTED_MODULE_4__);
 
  // import {AttachAddon} from "xterm-addon-attach";
 
