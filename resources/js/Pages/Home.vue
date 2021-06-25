@@ -39,7 +39,7 @@
                     Developed by students from Florida Southern College's CS department
                   </p>
 
-                  <a href="#" class="btn btn-danger btn-lg">Button</a>
+                  <router-link to="/about" class="btn btn-danger btn-lg ml-2">About Us</router-link>
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, nulla?
                   </p>
 
-                  <a href="#" class="btn btn-primary btn-lg">Button</a>
+                  <a href="" class="btn btn-primary btn-lg">Button</a>
                 </div>
               </div>
             </div>
@@ -68,13 +68,13 @@
       <!-- End Carousel Content -->
 
       <!-- Previous & Next Buttons -->
-      <a href="" class="carousel-control-prev" role="button" data-slide="prev">
+      <!-- <a href="" class="carousel-control-prev" role="button" data-slide="prev">
         <span class="fas fa-chevron-left fa-2x"></span>
       </a>
 
       <a href="" class="carousel-control-next" role="button" data-slide="next">
         <span class="fas fa-chevron-right fa-2x"></span>
-      </a>
+      </a> -->
       <!-- End Previous & Next Buttons -->
     </div>
     <!-- End Image Carousel -->
@@ -90,7 +90,7 @@
 
     <!-- Start Socket -->
     <div class="socket text-light text-center py-3">
-      <p><a href="#" target="_blank">and here</a></p>
+      <p><a href="" target="_blank">and here</a></p>
     </div>
     <!-- End Socket -->
   </div>
@@ -107,38 +107,7 @@ export default {
       email: null,
       password: null,
       error: null,
-      // props: ["isLoginOpen"],
     };
-  },
-  methods: {
-    // async login() {
-    //   // code properly connects to this point
-
-    //   const payload = {
-    //     email: this.email,
-    //     password: this.password,
-    //   };
-    //   this.error = null;
-    //   try {
-    //     await AuthService.login(payload);
-    //     const authUser = await this.$store.dispatch("auth/getAuthUser");
-    //     if (authUser) {
-    //       this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
-    //       this.$router.push("/dashboard");
-    //     } else {
-    //       const error = Error(
-    //         "Unable to fetch user after login, check your API settings."
-    //       );
-    //       error.name = "Fetch User";
-    //       throw error;
-    //     }
-    //   } catch (error) {
-    //     this.error = getError(error);
-    //   }
-    // },
-    // toggleLogin() {
-    //   this.isLoginOpen = !this.isLoginOpen;
-    // },
   },
 };
 </script>
