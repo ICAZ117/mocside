@@ -2,7 +2,7 @@
   <div>
     <template v-for="(item, index) in items">
       <div class="divider" v-if="item.type === 'divider'" :key="index" />
-      <menu-item v-else :key="index" v-bind="item" />
+      <menu-item v-else :key="item.id" v-bind="item" />
     </template>
   </div>
 </template>

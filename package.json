@@ -12,9 +12,11 @@
     "devDependencies": {
         "@vue/compiler-sfc": "^3.0.11",
         "axios": "^0.21.1",
+        "laravel-echo": "^1.11.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.21",
         "postcss": "^8.1.14",
+        "pusher-js": "^7.0.3",
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
@@ -32,6 +34,11 @@
         "vue-template-compiler": "^2.6.12",
         "vue3-ace-editor": "^2.0.2",
         "vue3-tabs": "^0.1.9",
-        "vuex": "^4.0.0"
+        "vuex": "^4.0.0",
+        "xterm": "^4.13.0",
+        "xterm-addon-attach": "^0.6.0",
+        "xterm-addon-fit": "^0.5.0",
+        "xterm-addon-search": "^0.8.0",
+        "xterm-addon-web-links": "^0.4.0"
     }
 }

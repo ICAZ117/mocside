@@ -35,6 +35,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       input: "",
       jID: "",
       pID: "",
+      codeID: "",
       forceReload: 0
     };
   },
@@ -72,9 +73,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 15:
                 _this.code_p = _context.sent;
+
+                if (_this.lang == "Java") {
+                  _this.codeID = _this.jID;
+                } else {
+                  _this.codeID = _this.pID;
+                }
+
                 _this.forceReload = 1;
 
-              case 17:
+              case 18:
               case "end":
                 return _context.stop();
             }
@@ -100,7 +108,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 };
 
                 if (!(progress.length == 0)) {
-                  _context2.next = 10;
+                  _context2.next = 9;
                   break;
                 }
 
@@ -109,21 +117,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
                 res = _context2.sent;
-                _this2.jID = res.data.id;
-                console.log("Got Java");
+                _this2.jID = res.data.id; // console.log("Got Java");
+
                 return _context2.abrupt("return", _this2.assignment.java_starter);
 
-              case 10:
+              case 9:
                 i = 0;
 
-              case 11:
+              case 10:
                 if (!(i < progress.length)) {
-                  _context2.next = 19;
+                  _context2.next = 18;
                   break;
                 }
 
                 if (!(progress[i].lang == "java")) {
-                  _context2.next = 16;
+                  _context2.next = 15;
                   break;
                 }
 
@@ -131,22 +139,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.jID = progress[i].id;
                 return _context2.abrupt("return", progress[i].code);
 
-              case 16:
+              case 15:
                 i++;
-                _context2.next = 11;
+                _context2.next = 10;
                 break;
 
-              case 19:
-                _context2.next = 21;
+              case 18:
+                _context2.next = 20;
                 return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.post("/code/", payload);
 
-              case 21:
+              case 20:
                 _res = _context2.sent;
-                _this2.jID = _res.data.id;
-                console.log("Got Java");
+                _this2.jID = _res.data.id; // console.log("Got Java");
+
                 return _context2.abrupt("return", _this2.assignment.java_starter);
 
-              case 25:
+              case 23:
               case "end":
                 return _context2.stop();
             }
@@ -224,13 +232,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     updateContent: function updateContent(e) {
-      console.log(e); //e is {code: "...", input: "..."}
-
+      // console.log(e);
+      //e is {code: "...", input: "..."}
       if (this.lang == "Java") {
-        console.log(e.code);
+        // console.log(e.code);
         this.code_j = e.code;
       } else {
-        console.log(e.code);
+        // console.log(e.code);
         this.code_p = e.code;
       }
 
@@ -351,11 +359,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     showSubmit: true,
     saved_j: $data.code_j,
     saved_p: $data.code_p,
+    problemID: $props.problemID,
+    codeID: $data.codeID,
     onUpdate: $options.updateContent,
     key: $data.forceReload
   }, null, 8
   /* PROPS */
-  , ["lang", "saved_j", "saved_p", "onUpdate"])])], 2112
+  , ["lang", "saved_j", "saved_p", "problemID", "codeID", "onUpdate"])])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   );
 }

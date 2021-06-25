@@ -14,8 +14,16 @@
         "laravel/framework": "^8.40",
         "laravel/sanctum": "^2.11",
         "laravel/telescope": "^4.4",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "pusher/pusher-php-server": "~3.0",
+        "docker-php/docker-php": "^2.0"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./docker-php"
+        }
+    ],
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.5",
