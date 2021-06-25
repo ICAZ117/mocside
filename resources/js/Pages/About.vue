@@ -53,7 +53,7 @@ export default {
     this.isWaiting = this.new[this.new.length - 1] === "";
 
     for (let i = 0; i < this.new.length; i++) {
-      this.contents += this.new[i] + "\r\n" + "\b";
+      this.contents += this.new[i] + "\n";
     }
 
     this.oldContents = this.contents;
