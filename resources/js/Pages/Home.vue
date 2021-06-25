@@ -68,11 +68,11 @@
       <!-- End Carousel Content -->
 
       <!-- Previous & Next Buttons -->
-      <a href="#carousel" class="carousel-control-prev" role="button" data-slide="prev">
+      <a href="" class="carousel-control-prev" role="button" data-slide="prev">
         <span class="fas fa-chevron-left fa-2x"></span>
       </a>
 
-      <a href="#carousel" class="carousel-control-next" role="button" data-slide="next">
+      <a href="" class="carousel-control-next" role="button" data-slide="next">
         <span class="fas fa-chevron-right fa-2x"></span>
       </a>
       <!-- End Previous & Next Buttons -->
