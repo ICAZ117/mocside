@@ -39,6 +39,6 @@ class InputSent implements ShouldBroadcast
     public function broadcastOn()
     {
         // normally 'channel-name'
-        return new PrivateChannel($this->user->fsc_id);
+        return new PrivateChannel('test');
     }
 }
