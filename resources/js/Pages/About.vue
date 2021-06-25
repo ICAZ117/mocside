@@ -24,16 +24,28 @@ export default {
   methods: {
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length);
-      console.log("\nNew input:");
-      console.log(this.newInput);
 
       if (this.isWaiting) {
         var payload = {
           input: this.newInput,
         };
 
-        const res = await API.apiClient.post(`/containers/test/${this.containerID}`, payload);
-        console.log(res.data.message);
+        const res = await API.apiClient.post(
+          `/containers/test/${this.containerID}`,
+          payload
+        );
+
+        // Get the new output
+        this.new = res.data.dump;
+
+        // Check if the program is still running/waiting on input
+        this.isWaiting = this.new[this.new.length - 1] === "";
+
+        for (let i = 0; i < this.new.length; i++) {
+          this.contents += this.new[i] + "\n";
+        }
+
+        this.oldContents = this.contents;
       }
     },
   },
