@@ -6,7 +6,10 @@
       :snapAlign="center"
       :wrapAround="true"
     >
-      <!-- Carousel Item 1 -->
+      <Slide v-for="slide in 10" :key="slide">
+        <div class="carousel__item">{{ slide }}</div>
+      </Slide>
+      <!-- Carousel Item 1
       <Slide style="background-image: url('../../img/carousel/1.jpg')">
         <div class="carousel__item">
           <div class="carousel-caption">
@@ -31,7 +34,7 @@
             </div>
           </div>
         </div>
-      </Slide>
+      </Slide> -->
 
       <!-- Carousel Item 2
         <Slide style="background-image: url('../../img/carousel/2.jpg')">
@@ -129,8 +132,8 @@ export default {
 .carousel__prev,
 .carousel__next {
   box-sizing: content-box;
-  border: 5px solid white;
+  border: 5px solid rgba(0, 0, 0, 0.493);
   margin: 0 20px;
-  background-color: transparent!important;
+  background-color: transparent !important;
 }
 </style>
