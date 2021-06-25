@@ -401,6 +401,7 @@ class ContainerController extends Controller
     {
         // $id is container ID
         $docker = Docker::create();
+        $user = Auth::user();
         $validData = $request->validate([
             'input' => 'required'
         ]);
@@ -443,7 +444,7 @@ class ContainerController extends Controller
         // return response()->json(["message" => $returns], 200);
         // then, emit ws event with returns
         $stripped = array_shift($returns);
-        broadcast(new InputSent(Auth::user(), $returns));
+        broadcast(new InputSent($user, $returns));
         return response()->json(["message" => "input sent"], 200);
     }
 }
