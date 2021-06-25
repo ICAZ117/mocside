@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Carousel :itemsToShow="1" :snapAlign="center" :wrapAround="true">
+    <Carousel class="carousel-inner" :itemsToShow="1" :snapAlign="center" :wrapAround="true">
         <!-- Carousel Item 1 -->
-        <Slide>
+        <Slide style="background-image: url('../../img/carousel/1.jpg')">
           <div class="carousel__item">
             <img src="../../img/carousel/1.jpg" alt="Image carousel" class="w-100" />
 
@@ -31,9 +31,8 @@
         </Slide>
 
         <!-- Carousel Item 2 -->
-        <Slide>
+        <Slide style="background-image: url('../../img/carousel/2.jpg')">
           <div class="carousel__item">
-            <img src="../../img/carousel/2.jpg" alt="Image carousel" class="w-100" />
 
             <div class="carousel-caption">
               <div class="container">
@@ -54,9 +53,8 @@
         </Slide>
 
         <!-- Carousel Item 3 -->
-        <Slide>
+        <Slide style="background-image: url('../../img/carousel/3.jpg')">
           <div class="carousel__item">
-            <img src="../../img/carousel/3.jpg" alt="Image carousel" class="w-100" />
 
             <div class="carousel-caption">
               <div class="container">
