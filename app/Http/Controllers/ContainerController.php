@@ -439,7 +439,10 @@ class ContainerController extends Controller
 
         // I think returns[0] will hold the input, so we should filer this out
         // but I will return to this after testing.
-        return response()->json(["message" => $returns], 200);
+        // returns[0] is 
+        // return response()->json(["message" => $returns], 200);
         // then, emit ws event with returns
+        $stripped = array_shift($returns);
+        broadcast(new InputSent(Auth::user(), $returns));
     }
 }
