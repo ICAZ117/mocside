@@ -16,11 +16,11 @@ export default {
       isWaiting: false,
     }
   },
-  mounted() {
+  async mounted() {
     var payload = {
       lang: "python",
     };
-    const res = API.apiClient.post(`/containers/spin-test/23`, payload);
+    const res = await API.apiClient.post(`/containers/spin-test/23`, payload);
 
     // Get the docker container ID
     this.containerID = res.data.message;
