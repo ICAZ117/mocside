@@ -444,7 +444,7 @@ class ContainerController extends Controller
         // return response()->json(["message" => $returns], 200);
         // then, emit ws event with returns
         $stripped = array_shift($returns);
-        broadcast(new InputSent($user, $returns));
+        // broadcast(new InputSent($user, $returns));
         return response()->json(["message" => "input sent", "dump" => $returns], 200);
     }
 }
