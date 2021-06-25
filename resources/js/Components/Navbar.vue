@@ -36,7 +36,7 @@
                 to="/register"
                 class="nav-link"
                 >Sign Up</router-link
-              >
+              > 
               <router-link v-if="isLoggedIn" @click="update" to="/about" class="move-up"
                 ><img class="pfp" src="../../img/DefaultPFP.png" alt="Profile"
               /></router-link>
