@@ -97,11 +97,13 @@
 </template>
 
 <script>
-import Modal from "../Components/Modal";
-import FormInput from "../Components/FormInput";
-import BaseBtn from "../Components/BaseBtn";
+
+
+// import Modal from "../Components/Modal";
+// import FormInput from "../Components/FormInput";
+// import BaseBtn from "../Components/BaseBtn";
 export default {
-  components: { Modal, FormInput, BaseBtn },
+  // components: { Modal, FormInput, BaseBtn },
   data() {
     return {
       email: null,
