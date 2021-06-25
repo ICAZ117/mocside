@@ -10,6 +10,8 @@ use Docker\Docker;
 use Docker\API\Model\ContainersCreatePostBody;
 use Docker\API\Model\HostConfig;
 use Docker\API\Model\Mount;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class ContainerController extends Controller
 {   
@@ -184,7 +186,7 @@ class ContainerController extends Controller
         if (strcasecmp($validData['lang'], 'python') == 0)
         {
             $containerConfig->setImage('python');
-            $containerConfig->setCmd(['submission.py']);
+            $containerConfig->setCmd(['supervisor.py']);
             $containerConfig->setEntrypoint(["python3"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
@@ -192,9 +194,11 @@ class ContainerController extends Controller
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
+            // get relevant supervisor
+            $supervisor = Storage::disk('local')->get('supervisor.py');
         } else {
             $containerConfig->setImage('java');
-            $containerConfig->setCmd(['main.java;', 'java', 'main']);
+            $containerConfig->setCmd(['supervisor.java;', 'java', 'supervisor']);
             $containerConfig->setEntrypoint(["javac"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
@@ -202,6 +206,8 @@ class ContainerController extends Controller
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
+            // get relevant supervisor
+            $supervisor = Storage::disk('local')->get('supervisor.java');
         }
         // create host config
         $mountsConfig->setType("bind");
@@ -211,11 +217,77 @@ class ContainerController extends Controller
         $hostConfig->setMounts([$mountsConfig]);
         $containerConfig->setHostConfig($hostConfig);
 
+        
+        // save test cases to file
+        $head = 'submissions/' . $user->fsc_id . "/" . $id;
+        for ($i = 0; $i < count($test_cases); $i++) {
+            $temp = $test_cases[$i];
+            $tc_id = $temp->id;
+
+            // save input
+            $path = $tc_id . ".in";
+            $file = fopen($path, "w");
+            fwrite($file, $temp->input);
+            $filePath = Storage::disk('local')
+                ->putFileAs($head . "/test-cases", new File($path), $path);
+            fclose($file);
+            unlink($file);
+
+            // save output
+            $path = $tc_id . ".out";
+            $file = fopen($path, "w");
+            fwrite($file, $temp->input);
+            $filePath = Storage::disk('local')
+                ->putFileAs($head . "/test-cases", new File($path), $path);
+            fclose($file);
+            unlink($file);
+        }
+
+        // copy in supervisor
+        $filePath = Storage::disk('local')
+            ->putFileAs($head, $supervisor, $supervisor->hashName());
+
         // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);
         $container_id = $containerCreateResult->getId();
 
-        return response()->json(["message" => $container_id], 200);
+        // start container
+        $docker->containerStart($container_id);
+
+        // attach container to ws
+        $webSocketStream = $docker->containerAttachWebsocket($container_id, [
+            "logs" => true,
+            "stream" => true,
+            "stdout" => true,
+            "stderr" => true,
+            "stdin" => true,
+        ]);
+
+        // no input to write!
+
+        // get output
+        $line = $webSocketStream->read();
+        $out = "";
+
+        while ($line != null)
+        {   
+            $out .= $line;
+            try {
+                $line = $webSocketStream->read();
+            // this is in reference to an error found in the 
+            // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
+            // ... final solution there. This should do nothing, but I'm scared.
+            } catch (ErrorException $e) {
+                echo $e;
+                $line = null;
+            }
+        }
+
+        // clean returns
+        $dump = utf8_encode($out);
+        $returns = explode("\r\n", $dump);
+
+        return response()->json(["message" => $container_id, "dump" => $returns], 200);
     }
 
     // this is our test of docker-php
