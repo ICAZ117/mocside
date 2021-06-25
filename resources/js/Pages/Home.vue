@@ -1,80 +1,146 @@
 <template>
-  <Carousel>
-    <Slide>
-      <div class="carousel__item">1</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">2</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">3</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">4</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">5</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">6</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">7</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">8</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">9</div>
-    </Slide>
-    <Slide>
-      <div class="carousel__item">10</div>
-    </Slide>
+  <div>
+    <!-- Image Carousel -->
+    <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="6500">
+      <!-- Carousel Content -->
+      <div class="carousel-inner h-100">
+        <!-- Carousel Item 1 -->
+        <div class="carousel-item active">
+          <img src="../../img/carousel/1.jpg" alt="Image carousel" class="w-100" />
 
-    <template #addons>
-      <Navigation />
-      <Pagination />
-    </template>
-  </Carousel>
+          <div class="carousel-caption">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-8 bg-custom d-none d-md-block py-3 px-0">
+                  <h1>Mocs-IDE</h1>
+
+                  <div class="border-top border-danger w-50 mx-auto my-3"></div>
+
+                  <h4>A modern, free to use online IDE for virtual classrooms</h4>
+
+                  <router-link to="/login" class="btn btn-danger btn-lg mr-2">Login</router-link>
+
+                  <router-link to="/register" class="btn btn-danger btn-lg ml-2">Sign Up</router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Item 2 -->
+        <div class="carousel-item">
+          <img src="../../img/carousel/2.jpg" alt="Image carousel" class="w-100" />
+
+          <div class="carousel-caption">
+            <div class="container">
+              <div class="row justify-content-end text-right">
+                <div class="col-5 bg-custom d-none d-lg-block py-3 px-0 pr-3">
+                  <p class="pb-3">
+                    Developed by students from Florida Southern College's CS department
+                  </p>
+
+                  <a href="#" class="btn btn-danger btn-lg">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Item 3 -->
+        <div class="carousel-item">
+          <img src="../../img/carousel/3.jpg" alt="Image carousel" class="w-100" />
+
+          <div class="carousel-caption">
+            <div class="container">
+              <div class="row justify-content-start text-left">
+                <div class="col-7 bg-custom d-none d-lg-block py-3 px-0 pl-3">
+                  <p class="lead">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, nulla?
+                  </p>
+
+                  <a href="#" class="btn btn-primary btn-lg">Button</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Carousel Content -->
+
+      <!-- Previous & Next Buttons -->
+      <a href="" class="carousel-control-prev" role="button" data-slide="prev">
+        <span class="fas fa-chevron-left fa-2x"></span>
+      </a>
+
+      <a href="" class="carousel-control-next" role="button" data-slide="next">
+        <span class="fas fa-chevron-right fa-2x"></span>
+      </a>
+      <!-- End Previous & Next Buttons -->
+    </div>
+    <!-- End Image Carousel -->
+    <!-- Start Footer -->
+    <footer>
+      <div class="container">
+        <div class="row text-light text-center py-4 justify-content-center">
+          <p>Stuff can go here</p>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Start Socket -->
+    <div class="socket text-light text-center py-3">
+      <p><a href="#" target="_blank">and here</a></p>
+    </div>
+    <!-- End Socket -->
+  </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel';
-
-import 'vue3-carousel/dist/carousel.css';
-
-export default defineComponent({
-  name: 'Basic',
-  components: {
-    Carousel,
-    Slide,
-    Pagination,
-    Navigation,
+import Modal from "../Components/Modal";
+import FormInput from "../Components/FormInput";
+import BaseBtn from "../Components/BaseBtn";
+export default {
+  components: { Modal, FormInput, BaseBtn },
+  data() {
+    return {
+      email: null,
+      password: null,
+      error: null,
+      // props: ["isLoginOpen"],
+    };
   },
-});
+  methods: {
+    // async login() {
+    //   // code properly connects to this point
+
+    //   const payload = {
+    //     email: this.email,
+    //     password: this.password,
+    //   };
+    //   this.error = null;
+    //   try {
+    //     await AuthService.login(payload);
+    //     const authUser = await this.$store.dispatch("auth/getAuthUser");
+    //     if (authUser) {
+    //       this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
+    //       this.$router.push("/dashboard");
+    //     } else {
+    //       const error = Error(
+    //         "Unable to fetch user after login, check your API settings."
+    //       );
+    //       error.name = "Fetch User";
+    //       throw error;
+    //     }
+    //   } catch (error) {
+    //     this.error = getError(error);
+    //   }
+    // },
+    // toggleLogin() {
+    //   this.isLoginOpen = !this.isLoginOpen;
+    // },
+  },
+};
 </script>
 
-<style>
-.carousel__item {
-  min-height: 200px;
-  width: 100%;
-  background-color: var(--carousel-color-primary);
-  color:  var(--carousel-color-white);
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.carousel__slide {
-  padding: 10px;
-}
-
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  border: 5px solid white;
-}
-</style>
+<style></style>
