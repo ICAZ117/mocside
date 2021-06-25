@@ -303,8 +303,7 @@ class ContainerController extends Controller
     {
         $user = Auth::user();
         $validData = $request->validate([
-            'lang' => 'required',
-            'input' => 'required',
+            'lang' => 'required'
         ]);
         $docker = Docker::create();
         $containerConfig = new ContainersCreatePostBody();
