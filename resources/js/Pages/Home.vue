@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Carousel :itemsToShow="1" :snapAlign="center" :wrapAround="true">
+    <Carousel id="carousel" class="carousel slide"  :itemsToShow="1" :snapAlign="center" :wrapAround="true">
       <div class="carousel-inner h-100">
         <!-- Carousel Item 1 -->
         <Slide>
