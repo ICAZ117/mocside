@@ -368,8 +368,8 @@ nav {
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1) !important;
 }
 
-.carousel-inner {
-    max-height: calc(100vh - 60px) !important;
+.carousel-inner, .carousel__item {
+    height: calc(100vh - 60px) !important;
 }
 
 /*---Change Carousel Transition Speed --*/

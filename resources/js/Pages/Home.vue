@@ -117,7 +117,6 @@ export default {
 
 <style>
 .carousel__item {
-  min-height: 200px;
   width: 100%;
   color: var(--carousel-color-white);
   font-size: 20px;
