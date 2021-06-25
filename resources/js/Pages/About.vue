@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     async enter() {
-      this.newInput = this.contents.substring(this.oldContents.length);
+      this.newInput = this.contents.substring(this.oldContents.length - 1);
       console.log("\nNew input:");
       console.log(this.newInput);
 
@@ -53,7 +53,7 @@ export default {
     this.isWaiting = this.new[this.new.length - 1] === "";
 
     for (let i = 0; i < this.new.length; i++) {
-      this.contents += this.new[i] + "\r\n" + "\b";
+      this.contents += this.new[i] + "\n";
     }
 
     this.oldContents = this.contents;
