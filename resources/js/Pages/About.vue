@@ -1,5 +1,10 @@
 <template>
-    <textarea class="console" contenteditable="true" v-model="contents"></textarea>
+  <textarea
+    class="console"
+    contenteditable="true"
+    v-model="contents"
+    @keyup.enter="enter"
+  ></textarea>
 </template>
 
 <script>
@@ -9,10 +14,29 @@ export default {
   data() {
     return {
       containerID: 0,
+      oldContents: "",
       contents: "",
       new: [],
       isWaiting: false,
-    }
+      newInput: "",
+    };
+  },
+  methods: {
+    async enter() {
+      if (this.isWaiting) {
+        var payload = {
+          input: this.newInput,
+        };
+
+        const res = await API.apiClient.post(`/containers/test/${this.containerID}`, payload);
+        console.log(res.data.message);
+      }
+    },
+  },
+  computed: {
+    getNewInput: function () {
+      this.newInput = this.contents.substring(this.oldContents.length);
+    },
   },
   async mounted() {
     var payload = {
@@ -32,10 +56,10 @@ export default {
     for (let i = 0; i < this.new.length; i++) {
       this.contents += this.new[i] + "\n";
     }
+
+    this.oldContents = this.contents;
   },
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
