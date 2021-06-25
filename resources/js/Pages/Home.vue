@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Carousel id="carousel" class="carousel slide">
+    <Carousel :itemsToShow="1" :snapAlign="center" :wrapAround="true">
       <div class="carousel-inner h-100">
         <!-- Carousel Item 1 -->
         <Slide>
@@ -76,7 +76,7 @@
           </div>
         </Slide>
       </div>
-      
+
       <template #addons>
         <navigation />
         <pagination />
