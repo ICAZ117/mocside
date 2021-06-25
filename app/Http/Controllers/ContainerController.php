@@ -406,7 +406,7 @@ class ContainerController extends Controller
         ]);
         // we expect this container to be RUNNING
         $webSocketStream = $docker->containerAttachWebsocket($id, [
-            "logs" => true,
+            "logs" => false,
             "stream" => true,
             "stdout" => true,
             "stderr" => true,
