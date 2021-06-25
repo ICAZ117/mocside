@@ -25,7 +25,7 @@ class InputSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $user, ?string $message)
+    public function __construct(User $user, ?array $message)
     {
         $this->user = $user;
         $this->message = $message;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Events\InputSent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
