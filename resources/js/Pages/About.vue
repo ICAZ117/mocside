@@ -24,6 +24,7 @@ export default {
   methods: {
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length - 1);
+      this.newInput = this.newInput.substring((this.newInput.charAt(0) == "\n") ? 0 : 1);
       console.log("\nNew input:");
       console.log(this.newInput);
 
