@@ -26,7 +26,7 @@
                 to="/courses"
                 class="nav-link"
                 >Courses</router-link
-              >
+              > 
               <router-link v-if="!isLoggedIn" @click="update" to="/login" class="nav-link"
                 >Login</router-link
               >
