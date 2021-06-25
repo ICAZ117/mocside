@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     async enter() {
-      this.newInput = this.contents.substring(this.oldContents.length);
+      this.newInput = this.contents.substring(this.oldContents.length - 1);
       console.log("\nNew input:");
       console.log(this.newInput);
 
