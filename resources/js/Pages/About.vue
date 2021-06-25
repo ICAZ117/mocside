@@ -23,6 +23,10 @@ export default {
   },
   methods: {
     async enter() {
+      this.newInput = this.contents.substring(this.oldContents.length);
+      console.log("\nNew input:");
+      console.log(this.newInput);
+
       if (this.isWaiting) {
         var payload = {
           input: this.newInput,
@@ -31,11 +35,6 @@ export default {
         const res = await API.apiClient.post(`/containers/test/${this.containerID}`, payload);
         console.log(res.data.message);
       }
-    },
-  },
-  computed: {
-    getNewInput: function () {
-      this.newInput = this.contents.substring(this.oldContents.length);
     },
   },
   async mounted() {
