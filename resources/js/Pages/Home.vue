@@ -1,10 +1,9 @@
 <template>
   <div>
-    <Carousel id="carousel" class="carousel slide"  :itemsToShow="1" :snapAlign="center" :wrapAround="true">
-      <div class="carousel-inner h-100">
+    <Carousel :itemsToShow="1" :snapAlign="center" :wrapAround="true">
         <!-- Carousel Item 1 -->
         <Slide>
-          <div class="carousel-item active">
+          <div class="carousel__item">
             <img src="../../img/carousel/1.jpg" alt="Image carousel" class="w-100" />
 
             <div class="carousel-caption">
@@ -33,7 +32,7 @@
 
         <!-- Carousel Item 2 -->
         <Slide>
-          <div class="carousel-item active">
+          <div class="carousel__item">
             <img src="../../img/carousel/2.jpg" alt="Image carousel" class="w-100" />
 
             <div class="carousel-caption">
@@ -56,7 +55,7 @@
 
         <!-- Carousel Item 3 -->
         <Slide>
-          <div class="carousel-item active">
+          <div class="carousel__item">
             <img src="../../img/carousel/3.jpg" alt="Image carousel" class="w-100" />
 
             <div class="carousel-caption">
@@ -75,7 +74,6 @@
             </div>
           </div>
         </Slide>
-      </div>
 
       <template #addons>
         <navigation />
