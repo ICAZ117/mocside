@@ -1,7 +1,34 @@
 <template>
   <Carousel>
-    <Slide v-for="slide in 10" :key="slide">
-      <div class="carousel__item">{{ slide }}</div>
+    <Slide>
+      <div class="carousel__item">1</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">2</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">3</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">4</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">5</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">6</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">7</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">8</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">9</div>
+    </Slide>
+    <Slide>
+      <div class="carousel__item">10</div>
     </Slide>
 
     <template #addons>
