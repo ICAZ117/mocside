@@ -1,7 +1,5 @@
 <template>
-  <div class="console">
-    <textarea contenteditable="true" v-model="contents"></textarea>
-  </div>
+    <textarea class="console" contenteditable="true" v-model="contents"></textarea>
 </template>
 
 <script>
