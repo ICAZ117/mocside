@@ -29,6 +29,7 @@ export default {
       contents: "",
       new: [],
       isWaiting: false,
+      hasNewLine: false,
       newInput: "",
     };
   },
@@ -51,8 +52,9 @@ export default {
 
         // Check if the program is still running/waiting on input
         this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
+        this.hasNewLine = this.new[this.new.length - 1] === "";
 
-        for (let i = 0; i < this.new.length - 1; i++) {
+        for (let i = 0; i < (this.hasNewLine ? this.new.length -1 : this.new.length); i++) {
           this.contents += this.new[i] + "\n";
         }
 
@@ -77,11 +79,16 @@ export default {
     this.new = res.data.dump;
 
     // Check if the program is still running/waiting on input
-    this.isWaiting = this.new[this.new.length - 1] === "";
+    this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
+    this.hasNewLine = this.new[this.new.length - 1] === "";
     
     this.contents = "student@server:/usr/src$ python3 submission.py\n"
-    for (let i = 0; i < this.new.length - 1; i++) {
+    for (let i = 0; i < (this.hasNewLine ? this.new.length -1 : this.new.length); i++) {
       this.contents += this.new[i] + "\n";
+    }
+
+    if (!this.isWaiting) {
+      this.contents += "student@server:/usr/src$ ";
     }
 
     this.oldContents = this.contents;
