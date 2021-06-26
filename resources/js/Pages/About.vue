@@ -31,7 +31,7 @@ export default {
         };
 
         const res = await API.apiClient.post(
-          `/containers/test/${this.containerID}`,
+          `/containers/send-in/${this.containerID}`,
           payload
         );
 
