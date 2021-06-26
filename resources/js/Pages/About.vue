@@ -41,7 +41,7 @@ export default {
         // Check if the program is still running/waiting on input
         this.isWaiting = this.new[this.new.length - 1] === "";
 
-        for (let i = 0; i < (this.isWaiting ? this.new.length : this.new.length - 1); i++) {
+        for (let i = 0; i < this.new.length - 1; i++) {
           this.contents += this.new[i] + "\n";
         }
 
