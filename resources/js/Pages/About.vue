@@ -4,6 +4,7 @@
     contenteditable="true"
     v-model="contents"
     @keyup.enter="enter"
+    spellcheck="false"
   ></textarea>
 </template>
 
