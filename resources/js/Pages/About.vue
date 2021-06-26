@@ -5,6 +5,16 @@
     v-model="contents"
     @keyup.enter="enter"
     spellcheck="false"
+    v-if="isWaiting"
+  ></textarea>
+  <textarea
+    class="console"
+    contenteditable="true"
+    v-model="contents"
+    @keyup.enter="enter"
+    spellcheck="false"
+    v-else
+    readonly
   ></textarea>
 </template>
 
