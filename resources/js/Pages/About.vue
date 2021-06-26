@@ -50,7 +50,7 @@ export default {
         this.new = res.data.dump;
 
         // Check if the program is still running/waiting on input
-        this.isWaiting = this.new[this.new.length - 1] === "";
+        this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
 
         for (let i = 0; i < this.new.length - 1; i++) {
           this.contents += this.new[i] + "\n";
