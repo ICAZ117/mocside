@@ -42,7 +42,7 @@ export default {
         this.isWaiting = this.new[this.new.length - 1] === "";
 
         for (let i = 0; i < (this.isWaiting ? this.new.length : this.new.length - 1); i++) {
-          this.contents += this.new[i] + "\n";
+          this.contents += this.new[i];
         }
 
         this.oldContents = this.contents;
@@ -65,7 +65,7 @@ export default {
     this.isWaiting = this.new[this.new.length - 1] === "";
 
     for (let i = 0; i < this.new.length; i++) {
-      this.contents += this.new[i] + "\n";
+      this.contents += this.new[i];
     }
 
     this.oldContents = this.contents;
