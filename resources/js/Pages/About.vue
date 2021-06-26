@@ -53,7 +53,7 @@ export default {
     var payload = {
       lang: "python",
     };
-    const res = await API.apiClient.post(`/containers/spin-test/23`, payload);
+    const res = await API.apiClient.post(`/containers/spin-up/23`, payload);
 
     // Get the docker container ID
     this.containerID = res.data.message;
