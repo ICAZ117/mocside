@@ -79,7 +79,7 @@ export default {
     // Check if the program is still running/waiting on input
     this.isWaiting = this.new[this.new.length - 1] === "";
     
-    this.contents = "<span style='color: blue;'>student@server:/usr/src$</span> python3 submission.py\n"
+    this.contents = "student@server:/usr/src$ python3 submission.py\n"
     for (let i = 0; i < this.new.length - 1; i++) {
       this.contents += this.new[i] + "\n";
     }
