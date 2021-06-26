@@ -45,6 +45,10 @@ export default {
           this.contents += this.new[i] + "\n";
         }
 
+        if (!this.isWaiting) {
+          this.contents += "student@server:/usr/src$ ";
+        }
+
         this.oldContents = this.contents;
       }
     },
@@ -63,7 +67,8 @@ export default {
 
     // Check if the program is still running/waiting on input
     this.isWaiting = this.new[this.new.length - 1] === "";
-
+    
+    this.contents = "student@server:/usr/src$ python3 submission.py\n"
     for (let i = 0; i < this.new.length - 1; i++) {
       this.contents += this.new[i] + "\n";
     }
