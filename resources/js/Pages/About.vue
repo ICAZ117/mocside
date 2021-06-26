@@ -52,7 +52,7 @@ export default {
 
         // Check if the program is still running/waiting on input
         this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
-        this.hasNewLine = this.new[this.new.length - 1] === "";
+        this.hasNewLine = (this.new[this.new.length - 1] === "") || (!this.isWaiting);
 
         for (let i = 0; i < (this.hasNewLine ? this.new.length -1 : this.new.length); i++) {
           this.contents += this.new[i] + "\n";
@@ -80,10 +80,10 @@ export default {
 
     // Check if the program is still running/waiting on input
     this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
-    this.hasNewLine = this.new[this.new.length - 1] === "";
+    this.hasNewLine = (this.new[this.new.length - 1] === "") || (!this.isWaiting);
     
     this.contents = "student@server:/usr/src$ python3 submission.py\n"
-    for (let i = 0; i < (this.hasNewLine ? this.new.length -1 : this.new.length); i++) {
+    for (let i = 0; i < (this.hasNewLine ? this.new.length - 1 : this.new.length); i++) {
       this.contents += this.new[i] + "\n";
     }
 
