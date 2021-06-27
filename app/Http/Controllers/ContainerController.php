@@ -340,7 +340,7 @@ class ContainerController extends Controller
         // returns[0] holds the latest user input, so we drop that
         $stripped = array_shift($returns);
         // broadcast(new InputSent($user, $returns));
-        return response()->json(["message" => "input sent", "dump" => $dump], 200);
+        return response()->json(["message" => "input sent", "dump" => $returns], 200);
     }
 
     /*
