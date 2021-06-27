@@ -5,12 +5,6 @@ import difflib
 
 def main():
 
-	#result = subprocess.run([sys.executable, "-c", "import sys; print(sys.stdin.read())"], input=b"underwater")
-	#options - capture_output=True, text=True, timeout=3, input=b"underwater"
-	#if text is true input must be string, not bytes
-	#a = "yesyyeysysysysyysysyssysysysy"
-	#result = subprocess.run(['python', 'submission.py'], capture_output=True, text=True, timeout=10, input=a)
-
 	#print("stdout: ", result.stdout)
 	#print("stderr: ", result.stderr)
 	#result.check_returncode() #checks for a bad exit code and prints error
@@ -28,7 +22,6 @@ def main():
 		#student code is submission.py
 
 def runPython(nCases):
-
 	#get names of each test case
 	caseNames = [] #includes the .in at the end of each file name
 	for _, _, filenames in os.walk(r'./test-cases'):
@@ -52,23 +45,32 @@ def runPython(nCases):
 
 
 def runJava(nCases):
-	print("java " + str(nCases))
-
-	results = []
+	#get names of each test case
+	caseNames = [] #includes the .in at the end of each file name
 	for _, _, filenames in os.walk(r'./test-cases'):
 		for file in filenames:
 			fileExt=os.path.splitext(file)[-1]
 			if fileExt == ".in":
-				results.append(file)
+				caseNames.append(file)
 
-	#loop that many times
-	for i in range(0, nCases):
-		print(results[i])
+	#compile student's java code, if no errors continue
+	#else return the error
+	compiled = subprocess.run(['javac', 'submission.java'], capture_output=True, text=True)
+	if(compiled.stderr != ""):
+		print(compiled.stderr)
+	else:
+		#loop over the number of test cases
+		for i in range(0, nCases):
+			#read the test case's input as a string to be used
+			with open('./test-cases/'+caseNames[i], 'r') as file:
+				data= file.read()
 
-		#run student code with test case input
-			#place time limit on the runnning of their code to stop any infinite loops
-			#consume any errors and save them
-		#compare students output to test case output
+			#run student code with test case input
+			result = subprocess.run(['java', 'submission'], capture_output=True, text=True, timeout=10, input=data)
+
+			#compare students output to test case output
+			model = caseNames[i].split(".")[0]+".out"
+			compare(result, model)
 
 
 def compare(result, model):
