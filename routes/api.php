@@ -99,11 +99,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/code/submit/{id}', [StorageController::class, 'createFile']);
 
-    Route::post('/containers/test/{id}', [ContainerController::class, 'sendIn']);
-    Route::post('/containers/spin-up/{id}', [ContainerController::class, 'spinUp']);
+    Route::post('/containers/send-in/{id}', [ContainerController::class, 'sendIn']);
+    Route::post('/containers/spin-up/{id}', [ContainerController::class, 'spinWLib']);
+    Route::post('/containers/grade/{id}', [ContainerController::class, 'grade']);
     Route::delete('/containers/{id}', [ContainerController::class, 'spinDown']);
-    Route::get('/containers/list', [ContainerController::class, 'list']);
-    Route::post('/containers/spin-test/{id}', [ContainerController::class, 'spinWLib']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

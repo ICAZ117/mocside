@@ -4,6 +4,17 @@
     contenteditable="true"
     v-model="contents"
     @keyup.enter="enter"
+    spellcheck="false"
+    v-if="isWaiting"
+  ></textarea>
+  <textarea
+    class="console"
+    contenteditable="true"
+    v-model="contents"
+    @keyup.enter="enter"
+    spellcheck="false"
+    v-else
+    readonly
   ></textarea>
 </template>
 
@@ -18,22 +29,40 @@ export default {
       contents: "",
       new: [],
       isWaiting: false,
+      hasNewLine: false,
       newInput: "",
     };
   },
   methods: {
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length);
-      console.log("\nNew input:");
-      console.log(this.newInput);
 
       if (this.isWaiting) {
         var payload = {
           input: this.newInput,
         };
 
-        const res = await API.apiClient.post(`/containers/test/${this.containerID}`, payload);
-        console.log(res.data.message);
+        const res = await API.apiClient.post(
+          `/containers/send-in/${this.containerID}`,
+          payload
+        );
+
+        // Get the new output
+        this.new = res.data.dump;
+
+        // Check if the program is still running/waiting on input
+        this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
+        this.hasNewLine = (this.new[this.new.length - 1] === "") || (!this.isWaiting);
+
+        for (let i = 0; i < (this.hasNewLine ? this.new.length -1 : this.new.length); i++) {
+          this.contents += this.new[i] + "\n";
+        }
+
+        if (!this.isWaiting) {
+          this.contents += "student@server:/usr/src$ ";
+        }
+
+        this.oldContents = this.contents;
       }
     },
   },
@@ -41,7 +70,7 @@ export default {
     var payload = {
       lang: "python",
     };
-    const res = await API.apiClient.post(`/containers/spin-test/23`, payload);
+    const res = await API.apiClient.post(`/containers/spin-up/23`, payload);
 
     // Get the docker container ID
     this.containerID = res.data.message;
@@ -50,10 +79,16 @@ export default {
     this.new = res.data.dump;
 
     // Check if the program is still running/waiting on input
-    this.isWaiting = this.new[this.new.length - 1] === "";
+    this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
+    this.hasNewLine = (this.new[this.new.length - 1] === "") || (!this.isWaiting);
+    
+    this.contents = "student@server:/usr/src$ python3 submission.py\n"
+    for (let i = 0; i < (this.hasNewLine ? this.new.length - 1 : this.new.length); i++) {
+      this.contents += this.new[i] + "\n";
+    }
 
-    for (let i = 0; i < this.new.length; i++) {
-      this.contents += this.new[i] + "\r\n" + "\b";
+    if (!this.isWaiting) {
+      this.contents += "student@server:/usr/src$ ";
     }
 
     this.oldContents = this.contents;
