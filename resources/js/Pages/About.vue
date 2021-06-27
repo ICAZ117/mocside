@@ -52,10 +52,17 @@ export default {
 
         // Check if the program is still running/waiting on input
         this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
-        this.hasNewLine = (this.new[this.new.length - 1] === "") || (!this.isWaiting);
+        this.hasNewLine =
+          this.new[this.new.length - 1] === "" || !this.isWaiting;
 
-        for (let i = 0; i < (this.hasNewLine ? this.new.length -1 : this.new.length); i++) {
+        for (let i = 0; i < this.new.length - 1; i++) {
           this.contents += this.new[i] + "\n";
+        }
+
+        if (this.hasNewLine) {
+          this.contents += "\n";
+        } else {
+          this.contents += this.new[this.new.length - 1];
         }
 
         if (!this.isWaiting) {
@@ -80,11 +87,18 @@ export default {
 
     // Check if the program is still running/waiting on input
     this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
-    this.hasNewLine = (this.new[this.new.length - 1] === "") || (!this.isWaiting);
-    
-    this.contents = "student@server:/usr/src$ python3 submission.py\n"
-    for (let i = 0; i < (this.hasNewLine ? this.new.length - 1 : this.new.length); i++) {
+    this.hasNewLine = this.new[this.new.length - 1] === "" || !this.isWaiting;
+
+    this.contents = "student@server:/usr/src$ python3 submission.py\n";
+    // (this.hasNewLine ? this.new.length - 1 : this.new.length)
+    for (let i = 0; i < this.new.length - 1; i++) {
       this.contents += this.new[i] + "\n";
+    }
+
+    if (this.hasNewLine) {
+      this.contents += "\n";
+    } else {
+      this.contents += this.new[this.new.length - 1];
     }
 
     if (!this.isWaiting) {
