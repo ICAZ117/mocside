@@ -59,9 +59,7 @@ export default {
           this.contents += this.new[i] + "\n";
         }
 
-        if (this.hasNewLine) {
-          this.contents += "";
-        } else {
+        if (!this.hasNewLine) {
           this.contents += this.new[this.new.length - 1];
         }
 
