@@ -60,7 +60,7 @@ export default {
         }
 
         if (this.hasNewLine) {
-          this.contents += "\n";
+          this.contents += "";
         } else {
           this.contents += this.new[this.new.length - 1];
         }
