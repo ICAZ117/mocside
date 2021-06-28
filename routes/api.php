@@ -104,6 +104,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/containers/spin-up/{id}', [ContainerController::class, 'spinWLib']);
     Route::post('/containers/grade/{id}', [ContainerController::class, 'grade']);
     Route::delete('/containers/{id}', [ContainerController::class, 'spinDown']);
+
+    Route::get('/containers/test/{id}', [ContainerController::class, 'listen']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
