@@ -4,6 +4,7 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -36,6 +37,6 @@ class ContainerOut implements ShouldBroadcast
     public function broadcastOn()
     {
         // normally 'channel-name'
-        return new PrivateChannel('test');
+        return new Channel('test');
     }
 }
