@@ -33,6 +33,7 @@ export default {
       isWaiting: false,
       hasNewLine: false,
       newInput: "",
+      container: {},
     };
   },
   watch: {
@@ -65,8 +66,7 @@ export default {
       if (this.lang == "Python") {
         this.contents += "python3 submission.py\n";
       } else if (this.lang == "Java") {
-        this.contents +=
-          "javac Main.java\nstudent@server:/usr/src$ java Main\n";
+        this.contents += "javac Main.java\nstudent@server:/usr/src$ java Main\n";
       } else {
         this.contents += "\nstudent@server:/usr/src$ ";
       }
@@ -90,6 +90,9 @@ export default {
 
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length);
+
+      this.container = await API.apiClient.get(`/containers/${this.containerID}`);
+      console.log(this.container.data.data);
 
       if (this.isWaiting) {
         var payload = {
