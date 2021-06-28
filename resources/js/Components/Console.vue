@@ -139,10 +139,13 @@ export default {
         if (!this.isWaiting) {
           this.contents += this.username + "@mocside:/usr/src$ ";
           this.$emit("programFinished");
+        } else {
+          // wait a second and check againg
+          // to catch slow/lousy container close.
+          this.checkLive()
         }
 
         this.oldContents = this.contents;
-        this.checkLive()
       }
     },
     async checkLive() {
