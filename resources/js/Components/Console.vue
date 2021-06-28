@@ -142,7 +142,11 @@ export default {
         }
 
         this.oldContents = this.contents;
-
+        this.checkLive()
+      }
+    },
+    async checkLive() {
+      setTimeout(function() {
         this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
         this.isWaiting = false;
@@ -155,8 +159,8 @@ export default {
           this.contents += this.username + "@mocside:/usr/src$ ";
           this.$emit("programFinished");
         }
-      }
-    },
+      }, 1000);
+    }
   },
   async beforeMount() {
     const authUser = await this.$store.dispatch("auth/getAuthUser");
