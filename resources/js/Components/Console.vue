@@ -1,20 +1,12 @@
 <template>
   <textarea
     class="console"
+    id="scrollToBottom"
     contenteditable="true"
     v-model="contents"
     @keyup.enter="enter"
     spellcheck="false"
-    v-if="isWaiting"
-  ></textarea>
-  <textarea
-    class="console"
-    contenteditable="true"
-    v-model="contents"
-    @keyup.enter="enter"
-    spellcheck="false"
-    v-else
-    readonly
+    :readonly="!isWaiting"
   ></textarea>
 </template>
 
@@ -43,14 +35,20 @@ export default {
       }
     },
     contents: function () {
-        const uneditable = this.contents.substring(0, this.oldContents.length);
-        if (uneditable != this.oldContents) {
-            this.contents = this.oldContents;
-        }
-    }
+      var text = document.getElementById("scrollToBottom");
+      text.scrollTop = text.scrollHeight;
+
+      const uneditable = this.contents.substring(0, this.oldContents.length);
+      if (uneditable != this.oldContents) {
+        this.contents = this.oldContents;
+      }
+    },
   },
   methods: {
     async startDocker() {
+      if (this.lang == "Java") {
+        this.contents += "javac Main.java\n";
+      }
       var payload = {
         lang: this.lang,
       };
@@ -72,7 +70,7 @@ export default {
       if (this.lang == "Python") {
         this.contents += "python3 submission.py\n";
       } else if (this.lang == "Java") {
-        this.contents += "javac Main.java\nstudent@server:/usr/src$ java Main\n";
+        this.contents += "student@server:/usr/src$ java Main\n";
       } else {
         this.contents += "\nstudent@server:/usr/src$ ";
       }
@@ -111,7 +109,7 @@ export default {
       }
 
       this.oldContents = this.contents;
-      
+
       if (this.isWaiting) {
         var payload = {
           input: this.newInput,
@@ -143,10 +141,24 @@ export default {
         }
 
         this.oldContents = this.contents;
+
+        this.isWaiting = false;
+
+        for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
+          this.isWaiting = this.containers.data.data[i] == this.containerID;
+        }
+
+        if (!this.isWaiting) {
+          this.contents += "student@server:/usr/src$ ";
+          this.$emit("programFinished");
+        }
       }
     },
   },
-  mounted() {},
+  async beforeMount() {
+      const authUser = await this.$store.dispatch("auth/getAuthUser");
+      console.log(authUser);
+  },
 };
 </script>
 
