@@ -87,7 +87,8 @@ class ContainerController extends Controller
         ]);
 
         // we won't write input here, although we did in testing.
-        usleep(125000);
+        // usleep(125000);
+        sleep(2);
 
         // grab program output
         $line = $webSocketStream->read();
