@@ -347,8 +347,13 @@ class ContainerController extends Controller
     public function checkStatus($id)
     {
         $docker = Docker::create();
-        $info = $docker->containerInspect($id);
-        return response()->json(['data' => $info], 200);
+        $ids = [];
+        $containers = $docker->containerList();
+
+        foreach ($containers as $container) {
+            array_push($ids, $container->getId());
+        }
+        return response()->json(['data' => $ids], 200);
     }
 
     /*
