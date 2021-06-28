@@ -96,7 +96,12 @@ export default {
       this.isWaiting = false;
 
       for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
-          this.isWaiting = this.containers.data.data[i] == this.containerID;
+        this.isWaiting = this.containers.data.data[i] == this.containerID;
+      }
+
+      if (!this.isWaiting) {
+        this.contents += "student@server:/usr/src$ ";
+        this.$emit("programFinished");
       }
 
       if (this.isWaiting) {
@@ -131,11 +136,6 @@ export default {
 
         this.oldContents = this.contents;
       }
-
-      if (!this.isWaiting) {
-          this.contents += "student@server:/usr/src$ ";
-          this.$emit("programFinished");
-        }
     },
   },
   mounted() {},
