@@ -1,13 +1,40 @@
 <template>
-  <Console />
+  <textarea contenteditable="true"
+    v-model="contents"
+    @keyup.enter="enter"
+    spellcheck="false"></textarea>
 </template>
 
 <script>
-import Console from "../Components/Console.vue";
+import API from "../services/API";
 
 export default {
-  components: {
-    Console
+  data() {
+    return {
+      containerID: 0,
+      contents: "",
+    }
+  },
+  async mounted() {
+    var payload = {
+      lang: 'python',
+    }
+    const res = await API.apiClient.post(`/containers/test/23`, payload);
+    this.containerID = res.data.message;
+    const attach = await API.apiClient.get(`/containers/test/${this.containerID}`)
+  },
+  methods: {
+    async enter() {
+      this.newInput = this.contents.substring(this.oldContents.length);
+      var payload = {
+        input: this.newInput,
+      };
+
+      const res = await API.apiClient.post(
+        `/containers/test-in/${this.containerID}`,
+        payload
+      );
+    }
   }
 };
 </script>
