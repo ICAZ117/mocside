@@ -343,6 +343,14 @@ class ContainerController extends Controller
         return response()->json(["message" => "input sent", "dump" => $returns], 200);
     }
 
+    // checks to see if certain container is running.
+    public function checkStatus($id)
+    {
+        $docker = Docker::create();
+        $info = $docker->containerInspect($id);
+        return response()->json(['data' => $info], 200);
+    }
+
     /*
     * This is the old spinUp function that used
     * the docker unix socket, and was unable to
