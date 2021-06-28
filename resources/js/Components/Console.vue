@@ -19,13 +19,14 @@ export default {
   data() {
     return {
       containerID: 0,
-      oldContents: "student@server:/usr/src$ ",
-      contents: "student@server:/usr/src$ ",
+      oldContents: this.username + "@server:/usr/src$ ",
+      contents: this.username + "@server:/usr/src$ ",
       new: [],
       isWaiting: false,
       hasNewLine: false,
       newInput: "",
       containers: {},
+      username: "",
     };
   },
   watch: {
@@ -70,9 +71,9 @@ export default {
       if (this.lang == "Python") {
         this.contents += "python3 submission.py\n";
       } else if (this.lang == "Java") {
-        this.contents += "student@server:/usr/src$ java Main\n";
+        this.contents += this.username + "@server:/usr/src$ java Main\n";
       } else {
-        this.contents += "\nstudent@server:/usr/src$ ";
+        this.contents += "\n" + this.username + "@server:/usr/src$ ";
       }
 
       // (this.hasNewLine ? this.new.length - 1 : this.new.length)
@@ -85,7 +86,7 @@ export default {
       }
 
       if (!this.isWaiting) {
-        this.contents += "student@server:/usr/src$ ";
+        this.contents += this.username + "@server:/usr/src$ ";
         this.$emit("programFinished");
       }
 
@@ -104,7 +105,7 @@ export default {
       }
 
       if (!this.isWaiting) {
-        this.contents += "student@server:/usr/src$ ";
+        this.contents += this.username + "@server:/usr/src$ ";
         this.$emit("programFinished");
       }
 
@@ -136,7 +137,7 @@ export default {
         }
 
         if (!this.isWaiting) {
-          this.contents += "student@server:/usr/src$ ";
+          this.contents += this.username + "@server:/usr/src$ ";
           this.$emit("programFinished");
         }
 
@@ -149,7 +150,7 @@ export default {
         }
 
         if (!this.isWaiting) {
-          this.contents += "student@server:/usr/src$ ";
+          this.contents += this.username + "@server:/usr/src$ ";
           this.$emit("programFinished");
         }
       }
@@ -157,7 +158,7 @@ export default {
   },
   async beforeMount() {
       const authUser = await this.$store.dispatch("auth/getAuthUser");
-      console.log(authUser);
+      this.username = authUser.username;
   },
 };
 </script>
