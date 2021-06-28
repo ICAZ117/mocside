@@ -62,9 +62,9 @@ export default {
       this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
       this.hasNewLine = this.new[this.new.length - 1] === "" || !this.isWaiting;
 
-      if (this.lang == "python") {
+      if (this.lang == "Python") {
         this.contents += "python3 submission.py\n";
-      } else if (this.lang == "java") {
+      } else if (this.lang == "Java") {
         this.contents +=
           "javac Main.java\nstudent@server:/usr/src$ java Main\n";
       } else {
