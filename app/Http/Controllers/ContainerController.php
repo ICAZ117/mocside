@@ -47,8 +47,8 @@ class ContainerController extends Controller
             $containerConfig->setWorkingDir('/usr/src');
         } else {
             $containerConfig->setImage('openjdk');
-            $containerConfig->setCmd(['/run.sh']);
-            $containerConfig->setEntrypoint([""]);
+            $containerConfig->setCmd(['run.sh']);
+            $containerConfig->setEntrypoint(["bash"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
