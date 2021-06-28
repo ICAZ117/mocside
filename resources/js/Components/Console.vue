@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       containerID: 0,
-      oldContents: "",
+      oldContents: "student@server:/usr/src$ ",
       contents: "student@server:/usr/src$ ",
       new: [],
       isWaiting: false,
@@ -42,6 +42,12 @@ export default {
         this.startDocker();
       }
     },
+    contents: function () {
+        const uneditable = contents.substring(0, this.oldContents.length);
+        if (uneditable != this.oldContents) {
+            this.contents = this.oldContents;
+        }
+    }
   },
   methods: {
     async startDocker() {
@@ -104,6 +110,8 @@ export default {
         this.$emit("programFinished");
       }
 
+      this.oldContents = this.contents;
+      
       if (this.isWaiting) {
         var payload = {
           input: this.newInput,
