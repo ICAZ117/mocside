@@ -1,26 +1,13 @@
 <template>
   <textarea
     class="console"
+    id="scrollToBottom"
     contenteditable="true"
     v-model="contents"
     @keyup.enter="enter"
     spellcheck="false"
-    
     :readonly="!isWaiting"
   ></textarea>
-  <!--
-      v-if="isWaiting"
-      
-      
-       <textarea
-    class="console"
-    contenteditable="true"
-    v-model="contents"
-    @keyup.enter="enter"
-    spellcheck="false"
-    v-else
-    readonly
-  ></textarea> -->
 </template>
 
 <script>
@@ -48,11 +35,14 @@ export default {
       }
     },
     contents: function () {
-        const uneditable = this.contents.substring(0, this.oldContents.length);
-        if (uneditable != this.oldContents) {
-            this.contents = this.oldContents;
-        }
-    }
+      const uneditable = this.contents.substring(0, this.oldContents.length);
+      if (uneditable != this.oldContents) {
+        this.contents = this.oldContents;
+      }
+
+      var text = document.getElementById("scrollToBottom");
+      text.scrollTop = text.scrollHeight;
+    },
   },
   methods: {
     async startDocker() {
@@ -116,7 +106,7 @@ export default {
       }
 
       this.oldContents = this.contents;
-      
+
       if (this.isWaiting) {
         var payload = {
           input: this.newInput,
