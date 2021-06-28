@@ -155,7 +155,10 @@ export default {
       }
     },
   },
-  mounted() {},
+  beforeMount() {
+      const authUser = await this.$store.dispatch("auth/getAuthUser");
+      console.log(authUser);
+  },
 };
 </script>
 
