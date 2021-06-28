@@ -75,44 +75,44 @@ class ContainerController extends Controller
         $containerCreateResult = $docker->containerCreate($containerConfig);
         $container_id = $containerCreateResult->getId();
 
-        // // start container
-        // $docker->containerStart($container_id);
+        // start container
+        $docker->containerStart($container_id);
 
-        // // attach container to ws
-        // $webSocketStream = $docker->containerAttachWebsocket($container_id, [
-        //     "logs" => true,
-        //     "stream" => true,
-        //     "stdout" => true,
-        //     "stderr" => true,
-        //     "stdin" => true,
-        // ]);
+        // attach container to ws
+        $webSocketStream = $docker->containerAttachWebsocket($container_id, [
+            "logs" => true,
+            "stream" => true,
+            "stdout" => true,
+            "stderr" => true,
+            "stdin" => true,
+        ]);
 
-        // // we won't write input here, although we did in testing.
-        // // usleep(500000);
-        // sleep(1);
+        // we won't write input here, although we did in testing.
+        // usleep(500000);
+        sleep(1);
 
-        // // grab program output
-        // $line = $webSocketStream->read();
-        // $out = "";
+        // grab program output
+        $line = $webSocketStream->read();
+        $out = "";
 
-        // while ($line != null) {
-        //     $out .= $line;
-        //     try {
-        //         $line = $webSocketStream->read();
-        //         // this is in reference to an error found in the 
-        //         // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
-        //         // ... final solution there. This should do nothing, but I'm scared.
-        //     } catch (ErrorException $e) {
-        //         echo $e;
-        //         $line = null;
-        //     }
-        // }
+        while ($line != null) {
+            $out .= $line;
+            try {
+                $line = $webSocketStream->read();
+                // this is in reference to an error found in the 
+                // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
+                // ... final solution there. This should do nothing, but I'm scared.
+            } catch (ErrorException $e) {
+                echo $e;
+                $line = null;
+            }
+        }
 
-        // // clean returns
-        // $dump = utf8_encode($out);
-        // $returns = explode("\r\n", $dump);
+        // clean returns
+        $dump = utf8_encode($out);
+        $returns = explode("\r\n", $dump);
 
-        return response()->json(["message" => $container_id], 200);
+        return response()->json(["message" => $container_id, "dump" => $returns], 200);
     }
 
     /*
