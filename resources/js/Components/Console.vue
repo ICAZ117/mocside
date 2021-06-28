@@ -27,13 +27,13 @@ export default {
   data() {
     return {
       containerID: 0,
-      oldContents: "",
+      oldContents: "student@server:/usr/src$ ",
       contents: "student@server:/usr/src$ ",
       new: [],
       isWaiting: false,
       hasNewLine: false,
       newInput: "",
-      container: {},
+      containers: {},
     };
   },
   watch: {
@@ -42,6 +42,12 @@ export default {
         this.startDocker();
       }
     },
+    contents: function () {
+        const uneditable = this.contents.substring(0, this.oldContents.length);
+        if (uneditable != this.oldContents) {
+            this.contents = this.oldContents;
+        }
+    }
   },
   methods: {
     async startDocker() {
@@ -91,9 +97,21 @@ export default {
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length);
 
-      this.container = await API.apiClient.get(`/containers/${this.containerID}`);
-      console.log(this.container.data.data);
+      this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
+      this.isWaiting = false;
+
+      for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
+        this.isWaiting = this.containers.data.data[i] == this.containerID;
+      }
+
+      if (!this.isWaiting) {
+        this.contents += "student@server:/usr/src$ ";
+        this.$emit("programFinished");
+      }
+
+      this.oldContents = this.contents;
+      
       if (this.isWaiting) {
         var payload = {
           input: this.newInput,

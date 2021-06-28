@@ -14,6 +14,7 @@ html {
     --FSCblue: #0060a9 !important;
     --FSClightblue: #0096db !important;
     --FSCgrey: #646464 !important;
+    --consoleBG: black !important;
 }
 
 /*----------------------------- ALL MONTSERRAT FONT TYPES -----------------------------*/
@@ -735,20 +736,26 @@ thead.gradebook {
     margin: 0 !important;
 }
 
+.editor.row {
+    padding: 0 !important;
+    background-color: var(--consoleBG) !important;
+}
+
 .row > * {
     margin: 0;
     padding: 0 !important;
 }
 
 .console {
-    background-color: rgb(58, 58, 58) !important;
-    color: lightgray !important;
+    background-color: var(--consoleBG) !important;
+    color: lime !important;
     font-family: consolas !important;
     height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important;
     margin: 0 !important;
     padding: 20px;
-    border: none!important;
-    width: 100vw!important;
+    border: none !important;
+    width: 100vw !important;
+    border-radius: 0px !important;
 }
 
 .workspace-label {

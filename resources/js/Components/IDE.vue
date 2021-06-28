@@ -2,7 +2,6 @@
   <div class="work-area">
     <div
       class="editor row"
-      style="padding: 0 !important; background-color: rgb(58, 58, 58)"
     >
       <VAceEditor
         class="editor"
