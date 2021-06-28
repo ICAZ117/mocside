@@ -5,10 +5,14 @@
     v-model="contents"
     @keyup.enter="enter"
     spellcheck="false"
-    v-if="isWaiting"
+    
     :readonly="!isWaiting"
   ></textarea>
-  <!-- <textarea
+  <!--
+      v-if="isWaiting"
+      
+      
+       <textarea
     class="console"
     contenteditable="true"
     v-model="contents"
