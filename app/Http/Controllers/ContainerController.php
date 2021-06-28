@@ -431,17 +431,23 @@ class ContainerController extends Controller
             'stdout' => true,
             'stderr' => true
         ]);
-        $attachStream->onStdout(function ($stdout) {
-            global $id;
-            ContainerOut::dispatch($stdout, $id);
-        });
-        $attachStream->onStderr(function ($stderr) {
-            global $id;
-            ContainerOut::dispatch($stderr, $id);
-        });
+
+        $this->attach($attachStream);
 
         // $attachStream->wait(); // this causes me to not be able to send in, I think.
         return reponse()->json(['message' => 'container finished'], 200);
+    }
+
+    private function attach($attachStream)
+    {
+        $attachStream->onStdout(function ($stdout) {
+            ContainerOut::dispatch($stdout);
+        });
+        $attachStream->onStderr(function ($stderr) {
+            ContainerOut::dispatch($stderr);
+        });
+
+        $attachStream->wait();
     }
 
     public function inNoOut(Request $request, $id)

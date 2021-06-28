@@ -15,17 +15,17 @@ class ContainerOut implements ShouldBroadcast
     // contents of output
     public $message;
 
-    public $container_id;
+    // public $container_id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(?array $message, int $id)
+    public function __construct(?array $message)
     {
         $this->message = $message;
-        $this->container_id = $id;
+        // $this->container_id = $id;
     }
 
     /**
