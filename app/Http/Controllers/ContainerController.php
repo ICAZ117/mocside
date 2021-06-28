@@ -45,8 +45,8 @@ class ContainerController extends Controller
             $containerConfig->setWorkingDir('/usr/src');
         } else {
             $containerConfig->setImage('openjdk');
-            $containerConfig->setCmd(['Main.java', 'java', 'Main']);
-            $containerConfig->setEntrypoint(["javac"]);
+            $containerConfig->setCmd(['javac', 'Main.java']);
+            $containerConfig->setEntrypoint(["java", "Main"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
