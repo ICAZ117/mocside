@@ -57,6 +57,7 @@ export default {
         `/containers/spin-up/${this.problemID}`,
         payload
       );
+      this.spawnListener()
 
       // Get the docker container ID
       this.containerID = res.data.message;
@@ -92,7 +93,10 @@ export default {
 
       this.oldContents = this.contents;
     },
-
+    async spawnListener() {
+      const res = await API.apiClient.get(`/containers/test/${this.containerID}`);
+      return res;
+    },
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length);
 
