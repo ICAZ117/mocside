@@ -16,7 +16,7 @@
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
-        <button @click="runCode()" type="run" name="run" class="run-code col-1 btn btn-success">
+        <button @click="runCode()" type="run" name="run" class="run-code col-1 btn btn-success" :disabled="launchConsole">
           Run
         </button>
         <button
@@ -81,9 +81,10 @@
         </div>
       </div>
     </div>
-    <div v-if="!showInput" class="console row">
-      <Xterm :containerID="containerID" :key="containerID"/>
-    </div>
+    
+    <!-- CONSOLE HERE, V_IF !ShowInput -->
+    <Console :launchConsole="launchConsole" :problemID="problemID" :lang="lang" @programFinished="launchConsole = false" />
+
     <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
     </div>
@@ -189,8 +190,8 @@ import "ace-builds/src-noconflict/mode-python";
   // import "ace-builds/src-noconflict/worker-xquery";
 }
 
-import Xterm from "../Components/Xterm.vue";
 import * as API from "../services/API";
+import Console from "./Console.vue";
 
 export default {
   name: "IDE",
@@ -207,6 +208,7 @@ export default {
       input: "",
       forceReload: 0,
       containerID: "",
+      launchConsole: false,
     };
   },
   methods: {
@@ -245,10 +247,11 @@ export default {
       const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
 
-      //code is saved....now need to run it
-      const res3 = await API.apiClient.post(`/containers/spin-up/${this.problemID}`, payload);
-      console.log("\nspin-up complete\n");
-      this.containerID = res3.data.message;
+      this.launchConsole = true;
+      // //code is saved....now need to run it
+      // const res3 = await API.apiClient.post(`/containers/spin-up/${this.problemID}`, payload);
+      // console.log("\nspin-up complete\n");
+      // this.containerID = res3.data.message;
     },
     async submitCode() {
       var payload = {
@@ -269,7 +272,7 @@ export default {
   },
   components: {
     VAceEditor,
-    Xterm,
+    Console,
   },
   mounted() {
     // console.log("BEFORE MOUNT");
