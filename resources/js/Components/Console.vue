@@ -43,7 +43,7 @@ export default {
       }
     },
     contents: function () {
-        const uneditable = contents.substring(0, this.oldContents.length);
+        const uneditable = this.contents.substring(0, this.oldContents.length);
         if (uneditable != this.oldContents) {
             this.contents = this.oldContents;
         }
