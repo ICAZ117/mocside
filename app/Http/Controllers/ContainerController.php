@@ -427,7 +427,7 @@ class ContainerController extends Controller
         $docker->containerStart($id);
         $attachStream = $docker->containerAttach($id, [
             'stream' => true,
-            'stdin' => true,
+            'stdin' => false,
             'stdout' => true,
             'stderr' => true
         ]);
@@ -460,8 +460,8 @@ class ContainerController extends Controller
         $webSocketStream = $docker->containerAttachWebsocket($id, [
             "logs" => false,
             "stream" => true,
-            "stdout" => true,
-            "stderr" => true,
+            "stdout" => false,
+            "stderr" => false,
             "stdin" => true,
         ]);
 
