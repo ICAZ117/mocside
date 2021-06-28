@@ -424,13 +424,13 @@ class ContainerController extends Controller
     {
         $docker = Docker::create();
         // we assume our container is not started yet
+        $docker->containerStart($id);
         $attachStream = $docker->containerAttach($id, [
             'stream' => true,
             'stdin' => true,
             'stdout' => true,
             'stderr' => true
         ]);
-        $docker->containerStart($id);
         $attachStream->onStdout(function ($stdout) {
             global $id;
             ContainerOut::dispatch($stdout, $id);
