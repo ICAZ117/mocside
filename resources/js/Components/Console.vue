@@ -146,7 +146,7 @@ export default {
       }
     },
     async checkLive() {
-      setTimeout(function() {
+      setTimeout(async function() {
         this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
         this.isWaiting = false;
