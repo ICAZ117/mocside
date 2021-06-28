@@ -146,18 +146,19 @@ export default {
       }
     },
     async checkLive() {
+      var self = this;
       setTimeout(async function() {
-        this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
+        self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
 
-        this.isWaiting = false;
+        self.isWaiting = false;
 
-        for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
-          this.isWaiting = this.containers.data.data[i] == this.containerID;
+        for (let i = 0; i < self.containers.data.data.length && !self.isWaiting; i++) {
+          self.isWaiting = self.containers.data.data[i] == self.containerID;
         }
 
-        if (!this.isWaiting) {
-          this.contents += this.username + "@mocside:/usr/src$ ";
-          this.$emit("programFinished");
+        if (!self.isWaiting) {
+          self.contents += self.username + "@mocside:/usr/src$ ";
+          self.$emit("programFinished");
         }
       }, 1000);
     }
