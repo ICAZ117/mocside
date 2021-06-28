@@ -234,7 +234,7 @@ class ContainerController extends Controller
         $containerCreateResult = $docker->containerCreate($containerConfig);
         $container_id = $containerCreateResult->getId();
 
-        
+
         /*
         // I want to test some functionality here where we wait for the
         // grading to run and then grab the logs afterwards... this may
@@ -262,7 +262,7 @@ class ContainerController extends Controller
         $attachStream->wait();
         */
 
-        
+
         // attach container to ws
         $webSocketStream = $docker->containerAttachWebsocket($container_id, [
             "logs" => true,
@@ -310,7 +310,6 @@ class ContainerController extends Controller
     {
         // $id is container ID
         $docker = Docker::create();
-        $user = Auth::user();
         $validData = $request->validate([
             'input' => 'required'
         ]);
@@ -366,6 +365,60 @@ class ContainerController extends Controller
         return response()->json(['data' => $ids], 200);
     }
 
+    public function spinNoStart(Request $request, $id)
+    {
+        $user = Auth::user();
+        $validData = $request->validate([
+            'lang' => 'required'
+        ]);
+        $head = "submissions/" . $user->fsc_id . "/" . $id;
+
+        $docker = Docker::create();
+        $containerConfig = new ContainersCreatePostBody();
+        $hostConfig = new HostConfig();
+        $mountsConfig = new Mount();
+        if (strcasecmp($validData['lang'], 'python') == 0) {
+            $containerConfig->setImage('python');
+            $containerConfig->setCmd(['submission.py']);
+            $containerConfig->setEntrypoint(["python3"]);
+            $containerConfig->setAttachStdin(true);
+            $containerConfig->setAttachStdout(true);
+            $containerConfig->setAttachStderr(true);
+            $containerConfig->setTty(true);
+            $containerConfig->setOpenStdin(true);
+            $containerConfig->setWorkingDir('/usr/src');
+        } else {
+            $containerConfig->setImage('openjdk');
+            $containerConfig->setCmd(['run.sh']);
+            $containerConfig->setEntrypoint(["bash"]);
+            $containerConfig->setAttachStdin(true);
+            $containerConfig->setAttachStdout(true);
+            $containerConfig->setAttachStderr(true);
+            $containerConfig->setTty(true);
+            $containerConfig->setOpenStdin(true);
+            $containerConfig->setWorkingDir('/usr/src');
+
+            // copy in bash file
+            $bash = Storage::disk('local')->path('run.sh');
+            $filePath = Storage::disk('local')
+                ->putFileAs($head, new File($bash), 'run.sh');
+        }
+
+        // create host config
+        $mountsConfig->setType("bind");
+        $mountsConfig->setSource("/home/max/mocside/storage/app/" . $head . "/");
+        $mountsConfig->setTarget("/usr/src");
+        $mountsConfig->setReadOnly(false);
+        $hostConfig->setMounts([$mountsConfig]);
+        $containerConfig->setHostConfig($hostConfig);
+
+        // create container
+        $containerCreateResult = $docker->containerCreate($containerConfig);
+        $container_id = $containerCreateResult->getId();
+
+        return response()->json(["message" => $container_id], 200);
+    }
+
     // create output listener for given ID
     public function listen($id)
     {
@@ -382,13 +435,34 @@ class ContainerController extends Controller
             global $id;
             ContainerOut::dispatch($stdout, $id);
         });
-        $attachStream->onStderr(function ($stderr){
+        $attachStream->onStderr(function ($stderr) {
             global $id;
             ContainerOut::dispatch($stderr, $id);
         });
 
         $attachStream->wait();
         return reponse()->json(['message' => 'container finished'], 200);
+    }
+
+    public function inNoOut(Request $request, $id)
+    {
+        $docker = Docker::create();
+        $validData = $request->validate([
+            'input' => 'required'
+        ]);
+        // we expect this container to be RUNNING
+        $webSocketStream = $docker->containerAttachWebsocket($id, [
+            "logs" => false,
+            "stream" => true,
+            "stdout" => true,
+            "stderr" => true,
+            "stdin" => true,
+        ]);
+
+        $webSocketStream->write($validData['input']);
+        $webSocketStream->write("\n");
+
+        return response()->json(['message' => 'input sent'], 200);
     }
 
     /*
