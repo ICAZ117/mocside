@@ -33,7 +33,7 @@ export default {
       isWaiting: false,
       hasNewLine: false,
       newInput: "",
-      container: {},
+      containers: {},
     };
   },
   watch: {
@@ -91,8 +91,13 @@ export default {
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length);
 
-      this.container = await API.apiClient.get(`/containers/${this.containerID}`);
-      console.log(this.container.data.data);
+      this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
+
+      this.isWaiting = false;
+
+      for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
+          this.isWaiting = this.containers.data.data[i] == this.containerID;
+      }
 
       if (this.isWaiting) {
         var payload = {
@@ -126,6 +131,11 @@ export default {
 
         this.oldContents = this.contents;
       }
+
+      if (!this.isWaiting) {
+          this.contents += "student@server:/usr/src$ ";
+          this.$emit("programFinished");
+        }
     },
   },
   mounted() {},
