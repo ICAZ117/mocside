@@ -11,7 +11,6 @@ use Docker\Docker;
 use Docker\API\Model\ContainersCreatePostBody;
 use Docker\API\Model\HostConfig;
 use Docker\API\Model\Mount;
-use Docker\API\Model\ExecIdStartPostBody;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -60,7 +59,7 @@ class ContainerController extends Controller
             // copy in bash file
             $bash = Storage::disk('local')->get('run.sh');
             $filePath = Storage::disk('local')
-                ->putFileAs($head, $bash, 'run.sh');
+                ->putFileAs($head, new File($bash), 'run.sh');
         }
 
         // create host config
