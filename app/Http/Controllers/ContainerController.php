@@ -440,7 +440,7 @@ class ContainerController extends Controller
             ContainerOut::dispatch($stderr, $id);
         });
 
-        $attachStream->wait();
+        // $attachStream->wait(); // this causes me to not be able to send in, I think.
         return reponse()->json(['message' => 'container finished'], 200);
     }
 
