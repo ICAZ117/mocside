@@ -57,10 +57,11 @@ export default {
         `/containers/spin-up/${this.problemID}`,
         payload
       );
-      this.spawnListener()
-
+      
       // Get the docker container ID
       this.containerID = res.data.message;
+
+      this.spawnListener()
 
       // Get the new input/output
       this.new = res.data.dump;
