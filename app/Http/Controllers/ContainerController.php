@@ -435,7 +435,7 @@ class ContainerController extends Controller
         $this->attach($attachStream);
 
         // $attachStream->wait(); // this causes me to not be able to send in, I think.
-        return reponse()->json(['message' => 'container finished'], 200);
+        return response()->json(['message' => 'container finished'], 200);
     }
 
     private function attach($attachStream)
