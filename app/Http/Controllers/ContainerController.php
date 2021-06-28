@@ -29,6 +29,8 @@ class ContainerController extends Controller
         $validData = $request->validate([
             'lang' => 'required'
         ]);
+        $head = "submissions/" . $user->fsc_id . "/" . $id;
+
         $docker = Docker::create();
         $containerConfig = new ContainersCreatePostBody();
         $hostConfig = new HostConfig();
@@ -45,19 +47,24 @@ class ContainerController extends Controller
             $containerConfig->setWorkingDir('/usr/src');
         } else {
             $containerConfig->setImage('openjdk');
-            $containerConfig->setCmd(['javac', 'Main.java']);
-            $containerConfig->setEntrypoint(["java", "Main"]);
+            $containerConfig->setCmd(['run.sh']);
+            $containerConfig->setEntrypoint(["bash"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
+
+            // copy in bash file
+            $bash = Storage::disk('local')->path('run.sh');
+            $filePath = Storage::disk('local')
+                ->putFileAs($head, new File($bash), 'run.sh');
         }
 
         // create host config
         $mountsConfig->setType("bind");
-        $mountsConfig->setSource("/home/max/mocside/storage/app/submissions/" . $user->fsc_id . "/" . $id . "/");
+        $mountsConfig->setSource("/home/max/mocside/storage/app/" . $head . "/");
         $mountsConfig->setTarget("/usr/src");
         $mountsConfig->setReadOnly(false);
         $hostConfig->setMounts([$mountsConfig]);
@@ -80,6 +87,8 @@ class ContainerController extends Controller
         ]);
 
         // we won't write input here, although we did in testing.
+        // usleep(500000);
+        sleep(1);
 
         // grab program output
         $line = $webSocketStream->read();
