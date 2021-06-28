@@ -13,7 +13,7 @@ export default {
     return {
       containerID: 0,
       contents: "",
-      // oldContents: "",
+      oldContents: "",
     }
   },
   async mounted() {
