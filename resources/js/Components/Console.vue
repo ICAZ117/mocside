@@ -6,8 +6,9 @@
     @keyup.enter="enter"
     spellcheck="false"
     v-if="isWaiting"
+    :readonly="!isWaiting"
   ></textarea>
-  <textarea
+  <!-- <textarea
     class="console"
     contenteditable="true"
     v-model="contents"
@@ -15,7 +16,7 @@
     spellcheck="false"
     v-else
     readonly
-  ></textarea>
+  ></textarea> -->
 </template>
 
 <script>
