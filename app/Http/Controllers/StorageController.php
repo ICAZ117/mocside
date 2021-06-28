@@ -55,7 +55,7 @@ class StorageController extends Controller
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File($path), "submission.py");
             fclose($file);
-            unlink($file);
+            unlink($path);
             return response()->json([
                 'message' => 'Python code stored.', 
                 'path' => $filePath, 
@@ -69,7 +69,7 @@ class StorageController extends Controller
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File($path), "Main.java");
             fclose($file);
-            unlink($file);
+            unlink($path);
             return response()->json(['message' => 'Java code stored.', 'path' => $filePath], 200);
         }
     }
