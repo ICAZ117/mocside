@@ -57,7 +57,7 @@ class ContainerController extends Controller
             $containerConfig->setWorkingDir('/usr/src');
 
             // copy in bash file
-            $bash = Storage::disk('local')->get('run.sh');
+            $bash = Storage::disk('local')->path('run.sh');
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File($bash), 'run.sh');
         }
