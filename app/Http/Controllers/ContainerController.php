@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 // use App\Events\InputSent;
+use App\Events\ContainerOut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -363,6 +364,31 @@ class ContainerController extends Controller
             array_push($ids, $container->getId());
         }
         return response()->json(['data' => $ids], 200);
+    }
+
+    // create output listener for given ID
+    public function listen($id)
+    {
+        $docker = Docker::create();
+        // we assume our container is not started yet
+        $attachStream = $docker->containerAttach($id, [
+            'stream' => true,
+            'stdin' => true,
+            'stdout' => true,
+            'stderr' => true
+        ]);
+        $docker->containerStart($id);
+        $attachStream->onStdout(function ($stdout) {
+            global $id;
+            ContainerOut::dispatch($stdout, $id);
+        });
+        $attachStream->onStderr(function ($stderr){
+            global $id;
+            ContainerOut::dispatch($stderr, $id);
+        });
+
+        $attachStream->wait();
+        return reponse()->json(['message' => 'container finished'], 200);
     }
 
     /*
