@@ -155,7 +155,7 @@ export default {
       }
     },
   },
-  beforeMount() {
+  async beforeMount() {
       const authUser = await this.$store.dispatch("auth/getAuthUser");
       console.log(authUser);
   },
