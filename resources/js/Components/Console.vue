@@ -143,6 +143,8 @@ export default {
 
         this.oldContents = this.contents;
 
+        this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
+
         this.isWaiting = false;
 
         for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
@@ -157,10 +159,10 @@ export default {
     },
   },
   async beforeMount() {
-      const authUser = await this.$store.dispatch("auth/getAuthUser");
-      this.username = authUser.username;
-      this.oldContents = this.username + "@mocside:/usr/src$ ";
-      this.contents = this.username + "@mocside:/usr/src$ ";
+    const authUser = await this.$store.dispatch("auth/getAuthUser");
+    this.username = authUser.username;
+    this.oldContents = this.username + "@mocside:/usr/src$ ";
+    this.contents = this.username + "@mocside:/usr/src$ ";
   },
 };
 </script>
