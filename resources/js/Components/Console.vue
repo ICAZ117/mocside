@@ -28,6 +28,7 @@ export default {
       containers: {},
       username: "",
       currLog: "",
+      isPolling: false,
     };
   },
   watch: {
@@ -147,10 +148,10 @@ export default {
         if (!this.isWaiting) {
           this.contents += this.username + "@mocside:/usr/src$ ";
           this.$emit("programFinished");
+        } else if (!this.isPolling){
+          this.checkLogs();
         } else {
-          // wait a second and check againg
-          // to catch slow/lousy container close.
-          this.checkLogs()
+          console.log("Already polling.")
         }
 
         this.oldContents = this.contents;
@@ -159,6 +160,7 @@ export default {
     async checkLogs() {
       var self = this;
       var count = 0;
+      this.isPolling = true;
       setTimeout(async function() {
         const res = await API.apiClient.get(`/containers/logs/${self.containerID}`);
 
@@ -197,6 +199,7 @@ export default {
           // recurse if still active
           if (!self.isWaiting) {
             self.contents += self.username + "@mocside:/usr/src$ ";
+            self.isPolling = false;
             self.$emit("programFinished");
           } else {
             self.checkLogs();

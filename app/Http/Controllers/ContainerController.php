@@ -341,9 +341,6 @@ class ContainerController extends Controller
     // gets all logs from container ID
     public function getLogs($id)
     {
-        $this->withoutMiddleware(
-            ThrottleRequests::class
-        );
         $docker = Docker::create();
         // $id is container_id
 
