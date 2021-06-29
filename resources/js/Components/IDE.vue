@@ -37,7 +37,7 @@
           content-class="modal-content"
           :esc-to-close="true"
         >
-          <Accordion />
+          <Accordion :accordions="accordions" />
           <button class="modal-close" @click="showModal = false">x</button>
         </vue-final-modal>
         <div :style="style">
@@ -227,6 +227,8 @@ export default {
     containerID: "",
     launchConsole: false,
     showModal: false,
+    accordions: [],
+    testCases: [],
   }),
   components: {
     VAceEditor,
@@ -296,6 +298,55 @@ export default {
         payload
       );
       console.log(res3.data);
+
+      const dump = res3.data.dump;
+      var currentTC = 0;
+
+      for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
+        var tc = {
+          userOut: dump[i],
+          profOut: dump[i + 1],
+          compare: dump[i + 2],
+        };
+
+        // IF the code has an error, handle it
+        if (tc.compare === "err") {
+          accordion.isSuccessful = false;
+          accordion.text = JSON.parse(tc.userOut)[0][0];
+        }
+        // ELSE, the code ran successfully. Now check if it was successful or not.
+        else {
+          var accordion = {
+            title: this.testCases.data[currentTC].title,
+            text: "",
+            input: "",
+            userOut: "",
+            profOut: "",
+            differences: "",
+            isSuccessful: "",
+          };
+
+          tc.compare = JSON.parse(tc.compare);
+
+          // IF code passed test case
+          if (tc.compare[0] === "100.0") {
+            accordion.isSuccessful = true;
+            accordion.text = "Test Case Passed :)";
+          }
+          // ELSE, code failed test case
+          else {
+            accordion.isSuccessful = false;
+            accordion.text = "Test Case Failed :(";
+            accordion.userOut = JSON.parse(tc.userOut)[0];
+            accordion.profOut = JSON.parse(tc.profOut)[0];
+          }
+        }
+
+        this.accordions.push(accordion);
+
+        currentTC++;
+      }
+
       //student Output
       //correct Output
       //line with text that says a percentage
@@ -304,7 +355,7 @@ export default {
       //starts next case
     },
   },
-  mounted() {
+  async mounted() {
     // console.log("BEFORE MOUNT");
     try {
       if (this.lang == "Java") {
@@ -320,6 +371,7 @@ export default {
     }
     this.getStyle();
     this.forceReload++;
+    this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
   },
   beforeCreate() {
     // console.log(this.saved_p);
@@ -352,7 +404,7 @@ export default {
   border: 1px solid #e2e8f0;
   border-radius: 0.25rem;
   background: #fff;
-  width: 30%!important;
+  width: 30% !important;
 }
 .modal__title {
   margin: 0 2rem 0 0;

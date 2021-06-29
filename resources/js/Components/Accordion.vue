@@ -17,29 +17,12 @@
 import BaseAccordian from "./BaseAccordion.vue";
 
 export default {
+  props: ["accordions"],
   components: {
     BaseAccordian,
   },
   data() {
-    return {
-      accordions: [
-        {
-          title: "Vue",
-          text: "All about Vue",
-          isSuccessful: "",
-        },
-        {
-          title: "Nuxt",
-          text: "All about Nuxt",
-          isSuccessful: true,
-        },
-        {
-          title: "webpack",
-          text: "All about webpack",
-          isSuccessful: false,
-        },
-      ],
-    };
+    return {};
   },
 };
 </script>
