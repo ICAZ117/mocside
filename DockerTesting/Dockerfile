@@ -1,18 +1,7 @@
-FROM python:3
+FROM python:latest
 
-WORKDIR /usr/src/app
+RUN apt-get update && \
+apt-get install -y --no-install-recommends \
+        openjdk-11-jre
 
-COPY submission.py .
-
-CMD [ "python", "./submission.py" ]
-# pull the base python image
-
-#set working directory
-
-#compile for java
-#any single commands are done under RUN
-#RUN javac main.java
-
-#run executable
-#to implement do CMD
-# CMD ["java", "Main"]
+RUN java --version

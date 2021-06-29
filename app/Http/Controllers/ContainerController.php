@@ -177,8 +177,7 @@ class ContainerController extends Controller
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
-            // get relevant supervisor
-            $supervisor = Storage::disk('local')->get('supervisor.py');
+            
         } else {
             $containerConfig->setImage('java');
             $containerConfig->setCmd(['supervisor.java;', 'java', 'supervisor']);
@@ -189,8 +188,6 @@ class ContainerController extends Controller
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
-            // get relevant supervisor
-            $supervisor = Storage::disk('local')->get('supervisor.java');
         }
         // create host config
         $mountsConfig->setType("bind");
@@ -227,8 +224,10 @@ class ContainerController extends Controller
         }
 
         // copy in supervisor
+        // get relevant supervisor
+        $supervisor = Storage::disk('local')->get('supervisor.py');
         $filePath = Storage::disk('local')
-            ->putFileAs($head, $supervisor, $supervisor->hashName());
+            ->putFileAs($head, $supervisor, 'supervisor.py');
 
         // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);
