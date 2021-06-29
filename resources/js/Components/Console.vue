@@ -128,7 +128,7 @@ export default {
         this.new = res.data.dump;
         
         // send input to currlog
-        this.currLog += this.newInput + "\n";
+        this.currLog += this.newInput;
 
         // Check if the program is still running/waiting on input
         this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
@@ -164,25 +164,32 @@ export default {
         // Get the new output
         self.new = res.data.dump;
 
+        // if new == currLog, nothing new to write
+        var tempLog = self.currLog.split("\n");
+        console.log(tempLog);
         console.log(self.new);
-        console.log(self.currLog);
+        if (!(tempLog == self.new)) {
+          // check is waiting
+          self.isWaiting = !(self.new[self.new.length - 1] === "\u0003è");
+          self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
 
-        // check is waiting
-        self.isWaiting = !(self.new[self.new.length - 1] === "\u0003è");
-        self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
+          for (let i = 0; i < self.new.length - 1; i++) {
+            self.contents += self.new[i] + "\n";
+            self.currLog += self.new[i] + "\n";
+          }
 
-        // for (let i = 0; i < self.new.length - 1; i++) {
-        //   self.contents += self.new[i] + "\n";
-        // }
+          if (!self.hasNewLine) {
+            self.contents += self.new[self.new.length - 1];
+            self.currLog += self.new[self.new.length - 1];
+          }
 
-        if (!self.hasNewLine) {
-          self.contents += self.new[self.new.length - 1];
-        }
-
-        if (!self.isWaiting) {
-          self.contents += self.username + "@mocside:/usr/src$ ";
-          self.$emit("programFinished");
-        } else {
+          if (!self.isWaiting) {
+            self.contents += self.username + "@mocside:/usr/src$ ";
+            self.$emit("programFinished");
+          } else {
+            // self.checkLogs();
+          } 
+        } else if (self.isWaiting) {
           // self.checkLogs();
         }
       }, 1000);
