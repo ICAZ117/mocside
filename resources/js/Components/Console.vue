@@ -27,6 +27,7 @@ export default {
       newInput: "",
       containers: {},
       username: "",
+      currLog: "",
     };
   },
   watch: {
@@ -79,6 +80,7 @@ export default {
       // (this.hasNewLine ? this.new.length - 1 : this.new.length)
       for (let i = 0; i < this.new.length - 1; i++) {
         this.contents += this.new[i] + "\n";
+        this.currLog += this.new[i] + "\n";
       }
 
       if (!this.hasNewLine) {
@@ -129,6 +131,7 @@ export default {
 
         for (let i = 0; i < this.new.length - 1; i++) {
           this.contents += this.new[i] + "\n";
+          this.currLog += this.new[i] + "\n";
         }
 
         if (!this.hasNewLine) {
@@ -155,6 +158,8 @@ export default {
         // Get the new output
         self.new = res.data.dump;
 
+        console.log(self.new);
+
         // check is waiting
         self.isWaiting = !(self.new[self.new.length - 1] === "\u0003è");
         self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
@@ -171,7 +176,7 @@ export default {
           self.contents += self.username + "@mocside:/usr/src$ ";
           self.$emit("programFinished");
         } else {
-          self.checkLogs();
+          // self.checkLogs();
         }
       }, 1000);
     }
