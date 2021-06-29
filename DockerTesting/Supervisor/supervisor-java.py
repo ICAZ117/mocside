@@ -35,7 +35,9 @@ def runJava(nCases):
 	compiled = subprocess.run(['javac', 'Main.java'], capture_output=True, text=True)
 	if(compiled.stderr != ""):
 		# print(compiled.stderr)
-		run_outs.append(compiled.stderr)
+		run_outs.append("".join(compiled.stderr))
+		run_outs.append("")
+		run_outs.append("")
 	else:
 		#loop over the number of test cases
 		for i in range(0, nCases):
