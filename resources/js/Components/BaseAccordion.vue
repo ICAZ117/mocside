@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div :class="bg">
     <div class="accordion" @click="toggleItem">
       <h2 class="title">
         <slot name="title"></slot>
@@ -12,23 +12,32 @@
 </template>
 <script>
 export default {
-  components: {},
-  data: function() {
+  props: ["isSuccessful"],
+  data: function () {
     return {
-      show: false
+      show: false,
+      bg: "wrapper",
     };
   },
+  watch: {
+    isSuccessful: function () {
+      bg +=
+        this.isSuccessful == true
+          ? " success"
+          : this.isSuccessful == false
+          ? " failed"
+          : "";
+    },
+  },
   methods: {
-    toggleItem: function() {
+    toggleItem: function () {
       this.show = !this.show;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
 .wrapper {
-  margin: 0 auto;
-  width: 300px;
   padding: 10px;
 }
 .accordion {
@@ -39,12 +48,12 @@ export default {
 }
 .title {
   margin: 0;
-  color: darkgreen;
+  color: grey;
 }
 .content {
   text-align: left;
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid grey;
   padding: 10px;
 }
 </style>

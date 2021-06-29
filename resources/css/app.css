@@ -832,6 +832,16 @@ thead.gradebook {
     color: darkgrey;
 }
 
+.success { 
+    background-color: rgb(117, 226, 150);
+    color: white;
+}
+
+.failed { 
+    background-color: rgb(243, 134, 134);
+    color: white;
+}
+
 /*========= ADD ASSIGNMENT =========*/
 .assignment-title {
     font-size: 20pt !important;

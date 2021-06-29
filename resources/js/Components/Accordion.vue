@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="accordion in accordions" :key="accordion.title">
-      <BaseAccordian>
+      <BaseAccordian :isSuccessful="accordion.isSuccessful">
         <template v-slot:title>{{ accordion.title }}</template>
 
         <template v-slot:content>
@@ -24,14 +24,17 @@ export default {
         {
           title: "Vue",
           text: "All about Vue",
+          isSuccessful: "",
         },
         {
           title: "Nuxt",
           text: "All about Nuxt",
+          isSuccessful: true,
         },
         {
           title: "webpack",
           text: "All about webpack",
+          isSuccessful: false,
         },
       ],
     };
