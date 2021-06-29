@@ -21,13 +21,13 @@ export default {
   },
   watch: {
     isSuccessful: function () {
+      console.log("here");
       bg +=
         this.isSuccessful == true
           ? " success"
           : this.isSuccessful == false
           ? " failed"
           : "";
-        console.log("here");
     },
   },
   methods: {
