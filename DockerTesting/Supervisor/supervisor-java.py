@@ -15,8 +15,7 @@ def main():
 	nCases = nCases//2
     #student code is submission.java
 	outs = runJava(nCases)
-	for out in outs:
-		print(out)
+	print(outs)
 
 
 def runJava(nCases):

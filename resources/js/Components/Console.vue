@@ -213,6 +213,7 @@ export default {
       const res = API.apiClient.delete(`/containers/${this.containerID}`);
       console.log(res.data);
     }
+    this.$emit('unmount');
   }
 };
 </script>
