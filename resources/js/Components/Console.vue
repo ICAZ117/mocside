@@ -27,6 +27,7 @@ export default {
       newInput: "",
       containers: {},
       username: "",
+      currLog: "",
     };
   },
   watch: {
@@ -63,6 +64,7 @@ export default {
 
       // Get the new input/output
       this.new = res.data.dump;
+      this.currLog = "";
 
       // Check if the program is still running/waiting on input
       this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
@@ -79,10 +81,12 @@ export default {
       // (this.hasNewLine ? this.new.length - 1 : this.new.length)
       for (let i = 0; i < this.new.length - 1; i++) {
         this.contents += this.new[i] + "\n";
+        this.currLog += this.new[i] + "\n";
       }
 
       if (!this.hasNewLine) {
         this.contents += this.new[this.new.length - 1];
+        this.currLog += this.new[this.new.length - 1];
       }
 
       if (!this.isWaiting) {
@@ -129,10 +133,12 @@ export default {
 
         for (let i = 0; i < this.new.length - 1; i++) {
           this.contents += this.new[i] + "\n";
+          this.currLog += this.new[i] + "\n";
         }
 
         if (!this.hasNewLine) {
           this.contents += this.new[this.new.length - 1];
+          this.currLog += this.new[this.new.length - 1];
         }
 
         if (!this.isWaiting) {
@@ -155,13 +161,16 @@ export default {
         // Get the new output
         self.new = res.data.dump;
 
+        console.log(self.new);
+        console.log(self.currLog);
+
         // check is waiting
         self.isWaiting = !(self.new[self.new.length - 1] === "\u0003è");
         self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
 
-        for (let i = 0; i < self.new.length - 1; i++) {
-          self.contents += self.new[i] + "\n";
-        }
+        // for (let i = 0; i < self.new.length - 1; i++) {
+        //   self.contents += self.new[i] + "\n";
+        // }
 
         if (!self.hasNewLine) {
           self.contents += self.new[self.new.length - 1];
@@ -171,7 +180,7 @@ export default {
           self.contents += self.username + "@mocside:/usr/src$ ";
           self.$emit("programFinished");
         } else {
-          self.checkLogs();
+          // self.checkLogs();
         }
       }, 1000);
     }
