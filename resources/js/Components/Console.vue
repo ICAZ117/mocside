@@ -176,7 +176,7 @@ export default {
             self.isWaiting = self.containers.data.data[i] == self.containerID;
           }
 
-          self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
+          self.hasNewLine = self.new[self.new.length - 1] === "";
 
           for (let i = tempLog.length; i < self.new.length - 1; i++) {
             self.contents += self.new[i] + "\n";
