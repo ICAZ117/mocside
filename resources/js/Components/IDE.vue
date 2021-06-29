@@ -341,11 +341,12 @@ export default {
   display: flex;
   flex-direction: column;
   max-height: 90%;
-  margin: 0 1rem;
+  margin: auto;
   padding: 1rem;
   border: 1px solid #e2e8f0;
   border-radius: 0.25rem;
   background: #fff;
+  width: 30%!important;
 }
 .modal__title {
   margin: 0 2rem 0 0;
@@ -367,6 +368,11 @@ export default {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  color: gray;
+  background-color: white;
+  border: 2px solid darkgray;
+  border-radius: 5px;
+
 }
 </style>
 
