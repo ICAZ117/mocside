@@ -25,13 +25,10 @@ import IDE from "./Components/IDE.vue";
 // Tiptap
 import Tiptap from "./Components/Tiptap.vue";
 
-// Modal
-import { Modal } from "vue-neat-modal";
 
 const app = createApp(App);
 app.component("IDE", IDE);
 app.component("Tiptap", Tiptap);
-app.component("Modal", Modal);
 app.use(Tabs);
 app.use(VuelidatePlugin);
 app.use(router);
