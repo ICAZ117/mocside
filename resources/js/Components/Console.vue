@@ -166,7 +166,10 @@ export default {
 
         // if new == currLog, nothing new to write
         var tempLog = self.currLog.split("\n");
-        if (!(self.currLog == self.new.join("\n"))) {
+        var tempNew = self.new.join("\n");
+        if (!(self.currLog == tempNew)) {
+          var newText = tempNew.substring(self.currLog.length);
+          console.log(newText)
           // check is waiting
           self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
 
