@@ -160,6 +160,7 @@ class ContainerController extends Controller
         ]);
         $assignment = Assignment::find($id);
         $test_cases = $assignment->test_cases;
+        $head = 'submissions/' . $user->fsc_id . "/" . $id;
 
         // now, lets create a container instance in the right language over the submission space
         $docker = Docker::create();
@@ -177,21 +178,22 @@ class ContainerController extends Controller
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
-            
+            $supervisor = Storage::disk('local')->path('supervisor-python.py');
         } else {
-            $containerConfig->setImage('java');
-            $containerConfig->setCmd(['supervisor.java;', 'java', 'supervisor']);
-            $containerConfig->setEntrypoint(["javac"]);
+            $containerConfig->setImage('supervisor');
+            $containerConfig->setCmd(['supervisor.py']);
+            $containerConfig->setEntrypoint(["python3"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
+            $supervisor = Storage::disk('local')->path('supervisor-java.py');
         }
         // create host config
         $mountsConfig->setType("bind");
-        $mountsConfig->setSource("/home/max/mocside/storage/app/submissions/1237419/23/");
+        $mountsConfig->setSource("/home/max/mocside/storage/app/" . $head . "/");
         $mountsConfig->setTarget("/usr/src");
         $mountsConfig->setReadOnly(false);
         $hostConfig->setMounts([$mountsConfig]);
@@ -199,7 +201,6 @@ class ContainerController extends Controller
 
 
         // save test cases to file
-        $head = 'submissions/' . $user->fsc_id . "/" . $id;
         for ($i = 0; $i < count($test_cases); $i++) {
             $temp = $test_cases[$i];
             $tc_id = $temp->id;
@@ -224,8 +225,6 @@ class ContainerController extends Controller
         }
 
         // copy in supervisor
-        // get relevant supervisor
-        $supervisor = Storage::disk('local')->get('supervisor.py');
         $filePath = Storage::disk('local')
             ->putFileAs($head, $supervisor, 'supervisor.py');
 
@@ -233,34 +232,11 @@ class ContainerController extends Controller
         $containerCreateResult = $docker->containerCreate($containerConfig);
         $container_id = $containerCreateResult->getId();
 
-
-        /*
-        // I want to test some functionality here where we wait for the
-        // grading to run and then grab the logs afterwards... this may
-        // avoid an issue I forsee where this fucntion is faster than the grader.
-
-        // I'm going to try "reading logs in real time"
-        $out = "";
-        $attachStream = $docker->containerAttach($container_id, [
-            'stream' => true,
-            'stdin' => true,
-            'stdout' => true,
-            'stderr' => true
-        ]);
-
         // start container
         $docker->containerStart($container_id);
 
-        $attachStream->onStdout(function ($stdout) {
-            // $out .= $stdout;                        <- this DOESN'T work, but is my preferred method if the WS works.
-        });
-        $attachStream->onStderr(function ($stderr) {
-            // $out .= $stderr;
-        });
-
-        $attachStream->wait();
-        */
-
+        // wait for grader to finish
+        $docker->containerWait();
 
         // attach container to ws
         $webSocketStream = $docker->containerAttachWebsocket($container_id, [
@@ -270,8 +246,6 @@ class ContainerController extends Controller
             "stderr" => true,
             "stdin" => true,
         ]);
-
-        // no input to write!
 
         // get output
         $line = $webSocketStream->read();
