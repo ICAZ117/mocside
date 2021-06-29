@@ -165,10 +165,9 @@ export default {
         self.new = res.data.dump;
 
         // if new == currLog, nothing new to write
-        var tempLog = self.currLog.split("\n");
-        console.log(tempLog);
-        console.log(self.new);
-        if (!(tempLog == self.new)) {
+        console.log(self.currLog)
+        console.log(self.new.join("\n"))
+        if (!(self.currLog == self.new.join("\n"))) {
           // check is waiting
           self.isWaiting = !(self.new[self.new.length - 1] === "\u0003è");
           self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
