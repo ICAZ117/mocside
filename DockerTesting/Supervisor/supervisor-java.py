@@ -33,13 +33,13 @@ def runJava(nCases):
 	compiled = subprocess.run(['javac', 'Main.java'], capture_output=True, text=True)
 	if(compiled.stderr != ""):
 		# print(compiled.stderr)
-		run_outs += compiled.stderr
+		run_outs.append(compiled.stderr)
 	else:
 		#loop over the number of test cases
 		for i in range(0, nCases):
 			#read the test case's input as a string to be used
 			with open('./test-cases/'+caseNames[i], 'r') as file:
-				data= file.read()
+				data = file.read()
 
 			#run student code with test case input
 			result = subprocess.run(['java', 'Main'], capture_output=True, text=True, timeout=10, input=data)
@@ -47,7 +47,7 @@ def runJava(nCases):
 			#compare students output to test case output
 			model = caseNames[i].split(".")[0]+".out"
 			outs = compare(result, model)
-			run_outs += outs
+			run_outs.append(outs)
 	return run_outs
 
 
@@ -60,22 +60,22 @@ def compare(result, model):
 	compare_outs = []
 	if(result.stderr != ""):
 		# print(result.stderr)
-		compare_outs += result.stderr
+		compare_outs.append(result.stderr)
 	else:
 		# print(result.stdout)
-		compare_outs += result.stdout
+		compare_outs.append(result.stdout)
 		with open('./test-cases/'+model, 'r') as file:
-				data= file.read()
+				data = file.read()
 		# print(data)
-		compare_outs += data
+		compare_outs.append(data)
 
 		s = difflib.SequenceMatcher(isjunk=None, a=result.stdout, b=data)
 		difference = round(s.ratio()*100, 2)
 		# print("percent match: " + str(difference) + "%")
-		compare_outs += "percent match: " + str(difference) + "%"
+		compare_outs.append("percent match: " + str(difference) + "%")
 		for block in s.get_matching_blocks():
 			# print("a[%d] and b[%d] match for %d elements" % block)
-			compare_outs += "a[%d] and b[%d] match for %d elements" % block
+			compare_outs.append("a[%d] and b[%d] match for %d elements" % block)
 			# a[%d] holds the index in a that matches with the index in b
 			# b[%d] holds the index in b that matches with the index in a
 			# %d holds how many elements are matching 
