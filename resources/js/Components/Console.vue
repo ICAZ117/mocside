@@ -64,6 +64,7 @@ export default {
 
       // Get the new input/output
       this.new = res.data.dump;
+      this.currLog = "";
 
       // Check if the program is still running/waiting on input
       this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
@@ -85,6 +86,7 @@ export default {
 
       if (!this.hasNewLine) {
         this.contents += this.new[this.new.length - 1];
+        this.currLog += this.new[this.new.length - 1];
       }
 
       if (!this.isWaiting) {
