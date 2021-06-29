@@ -296,6 +296,12 @@ export default {
         payload
       );
       console.log(res3.data);
+      //student Output
+      //correct Output
+      //line with text that says a percentage
+      //followed n lines of a[0] b[0] for 6 elements
+      //a[last elem] b[last elem] for 0 elements
+      //starts next case
     },
   },
   mounted() {
