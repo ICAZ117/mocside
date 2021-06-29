@@ -76,7 +76,7 @@ def compare(result, model):
 		compare_outs += "percent match: " + str(difference) + "%"
 		for block in s.get_matching_blocks():
 			# print("a[%d] and b[%d] match for %d elements" % block)
-			compare_outs = "a[%d] and b[%d] match for %d elements" % block
+			compare_outs += "a[%d] and b[%d] match for %d elements" % block
 			# a[%d] holds the index in a that matches with the index in b
 			# b[%d] holds the index in b that matches with the index in a
 			# %d holds how many elements are matching 
