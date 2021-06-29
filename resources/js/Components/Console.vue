@@ -187,10 +187,10 @@ export default {
             self.contents += self.username + "@mocside:/usr/src$ ";
             self.$emit("programFinished");
           } else {
-            self.checkLogs();
+            // self.checkLogs();
           } 
         } else if (self.isWaiting) {
-          self.checkLogs();
+          // self.checkLogs();
         }
       }, 1000);
     }
