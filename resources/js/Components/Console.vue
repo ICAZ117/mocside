@@ -169,6 +169,7 @@ export default {
         var tempNew = self.new.join("\n");
         if (!(self.currLog == tempNew)) {
           var newText = tempNew.substring(self.currLog.length);
+          self.new = newText.split("\n");
           console.log(newText)
           // check is waiting
           self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
@@ -181,7 +182,7 @@ export default {
 
           self.hasNewLine = self.new[self.new.length - 1] === "";
 
-          for (let i = tempLog.length; i < self.new.length - 1; i++) {
+          for (let i = 0; i < self.new.length - 1; i++) {
             self.contents += self.new[i] + "\n";
             self.currLog += self.new[i] + "\n";
           }
