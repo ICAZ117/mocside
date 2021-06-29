@@ -128,7 +128,7 @@ export default {
         this.new = res.data.dump;
         
         // send input to currlog
-        this.currLog += this.newInput + "\n";
+        this.currLog += this.newInput;
 
         // Check if the program is still running/waiting on input
         this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
