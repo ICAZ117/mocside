@@ -270,6 +270,8 @@ export default {
       console.log(res2);
 
       //code is saved now need to run and compare it
+      const res3 = await API.apiClient.post(`/containers/grade/${this.problemID}`, payload);
+      console.log(res3.data);
       
     },
   },
