@@ -25,10 +25,13 @@ import IDE from "./Components/IDE.vue";
 // Tiptap
 import Tiptap from "./Components/Tiptap.vue";
 
+// Modal
+import VueFinalModal from "vue-final-modal";
 
 const app = createApp(App);
 app.component("IDE", IDE);
 app.component("Tiptap", Tiptap);
+app.use(VueFinalModal());
 app.use(Tabs);
 app.use(VuelidatePlugin);
 app.use(router);
