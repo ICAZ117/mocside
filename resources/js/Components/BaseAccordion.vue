@@ -52,6 +52,7 @@ export default {
 .wrapper {
   padding: 10px;
   margin-top: 20px !important;
+  background-color: #EFEFEF;
 }
 .accordion {
   display: flex;

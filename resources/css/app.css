@@ -828,12 +828,12 @@ thead.gradebook {
 }
 
 .success {
-    background-color: #ddecdf;
+    background-color: #ddecdf!important;
     color: #71a381;
 }
 
 .failed {
-    background-color: #fcf0ee;
+    background-color: #fcf0ee!important;
     color: #d69c97;
 }
 
