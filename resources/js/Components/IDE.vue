@@ -35,8 +35,15 @@
           v-model="showModal"
           classes="modal-container"
           content-class="modal-content"
+          :max-width="600"
+          :min-width="600"
+          transition="{'enter-active-class': 'transition duration-200 ease-in-out transform','enter-from-class': 'translate-y-full','enter-to-class': 'translate-y-0','leave-active-class': 'transition duration-200 ease-in-out transform','leave-to-class': 'translate-y-full','leave-from-class': 'translate-y-0'}"
+          overlay-transition="{'enter-active-class': 'transition duration-200 ease-in-out transform','enter-from-class': 'translate-y-full','enter-to-class': 'translate-y-0','leave-active-class': 'transition duration-200 ease-in-out transform','leave-to-class': 'translate-y-full','leave-from-class': 'translate-y-0'}"
+          :esc-to-close="true"
+          :min-height="800"
+          :max-height="800"
         >
-          <Accordion/>
+          <Accordion />
           <button class="modal-close" @click="showModal = false">x</button>
         </vue-final-modal>
         <div :style="style">
