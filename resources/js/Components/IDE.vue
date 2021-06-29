@@ -1,8 +1,6 @@
 <template>
   <div class="work-area">
-    <div
-      class="editor row"
-    >
+    <div class="editor row">
       <VAceEditor
         class="editor"
         v-model:value="code"
@@ -15,7 +13,13 @@
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
-        <button @click="runCode()" type="run" name="run" class="run-code col-1 btn btn-success" :disabled="launchConsole">
+        <button
+          @click="runCode()"
+          type="run"
+          name="run"
+          class="run-code col-1 btn btn-success"
+          :disabled="launchConsole"
+        >
           Run
         </button>
         <button
@@ -27,6 +31,17 @@
         >
           Submit
         </button>
+        <vue-final-modal
+          v-model="showModal"
+          classes="modal-container"
+          content-class="modal-content"
+        >
+          <span># Simple modal</span>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          </p>
+          <button class="modal-close" @click="showModal = false">x</button>
+        </vue-final-modal>
         <div :style="style">
           <div style="float: right !important">
             <div class="configure-editor">
@@ -80,9 +95,14 @@
         </div>
       </div>
     </div>
-    
+
     <!-- CONSOLE HERE, V_IF !ShowInput -->
-    <Console :launchConsole="launchConsole" :problemID="problemID" :lang="lang" @programFinished="launchConsole = false" />
+    <Console
+      :launchConsole="launchConsole"
+      :problemID="problemID"
+      :lang="lang"
+      @programFinished="launchConsole = false"
+    />
 
     <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
@@ -197,18 +217,17 @@ export default {
   props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID"],
   emits: ["update"],
   data: () => ({
-      theme: "gob",
-      editorLangauge: "",
-      style: "",
-      IOmessage: "Show Input",
-      showInput: false,
-      code: "",
-      input: "",
-      forceReload: 0,
-      containerID: "",
-      launchConsole: false,
-      isOpen: false,
-      modalWidth: "500px"
+    theme: "gob",
+    editorLangauge: "",
+    style: "",
+    IOmessage: "Show Input",
+    showInput: false,
+    code: "",
+    input: "",
+    forceReload: 0,
+    containerID: "",
+    launchConsole: false,
+    showModal: false,
   }),
   methods: {
     toggleIO() {
@@ -236,13 +255,13 @@ export default {
     async runCode() {
       var payload = {
         code: this.code,
-      }
+      };
       const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
       console.log(res);
 
       payload = {
         lang: this.lang.toLowerCase(),
-      }
+      };
       const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
 
@@ -253,24 +272,26 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
-      // this.isOpen = true;
+      this.showModal = true;
 
       var payload = {
         code: this.code,
-      }
+      };
       const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
       console.log(res);
 
       payload = {
         lang: this.lang.toLowerCase(),
-      }
+      };
       const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
 
       //code is saved now need to run and compare it
-      const res3 = await API.apiClient.post(`/containers/grade/${this.problemID}`, payload);
+      const res3 = await API.apiClient.post(
+        `/containers/grade/${this.problemID}`,
+        payload
+      );
       console.log(res3.data);
-      
     },
   },
   components: {
