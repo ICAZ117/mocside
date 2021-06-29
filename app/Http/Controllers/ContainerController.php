@@ -236,7 +236,7 @@ class ContainerController extends Controller
         $docker->containerStart($container_id);
 
         // wait for grader to finish
-        $docker->containerWait();
+        $docker->containerWait($container_id);
 
         // attach container to ws
         $webSocketStream = $docker->containerAttachWebsocket($container_id, [
