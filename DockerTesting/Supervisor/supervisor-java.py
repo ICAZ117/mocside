@@ -15,8 +15,9 @@ def main():
 	nCases = nCases//2
     #student code is submission.java
 	outs = runJava(nCases)
-	for out in outs:
-		print(out)
+	for case in outs:
+		for out in case:
+			print(out)
 
 
 def runJava(nCases):
@@ -47,7 +48,7 @@ def runJava(nCases):
 
 			#compare students output to test case output
 			model = caseNames[i].split(".")[0]+".out"
-			run_outs = compare(result, model)
+			run_outs.append(compare(result, model))
 	return run_outs
 
 
@@ -79,7 +80,7 @@ def compare(result, model):
 		difference = round(s.ratio()*100, 2)
 		# print("percent match: " + str(difference) + "%")
 		temp = []
-		temp.append("percent match: " + str(difference) + "%")
+		temp.append(str(difference))
 		for block in s.get_matching_blocks():
 			# print("a[%d] and b[%d] match for %d elements" % block)
 			temp.append("a[%d] and b[%d] match for %d elements" % block)
