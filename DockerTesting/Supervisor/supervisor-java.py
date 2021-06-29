@@ -36,7 +36,7 @@ def runJava(nCases):
 	if(compiled.stderr != ""):
 		# print(compiled.stderr)
 		temp = []
-		temp.append("".join(compiled.stderr))
+		temp.append(compiled.stderr)
 		temp.append("")
 		temp.append("")
 		run_outs.append(temp)
