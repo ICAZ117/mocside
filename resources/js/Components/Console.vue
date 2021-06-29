@@ -165,8 +165,12 @@ export default {
         self.new = res.data.dump;
 
         // if new == currLog, nothing new to write
-        var tempLog = self.currLog.split("\n");
-        if (!(self.currLog == self.new.join("\n"))) {
+        var tempNew = self.new.join("\n");
+        if (!(self.currLog == tempNew)) {
+          // find new output
+          var newText = tempNew.substring(self.currLog.length);
+          self.new = newText.split("\n");
+
           // check is waiting
           self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
 
@@ -176,9 +180,10 @@ export default {
             self.isWaiting = self.containers.data.data[i] == self.containerID;
           }
 
+          // display output
           self.hasNewLine = self.new[self.new.length - 1] === "";
 
-          for (let i = tempLog.length; i < self.new.length - 1; i++) {
+          for (let i = 0; i < self.new.length - 1; i++) {
             self.contents += self.new[i] + "\n";
             self.currLog += self.new[i] + "\n";
           }
@@ -188,6 +193,7 @@ export default {
             self.currLog += self.new[self.new.length - 1];
           }
 
+          // recurse if still active
           if (!self.isWaiting) {
             self.contents += self.username + "@mocside:/usr/src$ ";
             self.$emit("programFinished");
