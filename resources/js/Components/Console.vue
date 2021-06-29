@@ -141,26 +141,37 @@ export default {
         } else {
           // wait a second and check againg
           // to catch slow/lousy container close.
-          this.checkLive()
+          this.checkLogs()
         }
 
         this.oldContents = this.contents;
       }
     },
-    async checkLive() {
+    async checkLogs() {
       var self = this;
       setTimeout(async function() {
-        self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
+        const res = await API.apiClient.get(`/containers/logs/${self.containerID}`);
 
-        self.isWaiting = false;
+        // Get the new output
+        self.new = res.data.dump;
 
-        for (let i = 0; i < self.containers.data.data.length && !self.isWaiting; i++) {
-          self.isWaiting = self.containers.data.data[i] == self.containerID;
+        // check is waiting
+        self.isWaiting = !(self.new[self.new.length - 1] === "\u0003è");
+        self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
+
+        for (let i = 0; i < self.new.length - 1; i++) {
+          self.contents += self.new[i] + "\n";
+        }
+
+        if (!self.hasNewLine) {
+          self.contents += self.new[self.new.length - 1];
         }
 
         if (!self.isWaiting) {
           self.contents += self.username + "@mocside:/usr/src$ ";
           self.$emit("programFinished");
+        } else {
+          self.checkLogs();
         }
       }, 1000);
     }
