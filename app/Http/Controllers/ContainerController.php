@@ -36,6 +36,10 @@ class ContainerController extends Controller
         $containerConfig = new ContainersCreatePostBody();
         $hostConfig = new HostConfig();
         $mountsConfig = new Mount();
+
+        // set global timeout
+        $containerConfig->setStopTimeout(300);
+
         if (strcasecmp($validData['lang'], 'python') == 0) {
             $containerConfig->setImage('python');
             $containerConfig->setCmd(['submission.py']);
