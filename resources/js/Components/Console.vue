@@ -165,8 +165,6 @@ export default {
         self.new = res.data.dump;
 
         // if new == currLog, nothing new to write
-        console.log(self.currLog)
-        console.log(self.new.join("\n"))
         if (!(self.currLog == self.new.join("\n"))) {
           // check is waiting
           self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
