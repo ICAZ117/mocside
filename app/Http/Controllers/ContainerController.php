@@ -127,8 +127,6 @@ class ContainerController extends Controller
     */
     public function spinDown($id)
     {
-        // shutdown active container by ID
-        $user = Auth::user();
         // $id is container ID
         $path = "/containers/" . $id . "?force=true";
         $host = '127.0.0.1';

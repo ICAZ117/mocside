@@ -207,6 +207,13 @@ export default {
     this.oldContents = this.username + "@mocside:/usr/src$ ";
     this.contents = this.username + "@mocside:/usr/src$ ";
   },
+  async beforeUnmount() {
+    if (this.isWaiting || this.isPolling) {
+      this.isWaiting = false;
+      const res = API.apiClient.delete(`/containers/${this.containerID}`);
+      console.log(res.data);
+    }
+  }
 };
 </script>
 
