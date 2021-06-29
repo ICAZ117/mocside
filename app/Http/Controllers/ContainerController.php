@@ -338,6 +338,47 @@ class ContainerController extends Controller
         return response()->json(['data' => $ids], 200);
     }
 
+    // gets all logs from container ID
+    public function getLogs($id)
+    {
+        $docker = Docker::create();
+        // $id is container_id
+
+        // HOPEFULLY this won't fail once container is dead.
+        $webSocketStream = $docker->containerAttachWebsocket($id, [
+            "logs" => true,
+            "stream" => true,
+            "stdout" => true,
+            "stderr" => true,
+            "stdin" => true,
+        ]);
+
+        // grab logs
+        $line = $webSocketStream->read(); 
+        $out = "";
+
+        while ($line != null) {
+            $out .= $line;
+            try {
+                $line = $webSocketStream->read();
+                // this is in reference to an error found in the 
+                // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
+                // ... final solution there. This should do nothing, but I'm scared.
+            } catch (ErrorException $e) {
+                echo $e;
+                $line = null;
+            }
+        }
+
+        // clean returns
+        $dump = utf8_encode($out);
+        $returns = explode("\r\n", $dump);
+
+        // broadcast(new InputSent($user, $returns));
+        return response()->json(["message" => "logs retrieved.", "dump" => $returns], 200);
+    }
+
+    /*
     public function spinNoStart(Request $request, $id)
     {
         $user = Auth::user();
@@ -443,6 +484,7 @@ class ContainerController extends Controller
 
         return response()->json(['message' => 'input sent'], 200);
     }
+    */
 
     /*
     * This is the old spinUp function that used
