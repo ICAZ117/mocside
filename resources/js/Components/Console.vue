@@ -190,7 +190,7 @@ export default {
             // self.checkLogs();
           } 
         } else if (self.isWaiting) {
-          // self.checkLogs();
+          self.checkLogs();
         }
       }, 1000);
     }
