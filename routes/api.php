@@ -100,6 +100,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/code/submit/{id}', [StorageController::class, 'createFile']);
 
     Route::get('/containers/{id}', [ContainerController::class, 'checkStatus']);
+    Route::get('/containers/logs/{id}', [ContainerController::class, 'getLogs']);
     Route::post('/containers/send-in/{id}', [ContainerController::class, 'sendIn']);
     Route::post('/containers/spin-up/{id}', [ContainerController::class, 'spinWLib']);
     Route::post('/containers/grade/{id}', [ContainerController::class, 'grade']);
