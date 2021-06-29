@@ -208,6 +208,8 @@ export default {
       forceReload: 0,
       containerID: "",
       launchConsole: false,
+      isOpen: false,
+      modalWidth: "500px"
     };
   },
   methods: {
@@ -253,6 +255,8 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
+      // this.isOpen = true;
+
       var payload = {
         code: this.code,
       }
