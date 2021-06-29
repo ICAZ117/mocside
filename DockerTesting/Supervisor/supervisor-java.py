@@ -65,7 +65,7 @@ def compare(result, model):
 		# print(result.stderr)
 		temp = []
 		temp.append(result.stderr)
-		compare_outs.append(temp)
+		compare_outs.append([temp, "err", "err"])
 	else:
 		# print(result.stdout)
 		temp = []
