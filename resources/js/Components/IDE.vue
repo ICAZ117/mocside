@@ -1,8 +1,6 @@
 <template>
   <div class="work-area">
-    <div
-      class="editor row"
-    >
+    <div class="editor row">
       <VAceEditor
         class="editor"
         v-model:value="code"
@@ -15,7 +13,13 @@
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
-        <button @click="runCode()" type="run" name="run" class="run-code col-1 btn btn-success" :disabled="launchConsole">
+        <button
+          @click="runCode()"
+          type="run"
+          name="run"
+          class="run-code col-1 btn btn-success"
+          :disabled="launchConsole"
+        >
           Run
         </button>
         <button
@@ -27,6 +31,15 @@
         >
           Submit
         </button>
+        <vue-final-modal
+          v-model="showModal"
+          classes="modal-container"
+          content-class="modal-content"
+        >
+          <span># Simple modal</span>
+
+          <button class="modal-close" @click="showModal = false">x</button>
+        </vue-final-modal>
         <div :style="style">
           <div style="float: right !important">
             <div class="configure-editor">
@@ -80,9 +93,14 @@
         </div>
       </div>
     </div>
-    
+
     <!-- CONSOLE HERE, V_IF !ShowInput -->
-    <Console :launchConsole="launchConsole" :problemID="problemID" :lang="lang" @programFinished="launchConsole = false" />
+    <Console
+      :launchConsole="launchConsole"
+      :problemID="problemID"
+      :lang="lang"
+      @programFinished="launchConsole = false"
+    />
 
     <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
@@ -192,24 +210,47 @@ import "ace-builds/src-noconflict/mode-python";
 import * as API from "../services/API";
 import Console from "./Console.vue";
 
+// import VueFaqAccordion from "vue-faq-accordion";
+
 export default {
   name: "IDE",
   props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID"],
   emits: ["update"],
   data: () => ({
-      theme: "gob",
-      editorLangauge: "",
-      style: "",
-      IOmessage: "Show Input",
-      showInput: false,
-      code: "",
-      input: "",
-      forceReload: 0,
-      containerID: "",
-      launchConsole: false,
-      isOpen: false,
-      modalWidth: "500px"
+    theme: "gob",
+    editorLangauge: "",
+    style: "",
+    IOmessage: "Show Input",
+    showInput: false,
+    code: "",
+    input: "",
+    forceReload: 0,
+    containerID: "",
+    launchConsole: false,
+    showModal: false,
+    myItems: [
+      {
+        title: "How many time zones are there in all?",
+        value: "Given a 24-hour day and 360 degrees of longitude around the Earth",
+        category: "Tab-1",
+      },
+      {
+        title: "How long is a day and year on Venus?",
+        value: "Venus takes 224.7 Earth days to complete one orbit around the Sun.",
+        category: "Tab-2",
+      },
+      {
+        title: "What animal smells like popcorn?",
+        value: "Binturongs smell like popcorn.",
+        category: "Tab-2",
+      },
+    ],
   }),
+  components: {
+    VAceEditor,
+    Console,
+    // VueFaqAccordion,
+  },
   methods: {
     toggleIO() {
       this.showInput = !this.showInput;
@@ -236,13 +277,13 @@ export default {
     async runCode() {
       var payload = {
         code: this.code,
-      }
+      };
       const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
       console.log(res);
 
       payload = {
         lang: this.lang.toLowerCase(),
-      }
+      };
       const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
 
@@ -253,29 +294,27 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
-      // this.isOpen = true;
+      this.showModal = true;
 
       var payload = {
         code: this.code,
-      }
+      };
       const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
       console.log(res);
 
       payload = {
         lang: this.lang.toLowerCase(),
-      }
+      };
       const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
       console.log(res2);
 
       //code is saved now need to run and compare it
-      const res3 = await API.apiClient.post(`/containers/grade/${this.problemID}`, payload);
+      const res3 = await API.apiClient.post(
+        `/containers/grade/${this.problemID}`,
+        payload
+      );
       console.log(res3.data);
-      
     },
-  },
-  components: {
-    VAceEditor,
-    Console,
   },
   mounted() {
     // console.log("BEFORE MOUNT");

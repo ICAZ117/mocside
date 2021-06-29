@@ -28,7 +28,7 @@ def runJava(nCases):
 
 	#compile student's java code, if no errors continue
 	#else return the error
-	compiled = subprocess.run(['javac', 'submission.java'], capture_output=True, text=True)
+	compiled = subprocess.run(['javac', 'Main.java'], capture_output=True, text=True)
 	if(compiled.stderr != ""):
 		print(compiled.stderr)
 	else:
@@ -39,7 +39,7 @@ def runJava(nCases):
 				data= file.read()
 
 			#run student code with test case input
-			result = subprocess.run(['java', 'submission'], capture_output=True, text=True, timeout=10, input=data)
+			result = subprocess.run(['java', 'Main'], capture_output=True, text=True, timeout=10, input=data)
 
 			#compare students output to test case output
 			model = caseNames[i].split(".")[0]+".out"
