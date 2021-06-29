@@ -1,9 +1,9 @@
 <template>
   <div :class="bg">
     <div class="accordion" @click="toggleItem">
-      <h2 class="title">
+      <h6 class="title">
         <slot name="title"></slot>
-      </h2>
+      </h6>
     </div>
     <div v-show="show" class="content">
       <slot name="content"></slot>
@@ -21,13 +21,14 @@ export default {
   },
   watch: {
     isSuccessful: function () {
-      console.log("here");
-      this.bg +=
-        this.isSuccessful == true
-          ? " success"
-          : this.isSuccessful == false
-          ? " failed"
-          : "";
+      if (this.isSuccessful === true) {
+        this.bg += " success";
+      } else if (this.isSuccessful === false) {
+        this.bg += " failed";
+      } else {
+        // Do nothing
+        this.bg += "";
+      }
     },
   },
   methods: {
@@ -57,7 +58,6 @@ export default {
 }
 .title {
   margin: 0;
-  color: grey;
 }
 .content {
   text-align: left;
