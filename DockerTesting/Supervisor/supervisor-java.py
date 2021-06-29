@@ -39,7 +39,7 @@ def runJava(nCases):
 		temp.append(compiled.stderr)
 		temp.append("")
 		temp.append("")
-		run_outs.append(temp)
+		run_outs.append([temp])
 	else:
 		#loop over the number of test cases
 		for i in range(0, nCases):
