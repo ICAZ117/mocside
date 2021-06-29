@@ -36,8 +36,7 @@
           classes="modal-container"
           content-class="modal-content"
         >
-          <span># Simple modal</span>
-
+          <Accordion/>
           <button class="modal-close" @click="showModal = false">x</button>
         </vue-final-modal>
         <div :style="style">
@@ -209,8 +208,7 @@ import "ace-builds/src-noconflict/mode-python";
 
 import * as API from "../services/API";
 import Console from "./Console.vue";
-
-// import VueFaqAccordion from "vue-faq-accordion";
+import Accordion from "../Components/Accordion.vue";
 
 export default {
   name: "IDE",
@@ -228,28 +226,11 @@ export default {
     containerID: "",
     launchConsole: false,
     showModal: false,
-    myItems: [
-      {
-        title: "How many time zones are there in all?",
-        value: "Given a 24-hour day and 360 degrees of longitude around the Earth",
-        category: "Tab-1",
-      },
-      {
-        title: "How long is a day and year on Venus?",
-        value: "Venus takes 224.7 Earth days to complete one orbit around the Sun.",
-        category: "Tab-2",
-      },
-      {
-        title: "What animal smells like popcorn?",
-        value: "Binturongs smell like popcorn.",
-        category: "Tab-2",
-      },
-    ],
   }),
   components: {
     VAceEditor,
     Console,
-    // VueFaqAccordion,
+    Accordion,
   },
   methods: {
     toggleIO() {
