@@ -158,6 +158,7 @@ export default {
     },
     async checkLogs() {
       var self = this;
+      var count = 0;
       setTimeout(async function() {
         const res = await API.apiClient.get(`/containers/logs/${self.containerID}`);
 
@@ -201,6 +202,7 @@ export default {
             self.checkLogs();
           } 
         } else if (self.isWaiting) {
+          count++;
           self.checkLogs();
         }
       }, 1000);
