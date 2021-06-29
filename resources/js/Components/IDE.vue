@@ -196,8 +196,7 @@ export default {
   name: "IDE",
   props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID"],
   emits: ["update"],
-  data() {
-    return {
+  data: () => ({
       theme: "gob",
       editorLangauge: "",
       style: "",
@@ -210,8 +209,7 @@ export default {
       launchConsole: false,
       isOpen: false,
       modalWidth: "500px"
-    };
-  },
+  }),
   methods: {
     toggleIO() {
       this.showInput = !this.showInput;

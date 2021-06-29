@@ -14,7 +14,7 @@ def main():
 	nCases = sum(len(files) for _, _, files in os.walk(r'./test-cases'))
 	nCases = nCases//2
     #student code is submission.java
-	runjava(nCases)
+	runJava(nCases)
 
 
 def runJava(nCases):
