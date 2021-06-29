@@ -150,16 +150,13 @@ export default {
           this.$emit("programFinished");
         } else if (!this.isPolling){
           this.checkLogs();
-        } else {
-          console.log("Already polling.")
-        }
+        } 
 
         this.oldContents = this.contents;
       }
     },
     async checkLogs() {
       var self = this;
-      var count = 0;
       this.isPolling = true;
       setTimeout(async function() {
         const res = await API.apiClient.get(`/containers/logs/${self.containerID}`);
@@ -199,7 +196,6 @@ export default {
             self.checkLogs();
           } 
         } else if (self.isWaiting) {
-          count++;
           self.checkLogs();
         }
       }, 1000);
