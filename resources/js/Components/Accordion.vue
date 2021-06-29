@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="accordion in accordions" :key="accordion.title">
-      <div :isSuccessful="accordion.isSuccessful">
+      <div>
         <BaseAccordian :isSuccessful="accordion.isSuccessful">
           <template v-slot:title>{{ accordion.title }}</template>
 

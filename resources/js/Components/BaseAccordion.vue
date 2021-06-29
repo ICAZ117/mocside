@@ -22,7 +22,7 @@ export default {
   watch: {
     isSuccessful: function () {
       console.log("here");
-      bg +=
+      this.bg +=
         this.isSuccessful == true
           ? " success"
           : this.isSuccessful == false
@@ -34,6 +34,14 @@ export default {
     toggleItem: function () {
       this.show = !this.show;
     },
+  },
+  mounted() {
+    this.bg +=
+      this.isSuccessful == true
+        ? " success"
+        : this.isSuccessful == false
+        ? " failed"
+        : "";
   },
 };
 </script>
