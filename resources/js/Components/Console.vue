@@ -159,14 +159,15 @@ export default {
         self.new = res.data.dump;
 
         console.log(self.new);
+        console.log(self.currLog);
 
         // check is waiting
         self.isWaiting = !(self.new[self.new.length - 1] === "\u0003è");
         self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
 
-        for (let i = 0; i < self.new.length - 1; i++) {
-          self.contents += self.new[i] + "\n";
-        }
+        // for (let i = 0; i < self.new.length - 1; i++) {
+        //   self.contents += self.new[i] + "\n";
+        // }
 
         if (!self.hasNewLine) {
           self.contents += self.new[self.new.length - 1];
