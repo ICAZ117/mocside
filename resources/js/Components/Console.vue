@@ -165,14 +165,20 @@ export default {
         self.new = res.data.dump;
 
         // if new == currLog, nothing new to write
-        console.log(self.currLog)
-        console.log(self.new.join("\n"))
+        var tempLog = self.currLog.split("\n");
         if (!(self.currLog == self.new.join("\n"))) {
           // check is waiting
-          self.isWaiting = !(self.new[self.new.length - 1] === "\u0003è");
-          self.hasNewLine = self.new[self.new.length - 1] === "" || !self.isWaiting;
+          self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
 
-          for (let i = 0; i < self.new.length - 1; i++) {
+          self.isWaiting = false;
+
+          for (let i = 0; i < self.containers.data.data.length && !self.isWaiting; i++) {
+            self.isWaiting = self.containers.data.data[i] == self.containerID;
+          }
+
+          self.hasNewLine = self.new[self.new.length - 1] === "";
+
+          for (let i = tempLog.length; i < self.new.length - 1; i++) {
             self.contents += self.new[i] + "\n";
             self.currLog += self.new[i] + "\n";
           }
@@ -186,7 +192,7 @@ export default {
             self.contents += self.username + "@mocside:/usr/src$ ";
             self.$emit("programFinished");
           } else {
-            // self.checkLogs();
+            self.checkLogs();
           } 
         } else if (self.isWaiting) {
           self.checkLogs();
