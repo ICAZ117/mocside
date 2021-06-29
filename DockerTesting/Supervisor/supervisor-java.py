@@ -15,7 +15,8 @@ def main():
 	nCases = nCases//2
     #student code is submission.java
 	outs = runJava(nCases)
-	print(outs)
+	for out in outs:
+		print(out)
 
 
 def runJava(nCases):
@@ -46,8 +47,7 @@ def runJava(nCases):
 
 			#compare students output to test case output
 			model = caseNames[i].split(".")[0]+".out"
-			outs = compare(result, model)
-			run_outs.append(outs)
+			run_outs = compare(result, model)
 	return run_outs
 
 
@@ -60,28 +60,36 @@ def compare(result, model):
 	compare_outs = []
 	if(result.stderr != ""):
 		# print(result.stderr)
-		compare_outs.append(result.stderr)
+		temp = []
+		temp.append(result.stderr)
+		compare_outs.append(temp)
 	else:
 		# print(result.stdout)
-		compare_outs.append(result.stdout)
+		temp = []
+		temp.append(result.stdout)
+		compare_outs.append(temp)
 		with open('./test-cases/'+model, 'r') as file:
 				data = file.read()
 		# print(data)
-		compare_outs.append(data)
+		temp = []
+		temp.append(data)
+		compare_outs.append(temp)
 
 		s = difflib.SequenceMatcher(isjunk=None, a=result.stdout, b=data)
 		difference = round(s.ratio()*100, 2)
 		# print("percent match: " + str(difference) + "%")
-		compare_outs.append("percent match: " + str(difference) + "%")
+		temp = []
+		temp.append("percent match: " + str(difference) + "%")
 		for block in s.get_matching_blocks():
 			# print("a[%d] and b[%d] match for %d elements" % block)
-			compare_outs.append("a[%d] and b[%d] match for %d elements" % block)
+			temp.append("a[%d] and b[%d] match for %d elements" % block)
 			# a[%d] holds the index in a that matches with the index in b
 			# b[%d] holds the index in b that matches with the index in a
 			# %d holds how many elements are matching 
 			#so a[i]..not including i...count %d and all the indexs after that one are incorrect
 			#until you reach the next index that they match ie a[%d]
 			#we skip index 0 and start counting characters at 1
+		compare_outs.append(temp)
 	return compare_outs
 
 
