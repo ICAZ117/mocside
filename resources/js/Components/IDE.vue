@@ -1,32 +1,5 @@
 <template>
   <div class="work-area">
-    <Modal
-    v-model="isOpen"
-    :fullscreen="false"
-    :modal-transition="'scale'"
-    :click-out="true"
-    :disable-motion="false"
-    :max-width="modalWidth"
-    :remove-backdrop="false"
-  >
-    <!-- Optional  -->
-    <template #activator="props">
-      <button v-bind="props">Open</button>
-    </template>
-
-    <div class="card">
-      <h1>Hey nice to see ya ;)</h1>
-
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt non
-        dicta architecto suscipit exercitationem amet iste quae cumque
-        accusantium? Praesentium qui dolor harum quod delectus dolorum, illo
-        ipsum in magnam.
-      </p>
-
-      <button @click="isOpen = false">Close</button>
-    </div>
-  </Modal>
     <div
       class="editor row"
     >
@@ -282,7 +255,7 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
-      this.isOpen = true;
+      // this.isOpen = true;
 
       var payload = {
         code: this.code,
@@ -297,6 +270,8 @@ export default {
       console.log(res2);
 
       //code is saved now need to run and compare it
+      const res3 = await API.apiClient.post(`/containers/grade/${this.problemID}`, payload);
+      console.log(res3.data);
       
     },
   },

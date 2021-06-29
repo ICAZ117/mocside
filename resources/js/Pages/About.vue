@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <textarea contenteditable="true"
     v-model="contents"
     @keyup.enter="enter"
@@ -40,4 +40,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style></style> -->
