@@ -138,6 +138,7 @@ export default {
 
         if (!this.hasNewLine) {
           this.contents += this.new[this.new.length - 1];
+          this.currLog += this.new[this.new.length - 1];
         }
 
         if (!this.isWaiting) {
