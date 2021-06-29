@@ -804,13 +804,8 @@ thead.gradebook {
     align-items: center;
 }
 .modal-content {
-    position: relative;
-    width: 50%;
-    max-height: 300px;
-    padding: 16px;
     overflow: auto;
-    background-color: #fff;
-    border-radius: 4px;
+    padding: 2.5rem 1rem !important;
 }
 .modal-close {
     position: absolute;
@@ -832,14 +827,14 @@ thead.gradebook {
     color: darkgrey;
 }
 
-.success { 
-    background-color: rgb(117, 226, 150);
-    color: white;
+.success {
+    background-color: #ddecdf;
+    color: #71a381;
 }
 
-.failed { 
-    background-color: rgb(243, 134, 134);
-    color: white;
+.failed {
+    background-color: #fcf0ee;
+    color: #d69c97;
 }
 
 /*========= ADD ASSIGNMENT =========*/
