@@ -111,7 +111,9 @@ export default {
       if (!this.isWaiting) {
         this.contents += this.username + "@mocside:/usr/src$ ";
         this.$emit("programFinished");
-      }
+      } else if (!this.isPolling){
+        this.checkLogs();
+      } 
 
       this.oldContents = this.contents;
 
@@ -148,9 +150,7 @@ export default {
         if (!this.isWaiting) {
           this.contents += this.username + "@mocside:/usr/src$ ";
           this.$emit("programFinished");
-        } else if (!this.isPolling){
-          this.checkLogs();
-        } 
+        }
 
         this.oldContents = this.contents;
       }
