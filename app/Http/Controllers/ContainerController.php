@@ -217,7 +217,7 @@ class ContainerController extends Controller
             // save tc/output
             $path = $tc_id . ".out";
             $file = fopen($path, "w");
-            fwrite($file, $temp->input);
+            fwrite($file, $temp->output);
             $filePath = Storage::disk('local')
                 ->putFileAs($head . "/test-cases", new File($path), $path);
             fclose($file);
