@@ -37,7 +37,7 @@
           content-class="modal-content"
         >
           <span># Simple modal</span>
-          <VueFaqAccordion :items="myItems" />
+
           <button class="modal-close" @click="showModal = false">x</button>
         </vue-final-modal>
         <div :style="style">
@@ -210,7 +210,7 @@ import "ace-builds/src-noconflict/mode-python";
 import * as API from "../services/API";
 import Console from "./Console.vue";
 
-import VueFaqAccordion from "vue-faq-accordion";
+// import VueFaqAccordion from "vue-faq-accordion";
 
 export default {
   name: "IDE",
@@ -246,6 +246,11 @@ export default {
       },
     ],
   }),
+  components: {
+    VAceEditor,
+    Console,
+    // VueFaqAccordion,
+  },
   methods: {
     toggleIO() {
       this.showInput = !this.showInput;
@@ -310,11 +315,6 @@ export default {
       );
       console.log(res3.data);
     },
-  },
-  components: {
-    VAceEditor,
-    Console,
-    VueFaqAccordion,
   },
   mounted() {
     // console.log("BEFORE MOUNT");
