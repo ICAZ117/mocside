@@ -167,21 +167,15 @@ export default {
         // Get the new output
         self.new = res.data.dump;
 
+        // check is waiting
+        self.isWaiting = res.data.isRunning;
+
         // if new == currLog, nothing new to write
         var tempNew = self.new.join("\n");
         if (!(self.currLog == tempNew)) {
           // find new output
           var newText = tempNew.substring(self.currLog.length);
           self.new = newText.split("\n");
-
-          // check is waiting
-          self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
-
-          self.isWaiting = false;
-
-          for (let i = 0; i < self.containers.data.data.length && !self.isWaiting; i++) {
-            self.isWaiting = self.containers.data.data[i] == self.containerID;
-          }
 
           // display output
           self.hasNewLine = self.new[self.new.length - 1] === "";

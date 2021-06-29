@@ -374,8 +374,18 @@ class ContainerController extends Controller
         $dump = utf8_encode($out);
         $returns = explode("\r\n", $dump);
 
-        // broadcast(new InputSent($user, $returns));
-        return response()->json(["message" => "logs retrieved.", "dump" => $returns], 200);
+        // check if still running
+        $flag = false;
+        $containers = $docker->containerList();
+
+        foreach ($containers as $container) {
+            if ($container->getId() == $id) {
+                // container is running still
+                $flag = true;
+            }
+        }
+
+        return response()->json(["message" => "logs retrieved.", "dump" => $returns, 'isRunning' => $flag], 200);
     }
 
     /*
