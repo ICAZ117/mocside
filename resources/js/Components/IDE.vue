@@ -368,11 +368,6 @@ export default {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  color: gray;
-  background-color: white;
-  border: 2px solid darkgray;
-  border-radius: 5px;
-
 }
 </style>
 
