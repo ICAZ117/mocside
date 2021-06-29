@@ -14,7 +14,7 @@ def main():
 	nCases = sum(len(files) for _, _, files in os.walk(r'./test-cases'))
 	nCases = nCases//2
     #student code is submission.py
-    runPython(nCases)
+	runPython(nCases)
 
 def runPython(nCases):
 	#get names of each test case

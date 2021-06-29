@@ -212,7 +212,7 @@ class ContainerController extends Controller
             $filePath = Storage::disk('local')
                 ->putFileAs($head . "/test-cases", new File($path), $path);
             fclose($file);
-            unlink($file);
+            unlink($path);
 
             // save tc/output
             $path = $tc_id . ".out";
@@ -221,7 +221,7 @@ class ContainerController extends Controller
             $filePath = Storage::disk('local')
                 ->putFileAs($head . "/test-cases", new File($path), $path);
             fclose($file);
-            unlink($file);
+            unlink($path);
         }
 
         // copy in supervisor
@@ -236,7 +236,7 @@ class ContainerController extends Controller
         $docker->containerStart($container_id);
 
         // wait for grader to finish
-        $docker->containerWait();
+        $docker->containerWait($container_id);
 
         // attach container to ws
         $webSocketStream = $docker->containerAttachWebsocket($container_id, [
