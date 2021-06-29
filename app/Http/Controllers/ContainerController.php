@@ -346,7 +346,7 @@ class ContainerController extends Controller
 
         // HOPEFULLY this won't fail once container is dead.
         $webSocketStream = $docker->containerAttachWebsocket($id, [
-            "logs" => true,
+            "logs" => false,
             "stream" => true,
             "stdout" => true,
             "stderr" => true,
