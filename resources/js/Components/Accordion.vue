@@ -1,13 +1,15 @@
 <template>
   <div>
     <div v-for="accordion in accordions" :key="accordion.title">
-      <BaseAccordian :isSuccessful="accordion.isSuccessful">
-        <template v-slot:title>{{ accordion.title }}</template>
+      <div :isSuccessful="accordion.isSuccessful">
+        <BaseAccordian :isSuccessful="accordion.isSuccessful">
+          <template v-slot:title>{{ accordion.title }}</template>
 
-        <template v-slot:content>
-          <div>{{ accordion.text }}</div>
-        </template>
-      </BaseAccordian>
+          <template v-slot:content>
+            <div>{{ accordion.text }}</div>
+          </template>
+        </BaseAccordian>
+      </div>
     </div>
   </div>
 </template>

@@ -27,6 +27,7 @@ export default {
           : this.isSuccessful == false
           ? " failed"
           : "";
+        console.log("here");
     },
   },
   methods: {
