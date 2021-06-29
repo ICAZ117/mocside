@@ -60,9 +60,12 @@ export default {
 
 <script>
 export default {
-  data: () => ({
+  // data: () => ({
+  //   showModal: false,
+  // }),
+  data: {
     showModal: false,
-  }),
+  },
 };
 </script>
 
