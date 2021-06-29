@@ -37,18 +37,21 @@ export default {
     },
   },
   mounted() {
-    this.bg +=
-      this.isSuccessful == true
-        ? " success"
-        : this.isSuccessful == false
-        ? " failed"
-        : "";
+    if (this.isSuccessful === true) {
+      this.bg += " success";
+    } else if (this.isSuccessful === false) {
+      this.bg += " failed";
+    } else {
+      // Do nothing
+      this.bg += "";
+    }
   },
 };
 </script>
 <style scoped>
 .wrapper {
   padding: 10px;
+  margin-top: 20px !important;
 }
 .accordion {
   display: flex;

@@ -804,13 +804,8 @@ thead.gradebook {
     align-items: center;
 }
 .modal-content {
-    position: relative;
-    width: 50%;
-    max-height: 300px;
-    padding: 16px;
     overflow: auto;
-    background-color: #fff;
-    border-radius: 4px;
+    padding: 2.5rem 1rem !important;
 }
 .modal-close {
     position: absolute;
