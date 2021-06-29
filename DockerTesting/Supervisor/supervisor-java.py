@@ -37,9 +37,7 @@ def runJava(nCases):
 		# print(compiled.stderr)
 		temp = []
 		temp.append(compiled.stderr)
-		temp.append("")
-		temp.append("")
-		run_outs.append([temp])
+		run_outs.append([temp, "", ""])
 	else:
 		#loop over the number of test cases
 		for i in range(0, nCases):
