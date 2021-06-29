@@ -1,5 +1,32 @@
 <template>
   <div class="work-area">
+    <Modal
+    v-model="isOpen"
+    :fullscreen="false"
+    :modal-transition="'scale'"
+    :click-out="true"
+    :disable-motion="false"
+    :max-width="modalWidth"
+    :remove-backdrop="false"
+  >
+    <!-- Optional  -->
+    <template #activator="props">
+      <button v-bind="props">Open</button>
+    </template>
+
+    <div class="card">
+      <h1>Hey nice to see ya ;)</h1>
+
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt non
+        dicta architecto suscipit exercitationem amet iste quae cumque
+        accusantium? Praesentium qui dolor harum quod delectus dolorum, illo
+        ipsum in magnam.
+      </p>
+
+      <button @click="isOpen = false">Close</button>
+    </div>
+  </Modal>
     <div
       class="editor row"
     >
@@ -208,6 +235,8 @@ export default {
       forceReload: 0,
       containerID: "",
       launchConsole: false,
+      isOpen: false,
+      modalWidth: "500px"
     };
   },
   methods: {
@@ -253,6 +282,8 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
+      this.isOpen = true;
+
       var payload = {
         code: this.code,
       }

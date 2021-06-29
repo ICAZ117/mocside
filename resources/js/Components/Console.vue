@@ -57,7 +57,7 @@ export default {
         `/containers/spin-up/${this.problemID}`,
         payload
       );
-
+      
       // Get the docker container ID
       this.containerID = res.data.message;
 
@@ -92,7 +92,6 @@ export default {
 
       this.oldContents = this.contents;
     },
-
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length);
 
@@ -139,28 +138,38 @@ export default {
         if (!this.isWaiting) {
           this.contents += this.username + "@mocside:/usr/src$ ";
           this.$emit("programFinished");
+        } else {
+          // wait a second and check againg
+          // to catch slow/lousy container close.
+          this.checkLive()
         }
 
         this.oldContents = this.contents;
-
-        this.isWaiting = false;
-
-        for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
-          this.isWaiting = this.containers.data.data[i] == this.containerID;
-        }
-
-        if (!this.isWaiting) {
-          this.contents += this.username + "@mocside:/usr/src$ ";
-          this.$emit("programFinished");
-        }
       }
     },
+    async checkLive() {
+      var self = this;
+      setTimeout(async function() {
+        self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
+
+        self.isWaiting = false;
+
+        for (let i = 0; i < self.containers.data.data.length && !self.isWaiting; i++) {
+          self.isWaiting = self.containers.data.data[i] == self.containerID;
+        }
+
+        if (!self.isWaiting) {
+          self.contents += self.username + "@mocside:/usr/src$ ";
+          self.$emit("programFinished");
+        }
+      }, 1000);
+    }
   },
   async beforeMount() {
-      const authUser = await this.$store.dispatch("auth/getAuthUser");
-      this.username = authUser.username;
-      this.oldContents = this.username + "@mocside:/usr/src$ ",
-      this.contents = this.username + "@mocside:/usr/src$ ",
+    const authUser = await this.$store.dispatch("auth/getAuthUser");
+    this.username = authUser.username;
+    this.oldContents = this.username + "@mocside:/usr/src$ ";
+    this.contents = this.username + "@mocside:/usr/src$ ";
   },
 };
 </script>
