@@ -837,6 +837,11 @@ thead.gradebook {
     color: #d69c97;
 }
 
+.info {
+    background-color: #D4D3D3!important;
+    color: #8F8C8D;
+}
+
 /*========= ADD ASSIGNMENT =========*/
 .assignment-title {
     font-size: 20pt !important;

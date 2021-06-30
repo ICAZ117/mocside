@@ -313,7 +313,7 @@ export default {
           userOut: dump[i],
           profOut: dump[i + 1],
           compare: dump[i + 2],
-          display: dump[i + 3]
+          differences: dump[i + 3]
         };
 
         console.log("\n\nTC BEFORE:");
@@ -323,13 +323,16 @@ export default {
         if (tc.compare == '"err"') {
           console.log("\n\tCODE ERROR");
           this.accordions[currentTC].isSuccessful = false;
+          this.accordions[currentTC].hasError = true,
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
         }
         // ELSE, the code ran successfully. Now check if it was successful or not.
         else {
           console.log("\n\tCODE RAN SUCCESSFULLY");
           tc.compare = JSON.parse(tc.compare);
-          tc.display = JSON.parse(tc.display);
+          tc.differences = JSON.parse(tc.differences);
+
+          this.accordions[currentTC].differences = tc.differences;
 
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
@@ -376,6 +379,7 @@ export default {
           profOut: "",
           differences: "",
           isSuccessful: "running",
+          hasError: false,
         };
         this.accordions.push(accordion);
       }

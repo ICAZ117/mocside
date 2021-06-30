@@ -58,7 +58,7 @@ export default {
 <style scoped>
 .wrapper {
   padding: 10px;
-  margin-top: 20px !important;
+  margin: 20px 0px!important;
   background-color: #efefef;
 }
 .accordion {
