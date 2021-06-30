@@ -838,8 +838,12 @@ thead.gradebook {
 }
 
 .info {
-    background-color: #D4D3D3!important;
-    color: #8F8C8D;
+    background-color: #d6d6d6!important;
+    color: #616161;
+}
+
+.details {
+    background-color: #efefef;
 }
 
 /*========= ADD ASSIGNMENT =========*/

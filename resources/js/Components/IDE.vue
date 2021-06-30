@@ -384,7 +384,7 @@ export default {
               // it should be saved in mismatch. Furthermore, we should also append HTML strikethrough
               // tags to display to the user that this output should be removed.
               mismatch =
-                "<strike>" + tc.userOut.substr(lastUser, currentUser) + "</strike>";
+                "<strike>" + tc.userOut.substring(lastUser, currentUser) + "</strike>";
 
               console.log("\nPre-variation Mismatch: " + mismatch);
 
@@ -392,7 +392,7 @@ export default {
               // must save the number of characters by which the length of the mismatch in the professor's
               // output exceeds that of the student's.
               mismatchVariation =
-                tc.profOut.substr(lastProf, currentProf).length - mismatch.length;
+                tc.profOut.substring(lastProf, currentProf).length - (mismatch.length - 17);
 
               console.log("\nMismatch variation: " + mismatchVariation);
 
@@ -421,7 +421,7 @@ export default {
               // Next, we must obtain the "match" substring from the user output. This substring should
               // be from the currentUser pointer to index currentUser + matchLength, and should be saved
               // in match
-              match = tc.userOut.substr(currentUser, currentUser + matchLength);
+              match = tc.userOut.substring(currentUser, currentUser + matchLength);
 
               console.log("\nMatch: " + match);
 

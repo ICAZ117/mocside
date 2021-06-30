@@ -7,7 +7,7 @@
 
           <template v-slot:content>
             <!-- IF the code FAILED the test case, and does NOT have an error, print extensive output -->
-            <div v-if="!accordion.isSuccessful && !accordion.hasError" class="wrapper">
+            <div v-if="!accordion.isSuccessful && !accordion.hasError" class="details">
               <div>{{ accordion.text }}</div>
               <br />
 
