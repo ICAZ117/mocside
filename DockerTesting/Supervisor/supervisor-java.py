@@ -96,7 +96,7 @@ def compare(result, model):
 			#so a[i]..not including i...count %d and all the indexs after that one are incorrect
 			#until you reach the next index that they match ie a[%d]
 			#we skip index 0 and start counting characters at 1
-		# compare_outs.append(temp)
+		compare_outs.append(temp)
 		compare_outs.append(table)
 	return compare_outs
 
