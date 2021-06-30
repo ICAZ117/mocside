@@ -56,8 +56,8 @@ Todo:
 
 * Course Page
 	* Style Course Page
-	* add the professor version of the page, ie. the add, delete, publish buttons for courses
 	* perhaps make another middle page for professors to go to before labs, which shows the course details, and overview as well as student overview
+	* Add Sorting Button
 
 * Lab Page
 	* Style Lab Page
@@ -65,25 +65,27 @@ Todo:
 	* Add the Professor version of this page, ie. the add, delete, publish buttons for labs
 	* complete dynamic labs info
 	* confirm delete message
+	* Add Sorting Button
 
 * Problems Page
 	* Style Problems Page
-	* add button in top left to return to courses page
+	* add button in top left to return to labs page
 	* add the professor version of this page, ie. the add, delete, publish buttons for labs
 	* complete dynamic problems info
 	* confirm delete message
 	* on template and model solution add the save status functionality/or remove it
+	* Add Sorting Button
 
 * Workspace Page
-	* Style Workspace Page
-	* Get Codemirror working properly
-	* add button in top left to return to courses page
+	* add button in top left to return to problems page
 
 * Edit/Add Course
 	* styling
+	* confirm delete message
 
 * Edit/Add Lab
 	* styling
+	* confirm delete message
 
 * Edit/Add Problem
 	*styling
@@ -91,4 +93,10 @@ Todo:
 	* do not allow unadding problem from the only course it is in, must delete problem from the overview tab
 
 * Docker
-	* get started
+	* Finish up returning grade results to front end
+
+* Fix Url when switching from a child back to home or courses through nav bar
+* enable url to take me to a child route, instead of redirecting....perhaps give 404 when not found
+* upon returning from workspace make way for switching languages
+* fix carousel
+* Add profile Page

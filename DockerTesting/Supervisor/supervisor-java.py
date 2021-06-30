@@ -82,7 +82,7 @@ def compare(result, model):
 		compare_outs.append(temp)
 
 		s = difflib.SequenceMatcher(isjunk=None, a=result.stdout, b=data)
-		table = difflib.HtmlDiff().make_table(model, result.stdout, 'Expected output', 'Your output')
+		table = difflib.HtmlDiff().make_table(data, result.stdout, 'Expected output', 'Your output')
 		difference = round(s.ratio()*100, 2)
 		# print("percent match: " + str(difference) + "%")
 		temp = []
