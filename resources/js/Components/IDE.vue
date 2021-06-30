@@ -319,7 +319,8 @@ export default {
         console.log("\n\nTC BEFORE:");
         console.log(tc);
 
-        if (tc.compare == 'compilationError') {
+        if (tc.compare == '"compilationError"') {
+          console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Compilation Error");
           this.accordions = [
             {
               title: "Compilation Error",
