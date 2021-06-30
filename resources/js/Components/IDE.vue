@@ -370,7 +370,7 @@ export default {
           userOut: "",
           profOut: "",
           differences: "",
-          isSuccessful: "",
+          isSuccessful: "running",
         };
         this.accordions.push(accordion);
       }
