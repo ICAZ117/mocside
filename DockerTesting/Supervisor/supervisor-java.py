@@ -1,5 +1,5 @@
 import subprocess
-import sys
+# import sys
 import os
 import difflib
 from json import dumps
