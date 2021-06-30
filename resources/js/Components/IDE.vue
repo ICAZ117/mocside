@@ -359,7 +359,9 @@ export default {
       //a[last elem] b[last elem] for 0 elements
       //starts next case
     },
-     initAccordion() {
+    initAccordion() {
+      this.accordions = [];
+
       for (let i = 0; i < this.testCases.data.length; i++) {
         var accordion = {
           title: this.testCases.data[i].title,
@@ -375,11 +377,11 @@ export default {
     },
   },
   watch: {
-    showModal: function() {
+    showModal: function () {
       if (!this.showModal) {
         this.initAccordion();
       }
-    }
+    },
   },
   async mounted() {
     // console.log("BEFORE MOUNT");
