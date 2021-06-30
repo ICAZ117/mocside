@@ -2,6 +2,7 @@ import subprocess
 import sys
 import os
 import difflib
+from json import dumps
 
 def main():
 
@@ -17,7 +18,7 @@ def main():
 	outs = runJava(nCases)
 	for case in outs:
 		for out in case:
-			print(out)
+			print(dumps(out))
 
 
 def runJava(nCases):
