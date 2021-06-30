@@ -47,7 +47,7 @@ export default {
       pID: "",
       codeID: "",
       forceReload: 0,
-      childIsOpen = false,
+      childIsOpen: false,
     };
   },
   methods: {
