@@ -358,7 +358,7 @@ export default {
         console.log("\n\n\n\n\n\n\n---------------------------- RIGHT BEFORE PUSH");
         console.log(accordion);
 
-        this.accordions.push(accordion);
+        await this.accordions.push(accordion);
 
         console.log("\n\n\tACCORDIONS:");
         console.log(this.accordions);
