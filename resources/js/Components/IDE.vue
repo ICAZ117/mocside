@@ -374,6 +374,13 @@ export default {
       }
     },
   },
+  watch: {
+    showModal: function() {
+      if (!this.showModal) {
+        this.initAccordion();
+      }
+    }
+  },
   async mounted() {
     // console.log("BEFORE MOUNT");
     try {
@@ -392,7 +399,7 @@ export default {
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
 
-    initAccordion();
+    this.initAccordion();
 
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     console.log(this.accordions);
