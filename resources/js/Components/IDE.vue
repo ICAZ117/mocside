@@ -321,10 +321,11 @@ export default {
 
         if (tc.compare == '"compilationError"') {
           console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Compilation Error");
+          console.log(JSON.parse(tc.userOut)[0],);
           this.accordions = [
             {
               title: "Compilation Error",
-              text: JSON.parse(tc.userOut)[0][0],
+              text: JSON.parse(tc.userOut)[0],
               input: this.testCases.data[i].input,
               userOut: "",
               profOut: "",
