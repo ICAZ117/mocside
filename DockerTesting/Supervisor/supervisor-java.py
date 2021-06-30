@@ -1,7 +1,8 @@
 import subprocess
-import sys
+# import sys
 import os
 import difflib
+from json import dumps
 
 def main():
 
@@ -14,10 +15,14 @@ def main():
 	nCases = sum(len(files) for _, _, files in os.walk(r'./test-cases'))
 	nCases = nCases//2
     #student code is submission.java
-	runJava(nCases)
+	outs = runJava(nCases)
+	for case in outs:
+		for out in case:
+			print(dumps(out))
 
 
 def runJava(nCases):
+	run_outs = []
 	#get names of each test case
 	caseNames = [] #includes the .in at the end of each file name
 	for _, _, filenames in os.walk(r'./test-cases'):
@@ -30,20 +35,24 @@ def runJava(nCases):
 	#else return the error
 	compiled = subprocess.run(['javac', 'Main.java'], capture_output=True, text=True)
 	if(compiled.stderr != ""):
-		print(compiled.stderr)
+		# print(compiled.stderr)
+		temp = []
+		temp.append(compiled.stderr)
+		run_outs.append([temp, "err", "err"])
 	else:
 		#loop over the number of test cases
 		for i in range(0, nCases):
 			#read the test case's input as a string to be used
 			with open('./test-cases/'+caseNames[i], 'r') as file:
-				data= file.read()
+				data = file.read()
 
 			#run student code with test case input
 			result = subprocess.run(['java', 'Main'], capture_output=True, text=True, timeout=10, input=data)
 
 			#compare students output to test case output
 			model = caseNames[i].split(".")[0]+".out"
-			compare(result, model)
+			run_outs.append(compare(result, model))
+	return run_outs
 
 
 def compare(result, model):
@@ -52,25 +61,42 @@ def compare(result, model):
 	#check stderr
 	#check_returnCode
 	#time currently auto stops supervisor and prints
+	compare_outs = []
 	if(result.stderr != ""):
-		print(result.stderr)
+		# print(result.stderr)
+		temp = []
+		temp.append(result.stderr)
+		compare_outs.append([temp])
+		compare_outs.append("err")
+		compare_outs.append("err")
 	else:
-		print(result.stdout)
+		# print(result.stdout)
+		temp = []
+		temp.append(result.stdout)
+		compare_outs.append(temp)
 		with open('./test-cases/'+model, 'r') as file:
-				data= file.read()
-		print(data)
+				data = file.read()
+		# print(data)
+		temp = []
+		temp.append(data)
+		compare_outs.append(temp)
 
 		s = difflib.SequenceMatcher(isjunk=None, a=result.stdout, b=data)
 		difference = round(s.ratio()*100, 2)
-		print("percent match: " + str(difference) + "%")
+		# print("percent match: " + str(difference) + "%")
+		temp = []
+		temp.append(str(difference))
 		for block in s.get_matching_blocks():
-			print("a[%d] and b[%d] match for %d elements" % block)
+			# print("a[%d] and b[%d] match for %d elements" % block)
+			temp.append("a[%d] and b[%d] match for %d elements" % block)
 			# a[%d] holds the index in a that matches with the index in b
 			# b[%d] holds the index in b that matches with the index in a
 			# %d holds how many elements are matching 
 			#so a[i]..not including i...count %d and all the indexs after that one are incorrect
 			#until you reach the next index that they match ie a[%d]
 			#we skip index 0 and start counting characters at 1
+		compare_outs.append(temp)
+	return compare_outs
 
 
 

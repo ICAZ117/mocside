@@ -21,13 +21,20 @@ export default {
   },
   watch: {
     isSuccessful: function () {
-      if (this.isSuccessful === true) {
-        this.bg += " success";
-      } else if (this.isSuccessful === false) {
-        this.bg += " failed";
-      } else {
-        // Do nothing
+      // tc running
+      if (this.isSuccessful === "running") {
+        // Grey bg
         this.bg += "";
+      } 
+      // tc passed
+      else if (this.isSuccessful === true) {
+        // Green bg
+        this.bg += " success";
+      } 
+      // tc failed
+      else if (this.isSuccessful === false) {
+        // Red bg
+        this.bg += " failed";
       }
     },
   },
@@ -52,7 +59,7 @@ export default {
 .wrapper {
   padding: 10px;
   margin-top: 20px !important;
-  background-color: #EFEFEF;
+  background-color: #efefef;
 }
 .accordion {
   display: flex;

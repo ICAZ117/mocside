@@ -93,7 +93,9 @@ export default {
       if (!this.isWaiting) {
         this.contents += this.username + "@mocside:/usr/src$ ";
         this.$emit("programFinished");
-      }
+      } else if (!this.isPolling){
+        this.checkLogs();
+      } 
 
       this.oldContents = this.contents;
     },
@@ -148,10 +150,6 @@ export default {
         if (!this.isWaiting) {
           this.contents += this.username + "@mocside:/usr/src$ ";
           this.$emit("programFinished");
-        } else if (!this.isPolling){
-          this.checkLogs();
-        } else {
-          console.log("Already polling.")
         }
 
         this.oldContents = this.contents;
@@ -159,7 +157,6 @@ export default {
     },
     async checkLogs() {
       var self = this;
-      var count = 0;
       this.isPolling = true;
       setTimeout(async function() {
         const res = await API.apiClient.get(`/containers/logs/${self.containerID}`);
@@ -167,21 +164,15 @@ export default {
         // Get the new output
         self.new = res.data.dump;
 
+        // check is waiting
+        self.isWaiting = res.data.isRunning;
+
         // if new == currLog, nothing new to write
         var tempNew = self.new.join("\n");
         if (!(self.currLog == tempNew)) {
           // find new output
           var newText = tempNew.substring(self.currLog.length);
           self.new = newText.split("\n");
-
-          // check is waiting
-          self.containers = await API.apiClient.get(`/containers/${self.containerID}`);
-
-          self.isWaiting = false;
-
-          for (let i = 0; i < self.containers.data.data.length && !self.isWaiting; i++) {
-            self.isWaiting = self.containers.data.data[i] == self.containerID;
-          }
 
           // display output
           self.hasNewLine = self.new[self.new.length - 1] === "";
@@ -205,7 +196,6 @@ export default {
             self.checkLogs();
           } 
         } else if (self.isWaiting) {
-          count++;
           self.checkLogs();
         }
       }, 1000);
@@ -217,6 +207,14 @@ export default {
     this.oldContents = this.username + "@mocside:/usr/src$ ";
     this.contents = this.username + "@mocside:/usr/src$ ";
   },
+  async beforeUnmount() {
+    if (this.isWaiting || this.isPolling) {
+      this.isWaiting = false;
+      const res = API.apiClient.delete(`/containers/${this.containerID}`);
+      console.log(res.data);
+    }
+    this.$emit('unmount');
+  }
 };
 </script>
 

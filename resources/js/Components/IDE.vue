@@ -37,7 +37,7 @@
           content-class="modal-content"
           :esc-to-close="true"
         >
-          <Accordion />
+          <Accordion :accordions="accordions" />
           <button class="modal-close" @click="showModal = false">x</button>
         </vue-final-modal>
         <div :style="style">
@@ -227,6 +227,8 @@ export default {
     containerID: "",
     launchConsole: false,
     showModal: false,
+    accordions: [],
+    testCases: [],
   }),
   components: {
     VAceEditor,
@@ -296,6 +298,60 @@ export default {
         payload
       );
       console.log(res3.data);
+
+      console.log("\n\n\n------------ DATA DUMP:");
+      const dump = res3.data.dump;
+
+      console.log(dump);
+
+      var currentTC = 0;
+
+      for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
+        console.log("\n\n\t------------- Current TC:" + currentTC);
+
+        var tc = {
+          userOut: dump[i],
+          profOut: dump[i + 1],
+          compare: dump[i + 2],
+        };
+
+        console.log("\n\nTC:");
+        console.log(tc);
+
+        // IF the code has an error, handle it
+        if (tc.compare == '"err"') {
+          console.log("\n\tCODE ERROR");
+          this.accordions[currentTC].isSuccessful = false;
+          this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
+        }
+        // ELSE, the code ran successfully. Now check if it was successful or not.
+        else {
+          console.log("\n\tCODE RAN SUCCESSFULLY");
+          tc.compare = JSON.parse(tc.compare);
+
+          // IF code passed test case
+          if (tc.compare[0] == "100.0") {
+            console.log("\n\tTEST CASE PASSED");
+            this.accordions[currentTC].isSuccessful = true;
+            this.accordions[currentTC].text = "Test Case Passed :)";
+          }
+          // ELSE, code failed test case
+          else {
+            console.log("\n\tTEST CASE FAILED");
+            this.accordions[currentTC].isSuccessful = false;
+            this.accordions[currentTC].text = "Test Case Failed :(";
+            this.accordions[currentTC].userOut = JSON.parse(tc.userOut)[0];
+            this.accordions[currentTC].profOut = JSON.parse(tc.profOut)[0];
+          }
+        }
+
+        console.log("\n\n\tACCORDIONS:");
+        console.log(this.accordions);
+        console.log("\n\n");
+
+        currentTC++;
+      }
+
       //student Output
       //correct Output
       //line with text that says a percentage
@@ -303,8 +359,31 @@ export default {
       //a[last elem] b[last elem] for 0 elements
       //starts next case
     },
+    initAccordion() {
+      this.accordions = [];
+
+      for (let i = 0; i < this.testCases.data.length; i++) {
+        var accordion = {
+          title: this.testCases.data[i].title,
+          text: "Running against test case...",
+          input: "",
+          userOut: "",
+          profOut: "",
+          differences: "",
+          isSuccessful: "running",
+        };
+        this.accordions.push(accordion);
+      }
+    },
   },
-  mounted() {
+  watch: {
+    showModal: function () {
+      if (!this.showModal) {
+        this.initAccordion();
+      }
+    },
+  },
+  async mounted() {
     // console.log("BEFORE MOUNT");
     try {
       if (this.lang == "Java") {
@@ -320,6 +399,13 @@ export default {
     }
     this.getStyle();
     this.forceReload++;
+    this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
+
+    this.initAccordion();
+
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    console.log(this.accordions);
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
   },
   beforeCreate() {
     // console.log(this.saved_p);
@@ -352,7 +438,7 @@ export default {
   border: 1px solid #e2e8f0;
   border-radius: 0.25rem;
   background: #fff;
-  width: 30%!important;
+  width: 30% !important;
 }
 .modal__title {
   margin: 0 2rem 0 0;
