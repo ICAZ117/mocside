@@ -319,7 +319,7 @@ export default {
         console.log(tc);
 
         // IF the code has an error, handle it
-        if (tc.compare === "err") {
+        if (tc.compare == "\"err\"") {
           console.log("\n\tCODE ERROR");
           accordion.isSuccessful = false;
           accordion.text = JSON.parse(tc.userOut)[0][0];
