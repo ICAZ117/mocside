@@ -374,7 +374,7 @@ export default {
         var accordion = {
           title: this.testCases.data[i].title,
           text: "Running against test case...",
-          input: "",
+          input: this.testCases.data[i].input,
           userOut: "",
           profOut: "",
           differences: "",
