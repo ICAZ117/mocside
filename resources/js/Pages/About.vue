@@ -43,29 +43,18 @@ export default {
 <style></style> -->
 
 <template>
-  <div>
-    <h1>Accordion</h1>
-    <Accordion/>
-  </div>
+  
 </template>
 
 <script>
-import Accordion from "../Components/Accordion.vue";
-
 export default {
-  components: {
-    Accordion
-  }
-};
+  mounted() {
+    console.log(JSON.parse("['Hello']"));
+    console.log(JSON.parse('["Hello"]'));
+  },
+}
 </script>
 
-<style scoped>
-* {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style>
+
 </style>
