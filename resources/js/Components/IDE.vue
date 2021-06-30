@@ -306,14 +306,13 @@ export default {
 
       var currentTC = 0;
 
-      for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
+      for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
         console.log("\n\n\t------------- Current TC:" + currentTC);
 
         var tc = {
           userOut: dump[i],
           profOut: dump[i + 1],
           compare: dump[i + 2],
-          differences: dump[i + 3],
         };
 
         console.log("\n\nTC BEFORE:");
@@ -321,7 +320,7 @@ export default {
 
         if (tc.compare == '"compilationError"') {
           console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Compilation Error");
-          console.log(JSON.parse(tc.userOut)[0],);
+          console.log(JSON.parse(tc.userOut)[0]);
           this.accordions = [
             {
               title: "Compilation Error",
@@ -347,9 +346,6 @@ export default {
         else {
           console.log("\n\tCODE RAN SUCCESSFULLY");
           tc.compare = JSON.parse(tc.compare);
-          tc.differences = JSON.parse(tc.differences);
-
-          this.accordions[currentTC].differences = tc.differences;
 
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
@@ -362,8 +358,93 @@ export default {
             console.log("\n\tTEST CASE FAILED");
             this.accordions[currentTC].isSuccessful = false;
             this.accordions[currentTC].text = "Test Case Failed :(";
-            this.accordions[currentTC].userOut = JSON.parse(tc.userOut)[0];
-            this.accordions[currentTC].profOut = JSON.parse(tc.profOut)[0];
+
+            tc.userOut = JSON.parse(tc.userOut)[0];
+            tc.profOut = JSON.parse(tc.profOut)[0];
+
+            this.accordions[currentTC].profOut = tc.profOut;
+            this.accordions[currentTC].userOut = tc.userOut;
+
+            var diff = "<p>";
+            var currentUser = 0;
+            var currentProf = 0;
+            var matchLength = 0;
+            var lastUser = 0;
+            var lastProf = 0;
+            var mismatch = "";
+            var mismatchVariation = 0;
+            var match = "";
+
+            // Loop over ALL comparison strings
+            for (let j = 1; j < tc.compare.length - 1; j++) {
+              // Each comparison string contains three numbers, seperated by commas
+              // So, we first split the string on a comma...
+              var arr = tc.compare[j].split(",");
+
+              // and then cast the strings to numbers, and save them into the appropriate variables
+              currentUser = Number(arr[0]);
+              currentProf = Number(arr[1]);
+              matchLength = Number(arr[2]);
+
+              // Now that we have those values saved, we need to get a substring of the user output.
+              // The substring should be from the lastUser pointer to the currentUser pointer, and
+              // it should be saved in mismatch. Furthermore, we should also append HTML strikethrough
+              // tags to display to the user that this output should be removed.
+              mismatch =
+                "<strike>" + tc.userOut.substr(lastUser, currentUser) + "</strike>";
+
+              // We must also check to see if the professor's output has any mismatches. If it does, we
+              // must save the number of characters by which the length of the mismatch in the professor's
+              // output exceeds that of the student's.
+              mismatchVariation =
+                tc.profOut.substr(lastProf, currentProf).length - mismatch.length;
+
+              // In the event that the mismatchVariation is a positive number, we must append
+              // mismatchVariation number of spaces to mismatch. To acomplish this, we do a for-loop that
+              // iterates mismatchVariation number of times, and append a single space to mismatch each
+              // iteration of said for-loop. Prior to doing so, we must append an opening HTML underline
+              // tag to diff. We must also append a closing underline tag upon completion of the for-loop.
+              // This is to display to the user that they are missing something here.
+              mismatch += "<u>";
+
+              for (let k = 0; k < mismatchVariation; k++) {
+                mismatch += " ";
+              }
+
+              mismatch += "</u>";
+
+              // IF the mismatch string is NOT empty, concatenate it to diff
+              if (mismatch != "<strike></strike><u></u>") {
+                diff += "<u>" + mismatch + "</u>";
+              }
+
+              // Next, we must obtain the "match" substring from the user output. This substring should
+              // be from the currentUser pointer to index currentUser + matchLength, and should be saved
+              // in match
+              match = tc.userOut.substr(currentUser, currentUser + matchLength);
+
+              // We can now append the match string to diff
+              diff += match;
+
+              // Finally, we adjust lastUser to be the currentUser + matchLength, and lastProf to be the
+              // currentProf + matchLength
+              lastUser = currentUser + matchLength;
+              lastProf = currentProf + matchLength;
+
+              // 0,0,3
+              // 3,5,5
+
+              // 0000000000111111111
+              // 0123456789012345678
+              // bobHello
+              // MikeyHello
+
+              // Desired output:
+              // bob  Hello
+              // -----
+            }
+
+            diff += "</p>";
           }
         }
 
