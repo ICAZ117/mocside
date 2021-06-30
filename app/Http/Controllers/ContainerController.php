@@ -43,7 +43,7 @@ class ContainerController extends Controller
         $ulimits->setName("cpu");
         $ulimits->setSoft(30);
         $ulimits->setHard(60);
-        $hostConfig->setUlimits($ulimits);
+        $hostConfig->setUlimits([$ulimits]);
 
         $containerConfig->setStopTimeout(60);
 
