@@ -307,6 +307,16 @@ export default {
       var currentTC = 0;
 
       for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
+        var accordion = {
+          title: this.testCases.data[currentTC].title,
+          text: "",
+          input: "",
+          userOut: "",
+          profOut: "",
+          differences: "",
+          isSuccessful: "",
+        };
+
         console.log("\n\n\t------------- Current TC:" + currentTC);
 
         var tc = {
@@ -319,7 +329,7 @@ export default {
         console.log(tc);
 
         // IF the code has an error, handle it
-        if (tc.compare == "\"err\"") {
+        if (tc.compare == '"err"') {
           console.log("\n\tCODE ERROR");
           accordion.isSuccessful = false;
           accordion.text = JSON.parse(tc.userOut)[0][0];
@@ -327,20 +337,10 @@ export default {
         // ELSE, the code ran successfully. Now check if it was successful or not.
         else {
           console.log("\n\tCODE RAN SUCCESSFULLY");
-          var accordion = {
-            title: this.testCases.data[currentTC].title,
-            text: "",
-            input: "",
-            userOut: "",
-            profOut: "",
-            differences: "",
-            isSuccessful: "",
-          };
-
           tc.compare = JSON.parse(tc.compare);
 
           // IF code passed test case
-          if (tc.compare[0] === "100.0") {
+          if (tc.compare[0] == "100.0") {
             console.log("\n\tTEST CASE PASSED");
             accordion.isSuccessful = true;
             accordion.text = "Test Case Passed :)";
@@ -363,7 +363,6 @@ export default {
         console.log("\n\n\tACCORDIONS:");
         console.log(this.accordions);
         console.log("\n\n");
-
 
         currentTC++;
       }
