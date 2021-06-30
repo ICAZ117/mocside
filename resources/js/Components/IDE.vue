@@ -315,6 +315,9 @@ export default {
           compare: dump[i + 2],
         };
 
+        console.log("\n\nTC:");
+        console.log(tc);
+
         // IF the code has an error, handle it
         if (tc.compare === "err") {
           console.log("\n\tCODE ERROR");
