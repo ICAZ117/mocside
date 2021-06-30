@@ -390,6 +390,10 @@ export default {
       };
       await this.accordions.push(accordion);
     }
+
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    console.log(this.accordions);
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
   },
   beforeCreate() {
     // console.log(this.saved_p);
