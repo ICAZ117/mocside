@@ -307,16 +307,6 @@ export default {
       var currentTC = 0;
 
       for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
-        var accordion = {
-          title: this.testCases.data[currentTC].title,
-          text: "",
-          input: "",
-          userOut: "",
-          profOut: "",
-          differences: "",
-          isSuccessful: "",
-        };
-
         console.log("\n\n\t------------- Current TC:" + currentTC);
 
         var tc = {
@@ -331,8 +321,8 @@ export default {
         // IF the code has an error, handle it
         if (tc.compare == '"err"') {
           console.log("\n\tCODE ERROR");
-          accordion.isSuccessful = false;
-          accordion.text = JSON.parse(tc.userOut)[0][0];
+          this.accordions[currentTC].isSuccessful = false;
+          this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
         }
         // ELSE, the code ran successfully. Now check if it was successful or not.
         else {
@@ -342,23 +332,18 @@ export default {
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
             console.log("\n\tTEST CASE PASSED");
-            accordion.isSuccessful = true;
-            accordion.text = "Test Case Passed :)";
+            this.accordions[currentTC].isSuccessful = true;
+            this.accordions[currentTC].text = "Test Case Passed :)";
           }
           // ELSE, code failed test case
           else {
             console.log("\n\tTEST CASE FAILED");
-            accordion.isSuccessful = false;
-            accordion.text = "Test Case Failed :(";
-            accordion.userOut = JSON.parse(tc.userOut)[0];
-            accordion.profOut = JSON.parse(tc.profOut)[0];
+            this.accordions[currentTC].isSuccessful = false;
+            this.accordions[currentTC].text = "Test Case Failed :(";
+            this.accordions[currentTC].userOut = JSON.parse(tc.userOut)[0];
+            this.accordions[currentTC].profOut = JSON.parse(tc.profOut)[0];
           }
         }
-
-        console.log("\n\n\n\n\n\n\n---------------------------- RIGHT BEFORE PUSH");
-        console.log(accordion);
-
-        await this.accordions.push(accordion);
 
         console.log("\n\n\tACCORDIONS:");
         console.log(this.accordions);
@@ -392,6 +377,19 @@ export default {
     this.getStyle();
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
+
+    for (let i = 0; i < testCases.data.length; i++) {
+      var accordion = {
+        title: this.testCases.data[i].title,
+        text: "",
+        input: "",
+        userOut: "",
+        profOut: "",
+        differences: "",
+        isSuccessful: "",
+      };
+      await this.accordions.push(accordion);
+    }
   },
   beforeCreate() {
     // console.log(this.saved_p);
