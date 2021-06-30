@@ -24,17 +24,17 @@ export default {
       // tc running
       if (this.isSuccessful === "running") {
         // Grey bg
-        this.bg += "";
+        this.bg = "wrapper";
       } 
       // tc passed
       else if (this.isSuccessful === true) {
         // Green bg
-        this.bg += " success";
+        this.bg = "wrapper success";
       } 
       // tc failed
       else if (this.isSuccessful === false) {
         // Red bg
-        this.bg += " failed";
+        this.bg = "wrapper failed";
       }
     },
   },
