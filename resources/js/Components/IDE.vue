@@ -313,17 +313,32 @@ export default {
           userOut: dump[i],
           profOut: dump[i + 1],
           compare: dump[i + 2],
-          differences: dump[i + 3]
+          differences: dump[i + 3],
         };
 
         console.log("\n\nTC BEFORE:");
         console.log(tc);
 
+        if (tc.compare == 'compilationError') {
+          this.accordions = [
+            {
+              title: "Compilation Error",
+              text: JSON.parse(tc.userOut)[0][0],
+              input: this.testCases.data[i].input,
+              userOut: "",
+              profOut: "",
+              differences: "",
+              isSuccessful: false,
+              hasError: true,
+            },
+          ];
+          break;
+        }
         // IF the code has an error, handle it
-        if (tc.compare == '"err"') {
+        else if (tc.compare == '"runtimeError"') {
           console.log("\n\tCODE ERROR");
           this.accordions[currentTC].isSuccessful = false;
-          this.accordions[currentTC].hasError = true,
+          this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
         }
         // ELSE, the code ran successfully. Now check if it was successful or not.

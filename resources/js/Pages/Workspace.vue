@@ -1,7 +1,7 @@
 <template>
   <!-- Main Page-->
-  <button @click="this.$emit('unmounting')" class="btn btn-danger btn-block">Return to Problems</button>
-  <div class="row">
+  <button v-if="childIsOpen" @click="this.$emit('unmounting')" class="btn btn-danger btn-block">Return to Problems</button>
+  <div v-if="childIsOpen" class="row">
     <div class="instructions col-4 p-4">
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
@@ -10,6 +10,7 @@
         :editable="false"
         :showMenuBar="false"
         :isDark="true"
+        v-if="childIsOpen"
       />
     </div>
 
@@ -23,6 +24,7 @@
       :codeID="codeID"
       @update="updateContent"
       :key="forceReload"
+      v-if="childIsOpen"
     />
   </div>
 </template>
@@ -45,6 +47,7 @@ export default {
       pID: "",
       codeID: "",
       forceReload: 0,
+      childIsOpen: false,
     };
   },
   methods: {
@@ -144,8 +147,10 @@ export default {
   },
   beforeUnmount() {
     this.$emit("unmounting");
+    this.childIsOpen=false;
   },
   async created() {
+    this.childIsOpen=true;
     await this.getAssignment();
   },
 };
