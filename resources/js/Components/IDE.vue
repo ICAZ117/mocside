@@ -402,13 +402,9 @@ export default {
               // iteration of said for-loop. Prior to doing so, we must append an opening HTML underline
               // tag to diff. We must also append a closing underline tag upon completion of the for-loop.
               // This is to display to the user that they are missing something here.
-              mismatch += "<u>";
-
               for (let k = 0; k < mismatchVariation; k++) {
-                mismatch += " ";
+                mismatch += "<u>&nbsp;</u>";
               }
-
-              mismatch += "</u>";
 
               console.log("\nPost-variation Mismatch: " + mismatch);
 
