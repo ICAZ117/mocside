@@ -4,9 +4,7 @@
       <div>
         <!-- IF code passed TC, OR if code failed TC due to an error-->
         <BaseAccordion
-          v-if="
-            accordion.isSuccessfull || (!accordion.isSuccessful && accordion.hasError)
-          "
+          v-if="accordion.isSuccessfull || (!accordion.isSuccessful && accordion.hasError)"
           :isSuccessful="accordion.isSuccessful"
         >
           <template v-slot:title>{{ accordion.title }}</template>
@@ -17,7 +15,7 @@
         </BaseAccordion>
 
         <!-- ELSE, code failed test case due to logical issue, must display comparison -->
-        <BaseAccordion v-else>
+        <BaseAccordion v-else :isSuccessful="accordion.isSuccessful">
           <template v-slot:title>{{ accordion.title }}</template>
 
           <template v-slot:content>

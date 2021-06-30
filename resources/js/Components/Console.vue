@@ -191,15 +191,18 @@ export default {
           // recurse if still active
           if (!self.isWaiting) {
             self.contents += self.username + "@mocside:/usr/src$ ";
+            self.oldContents = self.contents;
             self.isPolling = false;
             self.$emit("programFinished");
           } else {
+            self.oldContents = self.contents;
             self.checkLogs();
           } 
         } else if (self.isWaiting) {
           self.checkLogs();
         } else {
           self.contents += self.username + "@mocside:/usr/src$ ";
+          self.oldContents = self.contents;
           self.isPolling = false;
           self.$emit("programFinished");
         }
