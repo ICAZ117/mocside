@@ -82,6 +82,7 @@ def compare(result, model):
 		compare_outs.append(temp)
 
 		s = difflib.SequenceMatcher(isjunk=None, a=result.stdout, b=data)
+		table = difflib.HtmlDiff().make_table(model, result.stdout, 'Expected output', 'Your output')
 		difference = round(s.ratio()*100, 2)
 		# print("percent match: " + str(difference) + "%")
 		temp = []
@@ -95,7 +96,8 @@ def compare(result, model):
 			#so a[i]..not including i...count %d and all the indexs after that one are incorrect
 			#until you reach the next index that they match ie a[%d]
 			#we skip index 0 and start counting characters at 1
-		compare_outs.append(temp)
+		# compare_outs.append(temp)
+		compare_outs.append(table)
 	return compare_outs
 
 
