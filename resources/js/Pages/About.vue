@@ -49,8 +49,8 @@ export default {
 <script>
 export default {
   mounted() {
-    console.log(JSON.parse("['Hello']"));
     console.log(JSON.parse('["Hello"]'));
+    console.log(JSON.parse("['Hello']"));
   },
 }
 </script>
