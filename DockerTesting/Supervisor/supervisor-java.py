@@ -38,7 +38,7 @@ def runJava(nCases):
 		# print(compiled.stderr)
 		temp = []
 		temp.append(compiled.stderr)
-		run_outs.append([temp, "err", "err"])
+		run_outs.append([temp, "compilationError", "compilationError"])
 	else:
 		#loop over the number of test cases
 		for i in range(0, nCases):
@@ -67,8 +67,8 @@ def compare(result, model):
 		temp = []
 		temp.append(result.stderr)
 		compare_outs.append([temp])
-		compare_outs.append("err")
-		compare_outs.append("err")
+		compare_outs.append("runtimeError")
+		compare_outs.append("runtimeError")
 	else:
 		# print(result.stdout)
 		temp = []
