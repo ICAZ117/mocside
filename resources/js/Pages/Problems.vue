@@ -83,7 +83,7 @@
   <router-view
     @unmounting="Unmounting()"
     @problemEdited="problemEdited()"
-    v-if="childIsOpen"
+    v-show="childIsOpen"
     :problemID="problemID"
     :lang="lang"
   ></router-view>
