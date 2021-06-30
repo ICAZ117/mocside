@@ -359,6 +359,20 @@ export default {
       //a[last elem] b[last elem] for 0 elements
       //starts next case
     },
+     initAccordion() {
+      for (let i = 0; i < this.testCases.data.length; i++) {
+        var accordion = {
+          title: this.testCases.data[i].title,
+          text: "Running against test case...",
+          input: "",
+          userOut: "",
+          profOut: "",
+          differences: "",
+          isSuccessful: "",
+        };
+        this.accordions.push(accordion);
+      }
+    },
   },
   async mounted() {
     // console.log("BEFORE MOUNT");
@@ -378,18 +392,7 @@ export default {
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
 
-    for (let i = 0; i < this.testCases.data.length; i++) {
-      var accordion = {
-        title: this.testCases.data[i].title,
-        text: "",
-        input: "",
-        userOut: "",
-        profOut: "",
-        differences: "",
-        isSuccessful: "",
-      };
-      await this.accordions.push(accordion);
-    }
+    initAccordion();
 
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     console.log(this.accordions);
