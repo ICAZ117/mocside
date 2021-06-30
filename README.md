@@ -61,7 +61,6 @@ Todo:
 
 * Lab Page
 	* Style Lab Page
-	* add button in top left to return to courses page
 	* Add the Professor version of this page, ie. the add, delete, publish buttons for labs
 	* complete dynamic labs info
 	* confirm delete message
@@ -69,7 +68,6 @@ Todo:
 
 * Problems Page
 	* Style Problems Page
-	* add button in top left to return to labs page
 	* add the professor version of this page, ie. the add, delete, publish buttons for labs
 	* complete dynamic problems info
 	* confirm delete message
@@ -77,7 +75,7 @@ Todo:
 	* Add Sorting Button
 
 * Workspace Page
-	* add button in top left to return to problems page
+	* return button works, however the workspace is still on screen when returning to parent component
 
 * Edit/Add Course
 	* styling
