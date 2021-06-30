@@ -378,7 +378,7 @@ export default {
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
 
-    for (let i = 0; i < testCases.data.length; i++) {
+    for (let i = 0; i < this.testCases.data.length; i++) {
       var accordion = {
         title: this.testCases.data[i].title,
         text: "",
