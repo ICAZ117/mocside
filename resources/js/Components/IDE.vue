@@ -352,7 +352,7 @@ export default {
             this.accordions[currentTC].profOut = tc.profOut;
             this.accordions[currentTC].userOut = tc.userOut;
 
-            var diff = "<p>";
+            var diff = '<p class="no-margin">';
             var currentUser = 0;
             var currentProf = 0;
             var matchLength = 0;

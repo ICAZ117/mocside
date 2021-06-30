@@ -852,6 +852,10 @@ thead.gradebook {
     border-radius: 5px;
 }
 
+.no-margin {
+    margin: 0!important;
+}
+
 /*========= ADD ASSIGNMENT =========*/
 .assignment-title {
     font-size: 20pt !important;
