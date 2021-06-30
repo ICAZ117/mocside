@@ -7,6 +7,7 @@
           v-if="accordion.isSuccessfull || (!accordion.isSuccessful && accordion.hasError)"
           :isSuccessful="accordion.isSuccessful"
         >
+        eeeeeeeeee
           <template v-slot:title>{{ accordion.title }}</template>
 
           <template v-slot:content>
@@ -15,7 +16,7 @@
         </BaseAccordion>
 
         <!-- ELSE, code failed test case due to logical issue, must display comparison -->
-        <BaseAccordion v-else :isSuccessful="accordion.isSuccessful">
+        <BaseAccordion v-if="!accordion.isSuccessful && !accordion.hasError" :isSuccessful="accordion.isSuccessful">
           <template v-slot:title>{{ accordion.title }}</template>
 
           <template v-slot:content>
