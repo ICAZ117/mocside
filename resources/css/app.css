@@ -830,22 +830,25 @@ thead.gradebook {
 .success {
     background-color: #ddecdf!important;
     color: #71a381;
+    padding: 5px;
 }
 
 .failed {
     background-color: #fcf0ee!important;
     color: #d69c97;
+    padding: 5px;
 }
 
 .info {
-    background-color: #d6d6d6!important;
+    background-color: #efefef!important;
     color: #616161;
+    padding: 5px;
 }
 
 .details {
-    background-color: white;
+    background-color: #fffaf9;
     padding: 10px;
-    border: 1px solid grey;
+    border: 1px solid rgb(207, 207, 207);
     border-radius: 5px;
 }
 
