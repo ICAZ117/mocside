@@ -415,7 +415,7 @@ export default {
 
               // IF the mismatch string is NOT empty, concatenate it to diff
               if (mismatch != "<strike></strike><u></u>") {
-                diff += "<u>" + mismatch + "</u>";
+                diff += mismatch;
               }
 
               // Next, we must obtain the "match" substring from the user output. This substring should
