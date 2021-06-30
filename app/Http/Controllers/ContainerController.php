@@ -40,23 +40,27 @@ class ContainerController extends Controller
         $ulimits = new ResourcesUlimitsItem();
 
         // set global timeout
-        $ulimits->setName("cpu");
-        $ulimits->setSoft(30);
-        $ulimits->setHard(60);
+        $ulimits->setName("cpu"); // this sets a cpu time limit
+        $ulimits->setSoft(30);    // but in the case of a print infinite loop,
+        $ulimits->setHard(60);    // it is no help.
         $hostConfig->setUlimits([$ulimits]);
 
-        $containerConfig->setStopTimeout(60);
+        $containerConfig->setStopTimeout(3); // time container will wait before force after get "shutdown" cmd
 
         if (strcasecmp($validData['lang'], 'python') == 0) {
             $containerConfig->setImage('python');
-            $containerConfig->setCmd(['submission.py']);
-            $containerConfig->setEntrypoint(["python3"]);
+            $containerConfig->setCmd(['run.sh']);
+            $containerConfig->setEntrypoint(["bash"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
+            // copy in bash file
+            $bash = Storage::disk('local')->path('run-python.sh');
+            $filePath = Storage::disk('local')
+                ->putFileAs($head, new File($bash), 'run.sh');
         } else {
             $containerConfig->setImage('openjdk');
             $containerConfig->setCmd(['run.sh']);
