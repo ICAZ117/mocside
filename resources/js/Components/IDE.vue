@@ -306,16 +306,17 @@ export default {
 
       var currentTC = 0;
 
-      for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
+      for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
         console.log("\n\n\t------------- Current TC:" + currentTC);
 
         var tc = {
           userOut: dump[i],
           profOut: dump[i + 1],
           compare: dump[i + 2],
+          display: dump[i + 3]
         };
 
-        console.log("\n\nTC:");
+        console.log("\n\nTC BEFORE:");
         console.log(tc);
 
         // IF the code has an error, handle it
@@ -328,6 +329,7 @@ export default {
         else {
           console.log("\n\tCODE RAN SUCCESSFULLY");
           tc.compare = JSON.parse(tc.compare);
+          tc.display = JSON.parse(tc.display);
 
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
@@ -344,6 +346,9 @@ export default {
             this.accordions[currentTC].profOut = JSON.parse(tc.profOut)[0];
           }
         }
+
+        console.log("\n\nTC AFTER:");
+        console.log(tc);
 
         console.log("\n\n\tACCORDIONS:");
         console.log(this.accordions);
