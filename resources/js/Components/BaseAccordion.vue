@@ -75,5 +75,6 @@ export default {
   width: 100%;
   border-bottom: 1px solid grey;
   padding: 10px;
+  word-break: break-word;
 }
 </style>
