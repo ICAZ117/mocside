@@ -12,6 +12,7 @@ use Docker\Docker;
 use Docker\API\Model\ContainersCreatePostBody;
 use Docker\API\Model\HostConfig;
 use Docker\API\Model\Mount;
+use Docker\API\Model\ResourcesUlimitsItem;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,9 +37,15 @@ class ContainerController extends Controller
         $containerConfig = new ContainersCreatePostBody();
         $hostConfig = new HostConfig();
         $mountsConfig = new Mount();
+        $ulimits = new ResourcesUlimitsItem();
 
         // set global timeout
-        $containerConfig->setStopTimeout(300);
+        $ulimits->setName("cpu");
+        $ulimits->setSoft(30);
+        $ulimits->setHard(60);
+        $hostConfig->setUlimits($ulimits);
+
+        $containerConfig->setStopTimeout(60);
 
         if (strcasecmp($validData['lang'], 'python') == 0) {
             $containerConfig->setImage('python');
