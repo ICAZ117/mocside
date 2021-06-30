@@ -2,12 +2,11 @@
   <div>
     <div v-for="accordion in accordions" :key="accordion.title">
       <div>
-        <!-- IF code passed TC, OR if code failed TC due to an error-->
         <BaseAccordion :isSuccessful="accordion.isSuccessful">
-          eeeeeeeeee
           <template v-slot:title>{{ accordion.title }}</template>
 
           <template v-slot:content>
+            <!-- IF the code FAILED the test case, and does NOT have an error, print extensive output -->
             <div v-if="!accordion.isSuccessful && !accordion.hasError" class="wrapper">
               <div>{{ accordion.text }}</div>
               <br />
@@ -29,6 +28,7 @@
               <br />
             </div>
 
+            <!-- ELSE, the code passed the test case, or there is an error. Simply print the text. -->
             <div v-else>{{ accordion.text }}</div>
           </template>
         </BaseAccordion>

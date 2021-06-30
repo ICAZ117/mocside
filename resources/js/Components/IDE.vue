@@ -445,6 +445,8 @@ export default {
             }
 
             diff += "</p>";
+
+            this.accordions[currentTC].differences = diff;
           }
         }
 
