@@ -31,7 +31,7 @@
 import * as API from "../services/API";
 export default {
   props: ["problemID", "lang"],
-  emits: ["unmounting"],
+  emits: ["unmounting", "problemEdited"],
   data() {
     return {
       assignment: {},
