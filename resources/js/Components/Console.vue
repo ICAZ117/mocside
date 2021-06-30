@@ -147,10 +147,11 @@ export default {
           this.currLog += this.new[this.new.length - 1];
         }
 
-        if (!this.isWaiting) {
-          this.contents += this.username + "@mocside:/usr/src$ ";
-          this.$emit("programFinished");
-        }
+        // we will handle this in our listener function
+        // if (!this.isWaiting) {
+        //   this.contents += this.username + "@mocside:/usr/src$ ";
+        //   this.$emit("programFinished");
+        // }
 
         this.oldContents = this.contents;
       }
@@ -197,6 +198,10 @@ export default {
           } 
         } else if (self.isWaiting) {
           self.checkLogs();
+        } else {
+          self.contents += self.username + "@mocside:/usr/src$ ";
+          self.isPolling = false;
+          self.$emit("programFinished");
         }
       }, 1000);
     }
