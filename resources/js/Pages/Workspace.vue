@@ -1,5 +1,6 @@
 <template>
   <!-- Main Page-->
+  <button @click="this.$emit('unmounting')" class="btn btn-danger btn-block">Return to Problems</button>
   <div class="row">
     <div class="instructions col-4 p-4">
       <h4>{{ title }}</h4>

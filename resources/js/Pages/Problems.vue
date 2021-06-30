@@ -1,7 +1,7 @@
 <template>
   <div v-if="!childIsOpen">
     <!-- Main Page-->
-
+    <button @click="this.$emit('unmounting')" class="btn btn-danger btn-block">Return to Labs</button>
     <div class="courses header">
       <h2>{{ this.labName }}</h2>
       <hr />
