@@ -299,28 +299,19 @@ export default {
       );
       console.log(res3.data);
 
-      console.log("\n\n\n------------ DATA DUMP:");
       const dump = res3.data.dump;
-
-      console.log(dump);
 
       var currentTC = 0;
 
       for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
-        console.log("\n\n\t------------- Current TC:" + currentTC);
-
         var tc = {
           userOut: dump[i],
           profOut: dump[i + 1],
           compare: dump[i + 2],
         };
 
-        console.log("\n\nTC BEFORE:");
-        console.log(tc);
-
+        // IF the code has a compile error, handle it
         if (tc.compare == '"compilationError"') {
-          console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ Compilation Error");
-          console.log(JSON.parse(tc.userOut)[0]);
           this.accordions = [
             {
               title: "Compilation Error",
@@ -335,27 +326,23 @@ export default {
           ];
           break;
         }
-        // IF the code has an error, handle it
+        // ELSE IF the code has a runtime error, handle it
         else if (tc.compare == '"runtimeError"') {
-          console.log("\n\tCODE ERROR");
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
         }
-        // ELSE, the code ran successfully. Now check if it was successful or not.
+        // ELSE, the code ran successfully. Now check if it passed the test case or not.
         else {
-          console.log("\n\tCODE RAN SUCCESSFULLY");
           tc.compare = JSON.parse(tc.compare);
 
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
-            console.log("\n\tTEST CASE PASSED");
             this.accordions[currentTC].isSuccessful = true;
             this.accordions[currentTC].text = "Test Case Passed :)";
           }
           // ELSE, code failed test case
           else {
-            console.log("\n\tTEST CASE FAILED");
             this.accordions[currentTC].isSuccessful = false;
             this.accordions[currentTC].text = "Test Case Failed :(";
 
@@ -377,6 +364,10 @@ export default {
 
             // Loop over ALL comparison strings
             for (let j = 1; j < tc.compare.length - 1; j++) {
+              console.log("\n\n\nStart of comparison loop iteration");
+
+              console.log("\nDiff: " + diff);
+
               // Each comparison string contains three numbers, seperated by commas
               // So, we first split the string on a comma...
               var arr = tc.compare[j].split(",");
@@ -386,6 +377,8 @@ export default {
               currentProf = Number(arr[1]);
               matchLength = Number(arr[2]);
 
+              console.log("\nInput: " + currentUser + "," + currentProf + "," + matchLength);
+
               // Now that we have those values saved, we need to get a substring of the user output.
               // The substring should be from the lastUser pointer to the currentUser pointer, and
               // it should be saved in mismatch. Furthermore, we should also append HTML strikethrough
@@ -393,11 +386,15 @@ export default {
               mismatch =
                 "<strike>" + tc.userOut.substr(lastUser, currentUser) + "</strike>";
 
+              console.log("\nPre-variation Mismatch: " + mismatch);
+
               // We must also check to see if the professor's output has any mismatches. If it does, we
               // must save the number of characters by which the length of the mismatch in the professor's
               // output exceeds that of the student's.
               mismatchVariation =
                 tc.profOut.substr(lastProf, currentProf).length - mismatch.length;
+
+              console.log("\nMismatch variation: " + mismatchVariation);
 
               // In the event that the mismatchVariation is a positive number, we must append
               // mismatchVariation number of spaces to mismatch. To acomplish this, we do a for-loop that
@@ -413,9 +410,12 @@ export default {
 
               mismatch += "</u>";
 
+              console.log("\nPost-variation Mismatch: " + mismatch);
+
               // IF the mismatch string is NOT empty, concatenate it to diff
               if (mismatch != "<strike></strike><u></u>") {
                 diff += mismatch;
+                console.log("\nAppended mismatch to diff, diff is now: " + diff);
               }
 
               // Next, we must obtain the "match" substring from the user output. This substring should
@@ -423,8 +423,12 @@ export default {
               // in match
               match = tc.userOut.substr(currentUser, currentUser + matchLength);
 
+              console.log("\nMatch: " + match);
+
               // We can now append the match string to diff
               diff += match;
+
+              console.log("\nAppended match to diff, diff is now: " + diff);
 
               // Finally, we adjust lastUser to be the currentUser + matchLength, and lastProf to be the
               // currentProf + matchLength
@@ -442,6 +446,7 @@ export default {
               // Desired output:
               // bob  Hello
               // -----
+              console.log("\nEnd for-loop");
             }
 
             diff += "</p>";
@@ -449,13 +454,6 @@ export default {
             this.accordions[currentTC].differences = diff;
           }
         }
-
-        console.log("\n\nTC AFTER:");
-        console.log(tc);
-
-        console.log("\n\n\tACCORDIONS:");
-        console.log(this.accordions);
-        console.log("\n\n");
 
         currentTC++;
       }
@@ -511,10 +509,6 @@ export default {
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
 
     this.initAccordion();
-
-    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    console.log(this.accordions);
-    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
   },
   beforeCreate() {
     // console.log(this.saved_p);
