@@ -9,7 +9,7 @@
           <div class="fas fa-chevron-down"></div>
         </div>
       </div>
-      <h6 class="title">
+      <h6 class="title fullWidth">
         <slot name="title"></slot>
       </h6>
     </div>
@@ -77,7 +77,10 @@ export default {
 }
 .title {
   margin: 0;
+}
+.fullWidth {
   width: 100%;
+  padding: 0 0 0 5px!important;
 }
 .content {
   text-align: left;
