@@ -2,8 +2,10 @@
   <div>
     <div v-for="accordion in accordions" :key="accordion.title">
       <div>
-        <BaseAccordion :isSuccessful="accordion.isSuccessful">
+        <BaseAccordion :isSuccessful="accordion.isSuccessful" @toggle="toggle" :key="show">
           <template v-slot:title>
+            <i v-if="!show" class="fas fa-chevron-right"></i>
+            <i v-if="show" class="fas fa-chevron-down"></i>
             {{ accordion.title }}
             <div class="right">
               <div v-if="accordion.isSuccessful == 'running'" class="spinner"></div>
@@ -50,7 +52,14 @@ export default {
     BaseAccordion,
   },
   data() {
-    return {};
+    return {
+      show: false,
+    };
+  },
+  methods: {
+    toggle() {
+      this.show = !this.show;
+    },
   },
 };
 </script>
