@@ -1,7 +1,7 @@
 <template>
   <div :class="bg">
     <div class="accordion" @click="toggleItem">
-      <div class="title">
+      <div class="icon">
         <div v-show="!show">
           <div class="fas fa-chevron-right"></div>
         </div>
@@ -9,7 +9,7 @@
           <div class="fas fa-chevron-down"></div>
         </div>
       </div>
-      <h6 class="title fullWidth">
+      <h6 class="title">
         <slot name="title"></slot>
       </h6>
     </div>
@@ -77,10 +77,12 @@ export default {
 }
 .title {
   margin: 0;
-}
-.fullWidth {
   width: 100%;
-  padding: 0 0 0 5px!important;
+  padding: 0 0 0 5px !important;
+}
+.icon {
+  margin: 0;
+  padding-top: 2px;
 }
 .content {
   text-align: left;
