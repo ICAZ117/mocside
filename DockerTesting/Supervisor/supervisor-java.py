@@ -51,7 +51,7 @@ def runJava(nCases):
 
 			#compare students output to test case output
 			model = caseNames[i].split(".")[0]+".out"
-			run_outs.append(caseNames[i])
+			run_outs.append([caseNames[i].split('.')[0]])
 			run_outs.append(compare(result, model))
 	return run_outs
 
