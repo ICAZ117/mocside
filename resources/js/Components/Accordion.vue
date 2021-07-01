@@ -5,7 +5,9 @@
         <BaseAccordion :isSuccessful="accordion.isSuccessful">
           <template v-slot:title>
             {{ accordion.title }}
-            
+            <div class="right">
+              <div v-if="accordion.isSuccessful == 'running'" class="spinner"></div>
+            </div>
           </template>
 
           <template v-slot:content>
