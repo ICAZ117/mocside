@@ -102,7 +102,6 @@ Bug Fixes:
 	* styling
 	* confirm delete message
 	* do not allow unadding problem from the only course it is in, must delete problem from the overview tab
-	* On Template & Model Solution add the save status functionality/or remove it
 
 * Docker
 	* Finish up returning grade results to front end

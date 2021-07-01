@@ -26,7 +26,7 @@
     <div v-if="showEditor" class="template-workspace">
       <div class="save-model">
         <div class="row">
-          <button class="btn btn-primary btn-md col-4" @click="saveTemplate()">
+          <button class="btn btn-primary btn-md col-4" @click="changeLanguage()">
             CHANGE LANGUAGE
           </button>
           <!-- <small class="col-8 saveStatus">{{ saveStatus }}</small> -->
@@ -64,8 +64,8 @@ export default {
       this.showEditor = true;
       // this.$forceUpdate();
     },
-    saveTemplate() {
-      console.log("Inside saveTemplate()");
+    changeLanguage() {
+      this.showEditor = false;
     },
     updateContent(e) {
       this.content = e.code;
