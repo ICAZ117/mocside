@@ -30,8 +30,6 @@
 
             <!-- IF the code FAILED the test case, and does NOT have an error, print extensive output -->
             <div v-if="!accordion.isSuccessful && !accordion.hasError" class="details">
-              <br />
-
               <p>Input:</p>
               <div class="info">{{ accordion.input }}</div>
               <br />
@@ -46,7 +44,6 @@
 
               <p>Differences:</p>
               <div class="info" v-html="accordion.differences"></div>
-              <br />
             </div>
           </template>
         </BaseAccordion>
