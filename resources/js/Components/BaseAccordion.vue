@@ -2,10 +2,7 @@
   <div :class="bg">
     <div class="accordion" @click="toggleItem">
       <h6 class="title">
-        <slot name="title"
-          ><i v-if="!show" class="fas fa-chevron-right"></i>
-          <i v-if="show" class="fas fa-chevron-down"></i
-        ></slot>
+        <slot name="title"></slot>
       </h6>
     </div>
     <div v-show="show" class="content">
@@ -44,6 +41,7 @@ export default {
   methods: {
     toggleItem: function () {
       this.show = !this.show;
+      this.$emit("toggle");
     },
   },
   mounted() {
