@@ -40,8 +40,8 @@
           <Accordion :accordions="accordions" :key="reloadModal"/>
           <button class="modal-close" @click="showModal = false">x</button>
           <div class="row">
-            <button class="col-4 btn btn-lg btn-secondary mx-1">Keep trying</button>
-            <button class="col-4 btn btn-lg btn-success mx-1">Submit anyway</button>
+            <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">Keep trying</button>
+            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1">Submit anyway</button>
           </div>
         </vue-final-modal>
         <div :style="style">
@@ -234,6 +234,7 @@ export default {
     accordions: [],
     testCases: [],
     reloadModal: 0,
+    tcGrades: [],
   }),
   components: {
     VAceEditor,
@@ -496,11 +497,15 @@ export default {
       //a[last elem] b[last elem] for 0 elements
       //starts next case
     },
+    submitForGrade() {
+
+    },
     initAccordion() {
       this.accordions = [];
 
       for (let i = 0; i < this.testCases.data.length; i++) {
         var accordion = {
+          tcID: "",
           title: this.testCases.data[i].title,
           text: "Running against test case...",
           input: "",
@@ -513,6 +518,9 @@ export default {
         this.accordions.push(accordion);
       }
     },
+    closeModal() {
+      this.showModal = false;
+    }
   },
   watch: {
     showModal: function () {
