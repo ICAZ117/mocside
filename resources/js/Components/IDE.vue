@@ -413,7 +413,7 @@ export default {
                 "<strike>" +
                 tc.userOut
                   .substring(lastUser, currentUser)
-                  .replace(/\n/g, "&nbsp<br /><br />") +
+                  .replace(/\n/g, "‎&nbsp;") +
                 "</strike>";
 
               console.log("\nPre-variation Mismatch: " + mismatch);
