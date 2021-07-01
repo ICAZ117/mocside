@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%!important;">
+  <div style="height: fit-content!important;">
     <bubble-menu
       class="bubble-menu"
       :tippy-options="{ duration: 100 }"
