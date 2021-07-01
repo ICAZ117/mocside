@@ -145,8 +145,8 @@ export default {
       // const res = await API.apiClient.delete(`/problems/${problem.id}`);
 
       //filter the problems list
-      // this.problems = this.problems.filter((p, i) => i  != key);
-      console.log("made it");
+      // this.problems = this.problems.filter((p, i) => i  != p.id);
+      console.log(this.problemID);
 
       //call unmounting of children
     },
