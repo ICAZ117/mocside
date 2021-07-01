@@ -65,7 +65,6 @@ export default {
       // this.$forceUpdate();
     },
     changeLanguage() {
-      console.log("Inside changeLanguage()");
       this.showEditor = false;
     },
     updateContent(e) {
