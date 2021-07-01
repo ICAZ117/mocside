@@ -44,8 +44,7 @@ export default {
       this.timeout(this.assignmentID);
     },
     deleteProblem() {
-      console.log("here");
-      var flag = confirm("Are you Sure you want to remove " + problem.name + " from this Lab?");
+      var flag = confirm("Are you Sure you want to delete this problem");
       if(flag) {
         this.$emit("delete-problem");
       }
