@@ -83,14 +83,14 @@ def compare(result, model):
 		compare_outs.append(temp)
 
 		s = difflib.SequenceMatcher(isjunk=None, a=result.stdout, b=data)
-		table = difflib.HtmlDiff().make_table([data], [result.stdout], 'Expected output', 'Your output')
+		# table = difflib.HtmlDiff().make_table([data], [result.stdout], 'Expected output', 'Your output')
 		difference = round(s.ratio()*100, 2)
 		# print("percent match: " + str(difference) + "%")
 		temp = []
 		temp.append(str(difference))
 		for block in s.get_matching_blocks():
 			# print("a[%d] and b[%d] match for %d elements" % block)
-			temp.append("a[%d] and b[%d] match for %d elements" % block)
+			temp.append("%d,%d,%d" % block)
 			# a[%d] holds the index in a that matches with the index in b
 			# b[%d] holds the index in b that matches with the index in a
 			# %d holds how many elements are matching 
@@ -98,7 +98,7 @@ def compare(result, model):
 			#until you reach the next index that they match ie a[%d]
 			#we skip index 0 and start counting characters at 1
 		compare_outs.append(temp)
-		compare_outs.append(table)
+		# compare_outs.append(table)
 	return compare_outs
 
 

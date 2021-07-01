@@ -830,16 +830,30 @@ thead.gradebook {
 .success {
     background-color: #ddecdf!important;
     color: #71a381;
+    padding: 5px;
 }
 
 .failed {
     background-color: #fcf0ee!important;
     color: #d69c97;
+    padding: 5px;
 }
 
 .info {
-    background-color: #D4D3D3!important;
-    color: #8F8C8D;
+    background-color: #efefef!important;
+    color: #616161;
+    padding: 5px;
+}
+
+.details {
+    background-color: #fffaf9;
+    padding: 10px;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+}
+
+.no-margin {
+    margin: 0!important;
 }
 
 /*========= ADD ASSIGNMENT =========*/
