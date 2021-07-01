@@ -313,7 +313,7 @@ export default {
 
 
         console.log("\ntcID: " + tc.tcID);
-        console.log("\nTest Case ID (from database): " + this.testCases[0].id);
+        console.log("\nTest Case ID (from database): " + this.testCases.data[0].id);
 
         // IF the code has a compile error, handle it
         if (tc.compare == '"compilationError"') {
