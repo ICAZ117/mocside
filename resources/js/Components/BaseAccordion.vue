@@ -43,7 +43,6 @@ export default {
   methods: {
     toggleItem: function () {
       this.show = !this.show;
-      this.$emit("toggle");
     },
   },
   mounted() {
