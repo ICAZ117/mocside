@@ -142,6 +142,7 @@ export default {
       }
     },
     async deleteMe() {
+      console.log("deleteMe");
       // remove this problem from the current lab
       const res = await API.apiClient.delete(`/problems/${this.problemID}`);
 
@@ -202,6 +203,7 @@ export default {
       }
     },
     async problemEdited() {
+      console.log("problem edited");
       if(!this.deletedMe) {
         ///update the list of courses
         this.problems = this.problems.filter((p) => p.id  != this.problemID);
@@ -213,6 +215,7 @@ export default {
       this.deletedMe = false;
     },
     async Unmounting() {
+      console.log("unmunting problem's children");
       this.childIsOpen = false;
       this.problemID = null;
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
