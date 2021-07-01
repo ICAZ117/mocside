@@ -411,7 +411,7 @@ export default {
               // it should be saved in mismatch. Furthermore, we should also append HTML strikethrough
               // tags to display to the user that this output should be removed.
               mismatch =
-                "<strike>" + tc.userOut.substring(lastUser, currentUser) + "</strike>";
+                "<strike>" + tc.userOut.substring(lastUser, currentUser).replace(/\n/g, "<br />") + "</strike>";
 
               console.log("\nPre-variation Mismatch: " + mismatch);
 
