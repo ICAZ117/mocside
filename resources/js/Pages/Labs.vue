@@ -146,11 +146,14 @@ export default {
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
     async removeLab(lab, key) {
-      //remove from lab the current course
-      const res = await API.apiClient.delete(`/labs/${lab}`);
+      var flag = confirm("Are you Sure you want to remove " + labName + " from this Course?");
+      if(flag) {
+        //remove from lab the current course
+        const res = await API.apiClient.delete(`/labs/${lab}`);
 
-      //filter from labs
-      this.labs = this.labs.filter((l, i) => i  != key);
+        //filter from labs
+        this.labs = this.labs.filter((l, i) => i  != key);
+      }
     },
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
