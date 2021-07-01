@@ -355,8 +355,8 @@ export default {
             tc.userOut = JSON.parse(tc.userOut)[0];
             tc.profOut = JSON.parse(tc.profOut)[0];
 
-            this.accordions[currentTC].profOut = tc.profOut.replace(/\n/g, '‎‎');
-            this.accordions[currentTC].userOut = tc.userOut.replace(/\n/g, '‎‎');
+            this.accordions[currentTC].profOut = tc.profOut.replace(/\n/g, '<br /><span class="unselectable"><br /></span>');
+            this.accordions[currentTC].userOut = tc.userOut.replace(/\n/g, '<br /><span class="unselectable"><br /></span>');
 
             // Loop over all test cases for the current problem and find the test case that has a
             // matching tcID with the current tcID provided in the supervisor dump. Once we find

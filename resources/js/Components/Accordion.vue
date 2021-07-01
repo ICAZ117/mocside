@@ -17,11 +17,11 @@
               <br />
 
               <p>Expected Output:</p>
-              <div class="success">{{ accordion.profOut }}</div>
+              <div class="success" v-html="accordion.profOut"></div>
               <br />
 
               <p>Your Output:</p>
-              <div class="failed">{{ accordion.userOut }}</div>
+              <div class="failed" v-html="accordion.userOut"></div>
               <br />
 
               <p>Differences:</p>
