@@ -355,7 +355,7 @@ export default {
             tc.userOut = JSON.parse(tc.userOut)[0];
             tc.profOut = JSON.parse(tc.profOut)[0];
 
-            this.accordions[currentTC].profOut = tc.profOut;
+            this.accordions[currentTC].profOut = tc.profOut.replace(/\n/g, '‎‎');
             this.accordions[currentTC].userOut = tc.userOut;
 
             // Loop over all test cases for the current problem and find the test case that has a
