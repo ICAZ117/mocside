@@ -311,7 +311,6 @@ export default {
           compare: dump[i + 3],
         };
 
-
         console.log("\ntcID: " + tc.tcID);
         console.log("\nTest Case ID (from database): " + this.testCases.data[0].id);
 
@@ -369,7 +368,7 @@ export default {
               console.log("\n==\n");
               console.log(tc.tcID);
               console.log("\n\n\n\n");
-              if (('"' + self.testCases.data[j].id + '"') == tc.tcID) {
+              if ('"' + self.testCases.data[j].id + '"' == tc.tcID) {
                 console.log("\n\n----------- WE FOUND THE TEST CASE\n\n");
                 self.accordions[currentTC].input = self.testCases.data[j].input;
               }
@@ -411,7 +410,11 @@ export default {
               // it should be saved in mismatch. Furthermore, we should also append HTML strikethrough
               // tags to display to the user that this output should be removed.
               mismatch =
-                "<strike>" + tc.userOut.substring(lastUser, currentUser).replace(/\n/g, "<br />") + "</strike>";
+                "<strike>" +
+                tc.userOut
+                  .substring(lastUser, currentUser)
+                  .replace(/\n/g, "&nbsp<br /><br />") +
+                "</strike>";
 
               console.log("\nPre-variation Mismatch: " + mismatch);
 
