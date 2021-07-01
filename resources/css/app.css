@@ -866,12 +866,11 @@ thead.gradebook {
 }
 
 .spinner {
-    border: 3px solid #adadad; /* Light grey */
-    border-top: 3px solid var(--FSClightblue); /* Blue */
-    border-radius: 50%;
+    border: 3px solid #adadad;
+    border-top: 3px solid var(--FSCgrey);
     width: 18px;
     height: 18px;
-    animation: spin 500ms linear infinite;
+    animation: spin 750ms linear infinite;
 }
 
 @keyframes spin {
