@@ -101,7 +101,7 @@ Bug Fixes:
 * Edit/Add Problem
 	* styling
 	* confirm delete message
-	* do not allow unadding problem from the only course it is in, must delete problem from the overview tab
+	* do not allow unadding problem from the only course it is in, must delete problem from the overview tab, or from the problems page
 
 * Docker
 	* Finish up returning grade results to front end
