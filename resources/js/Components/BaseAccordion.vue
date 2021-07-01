@@ -2,8 +2,8 @@
   <div :class="bg">
     <div class="accordion" @click="toggleItem">
       <div class="title">
-        <i v-show="!show" class="fas fa-chevron-right"></i>
-        <i v-show="show" class="fas fa-chevron-down"></i>
+        <div v-show="!show" class="fas fa-chevron-right"></div>
+        <div v-show="show" class="fas fa-chevron-down"></div>
       </div>
       <h6 class="title">
         <slot name="title"></slot>
