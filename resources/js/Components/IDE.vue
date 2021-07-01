@@ -362,6 +362,11 @@ export default {
             // the correct test case, set the current accordion's input to the correct test case's
             // input.
             for (let j = 0; j < this.testCases.length; j++) {
+              console.log("\n\n\n\nIF");
+              console.log(this.testCases.data[i].id);
+              console.log("\n==\n");
+              console.log(tc.tcID);
+              console.log("\n\n\n\n");
               if (('"' + this.testCases.data[i].id + '"') == tc.tcID) {
                 console.log("\n\n----------- WE FOUND THE TEST CASE\n\n");
                 this.accordions[currentTC].input = this.testCases.data[i].input;
