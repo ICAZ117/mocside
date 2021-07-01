@@ -71,7 +71,7 @@ export default {
       console.log("Inside saveTemplate()");
     },
     updateContent(e) {
-      this.content = e;
+      this.content = e.code;
     },
     timeout: _.debounce(async function(assignmentID) {
       var payload = {};
