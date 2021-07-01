@@ -365,13 +365,13 @@ export default {
             // input.
             for (let j = 0; j < this.testCases.data.length; j++) {
               console.log("\n\n\n\nIF");
-              console.log(self.testCases.data[i].id);
+              console.log(self.testCases.data[j].id);
               console.log("\n==\n");
               console.log(tc.tcID);
               console.log("\n\n\n\n");
-              if (('"' + self.testCases.data[i].id + '"') == tc.tcID) {
+              if (('"' + self.testCases.data[j].id + '"') == tc.tcID) {
                 console.log("\n\n----------- WE FOUND THE TEST CASE\n\n");
-                self.accordions[currentTC].input = self.testCases.data[i].input;
+                self.accordions[currentTC].input = self.testCases.data[j].input;
               }
             }
 
