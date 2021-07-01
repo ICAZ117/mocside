@@ -106,6 +106,7 @@ export default {
       progress: [],
       authUser: null,
       fscID: null,
+      deletedMe: false,
     };
   },
   methods: {
@@ -141,6 +142,7 @@ export default {
       }
     },
     async deleteMe() {
+      console.log("deleteMe");
       // remove this problem from the current lab
       const res = await API.apiClient.delete(`/problems/${this.problemID}`);
 
@@ -148,6 +150,7 @@ export default {
       this.problems = this.problems.filter((p, i) => i  != p.id);
 
       //call unmounting of children
+      this.deletedMe = true;
       this.Unmounting();
     },
     goToProblem(id) {
@@ -200,14 +203,20 @@ export default {
       }
     },
     async problemEdited() {
-      ///update the list of courses
-      this.problems = this.problems.filter((p) => p.id  != this.problemID);
-      const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      this.problems.push(problem.data.data);
-      console.log(problem.data.data);
-      await this.Unmounting();
+      console.log("problem edited");
+      if(!this.deletedMe) {
+        ///update the list of courses
+        this.problems = this.problems.filter((p) => p.id  != this.problemID);
+        const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+        this.problems.push(problem.data.data);
+        console.log(problem.data.data);
+        await this.Unmounting();
+      }
+      this.deletedMe = false;
+      //receiving error after here about parent being null...also problem not removed from vue-list through filter?
     },
     async Unmounting() {
+      console.log("unmunting problem's children");
       this.childIsOpen = false;
       this.problemID = null;
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
