@@ -868,6 +868,7 @@ thead.gradebook {
 .spinner {
     border: 3px solid #adadad;
     border-top: 3px solid var(--FSCgrey);
+    border-radius: 50%;
     width: 18px;
     height: 18px;
     animation: spin 750ms linear infinite;
