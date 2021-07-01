@@ -142,7 +142,7 @@ export default {
     },
     async deleteMe() {
       // remove this problem from the current lab
-      const res = await API.apiClient.delete(`/problems/${problem.id}`);
+      const res = await API.apiClient.delete(`/problems/${this.problemID}`);
 
       //filter the problems list
       this.problems = this.problems.filter((p, i) => i  != p.id);
