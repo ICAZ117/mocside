@@ -315,6 +315,8 @@ export default {
         console.log("\ntcID: " + tc.tcID);
         console.log("\nTest Case ID (from database): " + this.testCases.data[0].id);
 
+        var self = this;
+
         // IF the code has a compile error, handle it
         if (tc.compare == '"compilationError"') {
           this.accordions = [
@@ -363,13 +365,13 @@ export default {
             // input.
             for (let j = 0; j < this.testCases.data.length; j++) {
               console.log("\n\n\n\nIF");
-              console.log(this.testCases.data[i].id);
+              console.log(self.testCases.data[i].id);
               console.log("\n==\n");
               console.log(tc.tcID);
               console.log("\n\n\n\n");
-              if (('"' + this.testCases.data[i].id + '"') == tc.tcID) {
+              if (('"' + self.testCases.data[i].id + '"') == tc.tcID) {
                 console.log("\n\n----------- WE FOUND THE TEST CASE\n\n");
-                this.accordions[currentTC].input = this.testCases.data[i].input;
+                self.accordions[currentTC].input = self.testCases.data[i].input;
               }
             }
 
