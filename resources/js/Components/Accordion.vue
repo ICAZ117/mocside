@@ -6,7 +6,8 @@
           <template v-slot:title>
             {{ accordion.title }}
             <div class="right">
-              <div v-if="accordion.isSuccessful == 'running'" class="spinner"></div>
+              <!-- v-if="accordion.isSuccessful == 'running'" -->
+              <div  class="spinner"></div>
             </div>
           </template>
 
