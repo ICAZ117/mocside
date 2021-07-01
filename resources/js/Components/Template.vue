@@ -47,7 +47,7 @@ export default {
   props: ["problemID"],
   data() {
     return {
-      saveStatus: "All changes have been saved",  //not working quite yet
+      saveStatus: "",
       lang: "",
       showEditor: false,
       content: "",
