@@ -3,7 +3,12 @@
     <div v-for="accordion in accordions" :key="accordion.title">
       <div>
         <BaseAccordion :isSuccessful="accordion.isSuccessful">
-          <template v-slot:title>{{ accordion.title }}</template>
+          <template v-slot:title>
+            {{ accordion.title }}
+            <div class="right">
+              <div v-if="accordion.isSuccessful == 'running'" class="spinner"></div>
+            </div>
+          </template>
 
           <template v-slot:content>
             <div>{{ accordion.text }}</div>
