@@ -303,11 +303,12 @@ export default {
 
       var currentTC = 0;
 
-      for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
+      for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
         var tc = {
-          userOut: dump[i],
-          profOut: dump[i + 1],
-          compare: dump[i + 2],
+          tcID: dump[i],
+          userOut: dump[i + 1],
+          profOut: dump[i + 2],
+          compare: dump[i + 3],
         };
 
         // IF the code has a compile error, handle it
@@ -316,7 +317,7 @@ export default {
             {
               title: "Compilation Error",
               text: JSON.parse(tc.userOut)[0],
-              input: this.testCases.data[i].input,
+              input: this.testCases.data[currentTC].input,
               userOut: "",
               profOut: "",
               differences: "",
