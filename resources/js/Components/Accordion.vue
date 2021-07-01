@@ -2,7 +2,7 @@
   <div>
     <div v-for="accordion in accordions" :key="accordion.title">
       <div>
-        <BaseAccordion :isSuccessful="accordion.isSuccessful" @toggle="toggle">
+        <BaseAccordion :isSuccessful="accordion.isSuccessful" @toggle="toggle" :key="show">
           <template v-slot:title>
             <i v-if="!show" class="fas fa-chevron-right"></i>
             <i v-if="show" class="fas fa-chevron-down"></i>
