@@ -311,6 +311,9 @@ export default {
           compare: dump[i + 3],
         };
 
+
+        console.log("\ntcID: " + tcID);
+
         // IF the code has a compile error, handle it
         if (tc.compare == '"compilationError"') {
           this.accordions = [
