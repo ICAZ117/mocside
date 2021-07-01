@@ -208,15 +208,21 @@ class AssignmentController extends Controller
             // $copies[1] is the successor in case of original delete.
             $isOriginal = $first->copy_id == $first->id;
             if ($isOriginal) {
-                // fix pointers
-                // $course1 = $first->course;
-                $lab2 = $copies[1]->lab;
-                $first->lab_id = $lab2->id;
-                $first->save();
-                // delete copies[1]
-                $husk = $copies[1];
-                $husk->delete();
-                return response()->json(['message' => 'Delete successful and pointers cleaned.', 'data' => $husk], 200);
+                if (count($copies) > 1) {
+                    // fix pointers
+                    // $course1 = $first->course;
+                    $lab2 = $copies[1]->lab;
+                    $first->lab_id = $lab2->id;
+                    $first->save();
+                    // delete copies[1]
+                    $husk = $copies[1];
+                    $husk->delete();
+                    return response()->json(['message' => 'Delete successful and pointers cleaned.', 'data' => $husk], 200);
+                } else {
+                    // we are deleting sole copy
+                    $first->delete();
+                    return response()->json(['message' => 'Delete sucessful with no cleanup.', 'data' => $first], 200);
+                }
             }
             // delete $id
             $first->delete();
