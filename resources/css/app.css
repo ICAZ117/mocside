@@ -420,11 +420,11 @@ nav {
 }
 
 .btn-success {
-    background-color: rgb(76, 197, 102);
+    background-color: rgb(76, 197, 102)!important;
 }
 
 .btn-secondary {
-    background-color: lightgrey;
+    background-color: lightgrey!important;
 }
 
 .btn-danger {
