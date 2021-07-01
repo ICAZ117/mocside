@@ -805,7 +805,7 @@ thead.gradebook {
 }
 .modal-content {
     overflow: auto;
-    padding: 2.5rem 1rem !important;
+    padding: 2.5rem 1rem 1rem 1rem!important;
 }
 .modal-close {
     position: absolute;
@@ -958,9 +958,10 @@ thead.gradebook {
 .create-assignment {
     padding-top: 2rem;
     background-color: white !important;
-    min-height: calc(100vh - (var(--nav-height) + 88px)) !important;
+    height: 100%;
+    /* min-height: calc(100vh - (var(--nav-height) + 88px)) !important;
     height: calc(100vh - (var(--nav-height) + 88px)) !important;
-    max-height: calc(100vh - (var(--nav-height) + 88px)) !important;
+    max-height: calc(100vh - (var(--nav-height) + 88px)) !important; */
 }
 
 .tab {
