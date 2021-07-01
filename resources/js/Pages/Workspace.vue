@@ -48,6 +48,7 @@ export default {
       codeID: "",
       forceReload: 0,
       childIsOpen: false,
+      saveStatus: "",
     };
   },
   methods: {
@@ -119,13 +120,10 @@ export default {
       }
     },
     updateContent(e) {
-      // console.log(e);
-      //e is {code: "...", input: "..."}
+      this.saveStatus = "Saving..."
       if (this.lang == "Java") {
-        // console.log(e.code);
         this.code_j = e.code;
       } else {
-        // console.log(e.code);
         this.code_p = e.code;
       }
       this.timeout();
@@ -142,6 +140,7 @@ export default {
           code: this.code_p,
         };
         const res = await API.apiClient.put(`/code/${this.pID}`, payload);
+        this.saveStatus = "All changes have been saved"
       }
     }, 1000),
   },
