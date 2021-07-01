@@ -43,6 +43,7 @@ Bug Fixes:
 * Add profile Page
 * Add default profile pictures/profile picture upload
 * Find way to increase loading speed of pictures
+* Change implementation from dates to datetimes
 
 * Navbar
 	* Style Navbar
@@ -84,6 +85,10 @@ Bug Fixes:
 * Workspace Page
 	* perhaps return and create a real front terminal, instead of fake version, otherwise perhaps add clear command to fake terminal
 	* save the results of the student when they choose to submit after completing the submit run of their code
+	* users cannot submit their code if it is passed the due date for said problem....problem duedate or lab duedate?
+	* Users can still test their code against the test cases but cannot submit
+	* Upon Submitting their code users can no longer resubmit,...ie they keep their current grade for said problem
+	* upon submitting their code users can inspect the model solution
 
 * Edit/Add Course
 	* styling
