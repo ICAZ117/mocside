@@ -2,6 +2,8 @@
   <div :class="bg">
     <div class="accordion" @click="toggleItem">
       <h6 class="title">
+        <i v-if="!show" class="fas fa-chevron-right"></i>
+        <i v-if="show" class="fas fa-chevron-down"></i>
         <slot name="title"></slot>
       </h6>
     </div>
@@ -25,12 +27,12 @@ export default {
       if (this.isSuccessful === "running") {
         // Grey bg
         this.bg = "wrapper";
-      } 
+      }
       // tc passed
       else if (this.isSuccessful === true) {
         // Green bg
         this.bg = "wrapper success";
-      } 
+      }
       // tc failed
       else if (this.isSuccessful === false) {
         // Red bg
@@ -58,7 +60,7 @@ export default {
 <style scoped>
 .wrapper {
   padding: 10px;
-  margin: 20px 0px!important;
+  margin: 20px 0px !important;
   background-color: #efefef;
 }
 .accordion {
@@ -69,6 +71,7 @@ export default {
 }
 .title {
   margin: 0;
+  width: 100%;
 }
 .content {
   text-align: left;
