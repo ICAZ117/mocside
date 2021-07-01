@@ -388,7 +388,7 @@ export default {
             var match = "";
 
             // Loop over ALL comparison strings
-            for (let j = 1; j < tc.compare.length - 1; j++) {
+            for (let j = 1; j < tc.compare.length; j++) {
               console.log("\n\n\nStart of comparison loop iteration");
 
               console.log("\nDiff: " + diff);
@@ -437,7 +437,7 @@ export default {
               console.log("\nPost-variation Mismatch: " + mismatch);
 
               // IF the mismatch string is NOT empty, concatenate it to diff
-              if (mismatch != "<strike></strike><u></u>") {
+              if (mismatch != "<strike></strike>") {
                 diff += mismatch;
                 console.log("\nAppended mismatch to diff, diff is now: " + diff);
               }
@@ -459,13 +459,12 @@ export default {
               lastUser = currentUser + matchLength;
               lastProf = currentProf + matchLength;
 
-              // 0,0,3
+              // 0,0,2
               // 3,5,5
 
-              // 0000000000111111111
-              // 0123456789012345678
-              // bobHello
-              // MikeyHello
+              // 012 3
+              // 889\n
+              // 888
 
               // Desired output:
               // bob  Hello
