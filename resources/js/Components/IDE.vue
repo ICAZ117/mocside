@@ -354,14 +354,16 @@ export default {
             this.accordions[currentTC].userOut = tc.userOut;
 
             // Loop over all test cases for the current problem and find the test case that has a
-            // matching tcID with the current tcID provided in the supervisor dump. Once we find 
+            // matching tcID with the current tcID provided in the supervisor dump. Once we find
             // the correct test case, set the current accordion's input to the correct test case's
             // input.
             for (let j = 0; j < this.testCases.length; j++) {
-              if (this.testCases.data[i].id == tcID) {
+              if (this.testCases.data[i].id == '"' + tcID + '"') {
                 this.accordions[currentTC].input = this.testCases.data[i].input;
               }
             }
+
+            console.log("\nTest Case Input: " + this.accordions[currentTC].input);
 
             var diff = '<p class="no-margin">';
             var currentUser = 0;
