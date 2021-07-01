@@ -413,7 +413,7 @@ export default {
                 "<strike>" +
                 tc.userOut
                   .substring(lastUser, currentUser)
-                  .replace(/\n/g, "‎&nbsp;") +
+                  .replace(/\n/g, '<span class="unselectable">&nbsp;<br /><br /></span>') +
                 "</strike>";
 
               console.log("\nPre-variation Mismatch: " + mismatch);
