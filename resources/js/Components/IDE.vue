@@ -303,11 +303,12 @@ export default {
 
       var currentTC = 0;
 
-      for (let i = 0; i < res3.data.dump.length - 1; i += 3) {
+      for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
         var tc = {
-          userOut: dump[i],
-          profOut: dump[i + 1],
-          compare: dump[i + 2],
+          tcID: dump[i],
+          userOut: dump[i + 1],
+          profOut: dump[i + 2],
+          compare: dump[i + 3],
         };
 
         // IF the code has a compile error, handle it
@@ -316,7 +317,7 @@ export default {
             {
               title: "Compilation Error",
               text: JSON.parse(tc.userOut)[0],
-              input: this.testCases.data[i].input,
+              input: "",
               userOut: "",
               profOut: "",
               differences: "",
@@ -352,6 +353,16 @@ export default {
             this.accordions[currentTC].profOut = tc.profOut;
             this.accordions[currentTC].userOut = tc.userOut;
 
+            // Loop over all test cases for the current problem and find the test case that has a
+            // matching tcID with the current tcID provided in the supervisor dump. Once we find 
+            // the correct test case, set the current accordion's input to the correct test case's
+            // input.
+            for (let j = 0; j < this.testCases.length; j++) {
+              if (this.testCases.data[i].id == tcID) {
+                this.accordions[currentTC].input = this.testCases.data[i].input;
+              }
+            }
+
             var diff = '<p class="no-margin">';
             var currentUser = 0;
             var currentProf = 0;
@@ -377,7 +388,9 @@ export default {
               currentProf = Number(arr[1]);
               matchLength = Number(arr[2]);
 
-              console.log("\nInput: " + currentUser + "," + currentProf + "," + matchLength);
+              console.log(
+                "\nInput: " + currentUser + "," + currentProf + "," + matchLength
+              );
 
               // Now that we have those values saved, we need to get a substring of the user output.
               // The substring should be from the lastUser pointer to the currentUser pointer, and
@@ -392,7 +405,8 @@ export default {
               // must save the number of characters by which the length of the mismatch in the professor's
               // output exceeds that of the student's.
               mismatchVariation =
-                tc.profOut.substring(lastProf, currentProf).length - (mismatch.length - 17);
+                tc.profOut.substring(lastProf, currentProf).length -
+                (mismatch.length - 17);
 
               console.log("\nMismatch variation: " + mismatchVariation);
 
@@ -468,7 +482,7 @@ export default {
         var accordion = {
           title: this.testCases.data[i].title,
           text: "Running against test case...",
-          input: this.testCases.data[i].input,
+          input: "",
           userOut: "",
           profOut: "",
           differences: "",
