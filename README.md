@@ -31,12 +31,22 @@ Completed:
 
 
 Todo:
-* Fix routing bug going from the edit assignment page to anywhere else
+* Finish up the grading of student code and returning it to front and save on back end
+* Double Check everything is still working
+
+
+Bug Fixes:
+* Fix Url when switching from a child back to home or courses through nav bar
+* enable url to take me to a child route, instead of redirecting....perhaps give 404 when not found...ie i should be able to refresh the page i am on and not return to courses when i do so
+* upon returning from workspace make way for switching languages
+* fix carousel
+* Add profile Page
+* Add default profile pictures/profile picture upload
+* Find way to increase loading speed of pictures
 
 * Navbar
-	* Add active element to highlight the active element
-	* add a red background instead of white when anywhere except the home page
 	* Style Navbar
+	* Combine Logout and profile picture into dropdown with link to logout, and got to user settings, and maybe user grades...archives?
 
 * Home Page
 	* Style Home Page
@@ -49,33 +59,31 @@ Todo:
 
 * Register Page
 	* Style Register Page
-	* Check if Registering User is a new or not
+	* Check if Registering User is a new or not...if already in database...throw error...on username, email, or id
 
 * Logout Button
 	* Style Button
 
 * Course Page
 	* Style Course Page
-	* perhaps make another middle page for professors to go to before labs, which shows the course details, and overview as well as student overview
+	* perhaps make another middle page for professors to go to before labs, which shows the course details, and overview as well as student overview (maybe create this as a child of courses, and a sibling of labs)
 	* Add Sorting Button
+	* Filter Button
 
 * Lab Page
 	* Style Lab Page
-	* Add the Professor version of this page, ie. the add, delete, publish buttons for labs
-	* complete dynamic labs info
 	* confirm delete message
 	* Add Sorting Button
+	* Filter Button
 
 * Problems Page
 	* Style Problems Page
-	* add the professor version of this page, ie. the add, delete, publish buttons for labs
-	* complete dynamic problems info
 	* confirm delete message
-	* on template and model solution add the save status functionality/or remove it
 	* Add Sorting Button
 
 * Workspace Page
-	* return button works, however the workspace is still on screen when returning to parent component
+	* perhaps return and create a real front terminal, instead of fake version, otherwise perhaps add clear command to fake terminal
+	* save the results of the student when they choose to submit after completing the submit run of their code
 
 * Edit/Add Course
 	* styling
@@ -86,15 +94,10 @@ Todo:
 	* confirm delete message
 
 * Edit/Add Problem
-	*styling
+	* styling
 	* confirm delete message
 	* do not allow unadding problem from the only course it is in, must delete problem from the overview tab
+	* On Template & Model Solution add the save status functionality/or remove it
 
 * Docker
 	* Finish up returning grade results to front end
-
-* Fix Url when switching from a child back to home or courses through nav bar
-* enable url to take me to a child route, instead of redirecting....perhaps give 404 when not found
-* upon returning from workspace make way for switching languages
-* fix carousel
-* Add profile Page
