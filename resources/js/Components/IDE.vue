@@ -37,7 +37,7 @@
           content-class="modal-content"
           :esc-to-close="true"
         >
-          <Accordion :accordions="accordions" />
+          <Accordion :accordions="accordions" :key="reloadModal"/>
           <button class="modal-close" @click="showModal = false">x</button>
         </vue-final-modal>
         <div :style="style">
@@ -229,6 +229,7 @@ export default {
     showModal: false,
     accordions: [],
     testCases: [],
+    reloadModal: 0,
   }),
   components: {
     VAceEditor,
@@ -513,6 +514,7 @@ export default {
     showModal: function () {
       if (!this.showModal) {
         this.initAccordion();
+        this.reloadModal++;
       }
     },
   },
