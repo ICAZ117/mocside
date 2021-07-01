@@ -27,7 +27,7 @@
       <div class="save-model">
         <div class="row">
           <button class="btn btn-primary btn-md col-4" @click="saveTemplate()">
-            SAVE CHANGES
+            CHANGE LANGUAGE
           </button>
           <!-- <small class="col-8 saveStatus">{{ saveStatus }}</small> -->
           <small class="col-8 saveStatus">{{ this.saveStatus }}</small>
