@@ -213,6 +213,7 @@ export default {
         await this.Unmounting();
       }
       this.deletedMe = false;
+      //receiving error after here about parent being null...also problem not removed from vue-list through filter?
     },
     async Unmounting() {
       console.log("unmunting problem's children");
