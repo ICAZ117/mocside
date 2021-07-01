@@ -356,7 +356,7 @@ export default {
             tc.profOut = JSON.parse(tc.profOut)[0];
 
             this.accordions[currentTC].profOut = tc.profOut.replace(/\n/g, '‎‎');
-            this.accordions[currentTC].userOut = tc.userOut;
+            this.accordions[currentTC].userOut = tc.userOut.replace(/\n/g, '‎‎');
 
             // Loop over all test cases for the current problem and find the test case that has a
             // matching tcID with the current tcID provided in the supervisor dump. Once we find
