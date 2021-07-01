@@ -361,7 +361,7 @@ export default {
             // matching tcID with the current tcID provided in the supervisor dump. Once we find
             // the correct test case, set the current accordion's input to the correct test case's
             // input.
-            for (let j = 0; j < this.testCases.length; j++) {
+            for (let j = 0; j < this.testCases.data.length; j++) {
               console.log("\n\n\n\nIF");
               console.log(this.testCases.data[i].id);
               console.log("\n==\n");
