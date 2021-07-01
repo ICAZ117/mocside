@@ -130,10 +130,14 @@ export default {
       this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
     },
     async deleteProblem(problem, key) {
-      const res = await API.apiClient.delete(`/problems/${problem.id}`);
+      var flag = confirm("Are you Sure you want to remove " + problem.name + " from this Lab?");
+      if(flag) {
+        // remove this problem from the current lab
+        const res = await API.apiClient.delete(`/problems/${problem.id}`);
 
-      //filter the problems list
-      this.problems = this.problems.filter((p, i) => i  != key);
+        //filter the problems list
+        this.problems = this.problems.filter((p, i) => i  != key);
+      }
     },
     goToProblem(id) {
       this.childIsOpen = true;
