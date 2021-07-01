@@ -419,6 +419,14 @@ nav {
     min-width: 8rem !important;
 }
 
+.btn-success {
+    background-color: rgb(76, 197, 102);
+}
+
+.btn-secondary {
+    background-color: lightgrey;
+}
+
 .btn-danger {
     background-color: var(--FSCred) !important;
     border: 0.05rem solid var(--FSCred) !important;
