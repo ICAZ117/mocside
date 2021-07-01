@@ -106,6 +106,7 @@ export default {
       progress: [],
       authUser: null,
       fscID: null,
+      deletedMe: false,
     };
   },
   methods: {
@@ -148,6 +149,7 @@ export default {
       this.problems = this.problems.filter((p, i) => i  != p.id);
 
       //call unmounting of children
+      this.deletedMe = true;
       this.Unmounting();
     },
     goToProblem(id) {
@@ -200,12 +202,15 @@ export default {
       }
     },
     async problemEdited() {
-      ///update the list of courses
-      this.problems = this.problems.filter((p) => p.id  != this.problemID);
-      const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      this.problems.push(problem.data.data);
-      console.log(problem.data.data);
-      await this.Unmounting();
+      if(!this.deletedMe) {
+        ///update the list of courses
+        this.problems = this.problems.filter((p) => p.id  != this.problemID);
+        const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+        this.problems.push(problem.data.data);
+        console.log(problem.data.data);
+        await this.Unmounting();
+      }
+      this.deletedMe = false;
     },
     async Unmounting() {
       this.childIsOpen = false;
