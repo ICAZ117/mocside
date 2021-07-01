@@ -828,19 +828,19 @@ thead.gradebook {
 }
 
 .success {
-    background-color: #ddecdf!important;
+    background-color: #ddecdf !important;
     color: #71a381;
     padding: 5px;
 }
 
 .failed {
-    background-color: #fcf0ee!important;
+    background-color: #fcf0ee !important;
     color: #d69c97;
     padding: 5px;
 }
 
 .info {
-    background-color: #efefef!important;
+    background-color: #efefef !important;
     color: #616161;
     padding: 5px;
 }
@@ -853,7 +853,7 @@ thead.gradebook {
 }
 
 .no-margin {
-    margin: 0!important;
+    margin: 0 !important;
 }
 
 .unselectable {
@@ -863,6 +863,28 @@ thead.gradebook {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.spinner {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #525252; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.right {
+    float: right;
 }
 
 /*========= ADD ASSIGNMENT =========*/
