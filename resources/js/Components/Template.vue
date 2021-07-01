@@ -30,7 +30,7 @@
             CHANGE LANGUAGE
           </button>
           <!-- <small class="col-8 saveStatus">{{ saveStatus }}</small> -->
-          <small class="col-8 saveStatus">save status not working quite yet</small>
+          <small class="col-8 saveStatus">{{ this.saveStatus }}</small>
         </div>
       </div>
 
