@@ -69,6 +69,7 @@ export default {
 }
 .title {
   margin: 0;
+  width: 100%;
 }
 .content {
   text-align: left;
