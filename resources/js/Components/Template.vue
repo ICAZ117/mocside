@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <IDE :lang="lang" :showSubmit="false" v-model:saved_j="template_j" v-model:saved_p="template_p" @update="updateContent" />
+      <IDE :lang="lang" :problemID="problemID" :showSubmit="false" v-model:saved_j="template_j" v-model:saved_p="template_p" @update="updateContent" />
     </div>
   </div>
 </template>
