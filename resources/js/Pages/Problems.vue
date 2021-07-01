@@ -83,6 +83,7 @@
   <router-view
     @unmounting="Unmounting()"
     @problemEdited="problemEdited()"
+    @deleteMe="deleteMe()"
     v-if="childIsOpen"
     :problemID="problemID"
     :lang="lang"
@@ -138,6 +139,16 @@ export default {
         //filter the problems list
         this.problems = this.problems.filter((p, i) => i  != key);
       }
+    },
+    async deleteMe() {
+      // remove this problem from the current lab
+      // const res = await API.apiClient.delete(`/problems/${problem.id}`);
+
+      //filter the problems list
+      // this.problems = this.problems.filter((p, i) => i  != key);
+      console.log("made it");
+
+      //call unmounting of children
     },
     goToProblem(id) {
       this.childIsOpen = true;
