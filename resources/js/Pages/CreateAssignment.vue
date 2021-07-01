@@ -70,7 +70,7 @@ const tabs = [
 
 export default defineComponent({
   props: ["problemID"],
-  emits: ["unmounting", "problemEdited"],
+  emits: ["unmounting", "problemEdited", "deleteMe"],
   components: { Overview, Assign, Template, TestBench, ModelSolution, GradeBook },
   name: "Create Assignment",
   setup() {
