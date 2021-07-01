@@ -3,13 +3,25 @@
     <div v-for="accordion in accordions" :key="accordion.title">
       <div>
         <!-- @toggle="toggle" :key="show" -->
-        <BaseAccordion :isSuccessful="accordion.isSuccessful" >
+        <BaseAccordion :isSuccessful="accordion.isSuccessful">
           <template v-slot:title>
             {{ accordion.title }}
             <div class="right">
-              <div v-if="accordion.isSuccessful == 'running'" class="spinner"></div>
-              <div v-if="accordion.isSuccessful == true" class="fas fa-check"></div>
-              <div v-if="accordion.isSuccessful == false" class="fas fa-times"></div>
+              <div
+                v-if="accordion.isSuccessful == 'running'"
+                class="spinner"
+                style="padding-top: 2px"
+              ></div>
+              <div
+                v-if="accordion.isSuccessful == true"
+                class="fas fa-check"
+                style="padding-top: 2px"
+              ></div>
+              <div
+                v-if="accordion.isSuccessful == false"
+                class="fas fa-times"
+                style="padding-top: 2px"
+              ></div>
             </div>
           </template>
 
