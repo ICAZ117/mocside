@@ -69,6 +69,7 @@ export default {
     },
     changeLanguage() {
       console.log("Inside changeLanguage()");
+      this.showEditor = false;
     },
     updateContent(e) {
       this.content = e.code;
