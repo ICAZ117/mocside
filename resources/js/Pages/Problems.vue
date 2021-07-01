@@ -142,13 +142,13 @@ export default {
     },
     async deleteMe() {
       // remove this problem from the current lab
-      // const res = await API.apiClient.delete(`/problems/${problem.id}`);
+      const res = await API.apiClient.delete(`/problems/${problem.id}`);
 
       //filter the problems list
-      // this.problems = this.problems.filter((p, i) => i  != p.id);
-      console.log(this.problemID);
+      this.problems = this.problems.filter((p, i) => i  != p.id);
 
       //call unmounting of children
+      this.Unmounting();
     },
     goToProblem(id) {
       this.childIsOpen = true;
