@@ -30,7 +30,7 @@
             SAVE CHANGES
           </button>
           <!-- <small class="col-8 saveStatus">{{ saveStatus }}</small> -->
-          <small class="col-8 saveStatus">save status not working quite yet</small>
+          <small class="col-8 saveStatus">{{ this.saveStatus }}</small>
         </div>
       </div>
 
@@ -82,7 +82,6 @@ export default {
           "python_model": this.content,
         }
       };
-      console.log(payload);
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
       this.saveStatus = "All changes have been saved";
     }, 500),
