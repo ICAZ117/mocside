@@ -29,6 +29,7 @@
       <tab-panel :val="'Overview'">
         <Overview
           @update="updateOverview"
+          @delete-problem="deleteProblem"
           :overview="overview"
           :problemID="assignmentID"
         />
@@ -127,6 +128,9 @@ export default defineComponent({
       };
       const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
     }, 500),
+    deleteProblem() {
+      this.$emit("deleteMe");
+    },
   },
   beforeMount() {
     this.getInfo();

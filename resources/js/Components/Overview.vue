@@ -5,7 +5,7 @@
       <Tiptap :savedText="JSON.parse(overview)" @input="save" :showMenuBar="true" :isDark="false" />
       <hr />
       <h5>Proceed with caution!</h5>
-      <button class="btn btn-danger btn-lg">DELETE ASSIGNMENT</button>
+      <button class="btn btn-danger btn-lg" @click="deleteProblem()">DELETE ASSIGNMENT</button>
     </div>
   </div>
 </template>
@@ -15,6 +15,7 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
+  emits: ["delete-problem"],
   props: {
     overview: {
       type: Object,
@@ -41,6 +42,12 @@ export default {
     save(e) {
       this.newText = e;
       this.timeout(this.assignmentID);
+    },
+    deleteProblem() {
+      var flag = confirm("Are you Sure you want to remove " + problem.name + " from this Lab?");
+      if(flag) {
+        this.$emit("delete-problem");
+      }
     },
   },
   beforeMount() {
