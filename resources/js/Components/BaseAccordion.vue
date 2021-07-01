@@ -2,10 +2,14 @@
   <div :class="bg">
     <div class="accordion" @click="toggleItem">
       <div class="title">
-        <div v-show="!show" class="fas fa-chevron-right"></div>
-        <div v-show="show" class="fas fa-chevron-down"></div>
+        <div v-show="!show">
+          <div class="fas fa-chevron-right"></div>
+        </div>
+        <div v-show="show">
+          <div class="fas fa-chevron-down"></div>
+        </div>
       </div>
-      <h6 class="title">
+      <h6 class="title fullWidth">
         <slot name="title"></slot>
       </h6>
     </div>
@@ -73,7 +77,10 @@ export default {
 }
 .title {
   margin: 0;
+}
+.fullWidth {
   width: 100%;
+  padding: 0 0 0 5px!important;
 }
 .content {
   text-align: left;
