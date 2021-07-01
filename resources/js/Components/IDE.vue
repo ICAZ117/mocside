@@ -40,8 +40,8 @@
           <Accordion :accordions="accordions" :key="reloadModal"/>
           <button class="modal-close" @click="showModal = false">x</button>
           <div class="row">
-            <button class="col-4 btn btn-md">Keep Working</button>
-            <button class="col-8 btn btn-md btn-success">Idk about my grade, submit</button>
+            <button class="col-6 btn btn-md btn-secondary">Keep searching Stack Overflow</button>
+            <button class="col-6 btn btn-md btn-success">Idk about my grade, submit</button>
           </div>
         </vue-final-modal>
         <div :style="style">
