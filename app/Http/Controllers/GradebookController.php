@@ -329,7 +329,7 @@ class GradebookController extends Controller
         }
         if (!$hasLabProgress) {
             array_push($student_lab_book['labs'], $lab->id);
-            $student_lab_book['grades'][$lab_id] = $earned_points;
+            $student_lab_book['grades'][$lab->id] = $earned_points;
             $lab_book['grades'][$fsc_id] = $earned_points;
         }
         $lab->gradebook = json_encode($lab_book);
