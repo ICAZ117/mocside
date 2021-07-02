@@ -52,7 +52,7 @@ class GradebookController extends Controller
                 'students' => [],
                 'grades' => array()
             );
-            if (strcasecmp($validData['scope'], 'course')) {
+            if (strcasecmp($validData['scope'], 'course') == 0) {
                 $course = Course::find($id);
                 $owner_id = $course->owner_id;
                 // on course creation, there will be no roster
@@ -64,7 +64,7 @@ class GradebookController extends Controller
                 } else {
                     return response()->json(['message' => 'This is not your course!'], 403);
                 }
-            } else if (strcasecmp($validData['scope'], 'lab')) {
+            } else if (strcasecmp($validData['scope'], 'lab') == 0) {
                 $lab = Lab::find($id);
                 // in this case, the parent course may have a roster.
                 $course_id = $lab->course_id;
