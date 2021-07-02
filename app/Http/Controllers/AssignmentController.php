@@ -254,7 +254,7 @@ class AssignmentController extends Controller
         $validData = $request->validate([
             'lab_id' => 'required|int',
         ]);
-        $seed = Assignment::find($id);
+        $seed = Assignment::findOrFail($id);
         
         // owner/admin gate
         $user = Auth::user();
