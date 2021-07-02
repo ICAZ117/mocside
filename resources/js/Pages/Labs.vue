@@ -1,13 +1,14 @@
 <template>
   <div v-if="!childisOpen">
     <!-- Main Page-->
-    <button @click="this.$emit('unmounting')" class="btn btn-danger btn-block">
-      Return to Courses
-    </button>
     <div class="courses header">
       <small
-        ><span class="navigation">{{ username }}{{ currentDirectory }}</span></small
-      >
+        ><span class="navigation">{{ username }}{{ currentDirectory }}</span>
+        <br />
+        <span class="navigation" @click="this.$emit('unmounting')"
+          >↩ Return to Courses</span
+        >
+      </small>
       <div class="heading">
         <h2>Labs</h2>
         <hr />
