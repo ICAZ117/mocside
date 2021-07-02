@@ -6,7 +6,6 @@
         <small
           ><span class="navigation">{{ username }}{{ currentDirectory }}</span></small
         >
-        <br />
         <div class="heading">
           <h2>My Courses</h2>
           <hr />
