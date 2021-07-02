@@ -33,7 +33,7 @@ class Student extends Model
     public function inCourse($id): bool
     {
         // determines if user is in course
-        $courses = $this->courses;
+        $courses = json_decode($this->courses, true);
         foreach ($courses as $course) {
             if ($course == $id) {
                 return true;
