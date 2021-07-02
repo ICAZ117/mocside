@@ -209,7 +209,7 @@ export default {
               console.log("should have changed back the isAdded");
               console.log(course);
               // this.switchedLab(course);
-              await this.sleep(500);
+              await this.sleep(10);
               course.isAdded=true;
               console.log(course);
             }
