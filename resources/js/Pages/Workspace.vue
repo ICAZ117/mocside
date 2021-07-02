@@ -69,14 +69,14 @@ export default {
         //create progress
         if(this.lang == "Java") {
           payload = {
-            lang: this.lang,
+            lang: this.lang.toLowerCase(0),
             problem_id: this.problemID,
             code: this.assignment.java_starter,
           }
         }
         else {
           payload = {
-            lang: this.lang,
+            lang: this.lang.toLowerCase(0),
             problem_id: this.problemID,
             code: this.assignment.python_starter,
           }
