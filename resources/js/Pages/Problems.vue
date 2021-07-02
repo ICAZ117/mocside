@@ -143,15 +143,9 @@ export default {
     },
     async deleteMe() {
       console.log("deleteMe");
-      // remove this problem from the current lab
-      const res = await API.apiClient.delete(`/problems/${this.problemID}`);
 
-      //filter the problems list
-      this.problems = this.problems.filter((p, i) => i  != p.id);
-
-      //call unmounting of children
+      //set variable to be used when problemEdited event is called
       this.deletedMe = true;
-      this.Unmounting();
     },
     goToProblem(id) {
       this.childIsOpen = true;
@@ -203,20 +197,27 @@ export default {
       }
     },
     async problemEdited() {
-      console.log("problem edited");
-      if(!this.deletedMe) {
-        ///update the list of courses
-        this.problems = this.problems.filter((p) => p.id  != this.problemID);
-        const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-        this.problems.push(problem.data.data);
-        console.log(problem.data.data);
-        await this.Unmounting();
+      var tempID = this.problemID;
+      ///update the list of courses
+      this.problems = this.problems.filter((p) => p.id  != this.problemID);
+      const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      this.problems.push(problem.data.data);
+      console.log(problem.data.data);
+      await this.Unmounting();
+
+      //check if the problem was deleted from child
+      if(this.deletedMe) {
+        //child deleted button was pressed
+        console.log("you gonna delete me");
+        // remove this problem from the current lab
+        const res = await API.apiClient.delete(`/problems/${tempID}`);
+
+        //filter the problems list
+        this.problems = this.problems.filter((p) => p.id  != tempID);
+        console.log("attempted delete and filter");
       }
-      this.deletedMe = false;
-      //receiving error after here about parent being null...also problem not removed from vue-list through filter?
     },
     async Unmounting() {
-      console.log("unmunting problem's children");
       this.childIsOpen = false;
       this.problemID = null;
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
