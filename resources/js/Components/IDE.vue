@@ -506,6 +506,8 @@ export default {
 
       for (let i = 0; i < this.tcGrades.length; i++) {
         gradebook[this.tcGrades[i].ID] = this.tcGrades[i].passed;
+        console.log("\n\ntcID: " + this.tcGrades[i].ID);
+        console.log("Passed: " + this.tcGrades[i].passed);
       }
 
       var payload = {
