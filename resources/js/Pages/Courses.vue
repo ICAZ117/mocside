@@ -3,7 +3,7 @@
     <!-- Main Page-->
     <div v-if="!childIsOpen">
       <div class="courses header">
-        <span class="navigation">{{ authUser.username }}{{ currentDirectory }}</span>
+        <small><span class="navigation">{{ username }}{{ currentDirectory }}</span></small>
         <br />
         <div class="heading">
           <h2>My Courses</h2>
@@ -97,6 +97,7 @@ export default {
       courses: [],
       childIsOpen: false,
       courseID: null,
+      username: "",
     };
   },
 
@@ -210,7 +211,8 @@ export default {
     this.getCourses();
   },
   async beforeMount() {
-    this.authUser = await this.$store.getters["auth/authUser"];
+    this.authUser = await store.getters["auth/authUser"];
+    this.username = this.authUser.username;
     console.log(this.authUser);
   },
 };
