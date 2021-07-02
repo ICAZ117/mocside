@@ -202,6 +202,7 @@ export default {
             var flag = confirm("This is the last copy of this assignment, are you sure you want to delete it forever");
             if(flag) {
               this.deleteFromCourse(course, lab);
+              //if we decided to delete then we need to return to problems page...otherwise edits will go to empty route and give errors
             }
             
           }
