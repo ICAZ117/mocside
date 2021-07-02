@@ -29,4 +29,16 @@ class Student extends Model
     {
         return $this->belongsTo(User::class, 'fsc_id', 'fsc_id');
     }
+
+    public function inCourse($id): bool
+    {
+        // determines if user is in course
+        $courses = $this->courses;
+        foreach ($courses as $course) {
+            if ($course == $id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

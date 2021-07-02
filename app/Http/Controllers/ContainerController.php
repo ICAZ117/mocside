@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 // use App\Events\InputSent;
-use App\Events\ContainerOut;
+// use App\Events\ContainerOut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -402,6 +402,13 @@ class ContainerController extends Controller
     }
 
     /*
+    *   This group of functions attempted to utilize laravel-websockets
+    *   as a pusher replacement to reactively send all stdout to the front-end.
+    *   It didn't work because the promise that started the listener
+    *   would never resolve, essentially blocking us from sending input (among other things).
+    *   I could start a child process, but I am nervous to run code from
+    *   php, as I view it as insecure. This may be achieved in python or go, 
+    *   langs with fully supported docker sdks.
     public function spinNoStart(Request $request, $id)
     {
         $user = Auth::user();
