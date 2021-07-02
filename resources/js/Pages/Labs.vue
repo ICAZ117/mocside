@@ -2,18 +2,18 @@
   <div v-if="!childisOpen">
     <!-- Main Page-->
     <div class="courses header">
-      <small
-        ><span class="navigation">{{ username }}{{ currentDirectory }}</span>
-        <br />
-        <span class="navigation" @click="this.$emit('unmounting')"
-          >↩ Return to Courses</span
-        >
-      </small>
       <div class="heading">
         <h2>Labs</h2>
         <hr />
       </div>
     </div>
+
+    <small class="navigation"
+      ><span>{{ username }}{{ currentDirectory }}</span>
+      <br />
+      <span class="pointer" @click="this.$emit('unmounting')">↩ Return to Courses</span>
+    </small>
+
     <a v-if="isProf" class="pointer no-decor" @click="addLab">ADD</a>
     <table class="table labtable">
       <thead class="labtable">
