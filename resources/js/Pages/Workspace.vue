@@ -60,7 +60,7 @@ export default {
       this.title = this.assignment.name;
       this.description = this.assignment.description;
       //check if empty....post if empty
-      payload = {
+      var payload = {
         lang: this.lang,
       }
       const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
