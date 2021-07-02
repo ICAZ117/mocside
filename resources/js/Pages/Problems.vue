@@ -208,13 +208,11 @@ export default {
       //check if the problem was deleted from child
       if(this.deletedMe) {
         //child deleted button was pressed
-        console.log("you gonna delete me");
         // remove this problem from the current lab
         const res = await API.apiClient.delete(`/problems/${tempID}`);
 
         //filter the problems list
         this.problems = this.problems.filter((p) => p.id  != tempID);
-        console.log("attempted delete and filter");
       }
     },
     async Unmounting() {
