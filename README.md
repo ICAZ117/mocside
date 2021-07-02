@@ -35,6 +35,8 @@ Todo:
 * Double Check everything is still working
 * add ability for professors to create temp url to give to students so they can sign up
 
+* deleting some problems has not reset their copies copy id when needed...ie delete 14 when it has copies should make the first copy switch copy id to itself, ie 45's copy id becomes 45
+
 
 Bug Fixes:
 * Fix Url when switching from a child back to home or courses through nav bar
