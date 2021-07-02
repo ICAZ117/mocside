@@ -213,7 +213,7 @@ export default {
         const res = await API.apiClient.delete(`/problems/${tempID}`);
 
         //filter the problems list
-        this.problems = this.problems.filter((p) => p  != tempID);
+        this.problems = this.problems.filter((p) => p.id  != tempID);
         console.log("attempted delete and filter");
       }
     },
