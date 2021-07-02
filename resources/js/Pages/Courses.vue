@@ -20,6 +20,8 @@
             v-for="(course, key) in courses"
             :key="course.id"
             :course="course"
+            id="clickable"
+            @contextmenu="showMenu"
           >
             <a @click="goToLabs(course.id)" class="no-decor pointer">
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
@@ -41,18 +43,6 @@
                 </div>
               </div>
             </a>
-            <a
-              v-if="isProf"
-              @click="editCourse(course.id)"
-              class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-              >•••</a
-            >
-            <a
-              v-if="isProf"
-              @click="deleteCourse(course.id, course, key)"
-              class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-              >X</a
-            >
           </div>
           <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
@@ -70,6 +60,20 @@
               </div>
             </a>
           </div>
+          <ul id="menu">
+            <li class="menu-item">
+              <a v-if="isProf" class="pointer no-decor" @click="editCourse(course.id)"
+                >Edit</a
+              >
+            </li>
+            <li class="menu-item">
+              <a v-if="isProf" class="pointer no-decor" @click="deleteCourse(course.id, course, key)"
+                >Delete</a
+              >
+            </li>
+          </ul>
+
+          <div id="out-click" @click="closeMenu"></div>
           <div v-if="courses.length == 0">
             <h1>No Registered Courses</h1>
           </div>
@@ -113,6 +117,28 @@ export default {
     };
   },
   methods: {
+    showMenu(e) {
+      const menu = document.getElementById("menu");
+      const outClick = document.getElementById("out-click");
+
+      console.log(menu);
+      console.log(outClick);
+
+      e.preventDefault();
+
+      menu.style.top = `${e.clientY}px`;
+      menu.style.left = `${e.clientX}px`;
+      menu.classList.add("show");
+
+      outClick.style.display = "block";
+    },
+    closeMenu() {
+      const menu = document.getElementById("menu");
+      const outClick = document.getElementById("out-click");
+
+      menu.classList.remove("show");
+      outClick.style.display = "none";
+    },
     async addCourse() {
       var payload = {
         name: "New Course",
