@@ -68,7 +68,7 @@ class TestCaseController extends Controller
         if ($user->isAdmin() || $user->isProf()) {
             return Assignment::find($problem_id)->test_cases;
         } else {
-            return SmallCaseResource::collection(Assignment::find($problem_id)->test_cases);
+            return response()->json(["data" => SmallCaseResource::collection(Assignment::find($problem_id)->test_cases)], 200);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
