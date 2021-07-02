@@ -687,7 +687,6 @@ thead.gradebook {
 #menu {
     display: block;
     background-color: white;
-    padding: 10px 0px;
     border-radius: 5px;
     box-shadow: 2px 2px 30px lightgrey;
     position: absolute;
@@ -702,6 +701,7 @@ thead.gradebook {
     opacity: 1;
     transform: scale(1);
     transform-origin: top left;
+    padding: 0;
 }
 
 .menu-item {
@@ -712,7 +712,8 @@ thead.gradebook {
 }
 
 .menu-item:hover {
-    background-color: #eee;
+    background-color: var(--FSCred);
+    color: white;
     cursor: pointer;
 }
 

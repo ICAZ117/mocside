@@ -1,6 +1,6 @@
 <template>
   <div class="edit-course">
-    <h3 class="edit-course-title">Course Editor</h3>
+    <h3 class="edit-course-title">Edit Course</h3>
     <div class="course-create-form">
       <form @submit.prevent="handleSubmit" class="course-form">
         <div class="form-group">
