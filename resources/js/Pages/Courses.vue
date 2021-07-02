@@ -3,13 +3,19 @@
     <!-- Main Page-->
     <div v-if="!childIsOpen">
       <div class="courses header">
+        <span class="navigation">{{ currentDirectory }}</span>
         <h2>My Courses</h2>
         <hr />
       </div>
 
       <div class="coursecontainer">
         <div class="courserow row my-5">
-          <div class="fixed-course-width" v-for="(course, key) in courses" :key="course.id" :course="course">
+          <div
+            class="fixed-course-width"
+            v-for="(course, key) in courses"
+            :key="course.id"
+            :course="course"
+          >
             <a @click="goToLabs(course.id)" class="no-decor pointer">
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -30,16 +36,24 @@
                 </div>
               </div>
             </a>
-            <a v-if="isProf" @click="editCourse(course.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
-            <a v-if="isProf" @click="deleteCourse(course.id, course, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
+            <a
+              v-if="isProf"
+              @click="editCourse(course.id)"
+              class="courselaunch text-danger mx-2 my-1 no-decor pointer"
+              >•••</a
+            >
+            <a
+              v-if="isProf"
+              @click="deleteCourse(course.id, course, key)"
+              class="courselaunch text-danger mx-2 my-1 no-decor pointer"
+              >X</a
+            >
           </div>
           <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
-                  <div
-                    class="courses card-img-add"
-                  ></div>
+                  <div class="courses card-img-add"></div>
                   <!-- <div class="courses card-content">
                     <h6 class="card-title my-3 mx-2 mb-0">Add Course</h6>
                     <hr class="courses my-0" />
@@ -57,13 +71,21 @@
         </div>
       </div>
     </div>
-    <router-view @unmounting="Unmounting()" @courseEdited="courseEdited" v-if="childIsOpen" :courseID="courseID"></router-view>
+    <router-view
+      @unmounting="Unmounting()"
+      @courseEdited="courseEdited"
+      v-if="childIsOpen"
+      :courseID="courseID"
+    ></router-view>
   </div>
 </template>
 
 <script>
 import store from "../Store/index";
 import * as API from "../services/API";
+import { useRoute } from "vue-router";
+
+Share;
 export default {
   data() {
     return {
@@ -72,7 +94,13 @@ export default {
       courses: [],
       childIsOpen: false,
       courseID: null,
+      currentDirectory: "",
     };
+  },
+  setup() {
+    const route = useRoute();
+
+    this.currentDirectory = computed(() => route.path);
   },
   methods: {
     async addCourse() {
@@ -91,9 +119,12 @@ export default {
     },
     async addProfessor() {
       var payload = {
-        "courses": JSON.stringify({"courses":  this.enrolledCourses}),
+        courses: JSON.stringify({ courses: this.enrolledCourses }),
       };
-      const prof = await API.apiClient.put(`/professors/${this.authUser.fsc_user.fsc_id}`, payload);
+      const prof = await API.apiClient.put(
+        `/professors/${this.authUser.fsc_user.fsc_id}`,
+        payload
+      );
       return prof;
     },
     editCourse(id) {
@@ -103,7 +134,7 @@ export default {
     },
     async deleteCourse(id, course, key) {
       var flag = confirm("Are you Sure you want to delete " + course.name);
-      if(flag) {
+      if (flag) {
         this.childIsOpen = false;
         //delete the course
         const res = await API.apiClient.delete(`/courses/${id}`);
@@ -111,7 +142,7 @@ export default {
         console.log("delete Course: " + id);
         var i;
         var ind = null;
-        for(i = 0; i<=this.enrolledCourses.length; i++) {
+        for (i = 0; i <= this.enrolledCourses.length; i++) {
           if (this.enrolledCourses[i] == id) {
             ind = i;
           }
@@ -123,12 +154,10 @@ export default {
         // this.getCourses();
 
         //filter the courses list
-        this.courses = this.courses.filter((c, i) => i  != key);
-      }
-      else {
+        this.courses = this.courses.filter((c, i) => i != key);
+      } else {
         console.log("Delete avoided");
       }
-
     },
     goToLabs(id) {
       this.childIsOpen = true;
@@ -151,21 +180,20 @@ export default {
     },
     async courseEdited() {
       ///update the list of courses
-      this.courses = this.courses.filter((c) => c.id  != this.courseID);
+      this.courses = this.courses.filter((c) => c.id != this.courseID);
       const course = await API.apiClient.get(`/courses/${this.courseID}`);
       this.courses.push(course.data.data);
       this.Unmounting();
     },
   },
   computed: {
-    isProf: function() {
+    isProf: function () {
       if (store.getters["auth/isProf"] == null) {
         return false;
-      }
-      else {
+      } else {
         return store.getters["auth/isProf"];
       }
-    }
+    },
   },
   mounted() {
     this.childIsOpen = false;
@@ -174,6 +202,7 @@ export default {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
+    this.currentDirectory = $route(to.fullpath);
   },
 };
 </script>
