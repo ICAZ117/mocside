@@ -20,9 +20,9 @@ class GradebookController extends Controller
         $validData = $request->validate([
             'scope' => 'required', // course, lab, assignment, student
         ]);
-        if (strcasecmp($validData['scope'], 'student')) {
+        if (strcasecmp($validData['scope'], 'student') == 0) {
             // init student gradebook.
-            $student = Student::find($id);
+            $student = Student::findOrFail($id);
             if ($user->fsc_id == $student->fsc_id || $user->isAdmin()) {
                 // these will be empty, they should be called upon student creation.
                 $lab_book = array(
