@@ -65,6 +65,24 @@ export default {
       }
       const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
       this.test = empty;
+      if(empty.data.message == "No progress. Please create.") {
+        //create progress
+        if(this.lang == "Java") {
+          payload = {
+            lang: this.lang,
+            problem_id: this.problemID,
+            code: this.assignment.java_starter,
+          }
+        }
+        else {
+          payload = {
+            lang: this.lang,
+            problem_id: this.problemID,
+            code: this.assignment.python_starter,
+          }
+        }
+        const initial = await API.apiClient.post(`/code/`, payload);
+      }
       const res = await API.apiClient.get(`/code/search/${this.problemID}`);
       var progress = res.data.data;
       this.code_j = await this.getJava(progress);
