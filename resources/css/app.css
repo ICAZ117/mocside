@@ -469,7 +469,7 @@ nav {
 }
 
 .courses.header .heading {
-    padding: 1.6rem 5.5rem 0.2rem !important;
+    padding: 0.5rem 5.5rem 0.2rem !important;
 }
 
 .navigation {
@@ -589,7 +589,8 @@ table.labtable,
 table.problemtable,
 table.gradebook {
     background-color: inherit !important;
-    margin: 2rem !important;
+    margin: 4rem 2rem 2rem 2rem !important;
+    width: calc(100vw - 4rem - 3px)!important;
 }
 
 .labtable td,
