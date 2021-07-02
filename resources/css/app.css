@@ -413,10 +413,21 @@ nav {
 
 .btn-lg {
     border-radius: 10px !important;
-    text-transform: uppercase !important;
     font-size: 1rem !important;
     border-width: medium !important;
     min-width: 8rem !important;
+}
+
+.uppercase {
+    text-transform: uppercase !important;
+}
+
+.btn-grey {
+    background-color: gray;
+}
+
+.btn-submit {
+    background-color: rgb(77, 169, 97)!important;
 }
 
 .btn-danger {

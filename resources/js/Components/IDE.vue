@@ -37,12 +37,15 @@
           content-class="modal-content"
           :esc-to-close="true"
         >
-          <Accordion :accordions="accordions" :key="reloadModal"/>
+          <Accordion :accordions="accordions" :key="reloadModal" />
           <button class="modal-close" @click="showModal = false">x</button>
           <div class="row">
-            <button class="col-5 btn btn-lg btn-secondary">Keep searching Stack Overflow</button>
-            <div class="col-2"></div>
-            <button class="col-5 btn btn-lg btn-success">Idk about my grade, submit</button>
+            <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">
+              Keep trying
+            </button>
+            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1">
+              Submit anyway
+            </button>
           </div>
         </vue-final-modal>
         <div :style="style">
@@ -235,6 +238,7 @@ export default {
     accordions: [],
     testCases: [],
     reloadModal: 0,
+    tcGrades: [],
   }),
   components: {
     VAceEditor,
@@ -285,6 +289,7 @@ export default {
     },
     async submitCode() {
       this.showModal = true;
+      this.tcGrades = [];
 
       var payload = {
         code: this.code,
@@ -317,9 +322,6 @@ export default {
           compare: dump[i + 3],
         };
 
-        console.log("\ntcID: " + tc.tcID);
-        console.log("\nTest Case ID (from database): " + this.testCases.data[0].id);
-
         var self = this;
 
         // IF the code has a compile error, handle it
@@ -336,6 +338,14 @@ export default {
               hasError: true,
             },
           ];
+
+          for (let j = 0; j < this.testCases.data.length; j++) {
+            this.tcGrades.push({
+              ID: this.testCases.data[j].id,
+              passed: false,
+            });
+          }
+
           break;
         }
         // ELSE IF the code has a runtime error, handle it
@@ -343,6 +353,10 @@ export default {
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
+          this.tcGrades.push({
+            ID: JSON.parse(tc.tcID),
+            passed: false,
+          });
         }
         // ELSE, the code ran successfully. Now check if it passed the test case or not.
         else {
@@ -352,35 +366,42 @@ export default {
           if (tc.compare[0] == "100.0") {
             this.accordions[currentTC].isSuccessful = true;
             this.accordions[currentTC].text = "Test Case Passed :)";
+            this.tcGrades.push({
+              ID: JSON.parse(tc.tcID),
+              passed: true,
+            });
           }
           // ELSE, code failed test case
           else {
+            this.tcGrades.push({
+              ID: JSON.parse(tc.tcID),
+              passed: false,
+            });
+
             this.accordions[currentTC].isSuccessful = false;
             this.accordions[currentTC].text = "Test Case Failed :(";
 
             tc.userOut = JSON.parse(tc.userOut)[0];
             tc.profOut = JSON.parse(tc.profOut)[0];
 
-            this.accordions[currentTC].profOut = tc.profOut.replace(/\n/g, '<br /><span class="unselectable"><br /></span>');
-            this.accordions[currentTC].userOut = tc.userOut.replace(/\n/g, '<br /><span class="unselectable"><br /></span>');
+            this.accordions[currentTC].profOut = tc.profOut.replace(
+              /\n/g,
+              '<br /><span class="unselectable"><br /></span>'
+            );
+            this.accordions[currentTC].userOut = tc.userOut.replace(
+              /\n/g,
+              '<br /><span class="unselectable"><br /></span>'
+            );
 
             // Loop over all test cases for the current problem and find the test case that has a
             // matching tcID with the current tcID provided in the supervisor dump. Once we find
             // the correct test case, set the current accordion's input to the correct test case's
             // input.
             for (let j = 0; j < this.testCases.data.length; j++) {
-              console.log("\n\n\n\nIF");
-              console.log(self.testCases.data[j].id);
-              console.log("\n==\n");
-              console.log(tc.tcID);
-              console.log("\n\n\n\n");
               if ('"' + self.testCases.data[j].id + '"' == tc.tcID) {
-                console.log("\n\n----------- WE FOUND THE TEST CASE\n\n");
                 self.accordions[currentTC].input = self.testCases.data[j].input;
               }
             }
-
-            console.log("\nTest Case Input: " + this.accordions[currentTC].input);
 
             var diff = '<p class="no-margin">';
             var currentUser = 0;
@@ -394,10 +415,6 @@ export default {
 
             // Loop over ALL comparison strings
             for (let j = 1; j < tc.compare.length; j++) {
-              console.log("\n\n\nStart of comparison loop iteration");
-
-              console.log("\nDiff: " + diff);
-
               // Each comparison string contains three numbers, seperated by commas
               // So, we first split the string on a comma...
               var arr = tc.compare[j].split(",");
@@ -407,10 +424,6 @@ export default {
               currentProf = Number(arr[1]);
               matchLength = Number(arr[2]);
 
-              console.log(
-                "\nInput: " + currentUser + "," + currentProf + "," + matchLength
-              );
-
               // Now that we have those values saved, we need to get a substring of the user output.
               // The substring should be from the lastUser pointer to the currentUser pointer, and
               // it should be saved in mismatch. Furthermore, we should also append HTML strikethrough
@@ -419,10 +432,11 @@ export default {
                 "<strike>" +
                 tc.userOut
                   .substring(lastUser, currentUser)
-                  .replace(/\n/g, '<span class="unselectable">&nbsp;<br /><br /></span>') +
+                  .replace(
+                    /\n/g,
+                    '<span class="unselectable">&nbsp;<br /><br /></span>'
+                  ) +
                 "</strike>";
-
-              console.log("\nPre-variation Mismatch: " + mismatch);
 
               // We must also check to see if the professor's output has any mismatches. If it does, we
               // must save the number of characters by which the length of the mismatch in the professor's
@@ -430,8 +444,6 @@ export default {
               mismatchVariation =
                 tc.profOut.substring(lastProf, currentProf).length -
                 (mismatch.length - 17);
-
-              console.log("\nMismatch variation: " + mismatchVariation);
 
               // In the event that the mismatchVariation is a positive number, we must append
               // mismatchVariation number of spaces to mismatch. To acomplish this, we do a for-loop that
@@ -443,12 +455,9 @@ export default {
                 mismatch += "<u>&nbsp;</u>";
               }
 
-              console.log("\nPost-variation Mismatch: " + mismatch);
-
               // IF the mismatch string is NOT empty, concatenate it to diff
               if (mismatch != "<strike></strike>") {
                 diff += mismatch;
-                console.log("\nAppended mismatch to diff, diff is now: " + diff);
               }
 
               // Next, we must obtain the "match" substring from the user output. This substring should
@@ -456,12 +465,8 @@ export default {
               // in match
               match = tc.userOut.substring(currentUser, currentUser + matchLength);
 
-              console.log("\nMatch: " + match);
-
               // We can now append the match string to diff
               diff += match;
-
-              console.log("\nAppended match to diff, diff is now: " + diff);
 
               // Finally, we adjust lastUser to be the currentUser + matchLength, and lastProf to be the
               // currentProf + matchLength
@@ -478,7 +483,6 @@ export default {
               // Desired output:
               // bob  Hello
               // -----
-              console.log("\nEnd for-loop");
             }
 
             diff += "</p>";
@@ -497,11 +501,25 @@ export default {
       //a[last elem] b[last elem] for 0 elements
       //starts next case
     },
+    submitForGrade() {
+      var gradebook = {};
+
+      for (let i = 0; i < this.tcGrades.length; i++) {
+        gradebook[this.tcGrades[i].ID] = this.tcGrades[i].passed;
+      }
+
+      var payload = {
+        gradebook: JSON.stringify(gradebook),
+      };
+
+      const res = API.apiClient.post(``, payload);
+    },
     initAccordion() {
       this.accordions = [];
 
       for (let i = 0; i < this.testCases.data.length; i++) {
         var accordion = {
+          tcID: "",
           title: this.testCases.data[i].title,
           text: "Running against test case...",
           input: "",
@@ -514,6 +532,9 @@ export default {
         this.accordions.push(accordion);
       }
     },
+    closeModal() {
+      this.showModal = false;
+    },
   },
   watch: {
     showModal: function () {
@@ -524,7 +545,6 @@ export default {
     },
   },
   async mounted() {
-    // console.log("BEFORE MOUNT");
     try {
       if (this.lang == "Java") {
         this.editorLangauge = "java";
@@ -533,27 +553,12 @@ export default {
         this.editorLangauge = "python";
         this.code = this.saved_p;
       }
-      // console.log("Try");
-    } catch (e) {
-      // console.log("Catch");
-    }
+    } catch (e) {}
     this.getStyle();
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
 
     this.initAccordion();
-  },
-  beforeCreate() {
-    // console.log(this.saved_p);
-    // console.log(this.saved_j);
-  },
-  created() {
-    // console.log(this.saved_p);
-    // console.log(this.saved_j);
-  },
-  beforeMount() {
-    // console.log(this.saved_p);
-    // console.log(this.saved_j);
   },
 };
 </script>

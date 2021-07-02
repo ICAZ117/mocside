@@ -140,12 +140,9 @@ export default {
   },
   watch: {
     $route(to) {
-      console.log(to);
       if (to.fullPath != "/") {
-        console.log("Dark");
         this.isDark = true;
       } else {
-        console.log("Light");
         this.isDark = false;
       }
       this.$emit("forceReload");
