@@ -82,18 +82,39 @@ export default {
           }
         }
         const initial = await API.apiClient.post(`/code/`, payload);
-      }
-      const res = await API.apiClient.get(`/code/search/${this.problemID}`);
-      var progress = res.data.data;
-      this.code_j = await this.getJava(progress);
-      this.code_p = await this.getPython(progress);
-      if(this.lang == "Java") {
-        this.codeID = this.jID;
+        if(this.lang == "Java") {
+          this.code_j = this.assignment.java_starter;
+          this.codeID = initial.data.id;
+        }
+        else {
+          this.code_p = this.assignment.python_starter;
+          this.codeID = initial.data.id;
+        }
       }
       else {
-        this.codeID = this.pID;
+        //otherwise not empty
+        if(this.lang == "Java") {
+          this.code_j = empty.data.dump.code;
+          this.codeID = empty.data.dump.id;
+        }
+        else {
+          this.code_p = empty.data.dump.code;
+          this.codeID = empty.data.dump.id;
+        }
       }
       this.forceReload = 1;
+
+      // const res = await API.apiClient.get(`/code/search/${this.problemID}`);
+      // var progress = res.data.data;
+      // this.code_j = await this.getJava(progress);
+      // this.code_p = await this.getPython(progress);
+      // if(this.lang == "Java") {
+      //   this.codeID = this.jID;
+      // }
+      // else {
+      //   this.codeID = this.pID;
+      // }
+      // this.forceReload = 1;
     },
     async getJava(progress) {
       //if first time opening grab template, else grab student code
