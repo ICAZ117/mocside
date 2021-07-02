@@ -513,7 +513,9 @@ export default {
       };
 
       console.log(payload.gradebook);
-      // const res = API.apiClient.post(``, payload);
+      const res = API.apiClient.post(`/gradebook/submit/${this.problemID}`, payload);
+      console.log("\n\n---------- DID WE GRADE CORRECTLY?");
+      console.log(res.data);
     },
     initAccordion() {
       this.accordions = [];
