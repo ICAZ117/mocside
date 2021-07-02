@@ -56,8 +56,6 @@
             <!-- <td>4/20/0420</td> -->
           </tr>
 
-          <tr v-if="isProf" class="lab pointer" @click="addLab"><td colspan="5">Add Lab</td></tr>
-
           <ul id="menu">
             <li class="menu-item">
               <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
@@ -74,6 +72,9 @@
           <div id="out-click" @click="closeMenu"></div>
         </template>
 
+        <tr v-if="isProf" class="lab pointer" @click="addLab">
+          <td colspan="5">Add Lab</td>
+        </tr>
         <!-- <tr
             class="lab"
             style="cursor: pointer"
