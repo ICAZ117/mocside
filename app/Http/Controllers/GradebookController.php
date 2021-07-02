@@ -148,7 +148,7 @@ class GradebookController extends Controller
             $student_course_book['grades'][$id] = '0';
             $student->gradebook_courses = $student_course_book;
             $student->save();
-            return response()->json(['message' => "User enrolled in course " . $id, 'dump'], 200);
+            return response()->json(['message' => "User enrolled in course " . $id, 'dump' => $student], 200);
         }
         return response()->json(["message" => 'User already in course.'], 418);
     }
@@ -273,7 +273,7 @@ class GradebookController extends Controller
         ]);
         $user = Auth::user();
         $fsc_id = $user->fsc_id;
-        $student = Student::findOrFail($fsc_id); // this will fail rq if user not stu
+        $student = Student::where('fsc_id', '=', $fsc_id)->first(); // this will fail rq if user not stu
         $assignment = Assignment::find($id);
         $test_cases = $assignment->test_cases;
         $case_book = json_decode($validData['gradebook'], true);
@@ -296,8 +296,7 @@ class GradebookController extends Controller
         $assignment_book['grades'][$fsc_id] = $earned_points;
         // check to see if student has made previous progress on this assignment
         $hasAssignmentProgress = false; // if they have, it will be in this list and we just edit
-        $list = json_decode($student_assignment_book['assignments'], true); // if line 290 decodes this is unnecessary
-        foreach ($list as $problem_id) {
+        foreach ($student_assignment_book['assignments'] as $problem_id) {
             if ($problem_id == $id) {
                 $hasAssignmentProgress = true;
                 $old_grade = $assignment_book['grades'][$id];
@@ -307,8 +306,7 @@ class GradebookController extends Controller
         }
         if (!$hasAssignmentProgress) {
             // add assignment ID to list
-            array_push($list, $id);
-            $student_assignment_book['assignments'] = $list; // do I need to encode here???
+            array_push($student_assignment_book['assignments'], $id);
         }
         $student_assignment_book['grades'][$id] = $earned_points;
         $assignment->gradebook = json_encode($assignment_book);
@@ -321,8 +319,7 @@ class GradebookController extends Controller
         $lab_book = json_decode($lab->gradebook, true);
         $student_lab_book = json_decode($student->gradebook_labs, true);
         $hasLabProgress = false;
-        $lab_list = json_decode($student_lab_book['labs'], true);
-        foreach ($lab_list as $lab_id) {
+        foreach ($student_lab_book['labs'] as $lab_id) {
             if ($lab_id == $lab->id) {
                 $hasLabProgress = true;
                 $lab_book['grades'][$fsc_id] = $lab_book['grades'][$fsc_id] + $earned_diff;
@@ -331,9 +328,8 @@ class GradebookController extends Controller
             }
         }
         if (!$hasLabProgress) {
-            array_push($lab_list, $lab->id);
-            $student_lab_book['grades'][$lab_id] = $earned_points;
-            $student_lab_book['labs'] = $lab_list;
+            array_push($student_lab_book['labs'], $lab->id);
+            $student_lab_book['grades'][$lab->id] = $earned_points;
             $lab_book['grades'][$fsc_id] = $earned_points;
         }
         $lab->gradebook = json_encode($lab_book);
@@ -345,11 +341,11 @@ class GradebookController extends Controller
         // the student MUST be in the course to have submitted this lab
         if ($hasAssignmentProgress) {
             // int_val doesn't work on objects, THIS BETTER WORK
-            $course_book['grades'][$fsc_id] = int_val($course_book['grades'][$fsc_id]) + $earned_diff;
-            $student_course_book['grades'][$course->id] = int_val($student_course_book['grades'][$course->id]) + $earned_diff;
+            $course_book['grades'][$fsc_id] = intval($course_book['grades'][$fsc_id]) + $earned_diff;
+            $student_course_book['grades'][$course->id] = intval($student_course_book['grades'][$course->id]) + $earned_diff;
         } else {
-            $course_book['grades'][$fsc_id] = int_val($course_book['grades'][$fsc_id]) + $earned_points;
-            $student_course_book['grades'][$course->id] = int_val($student_course_book['grades'][$course->id]) + $earned_points;
+            $course_book['grades'][$fsc_id] = intval($course_book['grades'][$fsc_id]) + $earned_points;
+            $student_course_book['grades'][$course->id] = intval($student_course_book['grades'][$course->id]) + $earned_points;
         }
         $course->gradebook = json_encode($course_book);
         $student->gradebook_courses = json_encode($student_course_book);
