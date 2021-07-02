@@ -319,8 +319,7 @@ class GradebookController extends Controller
         $lab_book = json_decode($lab->gradebook, true);
         $student_lab_book = json_decode($student->gradebook_labs, true);
         $hasLabProgress = false;
-        $lab_list = json_decode($student_lab_book['labs'], true);
-        foreach ($lab_list as $lab_id) {
+        foreach ($student_lab_book['labs'] as $lab_id) {
             if ($lab_id == $lab->id) {
                 $hasLabProgress = true;
                 $lab_book['grades'][$fsc_id] = $lab_book['grades'][$fsc_id] + $earned_diff;
@@ -329,9 +328,8 @@ class GradebookController extends Controller
             }
         }
         if (!$hasLabProgress) {
-            array_push($lab_list, $lab->id);
+            array_push($student_lab_book['labs'], $lab->id);
             $student_lab_book['grades'][$lab_id] = $earned_points;
-            $student_lab_book['labs'] = $lab_list;
             $lab_book['grades'][$fsc_id] = $earned_points;
         }
         $lab->gradebook = json_encode($lab_book);
