@@ -475,10 +475,13 @@ nav {
 .navigation {
     /* color: #80caff; */
     color: var(--FSCblue);
-    text-decoration: underline;
     display: block;
     position: absolute;
     margin: 5px !important;
+}
+
+.underline {
+    text-decoration: underline !important;
 }
 
 .courses h2 {
