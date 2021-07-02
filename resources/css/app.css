@@ -427,7 +427,7 @@ nav {
 }
 
 .btn-submit {
-    background-color: rgb(77, 169, 97)!important;
+    background-color: rgb(77, 169, 97) !important;
 }
 
 .btn-danger {
@@ -465,11 +465,18 @@ nav {
     width: 100% !important;
     background-color: var(--FSCblue) !important;
     color: white !important;
-    padding: 0.5rem 0.5rem 0 0.5rem!important;
+    padding: 0.5rem 0.5rem 0 0.5rem !important;
 }
 
 .courses.header .heading {
-    padding: 0.5rem 5.5rem 0.2rem !important;
+    padding: 1rem 5.5rem 0.2rem !important;
+}
+
+.navigation {
+    color: var(--FSClightblue);
+    text-decoration: underline;
+    display: block;
+    position: absolute;
 }
 
 .courses h2 {
@@ -820,7 +827,7 @@ thead.gradebook {
 }
 .modal-content {
     overflow: auto;
-    padding: 2.5rem 1rem 1rem 1rem!important;
+    padding: 2.5rem 1rem 1rem 1rem !important;
 }
 .modal-close {
     position: absolute;
