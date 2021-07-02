@@ -192,7 +192,19 @@ export default {
         }
         else {
           //delete from course/lab
-          this.deleteFromCourse(course, lab);
+          //check if there are no copies...
+          if(this.copies.length > 1) {
+            //enough copies can just delete
+            this.deleteFromCourse(course, lab);
+          }
+          else {
+            //give message on screen saying we are deleting the last copy
+            var flag = confirm("This is the last copy of this assignment, are you sure you want to delete it forever");
+            if(flag) {
+              this.deleteFromCourse(course, lab);
+            }
+            
+          }
         }
 
       }
