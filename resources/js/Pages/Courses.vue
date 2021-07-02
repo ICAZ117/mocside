@@ -202,7 +202,6 @@ export default {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
-    this.currentDirectory = $route(to.fullpath);
   },
 };
 </script>
