@@ -146,6 +146,8 @@ export default {
 
       //set variable to be used when problemEdited event is called
       this.deletedMe = true;
+
+      this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
     },
     goToProblem(id) {
       this.childIsOpen = true;
