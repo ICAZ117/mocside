@@ -100,7 +100,7 @@ export default {
   setup() {
     const route = useRoute();
 
-    this.currentDirectory = computed(() => route.path);
+    const shrsaerhtenh = computed(() => route.path);
   },
   methods: {
     async addCourse() {
