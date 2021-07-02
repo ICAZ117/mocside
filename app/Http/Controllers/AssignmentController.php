@@ -76,6 +76,8 @@ class AssignmentController extends Controller
         $owner = $assignment->lab->course->owner_id;  // with an admin bypass, of course.
         if (($user->isProf() && $user->fsc_id == $owner) || $user->isAdmin()) {
             return new FullAssignmentResource($assignment);
+        } else {
+            return new AssignmentResource($assignment); 
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }

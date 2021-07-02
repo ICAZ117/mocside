@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Assignment;
 use App\Models\TestCase;
+use App\Http\Resources\SmallCaseResource;
 
 class TestCaseController extends Controller
 {
@@ -66,6 +67,8 @@ class TestCaseController extends Controller
         $user = Auth::user();
         if ($user->isAdmin() || $user->isProf()) {
             return Assignment::find($problem_id)->test_cases;
+        } else {
+            return SmallCaseResource::collection(Assignment::find($problem_id)->test_cases);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
