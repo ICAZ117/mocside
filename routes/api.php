@@ -94,6 +94,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/code/{id}', [CodeController::class, 'show']);
     Route::get('/code/search/{problem_id}', [CodeController::class, 'find']);
+    Route::post('/code/check/{id}', [CodeController::class, 'checkProgress']);
     Route::post('/code', [CodeController::class, 'store']);
     Route::put('/code/{id}', [CodeController::class, 'update']);
     Route::delete('/code/{id}', [CodeController::class, 'delete']);

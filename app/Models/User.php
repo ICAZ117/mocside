@@ -46,6 +46,17 @@ class User extends Authenticatable
         return $this->hasMany(Code::class, 'fsc_id', 'fsc_id');
     }
 
+    public function hasProgress($assignment_id, $lang)
+    {
+        $snaps = $this->code_snaps;
+        foreach ($snaps as $snap) {
+            if ($snap->assignment_id == $assignment_id && $snap->lang == $lang) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * The attributes that are mass assignable.
      *

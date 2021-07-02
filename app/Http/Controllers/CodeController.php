@@ -47,6 +47,25 @@ class CodeController extends Controller
         return reponse()->json(['message' => 'This is not your code!'], 403);
     }
 
+    public function checkProgress(Request $request, $id)
+    {
+        $user = Auth::user();
+        $validData = $request->validate([
+            'lang' => 'required'
+        ]);
+        $hasProgress = $user->hasProgress($id, $validData['lang']);
+        if ($hasProgress) {
+            $code = Code::where([
+                ['fsc_id', '=', $user->fsc_id],
+                ['assignment_id', '=', $id],
+                ['lang', '=', $validData->lang]
+            ])->get();
+            return response()->json(['message' => 'Progress found', 'dump' => $code], 200);
+        } else {
+            return response()->json(['message' => 'No progress. Please create.'], 200);
+        }
+    }
+
     public function update(Request $request, $id)
     {
         $user = Auth::user();

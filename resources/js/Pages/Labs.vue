@@ -70,7 +70,7 @@
             </li>
           </ul>
 
-          <div id="out-click"></div>
+          <div id="out-click" @click="closeMenu"></div>
         </template>
 
         <!-- <tr
