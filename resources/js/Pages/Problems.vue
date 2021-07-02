@@ -142,16 +142,18 @@ export default {
       }
     },
     async deleteMe() {
+      //call unmounting of children
+      this.deletedMe = true;
+      this.Unmounting();
+
       console.log("deleteMe");
       // remove this problem from the current lab
       const res = await API.apiClient.delete(`/problems/${this.problemID}`);
 
       //filter the problems list
       this.problems = this.problems.filter((p, i) => i  != p.id);
+      console.log("completed filtering after delete");
 
-      //call unmounting of children
-      this.deletedMe = true;
-      this.Unmounting();
     },
     goToProblem(id) {
       this.childIsOpen = true;
