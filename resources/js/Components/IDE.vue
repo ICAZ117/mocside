@@ -354,7 +354,7 @@ export default {
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
           this.tcGrades.push({
-            ID: Number(tc.tcID),
+            ID: JSON.parse(tc.tcID),
             passed: false,
           });
         }
@@ -367,17 +367,14 @@ export default {
             this.accordions[currentTC].isSuccessful = true;
             this.accordions[currentTC].text = "Test Case Passed :)";
             this.tcGrades.push({
-              ID: Number(tc.tcID),
+              ID: JSON.parse(tc.tcID),
               passed: true,
             });
           }
           // ELSE, code failed test case
           else {
-            console.log("\nRegular tcID: " + tc.tcID);
-            console.log("Casted tcID: " + Number(tc.tcID));
-            console.log("JSON-parsed tcID: " + JSON.parse(tc.tcID));
             this.tcGrades.push({
-              ID: Number(tc.tcID),
+              ID: JSON.parse(tc.tcID),
               passed: false,
             });
 
@@ -503,7 +500,6 @@ export default {
       //followed n lines of a[0] b[0] for 6 elements
       //a[last elem] b[last elem] for 0 elements
       //starts next case
-      console.log("\n\n---------------------------------------------------------------------\n\n");
     },
     submitForGrade() {
       var gradebook = {};
