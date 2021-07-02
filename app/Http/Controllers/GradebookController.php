@@ -296,8 +296,7 @@ class GradebookController extends Controller
         $assignment_book['grades'][$fsc_id] = $earned_points;
         // check to see if student has made previous progress on this assignment
         $hasAssignmentProgress = false; // if they have, it will be in this list and we just edit
-        $list = json_decode($student_assignment_book['assignments'], true); // if line 290 decodes this is unnecessary
-        foreach ($list as $problem_id) {
+        foreach ($student_assignment_book['assignments'] as $problem_id) {
             if ($problem_id == $id) {
                 $hasAssignmentProgress = true;
                 $old_grade = $assignment_book['grades'][$id];
@@ -307,8 +306,7 @@ class GradebookController extends Controller
         }
         if (!$hasAssignmentProgress) {
             // add assignment ID to list
-            array_push($list, $id);
-            $student_assignment_book['assignments'] = $list; // do I need to encode here???
+            array_push($student_assignment_book['assignments'], $id);
         }
         $student_assignment_book['grades'][$id] = $earned_points;
         $assignment->gradebook = json_encode($assignment_book);
