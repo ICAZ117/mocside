@@ -136,9 +136,7 @@ class GradebookController extends Controller
                 foreach ($assignments as $assignment) {
                     // update assignment
                     $assignment_book = json_decode($assignment->gradebook, true);
-                    $student_list = json_decode($assignment_book['students'], true);
-                    array_push($student_list, $user->fsc_id);
-                    $assignment_book['students'] = $student_list;
+                    array_push($assignment_book['students'], $user->fsc_id);
                     $assignment_book['grades'][$user->fsc_id] = '0';
                     $assignment->gradebook = json_encode($assignment_book);
                     $assignment->save();
