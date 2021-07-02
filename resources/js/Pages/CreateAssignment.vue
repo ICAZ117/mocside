@@ -130,9 +130,6 @@ export default defineComponent({
     }, 500),
     async deleteProblem() {
       await this.$emit("deleteMe");
-      // this.$router.go(-1); works but leaves history that allows user to go to /edit/problemID
-      // this.childIsOpen = false;
-      // await this.$emit("problemEdited");
     },
   },
   beforeMount() {
