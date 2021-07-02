@@ -208,7 +208,9 @@ export default {
               //not deleted change back the isAdded
               console.log("should have changed back the isAdded");
               console.log(course);
-              this.switchedLab(course);
+              // this.switchedLab(course);
+              await sleep(3);
+              course.isAdded=true;
               console.log(course);
             }
             
