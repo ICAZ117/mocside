@@ -325,6 +325,7 @@ export default {
         var self = this;
 
         // IF the code has a compile error, handle it
+        console.log(tc.compare);
         if (tc.compare == '"compilationError"') {
           console.log("Compile Error");
           this.accordions = [
