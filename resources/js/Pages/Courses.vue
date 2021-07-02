@@ -204,7 +204,7 @@ export default {
   },
   async mounted() {
     this.childIsOpen = false;
-    this.authUser = await store.getters["auth/authUser"];
+    this.authUser = await this.$store.getters["auth/authUser"];
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
