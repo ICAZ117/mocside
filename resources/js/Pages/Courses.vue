@@ -5,8 +5,10 @@
       <div class="courses header">
         <span class="navigation">{{ authUser.username }}{ currentDirectory }}</span>
         <br />
-        <h2>My Courses</h2>
-        <hr />
+        <div class="heading">
+          <h2>My Courses</h2>
+          <hr />
+        </div>
       </div>
 
       <div class="coursecontainer">
@@ -200,9 +202,9 @@ export default {
       }
     },
   },
-  mounted() {
+  async mounted() {
     this.childIsOpen = false;
-    this.authUser = store.getters["auth/authUser"];
+    this.authUser = await store.getters["auth/authUser"];
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
