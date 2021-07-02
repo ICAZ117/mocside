@@ -14,7 +14,6 @@
       <span class="pointer" @click="this.$emit('unmounting')">↩ Return to Courses</span>
     </small>
 
-    <a v-if="isProf" class="pointer no-decor" @click="addLab">ADD</a>
     <table class="table labtable">
       <thead class="labtable">
         <tr>
@@ -56,6 +55,8 @@
             <td v-if="!isProf">{{ lab.activity }}</td>
             <!-- <td>4/20/0420</td> -->
           </tr>
+
+          <tr v-if="isProf" class="lab pointer" @click="addLab"><td colspan="5">Add Lab</td></tr>
 
           <ul id="menu">
             <li class="menu-item">
