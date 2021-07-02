@@ -478,6 +478,7 @@ nav {
     text-decoration: underline;
     display: block;
     position: absolute;
+    margin: 5px!important;
 }
 
 .courses h2 {
