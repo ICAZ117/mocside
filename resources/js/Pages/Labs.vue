@@ -68,6 +68,9 @@
 <script>
 import * as API from "../services/API";
 import store from "../Store/index";
+import { useRoute } from "vue-router";
+import { computed } from "vue";
+
 export default {
   props: ["courseID"],
   emits: ["unmounting", "courseEdited"],
