@@ -209,6 +209,7 @@ export default {
               console.log("should have changed back the isAdded");
               console.log(course);
               // this.switchedLab(course);
+              //this had to be added because the checkbox was being changed back to quickly....however this is 1/100th of a second..not noticeable at all
               await this.sleep(10);
               course.isAdded=true;
               console.log(course);
