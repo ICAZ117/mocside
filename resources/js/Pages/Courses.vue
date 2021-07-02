@@ -3,8 +3,8 @@
     <!-- Main Page-->
     <div v-if="!childIsOpen">
       <div class="courses header">
-        <span class="navigation">{{ currentDirectory }}</span>
-        <br>
+        <span class="navigation">{{ authUser.username }}{ currentDirectory }}</span>
+        <br />
         <h2>My Courses</h2>
         <hr />
       </div>
@@ -105,7 +105,7 @@ export default {
 
     return {
       currentDirectory,
-    }
+    };
   },
   methods: {
     async addCourse() {
