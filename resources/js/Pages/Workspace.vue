@@ -59,8 +59,13 @@ export default {
       this.assignment = rawAssignment.data.data;
       this.title = this.assignment.name;
       this.description = this.assignment.description;
+      //check if empty....post if empty
+      payload = {
+        lang: this.lang,
+      }
+      const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
+      this.test = empty;
       const res = await API.apiClient.get(`/code/search/${this.problemID}`);
-      this.test = res;
       var progress = res.data.data;
       this.code_j = await this.getJava(progress);
       this.code_p = await this.getPython(progress);
