@@ -27,7 +27,7 @@
       </thead>
       <tbody>
         <template v-for="(lab, key) in labs" :key="lab.id">
-          <tr class="lab pointer" @click="goToProblems(lab.id, lab.name)">
+          <tr v-if="!isProf" class="lab pointer" @click="goToProblems(lab.id, lab.name)">
             <td>
               <a>{{ lab.name }}</a>
             </td>
@@ -38,10 +38,38 @@
             <td v-if="!isProf">{{ lab.activity }}</td>
             <!-- <td>4/20/0420</td> -->
           </tr>
-          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
-            >•••</a
+
+          <tr
+            v-if="isProf"
+            class="lab pointer"
+            id="clickable"
+            @click="goToProblems(lab.id, lab.name)"
           >
-          <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)">X</a>
+            <td>
+              <a>{{ lab.name }}</a>
+            </td>
+            <td>{{ lab.num_problems }}</td>
+            <td v-if="!isProf">{{ lab.percent }}</td>
+            <!-- <td>69%</td> -->
+            <td>{{ lab.due_date }}</td>
+            <td v-if="!isProf">{{ lab.activity }}</td>
+            <!-- <td>4/20/0420</td> -->
+          </tr>
+
+          <ul id="menu">
+            <li class="menu-item">
+              <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
+                >Edit</a
+              >
+            </li>
+            <li class="menu-item">
+              <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
+                >Delete</a
+              >
+            </li>
+          </ul>
+
+          <div id="out-click"></div>
         </template>
 
         <!-- <tr
@@ -71,6 +99,25 @@ import * as API from "../services/API";
 import store from "../Store/index";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
+
+const clickable = document.getElementById("clickable");
+const menu = document.getElementById("menu");
+const outClick = document.getElementById("out-click");
+
+clickable.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+
+  menu.style.top = `${e.clientY}px`;
+  menu.style.left = `${e.clientX}px`;
+  menu.classList.add("show");
+
+  outClick.style.display = "block";
+});
+
+outClick.addEventListener("click", () => {
+  menu.classList.remove("show");
+  outClick.style.display = "none";
+});
 
 export default {
   props: ["courseID"],
