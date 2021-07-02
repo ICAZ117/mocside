@@ -43,10 +43,10 @@ export default {
       this.newText = e;
       this.timeout(this.assignmentID);
     },
-    deleteProblem() {
+    async deleteProblem() {
       var flag = confirm("Are you Sure you want to delete this problem");
       if(flag) {
-        this.$emit("delete-problem");
+        await this.$emit("delete-problem");
       }
     },
   },
