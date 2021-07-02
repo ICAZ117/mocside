@@ -206,7 +206,8 @@ export default {
             }
             else {
               //not deleted change back the isAdded
-              course.isAdded=true;
+              console.log("should have changed back the isAdded");
+              course.isAdded = true;
             }
             
           }
