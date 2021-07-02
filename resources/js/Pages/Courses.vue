@@ -3,7 +3,7 @@
     <!-- Main Page-->
     <div v-if="!childIsOpen">
       <div class="courses header">
-        <span class="navigation">{{ currentDirectory }}</span>
+        <small><span class="navigation">{{ username }}{{ currentDirectory }}</span></small>
         <br />
         <div class="heading">
           <h2>My Courses</h2>
@@ -97,6 +97,7 @@ export default {
       courses: [],
       childIsOpen: false,
       courseID: null,
+      username: "",
     };
   },
 
@@ -204,12 +205,15 @@ export default {
   },
   async mounted() {
     this.childIsOpen = false;
-    this.authUser = await this.$store.getters["auth/authUser"];
-    console.log(this.authUser);
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
+  },
+  async beforeMount() {
+    this.authUser = await store.getters["auth/authUser"];
+    this.username = this.authUser.username;
+    console.log(this.authUser);
   },
 };
 </script>
