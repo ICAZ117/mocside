@@ -136,9 +136,7 @@ class GradebookController extends Controller
                 foreach ($assignments as $assignment) {
                     // update assignment
                     $assignment_book = json_decode($assignment->gradebook, true);
-                    $student_list = json_decode($assignment_book['students'], true);
-                    array_push($student_list, $user->fsc_id);
-                    $assignment_book['students'] = $student_list;
+                    array_push($assignment_book['students'], $user->fsc_id);
                     $assignment_book['grades'][$user->fsc_id] = '0';
                     $assignment->gradebook = json_encode($assignment_book);
                     $assignment->save();
@@ -146,9 +144,10 @@ class GradebookController extends Controller
             }
             // add course to student gradebook
             $student_course_book = json_decode($student->gradebook_courses, true);
-            $course_list = json_decode($student_course_book['courses'], true);
-            array_push($course_list, $id);
+            array_push($student_course_book['courses'], $id);
             $student_course_book['grades'][$id] = '0';
+            $student->gradebook_courses = $student_course_book;
+            $student->save();
             return response()->json(['message' => "User enrolled in course " . $id, 'dump'], 200);
         }
         return response()->json(["message" => 'User already in course.'], 418);
