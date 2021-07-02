@@ -375,6 +375,7 @@ export default {
           else {
             console.log("\nRegular tcID: " + tc.tcID);
             console.log("Casted tcID: " + Number(tc.tcID));
+            console.log("JSON-parsed tcID: " + JSON.parse(tc.tcID));
             this.tcGrades.push({
               ID: Number(tc.tcID),
               passed: false,
