@@ -34,7 +34,7 @@
           :problemID="assignmentID"
         />
       </tab-panel>
-      <tab-panel :val="'Assign'"> <Assign :problemID="problemID" /> </tab-panel>
+      <tab-panel :val="'Assign'"> <Assign :problemID="problemID" @delete-problem="deleteProblem" /> </tab-panel>
       <tab-panel :val="'Template'"> <Template :problemID="problemID" /> </tab-panel>
       <tab-panel :val="'Test Bench'"> <TestBench :problemID="problemID" /> </tab-panel>
       <tab-panel :val="'Model Solution'"><ModelSolution :problemID="problemID" /></tab-panel>
