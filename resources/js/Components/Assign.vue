@@ -89,6 +89,7 @@ import store from "../Store/index";
 import * as API from "../services/API";
 
 export default {
+  emits: ["delete-problem"],
   props: ['problemID'],
   data() {
     return {
@@ -203,6 +204,7 @@ export default {
             if(flag) {
               this.deleteFromCourse(course, lab, true);
               //if we decided to delete then we need to return to problems page...otherwise edits will go to empty route and give errors
+              await this.$emit("delete-problem");
             }
             else {
               //not deleted change back the isAdded
