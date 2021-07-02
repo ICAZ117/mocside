@@ -341,11 +341,11 @@ class GradebookController extends Controller
         // the student MUST be in the course to have submitted this lab
         if ($hasAssignmentProgress) {
             // int_val doesn't work on objects, THIS BETTER WORK
-            $course_book['grades'][$fsc_id] = int_val($course_book['grades'][$fsc_id]) + $earned_diff;
-            $student_course_book['grades'][$course->id] = int_val($student_course_book['grades'][$course->id]) + $earned_diff;
+            $course_book['grades'][$fsc_id] = intval($course_book['grades'][$fsc_id]) + $earned_diff;
+            $student_course_book['grades'][$course->id] = intval($student_course_book['grades'][$course->id]) + $earned_diff;
         } else {
-            $course_book['grades'][$fsc_id] = int_val($course_book['grades'][$fsc_id]) + $earned_points;
-            $student_course_book['grades'][$course->id] = int_val($student_course_book['grades'][$course->id]) + $earned_points;
+            $course_book['grades'][$fsc_id] = intval($course_book['grades'][$fsc_id]) + $earned_points;
+            $student_course_book['grades'][$course->id] = intval($student_course_book['grades'][$course->id]) + $earned_points;
         }
         $course->gradebook = json_encode($course_book);
         $student->gradebook_courses = json_encode($student_course_book);
