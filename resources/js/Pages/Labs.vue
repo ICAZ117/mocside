@@ -100,29 +100,6 @@ import store from "../Store/index";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 
-const clickable = document.getElementById("clickable");
-const menu = document.getElementById("menu");
-const outClick = document.getElementById("out-click");
-
-console.log(clickable);
-console.log(menu);
-console.log(outClick);
-
-// clickable.addEventListener("contextmenu", (e) => {
-//   e.preventDefault();
-
-//   menu.style.top = `${e.clientY}px`;
-//   menu.style.left = `${e.clientX}px`;
-//   menu.classList.add("show");
-
-//   outClick.style.display = "block";
-// });
-
-// outClick.addEventListener("click", () => {
-//   menu.classList.remove("show");
-//   outClick.style.display = "none";
-// });
-
 export default {
   props: ["courseID"],
   emits: ["unmounting", "courseEdited"],
@@ -148,6 +125,28 @@ export default {
     };
   },
   methods: {
+    showMenu(e) {
+      const menu = document.getElementById("menu");
+      const outClick = document.getElementById("out-click");
+
+      console.log(menu);
+      console.log(outClick);
+
+      e.preventDefault();
+
+      menu.style.top = `${e.clientY}px`;
+      menu.style.left = `${e.clientX}px`;
+      menu.classList.add("show");
+
+      outClick.style.display = "block";
+    },
+    closeMenu() {
+      const menu = document.getElementById("menu");
+      const outClick = document.getElementById("out-click");
+
+      menu.classList.remove("show");
+      outClick.style.display = "none";
+    },
     goToProblems(id, name) {
       this.childisOpen = true;
       this.labID = id;
