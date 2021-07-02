@@ -94,12 +94,12 @@ export default {
       else {
         //otherwise not empty
         if(this.lang == "Java") {
-          this.code_j = empty.data.dump.code;
-          this.codeID = empty.data.dump.id;
+          this.code_j = empty.data.dump[0].code;
+          this.codeID = empty.data.dump[0].id;
         }
         else {
-          this.code_p = empty.data.dump.code;
-          this.codeID = empty.data.dump.id;
+          this.code_p = empty.data.dump[0].code;
+          this.codeID = empty.data.dump[0].id;
         }
       }
       this.forceReload = 1;
