@@ -299,7 +299,7 @@ class GradebookController extends Controller
         foreach ($student_assignment_book['assignments'] as $problem_id) {
             if ($problem_id == $id) {
                 $hasAssignmentProgress = true;
-                $old_grade = $assignment_book['grades'][$id];
+                $old_grade = $assignment_book['grades'][$fsc_id];
                 $earned_diff = $earned_points - $old_grade;
                 break;
             }
