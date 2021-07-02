@@ -100,7 +100,7 @@ export default {
   setup() {
     const route = useRoute();
 
-    this.currentDirectory = computed(() => route.path);
+    const shrsaerhtenh = computed(() => route.path);
   },
   methods: {
     async addCourse() {
@@ -202,7 +202,6 @@ export default {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
-    this.currentDirectory = $route(to.fullpath);
   },
 };
 </script>
