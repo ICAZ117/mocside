@@ -182,7 +182,7 @@ export default {
 
 
     //Adder Methods
-    toggleToCourse(course) {
+    async toggleToCourse(course) {
       var lab = course.currentLab;
       if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
 
@@ -208,7 +208,7 @@ export default {
               //not deleted change back the isAdded
               console.log("should have changed back the isAdded");
               console.log(course);
-              course.isAdded = true;
+              await this.stupidFunction(course);
               console.log(course);
             }
             
@@ -220,6 +220,10 @@ export default {
         console.log("can't add/delete to undefined lab");
         course.isAdded = false;
       }
+    },
+    async stupidFunction(course) {
+      course.isAdded = true;
+      return "this better work";
     },
     async addToCourse(lab) {
       //create a copy with a lab id of lab.id, and a copy id of problemID and post to database
