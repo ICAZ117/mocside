@@ -85,7 +85,6 @@ import store from "../Store/index";
 import * as API from "../services/API";
 import { useRoute } from "vue-router";
 
-Share;
 export default {
   data() {
     return {
