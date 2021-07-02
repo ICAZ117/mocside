@@ -104,20 +104,24 @@ const clickable = document.getElementById("clickable");
 const menu = document.getElementById("menu");
 const outClick = document.getElementById("out-click");
 
-clickable.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
+console.log(clickable);
+console.log(menu);
+console.log(outClick);
 
-  menu.style.top = `${e.clientY}px`;
-  menu.style.left = `${e.clientX}px`;
-  menu.classList.add("show");
+// clickable.addEventListener("contextmenu", (e) => {
+//   e.preventDefault();
 
-  outClick.style.display = "block";
-});
+//   menu.style.top = `${e.clientY}px`;
+//   menu.style.left = `${e.clientX}px`;
+//   menu.classList.add("show");
 
-outClick.addEventListener("click", () => {
-  menu.classList.remove("show");
-  outClick.style.display = "none";
-});
+//   outClick.style.display = "block";
+// });
+
+// outClick.addEventListener("click", () => {
+//   menu.classList.remove("show");
+//   outClick.style.display = "none";
+// });
 
 export default {
   props: ["courseID"],
