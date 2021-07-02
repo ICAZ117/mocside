@@ -44,6 +44,7 @@
             class="lab pointer"
             id="clickable"
             @click="goToProblems(lab.id, lab.name)"
+            @contextmenu="showMenu"
           >
             <td>
               <a>{{ lab.name }}</a>
