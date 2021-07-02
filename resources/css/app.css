@@ -473,7 +473,7 @@ nav {
 }
 
 .navigation {
-    color: var(--FSClightblue);
+    color: #80caff;
     text-decoration: underline;
     display: block;
     position: absolute;
