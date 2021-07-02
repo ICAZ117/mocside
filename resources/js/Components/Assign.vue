@@ -209,7 +209,7 @@ export default {
               console.log("should have changed back the isAdded");
               console.log(course);
               // this.switchedLab(course);
-              await sleep(3);
+              await this.sleep(10);
               course.isAdded=true;
               console.log(course);
             }
@@ -222,6 +222,9 @@ export default {
         console.log("can't add/delete to undefined lab");
         course.isAdded = false;
       }
+    },
+    async sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async addToCourse(lab) {
       //create a copy with a lab id of lab.id, and a copy id of problemID and post to database
