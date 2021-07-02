@@ -201,7 +201,7 @@ export default {
             //give message on screen saying we are deleting the last copy
             var flag = confirm("This is the last copy of this assignment, are you sure you want to delete it forever");
             if(flag) {
-              this.deleteFromCourse(course, lab);
+              this.deleteFromCourse(course, lab, true);
               //if we decided to delete then we need to return to problems page...otherwise edits will go to empty route and give errors
             }
             else {
@@ -240,7 +240,7 @@ export default {
 
       return res;
     },
-    async deleteFromCourse(course, lab) {
+    async deleteFromCourse(course, lab, orig=false) {
       //get assignment id of the one i want to remove
       var tempID = "";
       for(let i = 0; i < this.copies.length; i++) {
@@ -253,9 +253,11 @@ export default {
       const res = await API.apiClient.delete(`/problems/${tempID}`);
       console.log(res.data.message);
 
-      //reset copies list
-      const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
-      this.copies = co.data.data;
+      if(!orig) {
+        //reset copies list
+        const co = await API.apiClient.get(`/problems/copies/${this.problemID}`);
+        this.copies = co.data.data;
+      }
 
       //change isPublished just in case on front end
       course.isPublished = false;
