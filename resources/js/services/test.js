@@ -45,7 +45,7 @@ var gradebook_for_labs = {
         // I would prefer to store in here a "total points earned"
         // and have each parent type assist in calculation by
         // counting it's children.
-        '1257419': '4', // 4/5
+        '1257419': '5', // 4/5
         '1257777': '5', // 5/5
     }
 }
@@ -57,8 +57,8 @@ var payload = {
 var gradebook_for_students_for_courses = {
     courses: [2280, 2290],
     grades: {
-        '2280': "85%",
-        '2290': "100%",
+        '2280': "5",
+        '2290': "5",
     }
 }
 
@@ -72,7 +72,7 @@ var gradebook_for_students_for_labs = {
 }
 
 var gradebook_for_students_for_problems = {
-    courses: [1, 2, 3],
+    problems: [1, 2, 3],
     grades: {
         '1': "101",
         '2': "2",

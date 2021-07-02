@@ -14,6 +14,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\ContainerController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\GradebookController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ProgressController;
@@ -106,9 +107,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/containers/grade/{id}', [ContainerController::class, 'grade']);
     Route::delete('/containers/{id}', [ContainerController::class, 'spinDown']);
 
-    Route::get('/containers/test/{id}', [ContainerController::class, 'listen']);
-    Route::post('/containers/test/{id}', [ContainerController::class, 'spinNoStart']);
-    Route::post('/containers/test-in/{id}', [ContainerController::class, 'inNoOut']);
+    Route::post('/gradebook/init/{id}', [GradebookController::class, 'initGradebook']);
+    Route::post('/enroll/gradebook/{id}', [GradebookController::class, 'enroll']);
+    Route::put('/courses/gradebook/{id}', [GradebookController::class, 'updateCourse']);
+    Route::put('/labs/gradebook/{id}', [GradebookController::class, 'updateLab']);
+    Route::put('/problems/gradebook/{id}', [GradebookController::class, 'updateAssignment']);
+    Route::post('/gradebook/submit/{id}', [GradebookController::class, 'submitAssignment']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
