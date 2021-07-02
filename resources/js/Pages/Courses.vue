@@ -3,14 +3,15 @@
     <!-- Main Page-->
     <div v-if="!childIsOpen">
       <div class="courses header">
-        <small
-          ><span class="navigation">{{ username }}{{ currentDirectory }}</span></small
-        >
         <div class="heading">
           <h2>My Courses</h2>
           <hr />
         </div>
       </div>
+      <small class="navigation"
+        ><span>{{ username }}{{ currentDirectory }}</span></small
+      >
+      <br />
 
       <div class="coursecontainer">
         <div class="courserow row my-5">
