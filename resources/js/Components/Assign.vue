@@ -204,6 +204,10 @@ export default {
               this.deleteFromCourse(course, lab);
               //if we decided to delete then we need to return to problems page...otherwise edits will go to empty route and give errors
             }
+            else {
+              //not deleted change back the isAdded
+              course.isAdded=true;
+            }
             
           }
         }
