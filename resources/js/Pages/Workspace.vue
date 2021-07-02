@@ -180,12 +180,12 @@ export default {
         payload = {
           code: this.code_j,
         };
-        const res = await API.apiClient.put(`/code/${this.jID}`, payload);
+        const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
       } else {
         payload = {
           code: this.code_p,
         };
-        const res = await API.apiClient.put(`/code/${this.pID}`, payload);
+        const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
         this.saveStatus = "All changes have been saved"
       }
     }, 1000),
