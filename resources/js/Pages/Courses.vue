@@ -60,20 +60,6 @@
               </div>
             </a>
           </div>
-          <ul id="menu">
-            <li class="menu-item">
-              <a v-if="isProf" class="pointer no-decor" @click="editCourse(course.id)"
-                >Edit</a
-              >
-            </li>
-            <li class="menu-item">
-              <a v-if="isProf" class="pointer no-decor" @click="deleteCourse(course.id, course, key)"
-                >Delete</a
-              >
-            </li>
-          </ul>
-
-          <div id="out-click" @click="closeMenu"></div>
           <div v-if="courses.length == 0">
             <h1>No Registered Courses</h1>
           </div>
@@ -87,6 +73,21 @@
       :courseID="courseID"
     ></router-view>
   </div>
+  <ul id="menu">
+    <li class="menu-item">
+      <a v-if="isProf" class="pointer no-decor" @click="editCourse(course.id)">Edit</a>
+    </li>
+    <li class="menu-item">
+      <a
+        v-if="isProf"
+        class="pointer no-decor"
+        @click="deleteCourse(course.id, course, key)"
+        >Delete</a
+      >
+    </li>
+  </ul>
+
+  <div id="out-click" @click="closeMenu"></div>
 </template>
 
 <script>
