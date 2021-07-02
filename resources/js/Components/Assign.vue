@@ -209,6 +209,7 @@ export default {
               console.log("should have changed back the isAdded");
               console.log(course);
               course.isAdded = true;
+              console.log(course);
             }
             
           }
