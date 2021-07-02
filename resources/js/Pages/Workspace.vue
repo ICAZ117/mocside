@@ -49,6 +49,7 @@ export default {
       forceReload: 0,
       childIsOpen: false,
       saveStatus: "",
+      test: {},
     };
   },
   methods: {
@@ -59,6 +60,7 @@ export default {
       this.title = this.assignment.name;
       this.description = this.assignment.description;
       const res = await API.apiClient.get(`/code/search/${this.problemID}`);
+      this.test = res;
       var progress = res.data.data;
       this.code_j = await this.getJava(progress);
       this.code_p = await this.getPython(progress);
