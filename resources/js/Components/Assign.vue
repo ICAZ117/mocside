@@ -182,7 +182,7 @@ export default {
 
 
     //Adder Methods
-    toggleToCourse(course) {
+    async toggleToCourse(course) {
       var lab = course.currentLab;
       if(lab != undefined && (JSON.stringify(lab) != JSON.stringify({}))) {
 
@@ -206,7 +206,12 @@ export default {
             }
             else {
               //not deleted change back the isAdded
+              console.log("should have changed back the isAdded");
+              console.log(course);
+              // this.switchedLab(course);
+              await sleep(3);
               course.isAdded=true;
+              console.log(course);
             }
             
           }
