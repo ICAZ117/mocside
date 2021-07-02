@@ -58,7 +58,7 @@ class CodeController extends Controller
             $code = Code::where([
                 ['fsc_id', '=', $user->fsc_id],
                 ['assignment_id', '=', $id],
-                ['lang', '=', $validData->lang]
+                ['lang', '=', $validData["lang"]]
             ])->get();
             return response()->json(['message' => 'Progress found', 'dump' => $code], 200);
         } else {
