@@ -148,7 +148,7 @@ class GradebookController extends Controller
             $student_course_book['grades'][$id] = '0';
             $student->gradebook_courses = $student_course_book;
             $student->save();
-            return response()->json(['message' => "User enrolled in course " . $id, 'dump'], 200);
+            return response()->json(['message' => "User enrolled in course " . $id, 'dump' => $student], 200);
         }
         return response()->json(["message" => 'User already in course.'], 418);
     }
