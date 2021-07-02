@@ -4,6 +4,7 @@
     <div v-if="!childIsOpen">
       <div class="courses header">
         <span class="navigation">{{ currentDirectory }}</span>
+        <br>
         <h2>My Courses</h2>
         <hr />
       </div>
@@ -84,8 +85,8 @@
 import store from "../Store/index";
 import * as API from "../services/API";
 import { useRoute } from "vue-router";
+import { computed } from "vue";
 
-Share;
 export default {
   data() {
     return {
@@ -94,13 +95,17 @@ export default {
       courses: [],
       childIsOpen: false,
       courseID: null,
-      currentDirectory: "",
     };
   },
+
   setup() {
     const route = useRoute();
 
-    this.currentDirectory = computed(() => route.path);
+    const currentDirectory = computed(() => route.path);
+
+    return {
+      currentDirectory,
+    }
   },
   methods: {
     async addCourse() {
@@ -202,7 +207,6 @@ export default {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
-    this.currentDirectory = $route(to.fullpath);
   },
 };
 </script>
