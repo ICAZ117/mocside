@@ -464,8 +464,12 @@ nav {
 .courses.header {
     width: 100% !important;
     background-color: var(--FSCblue) !important;
-    padding: 1rem 6rem 0.2rem !important;
     color: white !important;
+    padding: 0.5rem 0.5rem 0 0.5rem!important;
+}
+
+.courses.header .heading {
+    padding: 0.5rem 5.5rem 0.2rem !important;
 }
 
 .courses h2 {

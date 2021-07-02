@@ -4,9 +4,11 @@
     <div v-if="!childIsOpen">
       <div class="courses header">
         <span class="navigation">{{ currentDirectory }}</span>
-        <br>
-        <h2>My Courses</h2>
-        <hr />
+        <br />
+        <div class="heading">
+          <h2>My Courses</h2>
+          <hr />
+        </div>
       </div>
 
       <div class="coursecontainer">
@@ -105,7 +107,7 @@ export default {
 
     return {
       currentDirectory,
-    }
+    };
   },
   methods: {
     async addCourse() {
@@ -200,9 +202,10 @@ export default {
       }
     },
   },
-  mounted() {
+  async mounted() {
     this.childIsOpen = false;
-    this.authUser = store.getters["auth/authUser"];
+    this.authUser = await this.$store.getters["auth/authUser"];
+    console.log(this.authUser);
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
