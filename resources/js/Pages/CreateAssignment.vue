@@ -130,8 +130,9 @@ export default defineComponent({
     }, 500),
     async deleteProblem() {
       await this.$emit("deleteMe");
-      this.childIsOpen = false;
-      await this.$emit("problemEdited");
+      this.$router.go(-1);
+      // this.childIsOpen = false;
+      // await this.$emit("problemEdited");
     },
   },
   beforeMount() {
