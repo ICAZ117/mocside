@@ -325,9 +325,7 @@ export default {
         var self = this;
 
         // IF the code has a compile error, handle it
-        console.log(tc.compare);
         if (tc.compare == '"compilationError"') {
-          console.log("Compile Error");
           this.accordions = [
             {
               title: "Compilation Error",
@@ -352,7 +350,6 @@ export default {
         }
         // ELSE IF the code has a runtime error, handle it
         else if (tc.compare == '"runtimeError"') {
-          console.log("Runtime Error");
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
@@ -363,7 +360,6 @@ export default {
         }
         // ELSE, the code ran successfully. Now check if it passed the test case or not.
         else {
-          console.log("Ran Successfully");
           tc.compare = JSON.parse(tc.compare);
 
           // IF code passed test case
@@ -510,17 +506,13 @@ export default {
 
       for (let i = 0; i < this.tcGrades.length; i++) {
         gradebook[this.tcGrades[i].ID] = this.tcGrades[i].passed;
-        console.log("\n\ntcID: " + this.tcGrades[i].ID);
-        console.log("Passed: " + this.tcGrades[i].passed);
       }
 
       var payload = {
         gradebook: JSON.stringify(gradebook),
       };
 
-      console.log(payload);
-
-      // const res = API.apiClient.post(``, payload);
+      const res = API.apiClient.post(``, payload);
     },
     initAccordion() {
       this.accordions = [];
