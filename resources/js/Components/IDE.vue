@@ -512,7 +512,10 @@ export default {
         gradebook: JSON.stringify(gradebook),
       };
 
-      const res = API.apiClient.post(``, payload);
+      console.log(payload.gradebook);
+      const res = API.apiClient.post(`/gradebook/submit/${this.problemID}`, payload);
+      console.log("\n\n---------- DID WE GRADE CORRECTLY?");
+      console.log(res.data);
     },
     initAccordion() {
       this.accordions = [];

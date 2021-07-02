@@ -469,14 +469,16 @@ nav {
 }
 
 .courses.header .heading {
-    padding: 1rem 5.5rem 0.2rem !important;
+    padding: 0.5rem 5.5rem 0.2rem !important;
 }
 
 .navigation {
-    color: #80caff;
+    /* color: #80caff; */
+    color: var(--FSCblue);
     text-decoration: underline;
     display: block;
     position: absolute;
+    margin: 5px!important;
 }
 
 .courses h2 {
@@ -587,7 +589,12 @@ table.labtable,
 table.problemtable,
 table.gradebook {
     background-color: inherit !important;
-    margin: 2rem !important;
+    margin: 4rem 2rem 2rem 2rem !important;
+    width: calc(100vw - 4rem - 3px)!important;
+}
+
+tbody {
+    border: 1px solid #9e9e9e !important;
 }
 
 .labtable td,
