@@ -11,7 +11,7 @@
     <small class="navigation"
       ><span>{{ username }}{{ currentDirectory }}</span>
       <br />
-      <span @click="this.$emit('unmounting')">↩ Return to Courses</span>
+      <span class="pointer" @click="this.$emit('unmounting')">↩ Return to Courses</span>
     </small>
 
     <a v-if="isProf" class="pointer no-decor" @click="addLab">ADD</a>
