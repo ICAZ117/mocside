@@ -95,16 +95,15 @@ Bug Fixes:
 
 * Edit/Add Course
 	* styling
-	* confirm delete message
+	* style confirm delete message
 
 * Edit/Add Lab
 	* styling
-	* confirm delete message
+	* stlye confirm delete message
 
 * Edit/Add Problem
 	* styling
-	* confirm delete message
-	* do not allow unadding problem from the only course it is in, must delete problem from the overview tab, or from the problems page
+	* style confirm delete message
 
 * Docker
 	* Finish up returning grade results to front end
