@@ -4,6 +4,7 @@
     <div v-if="!childIsOpen">
       <div class="courses header">
         <span class="navigation">{{ currentDirectory }}</span>
+        <br>
         <h2>My Courses</h2>
         <hr />
       </div>
@@ -94,13 +95,17 @@ export default {
       courses: [],
       childIsOpen: false,
       courseID: null,
-      currentDirectory: "",
     };
   },
+
   setup() {
     const route = useRoute();
 
-    const shrsaerhtenh = computed(() => route.path);
+    const currentDirectory = computed(() => route.path);
+
+    return {
+      currentDirectory,
+    }
   },
   methods: {
     async addCourse() {
