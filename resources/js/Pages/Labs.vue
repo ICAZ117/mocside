@@ -11,7 +11,7 @@
     <small class="navigation"
       ><span>{{ username }}{{ currentDirectory }}</span>
       <br />
-      <span class="pointer" @click="this.$emit('unmounting')">↩ Return to Courses</span>
+      <span class="pointer underline" @click="this.$emit('unmounting')">↩ Return to Courses</span>
     </small>
 
     <table class="table labtable">
