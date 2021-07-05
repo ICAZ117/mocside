@@ -274,6 +274,9 @@ class GradebookController extends Controller
         $user = Auth::user();
         $fsc_id = $user->fsc_id;
         $student = Student::where('fsc_id', '=', $fsc_id)->first(); // this will fail rq if user not stu
+        if (!$student) {
+            return response()->json(['message' => 'No student found.'], 403);
+        }
         $assignment = Assignment::find($id);
         $test_cases = $assignment->test_cases;
         $case_book = json_decode($validData['gradebook'], true);
