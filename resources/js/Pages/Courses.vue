@@ -231,12 +231,19 @@ export default {
       }
       else {
         console.log("on this page: " + c);
-        var urlList = c.split("/");
-        var cID = urlList[1];
-        var path = urlList[2]; //labs, or enroll or edit
-         console.log("urlList " + urlList );
-         console.log("courseID " + cID);
-         console.log("path " + path);
+        var c = c.split("/");
+        var cID = c[1];
+        var path = c[2]; //labs, or enroll or edit
+
+        if(path == "labs") {
+          this.goToLabs(cID);
+        }
+        else if(path == "edit") {
+          console.log("edit");
+        }
+        else {
+          console.log(path);
+        }
       }
     },
   },
