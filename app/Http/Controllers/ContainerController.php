@@ -64,7 +64,7 @@ class ContainerController extends Controller
         } else {
             $containerConfig->setImage('264c9bdce361');
             $containerConfig->setCmd(['run.sh']);
-            $containerConfig->setEntrypoint(["bash"]);
+            $containerConfig->setEntrypoint(["ash"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
