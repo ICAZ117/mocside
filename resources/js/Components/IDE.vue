@@ -519,7 +519,7 @@ export default {
       console.log("\n\n---------- DID WE GRADE CORRECTLY?");
       console.log(res.data);
     },
-    initAccordion() {
+    async initAccordion() {
       this.accordions = [];
       console.log(this.accordions);
       console.log(this.testCases.data.length);
@@ -537,7 +537,7 @@ export default {
           hasError: false,
         };
         console.log("pushing an accordion to accordion");
-        this.accordions.push(accordion);
+         await this.accordions.push(accordion);
       }
     },
     closeModal() {
@@ -565,8 +565,11 @@ export default {
     this.getStyle();
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
+    console.log("\n\nIN MOUNTED");
+    console.log(this.testCases);
+    console.log("\n\n");
 
-    this.initAccordion();
+    await this.initAccordion();
   },
 };
 </script>
