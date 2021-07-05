@@ -521,6 +521,8 @@ export default {
     },
     initAccordion() {
       this.accordions = [];
+      console.log(this.accordions);
+      console.log(this.testCases.data.length);
 
       for (let i = 0; i < this.testCases.data.length; i++) {
         var accordion = {
@@ -534,6 +536,7 @@ export default {
           isSuccessful: "running",
           hasError: false,
         };
+        console.log("pushing an accordion to accordion");
         this.accordions.push(accordion);
       }
     },
