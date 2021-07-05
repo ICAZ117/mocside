@@ -40,6 +40,8 @@ Todo:
 * running code not working
 * submitting code not working...accordion problem....not able to set isSuccessful of undefined
 
+* Fixing Url...i think the reason it isn't working is because it goes properly to said child route, but the childIsOpen hasn't been changed properly, perhaps we try to also set childIsOpen based on route...however also have issue where unmounting grandchild to go to grandparent....goes to grandparent and then parents unmounting calls itself...thereby moving the url to the parent rather than the grandparent
+
 
 Bug Fixes:
 * Fix Url when switching from a child back to home or courses through nav bar
