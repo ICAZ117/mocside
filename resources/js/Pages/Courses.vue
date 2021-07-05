@@ -231,7 +231,7 @@ export default {
       }
       else {
         console.log("on this page: " + c);
-        var urlList = c.split("/");
+        var urlList = c.split("//");
         var cID = c[0];
         var path = c[1]; //labs, or enroll or edit
          console.log("urlList " + urlList );
