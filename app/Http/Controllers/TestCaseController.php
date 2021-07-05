@@ -66,7 +66,7 @@ class TestCaseController extends Controller
     {
         $user = Auth::user();
         if ($user->isAdmin() || $user->isProf()) {
-            return Assignment::find($problem_id)->test_cases;
+            return response()->json(["data" => Assignment::find($problem_id)->test_cases], 200);
         } else {
             return response()->json(["data" => SmallCaseResource::collection(Assignment::find($problem_id)->test_cases)], 200);
         }
