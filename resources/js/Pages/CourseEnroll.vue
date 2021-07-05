@@ -2,6 +2,7 @@
   <h1>You have been invited to join {{ course.name }}</h1>
   <button @click="join()">Join</button>
   <button @click="cancel()" >Cancel</button>
+  <p>yah</p>
 </template>
 
 <script>
