@@ -69,14 +69,14 @@ export default {
         //create progress
         if(this.lang == "Java") {
           payload = {
-            lang: this.lang,
+            lang: this.lang.toLowerCase(0),
             problem_id: this.problemID,
             code: this.assignment.java_starter,
           }
         }
         else {
           payload = {
-            lang: this.lang,
+            lang: this.lang.toLowerCase(0),
             problem_id: this.problemID,
             code: this.assignment.python_starter,
           }
@@ -180,12 +180,12 @@ export default {
         payload = {
           code: this.code_j,
         };
-        const res = await API.apiClient.put(`/code/${this.jID}`, payload);
+        const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
       } else {
         payload = {
           code: this.code_p,
         };
-        const res = await API.apiClient.put(`/code/${this.pID}`, payload);
+        const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
         this.saveStatus = "All changes have been saved"
       }
     }, 1000),

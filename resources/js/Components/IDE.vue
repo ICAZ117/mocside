@@ -350,6 +350,7 @@ export default {
         }
         // ELSE IF the code has a runtime error, handle it
         else if (tc.compare == '"runtimeError"') {
+          console.log(currentTC);
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
@@ -364,6 +365,7 @@ export default {
 
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
+            console.log(currentTC);
             this.accordions[currentTC].isSuccessful = true;
             this.accordions[currentTC].text = "Test Case Passed :)";
             this.tcGrades.push({
@@ -377,7 +379,7 @@ export default {
               ID: JSON.parse(tc.tcID),
               passed: false,
             });
-
+            console.log(currentTC);
             this.accordions[currentTC].isSuccessful = false;
             this.accordions[currentTC].text = "Test Case Failed :(";
 
@@ -519,6 +521,8 @@ export default {
     },
     initAccordion() {
       this.accordions = [];
+      console.log(this.accordions);
+      console.log(this.testCases.data.length);
 
       for (let i = 0; i < this.testCases.data.length; i++) {
         var accordion = {
@@ -532,6 +536,7 @@ export default {
           isSuccessful: "running",
           hasError: false,
         };
+        console.log("pushing an accordion to accordion");
         this.accordions.push(accordion);
       }
     },
