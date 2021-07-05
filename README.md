@@ -31,7 +31,8 @@ Completed:
 
 
 Todo:
-ReAdd delete and edit buttons for courses, and labs
+* ReAdd delete and edit button functionality for courses, and labs
+* adding a course or lab does not open course edit like it should
 
 * Finish up the grading of student code and returning it to front and save on back end
 * Double Check everything is still working
