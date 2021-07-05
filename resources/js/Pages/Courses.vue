@@ -258,7 +258,7 @@ export default {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
-    routeToChild();
+    this.routeToChild();
   },
 };
 </script>
