@@ -13,11 +13,13 @@ export default {
             course: {},
         }
     },
-    joinCourse() {
-        console.log("join");
-    },
-    cancelCourse() {
-        console.log("cancel");
+    methods: {
+        joinCourse() {
+            console.log("join");
+        },
+        cancelCourse() {
+            console.log("cancel");
+        },
     },
     async mounted() {
         // const res = await API.apiClient.get(`this is the backend route for each course invitation/${courseKey}`);
