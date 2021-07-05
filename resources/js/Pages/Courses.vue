@@ -233,13 +233,13 @@ export default {
         console.log("on this page: " + c);
         var c = c.split("/");
         var cID = c[1];
-        var path = c[2]; //labs, or enroll or edit
+        var path = c[2]; //labs, or edit, and maybe something else
 
         if(path == "labs") {
           this.goToLabs(cID);
         }
         else if(path == "edit") {
-          console.log("edit");
+          this.editCourse(cID);
         }
         else {
           console.log(path);

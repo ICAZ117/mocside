@@ -266,6 +266,7 @@ export default {
   async mounted() {
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
+    console.log("its mounted baby");
   },
   async beforeMount() {
     this.childisOpen = false;
