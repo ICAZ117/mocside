@@ -38,7 +38,6 @@ Todo:
 * deleting some problems has not reset their copies copy id when needed...ie delete 14 when it has copies should make the first copy switch copy id to itself, ie 45's copy id becomes 45
 * some test cases have the wrong assignment id....where did this happen....perhaps when deleting the original/copies?
 * running code not working
-* submitting code not working...accordion problem....not able to set isSuccessful of undefined
 
 * Fixing Url...i think the reason it isn't working is because it goes properly to said child route, but the childIsOpen hasn't been changed properly, perhaps we try to also set childIsOpen based on route...however also have issue where unmounting grandchild to go to grandparent....goes to grandparent and then parents unmounting calls itself...thereby moving the url to the parent rather than the grandparent
 
