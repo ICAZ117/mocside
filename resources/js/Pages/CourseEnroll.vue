@@ -11,14 +11,21 @@ export default {
     data() {
         return {
             course: {},
+            courseID: 2280,
         }
     },
     methods: {
         joinCourse() {
             console.log("join");
+            //join class
+
+            //move to course page
+            this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
         },
         cancelCourse() {
             console.log("cancel");
+            //move to home since not joining page
+            this.$router.push({ name: "Courses" });
         },
     },
     async mounted() {
