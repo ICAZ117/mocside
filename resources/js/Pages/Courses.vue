@@ -222,6 +222,17 @@ export default {
       this.courses.push(course.data.data);
       this.Unmounting();
     },
+    routeToChild() {
+      var r = window.location.pathname;
+      var sub = "/courses";
+      var c = r.substring(sub.length);
+      if(c == "") {
+        console.log("just on the courses page");
+      }
+      else {
+        console.log("on this page: " + c);
+      }
+    },
   },
   computed: {
     isProf: function () {
@@ -241,7 +252,7 @@ export default {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
     this.getCourses();
-    console.log(window.location.pathname);
+    routeToChild();
   },
 };
 </script>
