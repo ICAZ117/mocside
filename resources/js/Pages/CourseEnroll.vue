@@ -1,7 +1,7 @@
 <template>
   <h1>You have been invited to join {{ course.name }}</h1>
-  <button @click="joinCourse()">Join</button>
-  <button @click="cancelCourse()" >Cancel</button>
+  <button @click="joinCourse()" type="submit" >Join</button>
+  <button @click="cancelCourse()" type="submit" >Cancel</button>
   <p>yah</p>
 </template>
 
