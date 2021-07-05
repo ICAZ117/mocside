@@ -365,6 +365,7 @@ export default {
 
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
+            console.log(currentTC);
             this.accordions[currentTC].isSuccessful = true;
             this.accordions[currentTC].text = "Test Case Passed :)";
             this.tcGrades.push({
@@ -378,7 +379,7 @@ export default {
               ID: JSON.parse(tc.tcID),
               passed: false,
             });
-
+            console.log(currentTC);
             this.accordions[currentTC].isSuccessful = false;
             this.accordions[currentTC].text = "Test Case Failed :(";
 
