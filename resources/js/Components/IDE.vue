@@ -339,7 +339,7 @@ export default {
             },
           ];
 
-          for (let j = 0; j < this.testCases.data.length; j++) {
+          for (let j = 0; j < this.testCases.data.data.length; j++) {
             this.tcGrades.push({
               ID: this.testCases.data[j].id,
               passed: false,
@@ -399,9 +399,9 @@ export default {
             // matching tcID with the current tcID provided in the supervisor dump. Once we find
             // the correct test case, set the current accordion's input to the correct test case's
             // input.
-            for (let j = 0; j < this.testCases.data.length; j++) {
-              if ('"' + self.testCases.data[j].id + '"' == tc.tcID) {
-                self.accordions[currentTC].input = self.testCases.data[j].input;
+            for (let j = 0; j < this.testCases.data.data.length; j++) {
+              if ('"' + self.testCases.data.data[j].id + '"' == tc.tcID) {
+                self.accordions[currentTC].input = self.testCases.data.data[j].input;
               }
             }
 
@@ -523,11 +523,12 @@ export default {
       this.accordions = [];
       console.log(this.accordions);
       console.log(this.testCases.data.length);
+      console.log(this.testCases.data.data.length);
 
-      for (let i = 0; i < this.testCases.data.length; i++) {
+      for (let i = 0; i < this.testCases.data.data.length; i++) {
         var accordion = {
           tcID: "",
-          title: this.testCases.data[i].title,
+          title: this.testCases.data.data[i].title,
           text: "Running against test case...",
           input: "",
           userOut: "",
@@ -537,7 +538,7 @@ export default {
           hasError: false,
         };
         console.log("pushing an accordion to accordion");
-         await this.accordions.push(accordion);
+        await this.accordions.push(accordion);
       }
     },
     closeModal() {
