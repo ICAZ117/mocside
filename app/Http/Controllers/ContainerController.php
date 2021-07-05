@@ -76,6 +76,12 @@ class ContainerController extends Controller
             $bash = Storage::disk('local')->path('run.sh');
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File($bash), 'run.sh');
+            $helper1 = Storage::disk('local')->path('java.sh');
+            $helper2 = Storage::disk('local')->path('timeout.sh');
+            $filePath = Storage::disk('local')
+                ->putFileAs($head, new File($helper1), 'java.sh');
+            $filePath = Storage::disk('local')
+                ->putFileAs($head, new File($helper2), 'run.sh');
         }
 
         // create host config
