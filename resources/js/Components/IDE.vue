@@ -350,6 +350,7 @@ export default {
         }
         // ELSE IF the code has a runtime error, handle it
         else if (tc.compare == '"runtimeError"') {
+          console.log(currentTC);
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
