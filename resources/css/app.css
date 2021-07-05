@@ -709,7 +709,7 @@ thead.gradebook {
 
 .menu-item {
     display: block;
-    padding: 10px 30px;
+    padding: 10px;
     transition: 0.1s;
     color: #666;
 }
