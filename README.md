@@ -31,6 +31,8 @@ Completed:
 
 
 Todo:
+ReAdd delete and edit buttons for courses, and labs
+
 * Finish up the grading of student code and returning it to front and save on back end
 * Double Check everything is still working
 * add ability for professors to create temp url to give to students so they can sign up
