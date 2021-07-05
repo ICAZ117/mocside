@@ -232,8 +232,8 @@ export default {
       else {
         console.log("on this page: " + c);
         var urlList = c.split("/");
-        var cID = urlList[0];
-        var path = urlList[1]; //labs, or enroll or edit
+        var cID = urlList[1];
+        var path = urlList[2]; //labs, or enroll or edit
          console.log("urlList " + urlList );
          console.log("courseID " + cID);
          console.log("path " + path);
