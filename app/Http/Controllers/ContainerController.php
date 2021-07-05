@@ -62,9 +62,9 @@ class ContainerController extends Controller
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File($bash), 'run.sh');
         } else {
-            $containerConfig->setImage('2aa8569968b8');
+            $containerConfig->setImage('06e208522cad');
             $containerConfig->setCmd(['run.sh']);
-            $containerConfig->setEntrypoint(["ash"]);
+            $containerConfig->setEntrypoint(["bash"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
