@@ -131,7 +131,7 @@ export default {
   methods: {
     showMenu(course_id) {
       this.rightClickID = course_id;
-      const menu = document.getElementById(course_id).childNodes[0];
+      const menu = document.getElementById(`${course_id}`).childNodes[0];
       const outClick = document.getElementById("out-click");
 
       console.log(menu);
@@ -234,18 +234,17 @@ export default {
       this.Unmounting();
     },
     hasLabAccess(cID) {
-      for(let i = 0; i < this.enrolledCourses.length; i++) {
-        if(this.enrolledCourses[i] == cID) {
+      for (let i = 0; i < this.enrolledCourses.length; i++) {
+        if (this.enrolledCourses[i] == cID) {
           return true;
         }
       }
       return false;
     },
     hasEditAccess(cID) {
-      if(isProf) {
+      if (isProf) {
         return this.hasLabAccess(cID);
-      }
-      else {
+      } else {
         return false;
       }
     },
@@ -263,12 +262,12 @@ export default {
 
         if (path == "labs") {
           //check if can go there
-          if(this.hasLabAccess(cID)) {
+          if (this.hasLabAccess(cID)) {
             this.goToLabs(cID);
           }
         } else if (path == "edit") {
           //check if can go there
-          if(this.hasEditAccess(cID)) {
+          if (this.hasEditAccess(cID)) {
             this.editCourse(cID);
           }
         } else {
