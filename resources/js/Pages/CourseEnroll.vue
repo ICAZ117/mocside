@@ -1,39 +1,60 @@
 <template>
   <h1>You have been invited to join {{ course.name }}</h1>
-  <button @click="joinCourse()" type="submit" >Join</button>
-  <button @click="cancelCourse()" type="submit" >Cancel</button>
+  <button @click="joinCourse()" type="submit">Join</button>
+  <button @click="cancelCourse()" type="submit">Cancel</button>
   <p>yah</p>
 </template>
 
 <script>
 import * as API from "../services/API";
 export default {
-    data() {
-        return {
-            course: {},
-            courseID: 2280,
-        }
-    },
-    methods: {
-        joinCourse() {
-            console.log("join");
-            //join class
+  data() {
+    return {
+      key: "",
+      course: {},
+      courseID: 2280,
+    };
+  },
+  methods: {
+    joinCourse() {
+      console.log("join");
+      //join class
 
-            //move to course page
-            this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
-        },
-        cancelCourse() {
-            console.log("cancel");
-            //move to home since not joining page
-            this.$router.push({ name: "Courses" });
-        },
+      //move to course page
+      this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
     },
-    async mounted() {
-        // const res = await API.apiClient.get(`this is the backend route for each course invitation/${courseKey}`);
-    }
-}
+    cancelCourse() {
+      console.log("cancel");
+      //move to home since not joining page
+      this.$router.push({ name: "Courses" });
+    },
+    async getCourse() {
+      //if valid key
+      if (this.key == "") {
+        console.log("404");
+      }
+      const res = await API.apiClient.get(`/invite/${this.key}`);
+      console.log(res);
+      console.log(res.data);
+      console.log(res.data.data);
+
+      //grab course using key
+
+      //set the courseID using results
+    },
+    getKey() {
+        // /key/enroll
+      var r = window.location.pathname;
+      r = r.split("/");
+      this.key = r[1];
+    },
+  },
+  async mounted() {
+    this.getKey();
+    await this.getCourse();
+  },
+};
 </script>
 
 <style>
-
 </style>
