@@ -18,10 +18,7 @@ export default {
   methods: {
     joinCourse() {
       //join class
-    //   const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
-
-      //check if they truly joined if they did not then redirect to courses
-      // this.cancelCourse();
+      const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
 
       //move to course page
       this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
