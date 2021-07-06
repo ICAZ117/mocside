@@ -50,9 +50,15 @@ class InviteController extends Controller
                 $new_key = bin2hex($bytes);
                 // it is so incredibly unlikely that this will ever repeat that I will not check uniqueness.
                 $validData['join_key'] = $new_key; 
+                $code = InviteCode::create([
+                    'join_key' => $new_key,
+                    'course_id' => $validData['course_id']
+                ]);
+                return response()->json(['message' => 'Successful. (w/ random)', 'data' => $code], 200);
+            } else {
+                $code = InviteCode::create($validData);
+                return response()->json(['message' => 'Successful.', 'data' => $code], 200);
             }
-            $code = InviteCode::create($validData);
-            return response()->json(['message' => 'Successful.', 'data' => $code], 200);
         }
         return response()->json(['message' => 'this is not your course'], 403);
     }
