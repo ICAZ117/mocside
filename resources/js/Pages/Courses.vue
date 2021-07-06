@@ -21,7 +21,7 @@
             :key="course.id"
             :course="course"
           >
-            <a
+            <span
               :id="course.id"
               @contextmenu.prevent="showMenu(course.id)"
               @click.prevent="goToLabs(course.id)"
@@ -63,7 +63,7 @@
                   </div>
                 </div>
               </div>
-            </a>
+            </span>
           </div>
           <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
