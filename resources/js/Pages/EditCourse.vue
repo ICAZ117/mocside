@@ -118,7 +118,7 @@
           </div>
           <button @click="addStudent" class="btn btn-danger btn-block">Add Student</button> -->
           <ul>
-            <li v-for="(k, id) in keys" :key="k"> {{ k.join_key }}
+            <li v-for="(k, id) in joinKeys" :key="k"> {{ k.join_key }}
               <a @click="copyKey(k)">Copy Url</a>
               <a @click="deleteKey(k, id)">Delete Key</a>
             </li>
@@ -184,7 +184,7 @@ export default {
         datetime: "",
         uses: "",
       },
-      keys: [],
+      joinKeys: [],
       keyURL: "",
     };
   },
@@ -194,7 +194,7 @@ export default {
       console.log(res);
       var myArr = res.data.data;
       for(let i = 0; i < myArr.length; i++) {
-        this.keys.push(myArr[i]);
+        this.joinKeys.push(myArr[i]);
       }
     },
     async generateKey() {
@@ -226,7 +226,7 @@ export default {
 
       const res2 = await API.apiClient.put(`/invite/${keyCode}`, payload);
 
-      this.keys.push(res2.data.data);
+      this.joinKeys.push(res2.data.data);
     },
     copyKey(key) {
       this.keyURL = "http://mocside.com:8000/" + key.join_key + "/enroll";
@@ -237,7 +237,7 @@ export default {
       //call delete api method
 
       //filter from front end
-      this.keys = this.keys.filter((k) => k.join_key != id);
+      this.joinKeys = this.joinKeys.filter((k) => k.join_key != id);
     },
     async handleSubmit() {
       this.isSubmitted = true;
