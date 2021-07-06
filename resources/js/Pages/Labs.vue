@@ -54,23 +54,19 @@
             <!-- <td>69%</td> -->
             <td>{{ lab.due_date }}</td>
             <!-- <td>4/20/0420</td> -->
-
-            <ul id="menu">
-              <li class="menu-item">
-                <a
-                  v-if="isProf"
-                  class="pointer no-decor"
-                  @click="editLab(lab.id, lab.name)"
-                  >Edit</a
-                >
-              </li>
-              <li class="menu-item">
-                <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
-                  >Delete</a
-                >
-              </li>
-            </ul>
           </tr>
+          <ul id="menu">
+            <li class="menu-item">
+              <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
+                >Edit</a
+              >
+            </li>
+            <li class="menu-item">
+              <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
+                >Delete</a
+              >
+            </li>
+          </ul>
         </template>
 
         <tr v-if="isProf" class="lab pointer" @click="addLab">
