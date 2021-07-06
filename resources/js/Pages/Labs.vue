@@ -253,6 +253,37 @@ export default {
         }
       }
     },
+    routeToChild() {
+      var r = window.location.pathname;
+      var sub = "/courses/" + this.courseID + "/labs";
+      var c = r.substring(sub.length);
+      if(c == "") {
+        console.log("just on the labs page");
+      }
+      else {
+        console.log("on this page: " + c);
+        var c = c.split("/");
+        var lID = c[1];
+        var path = c[2]; //labs, or edit, and maybe something else
+        var name = "";
+        for(let i = 0; i < this.labs.length; i++) {
+          if(this.labs[i].id == lID) {
+            name = this.labs[i].name;
+            break;
+          }
+        }
+
+        if(path == "problems") {
+          this.goToProblems(lID, name);
+        }
+        else if(path == "edit") {
+          this.editLab(lID, name);
+        }
+        else {
+          console.log(path);
+        }
+      }
+    },
   },
   computed: {
     isProf: function () {
@@ -266,6 +297,7 @@ export default {
   async mounted() {
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
+    this.routeToChild();
   },
   async beforeMount() {
     this.childisOpen = false;
