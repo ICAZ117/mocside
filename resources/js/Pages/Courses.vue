@@ -45,9 +45,7 @@
                   </div>
                 </div>
               </div>
-            </a>
-
-            <ul id="menu">
+              <ul id="menu">
               <li class="menu-item">
                 <a v-if="isProf" class="pointer no-decor" @click="editCourse(course.id)"
                   >Edit</a
@@ -64,6 +62,8 @@
               <li>{{ course.id }}</li>
               <li>{{ course }}</li>
             </ul>
+            </a>
+
           </div>
           <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
