@@ -4,7 +4,6 @@ IMPORTANT
 * Fix Student Run Button
 * Complete Grade Process
 * Add the course enroll link stuff
-* Course Edit, and Delete do not work currently because of the menu
 
 
 
@@ -38,7 +37,7 @@ STYLE FIXES
 ADD PAGES
 * Add profile Page
 * Add contact us page
-* perhaps make another middle page for professors to go to before labs, which shows the course details, and overview as well as student overview (maybe create this as a child of courses, and a sibling of labs)
+* turn course edit into a course dashboard where professor can change course details as well as see gradebook, students, etc.
 
 
 
