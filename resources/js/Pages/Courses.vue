@@ -23,7 +23,7 @@
           >
             <a
               :id="course.id"
-              @contextmenu="showMenu(event)"
+              @contextmenu.prevent="showMenu(event, course.id)"
               @click="goToLabs(course.id)"
               class="no-decor pointer"
             >
@@ -129,23 +129,19 @@ export default {
     };
   },
   methods: {
-    showMenu(event) {
-      console.log(event.srcElement);
+    showMenu(course_id) {
+      this.rightClickID = course_id;
+      const menu = document.getElementById(course_id).childNodes[0];
+      const outClick = document.getElementById("out-click");
 
-      // this.rightClickID = course_id;
-      // const menu = document.getElementById(course_id).childNodes[0];
-      // const outClick = document.getElementById("out-click");
+      console.log(menu);
+      console.log(outClick);
 
-      // console.log(menu);
-      // console.log(outClick);
+      menu.style.top = `${window.event.clientY}px`;
+      menu.style.left = `${window.event.clientX}px`;
+      menu.classList.add("show");
 
-      // e.preventDefault();
-
-      // menu.style.top = `${e.clientY}px`;
-      // menu.style.left = `${e.clientX}px`;
-      // menu.classList.add("show");
-
-      // outClick.style.display = "block";
+      outClick.style.display = "block";
     },
     closeMenu(course_id) {
       this.rightClickID = course_id;
