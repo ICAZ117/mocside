@@ -147,12 +147,8 @@ export default {
       try {
         document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
       } catch (e) {}
-      
-      const outClick = document.getElementById("out-click");
-
+      document.getElementById("out-click").style.display = "none";
       this.rightClickID = "";
-
-      outClick.style.display = "none";
     },
     async addCourse() {
       var payload = {
@@ -187,6 +183,7 @@ export default {
       var flag = confirm("Are you Sure you want to delete " + course.name);
       if (flag) {
         this.childIsOpen = false;
+        document.getElementById("out-click").style.display = "none";
         //delete the course
         const res = await API.apiClient.delete(`/courses/${id}`);
         console.log(res);
