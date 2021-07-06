@@ -11,7 +11,9 @@
     <small class="navigation"
       ><span>{{ username }}{{ currentDirectory }}</span>
       <br />
-      <span class="pointer underline" @click="this.$emit('unmounting')">↩ Return to Courses</span>
+      <span class="pointer underline" @click="this.$emit('unmounting')"
+        >↩ Return to Courses</span
+      >
     </small>
 
     <table class="table labtable">
@@ -41,33 +43,34 @@
           <tr
             v-if="isProf"
             class="lab pointer"
-            id="clickable"
+            :id="lab.id"
             @click="goToProblems(lab.id, lab.name)"
-            @contextmenu="showMenu"
+            @contextmenu="showMenu(lab.id)"
           >
             <td>
               <a>{{ lab.name }}</a>
             </td>
             <td>{{ lab.num_problems }}</td>
-            <td v-if="!isProf">{{ lab.percent }}</td>
             <!-- <td>69%</td> -->
             <td>{{ lab.due_date }}</td>
-            <td v-if="!isProf">{{ lab.activity }}</td>
             <!-- <td>4/20/0420</td> -->
-          </tr>
 
-          <ul id="menu">
-            <li class="menu-item">
-              <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
-                >Edit</a
-              >
-            </li>
-            <li class="menu-item">
-              <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
-                >Delete</a
-              >
-            </li>
-          </ul>
+            <ul id="menu">
+              <li class="menu-item">
+                <a
+                  v-if="isProf"
+                  class="pointer no-decor"
+                  @click="editLab(lab.id, lab.name)"
+                  >Edit</a
+                >
+              </li>
+              <li class="menu-item">
+                <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
+                  >Delete</a
+                >
+              </li>
+            </ul>
+          </tr>
 
           <div id="out-click" @click="closeMenu"></div>
         </template>
@@ -116,6 +119,7 @@ export default {
       fscID: null,
       progress: [],
       username: "",
+      rightClickID: "",
     };
   },
   setup() {
@@ -128,27 +132,25 @@ export default {
     };
   },
   methods: {
-    showMenu(e) {
-      const menu = document.getElementById("menu");
-      const outClick = document.getElementById("out-click");
+    showMenu(course_id) {
+      if (this.isProf) {
+        this.rightClickID = String(course_id);
+        const menu = document.getElementById(this.rightClickID).childNodes[0];
+        const outClick = document.getElementById("out-click");
 
-      console.log(menu);
-      console.log(outClick);
+        menu.style.top = `${window.event.clientY}px`;
+        menu.style.left = `${window.event.clientX}px`;
+        menu.classList.add("show");
 
-      e.preventDefault();
-
-      menu.style.top = `${e.clientY}px`;
-      menu.style.left = `${e.clientX}px`;
-      menu.classList.add("show");
-
-      outClick.style.display = "block";
+        outClick.style.display = "block";
+      }
     },
     closeMenu() {
-      const menu = document.getElementById("menu");
-      const outClick = document.getElementById("out-click");
-
-      menu.classList.remove("show");
-      outClick.style.display = "none";
+      try {
+        document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
+      } catch (e) {}
+      document.getElementById("out-click").style.display = "none";
+      this.rightClickID = "";
     },
     goToProblems(id, name) {
       this.childisOpen = true;
@@ -257,29 +259,26 @@ export default {
       var r = window.location.pathname;
       var sub = "/courses/" + this.courseID + "/labs";
       var c = r.substring(sub.length);
-      if(c == "") {
+      if (c == "") {
         console.log("just on the labs page");
-      }
-      else {
+      } else {
         console.log("on this page: " + c);
         var c = c.split("/");
         var lID = c[1];
         var path = c[2]; //labs, or edit, and maybe something else
         var name = "";
-        for(let i = 0; i < this.labs.length; i++) {
-          if(this.labs[i].id == lID) {
+        for (let i = 0; i < this.labs.length; i++) {
+          if (this.labs[i].id == lID) {
             name = this.labs[i].name;
             break;
           }
         }
 
-        if(path == "problems") {
+        if (path == "problems") {
           this.goToProblems(lID, name);
-        }
-        else if(path == "edit") {
+        } else if (path == "edit") {
           this.editLab(lID, name);
-        }
-        else {
+        } else {
           console.log(path);
         }
       }

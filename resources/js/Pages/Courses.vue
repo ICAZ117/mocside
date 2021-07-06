@@ -116,12 +116,6 @@ export default {
       rightClickID: "",
     };
   },
-  watch: {
-    rightClickID: function () {
-      console.log(this.rightClickID);
-    },
-  },
-
   setup() {
     const route = useRoute();
 
@@ -133,15 +127,17 @@ export default {
   },
   methods: {
     showMenu(course_id) {
-      this.rightClickID = String(course_id);
-      const menu = document.getElementById(this.rightClickID).childNodes[0];
-      const outClick = document.getElementById("out-click");
+      if (this.isProf) {
+        this.rightClickID = String(course_id);
+        const menu = document.getElementById(this.rightClickID).childNodes[0];
+        const outClick = document.getElementById("out-click");
 
-      menu.style.top = `${window.event.clientY}px`;
-      menu.style.left = `${window.event.clientX}px`;
-      menu.classList.add("show");
+        menu.style.top = `${window.event.clientY}px`;
+        menu.style.left = `${window.event.clientX}px`;
+        menu.classList.add("show");
 
-      outClick.style.display = "block";
+        outClick.style.display = "block";
+      }
     },
     closeMenu() {
       try {
@@ -209,7 +205,6 @@ export default {
     },
     goToLabs(id) {
       if (this.rightClickID == "") {
-        console.log("\n\n\nrightClickID: " + this.rightClickID);
         this.childIsOpen = true;
         this.courseID = id;
         this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
