@@ -117,9 +117,9 @@ export default {
     };
   },
   watch: {
-    rightClickID: function() {
+    rightClickID: function () {
       console.log(this.rightClickID);
-    }
+    },
   },
 
   setup() {
@@ -144,12 +144,14 @@ export default {
       outClick.style.display = "block";
     },
     closeMenu() {
-      const menu = document.getElementById(this.rightClickID).childNodes[0];
+      try {
+        document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
+      } catch (e) {}
+      
       const outClick = document.getElementById("out-click");
 
       this.rightClickID = "";
 
-      menu.classList.remove("show");
       outClick.style.display = "none";
     },
     async addCourse() {
