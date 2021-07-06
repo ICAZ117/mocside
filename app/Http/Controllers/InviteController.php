@@ -81,9 +81,13 @@ class InviteController extends Controller
         $code = InviteCode::where('join_key', '=', $key)->first();
         $course = Course::findOrFail($code->course_id);
 
-        // check for code expiracy
-
-        // return response()->json(['message' => 'Code no longer valid.'], 403)
+        // check for code expiracy             max_uses = 0 => infinite uses
+        if (($code->uses >= $code->max_uses && $code->max_uses != 0) || date("Y-m-d H:i:s") >= $code->expire_date) {
+            return response()->json(['message' => 'Code no longer valid.'], 403);
+        } else {
+            $code->uses = $code->uses + 1;
+            $code->save();
+        }
 
         // populate rosters
         // IF this code fails, it will be because the user does not have these
