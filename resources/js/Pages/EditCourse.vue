@@ -137,7 +137,7 @@
             </label>
             <label>Expire Date</label>
             <input
-              type="datetime"
+              type="datetime-local"
               :disabled="enrollKey.perm"
               v-model="enrollKey.datetime"
             />
