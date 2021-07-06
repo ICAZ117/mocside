@@ -72,7 +72,7 @@ class InviteController extends Controller
         $user = Auth::user();
 
         // check to be sure that the user is a student, before anything else
-        $student = Student::whereFscId($user->fsc_id);
+        $student = Student::where('fsc_id', '=', $user->fsc_id)->first();
         if (!$student) {
             return response()->json(['message' => 'No student found for current fsc_id.'], 403);
         }
