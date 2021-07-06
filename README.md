@@ -3,12 +3,10 @@
 IMPORTANT
 * Fix Student Run Button
 * Complete Grade Process
-* Add the course enroll link stuff
 
 
 
 NEXT UP
-* replace the student id add in courses, with the create link to join course
 * Fixing the url routing issue
 * deleting some problems has not reset their copies copy id when needed...ie delete 14 when it has copies should make the first copy switch copy id to itself, ie 45's copy id becomes 45
 * some test cases have the wrong assignment id....where did this happen....perhaps when deleting the original/copies?
@@ -24,7 +22,8 @@ STYLE FIXES
 * Home
 * Navbar
 * Courses
-* Course Edit
+* Course Edit...change to course dashboard
+* Course Enroll Page
 * Labs
 * Lab Edit
 * Problems
