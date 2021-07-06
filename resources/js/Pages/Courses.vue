@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     showMenu(e) {
-      console.log(e);
+      console.log(e.target);
 
       // this.rightClickID = course_id;
       // const menu = document.getElementById(course_id).childNodes[0];
