@@ -103,6 +103,7 @@
 <script>
 import * as API from "../services/API";
 import store from "../Store/index";
+import { useRoute } from "vue-router";
 export default {
   props: ["labID", "labName"],
   emits: ["unmounting", "labEdited"],
