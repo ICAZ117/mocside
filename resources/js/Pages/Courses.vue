@@ -233,6 +233,22 @@ export default {
       this.courses.push(course.data.data);
       this.Unmounting();
     },
+    hasLabAccess(cID) {
+      for(let i = 0; i < this.enrolledCourses.length; i++) {
+        if(this.enrolledCourses[i] == cID) {
+          return true;
+        }
+      }
+      return false;
+    },
+    hasEditAccess(cID) {
+      if(isProf) {
+        return this.hasLabAccess(cID);
+      }
+      else {
+        return false;
+      }
+    },
     routeToChild() {
       var r = window.location.pathname;
       var sub = "/courses";
@@ -246,9 +262,15 @@ export default {
         var path = c[2]; //labs, or edit, and maybe something else
 
         if (path == "labs") {
-          this.goToLabs(cID);
+          //check if can go there
+          if(this.hasLabAccess(cID)) {
+            this.goToLabs(cID);
+          }
         } else if (path == "edit") {
-          this.editCourse(cID);
+          //check if can go there
+          if(this.hasEditAccess(cID)) {
+            this.editCourse(cID);
+          }
         } else {
           console.log(path);
         }
