@@ -182,7 +182,7 @@ export default {
         key: "",
         perm: true,
         datetime: "",
-        uses: 0,
+        uses: "",
       },
       keys: [],
       keyURL: "",
