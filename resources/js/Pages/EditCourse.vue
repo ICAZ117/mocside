@@ -257,7 +257,6 @@ export default {
       textarea.select();
       document.execCommand('copy');
       document.body.removeChild(textarea);
-      console.log(this.keyURL);
     },
     async deleteKey(key, id) {
       //call delete api method
