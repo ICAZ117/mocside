@@ -231,7 +231,7 @@ export default {
       //call delete api method
 
       //filter from front end
-      this.keys = this.keys.filter((key) => key.join_key != id);
+      this.keys = this.keys.filter((k) => k.join_key != id);
     },
     async handleSubmit() {
       this.isSubmitted = true;
