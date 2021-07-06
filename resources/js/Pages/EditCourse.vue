@@ -132,6 +132,7 @@
             <label>Enroll Key</label>
             <input placeholder="Random" type="text" v-model="enrollKey.key" />
             <br>
+            <label>Permanent Key</label>
             <label class="switch">
               <input type="checkbox" v-model="enrollKey.perm" />
               <span class="slider round"></span>
