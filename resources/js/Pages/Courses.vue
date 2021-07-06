@@ -247,7 +247,7 @@ export default {
       return false;
     },
     hasEditAccess(cID) {
-      if (isProf) {
+      if (this.isProf) {
         return this.hasLabAccess(cID);
       } else {
         return false;
