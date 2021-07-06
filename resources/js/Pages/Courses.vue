@@ -23,7 +23,7 @@
           >
             <a
               :id="course.id"
-              @contextmenu="showMenu()"
+              @contextmenu="showMenu(event)"
               @click="goToLabs(course.id)"
               class="no-decor pointer"
             >
@@ -129,8 +129,8 @@ export default {
     };
   },
   methods: {
-    showMenu(e) {
-      console.log(e.target);
+    showMenu(event) {
+      console.log(event.target);
 
       // this.rightClickID = course_id;
       // const menu = document.getElementById(course_id).childNodes[0];
