@@ -43,6 +43,22 @@
                 </div>
               </div>
             </a>
+
+            <ul id="menu">
+              <li class="menu-item">
+                <a v-if="isProf" class="pointer no-decor" @click="editCourse(course.id)"
+                  >Edit</a
+                >
+              </li>
+              <li class="menu-item">
+                <a
+                  v-if="isProf"
+                  class="pointer no-decor"
+                  @click="deleteCourse(course.id, course, key)"
+                  >Delete</a
+                >
+              </li>
+            </ul>
           </div>
           <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
@@ -73,19 +89,6 @@
       :courseID="courseID"
     ></router-view>
   </div>
-  <ul id="menu">
-    <li class="menu-item">
-      <a v-if="isProf" class="pointer no-decor" @click="editCourse(course.id)">Edit</a>
-    </li>
-    <li class="menu-item">
-      <a
-        v-if="isProf"
-        class="pointer no-decor"
-        @click="deleteCourse(course.id, course, key)"
-        >Delete</a
-      >
-    </li>
-  </ul>
 
   <div id="out-click" @click="closeMenu"></div>
 </template>
@@ -226,22 +229,19 @@ export default {
       var r = window.location.pathname;
       var sub = "/courses";
       var c = r.substring(sub.length);
-      if(c == "") {
+      if (c == "") {
         console.log("just on the courses page");
-      }
-      else {
+      } else {
         console.log("on this page: " + c);
         var c = c.split("/");
         var cID = c[1];
         var path = c[2]; //labs, or edit, and maybe something else
 
-        if(path == "labs") {
+        if (path == "labs") {
           this.goToLabs(cID);
-        }
-        else if(path == "edit") {
+        } else if (path == "edit") {
           this.editCourse(cID);
-        }
-        else {
+        } else {
           console.log(path);
         }
       }
