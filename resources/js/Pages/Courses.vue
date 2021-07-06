@@ -22,11 +22,31 @@
             :course="course"
           >
             <a
-              id="clickable"
-              @contextmenu="showMenu"
+              :id="course.id"
+              @contextmenu="showMenu(event, course.id)"
               @click="goToLabs(course.id)"
               class="no-decor pointer"
             >
+              <ul id="menu">
+                <li class="menu-item">
+                  <a
+                    v-show="isProf"
+                    class="pointer no-decor"
+                    @click="editCourse(course.id)"
+                    >Edit</a
+                  >
+                </li>
+                <li class="menu-item">
+                  <a
+                    v-show="isProf"
+                    class="pointer no-decor"
+                    @click="deleteCourse(course.id, course, key)"
+                    >Delete</a
+                  >
+                </li>
+                <li>{{ course.id }}</li>
+                <li>{{ course }}</li>
+              </ul>
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
@@ -45,25 +65,7 @@
                   </div>
                 </div>
               </div>
-              <ul id="menu">
-              <li class="menu-item">
-                <a v-show="isProf" class="pointer no-decor" @click="editCourse(course.id)"
-                  >Edit</a
-                >
-              </li>
-              <li class="menu-item">
-                <a
-                  v-show="isProf"
-                  class="pointer no-decor"
-                  @click="deleteCourse(course.id, course, key)"
-                  >Delete</a
-                >
-              </li>
-              <li>{{ course.id }}</li>
-              <li>{{ course }}</li>
-            </ul>
             </a>
-
           </div>
           <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
@@ -113,6 +115,7 @@ export default {
       childIsOpen: false,
       courseID: null,
       username: "",
+      rightClickID: "",
     };
   },
 
@@ -126,8 +129,9 @@ export default {
     };
   },
   methods: {
-    showMenu(e) {
-      const menu = document.getElementById("menu");
+    showMenu(e, course_id) {
+      this.rightClickID = course_id;
+      const menu = document.getElementById(course_id).childNodes[0];
       const outClick = document.getElementById("out-click");
 
       console.log(menu);
@@ -141,8 +145,9 @@ export default {
 
       outClick.style.display = "block";
     },
-    closeMenu() {
-      const menu = document.getElementById("menu");
+    closeMenu(course_id) {
+      this.rightClickID = course_id;
+      const menu = document.getElementById(course_id).childNodes[0];
       const outClick = document.getElementById("out-click");
 
       menu.classList.remove("show");
