@@ -141,6 +141,7 @@
               :disabled="enrollKey.perm"
               v-model="enrollKey.datetime"
             />
+            <br>
             <label>Expire Time</label>
             <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time">
             <label>Max Uses</label>
