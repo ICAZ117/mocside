@@ -205,6 +205,7 @@ export default {
     },
     goToLabs(id) {
       if (this.rightClickID != "") {
+        console.log("\n\n\nrightClickID: " + this.rightClickID);
         this.childIsOpen = true;
         this.courseID = id;
         this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
