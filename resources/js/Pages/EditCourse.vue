@@ -219,6 +219,8 @@ export default {
       payload["max_uses"] = this.enrollKey.uses;
 
       const res2 = await API.apiClient.put(`/invite/${keyCode}`, payload);
+
+      this.keys.push(res2.data.data);
     },
     copyKey(key) {
       this.keyURL = "http://mocside.com:8000/" + key.join_key + "/enroll";
