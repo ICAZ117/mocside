@@ -81,6 +81,10 @@ class InviteController extends Controller
         $code = InviteCode::where('join_key', '=', $key)->first();
         $course = Course::findOrFail($code->course_id);
 
+        // check for code expiracy
+
+        // return response()->json(['message' => 'Code no longer valid.'], 403)
+
         // populate rosters
         // IF this code fails, it will be because the user does not have these
         // columns properly initialized by init/gradebook 
