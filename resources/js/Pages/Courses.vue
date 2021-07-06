@@ -20,10 +20,13 @@
             v-for="(course, key) in courses"
             :key="course.id"
             :course="course"
-            id="clickable"
-            @contextmenu="showMenu"
           >
-            <a @click="goToLabs(course.id)" class="no-decor pointer">
+            <a
+              id="clickable"
+              @contextmenu="showMenu"
+              @click="goToLabs(course.id)"
+              class="no-decor pointer"
+            >
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div class="card coursecard w-100">
