@@ -138,10 +138,11 @@ export default {
 
       outClick.style.display = "block";
     },
-    closeMenu(course_id) {
-      this.rightClickID = "";
-      const menu = document.getElementById(String(course_id)).childNodes[0];
+    closeMenu() {
+      const menu = document.getElementById(this.rightClickID).childNodes[0];
       const outClick = document.getElementById("out-click");
+
+      this.rightClickID = "";
 
       menu.classList.remove("show");
       outClick.style.display = "none";
