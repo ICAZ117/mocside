@@ -20,7 +20,7 @@ export default {
             //join class
 
             //move to course page
-            this.$router.push({ name: "Labs", params: { course_id: this.courseID } }); //routing issue
+            this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
         },
         cancelCourse() {
             console.log("cancel");

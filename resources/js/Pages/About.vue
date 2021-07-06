@@ -42,14 +42,8 @@ export default {
 
 <style></style> -->
 
-<template>
-  <CourseEnroll />
-</template>
-
 <script>
-import CourseEnroll from "./CourseEnroll";
 export default {
-  components: { CourseEnroll },
   mounted() {
     
   },
