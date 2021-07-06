@@ -235,6 +235,7 @@ export default {
     },
     deleteKey(key, id) {
       //call delete api method
+      const res = await API.apiClient.delete(`/invite/${key.id}`);
 
       //filter from front end
       this.joinKeys = this.joinKeys.filter((k, i) => i  != id);
