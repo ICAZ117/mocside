@@ -204,7 +204,7 @@ export default {
       }
     },
     goToLabs(id) {
-      if (this.rightClickID != "") {
+      if (this.rightClickID == "") {
         console.log("\n\n\nrightClickID: " + this.rightClickID);
         this.childIsOpen = true;
         this.courseID = id;
