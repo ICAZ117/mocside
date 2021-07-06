@@ -43,8 +43,8 @@
           <tr
             v-if="isProf"
             class="lab pointer"
-            @click="goToProblems(lab.id, lab.name)"
-            @contextmenu="showMenu(lab.id)"
+            @click.prevent="goToProblems(lab.id, lab.name)"
+            @contextmenu.prevent="showMenu(lab.id)"
           >
             <td>
               <a>{{ lab.name }}</a>
