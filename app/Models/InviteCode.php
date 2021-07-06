@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class InviteCode extends Model
 {
     use HasFactory;
-    protected $primaryKey = $id;
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'join_key',
