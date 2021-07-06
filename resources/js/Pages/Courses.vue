@@ -58,6 +58,8 @@
                   >Delete</a
                 >
               </li>
+              <li>{{ course.id }}</li>
+              <li>{{ course }}</li>
             </ul>
           </div>
           <div v-if="isProf" class="add-course fixed-course-width">
