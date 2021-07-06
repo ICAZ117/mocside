@@ -60,17 +60,11 @@ const routes = [
         //     else next(false);
         // }
     },
-    // {
-    //     path: '/courses/:id',
-    //     component: () => import("../Pages/Courses.vue"),
-    //     name: "labs",
-    //     children: [
-    //         {
-    //             path: 'labs',
-    //             component: () => import("../Pages/Labs.vue"),
-    //         }
-    //     ]
-    // },
+    {
+        path: ":course_key/enroll",
+        component: () => import("../Pages/CourseEnroll.vue"),
+        name: "CourseEnroll",
+    },
     {
         path: "/about",
         component: () => import("../Pages/About.vue"),
