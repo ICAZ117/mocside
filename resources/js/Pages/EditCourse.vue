@@ -129,7 +129,7 @@
             <label >Enroll Url</label>
             <input type="text" disabled >
           </div>
-          <button type="don't do nothing" @click="generateKey" class="btn btn-danger btn-block">Generate Course Enroll Key</button>
+          <button type="button" @click="generateKey" class="btn btn-danger btn-block">Generate Course Enroll Key</button>
         </div>
         <br />
 
