@@ -131,11 +131,16 @@ export default {
   methods: {
     showMenu(course_id) {
       this.rightClickID = course_id;
-      const menu = document.getElementById('"' + course_id + '"').childNodes[0];
-      const outClick = document.getElementById("out-click");
-
+      var elID = '"' + course_id + '"';
+      console.log("elID:");
+      console.log(elID);
+      const menuParent = document.getElementById(elID)
+      console.log("\nMenu Parent:");
+      console.log(menuParent);
+      const menu = menuParent.childNodes[0];
+      console.log("\nMenu:");
       console.log(menu);
-      console.log(outClick);
+      const outClick = document.getElementById("out-click");
 
       menu.style.top = `${window.event.clientY}px`;
       menu.style.left = `${window.event.clientX}px`;
