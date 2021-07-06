@@ -362,7 +362,7 @@ export default {
         // ELSE, the code ran successfully. Now check if it passed the test case or not.
         else {
           // tc.compare = JSON.parse(tc.compare);
-          console.log(tc.compare[0]);
+          console.log(JSON.parse(tc.compare));
 
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
