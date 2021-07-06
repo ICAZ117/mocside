@@ -137,10 +137,12 @@
             </label>
             <label>Expire Date</label>
             <input
-              type="datetime-local"
+              type="date"
               :disabled="enrollKey.perm"
               v-model="enrollKey.datetime"
             />
+            <label>Expire Time</label>
+            <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time">
             <label>Max Uses</label>
             <input
               placeholder="0 for unlimited use"
@@ -202,6 +204,7 @@ export default {
         key: "",
         perm: true,
         datetime: "",
+        time: "",
         uses: "",
       },
       joinKeys: [],
