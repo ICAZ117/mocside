@@ -27,7 +27,7 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="(lab, key) in labs" :key="lab.id">
+        <template v-for="lab in labs" :key="lab.id">
           <tr v-if="!isProf" class="lab pointer" @click="goToProblems(lab.id, lab.name)">
             <td>
               <a>{{ lab.name }}</a>
@@ -43,7 +43,6 @@
           <tr
             v-if="isProf"
             class="lab pointer"
-            :id="lab.id"
             @click="goToProblems(lab.id, lab.name)"
             @contextmenu="showMenu(lab.id)"
           >
@@ -55,18 +54,6 @@
             <td>{{ lab.due_date }}</td>
             <!-- <td>4/20/0420</td> -->
           </tr>
-          <ul id="menu">
-            <li class="menu-item">
-              <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
-                >Edit</a
-              >
-            </li>
-            <li class="menu-item">
-              <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
-                >Delete</a
-              >
-            </li>
-          </ul>
         </template>
 
         <tr v-if="isProf" class="lab pointer" @click="addLab">
@@ -92,6 +79,22 @@
     :labID="labID"
     :labName="labName"
   ></router-view>
+  <div v-for="(lab, key) in labs" :key="lab.id">
+    <div :id="lab.id">
+      <ul id="menu">
+        <li class="menu-item">
+          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
+            >Edit</a
+          >
+        </li>
+        <li class="menu-item">
+          <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
+            >Delete</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
   <div id="out-click" @click="closeMenu"></div>
 </template>
 
