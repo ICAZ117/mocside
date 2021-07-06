@@ -12,7 +12,7 @@ export default {
     return {
       key: "",
       course: {},
-      courseID: 2280,
+      courseID: "",
     };
   },
   methods: {
@@ -34,13 +34,11 @@ export default {
         console.log("404");
       }
       const res = await API.apiClient.get(`/invite/${this.key}`);
-      console.log(res);
-      console.log(res.data);
-      console.log(res.data.data);
+      this.courseID = res.data.data.course_id;
 
       //grab course using key
-
-      //set the courseID using results
+      const res = await API.apiClient.get(`/courses/${this.courseID}`);
+      this.course = res.data.data;
     },
     getKey() {
         // /key/enroll
