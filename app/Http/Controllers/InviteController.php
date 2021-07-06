@@ -44,6 +44,13 @@ class InviteController extends Controller
         $course = Course::findOrFail($validData['course_id']);
         $owner = $course->owner_id;
         if ($user->fsc_id == $owner || $user->isAdmin()) {
+            if (strcasecmp($validData['join_key'],'random') == 0) {
+                // generate random, unique key
+                $bytes = random_bytes(4);
+                $new_key = bin2hex($bytes);
+                // it is so incredibly unlikely that this will ever repeat that I will not check uniqueness.
+                $validData['join_key'] = $new_key; 
+            }
             $code = InviteCode::create($validData);
             return response()->json(['message' => 'Successful.', 'data' => $code], 200);
         }
