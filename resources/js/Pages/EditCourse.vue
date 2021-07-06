@@ -191,6 +191,7 @@ export default {
   methods: {
     async initKeys() {
       const res = await API.apiClient.get(`/invite/course/${this.courseID}`);
+      console.log(res);
       var myArr = res.data.data;
       for(let i = 0; i < myArr.length; i++) {
         this.keys.push(myArr[i]);
