@@ -61,7 +61,7 @@ const routes = [
         // }
     },
     {
-        path: ":course_key/enroll",
+        path: "/:course_key/enroll",
         component: () => import("../Pages/CourseEnroll.vue"),
         name: "CourseEnroll",
     },
