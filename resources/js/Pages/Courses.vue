@@ -44,8 +44,6 @@
                     >Delete</a
                   >
                 </li>
-                <li>{{ course.id }}</li>
-                <li>{{ course }}</li>
               </ul>
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
