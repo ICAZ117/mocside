@@ -130,16 +130,8 @@ export default {
   },
   methods: {
     showMenu(course_id) {
-      this.rightClickID = course_id;
-      // var elID = '"' + course_id + '"';
-      console.log("String(course_id):");
-      console.log(String(course_id));
-      const menuParent = document.getElementById(String(course_id))
-      console.log("\nMenu Parent:");
-      console.log(menuParent);
-      const menu = menuParent.childNodes[0];
-      console.log("\nMenu:");
-      console.log(menu);
+      this.rightClickID = String(course_id);
+      const menu = document.getElementById(this.rightClickID).childNodes[0];
       const outClick = document.getElementById("out-click");
 
       menu.style.top = `${window.event.clientY}px`;
@@ -149,8 +141,8 @@ export default {
       outClick.style.display = "block";
     },
     closeMenu(course_id) {
-      this.rightClickID = course_id;
-      const menu = document.getElementById(course_id).childNodes[0];
+      this.rightClickID = "";
+      const menu = document.getElementById(String(course_id)).childNodes[0];
       const outClick = document.getElementById("out-click");
 
       menu.classList.remove("show");
