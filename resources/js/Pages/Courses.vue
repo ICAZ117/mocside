@@ -47,13 +47,13 @@
               </div>
               <ul id="menu">
               <li class="menu-item">
-                <a v-if="isProf" class="pointer no-decor" @click="editCourse(course.id)"
+                <a v-show="isProf" class="pointer no-decor" @click="editCourse(course.id)"
                   >Edit</a
                 >
               </li>
               <li class="menu-item">
                 <a
-                  v-if="isProf"
+                  v-show="isProf"
                   class="pointer no-decor"
                   @click="deleteCourse(course.id, course, key)"
                   >Delete</a
