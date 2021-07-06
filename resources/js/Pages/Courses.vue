@@ -116,6 +116,11 @@ export default {
       rightClickID: "",
     };
   },
+  watch: {
+    rightClickID: function () {
+      console.log(this.rightClickID);
+    },
+  },
 
   setup() {
     const route = useRoute();
@@ -139,13 +144,11 @@ export default {
       outClick.style.display = "block";
     },
     closeMenu() {
-      const menu = document.getElementById(this.rightClickID).childNodes[0];
-      const outClick = document.getElementById("out-click");
-
+      try {
+        document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
+      } catch (e) {}
+      document.getElementById("out-click").style.display = "none";
       this.rightClickID = "";
-
-      menu.classList.remove("show");
-      outClick.style.display = "none";
     },
     async addCourse() {
       var payload = {
@@ -180,6 +183,7 @@ export default {
       var flag = confirm("Are you Sure you want to delete " + course.name);
       if (flag) {
         this.childIsOpen = false;
+        document.getElementById("out-click").style.display = "none";
         //delete the course
         const res = await API.apiClient.delete(`/courses/${id}`);
         console.log(res);
