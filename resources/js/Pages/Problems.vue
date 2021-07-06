@@ -3,7 +3,7 @@
     <!-- Main Page-->
     <div class="courses header">
       <div class="heading">
-        <h2>{{ this.labNames }}</h2>
+        <h2>{{ this.labName }}</h2>
         <hr />
       </div>
     </div>
@@ -104,6 +104,8 @@
 import * as API from "../services/API";
 import store from "../Store/index";
 import { useRoute } from "vue-router";
+import { computed } from "vue";
+
 export default {
   props: ["labID", "labName"],
   emits: ["unmounting", "labEdited"],
