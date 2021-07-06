@@ -197,6 +197,7 @@ import useVuelidate from "@vuelidate/core";
 import { getError } from "../utils/helpers";
 import { required, email, minLength, maxLength, between, integer } from "@vuelidate/validators";
 import AuthService from "../services/AuthService";
+import * as API from "../services/API";
 export default {
   setup() {
     return {
@@ -267,9 +268,26 @@ export default {
         password: this.userForm.password,
         password_confirmation: this.userForm.confirmPassword,
       };
-      AuthService.registerUser(payload)
-        .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
-        .catch((error) => (this.error = getError(error)));
+      
+      // AuthService.registerUser(payload)
+      //   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
+      //   .catch((error) => (this.error = getError(error)));
+
+      const res = await AuthService.registerUser(payload);
+      console.log(res);
+      // then, create student. Any user signed up from the front end STARTS as a student.
+      // is there a chance this doesn't work? (CSRF mismatch, likely)
+      const res2 = await API.apiClient.post('/students', { fsc_id: payload.fsc_id });
+      console.log(res2);
+
+      // if we've made it this far, they have a student (probably), and we can push to login
+      // but not before we init gradebook!
+      const res3 = await API.apiClient.post(`/gradebook/init/${res2.data.data.id}`, { scope: "student" });
+      console.log(res3);
+
+      // now, push to login
+      this.$router.push('/login') // this will get them properly authorized,
+      // and in the future possibly aid email verification.
     },
   },
   computed: {
