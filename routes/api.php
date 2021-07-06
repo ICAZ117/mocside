@@ -15,6 +15,7 @@ use App\Http\Controllers\CodeController;
 use App\Http\Controllers\ContainerController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GradebookController;
+use App\Http\Controllers\InviteController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ProgressController;
@@ -114,6 +115,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/labs/gradebook/{id}', [GradebookController::class, 'updateLab']);
     Route::put('/problems/gradebook/{id}', [GradebookController::class, 'updateAssignment']);
     Route::post('/gradebook/submit/{id}', [GradebookController::class, 'submitAssignment']);
+
+    Route::get('/invite/course/{id}', [InviteController::class, 'index']);
+    Route::get('/invite/{key}', [InviteController::class, 'show']);
+    Route::post('/invite', [InviteController::class, 'store']);
+    Route::post('/invite/enroll/{key}', [InviteController::class, 'enroll']);
+    Route::put('/invite/{id}', [InviteController::class, 'update']);
+    Route::delete('/invite/{id}', [InviteController::class, 'delete']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

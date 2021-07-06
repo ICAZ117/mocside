@@ -37,6 +37,10 @@ class GradebookController extends Controller
                     'assignments' => [],
                     'grades' => array(),
                 );
+                $courses = array(
+                    'courses' => []
+                );
+                $student->courses = json_encode($courses);
                 $student->gradebook_courses = json_encode($course_book);
                 $student->gradebook_labs = json_encode($lab_book);
                 $student->gradebook_problems = json_encode($assignment_book);
