@@ -251,7 +251,7 @@ export default {
       this.keyURL = "http://mocside.com:8000/" + key.join_key + "/enroll";
       //copy to clipboard
       var copyText = this.keyURL;
-      copyText.select();
+      // copyText.select();
       document.execCommand("copy");
       console.log(this.keyURL);
     },
