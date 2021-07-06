@@ -3,7 +3,7 @@
     <!-- Main Page-->
     <div class="courses header">
       <div class="heading">
-        <h2>{{ this.labNames }}</h2>
+        <h2>{{ this.labName }}</h2>
         <hr />
       </div>
     </div>
