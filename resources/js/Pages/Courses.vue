@@ -23,8 +23,8 @@
           >
             <a
               :id="course.id"
-              @contextmenu.prevent="showMenu(event, course.id)"
-              @click="goToLabs(course.id)"
+              @contextmenu.prevent="showMenu(course.id)"
+              @click.prevent="goToLabs(course.id)"
               class="no-decor pointer"
             >
               <ul id="menu">
@@ -44,8 +44,6 @@
                     >Delete</a
                   >
                 </li>
-                <li>{{ course.id }}</li>
-                <li>{{ course }}</li>
               </ul>
               <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -130,16 +128,8 @@ export default {
   },
   methods: {
     showMenu(course_id) {
-      this.rightClickID = course_id;
-      var elID = '"' + course_id + '"';
-      console.log("elID:");
-      console.log(elID);
-      const menuParent = document.getElementById(elID)
-      console.log("\nMenu Parent:");
-      console.log(menuParent);
-      const menu = menuParent.childNodes[0];
-      console.log("\nMenu:");
-      console.log(menu);
+      this.rightClickID = String(course_id);
+      const menu = document.getElementById(this.rightClickID).childNodes[0];
       const outClick = document.getElementById("out-click");
 
       menu.style.top = `${window.event.clientY}px`;
@@ -148,10 +138,11 @@ export default {
 
       outClick.style.display = "block";
     },
-    closeMenu(course_id) {
-      this.rightClickID = course_id;
-      const menu = document.getElementById(course_id).childNodes[0];
+    closeMenu() {
+      const menu = document.getElementById(this.rightClickID).childNodes[0];
       const outClick = document.getElementById("out-click");
+
+      this.rightClickID = "";
 
       menu.classList.remove("show");
       outClick.style.display = "none";
@@ -213,9 +204,12 @@ export default {
       }
     },
     goToLabs(id) {
-      this.childIsOpen = true;
-      this.courseID = id;
-      this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      if (this.rightClickID == "") {
+        console.log("\n\n\nrightClickID: " + this.rightClickID);
+        this.childIsOpen = true;
+        this.courseID = id;
+        this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      }
     },
     async getCourses() {
       this.courses = [];
@@ -247,7 +241,7 @@ export default {
       return false;
     },
     hasEditAccess(cID) {
-      if (isProf) {
+      if (this.isProf) {
         return this.hasLabAccess(cID);
       } else {
         return false;
