@@ -24,7 +24,7 @@
             <a
               :id="course.id"
               @contextmenu.prevent="showMenu(course.id)"
-              @click="goToLabs(course.id)"
+              @click.prevent="goToLabs(course.id)"
               class="no-decor pointer"
             >
               <ul id="menu">
@@ -204,9 +204,11 @@ export default {
       }
     },
     goToLabs(id) {
-      this.childIsOpen = true;
-      this.courseID = id;
-      this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      if (this.rightClickID != "") {
+        this.childIsOpen = true;
+        this.courseID = id;
+        this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      }
     },
     async getCourses() {
       this.courses = [];
