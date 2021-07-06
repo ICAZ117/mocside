@@ -37,8 +37,8 @@ export default {
       this.courseID = res.data.data.course_id;
 
       //grab course using key
-      const res = await API.apiClient.get(`/courses/${this.courseID}`);
-      this.course = res.data.data;
+      const resp = await API.apiClient.get(`/courses/${this.courseID}`);
+      this.course = resp.data.data;
     },
     getKey() {
         // /key/enroll
