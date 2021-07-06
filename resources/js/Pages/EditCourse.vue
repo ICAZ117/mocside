@@ -191,6 +191,7 @@ export default {
   methods: {
     async initKeys() {
       const res = await API.apiClient.get(`/invite/course/${this.courseID}`);
+      console.log(res);
       var myArr = res.data.data;
       for(let i = 0; i < myArr.length; i++) {
         this.keys.push(myArr[i]);
@@ -231,7 +232,7 @@ export default {
       //call delete api method
 
       //filter from front end
-      this.keys = this.keys.filter((key) => key.join_key != id);
+      this.keys = this.keys.filter((k) => k.join_key != id);
     },
     async handleSubmit() {
       this.isSubmitted = true;
