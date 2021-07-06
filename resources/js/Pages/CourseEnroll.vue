@@ -16,7 +16,7 @@ export default {
     };
   },
   methods: {
-    joinCourse() {
+    async joinCourse() {
       //join class
       const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
 
