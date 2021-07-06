@@ -23,7 +23,7 @@
           >
             <a
               :id="course.id"
-              @contextmenu="showMenu(event)"
+              @contextmenu.prevent="showMenu(event, course.id)"
               @click="goToLabs(course.id)"
               class="no-decor pointer"
             >
@@ -129,23 +129,24 @@ export default {
     };
   },
   methods: {
-    showMenu(event) {
-      console.log(event.target);
+    showMenu(course_id) {
+      this.rightClickID = course_id;
+      var elID = '"' + course_id + '"';
+      console.log("elID:");
+      console.log(elID);
+      const menuParent = document.getElementById(elID)
+      console.log("\nMenu Parent:");
+      console.log(menuParent);
+      const menu = menuParent.childNodes[0];
+      console.log("\nMenu:");
+      console.log(menu);
+      const outClick = document.getElementById("out-click");
 
-      // this.rightClickID = course_id;
-      // const menu = document.getElementById(course_id).childNodes[0];
-      // const outClick = document.getElementById("out-click");
+      menu.style.top = `${window.event.clientY}px`;
+      menu.style.left = `${window.event.clientX}px`;
+      menu.classList.add("show");
 
-      // console.log(menu);
-      // console.log(outClick);
-
-      // e.preventDefault();
-
-      // menu.style.top = `${e.clientY}px`;
-      // menu.style.left = `${e.clientX}px`;
-      // menu.classList.add("show");
-
-      // outClick.style.display = "block";
+      outClick.style.display = "block";
     },
     closeMenu(course_id) {
       this.rightClickID = course_id;
@@ -237,6 +238,21 @@ export default {
       this.courses.push(course.data.data);
       this.Unmounting();
     },
+    hasLabAccess(cID) {
+      for (let i = 0; i < this.enrolledCourses.length; i++) {
+        if (this.enrolledCourses[i] == cID) {
+          return true;
+        }
+      }
+      return false;
+    },
+    hasEditAccess(cID) {
+      if (isProf) {
+        return this.hasLabAccess(cID);
+      } else {
+        return false;
+      }
+    },
     routeToChild() {
       var r = window.location.pathname;
       var sub = "/courses";
@@ -250,9 +266,15 @@ export default {
         var path = c[2]; //labs, or edit, and maybe something else
 
         if (path == "labs") {
-          this.goToLabs(cID);
+          //check if can go there
+          if (this.hasLabAccess(cID)) {
+            this.goToLabs(cID);
+          }
         } else if (path == "edit") {
-          this.editCourse(cID);
+          //check if can go there
+          if (this.hasEditAccess(cID)) {
+            this.editCourse(cID);
+          }
         } else {
           console.log(path);
         }
