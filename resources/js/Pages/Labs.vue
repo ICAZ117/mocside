@@ -71,8 +71,6 @@
               </li>
             </ul>
           </tr>
-
-          <div id="out-click" @click="closeMenu"></div>
         </template>
 
         <tr v-if="isProf" class="lab pointer" @click="addLab">
@@ -98,6 +96,7 @@
     :labID="labID"
     :labName="labName"
   ></router-view>
+  <div id="out-click" @click="closeMenu"></div>
 </template>
 
 <script>
