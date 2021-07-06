@@ -118,9 +118,9 @@
           </div>
           <button @click="addStudent" class="btn btn-danger btn-block">Add Student</button> -->
           <ul>
-            <li v-for="(key, id) in keys" :key="key"> {{ key.join_key }}
-              <a @click="copyKey(key)">Copy Url</a>
-              <a @click="deleteKey(key, id)">Delete Key</a>
+            <li v-for="(k, id) in keys" :key="k"> {{ k.join_key }}
+              <a @click="copyKey(k)">Copy Url</a>
+              <a @click="deleteKey(k, id)">Delete Key</a>
             </li>
           </ul>
           <div class="key-options">
