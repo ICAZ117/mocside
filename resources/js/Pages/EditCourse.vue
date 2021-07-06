@@ -106,7 +106,7 @@
         <br />
 
         <div class="form-group">
-          <label for="AddStudent">Add Student by ID</label>
+          <!-- <label for="AddStudent">Add Student by ID</label>
           <div class="row">
             <input
               type="number"
@@ -116,7 +116,20 @@
               class="form-control col-7"
             />
           </div>
-          <button @click="addStudent" class="btn btn-danger btn-block">Add Student</button>
+          <button @click="addStudent" class="btn btn-danger btn-block">Add Student</button> -->
+          <div class="key-options">
+            <label >Enroll Key</label>
+            <input placeholder="Random" type="text" v-model="enrollKey.key">
+            <label class="switch">
+              <input type="checkbox" v-model="enrollKey.perm" />
+              <span class="slider round"></span>
+            </label>
+            <label>Expire Date</label>
+            <input type="datetime" :disabled="enrollKey.perm" v-model="enrollKey.datetime">
+            <label >Enroll Url</label>
+            <input type="text" disabled >
+          </div>
+          <button @click="generateKey" class="btn btn-danger btn-block">Generate Course Enroll Key</button>
         </div>
         <br />
 
@@ -159,9 +172,17 @@ export default {
       endpoint: "/images/store",
       students: [],
       studentID: "",
+      enrollKey: {
+        key: "",
+        perm: true,
+        datetime: "",
+      },
     };
   },
   methods: {
+    async generateKey() {
+      console.log(enrollKey);
+    },
     async handleSubmit() {
       this.isSubmitted = true;
       await this.uploadImage();
