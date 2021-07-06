@@ -129,13 +129,13 @@
             <label >Enroll Url</label>
             <input type="text" disabled >
           </div>
-          <button @click="generateKey" class="btn btn-danger btn-block">Generate Course Enroll Key</button>
+          <button type="don't do nothing" @click="generateKey" class="btn btn-danger btn-block">Generate Course Enroll Key</button>
         </div>
         <br />
 
 
         <div class="form-group">
-          <button class="btn btn-danger btn-block">Submit Changes</button>
+          <button type="submit" class="btn btn-danger btn-block">Submit Changes</button>
         </div>
       </form>
     </div>
@@ -181,7 +181,7 @@ export default {
   },
   methods: {
     async generateKey() {
-      console.log(enrollKey);
+      console.log(this.enrollKey);
     },
     async handleSubmit() {
       this.isSubmitted = true;
