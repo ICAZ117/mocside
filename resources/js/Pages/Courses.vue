@@ -134,7 +134,7 @@ export default {
       var elID = '"' + course_id + '"';
       console.log("elID:");
       console.log(elID);
-      const menuParent = document.getElementById("2335")
+      const menuParent = document.getElementById(String(elID))
       console.log("\nMenu Parent:");
       console.log(menuParent);
       const menu = menuParent.childNodes[0];
