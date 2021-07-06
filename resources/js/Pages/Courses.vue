@@ -23,7 +23,7 @@
           >
             <a
               :id="course.id"
-              @contextmenu.prevent="showMenu(event, course.id)"
+              @contextmenu.prevent="showMenu(course.id)"
               @click="goToLabs(course.id)"
               class="no-decor pointer"
             >
