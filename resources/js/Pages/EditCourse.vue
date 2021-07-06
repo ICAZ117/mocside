@@ -117,6 +117,12 @@
             />
           </div>
           <button @click="addStudent" class="btn btn-danger btn-block">Add Student</button> -->
+          <ul>
+            <li v-for="(key, id) in keys" :key="key"> {{ key.join_key }}
+              <a @click="copyKey(key)">Copy Url</a>
+              <a @click="deleteKey(key, id)">Delete Key</a>
+            </li>
+          </ul>
           <div class="key-options">
             <label >Enroll Key</label>
             <input placeholder="Random" type="text" v-model="enrollKey.key">
@@ -126,8 +132,8 @@
             </label>
             <label>Expire Date</label>
             <input type="datetime" :disabled="enrollKey.perm" v-model="enrollKey.datetime">
-            <label >Enroll Url</label>
-            <input type="text" disabled >
+            <label >Max Uses</label>
+            <input placeholder="0 for unlimited use" type="text" v-model="enrollKey.uses">
           </div>
           <button type="button" @click="generateKey" class="btn btn-danger btn-block">Generate Course Enroll Key</button>
         </div>
@@ -176,12 +182,56 @@ export default {
         key: "",
         perm: true,
         datetime: "",
+        uses: "",
       },
+      keys: [],
+      keyURL: "",
     };
   },
   methods: {
+    async initKeys() {
+      const res = await API.apiClient.get(`/invite/course/${this.courseID}`);
+      var myArr = res.data.data;
+      for(let i = 0; i < myArr.length; i++) {
+        this.keys.push(myArr[i]);
+      }
+    },
     async generateKey() {
-      console.log(this.enrollKey);
+      var payload = {}
+      if(this.enrollKey.key == "") {
+        this.enrollKey.key = "random";
+      }
+
+      payload["join_key"] = this.enrollKey.key;
+      payload["course_id"] = this.courseID;
+
+      const res = await API.apiClient.post(`/invite`, payload);
+      var keyCode = res.data.data.id;
+
+      if(this.enrollKey.perm) {
+        //get end time of course
+        payload["expire_date"] = this.courseForm.dateEnd;
+      }
+      else {
+        //expire date is set to datetime
+        payload["expire_date"] = this.enrollKey.datetime;
+      }
+      payload["max_uses"] = this.enrollKey.uses;
+
+      const res2 = await API.apiClient.put(`/invite/${keyCode}`, payload);
+
+      this.keys.push(res2.data.data);
+    },
+    copyKey(key) {
+      this.keyURL = "http://mocside.com:8000/" + key.join_key + "/enroll";
+      //copy to clipboard
+      console.log(this.keyURL);
+    },
+    deleteKey(key, id) {
+      //call delete api method
+
+      //filter from front end
+      this.keys = this.keys.filter((key) => key.join_key != id);
     },
     async handleSubmit() {
       this.isSubmitted = true;
@@ -299,6 +349,7 @@ export default {
     this.courseForm.dateEnd = course.data.data.end_date;
     this.courseForm.roster = JSON.parse(course.data.data.roster).roster;
     this.getStudents();
+    this.initKeys();
   },
   beforeUnmount() {
     this.$emit("unmounting");
