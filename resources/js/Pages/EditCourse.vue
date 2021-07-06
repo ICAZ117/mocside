@@ -233,7 +233,7 @@ export default {
       //copy to clipboard
       console.log(this.keyURL);
     },
-    deleteKey(key, id) {
+    async deleteKey(key, id) {
       //call delete api method
       const res = await API.apiClient.delete(`/invite/${key.id}`);
 
