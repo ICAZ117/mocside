@@ -116,6 +116,11 @@ export default {
       rightClickID: "",
     };
   },
+  watch: {
+    rightClickID: function() {
+      console.log(this.rightClickID);
+    }
+  },
 
   setup() {
     const route = useRoute();
