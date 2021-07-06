@@ -131,7 +131,7 @@ export default {
   methods: {
     showMenu(course_id) {
       this.rightClickID = course_id;
-      const menu = document.getElementById(`${course_id}`).childNodes[0];
+      const menu = document.getElementById('"' + course_id + '"').childNodes[0];
       const outClick = document.getElementById("out-click");
 
       console.log(menu);
