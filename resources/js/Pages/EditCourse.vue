@@ -251,8 +251,12 @@ export default {
       this.keyURL = "http://mocside.com:8000/" + key.join_key + "/enroll";
       //copy to clipboard
       var copyText = this.keyURL;
-      // copyText.select();
-      document.execCommand("copy");
+      const textarea = document.createElement('textarea');
+      textarea.value = copyText;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
       console.log(this.keyURL);
     },
     async deleteKey(key, id) {
