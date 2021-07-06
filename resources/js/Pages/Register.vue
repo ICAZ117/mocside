@@ -257,7 +257,7 @@ export default {
       }
       this.registerUser();
     },
-    registerUser() {
+    async registerUser() {
       this.error = null;
       this.message = null;
       const payload = {
@@ -268,7 +268,7 @@ export default {
         password: this.userForm.password,
         password_confirmation: this.userForm.confirmPassword,
       };
-      
+
       // AuthService.registerUser(payload)
       //   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
       //   .catch((error) => (this.error = getError(error)));
