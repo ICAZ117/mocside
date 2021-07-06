@@ -49,8 +49,8 @@ class ContainerController extends Controller
 
         if (strcasecmp($validData['lang'], 'python') == 0) {
             $containerConfig->setImage('python');
-            $containerConfig->setCmd(['run.sh']);
-            $containerConfig->setEntrypoint(["bash"]);
+            $containerConfig->setCmd(['run.py']);
+            $containerConfig->setEntrypoint(["python3"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
@@ -58,9 +58,9 @@ class ContainerController extends Controller
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
             // copy in bash file
-            $bash = Storage::disk('local')->path('run-python.sh');
+            $bash = Storage::disk('local')->path('run.py');
             $filePath = Storage::disk('local')
-                ->putFileAs($head, new File($bash), 'run.sh');
+                ->putFileAs($head, new File($bash), 'run.py');
         } else {
             $containerConfig->setImage('d9fa82599cdd');
             $containerConfig->setCmd(['run.sh']);
