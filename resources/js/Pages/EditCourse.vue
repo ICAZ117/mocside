@@ -217,6 +217,9 @@ export default {
         //expire date is set to datetime
         payload["expire_date"] = this.enrollKey.datetime;
       }
+      if(this.enrollKey.uses == "") {
+        this.enrollKey.uses = 0;
+      }
       payload["max_uses"] = this.enrollKey.uses;
 
       const res2 = await API.apiClient.put(`/invite/${keyCode}`, payload);
