@@ -198,7 +198,7 @@ export default {
 
           // recurse if still active
           if (!self.isWaiting) {
-            if (this.isPolling) {
+            if (self.isPolling) {
               // if were polling this is first to catch, otherwise this has already been printed
               self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
             }
@@ -212,7 +212,7 @@ export default {
         } else if (self.isWaiting) {
           self.checkLogs();
         } else {
-          if (this.isPolling) {
+          if (self.isPolling) {
             // if were polling this is first to catch, otherwise this has already been printed
             self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
           }
