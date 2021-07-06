@@ -209,6 +209,8 @@ export default {
       const res = await API.apiClient.post(`/invite`, payload);
       var keyCode = res.data.data.id;
 
+      payload["join_key"] = res.data.data.join_key;
+
       if(this.enrollKey.perm) {
         //get end time of course
         payload["expire_date"] = this.courseForm.dateEnd;
