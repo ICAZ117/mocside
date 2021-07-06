@@ -1,12 +1,19 @@
 <template>
   <div v-if="!childIsOpen">
     <!-- Main Page-->
-    <button @click="this.$emit('unmounting')" class="btn btn-danger btn-block">Return to Labs</button>
     <div class="courses header">
-      <h2>{{ this.labName }}</h2>
-      <hr />
+      <div class="heading">
+        <h2>{{ this.labNames }}</h2>
+        <hr />
+      </div>
     </div>
-    <a v-if="isProf" class="pointer no-decor" @click="addProblem">ADD</a>
+
+    <small class="navigation"
+      ><span>{{ username }}{{ currentDirectory }}</span>
+      <br />
+      <span class="pointer underline" @click="this.$emit('unmounting')">↩ Return to Labs</span>
+    </small>
+
     <table class="table problemtable">
       <thead class="problemtable">
         <tr>
@@ -77,6 +84,9 @@
           <a v-if="isProf" @click="editProblem(problem.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
           <a v-if="isProf" @click="deleteProblem(problem, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
         </template>
+        <tr v-if="isProf" class="lab pointer" @click="addProblem">
+          <td colspan="5">Add Problem</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -107,6 +117,16 @@ export default {
       authUser: null,
       fscID: null,
       deletedMe: false,
+      username: "",
+    };
+  },
+  setup() {
+    const route = useRoute();
+
+    const currentDirectory = computed(() => route.path);
+
+    return {
+      currentDirectory,
     };
   },
   methods: {
@@ -256,6 +276,10 @@ export default {
   },
   beforeUnmount() {
     this.$emit("unmounting");
+  },
+  async mounted() {
+    this.authUser = await store.getters["auth/authUser"];
+    this.username = this.authUser.username;
   },
 };
 </script>
