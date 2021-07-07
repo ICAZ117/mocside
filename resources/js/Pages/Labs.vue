@@ -28,7 +28,11 @@
       </thead>
       <tbody>
         <template v-for="lab in labs" :key="lab.id">
-          <tr v-if="!isProf" class="lab pointer" @click="goToProblems(lab.id, lab.name)">
+          <tr
+            v-if="!isProf"
+            class="lab pointer"
+            @click="goToProblems(lab.id, lab.name)"
+          >
             <td>
               <a>{{ lab.name }}</a>
             </td>
@@ -83,12 +87,18 @@
     <div :id="lab.id">
       <ul id="menu">
         <li class="menu-item">
-          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
+          <a
+            v-if="isProf"
+            class="pointer no-decor"
+            @click="editLab(lab.id, lab.name)"
             >Edit</a
           >
         </li>
         <li class="menu-item">
-          <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
+          <a
+            v-if="isProf"
+            class="pointer no-decor"
+            @click="removeLab(lab.id, key)"
             >Delete</a
           >
         </li>
@@ -145,7 +155,9 @@ export default {
     },
     closeMenu() {
       try {
-        document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
+        document
+          .getElementById(this.rightClickID)
+          .childNodes[0].classList.remove("show");
       } catch (e) {}
       document.getElementById("out-click").style.display = "none";
       this.rightClickID = "";
@@ -234,9 +246,9 @@ export default {
       var d = JSON.parse(this.progress.labs);
       var c;
       for (let i = 0; i < d.length; i++) {
-        console.log(d[i]);
-        console.log(lab.id);
         if (d[i].lab_id == lab.id) {
+          console.log(d[i]);
+          console.log(lab.id);
           c = d[i];
           break;
         }
