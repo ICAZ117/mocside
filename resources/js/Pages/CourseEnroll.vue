@@ -13,14 +13,24 @@
         :height="imgSizes.height"
       /> -->
       <div class="crop">
-        <img :src="this.courseImg" alt="Course Image" width="600"/>
+        <img :src="this.courseImg" alt="Course Image" width="600" />
       </div>
       <br />
       <h3 class="center">{{ course.name }}</h3>
       <br />
       <p class="center">1/1/2021 - 5/31/2021</p>
       <br />
-      <button class="btn btn-lg" style="width: 97%; background-color: #14a160;">Join!</button>
+      <button
+        class="btn btn-lg"
+        style="
+          width: 97%;
+          background-color: #14a160;
+          border-radius: 5px !important;
+          color: white;
+        "
+      >
+        Join!
+      </button>
     </div>
   </div>
 
