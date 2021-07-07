@@ -233,7 +233,9 @@ export default {
     async getPercent(lab) {
       var d = JSON.parse(this.progress.labs);
       var c;
-      for (let i = 0; i <= d.length; i++) {
+      for (let i = 0; i < d.length; i++) {
+        console.log(d[i]);
+        console.log(lab.id);
         if (d[i].lab_id == lab.id) {
           c = d[i];
           break;
@@ -241,13 +243,15 @@ export default {
       }
       if (lab.numProblems == 0) {
         return "0%";
+      } else if (!c) {
+        return "0%";
       } else {
         return parseInt(c.num_completed / lab.num_problems) * 100 + "%";
       }
     },
     async getActivity(lab) {
       var d = JSON.parse(this.progress.labs);
-      for (let i = 0; i <= d.length; i++) {
+      for (let i = 0; i < d.length; i++) {
         if (d[i].lab_id == lab.id) {
           return d[i].last_progress;
         }

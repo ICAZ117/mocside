@@ -1,8 +1,8 @@
 ===============> MocsIDE<===============
 
 IMPORTANT
-* Fix Student Run Button
 * Complete Grade Process
+* Due Dates on Assignments..get both client and backend to same timezone then the rest works
 * Email Confirmation ( For future, not this week)
 * Password Reset ( For future, not this work)
 
@@ -16,7 +16,6 @@ NEXT UP
 * Check if Registering User is a new or not...if already in database...throw error...on username, email, or id
 * Add Sorting for the courses, labs, and problems
 * Add Filter for the courses, labs, and problems
-* time is in UTC, change front to EST/LOCAL time
 
 
 
@@ -30,7 +29,7 @@ STYLE FIXES
 * Lab Edit
 * Problems
 * Problem Edit
-* Workspace
+* Workspace...specifically the tiptap area not displaying properly
 * Confirm Delete style message on courses, labs, and problems
 * Fix Carousel
 * Combine Logout, with profile pic, and link to profile page
