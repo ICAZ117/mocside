@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Progress;
+use App\Models\Lab;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
