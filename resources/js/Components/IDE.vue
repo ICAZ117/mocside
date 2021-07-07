@@ -519,6 +519,9 @@ export default {
         const res = await API.apiClient.post(`/gradebook/submit/${this.problemID}`, payload);
         console.log("\n\n---------- DID WE GRADE CORRECTLY?");
         console.log(res.data);
+        payload['lang'] = this.lang.toLowerCase();
+        const res2 = await API.apiClient.post(`/progress/submit/${this.problemID}`, payload);
+        console.log(res2);
         // router push to labs, we are done here
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
       }
@@ -540,10 +543,12 @@ export default {
       // assuming both times are using the same time zone the following works
       if(backDate > current_time) {
         console.log("within window?");
+        alert("current: " + current_time + "\nback: " + backdDate);
         // return false;
       }
       else {
         console.log("not within window?");
+        alert("current: " + current_time + "\nback: " + backDate);
         // return true;
       }
       return false;
