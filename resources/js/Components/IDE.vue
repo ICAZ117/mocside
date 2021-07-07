@@ -526,6 +526,7 @@ export default {
     async pastDue() {
       //get user time in UTC
       var current_time = new Date();
+      console.log(current_time);
 
 
       //get Problem Due date time
@@ -537,7 +538,7 @@ export default {
 
 
       // assuming both times are using the same time zone the following works
-      if(temp > current_time) {
+      if(backDate > current_time) {
         console.log("within window?");
         // return false;
       }
