@@ -44,7 +44,7 @@
               Keep trying
             </button>
             <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1">
-              Submit anyway
+              Submit
             </button>
           </div>
         </vue-final-modal>
