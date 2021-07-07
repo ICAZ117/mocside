@@ -543,12 +543,12 @@ export default {
       // assuming both times are using the same time zone the following works
       if(backDate > current_time) {
         console.log("within window?");
-        alert("current: " + current_time + "\nback: " + backdDate);
+        // alert("current: " + current_time + "\nback: " + backdDate);
         // return false;
       }
       else {
         console.log("not within window?");
-        alert("current: " + current_time + "\nback: " + backDate);
+        // alert("current: " + current_time + "\nback: " + backDate);
         // return true;
       }
       return false;
@@ -556,6 +556,7 @@ export default {
     },
     getBackDate(due_date) {
       var temp = new Date('Feb 28 2013 19:00:00 EST');
+      console.log(temp);
       var mydate = due_date.split(" ")[0];
       var time = due_date.split(" ")[1]
       var tmp = mydate.split("-");
