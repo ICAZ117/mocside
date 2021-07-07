@@ -126,8 +126,12 @@ export default {
     this.getKey();
     await this.getCourse();
     console.log(this.course);
-    var image = document.getElementById("scaleImg");
-    this.scaleImage(image.offsetWidth, image.offsetHeight, 600, 338, true);
+
+    let img = new Image();
+    img.onload = function () {
+      this.scaleImage(this.width, this.height, 600, 338, true);
+    };
+    img.src = this.courseImg;
   },
 };
 </script>
