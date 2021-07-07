@@ -420,3 +420,4 @@ a, abbr, acronym, address, applet, big, blockquote, body, caption, cite, code, d
     color: var(--text-normal);
 }
 </style>
+<!-- https://discord.com/invite/SUJPtz9u this is where i got all the styling-->
