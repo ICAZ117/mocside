@@ -90,6 +90,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/progress/{id}', [ProgressController::class, 'show']);
     Route::post('/progress', [ProgressController::class, 'store']);
+    Route::post('/progress/submit/{id}', [ProgressController::class, 'recordProgress']);
     Route::put('/progress/{id}', [ProgressController::class, 'update']);
     Route::delete('/progress/{id}', [ProgressController::class, 'destroy']);
 
