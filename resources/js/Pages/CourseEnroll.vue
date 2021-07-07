@@ -5,7 +5,14 @@
       class="inviteBG"
     ></div>
     <div class="invite-card center center-height">
-      <img :src="this.courseImg" alt="Course Image" class="invite-card-img" />
+      <img
+        id="scaleImg"
+        :src="this.courseImg"
+        alt="Course Image"
+        class="invite-card-img"
+        :width="imgSizes.width"
+        :height="imgSizes.height"
+      />
       <br />
       <h3 class="center">{{ course.name }}</h3>
       <br />
@@ -30,9 +37,52 @@ export default {
       course: {},
       courseID: "",
       courseImg: "",
+      imgSizes: {
+        width: 0,
+        height: 0,
+        fScaleToTargetWidth: true,
+      },
     };
   },
   methods: {
+    scaleImage(srcwidth, srcheight, targetwidth, targetheight, fLetterBox) {
+      this.imgSizes = {
+        width: 0,
+        height: 0,
+        fScaleToTargetWidth: true,
+      };
+
+      if (srcwidth > 0 && srcheight > 0 && targetwidth > 0 && targetheight > 0) {
+        // scale to the target width
+        var scaleX1 = targetwidth;
+        var scaleY1 = (srcheight * targetwidth) / srcwidth;
+
+        // scale to the target height
+        var scaleX2 = (srcwidth * targetheight) / srcheight;
+        var scaleY2 = targetheight;
+
+        // now figure out which one we should use
+        var fScaleOnWidth = scaleX2 > targetwidth;
+        if (fScaleOnWidth) {
+          fScaleOnWidth = fLetterBox;
+        } else {
+          fScaleOnWidth = !fLetterBox;
+        }
+
+        if (fScaleOnWidth) {
+          this.imgSizes.width = Math.floor(scaleX1);
+          this.imgSizes.height = Math.floor(scaleY1);
+          this.imgSizes.fScaleToTargetWidth = true;
+        } else {
+          this.imgSizes.width = Math.floor(scaleX2);
+          this.imgSizes.height = Math.floor(scaleY2);
+          this.imgSizes.fScaleToTargetWidth = false;
+        }
+        this.imgSizes.targetleft = Math.floor((targetwidth - this.imgSizes.width) / 2);
+        this.imgSizes.targettop = Math.floor((targetheight - this.imgSizes.height) / 2);
+      }
+    },
+
     async joinCourse() {
       //join class
       const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
@@ -70,6 +120,10 @@ export default {
     this.getKey();
     await this.getCourse();
     console.log(this.course);
+  },
+  mounted() {
+    var image = document.getElementById("scaleImg");
+    scaleImage(image.offsetWidth, image.offsetHeight, 600, 338, true);
   },
 };
 </script>
