@@ -57,14 +57,15 @@ class ContainerController extends Controller
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
-            // copy in bash file
+
+            // copy in timout controller
             $bash = Storage::disk('local')->path('run.py');
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File($bash), 'run.py');
         } else {
-            $containerConfig->setImage('d9fa82599cdd');
-            $containerConfig->setCmd(['run.sh']);
-            $containerConfig->setEntrypoint(["bash"]);
+            $containerConfig->setImage('d9fa82599cdd'); // supervisor 
+            $containerConfig->setCmd(['run.py']);
+            $containerConfig->setEntrypoint(["python3"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
             $containerConfig->setAttachStderr(true);
@@ -72,16 +73,10 @@ class ContainerController extends Controller
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
 
-            // copy in bash file
-            $bash = Storage::disk('local')->path('run.sh');
+            // copy in timeout controller
+            $bash = Storage::disk('local')->path('run-java.py');
             $filePath = Storage::disk('local')
-                ->putFileAs($head, new File($bash), 'run.sh');
-            $helper1 = Storage::disk('local')->path('java.sh');
-            $helper2 = Storage::disk('local')->path('timeout.sh');
-            $filePath = Storage::disk('local')
-                ->putFileAs($head, new File($helper1), 'java.sh');
-            $filePath = Storage::disk('local')
-                ->putFileAs($head, new File($helper2), 'run.sh');
+                ->putFileAs($head, new File($bash), 'run.py');
         }
 
         // create host config
