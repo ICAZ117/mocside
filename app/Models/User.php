@@ -50,7 +50,7 @@ class User extends Authenticatable
     {
         $snaps = $this->code_snaps;
         foreach ($snaps as $snap) {
-            if ($snap->assignment_id == $assignment_id && $snap->lang == $lang) {
+            if ($snap->assignment_id == $assignment_id && strcasecmp($snap->lang, $lang) == 0) {
                 return true;
             }
         }

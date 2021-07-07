@@ -3,7 +3,8 @@
 IMPORTANT
 * Fix Student Run Button
 * Complete Grade Process
-
+* Email Confirmation ( For future, not this week)
+* Password Reset ( For future, not this work)
 
 
 NEXT UP
