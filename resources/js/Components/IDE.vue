@@ -535,6 +535,17 @@ export default {
       var due_date = assignment.due_date;
 
       console.log(due_date);
+      var temp = new Date();
+      var mydate = due_date.split(" ")[0];
+      var time = due_date.split(" ")[1]
+      var tmp = mydate.split("-");
+      temp.setDate(tmp[2]);
+      temp.setMonth(tmp[1]);
+      temp.setFullYear(tmp[0]);
+      temp.setHours(time.split(":")[0]);
+      temp.setMinutes(time.split(":")[1]);
+      temp.setMilliseconds(time.split(":")[2]);
+      console.log(temp);
       // console.log(new Date(due_date.toUTCString()));
 
 
