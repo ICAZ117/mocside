@@ -234,6 +234,8 @@ export default {
       var d = JSON.parse(this.progress.labs);
       var c;
       for (let i = 0; i < d.length; i++) {
+        console.log(d[i]);
+        console.log(lab.id);
         if (d[i].lab_id == lab.id) {
           c = d[i];
           break;
