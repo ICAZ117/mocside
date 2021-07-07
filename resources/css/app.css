@@ -1222,6 +1222,7 @@ footer .svg-inline--fa:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+    padding-bottom: 10px;
 }
 
 .inviteBG {
@@ -1236,11 +1237,6 @@ footer .svg-inline--fa:hover {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-.invite-card-img {
-    /* width: 600px; */
-    /* height: 300px; */
 }
 
 .crop {
