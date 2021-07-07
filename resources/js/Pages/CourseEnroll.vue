@@ -13,7 +13,7 @@
         :height="imgSizes.height"
       /> -->
       <div class="crop">
-        <img :src="this.courseImg" alt="Course Image" />
+        <img :src="this.courseImg" alt="Course Image" width="600px"/>
       </div>
       <br />
       <h3 class="center">{{ course.name }}</h3>
