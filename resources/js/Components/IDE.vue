@@ -527,6 +527,7 @@ export default {
       //get user time in UTC
       var current_time = new Date();
       console.log(current_time);
+      //convert this to UTC time?
 
 
       //get Problem Due date time
@@ -545,6 +546,7 @@ export default {
       temp.setMinutes(time.split(":")[1]);
       temp.setMilliseconds(time.split(":")[2]);
       console.log(temp);
+      //this date shows the current user timezone....convert to est than to utc for accurate time
 
 
       if(temp > current_time) {
