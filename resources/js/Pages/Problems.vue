@@ -50,13 +50,13 @@
                       v-if="isProf"
                       @click="editProblem(problem.id)"
                       class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-                      >•••</a
+                      ><h5>•••</h5></a
                     >
                     <a
                       v-if="isProf"
                       @click="deleteProblem(problem, key)"
                       class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-                      >X</a
+                      ><h5>×</h5></a
                     >
                   </div>
                 </div>
