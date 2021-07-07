@@ -68,7 +68,10 @@
           <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                <div class="card coursecard w-100">
+                <div
+                  class="card coursecard w-100"
+                  style="background-color: transparent !important"
+                >
                   <div class="courses card-img-add"></div>
                   <!-- <div class="courses card-content">
                     <h6 class="card-title my-3 mx-2 mb-0">Add Course</h6>
