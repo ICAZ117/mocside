@@ -18,7 +18,7 @@
       <br />
       <h3 class="center">{{ course.name }}</h3>
       <br />
-      <p class="center">1/1/2021 - 5/31/2021</p>
+      <p class="center">{{ course.start_date}} — {{ course.end_date }}</p>
       <br />
       <button
         class="btn btn-lg"
