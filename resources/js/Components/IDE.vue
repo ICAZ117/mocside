@@ -540,12 +540,12 @@ export default {
       // assuming both times are using the same time zone the following works
       if(backDate > current_time) {
         console.log("within window?");
-        alert("current: " + currnet_time + "\nback: " + backdate);
+        alert("current: " + current_time + "\nback: " + backdate);
         // return false;
       }
       else {
         console.log("not within window?");
-        alert("current: " + currnet_time + "\nback: " + backdate);
+        alert("current: " + current_time + "\nback: " + backdate);
         // return true;
       }
       return false;
