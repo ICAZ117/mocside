@@ -221,7 +221,7 @@ import Accordion from "../Components/Accordion.vue";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID"],
+  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID", "labID"],
   emits: ["update"],
   data: () => ({
     theme: "gob",
@@ -519,6 +519,7 @@ export default {
       console.log("\n\n---------- DID WE GRADE CORRECTLY?");
       console.log(res.data);
       // router push to labs, we are done here
+      this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
     },
     async initAccordion() {
       this.accordions = [];
