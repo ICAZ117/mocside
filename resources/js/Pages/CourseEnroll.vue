@@ -123,7 +123,7 @@ export default {
   },
   mounted() {
     var image = document.getElementById("scaleImg");
-    scaleImage(image.offsetWidth, image.offsetHeight, 600, 338, true);
+    this.scaleImage(image.offsetWidth, image.offsetHeight, 600, 338, true);
   },
 };
 </script>
