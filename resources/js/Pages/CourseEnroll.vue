@@ -18,7 +18,7 @@
       <br />
       <h3 class="center">{{ course.name }}</h3>
       <br />
-      <p class="center">{{ course.start_date}} — {{ course.end_date }}</p>
+      <p class="center">{{ course.start_date }} — {{ course.end_date }}</p>
       <br />
       <button
         class="btn btn-lg"
@@ -28,6 +28,7 @@
           border-radius: 5px !important;
           color: white;
         "
+        @click="joinCourse()"
       >
         Join!
       </button>
