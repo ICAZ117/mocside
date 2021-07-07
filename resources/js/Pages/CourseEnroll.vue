@@ -4,7 +4,7 @@
       :style="'background-image: url(&quot;' + this.courseImg + '&quot;)'"
       class="inviteBG"
     ></div>
-    <div class="invite-card center center-height">
+    <div class="invite-card center">
       <img
         id="scaleImg"
         :src="this.courseImg"
@@ -120,8 +120,6 @@ export default {
     this.getKey();
     await this.getCourse();
     console.log(this.course);
-  },
-  mounted() {
     var image = document.getElementById("scaleImg");
     this.scaleImage(image.offsetWidth, image.offsetHeight, 600, 338, true);
   },
