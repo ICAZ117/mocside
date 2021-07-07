@@ -49,6 +49,7 @@ export default {
   async mounted() {
     this.getKey();
     await this.getCourse();
+    console.log(this.course);
   },
 };
 </script>
