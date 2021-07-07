@@ -959,7 +959,9 @@ thead.gradebook {
 }
 
 .right {
-    float: right;
+    float: right!important;
+    text-align: right!important;
+    align-items: flex-end!important;
 }
 
 /*========= ADD ASSIGNMENT =========*/
