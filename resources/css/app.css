@@ -1245,15 +1245,15 @@ footer .svg-inline--fa:hover {
 
 .crop {
     display: block;
-    height: 100px;
+    height: 338px;
     position: relative;
     overflow: hidden;
-    width: 100px;
+    width: 600px;
 }
 .crop img {
-    left: -20px; /* alter this to move left or right */
+    left: 0px; /* alter this to move left or right */
     position: absolute;
-    top: -20px; /* alter this to move up or down */
+    top: 0px; /* alter this to move up or down */
 }
 /*============= MEDIA QUERIES =============*/
 
