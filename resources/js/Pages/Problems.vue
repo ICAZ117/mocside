@@ -222,7 +222,8 @@ export default {
     },
     async getPercent(problem) {
       console.log(this.progress);
-      var d = JSON.parse(this.progress).assignments;
+      var d = JSON.parse(this.progress.assignments);
+      console.log(d);
       var c;
       for (let i = 0; i <= d.length; i++) {
         if (d[i].assignment_id == problem.id) {
@@ -238,6 +239,7 @@ export default {
     },
     async getActivity(problem) {
       var d = JSON.parse(this.progress.assignments);
+      console.log(d);
       for (let i = 0; i <= d.length; i++) {
         if (d[i].assignment_id == problem.id) {
           return d[i].last_progress;
