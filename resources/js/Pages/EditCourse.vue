@@ -131,16 +131,23 @@
           <div class="key-options">
             <label>Enroll Key</label>
             <input placeholder="Random" type="text" v-model="enrollKey.key" />
+            <br>
+            <label>Permanent Key</label>
             <label class="switch">
               <input type="checkbox" v-model="enrollKey.perm" />
               <span class="slider round"></span>
             </label>
+            <br>
             <label>Expire Date</label>
             <input
-              type="datetime"
+              type="date"
               :disabled="enrollKey.perm"
               v-model="enrollKey.datetime"
             />
+            <br>
+            <label>Expire Time</label>
+            <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time">
+            <br>
             <label>Max Uses</label>
             <input
               placeholder="0 for unlimited use"
@@ -202,6 +209,7 @@ export default {
         key: "",
         perm: true,
         datetime: "",
+        time: "",
         uses: "",
       },
       joinKeys: [],

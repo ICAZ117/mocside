@@ -91,7 +91,11 @@ export default {
       }
 
       if (!this.isWaiting) {
-        this.contents += this.username + "@mocside:/usr/src$ ";
+        if (this.isPolling) {
+          // if were polling this is first to catch, otherwise this has already been printed
+          self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
+        }
+        this.isPolling = false;
         this.$emit("programFinished");
       } else if (!this.isPolling){
         this.checkLogs();
@@ -111,7 +115,11 @@ export default {
       }
 
       if (!this.isWaiting) {
-        this.contents += this.username + "@mocside:/usr/src$ ";
+        if (this.isPolling) {
+          // if were polling this is first to catch, otherwise this has already been printed
+          self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
+        }
+        this.isPolling = false;
         this.$emit("programFinished");
       }
 
@@ -190,7 +198,10 @@ export default {
 
           // recurse if still active
           if (!self.isWaiting) {
-            self.contents += self.username + "@mocside:/usr/src$ ";
+            if (self.isPolling) {
+              // if were polling this is first to catch, otherwise this has already been printed
+              self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
+            }
             self.oldContents = self.contents;
             self.isPolling = false;
             self.$emit("programFinished");
@@ -201,7 +212,10 @@ export default {
         } else if (self.isWaiting) {
           self.checkLogs();
         } else {
-          self.contents += self.username + "@mocside:/usr/src$ ";
+          if (self.isPolling) {
+            // if were polling this is first to catch, otherwise this has already been printed
+            self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
+          }
           self.oldContents = self.contents;
           self.isPolling = false;
           self.$emit("programFinished");
