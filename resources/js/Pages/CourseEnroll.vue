@@ -124,13 +124,19 @@ export default {
   },
   async beforeMount() {
     this.getKey();
+
     await this.getCourse();
+    
     console.log(this.course);
 
+    var self = this;
+
     let img = new Image();
+
     img.onload = function () {
-      this.scaleImage(this.width, this.height, 600, 338, true);
+      self.scaleImage(this.width, this.height, 600, 338, true);
     };
+
     img.src = this.courseImg;
   },
 };
