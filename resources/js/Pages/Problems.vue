@@ -222,7 +222,7 @@ export default {
     },
     async getPercent(problem) {
       console.log(this.progress);
-      var d = JSON.parse(this.progress.assignments);
+      var d = JSON.parse(this.progress).assignments;
       var c;
       for (let i = 0; i <= d.length; i++) {
         if (d[i].assignment_id == problem.id) {
