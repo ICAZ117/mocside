@@ -46,6 +46,12 @@ export default {
   },
   methods: {
     scaleImage(srcwidth, srcheight, targetwidth, targetheight, fLetterBox) {
+      console.log("HERE");
+      console.log(srcwidth);
+      console.log(srcheight);
+      console.log(targetwidth);
+      console.log(targetheight);
+      console.log(fLetterBox);
       this.imgSizes = {
         width: 0,
         height: 0,
