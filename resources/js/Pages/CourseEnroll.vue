@@ -4,15 +4,17 @@
       :style="'background-image: url(&quot;' + this.courseImg + '&quot;)'"
       class="inviteBG"
     ></div>
-    <div class="invite-card center center-height">
-      <img
-        id="scaleImg"
+    <div class="invite-card center">
+      <!-- <img
         :src="this.courseImg"
         alt="Course Image"
         class="invite-card-img"
         :width="imgSizes.width"
         :height="imgSizes.height"
-      />
+      /> -->
+      <div class="crop">
+        <img :src="this.courseImg" alt="Course Image" />
+      </div>
       <br />
       <h3 class="center">{{ course.name }}</h3>
       <br />
@@ -46,6 +48,12 @@ export default {
   },
   methods: {
     scaleImage(srcwidth, srcheight, targetwidth, targetheight, fLetterBox) {
+      console.log("HERE");
+      console.log(srcwidth);
+      console.log(srcheight);
+      console.log(targetwidth);
+      console.log(targetheight);
+      console.log(fLetterBox);
       this.imgSizes = {
         width: 0,
         height: 0,
@@ -118,12 +126,20 @@ export default {
   },
   async beforeMount() {
     this.getKey();
+
     await this.getCourse();
+
     console.log(this.course);
-  },
-  mounted() {
-    var image = document.getElementById("scaleImg");
-    scaleImage(image.offsetWidth, image.offsetHeight, 600, 338, true);
+
+    var self = this;
+
+    let img = new Image();
+
+    img.onload = function () {
+      self.scaleImage(this.width, this.height, 600, 338, false);
+    };
+
+    img.src = this.courseImg;
   },
 };
 </script>

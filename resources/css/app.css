@@ -1242,6 +1242,19 @@ footer .svg-inline--fa:hover {
     /* width: 600px; */
     /* height: 300px; */
 }
+
+.crop {
+    display: block;
+    height: 338px;
+    position: relative;
+    overflow: hidden;
+    width: 600px;
+}
+.crop img {
+    left: 0px; /* alter this to move left or right */
+    position: absolute;
+    top: 0px; /* alter this to move up or down */
+}
 /*============= MEDIA QUERIES =============*/
 
 @media (min-width: 1200px) {
