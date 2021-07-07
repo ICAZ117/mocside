@@ -534,7 +534,8 @@ export default {
       var assignment = res.data.data;
       var due_date = assignment.due_date;
 
-      console.log(new Date(due_date.toUTCString()));
+      console.log(due_date);
+      // console.log(new Date(due_date.toUTCString()));
 
 
 
