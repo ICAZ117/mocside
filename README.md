@@ -16,6 +16,7 @@ NEXT UP
 * Check if Registering User is a new or not...if already in database...throw error...on username, email, or id
 * Add Sorting for the courses, labs, and problems
 * Add Filter for the courses, labs, and problems
+* time is in UTC, change front to EST/LOCAL time
 
 
 

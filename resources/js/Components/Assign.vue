@@ -158,6 +158,7 @@ export default {
       else {
         console.log("can't change date to undefined lab");
         course.DDate = "";
+        course.TDate = "";
       }
     },
 
