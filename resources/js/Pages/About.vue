@@ -219,4 +219,70 @@ export default {
     --brightness: calc(1.5 - var(--saturation-factor, 1)*0.5);
     --contrast: var(--saturation-factor,1);
 }
+.centeringWrapper-2Rs1dR {
+    width: 100%;
+    text-align: center;
+}
+.container-23z5yI {
+    width: 100%;
+}
+.lookFilled-1Gx00P.colorBrand-3pXr91 {
+    color: #fff;
+    background-color: var(--brand-experiment);
+}
+.button-3k0cO7 {
+    font-size: 16px;
+    line-height: 24px;
+}
+.marginTop40-i-78cZ {
+    margin-top: 40px;
+}
+.fullWidth-1orjjo {
+    width: 100%;
+}
+.grow-q77ONN, .sizeIcon-1-kvKI {
+    width: auto;
+}
+.sizeLarge-1vSeWK {
+    width: 130px;
+    height: 44px;
+    min-width: 130px;
+    min-height: 44px;
+}
+.lookFilled-1Gx00P, .lookInverted-2D7oAl {
+    -webkit-transition: background-color .17s ease,color .17s ease;
+    transition: background-color .17s ease,color .17s ease;
+}
+.button-38aScr {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: none;
+        background-color: rgba(0, 0, 0, 0);
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 2px 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.lookFilled-1Gx00P .contents-18-Yxp, .lookInverted-2D7oAl .contents-18-Yxp, .lookLink-9FtZy- .contents-18-Yxp, .lookOutlined-3sRXeN .contents-18-Yxp {
+    margin: 0 auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 </style>
