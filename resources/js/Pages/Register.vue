@@ -284,6 +284,8 @@ export default {
       // but not before we init gradebook!
       const res3 = await API.apiClient.post(`/gradebook/init/${res2.data.data.id}`, { scope: "student" });
       console.log(res3);
+      const res4 = await API.apiClient.post('/progress');
+      console.log(res4);
 
       // now, push to login
       this.$router.push('/login') // this will get them properly authorized,
