@@ -1,13 +1,17 @@
 <template>
-  <div :style='"background-image: url(\"" + this.courseImg + "\")"' class="inviteBG">
+  <div>
+    <div
+      :style="'background-image: url(&quot;' + this.courseImg + '&quot;)'"
+      class="inviteBG"
+    ></div>
     <div class="invite-card center center-height">
-        <img :src="this.courseImg" alt="Course Image" class="invite-card-img">
-        <br>
-        <h3 class="center">{{ course.name }}</h3>
-        <br>
-        <p class="center">1/1/2021 - 5/31/2021</p>
-        <br>
-        <button class="btn btn-success btn-lg">Join!</button>
+      <img :src="this.courseImg" alt="Course Image" class="invite-card-img" />
+      <br />
+      <h3 class="center">{{ course.name }}</h3>
+      <br />
+      <p class="center">1/1/2021 - 5/31/2021</p>
+      <br />
+      <button class="btn btn-success btn-lg">Join!</button>
     </div>
   </div>
 
@@ -56,7 +60,7 @@ export default {
       this.courseImg = this.course.img_loc;
     },
     getKey() {
-        // /key/enroll
+      // /key/enroll
       var r = window.location.pathname;
       r = r.split("/");
       this.key = r[1];
@@ -70,5 +74,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
