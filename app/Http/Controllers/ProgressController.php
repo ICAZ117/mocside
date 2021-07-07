@@ -156,7 +156,7 @@ class ProgressController extends Controller
             'lab_id' => $assignment->lab_id,
             'num_completed' => $num_completed,
             'completed' => $lab_completed,
-            'last_progess' => date('Y-m-d')
+            'last_progress' => date('Y-m-d')
         );
 
 
