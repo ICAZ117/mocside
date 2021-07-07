@@ -5,14 +5,16 @@
       class="inviteBG"
     ></div>
     <div class="invite-card center">
-      <img
-        id="scaleImg"
+      <!-- <img
         :src="this.courseImg"
         alt="Course Image"
         class="invite-card-img"
         :width="imgSizes.width"
         :height="imgSizes.height"
-      />
+      /> -->
+      <div class="crop">
+        <img :src="this.courseImg" alt="Course Image" />
+      </div>
       <br />
       <h3 class="center">{{ course.name }}</h3>
       <br />
@@ -126,7 +128,7 @@ export default {
     this.getKey();
 
     await this.getCourse();
-    
+
     console.log(this.course);
 
     var self = this;
