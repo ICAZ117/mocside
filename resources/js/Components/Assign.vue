@@ -57,6 +57,9 @@
 
                   <label for="dueDate">Due Date: </label>
                   <input type="date" id="dueDate" @change="updateDate(course)" v-model="course.DDate" />
+                  <br>
+                  <label for="dueTime">Time Due: </label>
+                  <input type="time" id="timeDate" @change="updateDate(course)" v-model="course.TDate" />
                 </div>
 
                 <hr class="courses my-0" />
@@ -119,6 +122,7 @@ export default {
         const labs = await this.getLabs(this.courses[i].id);
         this.labs.push(labs);
         this.courses[i].DDate = "",
+        this.courses[i].TDate = "",
         this.courses[i].isAdded = false;
         this.courses[i].isPublished = false;
         this.courses[i].currentLab = {};
@@ -142,14 +146,19 @@ export default {
             break;
           }
         }
+
+        //combine due date and due time and send to database
+
         var payload = {
-          "due_date": course.DDate,
+          "due_date": course.DDate + " " + course.TDate,
         }
+        console.log(payload);
         const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
       }
       else {
         console.log("can't change date to undefined lab");
         course.DDate = "";
+        course.TDate = "";
       }
     },
 
@@ -173,10 +182,12 @@ export default {
 
         //due date needs to be set
         course.DDate = this.copies[ind].due_date.split(" ")[0];
+        course.TDate = this.copies[ind].due_date.split(" ")[1];
       }
       else {
         course.isPublished = false;
         course.DDate = "";
+        course.TDate = "";
       }
     },
 
@@ -264,6 +275,7 @@ export default {
 
       //remove date showing on front end
       course.DDate = "";
+      course.TDate = "";
     },
     togglePublish(course) {
       var lab = course.currentLab;

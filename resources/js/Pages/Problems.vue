@@ -112,6 +112,7 @@
     v-if="childIsOpen"
     :problemID="problemID"
     :lang="lang"
+    :labID="labID"
   ></router-view>
 </template>
 

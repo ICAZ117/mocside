@@ -22,6 +22,7 @@
       :saved_p="code_p"
       :problemID="problemID"
       :codeID="codeID"
+      :labID="labID"
       @update="updateContent"
       :key="forceReload"
       v-if="childIsOpen"
@@ -32,7 +33,7 @@
 <script>
 import * as API from "../services/API";
 export default {
-  props: ["problemID", "lang"],
+  props: ["problemID", "lang", "labID"],
   emits: ["unmounting", "problemEdited"],
   data() {
     return {

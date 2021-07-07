@@ -44,7 +44,7 @@
               Keep trying
             </button>
             <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1">
-              Submit anyway
+              Submit
             </button>
           </div>
         </vue-final-modal>
@@ -221,7 +221,7 @@ import Accordion from "../Components/Accordion.vue";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID"],
+  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID", "labID"],
   emits: ["update"],
   data: () => ({
     theme: "gob",
@@ -503,21 +503,44 @@ export default {
       //a[last elem] b[last elem] for 0 elements
       //starts next case
     },
-    submitForGrade() {
-      var gradebook = {};
+    async submitForGrade() {
+      if(!this.pastDue()) {
+        var gradebook = {};
 
-      for (let i = 0; i < this.tcGrades.length; i++) {
-        gradebook[this.tcGrades[i].ID] = this.tcGrades[i].passed;
+        for (let i = 0; i < this.tcGrades.length; i++) {
+          gradebook[this.tcGrades[i].ID] = this.tcGrades[i].passed;
+        }
+
+        var payload = {
+          gradebook: JSON.stringify(gradebook),
+        };
+
+        console.log(payload.gradebook);
+        const res = await API.apiClient.post(`/gradebook/submit/${this.problemID}`, payload);
+        console.log("\n\n---------- DID WE GRADE CORRECTLY?");
+        console.log(res.data);
+        // router push to labs, we are done here
+        this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
       }
+    },
+    async pastDue() {
+      //get user time in UTC
+      var current_time = new Date();
+      console.log(current_time);
 
-      var payload = {
-        gradebook: JSON.stringify(gradebook),
-      };
 
-      console.log(payload.gradebook);
-      const res = API.apiClient.post(`/gradebook/submit/${this.problemID}`, payload);
-      console.log("\n\n---------- DID WE GRADE CORRECTLY?");
-      console.log(res.data);
+      //get Problem Due date time
+      const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      var assignment = res.data.data;
+      var due_date = assignment.due_date;
+
+
+
+      //return true if past due date
+
+      //return false otherwise
+      return false;
+
     },
     async initAccordion() {
       this.accordions = [];

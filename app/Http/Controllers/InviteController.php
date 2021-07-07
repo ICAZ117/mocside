@@ -111,6 +111,18 @@ class InviteController extends Controller
         array_push($course_roster['roster'], $user->fsc_id);
         $course->roster = json_encode($course_roster);
         $student->courses = json_encode($student_roster);
+
+        // we also need to init them in the course-wide gradebook
+        $course_book = json_decode($course->gradebook, true);
+        array_push($course_book['students'], $user->fsc_id);
+        $course_book['grades'][$user->fsc_id] = 0;
+        $course->gradebook = json_encode($course_book);
+
+        $student_course_book = json_decode($student->gradebook_courses, true);
+        array_push($student_course_book['courses'], $course->id);
+        $student_course_book['grades'][$course->id] = 0;
+        $student->gradebook_courses = json_encode($student_course_book);
+
         $course->save();
         $student->save();
 
