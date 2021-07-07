@@ -45,7 +45,7 @@
                   <h4 class="col-11">
                     <b>{{ problem.name }}</b>
                   </h4>
-                  <div class="col-1">
+                  <div class="right col-1">
                     <a
                       v-if="isProf"
                       @click="editProblem(problem.id)"
