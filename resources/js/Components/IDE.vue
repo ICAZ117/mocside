@@ -526,16 +526,30 @@ export default {
     async pastDue() {
       //get user time in UTC
       var current_time = new Date();
-      console.log(current_time);
-      //convert this to UTC time?
 
 
       //get Problem Due date time
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var assignment = res.data.data;
       var due_date = assignment.due_date;
+      var backDate = this.getBackDate(due_date);
+      console.log(backDate);
 
-      var temp = new Date();
+
+      // assuming both times are using the same time zone the following works
+      if(temp > current_time) {
+        console.log("within window?");
+        // return false;
+      }
+      else {
+        console.log("not within window?");
+        // return true;
+      }
+      return false;
+
+    },
+    getBackDate(due_date) {
+      var temp = new Date('Feb 28 2013 19:00:00 EST');
       var mydate = due_date.split(" ")[0];
       var time = due_date.split(" ")[1]
       var tmp = mydate.split("-");
@@ -545,24 +559,7 @@ export default {
       temp.setHours(time.split(":")[0]);
       temp.setMinutes(time.split(":")[1]);
       temp.setMilliseconds(time.split(":")[2]);
-      console.log(temp);
-      //this date shows the current user timezone....convert to est than to utc for accurate time
-
-
-      if(temp > current_time) {
-        console.log("within window?");
-      }
-      else {
-        console.log("not within window?");
-      }
-
-
-
-      //return true if past due date
-
-      //return false otherwise
-      return false;
-
+      return temp;
     },
     async initAccordion() {
       this.accordions = [];
