@@ -285,4 +285,138 @@ export default {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+.container-23z5yI {
+    width: 100%;
+}
+a, button, div, input, label, select, span, strong, textarea {
+    outline: 0;
+}
+a, abbr, acronym, address, applet, big, blockquote, body, caption, cite, code, dd, del, dfn, div, dl, dt, em, fieldset, form, h1, h2, h3, h4, h5, h6, html, iframe, img, ins, kbd, label, legend, li, object, ol, p, pre, q, s, samp, small, span, strike, strong, table, tbody, td, tfoot, th, thead, tr, tt, ul, var {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+.appIcon-lZGJcM, .avatar-2Gi7sV, .guildIcon-1PRDp6 {
+    margin-bottom: 0;
+    width: 64px;
+    height: 64px;
+}
+.appIcon-lZGJcM, .avatar-2Gi7sV, .guildIcon-1PRDp6 {
+    margin-bottom: 24px;
+}
+.size16-1P40sf {
+    font-size: 16px;
+    line-height: 20px;
+}
+.colorHeaderSecondary-3Sp3Ft {
+    color: var(--header-secondary);
+}
+.title-2_aCTw {
+    margin-top: 4px;
+    color: var(--header-primary);
+    font-weight: 600;
+}
+.inviteResolvingGuildName-bQULNl, .title-2_aCTw {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.title-jXR8lp {
+    font-weight: 600;
+}
+.base-1x0h_U {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--header-primary);
+}
+.size24-RIRrxO {
+    font-size: 24px;
+    line-height: 30px;
+}
+.activityCount-2GgGMq {
+    margin-top: 4px;
+}
+.horizontal-1ae9ci {
+}
+.flex-1xMQg5 {
+}
+.horizontal-2EEEnY {
+}
+.directionRow-3v3tfG {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+.noWrap-3jynv6 {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+.justifyCenter-3D2jYp {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.alignStretch-DpGPf3 {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+.flex-1O1GKY {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.pillOnline-35Y-7N {
+    margin-right: 16px;
+}
+.pill-1dHPfk {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.pill-1dHPfk {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.pillIconOnline-2JGlqR {
+    background-color: hsl(139,calc(var(--saturation-factor, 1)*47.3%),43.9%);
+}
+.pillIcon-BaqtHs {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+.pillMessage-1btqlx {
+    font-size: 14px;
+    white-space: nowrap;
+    color: var(--header-secondary);
+}
+.size16-1P40sf {
+    font-size: 16px;
+    line-height: 20px;
+}
+.colorStandard-2KCXvj {
+    color: var(--text-normal);
+}
 </style>
