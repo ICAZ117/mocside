@@ -217,7 +217,7 @@ export default {
       this.authUser = store.getters["auth/authUser"];
       this.fscID = this.authUser.fsc_user.fsc_id;
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
-      this.progress = res.data;
+      this.progress = res.data.data;
       return this.progress;
     },
     async getPercent(problem) {
