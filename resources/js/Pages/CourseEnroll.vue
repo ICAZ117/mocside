@@ -134,7 +134,7 @@ export default {
     let img = new Image();
 
     img.onload = function () {
-      self.scaleImage(this.width, this.height, 600, 338, true);
+      self.scaleImage(this.width, this.height, 600, 338, false);
     };
 
     img.src = this.courseImg;
