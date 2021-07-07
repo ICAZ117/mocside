@@ -233,7 +233,7 @@ export default {
     async getPercent(lab) {
       var d = JSON.parse(this.progress.labs);
       var c;
-      for (let i = 0; i <= d.length; i++) {
+      for (let i = 0; i < d.length; i++) {
         if (d[i].lab_id == lab.id) {
           c = d[i];
           break;
@@ -247,7 +247,7 @@ export default {
     },
     async getActivity(lab) {
       var d = JSON.parse(this.progress.labs);
-      for (let i = 0; i <= d.length; i++) {
+      for (let i = 0; i < d.length; i++) {
         if (d[i].lab_id == lab.id) {
           return d[i].last_progress;
         }
