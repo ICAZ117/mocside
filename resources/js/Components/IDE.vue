@@ -534,7 +534,6 @@ export default {
       var assignment = res.data.data;
       var due_date = assignment.due_date;
 
-      console.log(due_date);
       var temp = new Date();
       var mydate = due_date.split(" ")[0];
       var time = due_date.split(" ")[1]
@@ -546,7 +545,14 @@ export default {
       temp.setMinutes(time.split(":")[1]);
       temp.setMilliseconds(time.split(":")[2]);
       console.log(temp);
-      // console.log(new Date(due_date.toUTCString()));
+
+
+      if(temp > current_time) {
+        console.log("within window?");
+      }
+      else {
+        console.log("not within window?");
+      }
 
 
 
