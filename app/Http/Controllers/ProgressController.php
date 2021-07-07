@@ -107,7 +107,7 @@ class ProgressController extends Controller
         // first, lets update $progress_book
         $cases_passed = [];
         $num_cases = 0;
-        foreach ($validData['gradebook'] as $key => $value) {
+        foreach (json_deocde($validData['gradebook'], true) as $key => $value) {
             if ($value) {
                 array_push($cases_passed, $key);
             }
