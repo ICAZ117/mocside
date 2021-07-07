@@ -1213,13 +1213,15 @@ footer .svg-inline--fa:hover {
 }
 
 .invite-card {
-    background-color: darkgrey;
+    background-color: var(--FSCgrey);
     padding: 0;
     margin: 0;
-}
-
-.invite-card.center-height {
-    margin-top: calc(100vh - var(--nav-height) - 250px) !important;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
 
 .inviteBG {
@@ -1237,8 +1239,8 @@ footer .svg-inline--fa:hover {
 }
 
 .invite-card-img {
-    width: 600px;
-    height: 300px;
+    /* width: 600px; */
+    /* height: 300px; */
 }
 /*============= MEDIA QUERIES =============*/
 
