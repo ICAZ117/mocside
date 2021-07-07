@@ -503,7 +503,7 @@ export default {
       //a[last elem] b[last elem] for 0 elements
       //starts next case
     },
-    submitForGrade() {
+    async submitForGrade() {
       var gradebook = {};
 
       for (let i = 0; i < this.tcGrades.length; i++) {
@@ -515,9 +515,10 @@ export default {
       };
 
       console.log(payload.gradebook);
-      const res = API.apiClient.post(`/gradebook/submit/${this.problemID}`, payload);
+      const res = await API.apiClient.post(`/gradebook/submit/${this.problemID}`, payload);
       console.log("\n\n---------- DID WE GRADE CORRECTLY?");
       console.log(res.data);
+      // router push to labs, we are done here
     },
     async initAccordion() {
       this.accordions = [];
