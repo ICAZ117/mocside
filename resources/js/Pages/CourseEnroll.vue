@@ -1,8 +1,20 @@
 <template>
-  <h1>You have been invited to join {{ course.name }}</h1>
+  <div :style='"background-image: url(\"" + this.courseImg + "\")"' class="inviteBG">
+    <div class="invite-card center center-height">
+        <img :src="this.courseImg" alt="Course Image" class="invite-card-img">
+        <br>
+        <h3 class="center">{{ course.name }}</h3>
+        <br>
+        <p class="center">1/1/2021 - 5/31/2021</p>
+        <br>
+        <button class="btn btn-success btn-lg">Join!</button>
+    </div>
+  </div>
+
+  <!-- <h1>You have been invited to join {{ course.name }}</h1>
   <button @click="joinCourse()" type="submit">Join</button>
   <button @click="cancelCourse()" type="submit">Cancel</button>
-  <p>yah</p>
+  <p>yah</p> -->
 </template>
 
 <script>
@@ -13,6 +25,7 @@ export default {
       key: "",
       course: {},
       courseID: "",
+      courseImg: "",
     };
   },
   methods: {
@@ -38,6 +51,9 @@ export default {
       //grab course using key
       const resp = await API.apiClient.get(`/courses/${this.courseID}`);
       this.course = resp.data.data;
+
+      //Grab image location from course
+      this.courseImg = this.course.img_loc;
     },
     getKey() {
         // /key/enroll
@@ -46,7 +62,7 @@ export default {
       this.key = r[1];
     },
   },
-  async mounted() {
+  async beforeMount() {
     this.getKey();
     await this.getCourse();
     console.log(this.course);

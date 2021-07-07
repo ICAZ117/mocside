@@ -98,6 +98,7 @@ h4 {
 
 .center {
     margin: auto !important;
+    text-align: center !important;
 }
 
 /* The switch - the box around the slider */
@@ -959,9 +960,9 @@ thead.gradebook {
 }
 
 .right {
-    float: right!important;
-    text-align: right!important;
-    align-items: flex-end!important;
+    float: right !important;
+    text-align: right !important;
+    align-items: flex-end !important;
 }
 
 /*========= ADD ASSIGNMENT =========*/
@@ -1206,6 +1207,39 @@ footer .svg-inline--fa:hover {
 
 /*============= PROFILE =============*/
 
+/*============= ENROLL =============*/
+.center-height {
+    margin-top: calc(100vh - var(--nav-height)) !important;
+}
+
+.invite-card {
+    background-color: darkgrey;
+    padding: 0;
+    margin: 0;
+}
+
+.invite-card.center-height {
+    margin-top: calc(100vh - var(--nav-height) - 250px) !important;
+}
+
+.inviteBG {
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.invite-card-img {
+    width: 600px;
+    height: 300px;
+}
 /*============= MEDIA QUERIES =============*/
 
 @media (min-width: 1200px) {
