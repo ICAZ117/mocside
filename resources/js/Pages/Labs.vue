@@ -227,13 +227,13 @@ export default {
       this.authUser = store.getters["auth/authUser"];
       this.fscID = this.authUser.fsc_user.fsc_id;
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
-      this.progress = res.data;
+      this.progress = res.data.data;
       return this.progress;
     },
     async getPercent(lab) {
       var d = JSON.parse(this.progress.labs);
       var c;
-      for (let i = 0; i <= d.length; i++) {
+      for (let i = 0; i < d.length; i++) {
         if (d[i].lab_id == lab.id) {
           c = d[i];
           break;
@@ -247,7 +247,7 @@ export default {
     },
     async getActivity(lab) {
       var d = JSON.parse(this.progress.labs);
-      for (let i = 0; i <= d.length; i++) {
+      for (let i = 0; i < d.length; i++) {
         if (d[i].lab_id == lab.id) {
           return d[i].last_progress;
         }

@@ -217,14 +217,13 @@ export default {
       this.authUser = store.getters["auth/authUser"];
       this.fscID = this.authUser.fsc_user.fsc_id;
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
-      this.progress = res.data;
+      this.progress = res.data.data;
       return this.progress;
     },
     async getPercent(problem) {
-      console.log(this.progress);
       var d = JSON.parse(this.progress.assignments);
       var c;
-      for (let i = 0; i <= d.length; i++) {
+      for (let i = 0; i < d.length; i++) {
         if (d[i].assignment_id == problem.id) {
           c = d[i];
           break;
@@ -238,7 +237,7 @@ export default {
     },
     async getActivity(problem) {
       var d = JSON.parse(this.progress.assignments);
-      for (let i = 0; i <= d.length; i++) {
+      for (let i = 0; i < d.length; i++) {
         if (d[i].assignment_id == problem.id) {
           return d[i].last_progress;
         }

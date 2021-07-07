@@ -20,7 +20,11 @@ class ProgressController extends Controller
         $user = Auth::user();
         // $id is STUDENT->fsc_id
         if ($user->fsc_id == $id || $user->isAdmin()) {
-            return Progress::where('fsc_id', $id)->first();
+            $progress = Progress::where('fsc_id', '=', $id)->first();
+            if ($progress) {
+                return response()->json(['message' => 'progress found', 'data' => $progress], 200);
+            }
+            return response()->json(['message' => 'not found'], 404);
         }
         return response()->json(['message' => 'This is not your user!'], 403);
     }
