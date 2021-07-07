@@ -50,14 +50,16 @@
                       v-if="isProf"
                       @click="editProblem(problem.id)"
                       class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-                      ><h5>•••</h5></a
+                      ><i class="fas fa-edit"></i></a
                     >
+                    <!-- <h5>•••</h5> -->
                     <a
                       v-if="isProf"
                       @click="deleteProblem(problem, key)"
                       class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-                      ><h5>×</h5></a
+                      ><i class="fas fa-trash-alt"></i></a
                     >
+                    <!-- <h5>×</h5> -->
                   </div>
                 </div>
                 <!-- get text from .description object -->
