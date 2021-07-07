@@ -37,6 +37,7 @@
               name="labDateDue"
               class="form-control col-4"
             />
+            <input type="time" v-model="labForm.timeDue">
           </div>
         </div>
         <br />
@@ -71,12 +72,13 @@ export default {
   data() {
     return {
       labForm: {
-		  name: "",
-		  description: "",
-		  dateDue: null,
-		  datePublish: null,
-	  },
-	  isSubmitted: false,
+		    name: "",
+		    description: "",
+		    dateDue: null,
+        timeDue: null,
+		    datePublish: null,
+	    },
+	    isSubmitted: false,
     };
   },
   methods: {
