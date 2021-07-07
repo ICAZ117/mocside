@@ -11,7 +11,9 @@
     <small class="navigation"
       ><span>{{ username }}{{ currentDirectory }}</span>
       <br />
-      <span class="pointer underline" @click="this.$emit('unmounting')">↩ Return to Labs</span>
+      <span class="pointer underline" @click="this.$emit('unmounting')"
+        >↩ Return to Labs</span
+      >
     </small>
 
     <table class="table problemtable">
@@ -27,10 +29,7 @@
       </thead>
       <tbody>
         <template v-for="(problem, key) in problems" :key="problem.id">
-          <tr
-            class="problem pointer"
-            @click="toggleExpansion(problem.id)"
-          >
+          <tr class="problem pointer" @click="toggleExpansion(problem.id)">
             <td v-show="!isExpanded(problem.id)"><i class="fas fa-chevron-right"></i></td>
             <td v-show="isExpanded(problem.id)"><i class="fas fa-chevron-down"></i></td>
             <td>{{ problem.name }}</td>
@@ -42,9 +41,25 @@
           <tr v-show="isExpanded(problem.id)" class="description-data">
             <td colspan="5" class="description-data">
               <div class="problem-description">
-                <h4>
-                  <b>{{ problem.name }}</b>
-                </h4>
+                <div class="row">
+                  <h4 class="col-11">
+                    <b>{{ problem.name }}</b>
+                  </h4>
+                  <div class="col-1">
+                    <a
+                      v-if="isProf"
+                      @click="editProblem(problem.id)"
+                      class="courselaunch text-danger mx-2 my-1 no-decor pointer"
+                      >•••</a
+                    >
+                    <a
+                      v-if="isProf"
+                      @click="deleteProblem(problem, key)"
+                      class="courselaunch text-danger mx-2 my-1 no-decor pointer"
+                      >X</a
+                    >
+                  </div>
+                </div>
                 <!-- get text from .description object -->
                 <p>
                   <!-- {{ problem.description }} -->
@@ -81,8 +96,6 @@
               </div>
             </td>
           </tr>
-          <a v-if="isProf" @click="editProblem(problem.id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">•••</a>
-          <a v-if="isProf" @click="deleteProblem(problem, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">X</a>
         </template>
         <tr v-if="isProf" class="lab pointer" @click="addProblem">
           <td colspan="5">Add Problem</td>
@@ -135,33 +148,42 @@ export default {
   methods: {
     async addProblem() {
       var payload = {
-        "name": "New Problem",
-        "description": JSON.stringify({"ops": [{"insert": "New Problem"}]}),
-        "lab_id": this.labID,
-        "due_date": "2021-05-29 13:04:03",
-        "copy_id": this.labID,
-        "java_starter": "public class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}",
-        "python_starter": "def main():\n\n\n\nif __name__ == \"__main__\":\n\tmain()",
-      }
+        name: "New Problem",
+        description: JSON.stringify({ ops: [{ insert: "New Problem" }] }),
+        lab_id: this.labID,
+        due_date: "2021-05-29 13:04:03",
+        copy_id: this.labID,
+        java_starter:
+          "public class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}",
+        python_starter: 'def main():\n\n\n\nif __name__ == "__main__":\n\tmain()',
+      };
       const problem = await API.apiClient.post(`/problems`, payload);
       this.problemID = problem.data.data.id;
       this.problems.push(problem.data.data);
       this.childIsOpen = true;
-      this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
+      this.$router.push({
+        name: "EditAssignment",
+        params: { problem_id: this.problemID },
+      });
     },
     editProblem(id) {
       this.childIsOpen = true;
       this.problemID = id;
-      this.$router.push({ name: "EditAssignment", params: { problem_id: this.problemID } });
+      this.$router.push({
+        name: "EditAssignment",
+        params: { problem_id: this.problemID },
+      });
     },
     async deleteProblem(problem, key) {
-      var flag = confirm("Are you Sure you want to remove " + problem.name + " from this Lab?");
-      if(flag) {
+      var flag = confirm(
+        "Are you Sure you want to remove " + problem.name + " from this Lab?"
+      );
+      if (flag) {
         // remove this problem from the current lab
         const res = await API.apiClient.delete(`/problems/${problem.id}`);
 
         //filter the problems list
-        this.problems = this.problems.filter((p, i) => i  != key);
+        this.problems = this.problems.filter((p, i) => i != key);
       }
     },
     async deleteMe() {
@@ -181,10 +203,10 @@ export default {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
       this.problems = rawProblems.data.data;
       const prog = await this.getStudent();
-      if(!this.isProf) {
+      if (!this.isProf) {
         for (let i = 0; i < this.problems.length; i++) {
-          this.problems[i]['percent'] = await this.getPercent(this.problems[i]);
-          this.problems[i]['activity'] = await this.getActivity(this.problems[i]);
+          this.problems[i]["percent"] = await this.getPercent(this.problems[i]);
+          this.problems[i]["activity"] = await this.getActivity(this.problems[i]);
         }
       }
     },
@@ -199,23 +221,21 @@ export default {
       console.log(this.progress);
       var d = JSON.parse(this.progress.assignments);
       var c;
-      for (let i = 0; i<=d.length; i++) {
+      for (let i = 0; i <= d.length; i++) {
         if (d[i].assignment_id == problem.id) {
           c = d[i];
           break;
         }
       }
-      if(problem.test_cases == 0) {
+      if (problem.test_cases == 0) {
         return "0%";
+      } else {
+        return parseInt(c.cases_passed / problem.test_cases) * 100 + "%";
       }
-      else {
-        return (parseInt(c.cases_passed / problem.test_cases) * 100 )+ "%";
-      }
-
     },
     async getActivity(problem) {
       var d = JSON.parse(this.progress.assignments);
-      for (let i = 0; i<=d.length; i++) {
+      for (let i = 0; i <= d.length; i++) {
         if (d[i].assignment_id == problem.id) {
           return d[i].last_progress;
         }
@@ -224,20 +244,20 @@ export default {
     async problemEdited() {
       var tempID = this.problemID;
       ///update the list of courses
-      this.problems = this.problems.filter((p) => p.id  != this.problemID);
+      this.problems = this.problems.filter((p) => p.id != this.problemID);
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problems.push(problem.data.data);
       console.log(problem.data.data);
       await this.Unmounting();
 
       //check if the problem was deleted from child
-      if(this.deletedMe) {
+      if (this.deletedMe) {
         //child deleted button was pressed
         // remove this problem from the current lab
         const res = await API.apiClient.delete(`/problems/${tempID}`);
 
         //filter the problems list
-        this.problems = this.problems.filter((p) => p.id  != tempID);
+        this.problems = this.problems.filter((p) => p.id != tempID);
       }
     },
     async Unmounting() {
@@ -264,14 +284,13 @@ export default {
     },
   },
   computed: {
-    isProf: function() {
+    isProf: function () {
       if (store.getters["auth/isProf"] == null) {
         return false;
-      }
-      else {
+      } else {
         return store.getters["auth/isProf"];
       }
-    }
+    },
   },
   beforeMount() {
     this.childIsOpen = false;
