@@ -105,4 +105,21 @@ export default {
 </script>
 
 <style>
+.wrapper-6URcxg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 580px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
 </style>
