@@ -539,7 +539,9 @@ export default {
       var mydate = due_date.split(" ")[0];
       var time = due_date.split(" ")[1]
       var temp = mydate.split("-");
-      temp.setFullYear(temp[0], temp[1], temp[2]);
+      temp.setDate(temp[2]);
+      temp.setMonth(temp[1]);
+      temp.setFullYear(temp[0]);
       temp.setHours(time.split(":")[0]);
       temp.setMinutes(time.split(":")[1]);
       temp.setMilliseconds(time.split(":")[2]);
