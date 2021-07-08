@@ -43,7 +43,7 @@
             <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">
               Keep trying
             </button>
-            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1" :disabled="canSubmit">
+            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1" :disabled="!canSubmit">
               Submit
             </button>
           </div>
