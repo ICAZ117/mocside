@@ -247,18 +247,16 @@ export default {
       var c;
       for (let i = 0; i < d.length; i++) {
         if (d[i].lab_id == lab.id) {
-          console.log(d[i]);
-          console.log(lab.id);
           c = d[i];
           break;
         }
       }
       if (lab.numProblems == 0) {
-        return "0%";
+        return "2%";
       } else if (!c) {
-        return "0%";
+        return "1%";
       } else {
-        return parseInt(c.num_completed / lab.num_problems) * 100 + "%";
+        return parseInt((c.num_completed / lab.num_problems) * 100) + "%";
       }
     },
     async getActivity(lab) {
