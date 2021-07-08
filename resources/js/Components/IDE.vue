@@ -561,13 +561,12 @@ export default {
       if (due_date > current_time) {
         console.log("within window?");
         // alert("current: " + current_time + "\nback: " + backdDate);
-        // return false;
+        return false;
       } else {
         console.log("not within window?");
         // alert("current: " + current_time + "\nback: " + backDate);
-        // return true;
+        return true;
       }
-      return false;
     },
     async initAccordion() {
       this.accordions = [];
