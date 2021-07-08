@@ -504,7 +504,7 @@ export default {
       //starts next case
     },
     async submitForGrade() {
-      if(!this.pastDue()) {
+      if (!this.pastDue()) {
         var gradebook = {};
 
         for (let i = 0; i < this.tcGrades.length; i++) {
@@ -516,11 +516,17 @@ export default {
         };
 
         console.log(payload.gradebook);
-        const res = await API.apiClient.post(`/gradebook/submit/${this.problemID}`, payload);
+        const res = await API.apiClient.post(
+          `/gradebook/submit/${this.problemID}`,
+          payload
+        );
         console.log("\n\n---------- DID WE GRADE CORRECTLY?");
         console.log(res.data);
-        payload['lang'] = this.lang.toLowerCase();
-        const res2 = await API.apiClient.post(`/progress/submit/${this.problemID}`, payload);
+        payload["lang"] = this.lang.toLowerCase();
+        const res2 = await API.apiClient.post(
+          `/progress/submit/${this.problemID}`,
+          payload
+        );
         console.log(res2);
         // router push to labs, we are done here
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
@@ -529,34 +535,39 @@ export default {
     async pastDue() {
       //get user time in UTC
       var c = new Date();
-      var current_time = Date.UTC(c.getFullYear(), c.getMonth(), c.Date(), c.getHours(), c.getMinutes, c.getSeconds, c.getMilliseconds);
-      console.log(current_time);
+      var current_time = Date.UTC(
+        c.getFullYear(),
+        c.getMonth(),
+        c.getDate(),
+        c.getHours(),
+        c.getMinutes(),
+        c.getSeconds(),
+        c.getMilliseconds()
+      );
 
+      console.log(new Date(current_time));
 
       //get problem time returned as UTC
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var assignment = res.data.data;
       var due_date = assignment.due_date_utc;
-      console.log(due_date);
+      console.log(new Date(due_date));
       //assume this is UTC
 
       // var backDate = this.getBackDate(due_date);
       // console.log(backDate);
 
-
       // assuming both times are using the same time zone the following works, or both are utc
-      if(backDate > current_time) {
+      if (due_date > current_time) {
         console.log("within window?");
         // alert("current: " + current_time + "\nback: " + backdDate);
         // return false;
-      }
-      else {
+      } else {
         console.log("not within window?");
         // alert("current: " + current_time + "\nback: " + backDate);
         // return true;
       }
       return false;
-
     },
     async initAccordion() {
       this.accordions = [];
