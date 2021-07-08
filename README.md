@@ -1,8 +1,6 @@
 ===============> MocsIDE<===============
 
 IMPORTANT
-* Complete Grade Process
-* Due Dates on Assignments..get both client and backend to same timezone then the rest works
 * Email Confirmation ( For future, not this week)
 * Password Reset ( For future, not this work)
 
