@@ -217,19 +217,19 @@ export default {
       this.$router.push({ name: "Assignment", params: { problem_id: id } });
     },
     async getProblems() {
-      const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
-      console.log("here");
-      console.log(rawProblems);
-      if(rawproblems.message != "") {
-        this.$router.go(-1);
-      }
-      this.problems = rawProblems.data.data;
-      const prog = await this.getStudent();
-      if (!this.isProf) {
-        for (let i = 0; i < this.problems.length; i++) {
-          this.problems[i]["percent"] = await this.getPercent(this.problems[i]);
-          this.problems[i]["activity"] = await this.getActivity(this.problems[i]);
+      try {
+        const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
+        this.problems = rawProblems.data.data;
+        const prog = await this.getStudent();
+        if (!this.isProf) {
+          for (let i = 0; i < this.problems.length; i++) {
+            this.problems[i]["percent"] = await this.getPercent(this.problems[i]);
+            this.problems[i]["activity"] = await this.getActivity(this.problems[i]);
+          }
         }
+      }
+      catch (e) {
+        console.log(e);
       }
     },
     async getStudent() {
