@@ -528,9 +528,10 @@ export default {
     },
     async pastDue() {
       //get user time in UTC
-      var current_time = new Date.UTC();
-      console.log(current_time);
+      var c = new Date();
+      var current_time = Date.UTC(c.getFullYear, c.getMonth, c.getDate, c.getHours, c.getMinutes, c.getSeconds, c.getMilliseconds);
 
+      console.log(current_time);
 
       //get problem time returned as UTC
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
