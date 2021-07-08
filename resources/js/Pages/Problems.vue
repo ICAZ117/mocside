@@ -35,7 +35,7 @@
             <td>{{ problem.name }}</td>
             <td>{{ problem.test_cases }}</td>
             <td v-if="!isProf">{{ problem.percent }}</td>
-            <td>{{ problem.due_date.split(" ")[0] }}</td>
+            <td>{{ problem.due_date.split(" ")[0] }} {{ problem.due_date.split(" ")[1] }}</td>
             <td v-if="!isProf">{{ problem.activity }}</td>
           </tr>
           <tr v-show="isExpanded(problem.id)" class="description-data">
