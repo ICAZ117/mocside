@@ -218,6 +218,10 @@ export default {
     },
     async getProblems() {
       const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
+      console.log(rawProblems);
+      if(rawproblems.message != "") {
+        this.$router.go(-1);
+      }
       this.problems = rawProblems.data.data;
       const prog = await this.getStudent();
       if (!this.isProf) {
