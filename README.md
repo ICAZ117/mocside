@@ -40,7 +40,6 @@ ADD PAGES
 
 
 FINAL
-* change implementation from dates to date times
 * speed up load time by adjusting picture size
 * Fill Homepage with necessary information
 * complete bug fixing and Testing
