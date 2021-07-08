@@ -528,19 +528,21 @@ export default {
     },
     async pastDue() {
       //get user time in UTC
-      var current_time = new Date();
+      var current_time = new Date.UTC();
       console.log(current_time);
 
 
-      //get Problem Due date time
+      //get problem time returned as UTC
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var assignment = res.data.data;
-      var due_date = assignment.due_date;
-      var backDate = this.getBackDate(due_date);
-      console.log(backDate);
+      var due_date = assignment.due_date_utc;
+      //assume this is UTC
+
+      // var backDate = this.getBackDate(due_date);
+      // console.log(backDate);
 
 
-      // assuming both times are using the same time zone the following works
+      // assuming both times are using the same time zone the following works, or both are utc
       if(backDate > current_time) {
         console.log("within window?");
         // alert("current: " + current_time + "\nback: " + backdDate);
@@ -553,20 +555,6 @@ export default {
       }
       return false;
 
-    },
-    getBackDate(due_date) {
-      var temp = new Date('Feb 28 2013 19:00:00 EST');
-      console.log(temp);
-      var mydate = due_date.split(" ")[0];
-      var time = due_date.split(" ")[1]
-      var tmp = mydate.split("-");
-      temp.setDate(tmp[2]);
-      temp.setMonth(tmp[1]);
-      temp.setFullYear(tmp[0]);
-      temp.setHours(time.split(":")[0]);
-      temp.setMinutes(time.split(":")[1]);
-      temp.setMilliseconds(time.split(":")[2]);
-      return temp;
     },
     async initAccordion() {
       this.accordions = [];
