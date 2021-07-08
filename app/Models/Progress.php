@@ -31,7 +31,7 @@ class Progress extends Model
     public function touchDate($assignment_id)
     {
         $labs_book = json_decode($this->labs, true);
-        $assignments_book = json_deocde($this->assignments, true);
+        $assignments_book = json_decode($this->assignments, true);
         $progress_book = json_decode($this->progress, true);
         $assignment = Assignment::find($assignment_id);
 
