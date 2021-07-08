@@ -157,7 +157,7 @@ export default {
       console.log("\n\n\n");
       console.log(dateList);
       var month = months[Number(dateList[1]) - 1];
-      var day = Number(dateList[2]);
+      var day = Number(dateList[2].split(" ")[0]);
 
       console.log(day);
 
