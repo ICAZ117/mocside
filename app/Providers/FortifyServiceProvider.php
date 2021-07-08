@@ -66,12 +66,7 @@ class FortifyServiceProvider extends ServiceProvider
                 $user &&
                 Hash::check($request->password, $user->password)
             ) {
-                $validated = Auth::validate($credentials = [
-                    'email' => $user->email,
-                    'password' => Hash::make($request->password),
-                    'remember' => $request->remember
-                ]);
-                return $validated ? Auth::getProvider()->retrieveByCredentials($credentials) : null;
+                return [$user, $request->remember];
             }
         });
     }
