@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Code;
+use App\Models\Progress;
 
 class CodeController extends Controller
 {
@@ -16,6 +17,12 @@ class CodeController extends Controller
             'problem_id' => 'required',
             'code' => 'required',
         ]);
+
+        // in this case, we are creating a new code entry.
+        // like with checking, we must touch progress
+        $progress = Progress::where('fsc_id', '=', $user->fsc_id)->first();
+        $progress->touchDate($validData['problem_id']);
+
         return Code::create([
             'fsc_id' => $user->fsc_id,
             'lang' => $validData['lang'],
@@ -55,6 +62,10 @@ class CodeController extends Controller
         ]);
         $hasProgress = $user->hasProgress($id, $validData['lang']);
         if ($hasProgress) {
+            // this route gets called when opening a problem
+            // So I'm gonna leave a footprint on the user's progress obj.
+            $progress = Progress::where('fsc_id', '=', $user->fsc_id)->first();
+            $progress->touchDate($id);
             $code = Code::where([
                 ['fsc_id', '=', $user->fsc_id],
                 ['assignment_id', '=', $id],
