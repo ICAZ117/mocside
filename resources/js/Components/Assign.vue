@@ -183,11 +183,11 @@ export default {
         var minute = Number(timeList[1]);
         var second = Number(timeList[2]);
 
-        var date = new Date.UTC(year, month, day, hour, minute, second, 0);
+        console.log(Date.UTC(year, month, day, hour, minute, second, 0));
 
         var payload = {
           due_date: course.DDate + " " + course.TDate,
-          due_date_utc: date,
+          due_date_utc: 5,
         };
         console.log(payload);
         const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
