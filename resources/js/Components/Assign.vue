@@ -182,18 +182,9 @@ export default {
         var hour = Number(timeList[0]);
         var minute = Number(timeList[1]);
 
-        console.log(year);
-        console.log(month);
-        console.log(day);
-        console.log(hour);
-        console.log(minute);
-
-
-        console.log(Date.UTC(year, month, day, hour, minute, 0, 0));
-
         var payload = {
           due_date: course.DDate + " " + course.TDate,
-          due_date_utc: 5,
+          due_date_utc: Date.UTC(year, month, day, hour, minute, 0, 0),
         };
         console.log(payload);
         const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
