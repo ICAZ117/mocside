@@ -180,9 +180,8 @@ export default {
 
         var timeList = course.TDate.split(":");
         var hour = Number(timeList[0]);
-        var minute = Number(timeList[1]);
+        var minute = Number(timeList[1]) + new Date().getTimezoneOffset();
         
-
         var payload = {
           due_date: course.DDate + " " + course.TDate,
           due_date_utc: Date.UTC(year, month, day, hour, minute, 0, 0),
