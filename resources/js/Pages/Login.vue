@@ -60,6 +60,7 @@
         <!-------------------- SUBMIT -------------------->
         <div class="form-group">
           <button class="btn btn-danger btn-block">Login</button>
+          <button type="button" @click="signUp()" class="btn btn-danger btn-block">Sign Up</button>
         </div>
       </form>
     </div>
@@ -108,6 +109,9 @@ export default {
         return;
       }
       this.login();
+    },
+    signUp() {
+      this.$router.push({ name: "Register"});
     },
     async login() {
       const payload = {
