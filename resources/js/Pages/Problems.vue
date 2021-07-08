@@ -149,6 +149,9 @@ export default {
     };
   },
   methods: {
+    convertDate() {
+
+    },
     async addProblem() {
       var payload = {
         name: "New Problem",
@@ -297,6 +300,7 @@ export default {
   beforeMount() {
     this.childIsOpen = false;
     this.getProblems();
+    console.log(this.problems);
   },
   beforeUnmount() {
     this.$emit("unmounting");
