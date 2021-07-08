@@ -51,7 +51,7 @@
 
         <div class="form-group form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" name="remember" />Remember Me
+            <input class="form-check-input" type="checkbox" name="remember" v-model="rememberMe"/>Remember Me
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Check this checkbox to continue.</div>
           </label>
@@ -87,6 +87,7 @@ export default {
         password: "",
       },
       isSubmitted: false,
+      rememberMe: false,
     };
   },
   validations: {
@@ -113,6 +114,7 @@ export default {
       const payload = {
         email: this.userForm.userEmail,
         password: this.userForm.password,
+        remember: this.rememberMe,
       };
       this.error = null;
       try {
