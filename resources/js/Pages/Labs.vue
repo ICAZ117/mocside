@@ -96,9 +96,10 @@
               <th><i class="fas fa-grin-alt spacer"></i></th>
               <th>Lab</th>
               <th># Problems</th>
-              <th># Completed</th>
+              <th>% Complete</th>
               <th>Due Date</th>
               <th>Last Activity</th>
+              <th>Grade</th>
             </tr>
           </thead>
           <tbody>
@@ -218,11 +219,14 @@
 import * as API from "../services/API";
 import store from "../Store/index";
 import { useRoute } from "vue-router";
-import { computed } from "vue";
+import { defineComponent, reactive, toRefs, computed } from "vue";
 
-export default {
+const tabs = ["Labs", "Grades"];
+
+export default defineComponent({
   props: ["courseID", "courseName"],
   emits: ["unmounting", "courseEdited"],
+  name: "Course",
   data() {
     return {
       labs: [],
@@ -241,8 +245,14 @@ export default {
 
     const currentDirectory = computed(() => route.path);
 
+    const state = reactive({
+      selectedTab: tabs[0],
+    });
+
     return {
       currentDirectory,
+      tabs,
+      ...toRefs(state),
     };
   },
   methods: {
@@ -423,5 +433,5 @@ export default {
   beforeUnmount() {
     this.$emit("unmounting");
   },
-};
+});
 </script>
