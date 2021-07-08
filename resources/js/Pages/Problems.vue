@@ -229,7 +229,6 @@ export default {
         }
       }
       catch (e) {
-        console.log(e);
         this.$router.go(-1);
       }
     },
