@@ -175,12 +175,13 @@ export default {
 
         var dateList = course.DDate.split("-");
         var year = Number(dateList[0]);
-        var month = Number(dateList[1]);
+        var month = Number(dateList[1]) - 1;
         var day = Number(dateList[2]);
 
         var timeList = course.TDate.split(":");
         var hour = Number(timeList[0]);
         var minute = Number(timeList[1]);
+        
 
         var payload = {
           due_date: course.DDate + " " + course.TDate,
