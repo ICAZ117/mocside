@@ -183,6 +183,14 @@ export default {
         var minute = Number(timeList[1]);
         var second = Number(timeList[2]);
 
+        console.log(year);
+        console.log(month);
+        console.log(day);
+        console.log(hour);
+        console.log(minute);
+        console.log(second);
+
+
         console.log(Date.UTC(year, month, day, hour, minute, second, 0));
 
         var payload = {
