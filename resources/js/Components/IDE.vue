@@ -536,6 +536,7 @@ export default {
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var assignment = res.data.data;
       var due_date = assignment.due_date_utc;
+      console.log(due_date);
       //assume this is UTC
 
       // var backDate = this.getBackDate(due_date);
