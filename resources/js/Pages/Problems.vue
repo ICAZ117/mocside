@@ -154,8 +154,12 @@ export default {
       // Output: Jun 4
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       var dateList = numericalDate.split("-");
+      console.log("\n\n\n");
+      console.log(dateList);
       var month = months[Number(dateList[1]) - 1];
       var day = Number(dateList[2]);
+
+      console.log(day);
 
       return month + " " + day;
     },
