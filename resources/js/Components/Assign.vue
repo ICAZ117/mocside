@@ -173,7 +173,7 @@ export default {
 
         //combine due date and due time and send to database
 
-        vardate = new Date();
+        var date = new Date();
 
         var dateList = course.DDate.split("-");
         var year = Number(dateList[0]);
