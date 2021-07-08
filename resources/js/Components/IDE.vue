@@ -529,7 +529,7 @@ export default {
     async pastDue() {
       //get user time in UTC
       var c = new Date();
-      var current_time = Date.UTC(c.getFullYear, c.getMonth, c.getDate, c.getHours, c.getMinutes, c.getSeconds, c.getMilliseconds);
+      var current_time = Date.UTC(c.getFullYear(), c.getMonth(), c.getDate(), c.getHours(), c.getMinutes(), c.getSeconds(), c.getMilliseconds());
 
       console.log(current_time);
 
@@ -545,7 +545,7 @@ export default {
 
 
       // assuming both times are using the same time zone the following works, or both are utc
-      if(backDate > current_time) {
+      if(due_date > current_time) {
         console.log("within window?");
         // alert("current: " + current_time + "\nback: " + backdDate);
         // return false;
