@@ -24,7 +24,7 @@
             <span
               :id="course.id"
               @contextmenu.prevent="showMenu(course.id)"
-              @click.prevent="goToLabs(course.id)"
+              @click.prevent="goToLabs(course.id, course.name)"
               class="no-decor pointer"
             >
               <ul id="menu">
@@ -95,6 +95,7 @@
       @courseEdited="courseEdited"
       v-if="childIsOpen"
       :courseID="courseID"
+      :courseName="courseName"
     ></router-view>
   </div>
 
@@ -117,6 +118,7 @@ export default {
       courseID: null,
       username: "",
       rightClickID: "",
+      courseName: "",
     };
   },
   setup() {
@@ -206,10 +208,11 @@ export default {
         console.log("Delete avoided");
       }
     },
-    goToLabs(id) {
+    goToLabs(id, name) {
       if (this.rightClickID == "") {
         this.childIsOpen = true;
         this.courseID = id;
+        this.courseName = name;
         this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
       }
     },

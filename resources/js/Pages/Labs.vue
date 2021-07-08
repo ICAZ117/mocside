@@ -3,8 +3,19 @@
     <!-- Main Page-->
     <div class="courses header">
       <div class="heading">
-        <h2>Labs</h2>
+        <h2>{{ courseName }}</h2>
         <hr />
+
+        <tabs v-model="selectedTab">
+          <tab
+            class="tab"
+            v-for="(tab, i) in tabs"
+            :key="`t${i}`"
+            :val="tab"
+            :label="tab"
+            :indicator="true"
+          />
+        </tabs>
       </div>
     </div>
 
@@ -16,54 +27,56 @@
       >
     </small>
 
-    <table class="table labtable">
-      <thead class="labtable">
-        <tr>
-          <th>Title</th>
-          <th># Problems</th>
-          <th v-if="!isProf">% Complete</th>
-          <th>Due Date</th>
-          <th v-if="!isProf">Last Activity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="lab in labs" :key="lab.id">
-          <tr
-            v-if="!isProf"
-            class="lab pointer"
-            @click="goToProblems(lab.id, lab.name)"
-          >
-            <td>
-              <a>{{ lab.name }}</a>
-            </td>
-            <td>{{ lab.num_problems }}</td>
-            <td v-if="!isProf">{{ lab.percent }}</td>
-            <!-- <td>69%</td> -->
-            <td>{{ lab.due_date }}</td>
-            <td v-if="!isProf">{{ lab.activity }}</td>
-            <!-- <td>4/20/0420</td> -->
-          </tr>
+    <tab-panels v-model="selectedTab" :animate="true">
+      <tab-panel :val="'Labs'">
+        <table class="table labtable">
+          <thead class="labtable">
+            <tr>
+              <th>Title</th>
+              <th># Problems</th>
+              <th v-if="!isProf">% Complete</th>
+              <th>Due Date</th>
+              <th v-if="!isProf">Last Activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-for="lab in labs" :key="lab.id">
+              <tr
+                v-if="!isProf"
+                class="lab pointer"
+                @click="goToProblems(lab.id, lab.name)"
+              >
+                <td>
+                  <a>{{ lab.name }}</a>
+                </td>
+                <td>{{ lab.num_problems }}</td>
+                <td v-if="!isProf">{{ lab.percent }}</td>
+                <!-- <td>69%</td> -->
+                <td>{{ lab.due_date }}</td>
+                <td v-if="!isProf">{{ lab.activity }}</td>
+                <!-- <td>4/20/0420</td> -->
+              </tr>
 
-          <tr
-            v-if="isProf"
-            class="lab pointer"
-            @click.prevent="goToProblems(lab.id, lab.name)"
-            @contextmenu.prevent="showMenu(lab.id)"
-          >
-            <td>
-              <a>{{ lab.name }}</a>
-            </td>
-            <td>{{ lab.num_problems }}</td>
-            <!-- <td>69%</td> -->
-            <td>{{ lab.due_date }}</td>
-            <!-- <td>4/20/0420</td> -->
-          </tr>
-        </template>
+              <tr
+                v-if="isProf"
+                class="lab pointer"
+                @click.prevent="goToProblems(lab.id, lab.name)"
+                @contextmenu.prevent="showMenu(lab.id)"
+              >
+                <td>
+                  <a>{{ lab.name }}</a>
+                </td>
+                <td>{{ lab.num_problems }}</td>
+                <!-- <td>69%</td> -->
+                <td>{{ lab.due_date }}</td>
+                <!-- <td>4/20/0420</td> -->
+              </tr>
+            </template>
 
-        <tr v-if="isProf" class="lab pointer" @click="addLab">
-          <td colspan="5">Add Lab</td>
-        </tr>
-        <!-- <tr
+            <tr v-if="isProf" class="lab pointer" @click="addLab">
+              <td colspan="5">Add Lab</td>
+            </tr>
+            <!-- <tr
             class="lab"
             style="cursor: pointer"
           >
@@ -73,8 +86,107 @@
             <td>1/31/2021</td>
             <td>1/31/2021</td>
           </tr> -->
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </tab-panel>
+      <tab-panel :val="'Grades'">
+        <table class="table problemtable">
+          <thead class="problemtable">
+            <tr>
+              <th><i class="fas fa-grin-alt spacer"></i></th>
+              <th>Lab</th>
+              <th># Problems</th>
+              <th># Completed</th>
+              <th>Due Date</th>
+              <th>Last Activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-for="(problem, key) in problems" :key="problem.id">
+              <tr class="problem pointer" @click="toggleExpansion(problem.id)">
+                <td v-show="!isExpanded(problem.id)">
+                  <i class="fas fa-chevron-right"></i>
+                </td>
+                <td v-show="isExpanded(problem.id)">
+                  <i class="fas fa-chevron-down"></i>
+                </td>
+                <td>{{ problem.name }}</td>
+                <td>{{ problem.test_cases }}</td>
+                <td v-if="!isProf">{{ problem.percent }}</td>
+                <td>
+                  {{ problem.due_date.split(" ")[0] }}
+                  {{ problem.due_date.split(" ")[1] }}
+                </td>
+                <td v-if="!isProf">{{ problem.activity }}</td>
+              </tr>
+              <tr v-show="isExpanded(problem.id)" class="description-data">
+                <td colspan="5" class="description-data">
+                  <div class="problem-description">
+                    <div class="row">
+                      <h4 class="col-11">
+                        <b>{{ problem.name }}</b>
+                      </h4>
+                      <div class="right col-1">
+                        <a
+                          v-if="isProf"
+                          @click="editProblem(problem.id)"
+                          class="courselaunch text-danger mx-2 my-1 no-decor pointer"
+                          ><i class="fas fa-edit"></i
+                        ></a>
+                        <!-- <h5>•••</h5> -->
+                        <a
+                          v-if="isProf"
+                          @click="deleteProblem(problem, key)"
+                          class="courselaunch text-danger mx-2 my-1 no-decor pointer"
+                          ><i class="fas fa-trash-alt"></i
+                        ></a>
+                        <!-- <h5>×</h5> -->
+                      </div>
+                    </div>
+                    <!-- get text from .description object -->
+                    <p>
+                      <!-- {{ problem.description }} -->
+                      <br />
+                      Due Date: {{ problem.due_date.split(" ")[0] }}
+                      <br />
+                      Test Cases: {{ problem.test_cases }}
+                      <br />
+                    </p>
+                    <div style="width: 50% !important">
+                      <div class="row">
+                        <div class="col-9">
+                          <select v-model="lang" id="lang" class="form-select">
+                            <option value="" selected disabled hidden>
+                              Select a language...
+                            </option>
+                            <option value="Java">Java</option>
+                            <option value="Python">Python</option>
+                          </select>
+                        </div>
+                        <div class="col-3 ml-1">
+                          <button
+                            type="launch"
+                            name="launch"
+                            class="launch-workspace btn btn-success"
+                            :disabled="!lang.length"
+                            @click="goToProblem(problem.id)"
+                          >
+                            Launch in {{ lang }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </template>
+            <tr v-if="isProf" class="lab pointer" @click="addProblem">
+              <td colspan="5">Add Problem</td>
+            </tr>
+          </tbody>
+        </table>
+      </tab-panel>
+    </tab-panels>
   </div>
   <router-view
     @unmounting="Unmounting()"
@@ -87,18 +199,12 @@
     <div :id="lab.id">
       <ul id="menu">
         <li class="menu-item">
-          <a
-            v-if="isProf"
-            class="pointer no-decor"
-            @click="editLab(lab.id, lab.name)"
+          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
             >Edit</a
           >
         </li>
         <li class="menu-item">
-          <a
-            v-if="isProf"
-            class="pointer no-decor"
-            @click="removeLab(lab.id, key)"
+          <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
             >Delete</a
           >
         </li>
@@ -115,7 +221,7 @@ import { useRoute } from "vue-router";
 import { computed } from "vue";
 
 export default {
-  props: ["courseID"],
+  props: ["courseID", "courseName"],
   emits: ["unmounting", "courseEdited"],
   data() {
     return {
@@ -155,9 +261,7 @@ export default {
     },
     closeMenu() {
       try {
-        document
-          .getElementById(this.rightClickID)
-          .childNodes[0].classList.remove("show");
+        document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
       } catch (e) {}
       document.getElementById("out-click").style.display = "none";
       this.rightClickID = "";

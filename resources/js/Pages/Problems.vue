@@ -19,7 +19,7 @@
     <table class="table problemtable">
       <thead class="problemtable">
         <tr>
-          <th><i class="fas fa-chevron-down spacer"></i></th>
+          <th><i class="fas fa-grin-alt spacer"></i></th>
           <th>Title</th>
           <th># Test Cases</th>
           <th v-if="!isProf">% Successful</th>
