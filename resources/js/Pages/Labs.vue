@@ -254,7 +254,7 @@ export default {
         }
       }
       if (lab.numProblems == 0) {
-        return "0%";
+        return "2%";
       } else if (!c) {
         return "1%";
       } else {
