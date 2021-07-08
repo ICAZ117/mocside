@@ -28,7 +28,6 @@
           type="submit"
           name="submit"
           class="submit-code col-1 btn btn-success"
-          :disabled="canSubmit"
         >
           Submit
         </button>
@@ -44,7 +43,7 @@
             <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">
               Keep trying
             </button>
-            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1">
+            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1" :disabled="canSubmit">
               Submit
             </button>
           </div>
