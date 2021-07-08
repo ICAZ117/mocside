@@ -247,8 +247,6 @@ export default {
       var c;
       for (let i = 0; i < d.length; i++) {
         if (d[i].lab_id == lab.id) {
-          console.log(d[i]);
-          console.log(lab.id);
           c = d[i];
           break;
         }
@@ -258,6 +256,8 @@ export default {
       } else if (!c) {
         return "1%";
       } else {
+        console.log(c);
+        console.log(lab);
         return parseInt(c.num_completed / lab.num_problems) * 100 + "%";
       }
     },
