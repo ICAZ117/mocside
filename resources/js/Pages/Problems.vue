@@ -297,9 +297,9 @@ export default {
       }
     },
   },
-  beforeMount() {
+  async beforeMount() {
     this.childIsOpen = false;
-    this.getProblems();
+    await this.getProblems();
     console.log(this.problems);
   },
   beforeUnmount() {
