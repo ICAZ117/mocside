@@ -149,8 +149,19 @@ export default {
     };
   },
   methods: {
-    convertDate() {
+    convertDate(numericalDate) {
+      // Input: 2021-06-04
+      // Output: Jun 4
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      var dateList = numericalDate.split("-");
+      console.log("\n\n\n");
+      console.log(dateList);
+      var month = months[Number(dateList[1]) - 1];
+      var day = Number(dateList[2]);
 
+      console.log(day);
+
+      return month + " " + day;
     },
     async addProblem() {
       var payload = {
@@ -299,9 +310,18 @@ export default {
       }
     },
   },
-  beforeMount() {
+  async beforeMount() {
     this.childIsOpen = false;
-    this.getProblems();
+    await this.getProblems();
+
+    console.log("\n\nBefore date convert");
+    console.log(this.problems);
+
+    for (let i = 0; i < this.problems.length; i++) {
+      this.problems[i].due_date = await this.convertDate(this.problems[i].due_date);
+    }
+
+    console.log("\n\nAfter date convert");
     console.log(this.problems);
   },
   beforeUnmount() {
