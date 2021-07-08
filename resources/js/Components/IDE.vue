@@ -528,7 +528,8 @@ export default {
     },
     async pastDue() {
       //get user time in UTC
-      var current_time = new Date.UTC();
+      var c = new Date();
+      var current_time = Date.UTC(c.getFullYear(), c.getMonth(), c.Date(), c.getHours(), c.getMinutes, c.getSeconds, c.getMilliseconds);
       console.log(current_time);
 
 
