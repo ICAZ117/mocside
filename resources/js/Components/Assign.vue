@@ -173,7 +173,7 @@ export default {
 
         //combine due date and due time and send to database
 
-        var date = new Date();
+        vardate = new Date();
 
         var dateList = course.DDate.split("-");
         var year = Number(dateList[0]);
@@ -183,6 +183,7 @@ export default {
         var timeList = course.TDate.split(":");
         var hour = Number(timeList[0]);
         var minute = Number(timeList[1]);
+        var second = Number(timeList[2]);
 
         date.setMonth(month);
         date.setDate(day);
@@ -193,7 +194,7 @@ export default {
 
         var payload = {
           due_date: course.DDate + " " + course.TDate,
-          due_date_utc: Date.UTC(date),
+          due_date_utc: Date.UTC(year, month, day, hours, minutes, second, 0),
         };
         console.log(payload);
         const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
