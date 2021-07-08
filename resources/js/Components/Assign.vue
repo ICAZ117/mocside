@@ -193,7 +193,7 @@ export default {
 
         var payload = {
           due_date: course.DDate + " " + course.TDate,
-          due_date_utc: date.UTC(),
+          due_date_utc: Date.UTC(date),
         };
         console.log(payload);
         const res = await API.apiClient.put(`/problems/unique/${tempID}`, payload);
