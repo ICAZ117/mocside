@@ -252,9 +252,9 @@ export default {
         }
       }
       if (lab.numProblems == 0) {
-        return "2%";
+        return "0%";
       } else if (!c) {
-        return "1%";
+        return "0%";
       } else {
         return parseInt((c.num_completed / lab.num_problems) * 100) + "%";
       }

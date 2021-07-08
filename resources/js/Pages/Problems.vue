@@ -234,8 +234,10 @@ export default {
       }
       if (problem.test_cases == 0) {
         return "0%";
+      } else if (!c) {
+        return "0%";
       } else {
-        return parseInt(c.cases_passed / problem.test_cases) * 100 + "%";
+        return parseInt((c.cases_passed / problem.test_cases)* 100) + "%";
       }
     },
     async getActivity(problem) {
