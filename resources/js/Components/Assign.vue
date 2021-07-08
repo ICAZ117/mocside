@@ -181,17 +181,15 @@ export default {
         var timeList = course.TDate.split(":");
         var hour = Number(timeList[0]);
         var minute = Number(timeList[1]);
-        var second = Number(timeList[2]);
 
         console.log(year);
         console.log(month);
         console.log(day);
         console.log(hour);
         console.log(minute);
-        console.log(second);
 
 
-        console.log(Date.UTC(year, month, day, hour, minute, second, 0));
+        console.log(Date.UTC(year, month, day, hour, minute, 0, 0));
 
         var payload = {
           due_date: course.DDate + " " + course.TDate,
