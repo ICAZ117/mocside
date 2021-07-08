@@ -43,7 +43,7 @@
             <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">
               Keep trying
             </button>
-            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1">
+            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1" :disabled="!canSubmit">
               Submit
             </button>
           </div>
@@ -239,6 +239,7 @@ export default {
     testCases: [],
     reloadModal: 0,
     tcGrades: [],
+    canSubmit: true,
   }),
   components: {
     VAceEditor,
@@ -288,6 +289,7 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
+      this.canSubmit = !this.pastDue();
       this.showModal = true;
       this.tcGrades = [];
 
