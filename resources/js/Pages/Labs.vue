@@ -250,6 +250,8 @@ export default {
       for (let i = 0; i < d.length; i++) {
         if (d[i].lab_id == lab.id) {
           c = d[i];
+          console.log("Set C");
+          console.log(c);
           break;
         }
       }
