@@ -5,15 +5,27 @@ IMPORTANT
 * Password Reset ( For future, not this work)
 
 
+ADD PAGES
+* Add profile Page....sorta like a dashboard
+    * Overall Course Grades
+    * Profile Settings.....username, email, password, profile picture, delete account?...if professor upgrade button 
+    * IDE Settings......Theme, language, Console Theme
+* Add Contact Us page
+* turn course edit into a course dashboard for professor can change course details as well as see gradebook, students, etc.
+    * Change Course Details(currently CourseEdit)
+    * Gradebook
+    * Students
+    * Labs...edit, delete, publish
+
+
 NEXT UP
 * Fixing the url routing issue
 * deleting some problems has not reset their copies copy id when needed...ie delete 14 when it has copies should make the first copy switch copy id to itself, ie 45's copy id becomes 45
 * some test cases have the wrong assignment id....where did this happen....perhaps when deleting the original/copies?
 * when typing in url past courses...an incorrect url will direct user to fake page...switch to 404 not found maybe...or redirect
-* Add Sign Up Button to Login Page
-* Check if Registering User is a new or not...if already in database...throw error...on username, email, or id
 * Add Sorting for the courses, labs, and problems
 * Add Filter for the courses, labs, and problems
+* add modification to Ace-editor, suggestions, autoformat, autocomplete
 
 
 
@@ -31,11 +43,6 @@ STYLE FIXES
 * Confirm Delete style message on courses, labs, and problems
 * Fix Carousel
 * Combine Logout, with profile pic, and link to profile page
-
-ADD PAGES
-* Add profile Page
-* Add contact us page
-* turn course edit into a course dashboard where professor can change course details as well as see gradebook, students, etc.
 
 
 

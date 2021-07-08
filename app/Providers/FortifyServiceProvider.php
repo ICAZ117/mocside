@@ -10,6 +10,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 
@@ -46,7 +47,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         RateLimiter::for('login', function (Request $request) {
-            return Limit::perMinute(5)->by($request->email.$request->ip());
+            return Limit::perMinute(5)->by($request->email . $request->ip());
         });
 
         RateLimiter::for('two-factor', function (Request $request) {
@@ -61,10 +62,16 @@ class FortifyServiceProvider extends ServiceProvider
             $user = User::where('email', $request->email)
                 ->orWhere('username', $request->email)
                 ->first();
-    
-            if ($user &&
-                Hash::check($request->password, $user->password)) {
-                return $user;
+            if (
+                $user &&
+                Hash::check($request->password, $user->password)
+            ) {
+                $validated = Auth::validate($credentials = [
+                    'email' => $user->email,
+                    'password' => Hash::make($request->password),
+                    'remember' => $request->remember
+                ]);
+                return $validated ? Auth::getProvider()->retrieveByCredentials($credentials) : null;
             }
         });
     }
