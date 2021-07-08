@@ -24,6 +24,7 @@ class Assignment extends Model
         'lab_id',
         'gradebook',
         'published',
+        'due_date_utc'
     ];
 
     protected $casts = [

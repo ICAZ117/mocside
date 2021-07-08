@@ -21,6 +21,7 @@ class AssignmentResource extends JsonResource
           'python_starter' => $this->python_starter,
           'java_starter' => $this->java_starter,
           'due_date' => $this->due_date,
+          'due_date_utc' => $this->due_date_utc,
           'isPublished' => $this->isPublished(),
           'lab_id' => $this->lab_id,
           // 'course_id' => $this->lab->course_id,
