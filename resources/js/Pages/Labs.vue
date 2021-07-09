@@ -114,7 +114,7 @@
           </thead>
           <tbody>
             <!-- Loop over all LABS -->
-            <template v-for="lab in grades.labs" :key="lab.id">
+            <template v-for="(lab, index) in grades.labs" :key="index">
               <!-- Regular table row -->
               <tr class="problem pointer" @click="toggleExpansion(lab.id)">
                 <td v-show="!isExpanded(lab.id)">
@@ -141,7 +141,47 @@
               </tr>
 
               <!-- Dropdown table row -->
-              <!-- <tr v-show="isExpanded(lab.id)" class="description-data"></tr> -->
+              <tr v-show="isExpanded(lab.id)" class="description-data">
+                <table class="table labtable">
+                  <thead class="labtable">
+                    <tr>
+                      <th>Title</th>
+                      <th># Test Cases</th>
+                      <th># Test Cases Passed</th>
+                      <th>Due Date</th>
+                      <th>Points Earned</th>
+                      <th>Points Possible</th>
+                      <th>Grade Percentage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template
+                      v-for="(problem, key) in grades.labs[index].problems"
+                      :key="key"
+                    >
+                      <tr class="lab pointer">
+                        <td>
+                          <a>{{ problems[problem.problemID].name }}</a>
+                        </td>
+                        <td>{{ problems[problem.problemID].test_cases }}</td>
+                        <td>{{ problems[problem.problemID].passed }}</td>
+                        <td>{{ problems[problem.problemID].due_date }}</td>
+                        <td>{{ problem.grade }}</td>
+                        <td>{{ problems[problem.problemID].worth }}</td>
+                        <td>
+                          {{
+                            problems[problem.problemID].worth == 0
+                              ? 0
+                              : problem.grade == undefined
+                              ? 0
+                              : parseInt((problem.grade / problems[problem.problemID].worth) * 10000) * 0.01
+                          }}%
+                        </td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </tr>
             </template>
           </tbody>
         </table>
@@ -200,7 +240,7 @@ export default defineComponent({
       rightClickID: "",
       student: {},
       grades: {},
-      pointValues: {},
+      problems: {},
       expandedProblem: null,
       sort: "0",
     };
@@ -313,7 +353,7 @@ export default defineComponent({
       const res = await API.apiClient.post(`/gradebook/worth/`, payload);
 
       // Save total point values into data object
-      this.pointValues = res.data.data;
+      this.problems = res.data.data;
     },
     showMenu(course_id) {
       if (this.isProf) {
@@ -409,7 +449,7 @@ export default defineComponent({
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
       this.fscID = this.authUser.fsc_user.fsc_id;
-      if(!this.isProf) {
+      if (!this.isProf) {
         const res = await API.apiClient.get(`/progress/${this.fscID}`);
         this.progress = res.data.data;
         return this.progress;
@@ -497,7 +537,7 @@ export default defineComponent({
       //false otherwise
       var now = new Date(Date.now());
       var pd = lab.publish_date.split("-")[2];
-      var pm = lab.publish_date.split("-")[1]-1;
+      var pm = lab.publish_date.split("-")[1] - 1;
       var py = lab.publish_date.split("-")[0];
 
       var published = new Date(
@@ -587,7 +627,6 @@ export default defineComponent({
       await this.getStudentObject();
       await this.getGrades();
     }
-
   },
   async beforeMount() {
     this.childisOpen = false;
