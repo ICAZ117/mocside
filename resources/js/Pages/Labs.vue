@@ -381,6 +381,8 @@ export default defineComponent({
       };
       const lab = await API.apiClient.post(`/labs/`, payload);
       this.labs.push(lab.data.data);
+      this.unfilteredLabs.push(lab.data.data);
+      this.sortLabs();
       console.log(lab.data.data);
       this.labID = lab.data.data.id;
       this.labName = lab.data.data.name;
@@ -404,6 +406,9 @@ export default defineComponent({
 
         //filter from labs
         this.labs = this.labs.filter((l, i) => i != key);
+
+        //filter from unfiltered labs
+        this.unfilteredLabs = this.unfilteredLabs.filter(l => l.id != lab.id);
       }
     },
     async getStudent() {
