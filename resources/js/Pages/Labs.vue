@@ -395,9 +395,12 @@ export default defineComponent({
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
       this.fscID = this.authUser.fsc_user.fsc_id;
-      const res = await API.apiClient.get(`/progress/${this.fscID}`);
-      this.progress = res.data.data;
-      return this.progress;
+      if(!this.isProf) {
+        const res = await API.apiClient.get(`/progress/${this.fscID}`);
+        this.progress = res.data.data;
+        return this.progress;
+      }
+      return {};
     },
     async getPercent(lab) {
       var d = JSON.parse(this.progress.labs);
