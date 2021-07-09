@@ -37,4 +37,22 @@ class Course extends Model
     {
         return $this->hasMany(Lab::class);
     }
+
+    public function worth()
+    {
+        $labs = $this->labs;
+        $problems = [];
+        $total = 0;
+        for ($i = 0; $i < count($labs); $i++) {
+            array_push($problems, $labs[$i]->assignments);
+        }
+
+        for ($j = 0; $j < count($problems); $j++) {
+            for ($k = 0; $k < count($problems[$j]); $k++) {
+                $points = $problems[$j][$k]->test_cases->count();
+                $total = $total + $points;
+            }
+        }
+        return $total;
+    }
 }

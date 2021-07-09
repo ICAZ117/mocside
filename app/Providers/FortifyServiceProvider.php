@@ -10,7 +10,6 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 
@@ -66,12 +65,7 @@ class FortifyServiceProvider extends ServiceProvider
                 $user &&
                 Hash::check($request->password, $user->password)
             ) {
-                $validated = Auth::validate($credentials = [
-                    'email' => $user->email,
-                    'password' => Hash::make($request->password),
-                    'remember' => $request->remember
-                ]);
-                return $validated ? Auth::getProvider()->retrieveByCredentials($credentials) : null;
+                return $user;
             }
         });
     }

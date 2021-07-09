@@ -370,4 +370,32 @@ class GradebookController extends Controller
             'student' => $student
         ], 200);
     }
+
+    public function smallBook($id)
+    {
+        $user = Auth::user();
+        $student = Student::where('fsc_id', '=', $user->fsc_id)->first();
+        if (!$student) {
+            return response()->json(['message' => 'No student found.'], 418);
+        }
+        $student_problem_book = json_decode($student->gradebook_problems, true);
+        $lab = Lab::find($id);
+        $problems = $lab->assignments;
+        $temp = array(
+            'problems' => [],
+            'grades' => array()
+        );
+        foreach ($problems as $problem) { 
+            array_push($temp['problems'], $problem->id);
+            if ($student_problem_book['grades'][$problem->id]) {
+                $temp['grades'][$problem->id] = $student_problem_book['grades'][$problem->id];
+            } else {
+                $temp['grades'][$problem->id] = 0;
+            }
+        }
+        return response()->json([
+            'message' => 'Gradebook made for '.$user->fsc_id." Lab: ".$lab->id,
+            'data' => $temp
+        ]);
+    }
 }
