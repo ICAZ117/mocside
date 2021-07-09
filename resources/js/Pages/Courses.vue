@@ -255,7 +255,6 @@ export default {
       this.courses = [];
 
       if (this.filter) {
-        console.log("filter on");
         //true if the filter is on
         for (let i = 0; i < this.unfilteredCourses.length; i++) {
           if (this.withinDate(this.unfilteredCourses[i])) {
@@ -264,7 +263,6 @@ export default {
           }
         }
       } else {
-        console.log("filter off");
         //filter is not on...therefore grab all courses
         for (let i = 0; i < this.unfilteredCourses.length; i++) {
           this.courses.push(this.unfilteredCourses[i]);
@@ -285,14 +283,6 @@ export default {
       var start = new Date(sy, sm, sd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
       var end = new Date(ey, em, ed, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
 
-      console.log(course);
-      console.log("Start");
-      console.log(start);
-      console.log("Now");
-      console.log(now);
-      console.log("End");
-      console.log(end);
-
       if(end >= now) {
         //before end of course, day of the end
         if(start <= now) {
@@ -309,6 +299,30 @@ export default {
       }
 
     },
+    sort(l = 4) {
+      //get sort method and call it
+      if(l == 0) {
+        //startDate
+        this.sortByStartDate();
+      }
+      else if (l == 1) {
+        //endDate
+        this.sortByEndDate();
+      }
+      else if (l == 2) {
+        //nextDueProblem
+        this.sortByNextProblemDue();
+      }
+      else if(l == 3) {
+        //name
+        this.sortByName();
+      }
+      else {
+        //default
+        //course ID
+        this.sortByID();
+      }
+    },
     sortByStartDate() {
       //sorts the filtered results by start date
     },
@@ -322,7 +336,7 @@ export default {
       //sorts the filtered results by the course name
     },
     sortByID() {
-      //sorts the filtered results by ID of the course....not backend but like 2280 vs. 2290
+      //sorts the filtered results by ID of the course
       //default
     },
     Unmounting() {
