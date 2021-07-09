@@ -119,8 +119,8 @@
                 <td>{{ lab.percentComplete }}</td>
                 <td>{{ lab.dueDate }}</td>
                 <td>{{ lab.grade }}</td>
-                <td>{{ lab.totalPoints }}</td>
-                <td>{{ parseInt((lab.grade / lab.totalPoints) * 10000) * 0.01 }}%</td>
+                <td>{{ lab.total_points }}</td>
+                <td>{{ parseInt((lab.grade / lab.total_points) * 10000) * 0.01 }}%</td>
               </tr>
 
               <!-- Dropdown table row -->
