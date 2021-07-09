@@ -127,9 +127,17 @@
                 <td>{{ lab.numProblems }}</td>
                 <td>{{ lab.percentComplete }}</td>
                 <td>{{ lab.dueDate }}</td>
-                <td>{{ (lab.grade == undefined) ? '--' : lab.grade }}</td>
+                <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
                 <td>{{ lab.total_points }}</td>
-                <td>{{ (lab.total_points == 0 ? 0 : ((lab.grade == undefined) ? 0 : (parseInt((lab.grade / lab.total_points) * 10000) * 0.01))) }}%</td>
+                <td>
+                  {{
+                    lab.total_points == 0
+                      ? 0
+                      : lab.grade == undefined
+                      ? 0
+                      : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
+                  }}%
+                </td>
               </tr>
 
               <!-- Dropdown table row -->
@@ -256,7 +264,9 @@ export default defineComponent({
       // Loop over all of the labs in the current course
       for (let i = 0; i < this.unfilteredLabs.length; i++) {
         // Get all of the problems for current lab
-        const problemsInLab = await API.apiClient.get(`/gradebook/${this.unfilteredLabs[i].id}`);
+        const problemsInLab = await API.apiClient.get(
+          `/gradebook/${this.unfilteredLabs[i].id}`
+        );
         problemsInLab = problemsInLab.data.data;
 
         // Log labID for later usage
@@ -338,8 +348,12 @@ export default defineComponent({
       const prog = await this.getStudent();
       if (!this.isProf) {
         for (let i = 0; i < this.unfilteredLabs.length; i++) {
-          this.unfilteredLabs[i]["percent"] = await this.getPercent(this.unfilteredLabs[i]);
-          this.unfilteredLabs[i]["activity"] = await this.getActivity(this.unfilteredLabs[i]);
+          this.unfilteredLabs[i]["percent"] = await this.getPercent(
+            this.unfilteredLabs[i]
+          );
+          this.unfilteredLabs[i]["activity"] = await this.getActivity(
+            this.unfilteredLabs[i]
+          );
         }
       }
       this.sortLabs();
@@ -476,27 +490,33 @@ export default defineComponent({
       //false otherwise
       var now = new Date(Date.now());
       var p = course.publish_date.split("-")[2];
-      var pm = course.publish_date.split("-")[1]-1;
+      var pm = course.publish_date.split("-")[1] - 1;
       var py = course.publish_date.split("-")[0];
 
-      var published = new Date(py, pm, pd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
-      if(published < now) {
+      var published = new Date(
+        py,
+        pm,
+        pd,
+        now.getHours(),
+        now.getMinutes(),
+        now.getSeconds(),
+        now.getMilliseconds()
+      );
+      if (published < now) {
         return true;
       }
       return false;
     },
     sortLabs() {
       //get sort method and call it
-      if(this.sort == 0) {
+      if (this.sort == 0) {
         //dueDate
         //default
         this.sortByDueDate();
-      }
-      else if(this.sort == 1) {
+      } else if (this.sort == 1) {
         //name
         this.sortByName();
-      }
-      else {
+      } else {
         //course ID
         this.sortByID();
       }
@@ -510,12 +530,12 @@ export default defineComponent({
         //if a should be first return -1, 0 for tie, -1 if b first
         let la = a.due_date.split("-");
         let lb = b.due_date.split("-");
-        let fa = Date.UTC(la[0], la[1]-1, la[2], 0, 0, 0, 0);
-        let fb = Date.UTC(lb[0], lb[1]-1, lb[2], 0, 0, 0, 0);
-        if(fa < fb) {
+        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+        if (fa < fb) {
           return -1;
         }
-        if(fa > fb) {
+        if (fa > fb) {
           return 1;
         }
         return 0;
@@ -526,7 +546,7 @@ export default defineComponent({
       this.unfilteredLabs.sort((a, b) => {
         let fa = a.name.toLowerCase();
         let fb = b.name.toLowerCase();
-        if(fa < fb) {
+        if (fa < fb) {
           return -1;
         }
         if (fa > fb) {
@@ -556,8 +576,11 @@ export default defineComponent({
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
     this.routeToChild();
-    await this.getStudentObject();
-    await this.getGrades();
+    if (!this.isProf) {
+      await this.getStudentObject();
+      await this.getGrades();
+    }
+    
   },
   async beforeMount() {
     this.childisOpen = false;
