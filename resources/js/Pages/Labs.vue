@@ -254,13 +254,13 @@ export default defineComponent({
       var studentLabs = JSON.parse(this.student.gradebook_labs);
 
       // Loop over all of the labs in the current course
-      for (let i = 0; i < this.labs.length; i++) {
+      for (let i = 0; i < this.unfilteredLabs.length; i++) {
         // Get all of the problems for current lab
-        const problemsInLab = await API.apiClient.get(`/gradebook/${this.labs[i].id}`);
+        const problemsInLab = await API.apiClient.get(`/gradebook/${this.unfilteredLabs[i].id}`);
         problemsInLab = problemsInLab.data.data;
 
         // Log labID for later usage
-        labIDs.push(this.labs[i].id);
+        labIDs.push(this.unfilteredLabs[i].id);
 
         // Initialize problems list
         var problems = [];
@@ -279,13 +279,13 @@ export default defineComponent({
 
         // Add the current lab to the local student gradebook
         grades.labs.push({
-          grade: studentLabs.grades[this.labs[i].id],
-          labID: this.labs[i].id,
-          name: this.labs[i].name,
-          numProblems: this.labs[i].num_problems,
-          percentComplete: this.labs[i].percent,
-          dueDate: this.labs[i].due_date,
-          total_points: this.labs[i].total_points,
+          grade: studentLabs.grades[this.unfilteredLabs[i].id],
+          labID: this.unfilteredLabs[i].id,
+          name: this.unfilteredLabs[i].name,
+          numProblems: this.unfilteredLabs[i].num_problems,
+          percentComplete: this.unfilteredLabs[i].percent,
+          dueDate: this.unfilteredLabs[i].due_date,
+          total_points: this.unfilteredLabs[i].total_points,
           problems: problems,
         });
       }
