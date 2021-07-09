@@ -120,7 +120,7 @@
                 <td>{{ lab.dueDate }}</td>
                 <td>{{ lab.grade }}</td>
                 <td>{{ lab.totalPoints }}</td>
-                <td>{{ (parseInt((lab.grade / lab.totalPoints) * 10000) * 0.01) }}%</td>
+                <td>{{ parseInt((lab.grade / lab.totalPoints) * 10000) * 0.01 }}%</td>
               </tr>
 
               <!-- Dropdown table row -->
@@ -220,7 +220,7 @@ export default defineComponent({
       }
     },
     async getStudentObject() {
-      const res = await API.apiClient.get(`/students/${this.fscID}`);
+      const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_ID}`);
       this.student = res.data;
       console.log(res.data);
     },
@@ -284,7 +284,7 @@ export default defineComponent({
       // Create payload to get total lab/problem values
       var payload = {
         problems: problemIDs,
-        labs: labIDs
+        labs: labIDs,
       };
 
       // Make API call and send payload to get said values
