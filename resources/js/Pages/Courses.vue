@@ -257,7 +257,7 @@ export default {
         console.log("filter on");
         //true if the filter is on
         for (let i = 0; i < this.unfilteredCourses.length; i++) {
-          if (withinDate(this.unfilteredCourses[i])) {
+          if (this.withinDate(this.unfilteredCourses[i])) {
             //if within date
             this.courses.push(this.unfilteredCourses[i]);
           }
