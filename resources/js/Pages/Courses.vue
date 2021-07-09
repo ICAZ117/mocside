@@ -247,7 +247,8 @@ export default {
         this.unfilteredCourses.push(course.data.data);
         // this.courses.push(course.data.data);
       }
-      this.sortCourses();
+      this.filterByDate();
+      // this.sortCourses();
     },
     filterByDate() {
       //grabs only the courses that are currently in session
