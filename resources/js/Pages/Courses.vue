@@ -343,6 +343,8 @@ export default {
         let lb = b.start_date.split("-");
         let fa = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
         let fb = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        console.log(fa);
+        console.log(fb);
         if(fa < fb) {
           return -1;
         }
