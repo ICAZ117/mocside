@@ -344,12 +344,6 @@ export default {
         let lb = b.start_date.split("-");
         let fa = Date.UTC(la[0], la[1]-1, la[2], 0, 0, 0, 0);
         let fb = Date.UTC(lb[0], lb[1]-1, lb[2], 0, 0, 0, 0);
-        console.log(a.name);
-        console.log(fa);
-        console.log(la);
-        console.log(b.name);
-        console.log(fb);
-        console.log(lb);
         if(fa < fb) {
           return -1;
         }
@@ -365,8 +359,8 @@ export default {
         //if a should be first return -1, 0 for tie, -1 if b first
         let la = a.end_date.split("-");
         let lb = b.end_date.split("-");
-        let fa = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
-        let fb = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        let fa = Date.UTC(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        let fb = Date.UTC(lb[0], lb[1]-1, lb[2], 0, 0, 0, 0);
         if(fa < fb) {
           return -1;
         }
