@@ -11,10 +11,11 @@
       <small class="navigation"
         ><span>{{ username }}{{ currentDirectory }}</span></small
       >
+      <br>
       <label class="switch">
         <input
           type="checkbox"
-          @click="filterByDate()"
+          @change="filterByDate()"
           v-model="filter"
         />
         <span class="slider round"></span>
@@ -251,11 +252,12 @@ export default {
     filterByDate() {
       //grabs only the courses that are currently in session
       //empty the courses list just in case
+      this.courses = [];
 
       if (this.filter) {
         //true if the filter is on
         for (let i = 0; i < this.unfilteredCourses.length; i++) {
-          if (withinDate(this.unfilteredCourses[i])) {
+          if (this.withinDate(this.unfilteredCourses[i])) {
             //if within date
             this.courses.push(this.unfilteredCourses[i]);
           }
@@ -271,11 +273,11 @@ export default {
       //return true if the course is still in session
       //false otherwise
       var now = new Date(Date.now());
-      var sd = course.start_date.split("-")[1];
-      var sm = course.start_date.split("-")[2];
+      var sd = course.start_date.split("-")[2];
+      var sm = course.start_date.split("-")[1]-1;
       var sy = course.start_date.split("-")[0];
-      var ed = course.end_date.split("-")[1];
-      var em = course.end_date.split("-")[2];
+      var ed = course.end_date.split("-")[2];
+      var em = course.end_date.split("-")[1]-1;
       var ey = course.end_date.split("-")[0];
 
       var start = new Date(sy, sm, sd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
@@ -297,6 +299,30 @@ export default {
       }
 
     },
+    sort(l = 4) {
+      //get sort method and call it
+      if(l == 0) {
+        //startDate
+        this.sortByStartDate();
+      }
+      else if (l == 1) {
+        //endDate
+        this.sortByEndDate();
+      }
+      else if (l == 2) {
+        //nextDueProblem
+        this.sortByNextProblemDue();
+      }
+      else if(l == 3) {
+        //name
+        this.sortByName();
+      }
+      else {
+        //default
+        //course ID
+        this.sortByID();
+      }
+    },
     sortByStartDate() {
       //sorts the filtered results by start date
     },
@@ -310,7 +336,7 @@ export default {
       //sorts the filtered results by the course name
     },
     sortByID() {
-      //sorts the filtered results by ID of the course....not backend but like 2280 vs. 2290
+      //sorts the filtered results by ID of the course
       //default
     },
     Unmounting() {
