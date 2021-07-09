@@ -21,7 +21,7 @@
         <span class="slider round"></span>
       </label>
       <br/>
-      <select id="sort" v-model="sort">
+      <select id="sort" v-model="sort" @change="sortCourses">
         <option value="0">Sort By: Start</option>
         <option value="1">Sort By: End</option>
         <option value="2">Sort By: Next Problem Due</option>
@@ -308,22 +308,21 @@ export default {
       }
 
     },
-    sortCourses(l = 0) {
-      console.log(this.sort);
+    sortCourses() {
       //get sort method and call it
-      if(l == 0) {
+      if(this.sort == 0) {
         //startDate
         this.sortByStartDate();
       }
-      else if (l == 1) {
+      else if (this.sort == 1) {
         //endDate
         this.sortByEndDate();
       }
-      else if (l == 2) {
+      else if (this.sort == 2) {
         //nextDueProblem
         this.sortByNextProblemDue();
       }
-      else if(l == 3) {
+      else if(this.sort == 3) {
         //name
         this.sortByName();
       }
