@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AssignmentResource;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\Lab;
@@ -403,25 +404,16 @@ class GradebookController extends Controller
     {
         // return book of lab and problem worths
         $validData = $request->validate([
-            'problems' => 'required',
-            'labs' => 'required'
+            'problems' => 'required'
         ]);
         // both members will be an array
-        $tempLabs = array();
-        foreach ($validData['labs'] as $lid) {
-            $temp = Lab::findOrFail($lid);
-            $worth = $temp->worth();
-            $tempLabs[$temp->id] = $worth;
-        }
         $tempProbs = array();
         foreach ($validData['problems'] as $pid) {
             $temp = Assignment::findOrFail($pid);
-            $worth = $temp->worth();
-            $tempProbs[$temp->id] = $worth;
+            $tempProbs[$temp->id] = new AssignmentResource($temp);
         }
         $dump = array(
-            'problems' => $tempProbs,
-            'labs' => $tempLabs
+            'problems' => $tempProbs
         );
         return response()->json(['message' => 'Worth Book created.', 'data' => $dump], 200);
     }

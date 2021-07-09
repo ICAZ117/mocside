@@ -97,13 +97,13 @@ var payload2 = {
 
 
 
-var worth_array = {
-    'labs': {
-        '3': POINTS_WORTH,
-        '4': 1000
-    }, 
+var worth_array = { 
     'problems': {
-        '28': 100,
-        '17': 4,
+        '28': {
+            // object from db
+        },
+        '17': {
+            
+        },
     }
 }
