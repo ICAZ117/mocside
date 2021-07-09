@@ -94,96 +94,32 @@
           <thead class="problemtable">
             <tr>
               <th><i class="fas fa-grin-alt spacer"></i></th>
-              <th>Lab</th>
+              <th>Lab Name</th>
               <th># Problems</th>
               <th>% Complete</th>
               <th>Due Date</th>
               <th>Last Activity</th>
-              <th>Grade</th>
+              <th>Points Earned</th>
+              <th>Points Possible</th>
+              <th>Grade Percentage</th>
             </tr>
           </thead>
           <tbody>
-            <template v-for="(problem, key) in problems" :key="problem.id">
-              <tr class="problem pointer" @click="toggleExpansion(problem.id)">
-                <td v-show="!isExpanded(problem.id)">
+            <!-- Loop over all LABS -->
+            <template v-for="lab in grades.labs" :key="lab.id">
+              <!-- Regular table row -->
+              <tr class="problem pointer" @click="toggleExpansion(lab.id)">
+                <td v-show="!isExpanded(lab.id)">
                   <i class="fas fa-chevron-right"></i>
                 </td>
-                <td v-show="isExpanded(problem.id)">
+                <td v-show="isExpanded(lab.id)">
                   <i class="fas fa-chevron-down"></i>
                 </td>
-                <td>{{ problem.name }}</td>
-                <td>{{ problem.test_cases }}</td>
-                <td v-if="!isProf">{{ problem.percent }}</td>
-                <td>
-                  {{ problem.due_date.split(" ")[0] }}
-                  {{ problem.due_date.split(" ")[1] }}
-                </td>
-                <td v-if="!isProf">{{ problem.activity }}</td>
               </tr>
-              <tr v-show="isExpanded(problem.id)" class="description-data">
-                <td colspan="5" class="description-data">
-                  <div class="problem-description">
-                    <div class="row">
-                      <h4 class="col-11">
-                        <b>{{ problem.name }}</b>
-                      </h4>
-                      <div class="right col-1">
-                        <a
-                          v-if="isProf"
-                          @click="editProblem(problem.id)"
-                          class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-                          ><i class="fas fa-edit"></i
-                        ></a>
-                        <!-- <h5>•••</h5> -->
-                        <a
-                          v-if="isProf"
-                          @click="deleteProblem(problem, key)"
-                          class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-                          ><i class="fas fa-trash-alt"></i
-                        ></a>
-                        <!-- <h5>×</h5> -->
-                      </div>
-                    </div>
-                    <!-- get text from .description object -->
-                    <p>
-                      <!-- {{ problem.description }} -->
-                      <br />
-                      Due Date: {{ problem.due_date.split(" ")[0] }}
-                      <br />
-                      Test Cases: {{ problem.test_cases }}
-                      <br />
-                    </p>
-                    <div style="width: 50% !important">
-                      <div class="row">
-                        <div class="col-9">
-                          <select v-model="lang" id="lang" class="form-select">
-                            <option value="" selected disabled hidden>
-                              Select a language...
-                            </option>
-                            <option value="Java">Java</option>
-                            <option value="Python">Python</option>
-                          </select>
-                        </div>
-                        <div class="col-3 ml-1">
-                          <button
-                            type="launch"
-                            name="launch"
-                            class="launch-workspace btn btn-success"
-                            :disabled="!lang.length"
-                            @click="goToProblem(problem.id)"
-                          >
-                            Launch in {{ lang }}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+
+              <!-- Dropdown table row -->
+              <tr v-show="isExpanded(lab.id)" class="description-data"></tr>
             </template>
-            <tr v-if="isProf" class="lab pointer" @click="addProblem">
-              <td colspan="5">Add Problem</td>
-            </tr>
           </tbody>
         </table>
       </tab-panel>
@@ -238,6 +174,10 @@ export default defineComponent({
       progress: [],
       username: "",
       rightClickID: "",
+      student: {},
+      grades: {},
+      pointValues: {},
+      expandedProblem: null,
     };
   },
   setup() {
@@ -256,6 +196,85 @@ export default defineComponent({
     };
   },
   methods: {
+    isExpanded(key) {
+      // return this.expandedProblem.indexOf(key) !== -1;
+      return this.expandedProblem == key;
+    },
+    toggleExpansion(key) {
+      // Close
+      if (this.isExpanded(key)) {
+        // this.expandedProblem.splice(this.expandedProblem.indexOf(key), 1);
+        this.lang = "";
+        this.expandedProblem = null;
+      }
+      // Open
+      else {
+        // this.expandedProblem.push(key);
+        this.expandedProblem = key;
+      }
+    },
+    async getStudentObject() {
+      const res = await API.apiClient.get(`/students/${this.fscID}`);
+      this.student = res.data;
+      console.log(res.data);
+    },
+    async getGrades() {
+      // Initiallize local student gradebook
+      var grades = {
+        grade: 0,
+        labs: [],
+      };
+
+      var labIDs = [],
+        problemIDs = [];
+
+      // Get total grade for course
+      grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
+
+      // Get all labs the student is in
+      var studentLabs = JSON.parse(this.student.gradebook_labs);
+
+      // Loop over all of the labs in the current course
+      for (let i = 0; i < this.labs.length; i++) {
+        // Get all of the problems for current lab
+        const problemsInLab = await API.apiClient.get(`/gradebook/${this.labs[i].id}`);
+        problemsInLab = problemsInLab.data.data;
+
+        // Log labID for later usage
+        labIDs.push(this.labs[i].id);
+
+        // Initialize problems list
+        var problems = [];
+
+        // Loop over all problems within current lab
+        for (let j = 0; j < problemsInLab.problems.length; j++) {
+          // Fill problems list with objects containing problemID's and grades
+          problems.push({
+            problemID: problemsInLab.problems[j],
+            grade: problemsInLab.grades[problemsInLab.problems[j]],
+          });
+
+          // Log problemID for later usage
+          problemIDs.push(problemsInLab.problems[j]);
+        }
+
+        // Add the current lab to the local student gradebook
+        grades.labs.push({
+          grade: studentLabs.grades[this.labs[i].id],
+          labID: this.labs[i].id,
+          problems: problems,
+        });
+      }
+
+      var payload = {
+        problems: problemIDs,
+        labs: labIDs
+      };
+
+      const res = await API.apiClient.get(`/gradebook/worth/`, payload);
+
+      this.pointValues = res.data.data;
+    },
     showMenu(course_id) {
       if (this.isProf) {
         this.rightClickID = String(course_id);
