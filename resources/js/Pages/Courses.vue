@@ -276,10 +276,10 @@ export default {
       //false otherwise
       var now = new Date(Date.now());
       var sd = course.start_date.split("-")[1];
-      var sm = course.start_date.split("-")[2];
+      var sm = course.start_date.split("-")[2]-1;
       var sy = course.start_date.split("-")[0];
       var ed = course.end_date.split("-")[1];
-      var em = course.end_date.split("-")[2];
+      var em = course.end_date.split("-")[2]-1;
       var ey = course.end_date.split("-")[0];
 
       var start = new Date(sy, sm, sd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
