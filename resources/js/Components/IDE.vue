@@ -289,7 +289,7 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
-      this.canSubmit = !this.pastDue();
+      this.canSubmit =  !(await this.pastDue());
       this.showModal = true;
       this.tcGrades = [];
 
@@ -506,7 +506,7 @@ export default {
       //starts next case
     },
     async submitForGrade() {
-      if (!this.pastDue()) {
+      if (!(await this.pastDue())) {
         var gradebook = {};
 
         for (let i = 0; i < this.tcGrades.length; i++) {
@@ -532,6 +532,9 @@ export default {
         console.log(res2);
         // router push to labs, we are done here
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
+      }
+      else {
+        console.log("Too late");
       }
     },
     async pastDue() {
