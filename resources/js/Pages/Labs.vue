@@ -124,7 +124,7 @@
               </tr>
 
               <!-- Dropdown table row -->
-              <tr v-show="isExpanded(lab.id)" class="description-data"></tr>
+              <!-- <tr v-show="isExpanded(lab.id)" class="description-data"></tr> -->
             </template>
           </tbody>
         </table>
