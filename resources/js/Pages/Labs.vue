@@ -398,7 +398,7 @@ export default defineComponent({
     },
     async removeLab(lab, key) {
       var flag = confirm(
-        "Are you Sure you want to remove " + labName + " from this Course?"
+        "Are you Sure you want to remove " + lab.name + " from this Course?"
       );
       if (flag) {
         //remove from lab the current course
