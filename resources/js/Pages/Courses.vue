@@ -285,6 +285,7 @@ export default {
       var start = new Date(sy, sm, sd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
       var end = new Date(ey, em, ed, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
 
+      console.log(course);
       console.log("Start");
       console.log(start);
       console.log("Now");
