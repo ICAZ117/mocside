@@ -116,6 +116,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/labs/gradebook/{id}', [GradebookController::class, 'updateLab']);
     Route::put('/problems/gradebook/{id}', [GradebookController::class, 'updateAssignment']);
     Route::post('/gradebook/submit/{id}', [GradebookController::class, 'submitAssignment']);
+    Route::get('/gradebook/{id}', [GradebookController::class, 'smallBook']);
 
     Route::get('/invite/course/{id}', [InviteController::class, 'index']);
     Route::get('/invite/{key}', [InviteController::class, 'show']);
