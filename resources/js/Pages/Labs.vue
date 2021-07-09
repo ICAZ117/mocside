@@ -118,9 +118,9 @@
                 <td>{{ lab.numProblems }}</td>
                 <td>{{ lab.percentComplete }}</td>
                 <td>{{ lab.dueDate }}</td>
-                <td>{{ lab.grade }}</td>
+                <td>{{ (lab.grade == undefined) ? '--' : lab.grade }}</td>
                 <td>{{ lab.total_points }}</td>
-                <td>{{ parseInt((lab.grade / lab.total_points) * 10000) * 0.01 }}%</td>
+                <td>{{ (lab.total_points == 0 ? 0 : ((lab.grade == undefined) ? 0 : (parseInt((lab.grade / lab.total_points) * 10000) * 0.01))) }}%</td>
               </tr>
 
               <!-- Dropdown table row -->
