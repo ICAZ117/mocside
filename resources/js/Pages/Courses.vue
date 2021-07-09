@@ -338,8 +338,8 @@ export default {
     sortByName() {
       //sorts the filtered results by the course name
       this.unfilteredCourses.sort((a, b) => {
-        fa = a.name.toLowerCase();
-        fb = b.name.toLowercase();
+        let fa = a.name.toLowerCase();
+        let fb = b.name.toLowercase();
         if(fa < fb) {
           return -1;
         }
