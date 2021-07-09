@@ -506,7 +506,7 @@ export default defineComponent({
     },
     sortByDueDate() {
       //sorts the filtered results by start date
-      this.unfilteredCourses.sort((a, b) => {
+      this.unfilteredLabs.sort((a, b) => {
         //if a should be first return -1, 0 for tie, -1 if b first
         let la = a.due_date.split("-");
         let lb = b.due_date.split("-");
@@ -523,7 +523,7 @@ export default defineComponent({
     },
     sortByName() {
       //sorts the filtered results by the course name
-      this.unfilteredCourses.sort((a, b) => {
+      this.unfilteredLabs.sort((a, b) => {
         let fa = a.name.toLowerCase();
         let fb = b.name.toLowerCase();
         if(fa < fb) {
@@ -538,7 +538,7 @@ export default defineComponent({
     sortByID() {
       //sorts the filtered results by ID of the course
       //default
-      this.unfilteredCourses.sort((a, b) => {
+      this.unfilteredLabs.sort((a, b) => {
         return a.id - b.id;
       });
     },
