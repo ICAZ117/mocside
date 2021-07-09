@@ -289,7 +289,7 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
-      this.canSubmit = !this.pastDue();
+      this.canSubmit =  !(await this.pastDue());
       this.showModal = true;
       this.tcGrades = [];
 
