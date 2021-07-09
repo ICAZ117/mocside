@@ -11,6 +11,7 @@
       <small class="navigation"
         ><span>{{ username }}{{ currentDirectory }}</span></small
       >
+      <br>
       <label class="switch">
         <input
           type="checkbox"
@@ -253,6 +254,7 @@ export default {
       //empty the courses list just in case
 
       if (this.filter) {
+        console.log("filter on");
         //true if the filter is on
         for (let i = 0; i < this.unfilteredCourses.length; i++) {
           if (withinDate(this.unfilteredCourses[i])) {
@@ -261,6 +263,7 @@ export default {
           }
         }
       } else {
+        console.log("filter off");
         //filter is not on...therefore grab all courses
         for (let i = 0; i < this.unfilteredCourses.length; i++) {
           this.courses.push(this.unfilteredCourses[i]);
