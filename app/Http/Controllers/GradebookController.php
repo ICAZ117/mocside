@@ -387,7 +387,7 @@ class GradebookController extends Controller
         );
         foreach ($problems as $problem) { 
             array_push($temp['problems'], $problem->id);
-            if ($student_problem_book['grades'][$problem->id]) {
+            if (in_array($problem->id, $student_problem_book['problems'])) {
                 $temp['grades'][$problem->id] = $student_problem_book['grades'][$problem->id];
             } else {
                 $temp['grades'][$problem->id] = 0;
