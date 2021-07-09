@@ -26,6 +26,13 @@
         >↩ Return to Courses</span
       >
     </small>
+    <br />
+    <label for="sort">Sort By: </label>
+    <select id="sort" v-model="sort" @change="sortLabs">
+      <option value="0">Due Date</option>
+      <option value="1">Name</option>
+      <option value="2">Unsorted</option>
+    </select>
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Labs'">
@@ -172,6 +179,7 @@ export default defineComponent({
   data() {
     return {
       labs: [],
+      unfilteredLabs: [],
       childisOpen: false,
       labID: null,
       labName: null,
@@ -184,6 +192,7 @@ export default defineComponent({
       grades: {},
       pointValues: {},
       expandedProblem: null,
+      sort: "0",
     };
   },
   setup() {
@@ -322,23 +331,16 @@ export default defineComponent({
     },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
-      this.labs = rawLabs.data.data;
+      // this.labs = rawLabs.data.data;
+      this.unfilteredLabs = rawLabs.data.data;
       const prog = await this.getStudent();
       if (!this.isProf) {
-        for (let i = 0; i < this.labs.length; i++) {
-          this.labs[i]["percent"] = await this.getPercent(this.labs[i]);
-          this.labs[i]["activity"] = await this.getActivity(this.labs[i]);
+        for (let i = 0; i < this.unfilteredLabs.length; i++) {
+          this.unfilteredLabs[i]["percent"] = await this.getPercent(this.unfilteredLabs[i]);
+          this.unfilteredLabs[i]["activity"] = await this.getActivity(this.unfilteredLabs[i]);
         }
       }
-    },
-    async sortLabs() {
-      const sortedLabs = this.labs.sort(function (a, b) {
-        // Turn your strings into dates, and then subtract them
-        // to get a value that is either negative, positive, or zero.
-        return new Date(a.due_date) - new Date(b.due_date);
-      });
-      // redundant, .sort() is in place, but also returns.
-      return sortedLabs;
+      this.sortLabs();
     },
     Unmounting() {
       this.childisOpen = false;
@@ -447,6 +449,97 @@ export default defineComponent({
         }
       }
     },
+    filterByPublish() {
+      //grabs only the courses that are currently in session
+      //empty the courses list just in case
+      this.labs = [];
+
+      if (!this.isProf) {
+        //is student don't show unpublished
+        for (let i = 0; i < this.unfilteredLabs.length; i++) {
+          if (this.published(this.unfilteredLabs[i])) {
+            //if within date
+            this.labs.push(this.unfilteredLabs[i]);
+          }
+        }
+      } else {
+        //grab all labs including unpublished
+        for (let i = 0; i < this.unfilteredLabs.length; i++) {
+          this.labs.push(this.unfilteredLabs[i]);
+        }
+      }
+    },
+    published(lab) {
+      //return true if the lab is published
+      //false otherwise
+      var now = new Date(Date.now());
+      var p = course.publish_date.split("-")[2];
+      var pm = course.publish_date.split("-")[1]-1;
+      var py = course.publish_date.split("-")[0];
+
+      var published = new Date(py, pm, pd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+      if(published < now) {
+        return true;
+      }
+      return false;
+    },
+    sortLabs() {
+      //get sort method and call it
+      if(this.sort == 0) {
+        //dueDate
+        //default
+        this.sortByDueDate();
+      }
+      else if(this.sort == 1) {
+        //name
+        this.sortByName();
+      }
+      else {
+        //course ID
+        this.sortByID();
+      }
+
+      //call the filter after sorting
+      this.filterByPublish();
+    },
+    sortByDueDate() {
+      //sorts the filtered results by start date
+      this.unfilteredCourses.sort((a, b) => {
+        //if a should be first return -1, 0 for tie, -1 if b first
+        let la = a.due_date.split("-");
+        let lb = b.due_date.split("-");
+        let fa = Date.UTC(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        let fb = Date.UTC(lb[0], lb[1]-1, lb[2], 0, 0, 0, 0);
+        if(fa < fb) {
+          return -1;
+        }
+        if(fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
+    },
+    sortByName() {
+      //sorts the filtered results by the course name
+      this.unfilteredCourses.sort((a, b) => {
+        let fa = a.name.toLowerCase();
+        let fb = b.name.toLowerCase();
+        if(fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
+    },
+    sortByID() {
+      //sorts the filtered results by ID of the course
+      //default
+      this.unfilteredCourses.sort((a, b) => {
+        return a.id - b.id;
+      });
+    },
   },
   computed: {
     isProf: function () {
@@ -467,8 +560,6 @@ export default defineComponent({
   async beforeMount() {
     this.childisOpen = false;
     await this.getLabs();
-    const sorted = await this.sortLabs();
-    console.log(sorted);
   },
   beforeUnmount() {
     this.$emit("unmounting");
