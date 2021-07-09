@@ -285,6 +285,13 @@ export default {
       var start = new Date(sy, sm, sd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
       var end = new Date(ey, em, ed, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
 
+      console.log("Start");
+      console.log(start);
+      console.log("Now");
+      console.log(now);
+      console.log("End");
+      console.log(end);
+
       if(end >= now) {
         //before end of course, day of the end
         if(start <= now) {
