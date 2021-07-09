@@ -356,6 +356,7 @@ export default defineComponent({
           );
         }
       }
+      console.log("get labs");
       this.sortLabs();
     },
     Unmounting() {
@@ -466,11 +467,13 @@ export default defineComponent({
       }
     },
     filterByPublish() {
+      console.log("filter by publish");
       //grabs only the courses that are currently in session
       //empty the courses list just in case
       this.labs = [];
 
       if (!this.isProf) {
+        console.log("student");
         //is student don't show unpublished
         for (let i = 0; i < this.unfilteredLabs.length; i++) {
           if (this.published(this.unfilteredLabs[i])) {
@@ -479,6 +482,7 @@ export default defineComponent({
           }
         }
       } else {
+        console.log("professor");
         //grab all labs including unpublished
         for (let i = 0; i < this.unfilteredLabs.length; i++) {
           this.labs.push(this.unfilteredLabs[i]);
@@ -489,9 +493,9 @@ export default defineComponent({
       //return true if the lab is published
       //false otherwise
       var now = new Date(Date.now());
-      var p = course.publish_date.split("-")[2];
-      var pm = course.publish_date.split("-")[1] - 1;
-      var py = course.publish_date.split("-")[0];
+      var pd = lab.publish_date.split("-")[2];
+      var pm = lab.publish_date.split("-")[1]-1;
+      var py = lab.publish_date.split("-")[0];
 
       var published = new Date(
         py,
@@ -520,7 +524,7 @@ export default defineComponent({
         //course ID
         this.sortByID();
       }
-
+      console.log(this.unfilteredLabs);
       //call the filter after sorting
       this.filterByPublish();
     },
@@ -580,7 +584,7 @@ export default defineComponent({
       await this.getStudentObject();
       await this.getGrades();
     }
-    
+
   },
   async beforeMount() {
     this.childisOpen = false;
