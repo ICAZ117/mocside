@@ -408,13 +408,13 @@ class GradebookController extends Controller
         ]);
         // both members will be an array
         $tempLabs = array();
-        foreach ($validData['labs'] as $lid) {
+        foreach (json_decode($validData['labs'], true) as $lid) {
             $temp = Lab::findOrFail($lid);
             $worth = $temp->worth();
             $tempLabs[$temp->id] = $worth;
         }
         $tempProbs = array();
-        foreach ($validData['problems'] as $pid) {
+        foreach (json_decode($validData['problems'], true) as $pid) {
             $temp = Assignment::findOrFail($pid);
             $worth = $temp->worth();
             $tempProbs[$temp->id] = $worth;
