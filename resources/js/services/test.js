@@ -93,3 +93,17 @@ var payload2 = {
 // For assignments, this number is test_cases as returned in the resource.
 // For courses, this number is the num_labs as returned in the resource.
 // For labs, this is num_problems.
+
+
+
+
+var worth_array = {
+    'labs': {
+        '3': POINTS_WORTH,
+        '4': 1000
+    }, 
+    'problems': {
+        '28': 100,
+        '17': 4,
+    }
+}
