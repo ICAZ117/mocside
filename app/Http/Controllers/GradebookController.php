@@ -379,7 +379,7 @@ class GradebookController extends Controller
             return response()->json(['message' => 'No student found.'], 418);
         }
         $student_problem_book = json_decode($student->gradebook_problems, true);
-        $lab = Lab::find($id);
+        $lab = Lab::findOrFail($id);
         $problems = $lab->assignments;
         $temp = array(
             'problems' => [],
