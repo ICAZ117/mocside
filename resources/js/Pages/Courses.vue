@@ -345,8 +345,10 @@ export default {
         let fb = Date(lb[0], lb[1]-1, lb[2], 0, 0, 0, 0);
         console.log(a.name);
         console.log(fa);
+        console.log(la);
         console.log(b.name);
         console.log(fb);
+        console.log(lb);
         if(fa < fb) {
           return -1;
         }
