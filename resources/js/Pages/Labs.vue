@@ -91,7 +91,7 @@
       </tab-panel>
       <tab-panel :val="'Grades'">
         <table class="table problemtable">
-          <thead class="problemtable">
+          <thead class="problemtable" style="border: none !important">
             <tr>
               <th><i class="fas fa-grin-alt spacer"></i></th>
               <th>Lab Name</th>
@@ -289,7 +289,7 @@ export default defineComponent({
       };
 
       // Make API call and send payload to get said values
-      const res = await API.apiClient.get(`/gradebook/worth/`, payload);
+      const res = await API.apiClient.post(`/gradebook/worth/`, payload);
 
       // Save total point values into data object
       this.pointValues = res.data.data;
