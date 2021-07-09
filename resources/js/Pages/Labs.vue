@@ -631,6 +631,8 @@ export default defineComponent({
     if (!this.isProf) {
       await this.getStudentObject();
       await this.getGrades();
+      console.log(this.problems);
+      console.log(this.problems[28]);
     }
   },
   async beforeMount() {
