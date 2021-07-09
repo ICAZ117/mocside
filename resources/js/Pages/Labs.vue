@@ -278,13 +278,19 @@ export default defineComponent({
         });
       }
 
+      // Set data value to local gradebook
+      this.grades = grades;
+
+      // Create payload to get total lab/problem values
       var payload = {
         problems: problemIDs,
         labs: labIDs
       };
 
+      // Make API call and send payload to get said values
       const res = await API.apiClient.get(`/gradebook/worth/`, payload);
 
+      // Save total point values into data object
       this.pointValues = res.data.data;
     },
     showMenu(course_id) {
@@ -454,6 +460,8 @@ export default defineComponent({
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
     this.routeToChild();
+    await this.getStudentObject();
+    await this.getGrades();
   },
   async beforeMount() {
     this.childisOpen = false;
