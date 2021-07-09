@@ -11,7 +11,7 @@
       <small class="navigation"
         ><span>{{ username }}{{ currentDirectory }}</span></small
       >
-      <br>
+      <br/>
       <label class="switch">
         <input
           type="checkbox"
@@ -20,6 +20,14 @@
         />
         <span class="slider round"></span>
       </label>
+      <br/>
+      <select id="sort" v-model="sort">
+        <option value="0">Sort By: Start</option>
+        <option value="1">Sort By: End</option>
+        <option value="2">Sort By: Next Problem Due</option>
+        <option value="3">Sort By: Name</option>
+        <option value="4">Unsorted</option>
+      </select>
       <br />
 
       <div class="coursecontainer">
@@ -130,6 +138,7 @@ export default {
       rightClickID: "",
       courseName: "",
       filter: true,
+      sort: "4",
     };
   },
   setup() {
@@ -299,7 +308,8 @@ export default {
       }
 
     },
-    sortCourses(l = 3) {
+    sortCourses(l = 0) {
+      console.log(this.sort);
       //get sort method and call it
       if(l == 0) {
         //startDate
@@ -328,12 +338,41 @@ export default {
     },
     sortByStartDate() {
       //sorts the filtered results by start date
+      this.unfilteredCourses.sort((a, b) => {
+        //if a should be first return -1, 0 for tie, -1 if b first
+        let la = a.start_date.split("-");
+        let lb = b.start_date.split("-");
+        let fa = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        let fb = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        if(fa < fb) {
+          return -1;
+        }
+        if(fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
     },
     sortByEndDate() {
       //sorts the filtered results by end date
+      this.unfilteredCourses.sort((a, b) => {
+        //if a should be first return -1, 0 for tie, -1 if b first
+        let la = a.end_date.split("-");
+        let lb = b.end_date.split("-");
+        let fa = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        let fb = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        if(fa < fb) {
+          return -1;
+        }
+        if(fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
     },
     sortByNextProblemDue() {
       //sorts the filtered results by showing the course with the earliest due problem being first
+      //this one is gonna be hard to add
     },
     sortByName() {
       //sorts the filtered results by the course name
@@ -347,7 +386,7 @@ export default {
           return 1;
         }
         return 0;
-      })
+      });
     },
     sortByID() {
       //sorts the filtered results by ID of the course
