@@ -416,8 +416,9 @@ class GradebookController extends Controller
         $progress_book = json_decode($progress->assignments, true);
         $tempProbs = array();
         foreach ($validData['problems'] as $pid) {
+            $passed = 0;
             foreach ($progress_book as $prog) {
-                if ($prog->id == $pid) {
+                if ($prog['assignment_id'] == $pid) {
                     $passed = $prog['cases_passed'];
                 }
             }
