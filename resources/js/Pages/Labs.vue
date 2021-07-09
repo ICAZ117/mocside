@@ -421,6 +421,8 @@ export default defineComponent({
       };
       const lab = await API.apiClient.post(`/labs/`, payload);
       this.labs.push(lab.data.data);
+      this.unfilteredLabs.push(lab.data.data);
+      this.sortLabs();
       console.log(lab.data.data);
       this.labID = lab.data.data.id;
       this.labName = lab.data.data.name;
@@ -436,7 +438,7 @@ export default defineComponent({
     },
     async removeLab(lab, key) {
       var flag = confirm(
-        "Are you Sure you want to remove " + labName + " from this Course?"
+        "Are you Sure you want to remove " + lab.name + " from this Course?"
       );
       if (flag) {
         //remove from lab the current course
@@ -444,6 +446,9 @@ export default defineComponent({
 
         //filter from labs
         this.labs = this.labs.filter((l, i) => i != key);
+
+        //filter from unfiltered labs
+        this.unfilteredLabs = this.unfilteredLabs.filter(l => l.id != lab.id);
       }
     },
     async getStudent() {

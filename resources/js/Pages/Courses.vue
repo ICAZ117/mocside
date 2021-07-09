@@ -186,6 +186,8 @@ export default {
       this.addProfessor();
       this.childIsOpen = true;
       this.courses.push(course.data);
+      this.unfilteredCourses.push(course.data);
+      this.sortCourses();
       this.$router.push({
         name: "EditCourse",
         params: { course_id: this.courseID },
@@ -230,6 +232,8 @@ export default {
         delete this.courses.course;
         this.courseID = null;
         // this.getCourses();
+        //delete from unfiltered
+        this.unfilteredCourses = this.unfilteredCourses.filter(c => c.id != id);
 
         //filter the courses list
         this.courses = this.courses.filter((c, i) => i != key);

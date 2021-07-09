@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AssignmentResource;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\Lab;
+use App\Models\Progress;
 use App\Models\Student;
 
 use Illuminate\Support\Facades\Auth;
@@ -403,25 +405,35 @@ class GradebookController extends Controller
     {
         // return book of lab and problem worths
         $validData = $request->validate([
-            'problems' => 'required',
-            'labs' => 'required'
+            'problems' => 'required'
         ]);
         // both members will be an array
-        $tempLabs = array();
-        foreach ($validData['labs'] as $lid) {
-            $temp = Lab::findOrFail($lid);
-            $worth = $temp->worth();
-            $tempLabs[$temp->id] = $worth;
+        $user = Auth::user();
+        $progress = Progress::where('fsc_id', '=', $user->fsc_id)->first();
+        if (!$progress) {
+            return response()->json(['message' => 'No progress found.'], 403);
         }
+        $progress_book = json_decode($progress->assignments, true);
         $tempProbs = array();
         foreach ($validData['problems'] as $pid) {
+            foreach ($progress_book as $prog) {
+                if ($prog->id == $pid) {
+                    $passed = $prog['cases_passed'];
+                }
+            }
             $temp = Assignment::findOrFail($pid);
-            $worth = $temp->worth();
-            $tempProbs[$temp->id] = $worth;
+            $tempProbs[$temp->id] = array(
+                'id' => $temp->id,
+                'name' => $temp->name,
+                'due_date' => $temp->due_date,
+                'due_date_utc' => $temp->due_date_utc,
+                'passed' => $passed,
+                'test_cases' => $temp->test_cases->count(),
+                'worth' => $temp->worth()
+            );
         }
         $dump = array(
-            'problems' => $tempProbs,
-            'labs' => $tempLabs
+            'problems' => $tempProbs
         );
         return response()->json(['message' => 'Worth Book created.', 'data' => $dump], 200);
     }
