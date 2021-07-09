@@ -98,7 +98,6 @@
               <th># Problems</th>
               <th>% Complete</th>
               <th>Due Date</th>
-              <th>Last Activity</th>
               <th>Points Earned</th>
               <th>Points Possible</th>
               <th>Grade Percentage</th>
@@ -115,6 +114,13 @@
                 <td v-show="isExpanded(lab.id)">
                   <i class="fas fa-chevron-down"></i>
                 </td>
+                <td>{{ lab.name }}</td>
+                <td>{{ lab.numProblems }}</td>
+                <td>{{ lab.percentComplete }}</td>
+                <td>{{ lab.dueDate }}</td>
+                <td>{{ lab.grade }}</td>
+                <td>{{ lab.totalPoints }}</td>
+                <td>{{ (parseInt((lab.grade / lab.totalPoints) * 10000) * 0.01) }}%</td>
               </tr>
 
               <!-- Dropdown table row -->
@@ -225,6 +231,7 @@ export default defineComponent({
         labs: [],
       };
 
+      // Create logging lists for payload later in method
       var labIDs = [],
         problemIDs = [];
 
@@ -262,6 +269,11 @@ export default defineComponent({
         grades.labs.push({
           grade: studentLabs.grades[this.labs[i].id],
           labID: this.labs[i].id,
+          name: this.labs[i].name,
+          numProblems: this.labs[i].num_problems,
+          percentComplete: this.labs[i].percent,
+          dueDate: this.labs[i].due_date,
+          total_points: this.labs[i].total_points,
           problems: problems,
         });
       }
