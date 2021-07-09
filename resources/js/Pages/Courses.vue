@@ -299,7 +299,7 @@ export default {
       }
 
     },
-    sortCourses(l = 4) {
+    sortCourses(l = 3) {
       //get sort method and call it
       if(l == 0) {
         //startDate
@@ -337,6 +337,17 @@ export default {
     },
     sortByName() {
       //sorts the filtered results by the course name
+      this.unfilteredCourses.sort((a, b) => {
+        fa = a.name.toLowerCase();
+        fb = b.name.toLowercase();
+        if(fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      })
     },
     sortByID() {
       //sorts the filtered results by ID of the course
