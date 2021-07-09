@@ -239,17 +239,19 @@ export default {
     },
     async getCourses() {
       this.courses = [];
-      var i;
-      for (i = 0; i < this.enrolledCourses.length; i++) {
+      this.unfilteredCourses = [];
+      for (let i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.unfilteredCourses.push(course.data.data);
         // this.courses.push(course.data.data);
-        this.filterByDate();
       }
+      this.filterByDate();
     },
     filterByDate() {
       //grabs only the courses that are currently in session
+      //empty the courses list just in case
+
       if (this.filter) {
         //true if the filter is on
         for (let i = 0; i < this.unfilteredCourses.length; i++) {
