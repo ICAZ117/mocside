@@ -343,7 +343,9 @@ export default {
         let lb = b.start_date.split("-");
         let fa = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
         let fb = Date(lb[0], lb[1]-1, lb[2], 0, 0, 0, 0);
+        console.log(a.name);
         console.log(fa);
+        console.log(b.name);
         console.log(fb);
         if(fa < fb) {
           return -1;
