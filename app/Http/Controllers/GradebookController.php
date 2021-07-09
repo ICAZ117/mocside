@@ -398,4 +398,31 @@ class GradebookController extends Controller
             'data' => $temp
         ]);
     }
+
+    public function worthBook(Request $request)
+    {
+        // return book of lab and problem worths
+        $validData = $request->validate([
+            'problems' => 'required',
+            'labs' => 'required'
+        ]);
+        // both members will be an array
+        $tempLabs = array();
+        foreach (json_decode($validData['labs'], true) as $lid) {
+            $temp = Lab::findOrFail($lid);
+            $worth = $temp->worth();
+            $tempLabs[$temp->id] = $worth;
+        }
+        $tempProbs = array();
+        foreach (json_decode($validData['problems'], true) as $pid) {
+            $temp = Assignment::findOrFail($pid);
+            $worth = $temp->worth();
+            $tempProbs[$temp->id] = $worth;
+        }
+        $dump = array(
+            'problems' => $tempProbs,
+            'labs' => $tempLabs
+        );
+        return response()->json(['message' => 'Worth Book created.', 'data' => $dump], 200);
+    }
 }

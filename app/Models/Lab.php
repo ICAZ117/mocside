@@ -29,4 +29,15 @@ class Lab extends Model
         'publish_date',
         'gradebook',
     ];
+
+    public function worth()
+    {
+        $assignments = $this->assignments;
+        $total = 0;
+        for ($i = 0; $i < count($assignments); $i++) {
+          $points = $assignments[$i]->test_cases->count();
+          $total = $total + $points;
+        }
+        return $total;
+    }
 }
