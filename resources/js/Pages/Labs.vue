@@ -633,7 +633,9 @@ export default defineComponent({
       await this.getGrades();
       console.log("\n\n\n\n\n\n\n\nBEFORE");
       console.log(this.problems);
-      console.log(this.problems[28]);
+      console.log(this.problems["28"]);
+      var x = 28;
+      console.log(this.problems[x]);
       console.log("AFTER\n\n\n\n\n\n\n\n\n");
     }
   },
