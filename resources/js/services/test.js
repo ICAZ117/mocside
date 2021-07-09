@@ -63,7 +63,7 @@ var gradebook_for_students_for_courses = {
 }
 
 var gradebook_for_students_for_labs = {
-    courses: [1, 2, 3],
+    labs: [1, 2, 3],
     grades: {
         '1': "3",
         '2': "9",
