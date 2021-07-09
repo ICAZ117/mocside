@@ -6,6 +6,7 @@ use App\Http\Resources\AssignmentResource;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\Lab;
+use App\Models\Progress;
 use App\Models\Student;
 
 use Illuminate\Support\Facades\Auth;
@@ -407,10 +408,29 @@ class GradebookController extends Controller
             'problems' => 'required'
         ]);
         // both members will be an array
+        $user = Auth::user();
+        $progress = Progress::where('fsc_id', '=', $user->fsc_id)->first();
+        if (!$progress) {
+            return response()->json(['message' => 'No progress found.'], 403);
+        }
+        $progress_book = json_decode($progress->assignments, true);
         $tempProbs = array();
         foreach ($validData['problems'] as $pid) {
+            foreach ($progress_book as $prog) {
+                if ($prog->id == $pid) {
+                    $passed = $prog['cases_passed'];
+                }
+            }
             $temp = Assignment::findOrFail($pid);
-            $tempProbs[$temp->id] = new AssignmentResource($temp);
+            $tempProbs[$temp->id] = array(
+                'id' => $temp->id,
+                'name' => $temp->name,
+                'due_date' => $temp->due_date,
+                'due_date_utc' => $temp->due_date_utc,
+                'passed' => $passed,
+                'test_cases' => $temp->test_cases->count(),
+                'worth' => $temp->worth()
+            );
         }
         $dump = array(
             'problems' => $tempProbs
