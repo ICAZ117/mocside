@@ -35,7 +35,11 @@ class Lab extends Model
         $assignments = $this->assignments;
         $total = 0;
         for ($i = 0; $i < count($assignments); $i++) {
-          $points = $assignments[$i]->test_cases->count();
+          $cases = $assignments[$i]->test_cases;
+          $points = 0;
+          foreach ($cases as $tc) {
+              $points = $points + $tc->points;
+          }
           $total = $total + $points;
         }
         return $total;

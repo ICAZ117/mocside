@@ -299,7 +299,7 @@ export default {
       }
 
     },
-    sortCourses(l = 4) {
+    sortCourses(l = 3) {
       //get sort method and call it
       if(l == 0) {
         //startDate
@@ -337,6 +337,17 @@ export default {
     },
     sortByName() {
       //sorts the filtered results by the course name
+      this.unfilteredCourses.sort((a, b) => {
+        let fa = a.name.toLowerCase();
+        let fb = b.name.toLowerCase();
+        if(fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      })
     },
     sortByID() {
       //sorts the filtered results by ID of the course
@@ -417,9 +428,9 @@ export default {
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
-    var temp = this.enrolledCourses[0];
-    this.enrolledCourses[0] = this.enrolledCourses[1];
-    this.enrolledCourses[1] = temp;
+    // var temp = this.enrolledCourses[0];
+    // this.enrolledCourses[0] = this.enrolledCourses[1];
+    // this.enrolledCourses[1] = temp;
     this.getCourses();
     this.routeToChild();
   },
