@@ -479,7 +479,7 @@ export default defineComponent({
       //return true if the lab is published
       //false otherwise
       var now = new Date(Date.now());
-      var p = lab.publish_date.split("-")[2];
+      var pd = lab.publish_date.split("-")[2];
       var pm = lab.publish_date.split("-")[1]-1;
       var py = lab.publish_date.split("-")[0];
 
