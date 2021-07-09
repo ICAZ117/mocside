@@ -247,7 +247,7 @@ export default {
         this.unfilteredCourses.push(course.data.data);
         // this.courses.push(course.data.data);
       }
-      this.filterByDate();
+      this.sortCourses();
     },
     filterByDate() {
       //grabs only the courses that are currently in session
@@ -299,7 +299,7 @@ export default {
       }
 
     },
-    sort(l = 4) {
+    sortCourses(l = 4) {
       //get sort method and call it
       if(l == 0) {
         //startDate
@@ -322,6 +322,9 @@ export default {
         //course ID
         this.sortByID();
       }
+
+      //call the filter after sorting
+      this.filterByDate();
     },
     sortByStartDate() {
       //sorts the filtered results by start date
@@ -338,6 +341,9 @@ export default {
     sortByID() {
       //sorts the filtered results by ID of the course
       //default
+      this.unfilteredCourses.sort((a, b) => {
+        return a.id - b.id;
+      });
     },
     Unmounting() {
       this.childIsOpen = false;
