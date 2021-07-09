@@ -21,11 +21,12 @@
         <span class="slider round"></span>
       </label>
       <br/>
+      <label for="sort">Sort By: </label>
       <select id="sort" v-model="sort" @change="sortCourses">
-        <option value="0">Sort By: Start</option>
-        <option value="1">Sort By: End</option>
-        <option value="2">Sort By: Next Problem Due</option>
-        <option value="3">Sort By: Name</option>
+        <option value="0">Start</option>
+        <option value="1">End</option>
+        <option value="2">Next Problem Due</option>
+        <option value="3">Name</option>
         <option value="4">Unsorted</option>
       </select>
       <br />
