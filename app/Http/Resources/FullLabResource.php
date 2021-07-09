@@ -22,6 +22,7 @@ class FullLabResource extends JsonResource
           'due_date' => $this->due_date,
           'publish_date' => $this->publish_date,
           'gradebook' => $this->gradebook,
+          'worth' => $this->worth
         ];
     }
 }
