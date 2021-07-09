@@ -29,6 +29,7 @@ class CourseResource extends JsonResource
             'owner_id' => $this->owner_id,
             'num_labs' => $this->labs->count(),
             'gradebook' => $this->gradebook,
+            'worth' => $this->worth()
         ];
     }
 }
