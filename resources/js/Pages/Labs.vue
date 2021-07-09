@@ -98,7 +98,6 @@
               <th># Problems</th>
               <th>% Complete</th>
               <th>Due Date</th>
-              <th>Last Activity</th>
               <th>Points Earned</th>
               <th>Points Possible</th>
               <th>Grade Percentage</th>
@@ -115,6 +114,13 @@
                 <td v-show="isExpanded(lab.id)">
                   <i class="fas fa-chevron-down"></i>
                 </td>
+                <td>{{ lab.name }}</td>
+                <td>{{ lab.numProblems }}</td>
+                <td>{{ lab.percentComplete }}</td>
+                <td>{{ lab.dueDate }}</td>
+                <td>{{ lab.grade }}</td>
+                <td>{{ lab.totalPoints }}</td>
+                <td>{{ parseInt((lab.grade / lab.totalPoints) * 10000) * 0.01 }}%</td>
               </tr>
 
               <!-- Dropdown table row -->
@@ -214,7 +220,8 @@ export default defineComponent({
       }
     },
     async getStudentObject() {
-      const res = await API.apiClient.get(`/students/${this.fscID}`);
+      console.log(this.authUser);
+      const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
       this.student = res.data;
       console.log(res.data);
     },
@@ -225,6 +232,7 @@ export default defineComponent({
         labs: [],
       };
 
+      // Create logging lists for payload later in method
       var labIDs = [],
         problemIDs = [];
 
@@ -262,17 +270,28 @@ export default defineComponent({
         grades.labs.push({
           grade: studentLabs.grades[this.labs[i].id],
           labID: this.labs[i].id,
+          name: this.labs[i].name,
+          numProblems: this.labs[i].num_problems,
+          percentComplete: this.labs[i].percent,
+          dueDate: this.labs[i].due_date,
+          total_points: this.labs[i].total_points,
           problems: problems,
         });
       }
 
+      // Set data value to local gradebook
+      this.grades = grades;
+
+      // Create payload to get total lab/problem values
       var payload = {
         problems: problemIDs,
-        labs: labIDs
+        labs: labIDs,
       };
 
+      // Make API call and send payload to get said values
       const res = await API.apiClient.get(`/gradebook/worth/`, payload);
 
+      // Save total point values into data object
       this.pointValues = res.data.data;
     },
     showMenu(course_id) {
@@ -442,6 +461,8 @@ export default defineComponent({
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
     this.routeToChild();
+    await this.getStudentObject();
+    await this.getGrades();
   },
   async beforeMount() {
     this.childisOpen = false;

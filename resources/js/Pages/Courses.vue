@@ -11,7 +11,7 @@
       <small class="navigation"
         ><span>{{ username }}{{ currentDirectory }}</span></small
       >
-      <br>
+      <br/>
       <label class="switch">
         <input
           type="checkbox"
@@ -20,6 +20,14 @@
         />
         <span class="slider round"></span>
       </label>
+      <br/>
+      <select id="sort" v-model="sort" @change="sortCourses">
+        <option value="0">Sort By: Start</option>
+        <option value="1">Sort By: End</option>
+        <option value="2">Sort By: Next Problem Due</option>
+        <option value="3">Sort By: Name</option>
+        <option value="4">Unsorted</option>
+      </select>
       <br />
 
       <div class="coursecontainer">
@@ -130,6 +138,7 @@ export default {
       rightClickID: "",
       courseName: "",
       filter: true,
+      sort: "4",
     };
   },
   setup() {
@@ -247,8 +256,7 @@ export default {
         this.unfilteredCourses.push(course.data.data);
         // this.courses.push(course.data.data);
       }
-      this.filterByDate();
-      // this.sortCourses();
+      this.sortCourses();
     },
     filterByDate() {
       //grabs only the courses that are currently in session
@@ -300,21 +308,21 @@ export default {
       }
 
     },
-    sortCourses(l = 4) {
+    sortCourses() {
       //get sort method and call it
-      if(l == 0) {
+      if(this.sort == 0) {
         //startDate
         this.sortByStartDate();
       }
-      else if (l == 1) {
+      else if (this.sort == 1) {
         //endDate
         this.sortByEndDate();
       }
-      else if (l == 2) {
+      else if (this.sort == 2) {
         //nextDueProblem
         this.sortByNextProblemDue();
       }
-      else if(l == 3) {
+      else if(this.sort == 3) {
         //name
         this.sortByName();
       }
@@ -329,15 +337,57 @@ export default {
     },
     sortByStartDate() {
       //sorts the filtered results by start date
+      this.unfilteredCourses.sort((a, b) => {
+        //if a should be first return -1, 0 for tie, -1 if b first
+        let la = a.start_date.split("-");
+        let lb = b.start_date.split("-");
+        let fa = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        let fb = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        console.log(fa);
+        console.log(fb);
+        if(fa < fb) {
+          return -1;
+        }
+        if(fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
     },
     sortByEndDate() {
       //sorts the filtered results by end date
+      this.unfilteredCourses.sort((a, b) => {
+        //if a should be first return -1, 0 for tie, -1 if b first
+        let la = a.end_date.split("-");
+        let lb = b.end_date.split("-");
+        let fa = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        let fb = Date(la[0], la[1]-1, la[2], 0, 0, 0, 0);
+        if(fa < fb) {
+          return -1;
+        }
+        if(fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
     },
     sortByNextProblemDue() {
       //sorts the filtered results by showing the course with the earliest due problem being first
+      //this one is gonna be hard to add
     },
     sortByName() {
       //sorts the filtered results by the course name
+      this.unfilteredCourses.sort((a, b) => {
+        let fa = a.name.toLowerCase();
+        let fb = b.name.toLowerCase();
+        if(fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
     },
     sortByID() {
       //sorts the filtered results by ID of the course
@@ -418,9 +468,9 @@ export default {
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
-    var temp = this.enrolledCourses[0];
-    this.enrolledCourses[0] = this.enrolledCourses[1];
-    this.enrolledCourses[1] = temp;
+    // var temp = this.enrolledCourses[0];
+    // this.enrolledCourses[0] = this.enrolledCourses[1];
+    // this.enrolledCourses[1] = temp;
     this.getCourses();
     this.routeToChild();
   },
