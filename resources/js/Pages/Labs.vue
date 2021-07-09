@@ -221,7 +221,7 @@ export default defineComponent({
     },
     async getStudentObject() {
       console.log(this.authUser);
-      const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_ID}`);
+      const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
       this.student = res.data;
       console.log(res.data);
     },
