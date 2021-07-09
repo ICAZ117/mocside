@@ -15,7 +15,7 @@
       <label class="switch">
         <input
           type="checkbox"
-          @click="filterByDate()"
+          @change="filterByDate()"
           v-model="filter"
         />
         <span class="slider round"></span>
@@ -252,6 +252,7 @@ export default {
     filterByDate() {
       //grabs only the courses that are currently in session
       //empty the courses list just in case
+      this.courses = [];
 
       if (this.filter) {
         console.log("filter on");
