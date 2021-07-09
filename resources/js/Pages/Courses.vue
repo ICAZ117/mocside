@@ -417,6 +417,9 @@ export default {
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
+    var temp = this.enrolledCourses[0];
+    this.enrolledCourses[0] = this.enrolledCourses[1];
+    this.enrolledCourses[1] = temp;
     this.getCourses();
     this.routeToChild();
   },
