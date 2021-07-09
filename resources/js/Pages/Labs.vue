@@ -274,7 +274,7 @@ export default defineComponent({
           numProblems: this.labs[i].num_problems,
           percentComplete: this.labs[i].percent,
           dueDate: this.labs[i].due_date,
-          totalPoints: this.labs[i].total_points,
+          total_points: this.labs[i].total_points,
           problems: problems,
         });
       }
