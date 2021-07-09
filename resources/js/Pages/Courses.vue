@@ -247,8 +247,7 @@ export default {
         this.unfilteredCourses.push(course.data.data);
         // this.courses.push(course.data.data);
       }
-      this.filterByDate();
-      // this.sortCourses();
+      this.sortCourses();
     },
     filterByDate() {
       //grabs only the courses that are currently in session
@@ -418,9 +417,9 @@ export default {
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
-    var temp = this.enrolledCourses[0];
-    this.enrolledCourses[0] = this.enrolledCourses[1];
-    this.enrolledCourses[1] = temp;
+    // var temp = this.enrolledCourses[0];
+    // this.enrolledCourses[0] = this.enrolledCourses[1];
+    // this.enrolledCourses[1] = temp;
     this.getCourses();
     this.routeToChild();
   },
