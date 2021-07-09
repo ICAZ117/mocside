@@ -11,7 +11,7 @@
       <small class="navigation"
         ><span>{{ username }}{{ currentDirectory }}</span></small
       >
-      <br>
+      <br/>
       <label class="switch">
         <input
           type="checkbox"
@@ -20,6 +20,14 @@
         />
         <span class="slider round"></span>
       </label>
+      <br/>
+      <select id="sort" v-model="sort">
+        <option value="0">Sort By: Start</option>
+        <option value="1">Sort By: End</option>
+        <option value="2">Sort By: Next Problem Due</option>
+        <option value="3">Sort By: Name</option>
+        <option value="4">Unsorted</option>
+      </select>
       <br />
 
       <div class="coursecontainer">
@@ -130,6 +138,7 @@ export default {
       rightClickID: "",
       courseName: "",
       filter: true,
+      sort: "4",
     };
   },
   setup() {
@@ -300,6 +309,7 @@ export default {
 
     },
     sortCourses(l = 0) {
+      console.log(this.sort);
       //get sort method and call it
       if(l == 0) {
         //startDate
@@ -362,6 +372,7 @@ export default {
     },
     sortByNextProblemDue() {
       //sorts the filtered results by showing the course with the earliest due problem being first
+      //this one is gonna be hard to add
     },
     sortByName() {
       //sorts the filtered results by the course name
