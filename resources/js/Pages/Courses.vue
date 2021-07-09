@@ -11,6 +11,14 @@
       <small class="navigation"
         ><span>{{ username }}{{ currentDirectory }}</span></small
       >
+      <label class="switch">
+        <input
+          type="checkbox"
+          @click="filterByDate()"
+          v-model="filter"
+        />
+        <span class="slider round"></span>
+      </label>
       <br />
 
       <div class="coursecontainer">
@@ -113,12 +121,14 @@ export default {
     return {
       authUser: null,
       enrolledCourses: [],
-      courses: [],
+      courses: [], //all courses
+      unfilteredCourses: [], //the filtered courses
       childIsOpen: false,
       courseID: null,
       username: "",
       rightClickID: "",
       courseName: "",
+      filter: true,
     };
   },
   setup() {
@@ -146,7 +156,9 @@ export default {
     },
     closeMenu() {
       try {
-        document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
+        document
+          .getElementById(this.rightClickID)
+          .childNodes[0].classList.remove("show");
       } catch (e) {}
       document.getElementById("out-click").style.display = "none";
       this.rightClickID = "";
@@ -163,7 +175,10 @@ export default {
       this.addProfessor();
       this.childIsOpen = true;
       this.courses.push(course.data);
-      this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
+      this.$router.push({
+        name: "EditCourse",
+        params: { course_id: this.courseID },
+      });
     },
     async addProfessor() {
       var payload = {
@@ -178,7 +193,10 @@ export default {
     editCourse(id) {
       this.childIsOpen = true;
       this.courseID = id;
-      this.$router.push({ name: "EditCourse", params: { course_id: this.courseID } });
+      this.$router.push({
+        name: "EditCourse",
+        params: { course_id: this.courseID },
+      });
     },
     async deleteCourse(id, course, key) {
       var flag = confirm("Are you Sure you want to delete " + course.name);
@@ -213,7 +231,10 @@ export default {
         this.childIsOpen = true;
         this.courseID = id;
         this.courseName = name;
-        this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+        this.$router.push({
+          name: "Labs",
+          params: { course_id: this.courseID },
+        });
       }
     },
     async getCourses() {
@@ -222,8 +243,73 @@ export default {
       for (i = 0; i < this.enrolledCourses.length; i++) {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
-        this.courses.push(course.data.data);
+        this.unfilteredCourses.push(course.data.data);
+        // this.courses.push(course.data.data);
+        this.filterByDate();
       }
+    },
+    filterByDate() {
+      //grabs only the courses that are currently in session
+      if (this.filter) {
+        //true if the filter is on
+        for (let i = 0; i < this.unfilteredCourses.length; i++) {
+          if (withinDate(this.unfilteredCourses[i])) {
+            //if within date
+            this.courses.push(this.unfilteredCourses[i]);
+          }
+        }
+      } else {
+        //filter is not on...therefore grab all courses
+        for (let i = 0; i < this.unfilteredCourses.length; i++) {
+          this.courses.push(this.unfilteredCourses[i]);
+        }
+      }
+    },
+    withinDate(course) {
+      //return true if the course is still in session
+      //false otherwise
+      var now = new Date(Date.now());
+      var sd = course.start_date.split("-")[1];
+      var sm = course.start_date.split("-")[2];
+      var sy = course.start_date.split("-")[0];
+      var ed = course.end_date.split("-")[1];
+      var em = course.end_date.split("-")[2];
+      var ey = course.end_date.split("-")[0];
+
+      var start = new Date(sy, sm, sd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+      var end = new Date(ey, em, ed, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+
+      if(end >= now) {
+        //before end of course, day of the end
+        if(start <= now) {
+          //after start of course, day of start
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+      else{
+        //after end of course
+        return false;
+      }
+
+    },
+    sortByStartDate() {
+      //sorts the filtered results by start date
+    },
+    sortByEndDate() {
+      //sorts the filtered results by end date
+    },
+    sortByNextProblemDue() {
+      //sorts the filtered results by showing the course with the earliest due problem being first
+    },
+    sortByName() {
+      //sorts the filtered results by the course name
+    },
+    sortByID() {
+      //sorts the filtered results by ID of the course....not backend but like 2280 vs. 2290
+      //default
     },
     Unmounting() {
       this.childIsOpen = false;
