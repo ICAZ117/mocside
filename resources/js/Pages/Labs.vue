@@ -302,6 +302,9 @@ export default defineComponent({
       // Get all labs the student is in
       var studentLabs = JSON.parse(this.student.gradebook_labs);
 
+      console.log("BEFORE FOR LOOP");
+      console.log(this.unfilteredLabs.length);
+
       // Loop over all of the labs in the current course
       for (let i = 0; i < this.unfilteredLabs.length; i++) {
         // Get all of the problems for current lab
