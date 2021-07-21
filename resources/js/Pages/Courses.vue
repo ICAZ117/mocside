@@ -21,9 +21,11 @@
         <div class="dropdown">
           <button class="dropbtn fas fa-filter"></button>
           <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <p @click="sort = 0" :class="(sort == 0) ? 'selected' : ''">Start</p>
+            <p @click="sort = 1" :class="(sort == 1) ? 'selected' : ''">End</p>
+            <p @click="sort = 2" :class="(sort == 2) ? 'selected' : ''">Next Problem Due</p>
+            <p @click="sort = 3" :class="(sort == 3) ? 'selected' : ''">Name</p>
+            <p @click="sort = 4" :class="(sort == 4) ? 'selected' : ''">Unsorted</p>
           </div>
         </div>
         <label for="sort">Sort By: </label>
