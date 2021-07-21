@@ -15,6 +15,9 @@
         >↩ Return to Labs</span
       >
     </small>
+    <br />
+    <br />
+    <br />
     <label for="sort">Sort By: </label>
     <select id="sort" v-model="sort" @change="sortProblems">
       <option value="0">Due Date</option>
