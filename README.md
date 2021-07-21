@@ -52,3 +52,5 @@ FINAL
 * Fill Homepage with necessary information
 * complete bug fixing and Testing
 * resolve all the errors on page loading
+* turn into production build
+* remove the need to add port 8000 to the url
