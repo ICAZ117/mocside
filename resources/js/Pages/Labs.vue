@@ -560,7 +560,7 @@ export default defineComponent({
         for (let i = 0; i < this.unfilteredLabs.length; i++) {
           if (this.published(this.unfilteredLabs[i])) {
             if (this.unfilteredLabs[i].num_problems > 0) {
-              //if within date
+              //if within date && at least 1 problem
               this.labs.push(this.unfilteredLabs[i]);
             }
           }
@@ -619,7 +619,7 @@ export default defineComponent({
       return "";
     },
     async sortByDueDate() {
-      //sorts the filtered results by start date
+      //sorts the unfiltered results by start date
       this.unfilteredLabs.sort((a, b) => {
         //if a should be first return -1, 0 for tie, -1 if b first
         let la = a.due_date.split("-");
@@ -636,7 +636,7 @@ export default defineComponent({
       });
     },
     async sortByName() {
-      //sorts the filtered results by the course name
+      //sorts the unfiltered results by the lab name
       this.unfilteredLabs.sort((a, b) => {
         let fa = a.name.toLowerCase();
         let fb = b.name.toLowerCase();
@@ -650,7 +650,7 @@ export default defineComponent({
       });
     },
     async sortByID() {
-      //sorts the filtered results by ID of the course
+      //sorts the unfiltered results by ID of the lab
       //default
       this.unfilteredLabs.sort((a, b) => {
         return a.id - b.id;

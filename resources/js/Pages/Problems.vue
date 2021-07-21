@@ -15,6 +15,15 @@
         >↩ Return to Labs</span
       >
     </small>
+    <br />
+    <br />
+    <br />
+    <label for="sort">Sort By: </label>
+    <select id="sort" v-model="sort" @change="sortProblems">
+      <option value="0">Due Date</option>
+      <option value="1">Name</option>
+      <option value="2">Unsorted</option>
+    </select>
     <div
       style="
         border: 1px solid #9e9e9e !important;
@@ -140,6 +149,7 @@ export default {
   data() {
     return {
       problems: [],
+      unfilteredProblems: [],
       childIsOpen: false,
       problemID: null,
       expandedProblem: null,
@@ -149,6 +159,7 @@ export default {
       fscID: null,
       deletedMe: false,
       username: "",
+      sort: "0",
     };
   },
   setup() {
@@ -242,19 +253,21 @@ export default {
       this.$router.push({ name: "Assignment", params: { problem_id: id } });
     },
     async getProblems() {
-      try {
+      // try {
         const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
-        this.problems = rawProblems.data.data;
+        // this.problems = rawProblems.data.data;
+        this.unfilteredProblems = rawProblems.data.data;
         const prog = await this.getStudent();
         if (!this.isProf) {
-          for (let i = 0; i < this.problems.length; i++) {
-            this.problems[i]["percent"] = await this.getPercent(this.problems[i]);
-            this.problems[i]["activity"] = await this.getActivity(this.problems[i]);
+          for (let i = 0; i < this.unfilteredProblems.length; i++) {
+            this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
+            this.unfilteredProblems[i]["activity"] = await this.getActivity(this.unfilteredProblems[i]);
           }
         }
-      } catch (e) {
-        this.$router.go(-1);
-      }
+        await this.sortProblems();
+      // } catch (e) {
+      //   this.$router.go(-1);
+      // }
     },
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
@@ -328,6 +341,87 @@ export default {
         // this.expandedProblem.push(key);
         this.expandedProblem = key;
       }
+    },
+    async filterByPublish() {
+      console.log("filter by publish");
+      //grabs only the courses that are currently in session
+      //empty the courses list just in case
+      this.problems = [];
+
+      if (!this.isProf) {
+        console.log("student");
+        //is student don't show unpublished
+        for (let i = 0; i < this.unfilteredProblems.length; i++) {
+          if (this.unfilteredProblems[i].isPublished) {
+            if (this.unfilteredProblems[i].test_cases> 0) {
+              //if within date && at least 1 test case
+              this.problems.push(this.unfilteredProblems[i]);
+            }
+          }
+        }
+      } else {
+        console.log("professor");
+        //grab all labs including unpublished
+        for (let i = 0; i < this.unfilteredProblems.length; i++) {
+          this.problems.push(this.unfilteredProblems[i]);
+        }
+      }
+
+      return "Hi";
+    },
+    async sortProblems() {
+      //get sort method and call it
+      if (this.sort == 0) {
+        //dueDate
+        //default
+        await this.sortByDueDate();
+      } else if (this.sort == 1) {
+        //name
+        await this.sortByName();
+      } else {
+        //course ID
+        await this.sortByID();
+      }
+      //call the filter after sorting
+      await this.filterByPublish();
+      return "";
+    },
+    async sortByDueDate() {
+      //sorts the unfiltered results by start date
+      this.unfilteredProblems.sort((a, b) => {
+        //if a should be first return -1, 0 for tie, -1 if b first
+        let la = a.due_date.split("-");
+        let lb = b.due_date.split("-");
+        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+        if (fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
+    },
+    async sortByName() {
+      //sorts the unfiltered results by the problem name
+      this.unfilteredProblems.sort((a, b) => {
+        let fa = a.name.toLowerCase();
+        let fb = b.name.toLowerCase();
+        if (fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
+    },
+    async sortByID() {
+      //sorts the unfiltered results by id of the problem
+      this.unfilteredProblems.sort((a, b) => {
+        return a.id - b.id;
+      });
     },
   },
   computed: {
