@@ -38,6 +38,7 @@ STYLE FIXES
 * Labs
 * Lab Edit
 * Problems
+    * Highlighting problems
 * Problem Edit
 * Workspace
 * Confirm Delete style message on courses, labs, and problems
