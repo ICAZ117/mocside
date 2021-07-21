@@ -3,6 +3,7 @@
 IMPORTANT
 * Email Confirmation ( For future, not this week)
 * Password Reset ( For future, not this work)
+* Configure/Add SSL(i.e. https)
 
 
 ADD PAGES
