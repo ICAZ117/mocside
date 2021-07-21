@@ -141,7 +141,7 @@
               </tr>
 
               <!-- Dropdown table row -->
-              <tr v-show="isExpanded(lab.id)" class="description-data">
+              <!-- <tr v-show="isExpanded(lab.id)" class="description-data">
                 <table class="table labtable">
                   <thead class="labtable">
                     <tr>
@@ -182,7 +182,7 @@
                     </template>
                   </tbody>
                 </table>
-              </tr>
+              </tr> -->
             </template>
           </tbody>
         </table>
