@@ -636,6 +636,7 @@ export default defineComponent({
   },
   async mounted() {
     console.log("Mounted");
+    await this.getLabs();
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
     this.routeToChild();
@@ -647,7 +648,7 @@ export default defineComponent({
   async beforeMount() {
     console.log("Before Mount");
     this.childisOpen = false;
-    await this.getLabs();
+    
     console.log("HELLO");
   },
   beforeUnmount() {
