@@ -21,21 +21,41 @@
         <div class="dropdown">
           <button class="dropbtn fas fa-filter"></button>
           <div class="dropdown-content">
-            <p @click="sort = 0" :class="(sort == 0) ? 'selected' : ''">Start</p>
-            <p @click="sort = 1" :class="(sort == 1) ? 'selected' : ''">End</p>
-            <p @click="sort = 2" :class="(sort == 2) ? 'selected' : ''">Next Problem Due</p>
-            <p @click="sort = 3" :class="(sort == 3) ? 'selected' : ''">Name</p>
-            <p @click="sort = 4" :class="(sort == 4) ? 'selected' : ''">Unsorted</p>
+            <small
+              ><span @click="sortCourses(0)" :class="sort == 0 ? 'selected' : ''"
+                >Start</span
+              ></small
+            >
+            <small
+              ><span @click="sortCourses(1)" :class="sort == 1 ? 'selected' : ''"
+                >End</span
+              ></small
+            >
+            <small
+              ><span @click="sortCourses(2)" :class="sort == 2 ? 'selected' : ''"
+                >Next Problem Due</span
+              ></small
+            >
+            <small
+              ><span @click="sortCourses(3)" :class="sort == 3 ? 'selected' : ''"
+                >Name</span
+              ></small
+            >
+            <small
+              ><span @click="sortCourses(4)" :class="sort == 4 ? 'selected' : ''"
+                >Unsorted</span
+              ></small
+            >
           </div>
         </div>
-        <label for="sort">Sort By: </label>
+        <!-- <label for="sort">Sort By: </label>
         <select id="sort" v-model="sort" @change="sortCourses">
           <option value="0">Start</option>
           <option value="1">End</option>
           <option value="2">Next Problem Due</option>
           <option value="3">Name</option>
           <option value="4">Unsorted</option>
-        </select>
+        </select> -->
       </div>
       <br />
 
@@ -193,7 +213,7 @@ export default {
       this.childIsOpen = true;
       this.courses.push(course.data);
       this.unfilteredCourses.push(course.data);
-      this.sortCourses();
+      this.sortCourses(4);
       this.$router.push({
         name: "EditCourse",
         params: { course_id: this.courseID },
@@ -267,7 +287,7 @@ export default {
         this.unfilteredCourses.push(course.data.data);
         // this.courses.push(course.data.data);
       }
-      this.sortCourses();
+      this.sortCourses(4);
     },
     filterByDate() {
       //grabs only the courses that are currently in session
@@ -332,7 +352,8 @@ export default {
         return false;
       }
     },
-    sortCourses() {
+    sortCourses(type) {
+      this.sort = type;
       //get sort method and call it
       if (this.sort == 0) {
         //startDate
