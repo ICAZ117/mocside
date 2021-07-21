@@ -141,47 +141,49 @@
               </tr>
 
               <!-- Dropdown table row -->
-              <template v-if="isExpanded(lab.id)" class="description-data">
-                <table class="table labtable">
-                  <thead class="labtable">
-                    <tr>
-                      <th>Title</th>
-                      <th># Test Cases</th>
-                      <th># Test Cases Passed</th>
-                      <th>Due Date</th>
-                      <th>Points Earned</th>
-                      <th>Points Possible</th>
-                      <th>Grade Percentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="(problem, key) in grades.labs[index].problems"
-                      :key="key"
-                      class="lab pointer"
-                    >
-                      <td>{{ problems[problem.problemID].name }}</td>
-                      <td>{{ problems[problem.problemID].test_cases }}</td>
-                      <td>{{ problems[problem.problemID].passed }}</td>
-                      <td>{{ problems[problem.problemID].due_date }}</td>
-                      <td>{{ problem.grade }}</td>
-                      <td>{{ problems[problem.problemID].worth }}</td>
-                      <td>
-                        {{
-                          problems[problem.problemID].worth == 0
-                            ? 0
-                            : problem.grade == undefined
-                            ? 0
-                            : parseInt(
-                                (problem.grade / problems[problem.problemID].worth) *
-                                  10000
-                              ) * 0.01
-                        }}%
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </template>
+              <tr v-if="isExpanded(lab.id)">
+                <td class="description-data" colspan="7">
+                  <table class="table labtable">
+                    <thead class="labtable">
+                      <tr>
+                        <th>Title</th>
+                        <th># Test Cases</th>
+                        <th># Test Cases Passed</th>
+                        <th>Due Date</th>
+                        <th>Points Earned</th>
+                        <th>Points Possible</th>
+                        <th>Grade Percentage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="(problem, key) in grades.labs[index].problems"
+                        :key="key"
+                        class="lab pointer"
+                      >
+                        <td>{{ problems[problem.problemID].name }}</td>
+                        <td>{{ problems[problem.problemID].test_cases }}</td>
+                        <td>{{ problems[problem.problemID].passed }}</td>
+                        <td>{{ problems[problem.problemID].due_date }}</td>
+                        <td>{{ problem.grade }}</td>
+                        <td>{{ problems[problem.problemID].worth }}</td>
+                        <td>
+                          {{
+                            problems[problem.problemID].worth == 0
+                              ? 0
+                              : problem.grade == undefined
+                              ? 0
+                              : parseInt(
+                                  (problem.grade / problems[problem.problemID].worth) *
+                                    10000
+                                ) * 0.01
+                          }}%
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
             </template>
           </tbody>
         </table>
