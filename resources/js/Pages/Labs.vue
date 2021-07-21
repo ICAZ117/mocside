@@ -142,7 +142,7 @@
 
               <!-- Dropdown table row -->
               <tr v-if="isExpanded(lab.labID)">
-                <td class="description-data" colspan="7">
+                <td class="description-data" colspan="8">
                   <table class="table labtable">
                     <thead class="labtable">
                       <tr>
