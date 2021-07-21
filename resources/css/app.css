@@ -202,7 +202,7 @@ input:checked + .slider:before {
 
 /* Change color of dropdown links on hover */
 .dropdown-content span:hover, .selected {
-    background-color: #f1f1f1;
+    background-color: #cecece;
 }
 
 /* Show the dropdown menu on hover */
