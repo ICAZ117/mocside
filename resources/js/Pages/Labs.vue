@@ -116,13 +116,13 @@
             <!-- Loop over all LABS -->
             <template v-for="(lab, index) in grades.labs" :key="index">
               <!-- Regular table row -->
-              <tr class="problem pointer" @click="toggleExpansion(lab.id)">
-                <!-- <td v-if="!isExpanded(lab.id)">
+              <tr class="problem pointer" @click="toggleExpansion(lab.labID)">
+                <td v-if="!isExpanded(lab.labID)">
                   <i class="fas fa-chevron-right"></i>
                 </td>
-                <td v-if="isExpanded(lab.id)">
+                <td v-if="isExpanded(lab.labID)">
                   <i class="fas fa-chevron-down"></i>
-                </td> -->
+                </td>
                 <td>{{ lab.name }}</td>
                 <td>{{ lab.numProblems }}</td>
                 <td>{{ lab.percentComplete }}</td>
@@ -141,7 +141,7 @@
               </tr>
 
               <!-- Dropdown table row -->
-              <tr v-if="isExpanded(lab.id)">
+              <tr v-if="isExpanded(lab.labID)">
                 <td class="description-data" colspan="7">
                   <table class="table labtable">
                     <thead class="labtable">
