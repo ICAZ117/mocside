@@ -99,102 +99,103 @@
         </table>
       </tab-panel>
       <tab-panel :val="'Grades'">
-        <table class="table problemtable" style="border: 1px solid #9e9e9e !important;">
-          <thead class="problemtable" style="border: none !important">
-            <tr>
-              <th><i class="fas fa-grin-alt spacer"></i></th>
-              <th>Lab Name</th>
-              <th># Problems</th>
-              <th>% Complete</th>
-              <th>Due Date</th>
-              <th>Points Earned</th>
-              <th>Points Possible</th>
-              <th>Grade Percentage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Loop over all LABS -->
-            <template v-for="(lab, index) in grades.labs" :key="index">
-              <!-- Regular table row -->
-              <tr class="problem pointer" @click="toggleExpansion(lab.labID)">
-                <td v-if="!isExpanded(lab.labID)">
-                  <i class="fas fa-chevron-right"></i>
-                </td>
-                <td v-if="isExpanded(lab.labID)">
-                  <i class="fas fa-chevron-down"></i>
-                </td>
-                <td>{{ lab.name }}</td>
-                <td>{{ lab.numProblems }}</td>
-                <td>{{ lab.percentComplete }}</td>
-                <td>{{ lab.dueDate }}</td>
-                <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
-                <td>{{ lab.total_points }}</td>
-                <td>
-                  {{
-                    lab.total_points == 0
-                      ? 0
-                      : lab.grade == undefined
-                      ? 0
-                      : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
-                  }}%
-                </td>
+        <div style="border: 1px solid #9e9e9e !important">
+          <table class="table problemtable">
+            <thead class="problemtable" style="border: none !important">
+              <tr>
+                <th><i class="fas fa-grin-alt spacer"></i></th>
+                <th>Lab Name</th>
+                <th># Problems</th>
+                <th>% Complete</th>
+                <th>Due Date</th>
+                <th>Points Earned</th>
+                <th>Points Possible</th>
+                <th>Grade Percentage</th>
               </tr>
+            </thead>
+            <tbody>
+              <!-- Loop over all LABS -->
+              <template v-for="(lab, index) in grades.labs" :key="index">
+                <!-- Regular table row -->
+                <tr class="problem pointer" @click="toggleExpansion(lab.labID)">
+                  <td v-if="!isExpanded(lab.labID)">
+                    <i class="fas fa-chevron-right"></i>
+                  </td>
+                  <td v-if="isExpanded(lab.labID)">
+                    <i class="fas fa-chevron-down"></i>
+                  </td>
+                  <td>{{ lab.name }}</td>
+                  <td>{{ lab.numProblems }}</td>
+                  <td>{{ lab.percentComplete }}</td>
+                  <td>{{ lab.dueDate }}</td>
+                  <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
+                  <td>{{ lab.total_points }}</td>
+                  <td>
+                    {{
+                      lab.total_points == 0
+                        ? 0
+                        : lab.grade == undefined
+                        ? 0
+                        : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
+                    }}%
+                  </td>
+                </tr>
 
-              <!-- Dropdown table row -->
-              <tr v-if="isExpanded(lab.labID)">
-                <td class="description-data" colspan="8">
-                  <table
-                    class="table"
-                    style="
-                      margin-bottom: 0;
-                      margin-left: 1rem;
-                      width: -webkit-fill-available;
-                      border: 1px solid #9e9e9e !important;
-                    "
-                  >
-                    <thead class="labtable">
-                      <tr>
-                        <th>Title</th>
-                        <th># Test Cases</th>
-                        <th># Test Cases Passed</th>
-                        <th>Due Date</th>
-                        <th>Points Earned</th>
-                        <th>Points Possible</th>
-                        <th>Grade Percentage</th>
-                      </tr>
-                    </thead>
-                    <tbody style="border-bottom: 0 !important">
-                      <tr
-                        v-for="(problem, key) in grades.labs[index].problems"
-                        :key="key"
-                        class="lab pointer"
-                      >
-                        <td>{{ problems[problem.problemID].name }}</td>
-                        <td>{{ problems[problem.problemID].test_cases }}</td>
-                        <td>{{ problems[problem.problemID].passed }}</td>
-                        <td>{{ problems[problem.problemID].due_date }}</td>
-                        <td>{{ problem.grade }}</td>
-                        <td>{{ problems[problem.problemID].worth }}</td>
-                        <td>
-                          {{
-                            problems[problem.problemID].worth == 0
-                              ? 0
-                              : problem.grade == undefined
-                              ? 0
-                              : parseInt(
-                                  (problem.grade / problems[problem.problemID].worth) *
-                                    10000
-                                ) * 0.01
-                          }}%
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </template>
-          </tbody>
-        </table>
+                <!-- Dropdown table row -->
+                <tr v-if="isExpanded(lab.labID)">
+                  <td class="description-data" colspan="8">
+                    <table
+                      class="table"
+                      style="
+                        margin-bottom: 0;
+                        margin-left: 1rem;
+                        width: -webkit-fill-available;
+                      "
+                    >
+                      <thead class="labtable">
+                        <tr>
+                          <th>Title</th>
+                          <th># Test Cases</th>
+                          <th># Test Cases Passed</th>
+                          <th>Due Date</th>
+                          <th>Points Earned</th>
+                          <th>Points Possible</th>
+                          <th>Grade Percentage</th>
+                        </tr>
+                      </thead>
+                      <tbody style="border-bottom: 0 !important">
+                        <tr
+                          v-for="(problem, key) in grades.labs[index].problems"
+                          :key="key"
+                          class="lab pointer"
+                        >
+                          <td>{{ problems[problem.problemID].name }}</td>
+                          <td>{{ problems[problem.problemID].test_cases }}</td>
+                          <td>{{ problems[problem.problemID].passed }}</td>
+                          <td>{{ problems[problem.problemID].due_date }}</td>
+                          <td>{{ problem.grade }}</td>
+                          <td>{{ problems[problem.problemID].worth }}</td>
+                          <td>
+                            {{
+                              problems[problem.problemID].worth == 0
+                                ? 0
+                                : problem.grade == undefined
+                                ? 0
+                                : parseInt(
+                                    (problem.grade / problems[problem.problemID].worth) *
+                                      10000
+                                  ) * 0.01
+                            }}%
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
       </tab-panel>
     </tab-panels>
   </div>
