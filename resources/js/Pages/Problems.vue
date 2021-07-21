@@ -253,7 +253,7 @@ export default {
       this.$router.push({ name: "Assignment", params: { problem_id: id } });
     },
     async getProblems() {
-      try {
+      // try {
         const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
         // this.problems = rawProblems.data.data;
         this.unfilteredProblems = rawProblems.data.data;
@@ -265,9 +265,9 @@ export default {
           }
         }
         await this.sortProblems();
-      } catch (e) {
-        this.$router.go(-1);
-      }
+      // } catch (e) {
+      //   this.$router.go(-1);
+      // }
     },
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
