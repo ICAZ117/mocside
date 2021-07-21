@@ -141,7 +141,7 @@
               </tr>
 
               <!-- Dropdown table row -->
-              <tr v-show="isExpanded(lab.id)">
+              <tr v-if="isExpanded(lab.id)">
                 <td class="description-data">
                   <table class="table labtable">
                     <thead class="labtable">
@@ -156,31 +156,30 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <template
+                      <tr
                         v-for="(problem, key) in grades.labs[index].problems"
                         :key="key"
+                        class="lab pointer"
                       >
-                        <tr class="lab pointer">
-                          <td>{{ problems[problem.problemID].name }}</td>
-                          <td>{{ problems[problem.problemID].test_cases }}</td>
-                          <td>{{ problems[problem.problemID].passed }}</td>
-                          <td>{{ problems[problem.problemID].due_date }}</td>
-                          <td>{{ problem.grade }}</td>
-                          <td>{{ problems[problem.problemID].worth }}</td>
-                          <td>
-                            {{
-                              problems[problem.problemID].worth == 0
-                                ? 0
-                                : problem.grade == undefined
-                                ? 0
-                                : parseInt(
-                                    (problem.grade / problems[problem.problemID].worth) *
-                                      10000
-                                  ) * 0.01
-                            }}%
-                          </td>
-                        </tr>
-                      </template>
+                        <td>{{ problems[problem.problemID].name }}</td>
+                        <td>{{ problems[problem.problemID].test_cases }}</td>
+                        <td>{{ problems[problem.problemID].passed }}</td>
+                        <td>{{ problems[problem.problemID].due_date }}</td>
+                        <td>{{ problem.grade }}</td>
+                        <td>{{ problems[problem.problemID].worth }}</td>
+                        <td>
+                          {{
+                            problems[problem.problemID].worth == 0
+                              ? 0
+                              : problem.grade == undefined
+                              ? 0
+                              : parseInt(
+                                  (problem.grade / problems[problem.problemID].worth) *
+                                    10000
+                                ) * 0.01
+                          }}%
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </td>
@@ -529,8 +528,10 @@ export default defineComponent({
         //is student don't show unpublished
         for (let i = 0; i < this.unfilteredLabs.length; i++) {
           if (this.published(this.unfilteredLabs[i])) {
-            //if within date
-            this.labs.push(this.unfilteredLabs[i]);
+            if (this.unfilteredLabs[i].num_problems > 0) {
+              //if within date
+              this.labs.push(this.unfilteredLabs[i]);
+            }
           }
         }
       } else {
