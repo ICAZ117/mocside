@@ -151,52 +151,61 @@
                 <!-- Dropdown table row -->
                 <tr v-if="isExpanded(lab.labID)">
                   <td class="description-data" colspan="8">
-                    <table
-                      class="table"
+                    <div
                       style="
-                        margin-bottom: 0;
-                        margin-left: 1rem;
-                        width: -webkit-fill-available;
+                        border: 1px solid #9e9e9e !important;
+                        padding: 0 !important;
+                        width: min-content !important;
+                        margin: 0 0 0rem 1rem !important;
                       "
                     >
-                      <thead class="labtable">
-                        <tr>
-                          <th>Title</th>
-                          <th># Test Cases</th>
-                          <th># Test Cases Passed</th>
-                          <th>Due Date</th>
-                          <th>Points Earned</th>
-                          <th>Points Possible</th>
-                          <th>Grade Percentage</th>
-                        </tr>
-                      </thead>
-                      <tbody style="border-bottom: 0 !important">
-                        <tr
-                          v-for="(problem, key) in grades.labs[index].problems"
-                          :key="key"
-                          class="lab pointer"
-                        >
-                          <td>{{ problems[problem.problemID].name }}</td>
-                          <td>{{ problems[problem.problemID].test_cases }}</td>
-                          <td>{{ problems[problem.problemID].passed }}</td>
-                          <td>{{ problems[problem.problemID].due_date }}</td>
-                          <td>{{ problem.grade }}</td>
-                          <td>{{ problems[problem.problemID].worth }}</td>
-                          <td>
-                            {{
-                              problems[problem.problemID].worth == 0
-                                ? 0
-                                : problem.grade == undefined
-                                ? 0
-                                : parseInt(
-                                    (problem.grade / problems[problem.problemID].worth) *
-                                      10000
-                                  ) * 0.01
-                            }}%
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                      <table
+                        class="table"
+                        style="
+                          margin: 0;
+                          width: -webkit-fill-available;
+                        "
+                      >
+                        <thead class="labtable">
+                          <tr>
+                            <th>Title</th>
+                            <th># Test Cases</th>
+                            <th># Test Cases Passed</th>
+                            <th>Due Date</th>
+                            <th>Points Earned</th>
+                            <th>Points Possible</th>
+                            <th>Grade Percentage</th>
+                          </tr>
+                        </thead>
+                        <tbody style="border-bottom: 0 !important">
+                          <tr
+                            v-for="(problem, key) in grades.labs[index].problems"
+                            :key="key"
+                            class="lab pointer"
+                          >
+                            <td>{{ problems[problem.problemID].name }}</td>
+                            <td>{{ problems[problem.problemID].test_cases }}</td>
+                            <td>{{ problems[problem.problemID].passed }}</td>
+                            <td>{{ problems[problem.problemID].due_date }}</td>
+                            <td>{{ problem.grade }}</td>
+                            <td>{{ problems[problem.problemID].worth }}</td>
+                            <td>
+                              {{
+                                problems[problem.problemID].worth == 0
+                                  ? 0
+                                  : problem.grade == undefined
+                                  ? 0
+                                  : parseInt(
+                                      (problem.grade /
+                                        problems[problem.problemID].worth) *
+                                        10000
+                                    ) * 0.01
+                              }}%
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </td>
                 </tr>
               </template>
