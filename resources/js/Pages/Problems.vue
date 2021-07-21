@@ -352,7 +352,7 @@ export default {
         console.log("student");
         //is student don't show unpublished
         for (let i = 0; i < this.unfilteredProblems.length; i++) {
-          if (this.published(this.unfilteredProblems[i])) {
+          if (this.unfilteredProblems[i].isPublished) {
             if (this.unfilteredProblems[i].test_cases> 0) {
               //if within date && at least 1 test case
               this.labs.push(this.unfilteredProblems[i]);
@@ -368,31 +368,6 @@ export default {
       }
 
       return "Hi";
-    },
-    published(problem) {
-      //return true if the problem is published
-      //false otherwise
-      var now = new Date(Date.now());
-      if (problem.publish_date == "" || problem.publish_date == null) {
-        return false;
-      }
-      var pd = problem.publish_date.split("-")[2];
-      var pm = problem.publish_date.split("-")[1] - 1;
-      var py = problem.publish_date.split("-")[0];
-
-      var published = new Date(
-        py,
-        pm,
-        pd,
-        now.getHours(),
-        now.getMinutes(),
-        now.getSeconds(),
-        now.getMilliseconds()
-      );
-      if (published < now) {
-        return true;
-      }
-      return false;
     },
     async sortProblems() {
       //get sort method and call it
