@@ -154,17 +154,14 @@
                     <div
                       style="
                         border: 1px solid #9e9e9e !important;
+                        border-right: none !important;
                         padding: 0 !important;
-                        width: min-content !important;
                         margin: 0 0 0rem 1rem !important;
                       "
                     >
                       <table
                         class="table"
-                        style="
-                          margin: 0;
-                          width: -webkit-fill-available;
-                        "
+                        style="margin: 0; width: -webkit-fill-available"
                       >
                         <thead class="labtable">
                           <tr>
