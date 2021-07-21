@@ -598,21 +598,21 @@ table.gradebook {
 }
 
 tbody {
-    border: 1px solid #9e9e9e !important;
+    /* border: 1px solid #9e9e9e !important; */
 }
 
 .labtable td,
 .problemtable td,
 .gradebook td {
-    border: 1px solid #9e9e9e !important;
-    border-right: none !important;
-    border-left: none !important;
+    /* border: 1px solid #9e9e9e !important; */
+    /* border-right: none !important; */
+    /* border-left: none !important; */
 }
 
 .labtable tr,
 .problemtable tr,
 .gradebook tr {
-    border: 1px solid #9e9e9e !important;
+    /* border: 1px solid #9e9e9e !important; */
 }
 
 thead.labtable,
@@ -620,7 +620,7 @@ thead.problemtable,
 thead.gradebook {
     background-color: rgba(0, 96, 169, 0.75) !important;
     color: white !important;
-    border: 1px solid rgba(0, 96, 169, 0.75) !important;
+    /* border: 1px solid rgba(0, 96, 169, 0.75) !important; */
 }
 
 .complete {
@@ -669,7 +669,7 @@ thead.gradebook {
 .problem-description {
     background-color: white !important;
     margin-left: 50px !important;
-    border: 1px solid #9e9e9e !important;
+    /* border: 1px solid #9e9e9e !important; */
     border-top: none !important;
     border-bottom: none !important;
     padding: 1rem !important;
