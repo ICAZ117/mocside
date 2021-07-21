@@ -24,8 +24,6 @@ NEXT UP
 * Fixing the url routing issue
 * deleting some problems has not reset their copies copy id when needed...ie delete 14 when it has copies should make the first copy switch copy id to itself, ie 45's copy id becomes 45
 * some test cases have the wrong assignment id....where did this happen....perhaps when deleting the original/copies?
-* Add Sorting for problems
-* Add Filter for problems
 * add modification to Ace-editor, suggestions, autoformat, autocomplete
 
 
