@@ -15,95 +15,107 @@
         >↩ Return to Labs</span
       >
     </small>
-
-    <table class="table problemtable">
-      <thead class="problemtable">
-        <tr>
-          <th><i class="fas fa-grin-alt spacer"></i></th>
-          <th>Title</th>
-          <th># Test Cases</th>
-          <th v-if="!isProf">% Successful</th>
-          <th>Due Date</th>
-          <th v-if="!isProf">Last Activity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="(problem, key) in problems" :key="problem.id">
-          <tr class="problem pointer" @click="toggleExpansion(problem.id)">
-            <td v-show="!isExpanded(problem.id)"><i class="fas fa-chevron-right"></i></td>
-            <td v-show="isExpanded(problem.id)"><i class="fas fa-chevron-down"></i></td>
-            <td>{{ problem.name }}</td>
-            <td>{{ problem.test_cases }}</td>
-            <td v-if="!isProf">{{ problem.percent }}</td>
-            <td>{{ problem.due_date.split(" ")[0] }} {{ problem.due_date.split(" ")[1] }}</td>
-            <td v-if="!isProf">{{ problem.activity }}</td>
+    <div
+      style="
+        border: 1px solid #9e9e9e !important;
+        padding: 0 !important;
+        width: min-content !important;
+        margin: 4rem 2rem 2rem 2rem !important;
+      "
+    >
+      <table class="table problemtable" style="margin: 0 !important">
+        <thead class="problemtable">
+          <tr>
+            <th><i class="fas fa-grin-alt spacer"></i></th>
+            <th>Title</th>
+            <th># Test Cases</th>
+            <th v-if="!isProf">% Successful</th>
+            <th>Due Date</th>
+            <th v-if="!isProf">Last Activity</th>
           </tr>
-          <tr v-show="isExpanded(problem.id)" class="description-data">
-            <td colspan="5" class="description-data">
-              <div class="problem-description">
-                <div class="row">
-                  <h4 class="col-11">
-                    <b>{{ problem.name }}</b>
-                  </h4>
-                  <div class="right col-1">
-                    <a
-                      v-if="isProf"
-                      @click="editProblem(problem.id)"
-                      class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-                      ><i class="fas fa-edit"></i></a
-                    >
-                    <!-- <h5>•••</h5> -->
-                    <a
-                      v-if="isProf"
-                      @click="deleteProblem(problem, key)"
-                      class="courselaunch text-danger mx-2 my-1 no-decor pointer"
-                      ><i class="fas fa-trash-alt"></i></a
-                    >
-                    <!-- <h5>×</h5> -->
-                  </div>
-                </div>
-                <!-- get text from .description object -->
-                <p>
-                  <!-- {{ problem.description }} -->
-                  <br />
-                  Due Date: {{ problem.due_date.split(" ")[0] }}
-                  <br />
-                  Test Cases: {{ problem.test_cases }}
-                  <br />
-                </p>
-                <div style="width: 50% !important">
+        </thead>
+        <tbody>
+          <template v-for="(problem, key) in problems" :key="problem.id">
+            <tr class="problem pointer" @click="toggleExpansion(problem.id)">
+              <td v-show="!isExpanded(problem.id)">
+                <i class="fas fa-chevron-right"></i>
+              </td>
+              <td v-show="isExpanded(problem.id)"><i class="fas fa-chevron-down"></i></td>
+              <td>{{ problem.name }}</td>
+              <td>{{ problem.test_cases }}</td>
+              <td v-if="!isProf">{{ problem.percent }}</td>
+              <td>
+                {{ problem.due_date.split(" ")[0] }} {{ problem.due_date.split(" ")[1] }}
+              </td>
+              <td v-if="!isProf">{{ problem.activity }}</td>
+            </tr>
+            <tr v-show="isExpanded(problem.id)" class="description-data">
+              <td colspan="5" class="description-data">
+                <div class="problem-description">
                   <div class="row">
-                    <div class="col-9">
-                      <select v-model="lang" id="lang" class="form-select">
-                        <option value="" selected disabled hidden>
-                          Select a language...
-                        </option>
-                        <option value="Java">Java</option>
-                        <option value="Python">Python</option>
-                      </select>
+                    <h4 class="col-11">
+                      <b>{{ problem.name }}</b>
+                    </h4>
+                    <div class="right col-1">
+                      <a
+                        v-if="isProf"
+                        @click="editProblem(problem.id)"
+                        class="courselaunch text-danger mx-2 my-1 no-decor pointer"
+                        ><i class="fas fa-edit"></i
+                      ></a>
+                      <!-- <h5>•••</h5> -->
+                      <a
+                        v-if="isProf"
+                        @click="deleteProblem(problem, key)"
+                        class="courselaunch text-danger mx-2 my-1 no-decor pointer"
+                        ><i class="fas fa-trash-alt"></i
+                      ></a>
+                      <!-- <h5>×</h5> -->
                     </div>
-                    <div class="col-3 ml-1">
-                      <button
-                        type="launch"
-                        name="launch"
-                        class="launch-workspace btn btn-success"
-                        :disabled="!lang.length"
-                        @click="goToProblem(problem.id)"
-                      >
-                        Launch in {{ lang }}
-                      </button>
+                  </div>
+                  <!-- get text from .description object -->
+                  <p>
+                    <!-- {{ problem.description }} -->
+                    <br />
+                    Due Date: {{ problem.due_date.split(" ")[0] }}
+                    <br />
+                    Test Cases: {{ problem.test_cases }}
+                    <br />
+                  </p>
+                  <div style="width: 50% !important">
+                    <div class="row">
+                      <div class="col-9">
+                        <select v-model="lang" id="lang" class="form-select">
+                          <option value="" selected disabled hidden>
+                            Select a language...
+                          </option>
+                          <option value="Java">Java</option>
+                          <option value="Python">Python</option>
+                        </select>
+                      </div>
+                      <div class="col-3 ml-1">
+                        <button
+                          type="launch"
+                          name="launch"
+                          class="launch-workspace btn btn-success"
+                          :disabled="!lang.length"
+                          @click="goToProblem(problem.id)"
+                        >
+                          Launch in {{ lang }}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </td>
+              </td>
+            </tr>
+          </template>
+          <tr v-if="isProf" class="lab pointer" @click="addProblem">
+            <td colspan="5">Add Problem</td>
           </tr>
-        </template>
-        <tr v-if="isProf" class="lab pointer" @click="addProblem">
-          <td colspan="5">Add Problem</td>
-        </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
   <router-view
     @unmounting="Unmounting()"
@@ -152,7 +164,20 @@ export default {
     convertDate(numericalDate) {
       // Input: 2021-06-04
       // Output: Jun 4
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
       var dateList = numericalDate.split("-");
       console.log("\n\n\n");
       console.log(dateList);
@@ -227,8 +252,7 @@ export default {
             this.problems[i]["activity"] = await this.getActivity(this.problems[i]);
           }
         }
-      }
-      catch (e) {
+      } catch (e) {
         this.$router.go(-1);
       }
     },
@@ -253,7 +277,7 @@ export default {
       } else if (!c) {
         return "0%";
       } else {
-        return parseInt((c.cases_passed / problem.test_cases)* 100) + "%";
+        return parseInt((c.cases_passed / problem.test_cases) * 100) + "%";
       }
     },
     async getActivity(problem) {

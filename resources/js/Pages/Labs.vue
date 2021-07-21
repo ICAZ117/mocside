@@ -38,54 +38,62 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Labs'">
-        <table class="table labtable">
-          <thead class="labtable">
-            <tr>
-              <th>Title</th>
-              <th># Problems</th>
-              <th v-if="!isProf">% Complete</th>
-              <th>Due Date</th>
-              <th v-if="!isProf">Last Activity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-for="lab in labs" :key="lab.id">
-              <tr
-                v-if="!isProf"
-                class="lab pointer"
-                @click="goToProblems(lab.id, lab.name)"
-              >
-                <td>
-                  <a>{{ lab.name }}</a>
-                </td>
-                <td>{{ lab.num_problems }}</td>
-                <td v-if="!isProf">{{ lab.percent }}</td>
-                <!-- <td>69%</td> -->
-                <td>{{ lab.due_date }}</td>
-                <td v-if="!isProf">{{ lab.activity }}</td>
-                <!-- <td>4/20/0420</td> -->
+        <div
+          style="
+            border: 1px solid #9e9e9e !important;
+            padding: 0 !important;
+            width: min-content !important;
+            margin: 2rem 2rem 2rem 2rem !important;
+          "
+        >
+          <table class="table labtable" style="margin: 0 !important">
+            <thead class="labtable">
+              <tr>
+                <th>Title</th>
+                <th># Problems</th>
+                <th v-if="!isProf">% Complete</th>
+                <th>Due Date</th>
+                <th v-if="!isProf">Last Activity</th>
               </tr>
+            </thead>
+            <tbody>
+              <template v-for="lab in labs" :key="lab.id">
+                <tr
+                  v-if="!isProf"
+                  class="lab pointer"
+                  @click="goToProblems(lab.id, lab.name)"
+                >
+                  <td>
+                    <a>{{ lab.name }}</a>
+                  </td>
+                  <td>{{ lab.num_problems }}</td>
+                  <td v-if="!isProf">{{ lab.percent }}</td>
+                  <!-- <td>69%</td> -->
+                  <td>{{ lab.due_date }}</td>
+                  <td v-if="!isProf">{{ lab.activity }}</td>
+                  <!-- <td>4/20/0420</td> -->
+                </tr>
 
-              <tr
-                v-if="isProf"
-                class="lab pointer"
-                @click.prevent="goToProblems(lab.id, lab.name)"
-                @contextmenu.prevent="showMenu(lab.id)"
-              >
-                <td>
-                  <a>{{ lab.name }}</a>
-                </td>
-                <td>{{ lab.num_problems }}</td>
-                <!-- <td>69%</td> -->
-                <td>{{ lab.due_date }}</td>
-                <!-- <td>4/20/0420</td> -->
+                <tr
+                  v-if="isProf"
+                  class="lab pointer"
+                  @click.prevent="goToProblems(lab.id, lab.name)"
+                  @contextmenu.prevent="showMenu(lab.id)"
+                >
+                  <td>
+                    <a>{{ lab.name }}</a>
+                  </td>
+                  <td>{{ lab.num_problems }}</td>
+                  <!-- <td>69%</td> -->
+                  <td>{{ lab.due_date }}</td>
+                  <!-- <td>4/20/0420</td> -->
+                </tr>
+              </template>
+
+              <tr v-if="isProf" class="lab pointer" @click="addLab">
+                <td colspan="5">Add Lab</td>
               </tr>
-            </template>
-
-            <tr v-if="isProf" class="lab pointer" @click="addLab">
-              <td colspan="5">Add Lab</td>
-            </tr>
-            <!-- <tr
+              <!-- <tr
             class="lab"
             style="cursor: pointer"
           >
@@ -95,97 +103,121 @@
             <td>1/31/2021</td>
             <td>1/31/2021</td>
           </tr> -->
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </tab-panel>
       <tab-panel :val="'Grades'">
-        <table class="table problemtable">
-          <thead class="problemtable" style="border: none !important">
-            <tr>
-              <!-- <th><i class="fas fa-grin-alt spacer"></i></th> -->
-              <th>Lab Name</th>
-              <th># Problems</th>
-              <th>% Complete</th>
-              <th>Due Date</th>
-              <th>Points Earned</th>
-              <th>Points Possible</th>
-              <th>Grade Percentage</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Loop over all LABS -->
-            <template v-for="(lab, index) in grades.labs" :key="index">
-              <!-- Regular table row -->
-              <tr class="problem pointer" @click="toggleExpansion(lab.id)">
-                <!-- <td v-if="!isExpanded(lab.id)">
-                  <i class="fas fa-chevron-right"></i>
-                </td>
-                <td v-if="isExpanded(lab.id)">
-                  <i class="fas fa-chevron-down"></i>
-                </td> -->
-                <td>{{ lab.name }}</td>
-                <td>{{ lab.numProblems }}</td>
-                <td>{{ lab.percentComplete }}</td>
-                <td>{{ lab.dueDate }}</td>
-                <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
-                <td>{{ lab.total_points }}</td>
-                <td>
-                  {{
-                    lab.total_points == 0
-                      ? 0
-                      : lab.grade == undefined
-                      ? 0
-                      : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
-                  }}%
-                </td>
+        <div
+          style="
+            border: 1px solid #9e9e9e !important;
+            padding: 0 !important;
+            width: min-content !important;
+            margin: 2rem 2rem 2rem 2rem !important;
+          "
+        >
+          <table class="table problemtable" style="margin: 0 !important">
+            <thead class="problemtable" style="border: none !important">
+              <tr>
+                <th><i class="fas fa-grin-alt spacer"></i></th>
+                <th>Lab Name</th>
+                <th># Problems</th>
+                <th>% Complete</th>
+                <th>Due Date</th>
+                <th>Points Earned</th>
+                <th>Points Possible</th>
+                <th>Grade Percentage</th>
               </tr>
+            </thead>
+            <tbody>
+              <!-- Loop over all LABS -->
+              <template v-for="(lab, index) in grades.labs" :key="index">
+                <!-- Regular table row -->
+                <tr class="problem pointer" @click="toggleExpansion(lab.labID)">
+                  <td v-if="!isExpanded(lab.labID)">
+                    <i class="fas fa-chevron-right"></i>
+                  </td>
+                  <td v-if="isExpanded(lab.labID)">
+                    <i class="fas fa-chevron-down"></i>
+                  </td>
+                  <td>{{ lab.name }}</td>
+                  <td>{{ lab.numProblems }}</td>
+                  <td>{{ lab.percentComplete }}</td>
+                  <td>{{ lab.dueDate }}</td>
+                  <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
+                  <td>{{ lab.total_points }}</td>
+                  <td>
+                    {{
+                      lab.total_points == 0
+                        ? 0
+                        : lab.grade == undefined
+                        ? 0
+                        : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
+                    }}%
+                  </td>
+                </tr>
 
-              <!-- Dropdown table row -->
-              <tr v-show="isExpanded(lab.id)" class="description-data">
-                <table class="table labtable">
-                  <thead class="labtable">
-                    <tr>
-                      <th>Title</th>
-                      <th># Test Cases</th>
-                      <th># Test Cases Passed</th>
-                      <th>Due Date</th>
-                      <th>Points Earned</th>
-                      <th>Points Possible</th>
-                      <th>Grade Percentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <template
-                      v-for="(problem, key) in grades.labs[index].problems"
-                      :key="key"
+                <!-- Dropdown table row -->
+                <tr v-if="isExpanded(lab.labID)">
+                  <td class="description-data" colspan="8">
+                    <div
+                      style="
+                        border: 1px solid #9e9e9e !important;
+                        border-right: none !important;
+                        padding: 0 !important;
+                        margin: 0 0 0rem 1rem !important;
+                      "
                     >
-                      <tr class="lab pointer">
-                        <td>{{ problems[problem.problemID].name }}</td>
-                        <td>{{ problems[problem.problemID].test_cases }}</td>
-                        <td>{{ problems[problem.problemID].passed }}</td>
-                        <td>{{ problems[problem.problemID].due_date }}</td>
-                        <td>{{ problem.grade }}</td>
-                        <td>{{ problems[problem.problemID].worth }}</td>
-                        <td>
-                          {{
-                            problems[problem.problemID].worth == 0
-                              ? 0
-                              : problem.grade == undefined
-                              ? 0
-                              : parseInt(
-                                  (problem.grade / problems[problem.problemID].worth) *
-                                    10000
-                                ) * 0.01
-                          }}%
-                        </td>
-                      </tr>
-                    </template>
-                  </tbody>
-                </table>
-              </tr>
-            </template>
-          </tbody>
-        </table>
+                      <table
+                        class="table"
+                        style="margin: 0; width: -webkit-fill-available"
+                      >
+                        <thead class="labtable">
+                          <tr>
+                            <th>Title</th>
+                            <th># Test Cases</th>
+                            <th># Test Cases Passed</th>
+                            <th>Due Date</th>
+                            <th>Points Earned</th>
+                            <th>Points Possible</th>
+                            <th>Grade Percentage</th>
+                          </tr>
+                        </thead>
+                        <tbody style="border-bottom: 0 !important">
+                          <tr
+                            v-for="(problem, key) in grades.labs[index].problems"
+                            :key="key"
+                            class="lab pointer"
+                          >
+                            <td>{{ problems[problem.problemID].name }}</td>
+                            <td>{{ problems[problem.problemID].test_cases }}</td>
+                            <td>{{ problems[problem.problemID].passed }}</td>
+                            <td>{{ problems[problem.problemID].due_date }}</td>
+                            <td>{{ problem.grade }}</td>
+                            <td>{{ problems[problem.problemID].worth }}</td>
+                            <td>
+                              {{
+                                problems[problem.problemID].worth == 0
+                                  ? 0
+                                  : problem.grade == undefined
+                                  ? 0
+                                  : parseInt(
+                                      (problem.grade /
+                                        problems[problem.problemID].worth) *
+                                        10000
+                                    ) * 0.01
+                              }}%
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
       </tab-panel>
     </tab-panels>
   </div>
@@ -308,9 +340,7 @@ export default defineComponent({
       // Loop over all of the labs in the current course
       for (let i = 0; i < this.labs.length; i++) {
         // Get all of the problems for current lab
-        const problemsInLab = await API.apiClient.get(
-          `/gradebook/${this.labs[i].id}`
-        );
+        const problemsInLab = await API.apiClient.get(`/gradebook/${this.labs[i].id}`);
         problemsInLab = problemsInLab.data.data;
 
         // Log labID for later usage
@@ -529,8 +559,10 @@ export default defineComponent({
         //is student don't show unpublished
         for (let i = 0; i < this.unfilteredLabs.length; i++) {
           if (this.published(this.unfilteredLabs[i])) {
-            //if within date
-            this.labs.push(this.unfilteredLabs[i]);
+            if (this.unfilteredLabs[i].num_problems > 0) {
+              //if within date
+              this.labs.push(this.unfilteredLabs[i]);
+            }
           }
         }
       } else {
@@ -547,7 +579,7 @@ export default defineComponent({
       //return true if the lab is published
       //false otherwise
       var now = new Date(Date.now());
-      if(lab.publish_date == "" || lab.publish_date == null) {
+      if (lab.publish_date == "" || lab.publish_date == null) {
         return false;
       }
       var pd = lab.publish_date.split("-")[2];
@@ -636,6 +668,11 @@ export default defineComponent({
   },
   async mounted() {
     console.log("Mounted");
+  },
+  async beforeMount() {
+    console.log("Before Mount");
+    this.childisOpen = false;
+    await this.getLabs();
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
     this.routeToChild();
@@ -643,11 +680,6 @@ export default defineComponent({
       await this.getStudentObject();
       await this.getGrades();
     }
-  },
-  async beforeMount() {
-    console.log("Before Mount");
-    this.childisOpen = false;
-    await this.getLabs();
     console.log("HELLO");
   },
   beforeUnmount() {
