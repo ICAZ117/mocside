@@ -573,20 +573,20 @@ export default defineComponent({
       if (this.sort == 0) {
         //dueDate
         //default
-        this.sortByDueDate();
+        await this.sortByDueDate();
       } else if (this.sort == 1) {
         //name
-        this.sortByName();
+        await this.sortByName();
       } else {
         //course ID
-        this.sortByID();
+        await this.sortByID();
       }
       console.log(this.unfilteredLabs);
       //call the filter after sorting
       await this.filterByPublish();
       return "";
     },
-    sortByDueDate() {
+    async sortByDueDate() {
       //sorts the filtered results by start date
       this.unfilteredLabs.sort((a, b) => {
         //if a should be first return -1, 0 for tie, -1 if b first
@@ -603,7 +603,7 @@ export default defineComponent({
         return 0;
       });
     },
-    sortByName() {
+    async sortByName() {
       //sorts the filtered results by the course name
       this.unfilteredLabs.sort((a, b) => {
         let fa = a.name.toLowerCase();
@@ -617,7 +617,7 @@ export default defineComponent({
         return 0;
       });
     },
-    sortByID() {
+    async sortByID() {
       //sorts the filtered results by ID of the course
       //default
       this.unfilteredLabs.sort((a, b) => {
