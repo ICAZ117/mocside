@@ -100,10 +100,14 @@
       </tab-panel>
       <tab-panel :val="'Grades'">
         <div
-          class="table problemtable"
-          style="border: 1px solid #9e9e9e !important; padding: 0 !important"
+          style="
+            border: 1px solid #9e9e9e !important;
+            padding: 0 !important;
+            width: min-content !important;
+            margin: 4rem 2rem 2rem 2rem !important;
+          "
         >
-          <table>
+          <table class="table problemtable" style="margin: none !important">
             <thead class="problemtable" style="border: none !important">
               <tr>
                 <th><i class="fas fa-grin-alt spacer"></i></th>
