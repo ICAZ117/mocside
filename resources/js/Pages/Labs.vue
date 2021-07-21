@@ -143,7 +143,7 @@
               <!-- Dropdown table row -->
               <tr v-if="isExpanded(lab.labID)">
                 <td class="description-data" colspan="8">
-                  <table class="table labtable">
+                  <table class="table" style="margin-bottom: 0; margin-left: 1rem">
                     <thead class="labtable">
                       <tr>
                         <th>Title</th>
@@ -155,7 +155,7 @@
                         <th>Grade Percentage</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="border-bottom: 0!important;">
                       <tr
                         v-for="(problem, key) in grades.labs[index].problems"
                         :key="key"
