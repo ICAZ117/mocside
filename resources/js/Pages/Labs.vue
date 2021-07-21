@@ -38,54 +38,62 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Labs'">
-        <table class="table labtable">
-          <thead class="labtable">
-            <tr>
-              <th>Title</th>
-              <th># Problems</th>
-              <th v-if="!isProf">% Complete</th>
-              <th>Due Date</th>
-              <th v-if="!isProf">Last Activity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-for="lab in labs" :key="lab.id">
-              <tr
-                v-if="!isProf"
-                class="lab pointer"
-                @click="goToProblems(lab.id, lab.name)"
-              >
-                <td>
-                  <a>{{ lab.name }}</a>
-                </td>
-                <td>{{ lab.num_problems }}</td>
-                <td v-if="!isProf">{{ lab.percent }}</td>
-                <!-- <td>69%</td> -->
-                <td>{{ lab.due_date }}</td>
-                <td v-if="!isProf">{{ lab.activity }}</td>
-                <!-- <td>4/20/0420</td> -->
+        <div
+          style="
+            border: 1px solid #9e9e9e !important;
+            padding: 0 !important;
+            width: min-content !important;
+            margin: 4rem 2rem 2rem 2rem !important;
+          "
+        >
+          <table class="table labtable" style="margin: 0 !important">
+            <thead class="labtable">
+              <tr>
+                <th>Title</th>
+                <th># Problems</th>
+                <th v-if="!isProf">% Complete</th>
+                <th>Due Date</th>
+                <th v-if="!isProf">Last Activity</th>
               </tr>
+            </thead>
+            <tbody>
+              <template v-for="lab in labs" :key="lab.id">
+                <tr
+                  v-if="!isProf"
+                  class="lab pointer"
+                  @click="goToProblems(lab.id, lab.name)"
+                >
+                  <td>
+                    <a>{{ lab.name }}</a>
+                  </td>
+                  <td>{{ lab.num_problems }}</td>
+                  <td v-if="!isProf">{{ lab.percent }}</td>
+                  <!-- <td>69%</td> -->
+                  <td>{{ lab.due_date }}</td>
+                  <td v-if="!isProf">{{ lab.activity }}</td>
+                  <!-- <td>4/20/0420</td> -->
+                </tr>
 
-              <tr
-                v-if="isProf"
-                class="lab pointer"
-                @click.prevent="goToProblems(lab.id, lab.name)"
-                @contextmenu.prevent="showMenu(lab.id)"
-              >
-                <td>
-                  <a>{{ lab.name }}</a>
-                </td>
-                <td>{{ lab.num_problems }}</td>
-                <!-- <td>69%</td> -->
-                <td>{{ lab.due_date }}</td>
-                <!-- <td>4/20/0420</td> -->
+                <tr
+                  v-if="isProf"
+                  class="lab pointer"
+                  @click.prevent="goToProblems(lab.id, lab.name)"
+                  @contextmenu.prevent="showMenu(lab.id)"
+                >
+                  <td>
+                    <a>{{ lab.name }}</a>
+                  </td>
+                  <td>{{ lab.num_problems }}</td>
+                  <!-- <td>69%</td> -->
+                  <td>{{ lab.due_date }}</td>
+                  <!-- <td>4/20/0420</td> -->
+                </tr>
+              </template>
+
+              <tr v-if="isProf" class="lab pointer" @click="addLab">
+                <td colspan="5">Add Lab</td>
               </tr>
-            </template>
-
-            <tr v-if="isProf" class="lab pointer" @click="addLab">
-              <td colspan="5">Add Lab</td>
-            </tr>
-            <!-- <tr
+              <!-- <tr
             class="lab"
             style="cursor: pointer"
           >
@@ -95,8 +103,9 @@
             <td>1/31/2021</td>
             <td>1/31/2021</td>
           </tr> -->
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </tab-panel>
       <tab-panel :val="'Grades'">
         <div
