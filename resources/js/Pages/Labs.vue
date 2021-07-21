@@ -107,7 +107,7 @@
             margin: 4rem 2rem 2rem 2rem !important;
           "
         >
-          <table class="table problemtable" style="margin: none !important">
+          <table class="table problemtable" style="margin: 0 !important">
             <thead class="problemtable" style="border: none !important">
               <tr>
                 <th><i class="fas fa-grin-alt spacer"></i></th>
