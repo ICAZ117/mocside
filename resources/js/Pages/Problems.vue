@@ -355,7 +355,7 @@ export default {
           if (this.unfilteredProblems[i].isPublished) {
             if (this.unfilteredProblems[i].test_cases> 0) {
               //if within date && at least 1 test case
-              this.labs.push(this.unfilteredProblems[i]);
+              this.problems.push(this.unfilteredProblems[i]);
             }
           }
         }
@@ -363,7 +363,7 @@ export default {
         console.log("professor");
         //grab all labs including unpublished
         for (let i = 0; i < this.unfilteredProblems.length; i++) {
-          this.labs.push(this.unfilteredProblems[i]);
+          this.problems.push(this.unfilteredProblems[i]);
         }
       }
 
