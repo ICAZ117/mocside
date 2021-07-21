@@ -102,7 +102,7 @@
         <table class="table problemtable">
           <thead class="problemtable" style="border: none !important">
             <tr>
-              <!-- <th><i class="fas fa-grin-alt spacer"></i></th> -->
+              <th><i class="fas fa-grin-alt spacer"></i></th>
               <th>Lab Name</th>
               <th># Problems</th>
               <th>% Complete</th>
