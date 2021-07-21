@@ -99,7 +99,7 @@
         </table>
       </tab-panel>
       <tab-panel :val="'Grades'">
-        <table class="table problemtable">
+        <table class="table problemtable" style="border: 1px solid #9e9e9e !important;">
           <thead class="problemtable" style="border: none !important">
             <tr>
               <th><i class="fas fa-grin-alt spacer"></i></th>
@@ -149,7 +149,7 @@
                       margin-bottom: 0;
                       margin-left: 1rem;
                       width: -webkit-fill-available;
-                      border: none!important;
+                      border: 1px solid #9e9e9e !important;
                     "
                   >
                     <thead class="labtable">
