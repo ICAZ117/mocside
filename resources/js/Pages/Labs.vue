@@ -401,7 +401,7 @@ export default defineComponent({
         }
       }
       console.log("get labs");
-      this.sortLabs();
+      await this.sortLabs();
     },
     Unmounting() {
       this.childisOpen = false;
@@ -518,7 +518,7 @@ export default defineComponent({
         }
       }
     },
-    filterByPublish() {
+    async filterByPublish() {
       console.log("filter by publish");
       //grabs only the courses that are currently in session
       //empty the courses list just in case
@@ -540,6 +540,8 @@ export default defineComponent({
           this.labs.push(this.unfilteredLabs[i]);
         }
       }
+
+      return "Hi";
     },
     published(lab) {
       //return true if the lab is published
@@ -566,7 +568,7 @@ export default defineComponent({
       }
       return false;
     },
-    sortLabs() {
+    async sortLabs() {
       //get sort method and call it
       if (this.sort == 0) {
         //dueDate
@@ -581,7 +583,8 @@ export default defineComponent({
       }
       console.log(this.unfilteredLabs);
       //call the filter after sorting
-      this.filterByPublish();
+      await this.filterByPublish();
+      return "";
     },
     sortByDueDate() {
       //sorts the filtered results by start date
