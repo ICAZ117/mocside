@@ -43,7 +43,7 @@
             border: 1px solid #9e9e9e !important;
             padding: 0 !important;
             width: min-content !important;
-            margin: 4rem 2rem 2rem 2rem !important;
+            margin: 2rem 2rem 2rem 2rem !important;
           "
         >
           <table class="table labtable" style="margin: 0 !important">
@@ -113,7 +113,7 @@
             border: 1px solid #9e9e9e !important;
             padding: 0 !important;
             width: min-content !important;
-            margin: 4rem 2rem 2rem 2rem !important;
+            margin: 2rem 2rem 2rem 2rem !important;
           "
         >
           <table class="table problemtable" style="margin: 0 !important">
