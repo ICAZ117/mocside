@@ -646,6 +646,7 @@ export default defineComponent({
   async beforeMount() {
     this.childisOpen = false;
     await this.getLabs();
+    console.log("HELLO");
   },
   beforeUnmount() {
     this.$emit("unmounting");
