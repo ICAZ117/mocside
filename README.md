@@ -16,7 +16,6 @@ ADD PAGES
 * turn course edit into a course dashboard for professor can change course details as well as see gradebook, students, etc.
     * Change Course Details(currently CourseEdit)
     * Gradebook
-    * Students
     * Labs...edit, delete, publish
 
 
@@ -36,10 +35,10 @@ STYLE FIXES
 * Navbar
 * Courses
 * Course Edit...change to course dashboard
-* Course Enroll Page
 * Labs
 * Lab Edit
 * Problems
+    * Highlighting problems
 * Problem Edit
 * Workspace
 * Confirm Delete style message on courses, labs, and problems
