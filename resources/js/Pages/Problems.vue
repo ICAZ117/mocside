@@ -266,7 +266,7 @@ export default {
         }
         await this.sortProblems();
       } catch (e) {
-        this.$router.go(-1);
+        // this.$router.go(-1);
       }
     },
     async getStudent() {
