@@ -139,74 +139,52 @@
                   }}%
                 </td>
               </tr>
-              
-              <tr class="problem pointer" @click="toggleExpansion(lab.id)">
-                <!-- <td v-if="!isExpanded(lab.id)">
-                  <i class="fas fa-chevron-right"></i>
-                </td>
-                <td v-if="isExpanded(lab.id)">
-                  <i class="fas fa-chevron-down"></i>
-                </td> -->
-                <td>{{ lab.name }}</td>
-                <td>{{ lab.numProblems }}</td>
-                <td>{{ lab.percentComplete }}</td>
-                <td>{{ lab.dueDate }}</td>
-                <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
-                <td>{{ lab.total_points }}</td>
-                <td>
-                  {{
-                    lab.total_points == 0
-                      ? 0
-                      : lab.grade == undefined
-                      ? 0
-                      : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
-                  }}%
-                </td>
-              </tr>
 
               <!-- Dropdown table row -->
-              <!-- <tr v-show="isExpanded(lab.id)" class="description-data">
-                <table class="table labtable">
-                  <thead class="labtable">
-                    <tr>
-                      <th>Title</th>
-                      <th># Test Cases</th>
-                      <th># Test Cases Passed</th>
-                      <th>Due Date</th>
-                      <th>Points Earned</th>
-                      <th>Points Possible</th>
-                      <th>Grade Percentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <template
-                      v-for="(problem, key) in grades.labs[index].problems"
-                      :key="key"
-                    >
-                      <tr class="lab pointer">
-                        <td>{{ problems[problem.problemID].name }}</td>
-                        <td>{{ problems[problem.problemID].test_cases }}</td>
-                        <td>{{ problems[problem.problemID].passed }}</td>
-                        <td>{{ problems[problem.problemID].due_date }}</td>
-                        <td>{{ problem.grade }}</td>
-                        <td>{{ problems[problem.problemID].worth }}</td>
-                        <td>
-                          {{
-                            problems[problem.problemID].worth == 0
-                              ? 0
-                              : problem.grade == undefined
-                              ? 0
-                              : parseInt(
-                                  (problem.grade / problems[problem.problemID].worth) *
-                                    10000
-                                ) * 0.01
-                          }}%
-                        </td>
+              <tr v-show="isExpanded(lab.id)">
+                <td class="description-data">
+                  <table class="table labtable">
+                    <thead class="labtable">
+                      <tr>
+                        <th>Title</th>
+                        <th># Test Cases</th>
+                        <th># Test Cases Passed</th>
+                        <th>Due Date</th>
+                        <th>Points Earned</th>
+                        <th>Points Possible</th>
+                        <th>Grade Percentage</th>
                       </tr>
-                    </template>
-                  </tbody>
-                </table>
-              </tr> -->
+                    </thead>
+                    <tbody>
+                      <template
+                        v-for="(problem, key) in grades.labs[index].problems"
+                        :key="key"
+                      >
+                        <tr class="lab pointer">
+                          <td>{{ problems[problem.problemID].name }}</td>
+                          <td>{{ problems[problem.problemID].test_cases }}</td>
+                          <td>{{ problems[problem.problemID].passed }}</td>
+                          <td>{{ problems[problem.problemID].due_date }}</td>
+                          <td>{{ problem.grade }}</td>
+                          <td>{{ problems[problem.problemID].worth }}</td>
+                          <td>
+                            {{
+                              problems[problem.problemID].worth == 0
+                                ? 0
+                                : problem.grade == undefined
+                                ? 0
+                                : parseInt(
+                                    (problem.grade / problems[problem.problemID].worth) *
+                                      10000
+                                  ) * 0.01
+                            }}%
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
             </template>
           </tbody>
         </table>
@@ -332,9 +310,7 @@ export default defineComponent({
       // Loop over all of the labs in the current course
       for (let i = 0; i < this.labs.length; i++) {
         // Get all of the problems for current lab
-        const problemsInLab = await API.apiClient.get(
-          `/gradebook/${this.labs[i].id}`
-        );
+        const problemsInLab = await API.apiClient.get(`/gradebook/${this.labs[i].id}`);
         problemsInLab = problemsInLab.data.data;
 
         // Log labID for later usage
@@ -571,7 +547,7 @@ export default defineComponent({
       //return true if the lab is published
       //false otherwise
       var now = new Date(Date.now());
-      if(lab.publish_date == "" || lab.publish_date == null) {
+      if (lab.publish_date == "" || lab.publish_date == null) {
         return false;
       }
       var pd = lab.publish_date.split("-")[2];
@@ -672,7 +648,7 @@ export default defineComponent({
   async beforeMount() {
     console.log("Before Mount");
     this.childisOpen = false;
-    
+
     console.log("HELLO");
   },
   beforeUnmount() {
