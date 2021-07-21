@@ -139,6 +139,30 @@
                   }}%
                 </td>
               </tr>
+              
+              <tr class="problem pointer" @click="toggleExpansion(lab.id)">
+                <!-- <td v-if="!isExpanded(lab.id)">
+                  <i class="fas fa-chevron-right"></i>
+                </td>
+                <td v-if="isExpanded(lab.id)">
+                  <i class="fas fa-chevron-down"></i>
+                </td> -->
+                <td>{{ lab.name }}</td>
+                <td>{{ lab.numProblems }}</td>
+                <td>{{ lab.percentComplete }}</td>
+                <td>{{ lab.dueDate }}</td>
+                <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
+                <td>{{ lab.total_points }}</td>
+                <td>
+                  {{
+                    lab.total_points == 0
+                      ? 0
+                      : lab.grade == undefined
+                      ? 0
+                      : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
+                  }}%
+                </td>
+              </tr>
 
               <!-- Dropdown table row -->
               <!-- <tr v-show="isExpanded(lab.id)" class="description-data">
