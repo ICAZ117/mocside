@@ -253,21 +253,21 @@ export default {
       this.$router.push({ name: "Assignment", params: { problem_id: id } });
     },
     async getProblems() {
-      // try {
+      try {
         const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
         // this.problems = rawProblems.data.data;
         this.unfilteredProblems = rawProblems.data.data;
         const prog = await this.getStudent();
-        if (!this.isProf) {
-          for (let i = 0; i < this.unfilteredProblems.length; i++) {
-            this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
-            this.unfilteredProblems[i]["activity"] = await this.getActivity(this.unfilteredProblems[i]);
-          }
+      } catch (e) {
+        // this.$router.go(-1);
+      }
+      if (!this.isProf) {
+        for (let i = 0; i < this.unfilteredProblems.length; i++) {
+          this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
+          this.unfilteredProblems[i]["activity"] = await this.getActivity(this.unfilteredProblems[i]);
         }
-        await this.sortProblems();
-      // } catch (e) {
-      //   this.$router.go(-1);
-      // }
+      }
+      await this.sortProblems();
     },
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
