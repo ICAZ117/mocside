@@ -595,7 +595,6 @@ table.gradebook {
     background-color: inherit !important;
     margin: 4rem 2rem 2rem 2rem !important;
     width: calc(100vw - 4rem - 3px) !important;
-    /* border: 1px solid #9e9e9e !important; */
     border: none !important;
 }
 
