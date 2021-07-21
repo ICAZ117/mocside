@@ -149,6 +149,7 @@
                       margin-bottom: 0;
                       margin-left: 1rem;
                       width: -webkit-fill-available;
+                      border: none!important;
                     "
                   >
                     <thead class="labtable">
