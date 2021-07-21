@@ -11,24 +11,30 @@
       <small class="navigation"
         ><span>{{ username }}{{ currentDirectory }}</span></small
       >
-      <br/>
-      <label class="switch">
-        <input
-          type="checkbox"
-          @change="filterByDate()"
-          v-model="filter"
-        />
-        <span class="slider round"></span>
-      </label>
-      <br/>
-      <label for="sort">Sort By: </label>
-      <select id="sort" v-model="sort" @change="sortCourses">
-        <option value="0">Start</option>
-        <option value="1">End</option>
-        <option value="2">Next Problem Due</option>
-        <option value="3">Name</option>
-        <option value="4">Unsorted</option>
-      </select>
+      <br />
+      <div class="filterSettings">
+        <label class="switch">
+          <input type="checkbox" @change="filterByDate()" v-model="filter" />
+          <span class="slider round"></span>
+        </label>
+        <br />
+        <div class="dropdown">
+          <button class="dropbtn fas fa-filter"></button>
+          <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+        </div>
+        <label for="sort">Sort By: </label>
+        <select id="sort" v-model="sort" @change="sortCourses">
+          <option value="0">Start</option>
+          <option value="1">End</option>
+          <option value="2">Next Problem Due</option>
+          <option value="3">Name</option>
+          <option value="4">Unsorted</option>
+        </select>
+      </div>
       <br />
 
       <div class="coursecontainer">
@@ -167,9 +173,7 @@ export default {
     },
     closeMenu() {
       try {
-        document
-          .getElementById(this.rightClickID)
-          .childNodes[0].classList.remove("show");
+        document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
       } catch (e) {}
       document.getElementById("out-click").style.display = "none";
       this.rightClickID = "";
@@ -233,7 +237,7 @@ export default {
         this.courseID = null;
         // this.getCourses();
         //delete from unfiltered
-        this.unfilteredCourses = this.unfilteredCourses.filter(c => c.id != id);
+        this.unfilteredCourses = this.unfilteredCourses.filter((c) => c.id != id);
 
         //filter the courses list
         this.courses = this.courses.filter((c, i) => i != key);
@@ -288,50 +292,59 @@ export default {
       //false otherwise
       var now = new Date(Date.now());
       var sd = course.start_date.split("-")[2];
-      var sm = course.start_date.split("-")[1]-1;
+      var sm = course.start_date.split("-")[1] - 1;
       var sy = course.start_date.split("-")[0];
       var ed = course.end_date.split("-")[2];
-      var em = course.end_date.split("-")[1]-1;
+      var em = course.end_date.split("-")[1] - 1;
       var ey = course.end_date.split("-")[0];
 
-      var start = new Date(sy, sm, sd, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
-      var end = new Date(ey, em, ed, now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+      var start = new Date(
+        sy,
+        sm,
+        sd,
+        now.getHours(),
+        now.getMinutes(),
+        now.getSeconds(),
+        now.getMilliseconds()
+      );
+      var end = new Date(
+        ey,
+        em,
+        ed,
+        now.getHours(),
+        now.getMinutes(),
+        now.getSeconds(),
+        now.getMilliseconds()
+      );
 
-      if(end >= now) {
+      if (end >= now) {
         //before end of course, day of the end
-        if(start <= now) {
+        if (start <= now) {
           //after start of course, day of start
           return true;
-        }
-        else {
+        } else {
           return false;
         }
-      }
-      else{
+      } else {
         //after end of course
         return false;
       }
-
     },
     sortCourses() {
       //get sort method and call it
-      if(this.sort == 0) {
+      if (this.sort == 0) {
         //startDate
         this.sortByStartDate();
-      }
-      else if (this.sort == 1) {
+      } else if (this.sort == 1) {
         //endDate
         this.sortByEndDate();
-      }
-      else if (this.sort == 2) {
+      } else if (this.sort == 2) {
         //nextDueProblem
         this.sortByNextProblemDue();
-      }
-      else if(this.sort == 3) {
+      } else if (this.sort == 3) {
         //name
         this.sortByName();
-      }
-      else {
+      } else {
         //default
         //course ID
         this.sortByID();
@@ -346,12 +359,12 @@ export default {
         //if a should be first return -1, 0 for tie, -1 if b first
         let la = a.start_date.split("-");
         let lb = b.start_date.split("-");
-        let fa = Date.UTC(la[0], la[1]-1, la[2], 0, 0, 0, 0);
-        let fb = Date.UTC(lb[0], lb[1]-1, lb[2], 0, 0, 0, 0);
-        if(fa < fb) {
+        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+        if (fa < fb) {
           return -1;
         }
-        if(fa > fb) {
+        if (fa > fb) {
           return 1;
         }
         return 0;
@@ -363,12 +376,12 @@ export default {
         //if a should be first return -1, 0 for tie, -1 if b first
         let la = a.end_date.split("-");
         let lb = b.end_date.split("-");
-        let fa = Date.UTC(la[0], la[1]-1, la[2], 0, 0, 0, 0);
-        let fb = Date.UTC(lb[0], lb[1]-1, lb[2], 0, 0, 0, 0);
-        if(fa < fb) {
+        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+        if (fa < fb) {
           return -1;
         }
-        if(fa > fb) {
+        if (fa > fb) {
           return 1;
         }
         return 0;
@@ -383,7 +396,7 @@ export default {
       this.unfilteredCourses.sort((a, b) => {
         let fa = a.name.toLowerCase();
         let fb = b.name.toLowerCase();
-        if(fa < fb) {
+        if (fa < fb) {
           return -1;
         }
         if (fa > fb) {
