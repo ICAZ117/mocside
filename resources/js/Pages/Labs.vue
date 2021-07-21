@@ -637,6 +637,10 @@ export default defineComponent({
   },
   async mounted() {
     console.log("Mounted");
+  },
+  async beforeMount() {
+    console.log("Before Mount");
+    this.childisOpen = false;
     await this.getLabs();
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
@@ -645,11 +649,6 @@ export default defineComponent({
       await this.getStudentObject();
       await this.getGrades();
     }
-  },
-  async beforeMount() {
-    console.log("Before Mount");
-    this.childisOpen = false;
-
     console.log("HELLO");
   },
   beforeUnmount() {
