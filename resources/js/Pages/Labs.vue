@@ -99,8 +99,11 @@
         </table>
       </tab-panel>
       <tab-panel :val="'Grades'">
-        <div style="border: 1px solid #9e9e9e !important">
-          <table class="table problemtable">
+        <div
+          class="table problemtable"
+          style="border: 1px solid #9e9e9e !important; padding: 0 !important"
+        >
+          <table>
             <thead class="problemtable" style="border: none !important">
               <tr>
                 <th><i class="fas fa-grin-alt spacer"></i></th>
