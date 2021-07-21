@@ -3,6 +3,7 @@
 IMPORTANT
 * Email Confirmation ( For future, not this week)
 * Password Reset ( For future, not this work)
+* Configure/Add SSL(i.e. https)
 
 
 ADD PAGES
@@ -20,6 +21,7 @@ ADD PAGES
 
 
 NEXT UP
+* turn browser alerts into custom modals
 * Fixing the url routing issue
 * deleting some problems has not reset their copies copy id when needed...ie delete 14 when it has copies should make the first copy switch copy id to itself, ie 45's copy id becomes 45
 * some test cases have the wrong assignment id....where did this happen....perhaps when deleting the original/copies?
@@ -51,3 +53,5 @@ FINAL
 * Fill Homepage with necessary information
 * complete bug fixing and Testing
 * resolve all the errors on page loading
+* turn into production build
+* remove the need to add port 8000 to the url
