@@ -102,7 +102,7 @@
         <table class="table problemtable">
           <thead class="problemtable" style="border: none !important">
             <tr>
-              <th><i class="fas fa-grin-alt spacer"></i></th>
+              <!-- <th><i class="fas fa-grin-alt spacer"></i></th> -->
               <th>Lab Name</th>
               <th># Problems</th>
               <th>% Complete</th>
@@ -117,12 +117,12 @@
             <template v-for="(lab, index) in grades.labs" :key="index">
               <!-- Regular table row -->
               <tr class="problem pointer" @click="toggleExpansion(lab.id)">
-                <td v-show="!isExpanded(lab.id)">
+                <!-- <td v-if="!isExpanded(lab.id)">
                   <i class="fas fa-chevron-right"></i>
                 </td>
-                <td v-show="isExpanded(lab.id)">
+                <td v-if="isExpanded(lab.id)">
                   <i class="fas fa-chevron-down"></i>
-                </td>
+                </td> -->
                 <td>{{ lab.name }}</td>
                 <td>{{ lab.numProblems }}</td>
                 <td>{{ lab.percentComplete }}</td>
@@ -160,9 +160,7 @@
                       :key="key"
                     >
                       <tr class="lab pointer">
-                        <td>
-                          <a>{{ problems[problem.problemID].name }}</a>
-                        </td>
+                        <td>{{ problems[problem.problemID].name }}</td>
                         <td>{{ problems[problem.problemID].test_cases }}</td>
                         <td>{{ problems[problem.problemID].passed }}</td>
                         <td>{{ problems[problem.problemID].due_date }}</td>
@@ -174,7 +172,10 @@
                               ? 0
                               : problem.grade == undefined
                               ? 0
-                              : parseInt((problem.grade / problems[problem.problemID].worth) * 10000) * 0.01
+                              : parseInt(
+                                  (problem.grade / problems[problem.problemID].worth) *
+                                    10000
+                                ) * 0.01
                           }}%
                         </td>
                       </tr>
@@ -300,6 +301,9 @@ export default defineComponent({
 
       // Get all labs the student is in
       var studentLabs = JSON.parse(this.student.gradebook_labs);
+
+      console.log("BEFORE FOR LOOP");
+      console.log(this.unfilteredLabs.length);
 
       // Loop over all of the labs in the current course
       for (let i = 0; i < this.unfilteredLabs.length; i++) {
@@ -448,7 +452,7 @@ export default defineComponent({
         this.labs = this.labs.filter((l, i) => i != key);
 
         //filter from unfiltered labs
-        this.unfilteredLabs = this.unfilteredLabs.filter(l => l.id != lab.id);
+        this.unfilteredLabs = this.unfilteredLabs.filter((l) => l.id != lab.id);
       }
     },
     async getStudent() {
