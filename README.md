@@ -41,7 +41,7 @@ STYLE FIXES
 * Lab Edit
 * Problems
 * Problem Edit
-* Workspace...specifically the tiptap area not displaying properly
+* Workspace
 * Confirm Delete style message on courses, labs, and problems
 * Fix Carousel
 * Combine Logout, with profile pic, and link to profile page
