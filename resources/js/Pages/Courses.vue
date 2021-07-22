@@ -496,6 +496,9 @@ export default {
       var r = window.location.pathname;
       console.log(r);
       var sub = "/courses";
+      if(r == "/") {
+        console.log("on home page");
+      }
       var c = r.substring(sub.length);
       if (c == "") {
         console.log("just on the courses page");

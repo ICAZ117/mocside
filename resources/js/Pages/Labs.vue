@@ -663,6 +663,7 @@ export default defineComponent({
       var r = window.location.pathname;
       var sub = "/courses";
       var c = r.substring(sub.length);
+      console.log(c);
       if (c == "") {
         console.log("just on the courses page");
         return false;
