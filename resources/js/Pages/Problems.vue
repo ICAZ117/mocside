@@ -324,6 +324,7 @@ export default {
       this.childIsOpen = false;
       this.problemID = null;
       this.refreshPage();
+      console.log("unmounting problems page");
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
       //before doing above check to see if the url is for problems...if it is not then do not call router push
       // i.e. if the url is only to /courses let the unmounting happen without calling the router push
