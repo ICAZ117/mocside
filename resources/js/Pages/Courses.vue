@@ -439,6 +439,8 @@ export default {
       this.childIsOpen = false;
       this.courseID = null;
       var flag = this.refreshPage();
+      console.log("unmounting the labs page");
+      console.log(flag);
       if (flag) {
         this.$router.push({ name: "Courses" });
       }

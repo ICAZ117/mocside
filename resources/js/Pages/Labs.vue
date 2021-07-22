@@ -438,6 +438,8 @@ export default defineComponent({
       this.labID = null;
       this.labName = null;
       var flag = this.refreshPage();
+      console.log("unmounting the problems page");
+      console.log(flag);
       if (flag) {
         this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
       }

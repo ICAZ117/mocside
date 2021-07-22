@@ -324,7 +324,8 @@ export default {
       this.childIsOpen = false;
       this.problemID = null;
       var flag = this.refreshPage();
-      console.log("unmounting problems page");
+      console.log("unmounting workspace page");
+      console.log(flag);
       if (flag) {
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
       }
