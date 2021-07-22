@@ -441,22 +441,8 @@ export default {
         var cID = c[1];
         var path = c[2]; //labs, or edit, and maybe something else
         return true;
-
-        // if (path == "labs") {
-        //   //check if can go there
-        //   if (this.hasLabAccess(cID)) {
-        //     this.goToLabs(cID);
-        //   }
-        // } else if (path == "edit") {
-        //   //check if can go there
-        //   if (this.hasEditAccess(cID)) {
-        //     this.editCourse(cID);
-        //   }
-        // } else {
-        //   console.log(path);
-        // }
       }
-    }
+    },
   },
   computed: {
     isProf: function () {

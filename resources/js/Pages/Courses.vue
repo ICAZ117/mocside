@@ -438,7 +438,10 @@ export default {
     Unmounting() {
       this.childIsOpen = false;
       this.courseID = null;
-      this.$router.push({ name: "Courses" });
+      var flag = this.refreshPage();
+      if (flag) {
+        this.$router.push({ name: "Courses" });
+      }
     },
     async courseEdited() {
       ///update the list of courses
@@ -487,6 +490,23 @@ export default {
         } else {
           console.log(path);
         }
+      }
+    },
+    async refreshPage() {
+      var r = window.location.pathname;
+      console.log(r);
+      var sub = "/courses";
+      var c = r.substring(sub.length);
+      if (c == "") {
+        console.log("just on the courses page");
+        return false;
+        //don't allow the page to refresh to stop it from overriding the courses nav button push
+      } else {
+        console.log("on this page: " + c);
+        var c = c.split("/");
+        var cID = c[1];
+        var path = c[2]; //labs, or edit, and maybe something else
+        return true;
       }
     },
   },

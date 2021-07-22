@@ -437,7 +437,10 @@ export default defineComponent({
       this.childisOpen = false;
       this.labID = null;
       this.labName = null;
-      this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      var flag = this.refreshPage();
+      if (flag) {
+        this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      }
     },
     async labEdited() {
       ///update the list of courses
@@ -655,6 +658,22 @@ export default defineComponent({
       this.unfilteredLabs.sort((a, b) => {
         return a.id - b.id;
       });
+    },
+    async refreshPage() {
+      var r = window.location.pathname;
+      var sub = "/courses";
+      var c = r.substring(sub.length);
+      if (c == "") {
+        console.log("just on the courses page");
+        return false;
+        //don't allow the page to refresh to stop it from overriding the courses nav button push
+      } else {
+        console.log("on this page: " + c);
+        var c = c.split("/");
+        var cID = c[1];
+        var path = c[2]; //labs, or edit, and maybe something else
+        return true;
+      }
     },
   },
   computed: {
