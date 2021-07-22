@@ -81,9 +81,14 @@ const routes = [
         name: "Register"
     },
     {
-        path: "/create-assignment",
-        component: () => import("../Pages/CreateAssignment.vue"),
-        name: "CreateAssignment"
+        path: "/profile",
+        component: () => import("../Pages/Profile.vue"),
+        name: "Profile"
+    },
+    {
+        path: "/contact",
+        component: () => import("../Pages/Contact.vue"),
+        name: "Contact"
     },
 ]
 
