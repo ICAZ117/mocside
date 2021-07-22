@@ -103,6 +103,7 @@ export default {
 	this.labForm.datePublish = Lab.data.data.publish_date;
   },
   beforeUnmount() {
+    //editlab
     this.$emit("unmounting");
   },
 };

@@ -80,6 +80,7 @@ export default {
   },
 
   beforeUnmount() {
+    //tiptap
     this.editor.destroy();
   },
 };

@@ -230,6 +230,7 @@ export default {
     this.contents = this.username + "@mocside:/usr/src$ ";
   },
   async beforeUnmount() {
+    //console
     if (this.isWaiting || this.isPolling) {
       this.isWaiting = false;
       const res = API.apiClient.delete(`/containers/${this.containerID}`);

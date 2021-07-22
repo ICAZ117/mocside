@@ -136,6 +136,7 @@ export default defineComponent({
     this.getInfo();
   },
   beforeUnmount() {
+    //create assignment
     this.childIsOpen = false;
     this.$emit("problemEdited");
   },

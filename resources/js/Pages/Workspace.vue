@@ -192,6 +192,7 @@ export default {
     }, 1000),
   },
   beforeUnmount() {
+    // workspace
     this.$emit("unmounting");
     this.childIsOpen=false;
   },

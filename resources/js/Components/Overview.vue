@@ -53,6 +53,7 @@ export default {
   beforeMount() {
   },
   beforeUnmount() {
+    //overview
     console.log("overview unmount");
   },
   mounted() {

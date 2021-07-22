@@ -469,6 +469,7 @@ export default {
     console.log(this.problems);
   },
   beforeUnmount() {
+    //problems
     this.$emit("unmounting");
   },
   async mounted() {
