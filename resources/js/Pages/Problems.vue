@@ -323,11 +323,11 @@ export default {
     async Unmounting() {
       this.childIsOpen = false;
       this.problemID = null;
-      this.refreshPage();
+      var flag = this.refreshPage();
       console.log("unmounting problems page");
-      this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
-      //before doing above check to see if the url is for problems...if it is not then do not call router push
-      // i.e. if the url is only to /courses let the unmounting happen without calling the router push
+      if (flag) {
+        this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
+      }
     },
     isExpanded(key) {
       // return this.expandedProblem.indexOf(key) !== -1;
@@ -433,12 +433,14 @@ export default {
       var c = r.substring(sub.length);
       if (c == "") {
         console.log("just on the courses page");
+        return false;
         //don't allow the page to refresh to stop it from overriding the courses nav button push
       } else {
         console.log("on this page: " + c);
         var c = c.split("/");
         var cID = c[1];
         var path = c[2]; //labs, or edit, and maybe something else
+        return true;
 
         // if (path == "labs") {
         //   //check if can go there
