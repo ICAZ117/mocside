@@ -494,7 +494,7 @@ export default {
         }
       }
     },
-    async refreshPage() {
+    refreshPage() {
       var r = window.location.pathname;
       console.log(r);
       var sub = "/courses";

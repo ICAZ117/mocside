@@ -661,7 +661,7 @@ export default defineComponent({
         return a.id - b.id;
       });
     },
-    async refreshPage() {
+    refreshPage() {
       var r = window.location.pathname;
       var sub = "/courses";
       var c = r.substring(sub.length);
