@@ -323,6 +323,7 @@ export default {
     async Unmounting() {
       this.childIsOpen = false;
       this.problemID = null;
+      this.refreshPage();
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
       //before doing above check to see if the url is for problems...if it is not then do not call router push
       // i.e. if the url is only to /courses let the unmounting happen without calling the router push
@@ -425,6 +426,34 @@ export default {
         return a.id - b.id;
       });
     },
+    async refreshPage() {
+      var r = window.location.pathname;
+      var sub = "/courses";
+      var c = r.substring(sub.length);
+      if (c == "") {
+        console.log("just on the courses page");
+        //don't allow the page to refresh to stop it from overriding the courses nav button push
+      } else {
+        console.log("on this page: " + c);
+        var c = c.split("/");
+        var cID = c[1];
+        var path = c[2]; //labs, or edit, and maybe something else
+
+        // if (path == "labs") {
+        //   //check if can go there
+        //   if (this.hasLabAccess(cID)) {
+        //     this.goToLabs(cID);
+        //   }
+        // } else if (path == "edit") {
+        //   //check if can go there
+        //   if (this.hasEditAccess(cID)) {
+        //     this.editCourse(cID);
+        //   }
+        // } else {
+        //   console.log(path);
+        // }
+      }
+    }
   },
   computed: {
     isProf: function () {
