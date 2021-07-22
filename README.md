@@ -21,9 +21,8 @@ ADD PAGES
 
 NEXT UP
 * turn browser alerts into custom modals
-* Fixing the url routing issue
-* deleting some problems has not reset their copies copy id when needed...ie delete 14 when it has copies should make the first copy switch copy id to itself, ie 45's copy id becomes 45
-* some test cases have the wrong assignment id....where did this happen....perhaps when deleting the original/copies?
+* Double check deleting and copy assingments work as intended
+    * some test cases have had the wrong assignment id
 * add modification to Ace-editor, suggestions, autoformat, autocomplete
 
 
