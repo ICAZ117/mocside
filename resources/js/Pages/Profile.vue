@@ -845,4 +845,28 @@ export default {};
 </script>
 
 <style>
+.ms-SideBar {
+    border-right: 1px solid #eaeaea;
+    height: 100%;
+}
+.ms-SideBar, .ms-Nav-compositeLink, .ms-Nav-chevronButton {
+    background: #ffffff;
+}
+.ms-SideBar {
+    width: 216px;
+    display: flex;
+    flex-flow: column;
+    flex: 0 0 auto;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+._1fpbZR736qOaqgAIN9gGBK {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 </style>
