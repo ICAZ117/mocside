@@ -1306,5 +1306,183 @@ element {
   text-overflow: inherit;
   user-select: text;
 }
+._3HmTl9G_MKluuwfWuyO0J8, .AjLALyECJrEbtqlh2aBlw {
+    padding-top: 42px;
+    flex: 0 0 auto;
+    flex-direction: column;
+    flex-wrap: wrap;
+    display: flex;
+}
+._33RjWQzWNXFDdCCtdeDUjk {
+    display: inline-block;
+    overflow-y: auto;
+    flex: 0 0 auto;
+    margin: 8px;
+    height: 320px;
+    box-shadow: rgba(0,0,0,0.133) 0px 5.6px 9.6px 0px,rgba(0,0,0,0.11) 0px 0.3px 0.9px 0px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 0;
+    text-align: center;
+}
+._1XDCqNx_n4Ez1QeDxNJ-k8 {
+    box-sizing: border-box;
+    width: 320px;
+}
+._2Ir9F3qt1wvFKnNA2JO8Bl {
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+    display: block;
+}
+._33RjWQzWNXFDdCCtdeDUjk {
+    text-align: center;
+}
+._3H7wThMl1ShSHlX_YT3PuA {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+._2nd-baVCC6AKRwlR8ux1gf {
+    font-size: 60px;
+    display: inline;
+    color: #3c3c3c;
+}
+.root-154 {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-family: "FabricMDL2Icons-8";
+}
+._1oVqaCmeWBFcK0kwWGqzno {
+    display: grid;
+    flex: 1 0 auto;
+}
+._1T6FLp13cfJXTn7L5mdlmI {
+    min-height: 38px;
+}
+._3x4xLIamuF4iHdRH-QkbZG {
+    max-height: 42px;
+}
+._1TqGKplzl4rCOxGKX1eHRv {
+    display: flex;
+    flex: none;
+    align-content: center;
+    justify-content: center;
+}
+._3uogbvWuQomFdZBkQ9Alwx {
+    padding-top: 8px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 8px;
+    text-decoration: none;
+    color: #0078d4;
+    font-weight: 600;
+}
+.root-155 {
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+    font-size: inherit;
+    font-weight: inherit;
+    color: rgb(0, 120, 212);
+    outline: currentcolor none medium;
+    text-decoration: none;
+}
+._39mRZigKanqUmAgU8Uuxf7 {
+    font-size: xx-small;
+    margin-right: 8px;
+    margin-left: 6.01504px;
+    margin-top: 2px;
+    color: var(--themePrimary);
+}
+.root-157 {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-family: "FabricMDL2Icons-3";
+}
+._33RjWQzWNXFDdCCtdeDUjk {
+    display: inline-block;
+    overflow-y: auto;
+    flex: 0 0 auto;
+    margin: 8px;
+    height: 320px;
+    box-shadow: rgba(0,0,0,0.133) 0px 5.6px 9.6px 0px,rgba(0,0,0,0.11) 0px 0.3px 0.9px 0px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 0;
+    text-align: center;
+}
+._1XDCqNx_n4Ez1QeDxNJ-k8 {
+    box-sizing: border-box;
+    width: 320px;
+}
+._2Ir9F3qt1wvFKnNA2JO8Bl {
+    background-color: #ffffff;
+    box-sizing: border-box;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+    display: block;
+}
+._3H7wThMl1ShSHlX_YT3PuA {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+._2nd-baVCC6AKRwlR8ux1gf {
+    font-size: 60px;
+    display: inline;
+    color: #3c3c3c;
+}
+.root-148 {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-family: "FabricMDL2Icons-0";
+}
+._1oVqaCmeWBFcK0kwWGqzno {
+    display: grid;
+    flex: 1 0 auto;
+}
+._1T6FLp13cfJXTn7L5mdlmI {
+    min-height: 38px;
+}
+._3x4xLIamuF4iHdRH-QkbZG {
+    max-height: 42px;
+}
+._1TqGKplzl4rCOxGKX1eHRv {
+    display: flex;
+    flex: none;
+    align-content: center;
+    justify-content: center;
+}
+._3uogbvWuQomFdZBkQ9Alwx {
+    padding-top: 8px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 8px;
+    text-decoration: none;
+    color: #0078d4;
+    font-weight: 600;
+}
+._39mRZigKanqUmAgU8Uuxf7 {
+    font-size: xx-small;
+    margin-right: 8px;
+    margin-left: 6.01504px;
+    margin-top: 2px;
+    color: var(--themePrimary);
+}
+.root-157 {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-family: "FabricMDL2Icons-3";
+}
 </style>
 <!-- https://myaccount.microsoft.com/ for the stlying -->
