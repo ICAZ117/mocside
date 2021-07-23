@@ -1,539 +1,789 @@
 <template>
   <div id="root">
     <div class="ms-Fabric root-56">
-      <div class="ms-SideBar">
-        <div class="ms-FocusZone css-123" data-focuszone-id="FocusZone23">
-          <nav role="navigation" class="ms-Nav root-104">
-            <div class="ms-Nav-group is-expanded">
-              <div class="ms-Nav-groupContent groupContent-112">
-                <ul role="list" class="ms-Nav-navItems navItems-111">
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="Overview"
-                      class="ms-Nav-compositeLink is-selected compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-124
-                        "
-                        href="/"
-                        title="Overview"
-                        aria-current="page"
-                        data-is-focusable="true"
-                        tabindex="0"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="Contact"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-130
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons-0'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            Overview
-                          </div></span
-                        ></a
+      <div class="ms-AppBody _1B7WmFAcjUVjbmeGSDGglO">
+        <div class="ms-SideBar">
+          <div class="ms-FocusZone css-123" data-focuszone-id="FocusZone23">
+            <nav role="navigation" class="ms-Nav root-104">
+              <div class="ms-Nav-group is-expanded">
+                <div class="ms-Nav-groupContent groupContent-112">
+                  <ul role="list" class="ms-Nav-navItems navItems-111">
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="Overview"
+                        class="ms-Nav-compositeLink is-selected compositeLink-106"
                       >
-                    </div>
-                  </li>
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="Security info"
-                      class="ms-Nav-compositeLink compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-131
-                        "
-                        href="https://mysignins.microsoft.com/security-info?tenant=13b07243-d8ee-44a8-a2b5-afb4e61142e6&amp;upn=srobinson6%40mocs.flsouthern.edu"
-                        title="Security info"
-                        data-is-focusable="true"
-                        tabindex="-1"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="EditContact"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-132
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons-8'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            Security info
-                          </div></span
-                        ></a
-                      >
-                    </div>
-                  </li>
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="Devices"
-                      class="ms-Nav-compositeLink compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-131
-                        "
-                        href="/device-list"
-                        title="Devices"
-                        data-is-focusable="true"
-                        tabindex="-1"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="System"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-130
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons-0'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            Devices
-                          </div></span
-                        ></a
-                      >
-                    </div>
-                  </li>
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="Password"
-                      class="ms-Nav-compositeLink compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-131
-                        "
-                        href="https://account.activedirectory.windowsazure.com/ChangePassword.aspx"
-                        title="Password"
-                        data-is-focusable="true"
-                        tabindex="-1"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="Permissions"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-133
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons-2'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            Password
-                          </div></span
-                        ></a
-                      >
-                    </div>
-                  </li>
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="Organizations"
-                      class="ms-Nav-compositeLink compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-131
-                        "
-                        href="/organizations"
-                        title="Organizations"
-                        data-is-focusable="true"
-                        tabindex="-1"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="Work"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-93
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons-1'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            Organizations
-                          </div></span
-                        ></a
-                      >
-                    </div>
-                  </li>
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="Settings &amp; Privacy"
-                      class="ms-Nav-compositeLink compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-131
-                        "
-                        href="/settingsandprivacy"
-                        title="Settings &amp; Privacy"
-                        data-is-focusable="true"
-                        tabindex="-1"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="Settings"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-89
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            Settings &amp; Privacy
-                          </div></span
-                        ></a
-                      >
-                    </div>
-                  </li>
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="My sign-ins"
-                      class="ms-Nav-compositeLink compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-131
-                        "
-                        href="https://mysignins.microsoft.com/"
-                        title="My sign-ins"
-                        data-is-focusable="true"
-                        tabindex="-1"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="Signin"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-134
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons-10'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            My sign-ins
-                          </div></span
-                        ></a
-                      >
-                    </div>
-                  </li>
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="Office apps"
-                      class="ms-Nav-compositeLink compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-131
-                        "
-                        href="https://portal.office.com/account/?ref=MeControl#installs"
-                        title="Office apps"
-                        data-is-focusable="true"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="InstallToDrive"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-134
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons-10'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            Office apps
-                          </div></span
-                        ></a
-                      >
-                    </div>
-                  </li>
-                  <li role="listitem" class="ms-Nav-navItem navItem-110">
-                    <div
-                      name="Subscriptions"
-                      class="ms-Nav-compositeLink compositeLink-106"
-                    >
-                      <a
-                        class="
-                          ms-Button ms-Button--action ms-Button--command
-                          ms-Nav-link
-                          link-131
-                        "
-                        href="https://portal.office.com/account/?ref=MeControl#subscriptions"
-                        title="Subscriptions"
-                        data-is-focusable="true"
-                        ><span
-                          class="ms-Button-flexContainer flexContainer-125"
-                          data-automationid="splitbuttonprimary"
-                          ><i
-                            data-icon-name="PaymentCard"
-                            aria-hidden="true"
-                            class="
-                              ms-Icon
-                              root-32
-                              css-133
-                              ms-Button-icon
-                              icon-127
-                            "
-                            style="font-family: 'FabricMDL2Icons-2'"
-                            ></i
-                          >
-                          <div class="ms-Nav-linkText linkText-105">
-                            Subscriptions
-                          </div></span
-                        ></a
-                      >
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </div>
-      <div class="ms-App _1fpbZR736qOaqgAIN9gGBK" style="">
-        <main class="ms-AccountHome MU0cb49heT0mzaR-Q8W_0">
-          <div class="ms-AccountContainer _1LzHTS-xQqSPISQ41dWHQ5">
-            <div class="ms-AccountContent _25Irmj0L6Vxj1kXPTWNIXQ">
-              <div
-                class="
-                  ms-AccountInfo
-                  _2Ir9F3qt1wvFKnNA2JO8Bl
-                  _1XDCqNx_n4Ez1QeDxNJ-k8
-                  _3HzOFmajEzzy0XcQ2CT533
-                "
-              >
-                <div class="_2_kH5uYurbyn71h4GXxb8N _3y9nrsgl7ig5LC_CCvJuxg">
-                  <div class="ms-tile _1VH979_Xwbt7L9kA-7xF44">
-                    <div
-                      role="heading"
-                      aria-level="1"
-                      class="_2uSoFXmoKnlOY2kgU_DB0b"
-                    >
-                      <div class="_2aETcQs-mxLEgoo3Cm5Kg5">
-                        <div
-                          id="profilePhoto"
+                        <a
                           class="
-                            ms-Persona ms-Persona--size100
-                            _3HT8FeePEEgw1zoDfrvx3c
-                            _3IXlW4hu4Y5OLQ7RP83Qq1
-                            root-135
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-124
                           "
+                          href="/"
+                          title="Overview"
+                          aria-current="page"
+                          data-is-focusable="true"
+                          tabindex="0"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="Contact"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-130
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons-0'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              Overview
+                            </div></span
+                          ></a
                         >
+                      </div>
+                    </li>
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="Security info"
+                        class="ms-Nav-compositeLink compositeLink-106"
+                      >
+                        <a
+                          class="
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-131
+                          "
+                          href="https://mysignins.microsoft.com/security-info?tenant=13b07243-d8ee-44a8-a2b5-afb4e61142e6&amp;upn=srobinson6%40mocs.flsouthern.edu"
+                          title="Security info"
+                          data-is-focusable="true"
+                          tabindex="-1"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="EditContact"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-132
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons-8'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              Security info
+                            </div></span
+                          ></a
+                        >
+                      </div>
+                    </li>
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="Devices"
+                        class="ms-Nav-compositeLink compositeLink-106"
+                      >
+                        <a
+                          class="
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-131
+                          "
+                          href="/device-list"
+                          title="Devices"
+                          data-is-focusable="true"
+                          tabindex="-1"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="System"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-130
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons-0'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              Devices
+                            </div></span
+                          ></a
+                        >
+                      </div>
+                    </li>
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="Password"
+                        class="ms-Nav-compositeLink compositeLink-106"
+                      >
+                        <a
+                          class="
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-131
+                          "
+                          href="https://account.activedirectory.windowsazure.com/ChangePassword.aspx"
+                          title="Password"
+                          data-is-focusable="true"
+                          tabindex="-1"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="Permissions"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-133
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons-2'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              Password
+                            </div></span
+                          ></a
+                        >
+                      </div>
+                    </li>
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="Organizations"
+                        class="ms-Nav-compositeLink compositeLink-106"
+                      >
+                        <a
+                          class="
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-131
+                          "
+                          href="/organizations"
+                          title="Organizations"
+                          data-is-focusable="true"
+                          tabindex="-1"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="Work"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-93
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons-1'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              Organizations
+                            </div></span
+                          ></a
+                        >
+                      </div>
+                    </li>
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="Settings &amp; Privacy"
+                        class="ms-Nav-compositeLink compositeLink-106"
+                      >
+                        <a
+                          class="
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-131
+                          "
+                          href="/settingsandprivacy"
+                          title="Settings &amp; Privacy"
+                          data-is-focusable="true"
+                          tabindex="-1"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="Settings"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-89
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              Settings &amp; Privacy
+                            </div></span
+                          ></a
+                        >
+                      </div>
+                    </li>
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="My sign-ins"
+                        class="ms-Nav-compositeLink compositeLink-106"
+                      >
+                        <a
+                          class="
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-131
+                          "
+                          href="https://mysignins.microsoft.com/"
+                          title="My sign-ins"
+                          data-is-focusable="true"
+                          tabindex="-1"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="Signin"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-134
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons-10'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              My sign-ins
+                            </div></span
+                          ></a
+                        >
+                      </div>
+                    </li>
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="Office apps"
+                        class="ms-Nav-compositeLink compositeLink-106"
+                      >
+                        <a
+                          class="
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-131
+                          "
+                          href="https://portal.office.com/account/?ref=MeControl#installs"
+                          title="Office apps"
+                          data-is-focusable="true"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="InstallToDrive"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-134
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons-10'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              Office apps
+                            </div></span
+                          ></a
+                        >
+                      </div>
+                    </li>
+                    <li role="listitem" class="ms-Nav-navItem navItem-110">
+                      <div
+                        name="Subscriptions"
+                        class="ms-Nav-compositeLink compositeLink-106"
+                      >
+                        <a
+                          class="
+                            ms-Button ms-Button--action ms-Button--command
+                            ms-Nav-link
+                            link-131
+                          "
+                          href="https://portal.office.com/account/?ref=MeControl#subscriptions"
+                          title="Subscriptions"
+                          data-is-focusable="true"
+                          ><span
+                            class="ms-Button-flexContainer flexContainer-125"
+                            data-automationid="splitbuttonprimary"
+                            ><i
+                              data-icon-name="PaymentCard"
+                              aria-hidden="true"
+                              class="
+                                ms-Icon
+                                root-32
+                                css-133
+                                ms-Button-icon
+                                icon-127
+                              "
+                              style="font-family: 'FabricMDL2Icons-2'"
+                              ></i
+                            >
+                            <div class="ms-Nav-linkText linkText-105">
+                              Subscriptions
+                            </div></span
+                          ></a
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div class="ms-App _1fpbZR736qOaqgAIN9gGBK" style="">
+          <main class="ms-AccountHome MU0cb49heT0mzaR-Q8W_0">
+            <div class="ms-AccountContainer _1LzHTS-xQqSPISQ41dWHQ5">
+              <div class="ms-AccountContent _25Irmj0L6Vxj1kXPTWNIXQ">
+                <div
+                  class="
+                    ms-AccountInfo
+                    _2Ir9F3qt1wvFKnNA2JO8Bl
+                    _1XDCqNx_n4Ez1QeDxNJ-k8
+                    _3HzOFmajEzzy0XcQ2CT533
+                  "
+                >
+                  <div class="_2_kH5uYurbyn71h4GXxb8N _3y9nrsgl7ig5LC_CCvJuxg">
+                    <div class="ms-tile _1VH979_Xwbt7L9kA-7xF44">
+                      <div
+                        role="heading"
+                        aria-level="1"
+                        class="_2uSoFXmoKnlOY2kgU_DB0b"
+                      >
+                        <div class="_2aETcQs-mxLEgoo3Cm5Kg5">
                           <div
-                            role="presentation"
-                            class="ms-Persona-coin ms-Persona--size100 coin-142"
+                            id="profilePhoto"
+                            class="
+                              ms-Persona ms-Persona--size100
+                              _3HT8FeePEEgw1zoDfrvx3c
+                              _3IXlW4hu4Y5OLQ7RP83Qq1
+                              root-135
+                            "
                           >
                             <div
                               role="presentation"
-                              class="ms-Persona-imageArea imageArea-144"
+                              class="ms-Persona-coin ms-Persona--size100 coin-142"
                             >
                               <div
-                                class="ms-Persona-initials initials-147"
-                                aria-hidden="true"
+                                role="presentation"
+                                class="ms-Persona-imageArea imageArea-144"
                               >
-                                <i
-                                  data-icon-name="Contact"
+                                <div
+                                  class="ms-Persona-initials initials-147"
                                   aria-hidden="true"
-                                  class="root-148"
-                                  ></i
                                 >
+                                  <i
+                                    data-icon-name="Contact"
+                                    aria-hidden="true"
+                                    class="root-148"
+                                    ></i
+                                  >
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="ms-tileTitle _3H7wThMl1ShSHlX_YT3PuA ms-pii">
-                        <div
-                          class="ms-tileTitle ms-pii _1DlO7YT-A7MA7GWzOk3r9C"
-                        >
-                          Robinson, Stephen C
+                        <div class="ms-tileTitle _3H7wThMl1ShSHlX_YT3PuA ms-pii">
+                          <div
+                            class="ms-tileTitle ms-pii _1DlO7YT-A7MA7GWzOk3r9C"
+                          >
+                            Robinson, Stephen C
+                          </div>
+                        </div>
+                        <div class="_3-lxkLIEcy9ZV5xryvhWA4">
+                          <div class="ms-pii"></div>
+                          <div class="ms-pii"></div>
                         </div>
                       </div>
-                      <div class="_3-lxkLIEcy9ZV5xryvhWA4">
-                        <div class="ms-pii"></div>
-                        <div class="ms-pii"></div>
+                    </div>
+                    <div class="ms-section _2ZmkCLbTig1Cczzu2Git9X">
+                      <div>
+                        <div class="_37Uk-Tx3STFp4GoqKNdUzh">
+                          <i
+                            data-icon-name="mail"
+                            aria-hidden="true"
+                            class="_1lqkYm7WJ860rrFNHhl2yR root-152"
+                            ></i
+                          >
+                          <div class="_2XDGQOKBdLaJt6H53T7VCO">
+                            <span class="ms-pii"
+                              >srobinson6@mocs.flsouthern.edu</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div></div>
+                      <div></div>
+                      <hr class="A3g2AUS_-6P2pInCdZsaH" />
+                      <div class="ms-section _1eRUIjofnyack_GQdJsOdr">
+                        <div class="ms-TooltipHost root-151">
+                          Why can't I edit?
+                          <i
+                            data-icon-name="Info"
+                            role="img"
+                            aria-label="Some details, like your name and job title, may be provided by your IT or human resources department. If you want to update those details, contact them or your admin. <1>Learn more</1>"
+                            tabindex="0"
+                            class="root-152"
+                            ></i
+                          >
+                          <div
+                            id="tooltip45"
+                            style="
+                              position: absolute;
+                              width: 1px;
+                              height: 1px;
+                              margin: -1px;
+                              padding: 0px;
+                              border: 0px none;
+                              overflow: hidden;
+                            "
+                          >
+                            Some details, like your name and job title, may be
+                            provided by your IT or human resources department. If
+                            you want to update those details, contact them or your
+                            admin.
+                            <a
+                              href="https://aka.ms/aadchangeinfocontact"
+                              class="ms-Link root-155"
+                              >Learn more</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="N0JqhjHgKy7LmJOY_fFnM">
+                      <div>
+                        <hr class="A3g2AUS_-6P2pInCdZsaH" />
+                        <button
+                          type="button"
+                          class="ms-Link j1iqEAkjiWSAoYxnzW4lM root-153"
+                        >
+                          Sign out everywhere
+                        </button>
                       </div>
                     </div>
                   </div>
-                  <div class="ms-section _2ZmkCLbTig1Cczzu2Git9X">
-                    <div>
-                      <div class="_37Uk-Tx3STFp4GoqKNdUzh">
-                        <i
-                          data-icon-name="mail"
-                          aria-hidden="true"
-                          class="_1lqkYm7WJ860rrFNHhl2yR root-152"
-                          ></i
-                        >
-                        <div class="_2XDGQOKBdLaJt6H53T7VCO">
-                          <span class="ms-pii"
-                            >srobinson6@mocs.flsouthern.edu</span
-                          >
-                        </div>
+                </div>
+                <div class="_3HmTl9G_MKluuwfWuyO0J8">
+                  <div
+                    class="
+                      ms-AccountInfo ms-tileCard
+                      _2Ir9F3qt1wvFKnNA2JO8Bl
+                      _1XDCqNx_n4Ez1QeDxNJ-k8
+                      _33RjWQzWNXFDdCCtdeDUjk
+                    "
+                  >
+                    <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
+                      <div
+                        class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
+                        role="heading"
+                      >
+                        Security info
                       </div>
+                      <i
+                        data-icon-name="EditContact"
+                        aria-hidden="true"
+                        class="_2nd-baVCC6AKRwlR8ux1gf root-154"
+                        ></i
+                      >
                     </div>
-                    <div></div>
-                    <div></div>
-                    <hr class="A3g2AUS_-6P2pInCdZsaH" />
-                    <div class="ms-section _1eRUIjofnyack_GQdJsOdr">
-                      <div class="ms-TooltipHost root-151">
-                        Why can't I edit?
-                        <i
-                          data-icon-name="Info"
-                          role="img"
-                          aria-label="Some details, like your name and job title, may be provided by your IT or human resources department. If you want to update those details, contact them or your admin. <1>Learn more</1>"
-                          tabindex="0"
-                          class="root-152"
-                          ></i
-                        >
+                    <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
+                      <p class="_1T6FLp13cfJXTn7L5mdlmI">
+                        Keep your verification methods and security info up to
+                        date.
+                      </p>
+                      <div>
                         <div
-                          id="tooltip45"
-                          style="
-                            position: absolute;
-                            width: 1px;
-                            height: 1px;
-                            margin: -1px;
-                            padding: 0px;
-                            border: 0px none;
-                            overflow: hidden;
+                          class="
+                            ms-titleCardAction
+                            _1TqGKplzl4rCOxGKX1eHRv
+                            _3x4xLIamuF4iHdRH-QkbZG
                           "
                         >
-                          Some details, like your name and job title, may be
-                          provided by your IT or human resources department. If
-                          you want to update those details, contact them or your
-                          admin.
                           <a
-                            href="https://aka.ms/aadchangeinfocontact"
-                            class="ms-Link root-155"
-                            >Learn more</a
+                            href="https://mysignins.microsoft.com/security-info?tenant=13b07243-d8ee-44a8-a2b5-afb4e61142e6"
+                            class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
+                            ><p>Update info</p>
+                            <i
+                              data-icon-name="ChevronRightMed"
+                              aria-hidden="true"
+                              class="_39mRZigKanqUmAgU8Uuxf7 root-157"
+                              ></i
+                            ></a
                           >
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="N0JqhjHgKy7LmJOY_fFnM">
-                    <div>
-                      <hr class="A3g2AUS_-6P2pInCdZsaH" />
-                      <button
-                        type="button"
-                        class="ms-Link j1iqEAkjiWSAoYxnzW4lM root-153"
+                  <div
+                    class="
+                      ms-AccountInfo ms-tileCard
+                      _2Ir9F3qt1wvFKnNA2JO8Bl
+                      _1XDCqNx_n4Ez1QeDxNJ-k8
+                      _33RjWQzWNXFDdCCtdeDUjk
+                    "
+                  >
+                    <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
+                      <div
+                        class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
+                        role="heading"
                       >
-                        Sign out everywhere
-                      </button>
+                        Devices
+                      </div>
+                      <i
+                        data-icon-name="System"
+                        aria-hidden="true"
+                        class="_2nd-baVCC6AKRwlR8ux1gf root-148"
+                        ></i
+                      >
+                    </div>
+                    <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
+                      <p class="_1T6FLp13cfJXTn7L5mdlmI">
+                        Disable a lost device and review your connected devices.
+                      </p>
+                      <div>
+                        <div
+                          class="
+                            ms-titleCardAction
+                            _1TqGKplzl4rCOxGKX1eHRv
+                            _3x4xLIamuF4iHdRH-QkbZG
+                          "
+                        >
+                          <a class="_3uogbvWuQomFdZBkQ9Alwx" href="/device-list"
+                            ><p>Manage devices</p>
+                            <i
+                              data-icon-name="ChevronRightMed"
+                              aria-hidden="true"
+                              class="_39mRZigKanqUmAgU8Uuxf7 root-157"
+                              ></i
+                            ></a
+                          >
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="_3HmTl9G_MKluuwfWuyO0J8">
-                <div
-                  class="
-                    ms-AccountInfo ms-tileCard
-                    _2Ir9F3qt1wvFKnNA2JO8Bl
-                    _1XDCqNx_n4Ez1QeDxNJ-k8
-                    _33RjWQzWNXFDdCCtdeDUjk
-                  "
-                >
-                  <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
-                    <div
-                      class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
-                      role="heading"
-                    >
-                      Security info
-                    </div>
-                    <i
-                      data-icon-name="EditContact"
-                      aria-hidden="true"
-                      class="_2nd-baVCC6AKRwlR8ux1gf root-154"
-                      ></i
-                    >
-                  </div>
-                  <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
-                    <p class="_1T6FLp13cfJXTn7L5mdlmI">
-                      Keep your verification methods and security info up to
-                      date.
-                    </p>
-                    <div>
+                <div class="AjLALyECJrEbtqlh2aBlw">
+                  <div
+                    class="
+                      ms-AccountInfo ms-tileCard
+                      _2Ir9F3qt1wvFKnNA2JO8Bl
+                      _1XDCqNx_n4Ez1QeDxNJ-k8
+                      _33RjWQzWNXFDdCCtdeDUjk
+                    "
+                  >
+                    <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
                       <div
-                        class="
-                          ms-titleCardAction
-                          _1TqGKplzl4rCOxGKX1eHRv
-                          _3x4xLIamuF4iHdRH-QkbZG
-                        "
+                        class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
+                        role="heading"
                       >
-                        <a
-                          href="https://mysignins.microsoft.com/security-info?tenant=13b07243-d8ee-44a8-a2b5-afb4e61142e6"
-                          class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
-                          ><p>Update info</p>
-                          <i
-                            data-icon-name="ChevronRightMed"
-                            aria-hidden="true"
-                            class="_39mRZigKanqUmAgU8Uuxf7 root-157"
-                            ></i
-                          ></a
+                        Password
+                      </div>
+                      <i
+                        data-icon-name="Permissions"
+                        aria-hidden="true"
+                        class="_2nd-baVCC6AKRwlR8ux1gf root-158"
+                        ></i
+                      >
+                    </div>
+                    <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
+                      <p class="_1T6FLp13cfJXTn7L5mdlmI">
+                        Make your password stronger, or change it if someone else
+                        knows it.
+                      </p>
+                      <div>
+                        <div
+                          class="
+                            ms-titleCardAction
+                            _1TqGKplzl4rCOxGKX1eHRv
+                            _3x4xLIamuF4iHdRH-QkbZG
+                          "
                         >
+                          <a
+                            href="https://account.activedirectory.windowsazure.com/ChangePassword.aspx"
+                            class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
+                            ><p>Change password</p>
+                            <i
+                              data-icon-name="ChevronRightMed"
+                              aria-hidden="true"
+                              class="_39mRZigKanqUmAgU8Uuxf7 root-157"
+                              ></i
+                            ></a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="
+                      ms-AccountInfo ms-tileCard
+                      _2Ir9F3qt1wvFKnNA2JO8Bl
+                      _1XDCqNx_n4Ez1QeDxNJ-k8
+                      _33RjWQzWNXFDdCCtdeDUjk
+                    "
+                  >
+                    <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
+                      <div
+                        class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
+                        role="heading"
+                      >
+                        Organizations
+                      </div>
+                      <i
+                        data-icon-name="Work"
+                        aria-hidden="true"
+                        class="_2nd-baVCC6AKRwlR8ux1gf root-159"
+                        ></i
+                      >
+                    </div>
+                    <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
+                      <p class="_1T6FLp13cfJXTn7L5mdlmI">
+                        See all the organizations that you're a part of.
+                      </p>
+                      <div>
+                        <div
+                          class="
+                            ms-titleCardAction
+                            _1TqGKplzl4rCOxGKX1eHRv
+                            _3x4xLIamuF4iHdRH-QkbZG
+                          "
+                        >
+                          <a class="_3uogbvWuQomFdZBkQ9Alwx" href="/organizations"
+                            ><p>Manage Organizations</p>
+                            <i
+                              data-icon-name="ChevronRightMed"
+                              aria-hidden="true"
+                              class="_39mRZigKanqUmAgU8Uuxf7 root-157"
+                              ></i
+                            ></a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="_1_U2HSzT64ci2CiZ7QbRLx">
+                  <div
+                    class="
+                      ms-AccountInfo ms-tileCard
+                      _2Ir9F3qt1wvFKnNA2JO8Bl
+                      _1XDCqNx_n4Ez1QeDxNJ-k8
+                      _33RjWQzWNXFDdCCtdeDUjk
+                    "
+                  >
+                    <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
+                      <div
+                        class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
+                        role="heading"
+                      >
+                        Settings &amp; Privacy
+                      </div>
+                      <i
+                        data-icon-name="Settings"
+                        aria-hidden="true"
+                        class="_2nd-baVCC6AKRwlR8ux1gf root-152"
+                        ></i
+                      >
+                    </div>
+                    <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
+                      <p class="_1T6FLp13cfJXTn7L5mdlmI">
+                        Personalize your account settings and see how your data is
+                        used.
+                      </p>
+                      <div>
+                        <div
+                          class="
+                            ms-titleCardAction
+                            _1TqGKplzl4rCOxGKX1eHRv
+                            _3x4xLIamuF4iHdRH-QkbZG
+                          "
+                        >
+                          <a
+                            class="_3uogbvWuQomFdZBkQ9Alwx"
+                            href="/settingsandprivacy"
+                            ><p>View settings and privacy</p>
+                            <i
+                              data-icon-name="ChevronRightMed"
+                              aria-hidden="true"
+                              class="_39mRZigKanqUmAgU8Uuxf7 root-157"
+                              ></i
+                            ></a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="
+                      ms-AccountInfo ms-tileCard
+                      _2Ir9F3qt1wvFKnNA2JO8Bl
+                      _1XDCqNx_n4Ez1QeDxNJ-k8
+                      _33RjWQzWNXFDdCCtdeDUjk
+                    "
+                  >
+                    <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
+                      <div
+                        class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
+                        role="heading"
+                      >
+                        My sign-ins
+                      </div>
+                      <i
+                        data-icon-name="Signin"
+                        aria-hidden="true"
+                        class="_2nd-baVCC6AKRwlR8ux1gf root-160"
+                        ></i
+                      >
+                    </div>
+                    <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
+                      <p class="_1T6FLp13cfJXTn7L5mdlmI">
+                        See when and where you’ve signed in and check if anything
+                        looks unusual.
+                      </p>
+                      <div>
+                        <div
+                          class="
+                            ms-titleCardAction
+                            _1TqGKplzl4rCOxGKX1eHRv
+                            _3x4xLIamuF4iHdRH-QkbZG
+                          "
+                        >
+                          <a
+                            href="https://mysignins.microsoft.com/"
+                            class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
+                            ><p>Review recent activity</p>
+                            <i
+                              data-icon-name="ChevronRightMed"
+                              aria-hidden="true"
+                              class="_39mRZigKanqUmAgU8Uuxf7 root-157"
+                              ></i
+                            ></a
+                          >
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -551,217 +801,18 @@
                       class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
                       role="heading"
                     >
-                      Devices
+                      Office apps
                     </div>
                     <i
-                      data-icon-name="System"
-                      aria-hidden="true"
-                      class="_2nd-baVCC6AKRwlR8ux1gf root-148"
-                      ></i
-                    >
-                  </div>
-                  <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
-                    <p class="_1T6FLp13cfJXTn7L5mdlmI">
-                      Disable a lost device and review your connected devices.
-                    </p>
-                    <div>
-                      <div
-                        class="
-                          ms-titleCardAction
-                          _1TqGKplzl4rCOxGKX1eHRv
-                          _3x4xLIamuF4iHdRH-QkbZG
-                        "
-                      >
-                        <a class="_3uogbvWuQomFdZBkQ9Alwx" href="/device-list"
-                          ><p>Manage devices</p>
-                          <i
-                            data-icon-name="ChevronRightMed"
-                            aria-hidden="true"
-                            class="_39mRZigKanqUmAgU8Uuxf7 root-157"
-                            ></i
-                          ></a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="AjLALyECJrEbtqlh2aBlw">
-                <div
-                  class="
-                    ms-AccountInfo ms-tileCard
-                    _2Ir9F3qt1wvFKnNA2JO8Bl
-                    _1XDCqNx_n4Ez1QeDxNJ-k8
-                    _33RjWQzWNXFDdCCtdeDUjk
-                  "
-                >
-                  <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
-                    <div
-                      class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
-                      role="heading"
-                    >
-                      Password
-                    </div>
-                    <i
-                      data-icon-name="Permissions"
-                      aria-hidden="true"
-                      class="_2nd-baVCC6AKRwlR8ux1gf root-158"
-                      ></i
-                    >
-                  </div>
-                  <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
-                    <p class="_1T6FLp13cfJXTn7L5mdlmI">
-                      Make your password stronger, or change it if someone else
-                      knows it.
-                    </p>
-                    <div>
-                      <div
-                        class="
-                          ms-titleCardAction
-                          _1TqGKplzl4rCOxGKX1eHRv
-                          _3x4xLIamuF4iHdRH-QkbZG
-                        "
-                      >
-                        <a
-                          href="https://account.activedirectory.windowsazure.com/ChangePassword.aspx"
-                          class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
-                          ><p>Change password</p>
-                          <i
-                            data-icon-name="ChevronRightMed"
-                            aria-hidden="true"
-                            class="_39mRZigKanqUmAgU8Uuxf7 root-157"
-                            ></i
-                          ></a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="
-                    ms-AccountInfo ms-tileCard
-                    _2Ir9F3qt1wvFKnNA2JO8Bl
-                    _1XDCqNx_n4Ez1QeDxNJ-k8
-                    _33RjWQzWNXFDdCCtdeDUjk
-                  "
-                >
-                  <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
-                    <div
-                      class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
-                      role="heading"
-                    >
-                      Organizations
-                    </div>
-                    <i
-                      data-icon-name="Work"
-                      aria-hidden="true"
-                      class="_2nd-baVCC6AKRwlR8ux1gf root-159"
-                      ></i
-                    >
-                  </div>
-                  <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
-                    <p class="_1T6FLp13cfJXTn7L5mdlmI">
-                      See all the organizations that you're a part of.
-                    </p>
-                    <div>
-                      <div
-                        class="
-                          ms-titleCardAction
-                          _1TqGKplzl4rCOxGKX1eHRv
-                          _3x4xLIamuF4iHdRH-QkbZG
-                        "
-                      >
-                        <a class="_3uogbvWuQomFdZBkQ9Alwx" href="/organizations"
-                          ><p>Manage Organizations</p>
-                          <i
-                            data-icon-name="ChevronRightMed"
-                            aria-hidden="true"
-                            class="_39mRZigKanqUmAgU8Uuxf7 root-157"
-                            ></i
-                          ></a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="_1_U2HSzT64ci2CiZ7QbRLx">
-                <div
-                  class="
-                    ms-AccountInfo ms-tileCard
-                    _2Ir9F3qt1wvFKnNA2JO8Bl
-                    _1XDCqNx_n4Ez1QeDxNJ-k8
-                    _33RjWQzWNXFDdCCtdeDUjk
-                  "
-                >
-                  <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
-                    <div
-                      class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
-                      role="heading"
-                    >
-                      Settings &amp; Privacy
-                    </div>
-                    <i
-                      data-icon-name="Settings"
-                      aria-hidden="true"
-                      class="_2nd-baVCC6AKRwlR8ux1gf root-152"
-                      ></i
-                    >
-                  </div>
-                  <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
-                    <p class="_1T6FLp13cfJXTn7L5mdlmI">
-                      Personalize your account settings and see how your data is
-                      used.
-                    </p>
-                    <div>
-                      <div
-                        class="
-                          ms-titleCardAction
-                          _1TqGKplzl4rCOxGKX1eHRv
-                          _3x4xLIamuF4iHdRH-QkbZG
-                        "
-                      >
-                        <a
-                          class="_3uogbvWuQomFdZBkQ9Alwx"
-                          href="/settingsandprivacy"
-                          ><p>View settings and privacy</p>
-                          <i
-                            data-icon-name="ChevronRightMed"
-                            aria-hidden="true"
-                            class="_39mRZigKanqUmAgU8Uuxf7 root-157"
-                            ></i
-                          ></a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="
-                    ms-AccountInfo ms-tileCard
-                    _2Ir9F3qt1wvFKnNA2JO8Bl
-                    _1XDCqNx_n4Ez1QeDxNJ-k8
-                    _33RjWQzWNXFDdCCtdeDUjk
-                  "
-                >
-                  <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
-                    <div
-                      class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
-                      role="heading"
-                    >
-                      My sign-ins
-                    </div>
-                    <i
-                      data-icon-name="Signin"
+                      data-icon-name="InstallToDrive"
                       aria-hidden="true"
                       class="_2nd-baVCC6AKRwlR8ux1gf root-160"
-                      ></i
+                      ></i
                     >
                   </div>
                   <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
                     <p class="_1T6FLp13cfJXTn7L5mdlmI">
-                      See when and where you’ve signed in and check if anything
-                      looks unusual.
+                      Install and manage Office applications
                     </p>
                     <div>
                       <div
@@ -772,9 +823,9 @@
                         "
                       >
                         <a
-                          href="https://mysignins.microsoft.com/"
+                          href="https://portal.office.com/account/?ref=MeControl#installs"
                           class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
-                          ><p>Review recent activity</p>
+                          ><p>Manage</p>
                           <i
                             data-icon-name="ChevronRightMed"
                             aria-hidden="true"
@@ -786,109 +837,60 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                class="
-                  ms-AccountInfo ms-tileCard
-                  _2Ir9F3qt1wvFKnNA2JO8Bl
-                  _1XDCqNx_n4Ez1QeDxNJ-k8
-                  _33RjWQzWNXFDdCCtdeDUjk
-                "
-              >
-                <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
-                  <div
-                    class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
-                    role="heading"
-                  >
-                    Office apps
-                  </div>
-                  <i
-                    data-icon-name="InstallToDrive"
-                    aria-hidden="true"
-                    class="_2nd-baVCC6AKRwlR8ux1gf root-160"
-                    ></i
-                  >
-                </div>
-                <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
-                  <p class="_1T6FLp13cfJXTn7L5mdlmI">
-                    Install and manage Office applications
-                  </p>
-                  <div>
+                <div
+                  class="
+                    ms-AccountInfo ms-tileCard
+                    _2Ir9F3qt1wvFKnNA2JO8Bl
+                    _1XDCqNx_n4Ez1QeDxNJ-k8
+                    _33RjWQzWNXFDdCCtdeDUjk
+                  "
+                >
+                  <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
                     <div
-                      class="
-                        ms-titleCardAction
-                        _1TqGKplzl4rCOxGKX1eHRv
-                        _3x4xLIamuF4iHdRH-QkbZG
-                      "
+                      class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
+                      role="heading"
                     >
-                      <a
-                        href="https://portal.office.com/account/?ref=MeControl#installs"
-                        class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
-                        ><p>Manage</p>
-                        <i
-                          data-icon-name="ChevronRightMed"
-                          aria-hidden="true"
-                          class="_39mRZigKanqUmAgU8Uuxf7 root-157"
-                          ></i
-                        ></a
-                      >
+                      Subscriptions
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="
-                  ms-AccountInfo ms-tileCard
-                  _2Ir9F3qt1wvFKnNA2JO8Bl
-                  _1XDCqNx_n4Ez1QeDxNJ-k8
-                  _33RjWQzWNXFDdCCtdeDUjk
-                "
-              >
-                <div class="ms-tileCardHeader _1DwImtbwHcMHncGmPg6GJq">
-                  <div
-                    class="_3H7wThMl1ShSHlX_YT3PuA _17gOLKQ-NSUlILXHyM_moy"
-                    role="heading"
-                  >
-                    Subscriptions
-                  </div>
-                  <i
-                    data-icon-name="PaymentCard"
-                    aria-hidden="true"
-                    class="_2nd-baVCC6AKRwlR8ux1gf root-158"
-                    ></i
-                  >
-                </div>
-                <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
-                  <p class="_1T6FLp13cfJXTn7L5mdlmI">
-                    Licenses assigned to you
-                  </p>
-                  <div>
-                    <div
-                      class="
-                        ms-titleCardAction
-                        _1TqGKplzl4rCOxGKX1eHRv
-                        _3x4xLIamuF4iHdRH-QkbZG
-                      "
+                    <i
+                      data-icon-name="PaymentCard"
+                      aria-hidden="true"
+                      class="_2nd-baVCC6AKRwlR8ux1gf root-158"
+                      ></i
                     >
-                      <a
-                        href="https://portal.office.com/account/?ref=MeControl#subscriptions"
-                        class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
-                        ><p>View</p>
-                        <i
-                          data-icon-name="ChevronRightMed"
-                          aria-hidden="true"
-                          class="_39mRZigKanqUmAgU8Uuxf7 root-157"
-                          ></i
-                        ></a
+                  </div>
+                  <div class="ms-tileCardDescription _1oVqaCmeWBFcK0kwWGqzno">
+                    <p class="_1T6FLp13cfJXTn7L5mdlmI">
+                      Licenses assigned to you
+                    </p>
+                    <div>
+                      <div
+                        class="
+                          ms-titleCardAction
+                          _1TqGKplzl4rCOxGKX1eHRv
+                          _3x4xLIamuF4iHdRH-QkbZG
+                        "
                       >
+                        <a
+                          href="https://portal.office.com/account/?ref=MeControl#subscriptions"
+                          class="ms-Link _3uogbvWuQomFdZBkQ9Alwx root-155"
+                          ><p>View</p>
+                          <i
+                            data-icon-name="ChevronRightMed"
+                            aria-hidden="true"
+                            class="_39mRZigKanqUmAgU8Uuxf7 root-157"
+                            ></i
+                          ></a
+                        >
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </main>
-      </div>
+          </main>
+        </div>
+      <div>
     </div>
   </div>
 </template>
@@ -920,6 +922,18 @@ export default {};
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+._1B7WmFAcjUVjbmeGSDGglO {
+  flex: 1;
+  flex-grow: 1;
+  flex-basis: 0%;
+  flex-grow: 1;
+  flex-basis: 0%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  height: auto;
+  overflow: hidden;
 }
 .ms-SideBar {
   border-right: 1px solid #eaeaea;
