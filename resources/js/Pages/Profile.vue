@@ -890,7 +890,7 @@
             </div>
           </main>
         </div>
-      <div>
+      </div>
     </div>
   </div>
 </template>
@@ -924,16 +924,16 @@ export default {};
   flex-direction: column;
 }
 ._1B7WmFAcjUVjbmeGSDGglO {
-  flex: 1;
-  flex-grow: 1;
-  flex-basis: 0%;
-  flex-grow: 1;
-  flex-basis: 0%;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: stretch;
-  height: auto;
-  overflow: hidden;
+    flex: 1;
+        flex-grow: 1;
+        flex-basis: 0%;
+    flex-grow: 1;
+    flex-basis: 0%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    height: auto;
+    overflow: hidden;
 }
 .ms-SideBar {
   border-right: 1px solid #eaeaea;
