@@ -869,4 +869,84 @@ export default {};
     overflow-y: auto;
     overflow-x: hidden;
 }
+.ms-Nav-groupContent {
+    margin: 24px 0;
+}
+.navItems-111 {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+.navItem-110 {
+    padding: 0px;
+}
+.compositeLink-106 {
+    display: block;
+    position: relative;
+    color: rgb(50, 49, 48);
+}
+.ms-SideBar, .ms-Nav-compositeLink, .ms-Nav-chevronButton {
+    background: #ffffff;
+}
+.ms-Nav-compositeLink {
+    margin-bottom: 8px;
+}
+.link-124 {
+    outline: transparent none medium;
+    position: relative;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 0px 20px 0px 3px;
+    border-radius: 2px;
+    height: 44px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(237, 235, 233);
+    width: 100%;
+    line-height: 44px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+}
+.flexContainer-125 {
+    display: flex;
+    height: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.css-130 {
+    font-style: normal;
+    font-weight: normal;
+    font-family: "FabricMDL2Icons-0";
+}
+.icon-127 {
+    font-size: 16px;
+    margin: 0px 4px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    flex-shrink: 0;
+    color: rgb(16, 110, 190);
+}
+.root-32 {
+    display: inline-block;
+}
+.linkText-105 {
+    margin: 0px 4px;
+    overflow: hidden;
+    vertical-align: middle;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+.root-104 .ms-Nav-compositeLink.is-selected .ms-Nav-linkText {
+    color: rgb(0, 112, 199);
+}
 </style>
