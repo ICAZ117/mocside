@@ -1484,5 +1484,36 @@ element {
     font-weight: normal;
     font-family: "FabricMDL2Icons-3";
 }
+._1_U2HSzT64ci2CiZ7QbRLx {
+    padding-top: 42px;
+    flex-direction: column;
+}
+._1_U2HSzT64ci2CiZ7QbRLx {
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    display: flex;
+}
+._1oVqaCmeWBFcK0kwWGqzno {
+    display: grid;
+    flex: 1 0 auto;
+}
+._3H7wThMl1ShSHlX_YT3PuA {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+._2nd-baVCC6AKRwlR8ux1gf {
+    font-size: 60px;
+    display: inline;
+    color: #3c3c3c;
+}
+.root-160 {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-family: "FabricMDL2Icons-10";
+}
+._1T6FLp13cfJXTn7L5mdlmI {
+    min-height: 38px;
+}
 </style>
 <!-- https://myaccount.microsoft.com/ for the stlying -->
