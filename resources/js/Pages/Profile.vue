@@ -1150,9 +1150,6 @@ export default {};
   align-items: stretch;
   width: 100%;
 }
-
-element {
-}
 ._2aETcQs-mxLEgoo3Cm5Kg5 {
   display: flex;
   justify-content: center;
