@@ -949,4 +949,33 @@ export default {};
 .root-104 .ms-Nav-compositeLink.is-selected .ms-Nav-linkText {
     color: rgb(0, 112, 199);
 }
+.link-131 {
+    outline: transparent none medium;
+    position: relative;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 0px 20px 0px 3px;
+    border-radius: 2px;
+    height: 44px;
+    color: rgb(50, 49, 48);
+    background-color: transparent;
+    width: 100%;
+    line-height: 44px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+}
+.css-132 {
+    font-style: normal;
+    font-weight: normal;
+    font-family: "FabricMDL2Icons-8";
+}
 </style>
