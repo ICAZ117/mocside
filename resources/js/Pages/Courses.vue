@@ -52,7 +52,7 @@
       </div>
       <br />
 
-      <div class="coursecontainer">
+      <div class="coursecontainer"  style="position: absolute;">
         <div class="courserow row mb-5">
           <div
             class="fixed-course-width"
@@ -132,7 +132,7 @@
 
 
 
-      <div v-if="showOldCourses" style="top: 500;">
+      <div v-if="showOldCourses" style="position: absolute; top: 500;">
         <h4>Archived Courses</h4>
         <hr />
         <br />
