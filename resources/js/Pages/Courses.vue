@@ -368,7 +368,7 @@ export default {
       }
     },
 
-    seperateCourses() {
+    separateCourses() {
       console.log("HERE");
       //grabs only the courses that are currently in session
       //empty the courses list just in case
@@ -614,7 +614,7 @@ export default {
     // this.enrolledCourses[0] = this.enrolledCourses[1];
     // this.enrolledCourses[1] = temp;
     await this.getCourses();
-    this.seperateCourses();
+    this.separateCourses();
     this.routeToChild();
   },
 };
