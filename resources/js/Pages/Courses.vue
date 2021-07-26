@@ -264,12 +264,12 @@ export default {
         owner_id: this.authUser.fsc_user.fsc_id,
       };
       const course = await API.apiClient.post(`/courses`, payload);
-      this.courseID = course.data.id;
+      this.courseID = course.data.data.id;
       this.enrolledCourses.push(this.courseID);
       this.addProfessor();
       this.childIsOpen = true;
-      this.courses.push(course.data);
-      this.unfilteredCourses.push(course.data);
+      this.courses.push(course.data.data);
+      this.unfilteredCourses.push(course.data.data);
       this.sortCourses(4);
       this.$router.push({
         name: "EditCourse",

@@ -46,7 +46,7 @@ class CourseController extends Controller
             return response()->json([
                 'data' => $course,
                 'message' => "Success."
-            ])
+            ]);
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
