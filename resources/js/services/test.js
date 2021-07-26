@@ -107,3 +107,108 @@ var worth_array = {
         },
     }
 }
+
+var foo = {
+    "type": "doc", 
+    "content": [
+        {
+            "type": "heading", 
+            "attrs": {"level": 3}, 
+            "content": [
+                {
+                    "text": "Problem Statement", 
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "paragraph", 
+            "content": [
+                {
+                    "text": "Read two integers, a and b, and then print their sum.",
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "heading", 
+            "attrs": {"level": 3}, 
+            "content": [
+                {
+                    "text": "Input Description", 
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "paragraph", 
+            "content": [
+                {
+                    "text": "There is one line of input, consisting of two integer values, a and b, such that 0 <= a, b <= 1000.",
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "heading", 
+            "attrs": {
+                "level": 3
+            }, 
+            "content": [
+                {
+                    "text": "Output Description", 
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "paragraph", 
+            "content": [
+                {
+                    "text": "A single integer value, c, the sum of the two input integer values.", 
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "heading", 
+            "attrs": {
+                "level": 3
+            }, 
+            "content": [
+                {
+                    "text": "Sample Input", 
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "codeBlock",
+            "attrs": {
+                "language": null
+            }, "content": [
+                {
+                    "text": "5 8", 
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "heading", 
+            "attrs": {
+                "level": 3
+            }, 
+            "content": [
+                {
+                    "text": "Sample Output", 
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "codeBlock", 
+            "attrs": {
+                "language": null
+            }, 
+            "content": [
+                {
+                    "text": "13", 
+                    "type": "text"
+                }
+            ]
+        }, {
+            "type": "paragraph"
+        }
+    ]
+}
