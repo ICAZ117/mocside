@@ -131,7 +131,7 @@
       <br />
       <br />
       <br />
-      <div>
+      <div v-if="showOldCourses">
         <h4>Old Courses</h4>
         <hr />
         <br />
@@ -368,24 +368,32 @@ export default {
     },
 
     seperateCourses() {
+      console.log("HERE");
       //grabs only the courses that are currently in session
       //empty the courses list just in case
       var currentCourses = [],
         oldCourses = [];
 
       for (let i = 0; i < this.unfilteredCourses.length; i++) {
+        console.log("Inside for-loop");
         if (this.withinDate(this.unfilteredCourses[i])) {
           //if within date
+          console.log("current");
           currentCourses.push(this.unfilteredCourses[i]);
         } else {
+          console.log("old");
           oldCourses.push(this.unfilteredCourses[i]);
         }
       }
+
+      console.log(currentCourses);
+      console.log(oldCourses);
 
       this.courses = {
         currentCourses,
         oldCourses,
       };
+      console.log(this.courses);
     },
     withinDate(course) {
       //return true if the course is still in session
@@ -605,6 +613,7 @@ export default {
     // this.enrolledCourses[0] = this.enrolledCourses[1];
     // this.enrolledCourses[1] = temp;
     this.getCourses();
+    this.seperateCourses();
     this.routeToChild();
   },
 };
