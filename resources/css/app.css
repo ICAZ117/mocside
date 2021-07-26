@@ -603,7 +603,6 @@ hr.courses {
     margin-right: 2rem !important;
     width: 100vw !important;
     display: flex !important;
-    position: absolute;
 }
 
 .courserow {
@@ -616,6 +615,10 @@ hr.courses {
     width: auto !important;
     margin-left: 1rem !important;
     margin-right: 1rem !important;
+}
+
+.oldcourseHeader {
+    margin: 0 1rem!important;
 }
 
 /*============= EDIT COURSES =============*/
