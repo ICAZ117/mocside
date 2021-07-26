@@ -563,8 +563,11 @@ export default defineComponent({
         console.log("student");
         //is student don't show unpublished
         for (let i = 0; i < this.unfilteredLabs.length; i++) {
+          console.log("\n\n\n\n" + i);
           if (this.published(this.unfilteredLabs[i])) {
+            console.log("Lab is published. Checking if it has problems...");
             if (this.unfilteredLabs[i].num_problems > 0) {
+              console.log("Lab does have problems");
               //if within date && at least 1 problem
               this.labs.push(this.unfilteredLabs[i]);
             }
@@ -591,15 +594,18 @@ export default defineComponent({
       var pm = lab.publish_date.split("-")[1] - 1;
       var py = lab.publish_date.split("-")[0];
 
-      var published = new Date(
-        py,
-        pm,
-        pd,
-        now.getHours(),
-        now.getMinutes(),
-        now.getSeconds(),
-        now.getMilliseconds()
-      );
+      // var published = new Date(
+      //   py,
+      //   pm,
+      //   pd,
+      //   now.getHours(),
+      //   now.getMinutes(),
+      //   now.getSeconds(),
+      //   now.getMilliseconds()
+      // );
+
+      var published = new Date(py, pm, pd, 0, 0, 0, 0);
+
       if (published < now) {
         return true;
       }
