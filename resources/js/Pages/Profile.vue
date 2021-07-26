@@ -15,7 +15,12 @@
   </div>
   <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Profile'">
-        Profile
+        {{ user.name }}
+        {{ user.email }}
+        {{ user.screen_name }}
+        {{ user.username }}
+        {{ user.fsc_id }}
+        {{ user.pfp }}
       </tab-panel>
       <tab-panel :val="'Grades'">
         <div
@@ -77,6 +82,14 @@ export default {
       letters: [],
       enrolledCourses: [],
       courses: [],
+      user: {
+        name: "",
+        email: "",
+        pfp: "",
+        fsc_id: "",
+        screen_name: "",
+        username: "",
+      }
     };
   },
   setup() {
@@ -95,6 +108,14 @@ export default {
     };
   },
   methods: {
+    getUser() {
+      this.user.name = this.authUser.name;
+      this.user.email = this.authUser.email;
+      this.user.screen_name = this.authUser.fsc_user.screen_name;
+      this.user.username = this.authUser.username;
+      this.user.fsc_id = this.authUser.fsc_user.id;
+      this.user.pfp = "";
+    },
     getGrades() {
       for(let i = 0; i < this.enrolledCourses.length; i++) {
         var val = JSON.parse(this.student.gradebook_courses).grades[this.enrolledCourses[i]];
@@ -162,6 +183,7 @@ export default {
       await this.getStudentObject();
       await this.getGrades();
     }
+    await this.getUser();
   },
 };
 // * Add profile Page....sorta like a dashboard
