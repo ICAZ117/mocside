@@ -612,7 +612,7 @@ export default {
     // var temp = this.enrolledCourses[0];
     // this.enrolledCourses[0] = this.enrolledCourses[1];
     // this.enrolledCourses[1] = temp;
-    this.getCourses();
+    await this.getCourses();
     this.seperateCourses();
     this.routeToChild();
   },
