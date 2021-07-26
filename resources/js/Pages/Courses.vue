@@ -272,6 +272,8 @@ export default {
       this.courses.push(course.data.data);
       this.unfilteredCourses.push(course.data.data);
       this.sortCourses(4);
+      // init gradebook
+      const gradebook = await API.apiClient.post(`/gradebook/init/${this.courseID}`, { scope: 'course' });
       this.$router.push({
         name: "EditCourse",
         params: { course_id: this.courseID },
