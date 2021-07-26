@@ -90,7 +90,9 @@ export default {
       progress: [],
       username: "",
       student: {},
-      grades: {},
+      grades: [],
+      letters: [],
+      enrolledCourses: [],
     };
   },
   setup() {
@@ -107,6 +109,63 @@ export default {
       tabs,
       ...toRefs(state),
     };
+  },
+  methods: {
+    getGrades() {
+      for(let i = 0; i < this.enrolledCourses.length; i++) {
+        var val = JSON.parse(this.student.gradebook_courses).grades[this.enrolledCourses[i]];
+        this.grades.push(val);
+        if(val >= 90) {
+          this.letters.push("A");
+        }
+        else if (val >= 80) {
+          this.letters.push("B");
+        }
+        else if (val >= 70) {
+          this.letters.push("C");
+        }
+        else if (val >= 60) {
+          this.letters.push("D");
+        }
+        else {
+          this.letters.push("F");
+        }
+      }
+    },
+    async getStudent() {
+      this.authUser = store.getters["auth/authUser"];
+      this.fscID = this.authUser.fsc_user.fsc_id;
+      if (!this.isProf) {
+        const res = await API.apiClient.get(`/progress/${this.fscID}`);
+        this.progress = res.data.data;
+        return this.progress;
+      }
+      return {};
+    },
+    async getStudentObject() {
+      const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
+      this.student = res.data;
+    },
+  },
+  computed: {
+    isProf: function () {
+      if (store.getters["auth/isProf"] == null) {
+        return false;
+      } else {
+        return store.getters["auth/isProf"];
+      }
+    },
+  },
+  async beforeMount() {
+    this.authUser = await store.getters["auth/authUser"];
+    this.username = this.authUser.username;
+    if (this.authUser.fsc_user.courses) {
+      this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
+    }
+    if (!this.isProf) {
+      await this.getStudentObject();
+      await this.getGrades();
+    }
   },
 };
 // * Add profile Page....sorta like a dashboard
