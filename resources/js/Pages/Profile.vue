@@ -27,6 +27,11 @@
 </template>
 
 <script>
+import * as API from "../services/API";
+import store from "../Store/index";
+import { useRoute } from "vue-router";
+import { defineComponent, reactive, toRefs, computed } from "vue";
+
 const tabs = ["Profile", "Grades", "Security"];
 export default {
   setup() {
