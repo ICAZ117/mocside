@@ -39,30 +39,14 @@
             </thead>
             <tbody>
               <!-- Loop over all LABS -->
-              <template v-for="(lab, index) in grades.labs" :key="index">
+              <template v-for="(course, index) in courses" :key="index">
                 <!-- Regular table row -->
-                <tr class="problem pointer" @click="toggleExpansion(lab.labID)">
-                  <td v-if="!isExpanded(lab.labID)">
-                    <i class="fas fa-chevron-right"></i>
-                  </td>
-                  <td v-if="isExpanded(lab.labID)">
-                    <i class="fas fa-chevron-down"></i>
-                  </td>
-                  <td>{{ lab.name }}</td>
-                  <td>{{ lab.numProblems }}</td>
-                  <td>{{ lab.percentComplete }}</td>
-                  <td>{{ lab.dueDate }}</td>
-                  <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
-                  <td>{{ lab.total_points }}</td>
-                  <td>
-                    {{
-                      lab.total_points == 0
-                        ? 0
-                        : lab.grade == undefined
-                        ? 0
-                        : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
-                    }}%
-                  </td>
+                <tr class="problem pointer" >
+                  <td>{{ course.name }}</td>
+                  <td>{{ letters[index] == undefined ? "--" : letters[index] }}</td>
+                  <td>{{ grades[index] == undefined ? "--" : grades[index]+ "%" }}</td>
+                  <td>{{ course.start_date }}</td>
+                  <td>{{ course.end_date }}</td>
                 </tr>
               </template>
             </tbody>
@@ -93,6 +77,7 @@ export default {
       grades: [],
       letters: [],
       enrolledCourses: [],
+      courses: [],
     };
   },
   setup() {
@@ -146,6 +131,15 @@ export default {
       const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
       this.student = res.data;
     },
+    async getCourses() {
+      this.courses = [];
+      for (let i = 0; i < this.enrolledCourses.length; i++) {
+        var cur = this.enrolledCourses[i];
+        const course = await API.apiClient.get(`/courses/${cur}`);
+        this.courses.push(course.data.data);
+      }
+      this.sortCourses(4);
+    },
   },
   computed: {
     isProf: function () {
@@ -162,6 +156,7 @@ export default {
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
+    await this.getCourses();
     if (!this.isProf) {
       await this.getStudentObject();
       await this.getGrades();
