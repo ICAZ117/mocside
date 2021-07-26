@@ -52,7 +52,7 @@
       </div>
       <br />
 
-      <div class="coursecontainer">
+      <div class="coursecontainer"  style="position: absolute;">
         <div class="courserow row mb-5">
           <div
             class="fixed-course-width"
@@ -132,8 +132,8 @@
 
 
 
-      <div v-if="showOldCourses">
-        <h4>Old Courses</h4>
+      <div v-if="showOldCourses" style="position: absolute; top: 500;">
+        <h4>Archived Courses</h4>
         <hr />
         <br />
 
@@ -272,6 +272,8 @@ export default {
       this.courses.push(course.data.data);
       this.unfilteredCourses.push(course.data.data);
       this.sortCourses(4);
+      // init gradebook
+      const gradebook = await API.apiClient.post(`/gradebook/init/${this.courseID}`, { scope: 'course' });
       this.$router.push({
         name: "EditCourse",
         params: { course_id: this.courseID },

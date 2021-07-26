@@ -603,7 +603,7 @@ hr.courses {
     margin-right: 2rem !important;
     width: 100vw !important;
     display: flex !important;
-    flex: content !important;
+    position: absolute;
 }
 
 .courserow {
