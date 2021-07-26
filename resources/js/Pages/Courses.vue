@@ -375,6 +375,7 @@ export default {
         oldCourses = [];
 
       for (let i = 0; i < this.unfilteredCourses.length; i++) {
+        console.log("Inside for-loop");
         if (this.withinDate(this.unfilteredCourses[i])) {
           //if within date
           console.log("current");
