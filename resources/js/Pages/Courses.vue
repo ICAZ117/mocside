@@ -131,7 +131,7 @@
       <br />
       <br />
       <br />
-      <div>
+      <div v-if="showOldCourses">
         <h4>Old Courses</h4>
         <hr />
         <br />
