@@ -53,7 +53,7 @@
       <br />
 
       <div class="coursecontainer">
-        <div class="courserow row my-5">
+        <div class="courserow row mb-5">
           <div
             class="fixed-course-width"
             v-for="(course, key) in courses.currentCourses"
@@ -128,16 +128,17 @@
           </div>
         </div>
       </div>
-      <br />
-      <br />
-      <br />
+
+
+
+
       <div v-if="showOldCourses">
         <h4>Old Courses</h4>
         <hr />
         <br />
 
         <div class="coursecontainer">
-          <div class="courserow row my-5">
+          <div class="courserow row mb-5">
             <div
               class="fixed-course-width"
               v-for="(course, key) in courses.oldCourses"
