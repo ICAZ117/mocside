@@ -111,6 +111,9 @@ export default {
         else if (val >= 60) {
           this.letters.push("D");
         }
+        else if (val == undefined) {
+          this.letters.push("--");
+        }
         else {
           this.letters.push("F");
         }
