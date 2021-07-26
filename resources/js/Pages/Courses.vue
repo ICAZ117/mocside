@@ -14,7 +14,8 @@
       <br />
       <div class="filterSettings">
         <label class="switch">
-          <input type="checkbox" @change="filterByDate()" v-model="filter" />
+          <!-- <input type="checkbox" @change="filterByDate()" v-model="filter" /> -->
+          <input type="checkbox" v-model="showOldCourses" />
           <span class="slider round"></span>
         </label>
         <br />
@@ -48,14 +49,6 @@
             >
           </div>
         </div>
-        <!-- <label for="sort">Sort By: </label>
-        <select id="sort" v-model="sort" @change="sortCourses">
-          <option value="0">Start</option>
-          <option value="1">End</option>
-          <option value="2">Next Problem Due</option>
-          <option value="3">Name</option>
-          <option value="4">Unsorted</option>
-        </select> -->
       </div>
       <br />
 
@@ -63,7 +56,7 @@
         <div class="courserow row my-5">
           <div
             class="fixed-course-width"
-            v-for="(course, key) in courses"
+            v-for="(course, key) in courses.currentCourses"
             :key="course.id"
             :course="course"
           >
@@ -135,6 +128,69 @@
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <div>
+        <h4>Old Courses</h4>
+        <hr />
+        <br />
+
+        <div class="coursecontainer">
+          <div class="courserow row my-5">
+            <div
+              class="fixed-course-width"
+              v-for="(course, key) in courses.oldCourses"
+              :key="course.id"
+              :course="course"
+            >
+              <span
+                :id="course.id"
+                @contextmenu.prevent="showMenu(course.id)"
+                @click.prevent="goToLabs(course.id, course.name)"
+                class="no-decor pointer"
+              >
+                <ul id="menu">
+                  <li class="menu-item">
+                    <a
+                      v-show="isProf"
+                      class="pointer no-decor"
+                      @click="editCourse(course.id)"
+                      >Edit</a
+                    >
+                  </li>
+                  <li class="menu-item">
+                    <a
+                      v-show="isProf"
+                      class="pointer no-decor"
+                      @click="deleteCourse(course.id, course, key)"
+                      >Delete</a
+                    >
+                  </li>
+                </ul>
+                <!-- :to="{ name: 'Labs', params: { id: course.id } }" -->
+                <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                  <div class="card coursecard w-100">
+                    <div
+                      class="courses card-img-top"
+                      :style="{ backgroundImage: `url(${course.img_loc})` }"
+                    ></div>
+                    <div class="courses card-content">
+                      <h6 class="card-title my-3 mx-2 mb-0">{{ course.name }}</h6>
+
+                      <hr class="courses my-0" />
+
+                      <!-- <a href="Labs.vue" class="courselaunch text-danger mx-2 my-1 no-decor"
+                      >Get Started</a
+                    > -->
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <router-view
       @unmounting="Unmounting()"
@@ -168,6 +224,7 @@ export default {
       courseName: "",
       filter: true,
       sort: "4",
+      showOldCourses: false,
     };
   },
   setup() {
@@ -207,12 +264,12 @@ export default {
         owner_id: this.authUser.fsc_user.fsc_id,
       };
       const course = await API.apiClient.post(`/courses`, payload);
-      this.courseID = course.data.id;
+      this.courseID = course.data.data.id;
       this.enrolledCourses.push(this.courseID);
       this.addProfessor();
       this.childIsOpen = true;
-      this.courses.push(course.data);
-      this.unfilteredCourses.push(course.data);
+      this.courses.push(course.data.data);
+      this.unfilteredCourses.push(course.data.data);
       this.sortCourses(4);
       this.$router.push({
         name: "EditCourse",
@@ -308,6 +365,27 @@ export default {
           this.courses.push(this.unfilteredCourses[i]);
         }
       }
+    },
+
+    seperateCourses() {
+      //grabs only the courses that are currently in session
+      //empty the courses list just in case
+      var currentCourses = [],
+        oldCourses = [];
+
+      for (let i = 0; i < this.unfilteredCourses.length; i++) {
+        if (this.withinDate(this.unfilteredCourses[i])) {
+          //if within date
+          currentCourses.push(this.unfilteredCourses[i]);
+        } else {
+          oldCourses.push(this.unfilteredCourses[i]);
+        }
+      }
+
+      this.courses = {
+        currentCourses,
+        oldCourses,
+      };
     },
     withinDate(course) {
       //return true if the course is still in session
@@ -498,11 +576,10 @@ export default {
       var r = window.location.pathname;
       console.log(r);
       var sub = "/courses";
-      if(r == "/") {
+      if (r == "/") {
         console.log("on home page");
         return false;
-      }
-      else {
+      } else {
         return true;
       }
     },
