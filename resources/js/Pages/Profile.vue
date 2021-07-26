@@ -29,7 +29,6 @@
           <table class="table problemtable" style="margin: 0 !important">
             <thead class="problemtable" style="border: none !important">
               <tr>
-                <th><i class="fas fa-grin-alt spacer"></i></th>
                 <th>Course</th>
                 <th>Letter Grade</th>
                 <th>Grade Percentage</th>
