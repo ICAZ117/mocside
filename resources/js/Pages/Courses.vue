@@ -377,11 +377,16 @@ export default {
       for (let i = 0; i < this.unfilteredCourses.length; i++) {
         if (this.withinDate(this.unfilteredCourses[i])) {
           //if within date
+          console.log("current");
           currentCourses.push(this.unfilteredCourses[i]);
         } else {
+          console.log("old");
           oldCourses.push(this.unfilteredCourses[i]);
         }
       }
+
+      console.log(currentCourses);
+      console.log(oldCourses);
 
       this.courses = {
         currentCourses,
