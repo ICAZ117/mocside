@@ -137,7 +137,6 @@ export default {
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
       }
-      this.sortCourses(4);
     },
   },
   computed: {
