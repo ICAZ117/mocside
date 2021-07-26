@@ -37,7 +37,16 @@ class CourseController extends Controller
                 'description' => 'required',
                 'owner_id' => 'required|int',
             ]);
-            return Course::create($validData);
+            $course = Course::create($validData);
+            $roster = array(
+                'roster' => []
+            );
+            $course->roster = json_encode($roster);
+            $course->save();
+            return response()->json([
+                'data' => $course,
+                'message' => "Success."
+            ])
         }
         return  response()->json(["message" => "Forbidden"], 403);
     }
