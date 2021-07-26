@@ -368,6 +368,7 @@ export default {
     },
 
     seperateCourses() {
+      console.log("HERE");
       //grabs only the courses that are currently in session
       //empty the courses list just in case
       var currentCourses = [],
@@ -386,6 +387,7 @@ export default {
         currentCourses,
         oldCourses,
       };
+      console.log(this.courses);
     },
     withinDate(course) {
       //return true if the course is still in session
