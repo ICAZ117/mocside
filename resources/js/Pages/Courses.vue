@@ -56,7 +56,7 @@
         <div class="courserow row my-5">
           <div
             class="fixed-course-width"
-            v-for="(course, key) in courses"
+            v-for="(course, key) in courses.currentCourses"
             :key="course.id"
             :course="course"
           >
@@ -605,6 +605,7 @@ export default {
     // this.enrolledCourses[0] = this.enrolledCourses[1];
     // this.enrolledCourses[1] = temp;
     this.getCourses();
+    this.seperateCourses();
     this.routeToChild();
   },
 };
