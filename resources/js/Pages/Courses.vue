@@ -56,7 +56,7 @@
         <div class="courserow row my-5">
           <div
             class="fixed-course-width"
-            v-for="(course, key) in courses.currentCourses"
+            v-for="(course, key) in courses"
             :key="course.id"
             :course="course"
           >
