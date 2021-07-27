@@ -402,6 +402,25 @@ class ContainerController extends Controller
         return response()->json(["message" => "logs retrieved.", "dump" => $returns, 'isRunning' => $flag], 200);
     }
 
+ 
+    // create a json file containing all test cases for given assingment. 
+    public function exportTCs($id)
+    {
+        $user = Auth::user();
+        if ($user->isAdmin()) {
+            $assignment = Assignment::find($id);
+            $test_cases = $assignment->test_cases;
+            $path = $id . "-testCases.json";
+            $file = fopen($path, "w");
+            fwrite($file, json_encode($test_cases));
+            Storage::disk('local')->putFileAs('/', $file, $path);
+            fclose($file);
+            unlink($path);
+            return response()->json(['message' => "exported."], 200);
+        }
+        return response()->json(['message' => "forbidden."], 403);
+    }
+
     /*
     *   This group of functions attempted to utilize laravel-websockets
     *   as a pusher replacement to reactively send all stdout to the front-end.
