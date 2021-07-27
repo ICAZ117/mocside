@@ -413,7 +413,7 @@ class ContainerController extends Controller
             $path = $id . "-testCases.json";
             $file = fopen($path, "w");
             fwrite($file, json_encode($test_cases));
-            Storage::disk('local')->putFileAs('cases', $file, $path);
+            Storage::disk('local')->putFileAs('cases', new File($path), $path);
             fclose($file);
             unlink($path);
             return response()->json(['message' => "exported."], 200);
