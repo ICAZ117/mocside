@@ -16,7 +16,7 @@
   <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Profile'">
         <div class="profile-section">
-          <img class="pfp" src="this.user.pfp" alt="Profile"/>
+          <img class="pfp" src="this.user.pfp" alt="Profile" id="pfp"/>
           <div class="picture"><label for="file" class="sr-only"> Upload Course Image </label>
             <input
               type="file"
@@ -241,6 +241,7 @@ export default {
       if(this.user.pfp == undefined || this.user.pfp == null) {
         this.user.pfp = "../../img/DefaultPFP.png";
       }
+      document.getElementById("pfp").src = this.user.pfp;
     },
     clearMessage() {
       this.error = null;
@@ -273,6 +274,7 @@ export default {
     },
     async updateAvatar() {
       await this.uploadImage();
+      document.getElementById("pfp").src = this.user.pfp;
     },
     getGrades() {
       for(let i = 0; i < this.enrolledCourses.length; i++) {
