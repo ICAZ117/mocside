@@ -37,6 +37,9 @@ use App\Http\Controllers\UserController;
 
 Route::post('/sanctum/token', TokenController::class);
 
+// I want this out of auth lock :) 
+Route::post('/convert-markdown', [StorageController::class, 'convertMarkdown']);
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/auth', AuthController::class);
     Route::put('/users/auth', [UserController::class, 'updateProfile']);
@@ -126,8 +129,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/invite/enroll/{key}', [InviteController::class, 'enroll']);
     Route::put('/invite/{id}', [InviteController::class, 'update']);
     Route::delete('/invite/{id}', [InviteController::class, 'delete']);
-
-    Route::post('/convert-markdown', [StorageController::class, 'convertMarkdown']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
