@@ -9,7 +9,7 @@
         v-model:w="w"
         v-model:h="h"
         v-model:active="active"
-        :draggable="true"
+        :draggable="false"
         :resizable="true"
         :disabledH="true"
         :handles="['mr']"
@@ -37,10 +37,10 @@ export default defineComponent({
   components: { Vue3DraggableResizable },
   data() {
     return {
-      x: 100,
-      y: 100,
-      h: 100,
-      w: 100,
+      x: 0,
+      y: 0,
+      h: 0,
+      w: 0,
       active: false
     }
   },
