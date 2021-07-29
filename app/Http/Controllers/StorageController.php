@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use App\Models\Code;
+use Parsedown;
 
 class StorageController extends Controller
 {
@@ -72,5 +73,20 @@ class StorageController extends Controller
             unlink($path);
             return response()->json(['message' => 'Java code stored.', 'path' => $filePath], 200);
         }
+    }
+
+    // recieves markdown, and converts it to ProseMirror
+    public function convertMarkdown(Request $request)
+    {
+        $validData = $request->validate([
+            'markdown' => 'required'
+        ]);
+        // first, convert markdown to html
+        $parser = new Parsedown();
+        $parsed_html = $parser->setBreaksEnabled(true)->text($validData['markdown']);
+        // then, convert html to ProseMirror
+        $prose = (new \HtmlToProseMirror\Renderer)->render($parsed_html);
+        // then, return ProseMirror JSON
+        return response()->json(['data' => $prose], 200);
     }
 }
