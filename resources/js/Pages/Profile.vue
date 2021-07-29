@@ -224,7 +224,7 @@ export default {
       this.user.email = this.authUser.email;
       this.user.screen_name = this.authUser.fsc_user.screen_name;
       this.user.username = this.authUser.username;
-      this.user.fsc_id = this.authUser.fsc_user.id;
+      this.user.fsc_id = this.authUser.fsc_user.fsc_id;
       this.user.pfp = "";
     },
     getGrades() {
