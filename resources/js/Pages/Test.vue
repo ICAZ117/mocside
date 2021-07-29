@@ -8,7 +8,7 @@
         :draggable="false"
         :resizable="true"
         :disabledH="true"
-        :handles="['r']"
+        :handles="['mr']"
         @activated="print('activated')"
         @deactivated="print('deactivated')"
         @resize-start="print('resize-start')"
