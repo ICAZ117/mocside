@@ -264,7 +264,7 @@ export default {
         }
       }
     },
-    saveProfile() {
+    async saveProfile() {
       await this.uploadImage();
     },
     getGrades() {
