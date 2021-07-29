@@ -237,7 +237,7 @@ export default {
       this.user.screen_name = this.authUser.fsc_user.screen_name;
       this.user.username = this.authUser.username;
       this.user.fsc_id = this.authUser.fsc_user.fsc_id;
-      this.user.pfp = this.authUser.user.pfp_path;
+      this.user.pfp = this.authUser.pfp_path;
       if(this.user.pfp == undefined || this.user.pfp == null) {
         this.user.pfp = "../../img/DefaultPFP.png";
       }
