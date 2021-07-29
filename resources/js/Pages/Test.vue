@@ -1,227 +1,62 @@
 <template>
-  <div>
-    <div class="container">
-      <vue-resizable
-        class="resizable"
-        ref="resizableComponent"
-        :dragSelector="dragSelector"
-        :active="handlers"
-        :fit-parent="fit"
-        :max-width="maxW"
-        :max-height="maxH"
-        :min-width="minW"
-        :min-height="minH"
-        :width="width"
-        :height="height"
-        :left="left"
-        :top="top"
-        @mount="eHandler"
-        @resize:move="eHandler"
-        @resize:start="eHandler"
-        @resize:end="eHandler"
-        @drag:move="eHandler"
-        @drag:start="eHandler"
-        @drag:end="eHandler"
+  <div id="app">
+    <div class="parent">
+      <Vue3DraggableResizable
+        :initW="110"
+        :initH="120"
+        v-model:x="x"
+        v-model:y="y"
+        v-model:w="w"
+        v-model:h="h"
+        v-model:active="active"
+        :draggable="true"
+        :resizable="true"
+        @activated="print('activated')"
+        @deactivated="print('deactivated')"
+        @drag-start="print('drag-start')"
+        @resize-start="print('resize-start')"
+        @dragging="print('dragging')"
+        @resizing="print('resizing')"
+        @drag-end="print('drag-end')"
+        @resize-end="print('resize-end')"
       >
-        <div class="block">
-          <div class="drag-container-1">drag_1</div>
-          <div class="table-container">
-            <table>
-              <tr>
-                <td>w:{{width}}</td>
-                <td>h:{{height}}</td>
-              </tr>
-              <tr>
-                <td>l:{{left}}</td>
-                <td>t:{{top}}</td>
-              </tr>
-            </table>
-          </div>
-          <div class="drag-container-2">drag_2</div>
-        </div>
-      </vue-resizable>
-    </div>
-    <div class="container table-block">
-      <div class="table-row">
-        <div>
-          <h4>handlers:</h4>
-        </div>
-        <span v-for="handler in ['r', 'rb', 'b', 'lb', 'l', 'lt', 't', 'rt']" :key="handler">
-          {{handler}}:
-          <input type="checkbox" v-model="handlers" :value="handler">
-        </span>
-      </div>
-      <div class="table-row">
-        <div class="table-cell">minWidth:
-          <input class="table-input" type="number" v-model.number="minW">
-        </div>
-        <div class="table-cell">maxWidth:
-          <input class="table-input" type="number" v-model.number="maxW">
-        </div>
-      </div>
-      <div class="table-row">
-        <div class="table-cell">minHeight:
-          <input class="table-input" type="number" v-model.number="minH">
-        </div>
-        <div class="table-cell">maxHeight:
-          <input class="table-input" type="number" v-model.number="maxH">
-        </div>
-      </div>
-      <div class="table-row">
-        <div class="table-cell">width:
-          <input class="table-input" type="number" v-model.number="width">
-        </div>
-        <div class="table-cell">height:
-          <input class="table-input" type="number" v-model.number="height">
-        </div>
-      </div>
-      <div class="table-row">
-        <div class="table-cell">left:
-          <input class="table-input" type="number" v-model.number="left">
-        </div>
-        <div class="table-cell">top:
-          <input class="table-input" type="number" v-model.number="top">
-        </div>
-      </div>
-      <div class="table-row">
-        <div class="table-cell">fitParent:
-          <input type="checkbox" v-model.number="fit">
-        </div>
-      </div>
-      <div class="table-row" style="text-align: left;">
-        <div class="table-cell" style="padding: 0 20px;width: 100%">lastEvent: {{event}}</div>
-      </div>
+        This is a test example
+      </Vue3DraggableResizable>
     </div>
   </div>
 </template>
 
 <script>
-import VueResizable from "vue-resizable";
-
-export default {
-  name: "App",
-  components: { VueResizable },
+import { defineComponent } from 'vue'
+import Vue3DraggableResizable from 'vue3-draggable-resizable'
+//default styles
+import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
+export default defineComponent({
+  components: { Vue3DraggableResizable },
   data() {
-    const tW = 150;
-    const tH = 150;
     return {
-      handlers: ["r", "rb", "b", "lb", "l", "lt", "t", "rt"],
-      left: `calc( 50% - ${tW / 2}px)`,
-      top: `calc(50% - ${tH / 2}px)`,
-      height: tH,
-      width: tW,
-      maxW: 250,
-      maxH: 250,
-      minW: 100,
-      minH: 100,
-      fit: true,
-      event: "",
-      dragSelector: ".drag-container-1, .drag-container-2"
-    };
+      x: 100,
+      y: 100,
+      h: 100,
+      w: 100,
+      active: false
+    }
   },
   methods: {
-    eHandler(data) {
-      this.width = data.width;
-      this.height = data.height;
-      this.left = data.left;
-      this.top = data.top;
-      this.event = data.eventName;
-    }
-  },
-  filters: {
-    checkEmpty(value) {
-      return typeof value !== "number" ? 0 : value;
+    print(val) {
+      console.log(val)
     }
   }
-};
+})
 </script>
-
-<style scoped>
-.block {
-  height: 100%;
-  width: 100%;
-  background-color: aqua;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-</style>
 <style>
-body,
-html {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: auto;
-}
-
-.container {
-  width: 300px;
-  height: 300px;
-  display: inline-block;
-  border: 1px solid #dddddd;
-  background: #ffffff;
-  color: #333333;
-  float: left;
-  margin: 10px;
-}
-
-#block1 {
-  border: solid black 1px;
-  height: 300px;
-  width: 300px;
-  display: inline-block;
-  float: left;
-}
-
-.resizable {
-  background-position: top left;
-  width: 150px;
-  height: 150px;
-  padding: 0;
-  border: 1px solid #003eff;
-  background: #007fff;
-  font-weight: normal;
-  color: #ffffff;
-  position: relative;
-}
-
-.table-block {
-  display: table;
-}
-
-.table-row {
-  display: table-row;
-  text-align: center;
-}
-
-.table-cell {
-  width: 50%;
-  display: inline-block;
-}
-
-.table-input {
-  width: 50px;
-}
-
-.drag-container-1,
-.drag-container-2 {
-  width: 100%;
-  height: 20px;
-  background: red;
-  color: white;
-  text-align: center;
-  cursor: pointer;
-}
-
-.table-container {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.parent {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  border: 1px solid #000;
+  user-select: none;
 }
 </style>
