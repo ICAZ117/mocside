@@ -21,6 +21,22 @@
         {{ user.username }}
         {{ user.fsc_id }}
         {{ user.pfp }}
+        <div class="profile-section">
+          <div class="picture">
+            <button>Change Avatar</button>
+          </div>
+          <div class="editable">
+            <label for="Name">Name</label>
+            <input type="text" v-model="user.name" id=Name>
+            <label for="ScreenName">ScreenName</label>
+            <input type="text" v-model="user.screen_name" id="ScreenName">
+            <label for="FSCID">FSC ID</label>
+            <input type="number" v-model="user.fsc_id" id="FSCID" disabled>
+            <button>Save</button>
+          </div>
+        </div>
+
+
       </tab-panel>
       <tab-panel :val="'Grades'">
         <div
@@ -58,7 +74,30 @@
         </div>
       </tab-panel>
       <tab-panel :val="'Security'">
-        Security
+        <label for="Username">Username</label>
+        <input type="text" v-model="user.name" id="Username">
+        <button>Change Email</button>
+        <div class="change-Email">
+          <label for="Verify">Verification Code</label>
+          <input type="text" id="Verify">
+          <label for="Email">New Email</label>
+          <input type="email" id="Email">
+          <button>Save</button>
+        </div>
+        <button>Change Password</button>
+        <div class="change-Pass">
+          <label for="CurrentPass">Current Password</label>
+          <input type="password" id="CurrentPass">
+          <label for="NewPass">New Password</label>
+          <input type="password" id="NewPass">
+          <label for="ConfirmPass">Confirm Password</label>
+          <input type="password" id="ConfirmPass">
+          <button>Save</button>
+        </div>
+        <button>Save</button>
+        <button>Upgrade User</button>
+        <button>DownGrade User</button>
+        <button>Delete My Account</button>
       </tab-panel>
   </tab-panels>
 </template>
