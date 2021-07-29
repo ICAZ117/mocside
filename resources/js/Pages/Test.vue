@@ -41,7 +41,7 @@ export default defineComponent({
       y: 100,
       h: 100,
       w: 100,
-      active: false
+      active: true
     }
   },
   methods: {
