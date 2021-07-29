@@ -7,7 +7,6 @@
         v-model:active="active"
         :draggable="false"
         :resizable="true"
-        :disabledH="true"
         :handles="['mr']"
         @activated="print('activated')"
         @deactivated="print('deactivated')"
