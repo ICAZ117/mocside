@@ -8,8 +8,8 @@
     Return to Problems
   </button>
   <div v-if="childIsOpen" class="row">
-    <vue-resizable>
-      <div class="resizable-content">
+    <!-- <vue-resizable> -->
+      <!-- <div class="resizable-content"> -->
         <div class="instructions col-4 p-4">
           <h4>{{ title }}</h4>
           <hr class="instructions-hr" />
@@ -21,8 +21,8 @@
             v-if="childIsOpen"
           />
         </div>
-      </div>
-    </vue-resizable>
+      <!-- </div> -->
+    <!-- </vue-resizable> -->
     <IDE
       class="col-8"
       :lang="lang"
