@@ -239,7 +239,7 @@ export default {
       this.user.fsc_id = this.authUser.fsc_user.fsc_id;
       this.user.pfp = this.authUser.pfp_path;
       if(this.user.pfp == undefined || this.user.pfp == null) {
-        this.user.pfp = "../../img/DefaultPFP.png";
+        this.user.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
       }
       document.getElementById("pfp").src = this.user.pfp;
     },
