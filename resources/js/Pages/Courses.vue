@@ -269,7 +269,7 @@ export default {
       this.enrolledCourses.push(this.courseID);
       this.addProfessor();
       this.childIsOpen = true;
-      this.courses.push(course.data.data);
+      this.courses.currentCourses.push(course.data.data);
       this.unfilteredCourses.push(course.data.data);
       this.sortCourses(4);
       // init gradebook
@@ -404,6 +404,12 @@ export default {
       //return true if the course is still in session
       //false otherwise
       var now = new Date(Date.now());
+      if(course.start_date == undefined) {
+        return false;
+      }
+      if(course.end_date == undefined) {
+        return false;
+      }
       var sd = course.start_date.split("-")[2];
       var sm = course.start_date.split("-")[1] - 1;
       var sy = course.start_date.split("-")[0];
@@ -465,7 +471,7 @@ export default {
       }
 
       //call the filter after sorting
-      this.filterByDate();
+      this.separateCourses();
     },
     sortByStartDate() {
       //sorts the filtered results by start date
