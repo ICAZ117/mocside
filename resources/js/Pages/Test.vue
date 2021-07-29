@@ -2,22 +2,17 @@
   <div id="app">
     <div class="parent">
       <Vue3DraggableResizable
-        :initW="110"
-        :initH="120"
-        v-model:x="x"
-        v-model:y="y"
         v-model:w="w"
         v-model:h="h"
         v-model:active="active"
-        :draggable="true"
+        :draggable="false"
         :resizable="true"
+        :disabledH="true"
+        :handles="['r']"
         @activated="print('activated')"
         @deactivated="print('deactivated')"
-        @drag-start="print('drag-start')"
         @resize-start="print('resize-start')"
-        @dragging="print('dragging')"
         @resizing="print('resizing')"
-        @drag-end="print('drag-end')"
         @resize-end="print('resize-end')"
       >
         This is a test example
