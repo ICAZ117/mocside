@@ -178,6 +178,8 @@ input:checked + .slider:before {
 .dropdown {
     position: relative;
     display: inline-block;
+    padding: 10;
+    z-index: 500;
 }
 
 /* Dropdown Content (Hidden by Default) */

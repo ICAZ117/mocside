@@ -594,16 +594,6 @@ export default defineComponent({
       var pm = lab.publish_date.split("-")[1] - 1;
       var py = lab.publish_date.split("-")[0];
 
-      // var published = new Date(
-      //   py,
-      //   pm,
-      //   pd,
-      //   now.getHours(),
-      //   now.getMinutes(),
-      //   now.getSeconds(),
-      //   now.getMilliseconds()
-      // );
-
       var published = new Date(py, pm, pd, 0, 0, 0, 0);
 
       if (published < now) {

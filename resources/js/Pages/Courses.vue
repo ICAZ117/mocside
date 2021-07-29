@@ -15,10 +15,11 @@
       <div class="filterSettings">
         <label class="switch">
           <!-- <input type="checkbox" @change="filterByDate()" v-model="filter" /> -->
+          <span>Display Archived Courses: </span>
           <input type="checkbox" v-model="showOldCourses" />
           <span class="slider round"></span>
         </label>
-        <br />
+        <br /><br />
         <div class="dropdown">
           <button class="dropbtn fas fa-filter"></button>
           <div class="dropdown-content">
@@ -272,7 +273,9 @@ export default {
       this.unfilteredCourses.push(course.data.data);
       this.sortCourses(4);
       // init gradebook
-      const gradebook = await API.apiClient.post(`/gradebook/init/${this.courseID}`, { scope: 'course' });
+      const gradebook = await API.apiClient.post(`/gradebook/init/${this.courseID}`, {
+        scope: "course",
+      });
       this.$router.push({
         name: "EditCourse",
         params: { course_id: this.courseID },
