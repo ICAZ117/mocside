@@ -1,19 +1,28 @@
 <template>
   <!-- Main Page-->
-  <button v-if="childIsOpen" @click="this.$emit('unmounting')" class="btn btn-danger btn-block">Return to Problems</button>
+  <button
+    v-if="childIsOpen"
+    @click="this.$emit('unmounting')"
+    class="btn btn-danger btn-block"
+  >
+    Return to Problems
+  </button>
   <div v-if="childIsOpen" class="row">
-    <div class="instructions col-4 p-4">
-      <h4>{{ title }}</h4>
-      <hr class="instructions-hr" />
-      <Tiptap
-        :savedText="JSON.parse(description)"
-        :editable="false"
-        :showMenuBar="false"
-        :isDark="true"
-        v-if="childIsOpen"
-      />
-    </div>
-
+    <vue-resizable>
+      <div class="resizable-content">
+        <div class="instructions col-4 p-4">
+          <h4>{{ title }}</h4>
+          <hr class="instructions-hr" />
+          <Tiptap
+            :savedText="JSON.parse(description)"
+            :editable="false"
+            :showMenuBar="false"
+            :isDark="true"
+            v-if="childIsOpen"
+          />
+        </div>
+      </div>
+    </vue-resizable>
     <IDE
       class="col-8"
       :lang="lang"
@@ -32,9 +41,15 @@
 
 <script>
 import * as API from "../services/API";
+import VueResizable from "vue-resizable";
+
 export default {
   props: ["problemID", "lang", "labID"],
   emits: ["unmounting", "problemEdited"],
+  components: {
+    VueResizable,
+  },
+
   data() {
     return {
       assignment: {},
@@ -63,42 +78,38 @@ export default {
       //check if empty....post if empty
       var payload = {
         lang: this.lang,
-      }
+      };
       const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
       this.test = empty;
-      if(empty.data.message == "No progress. Please create.") {
+      if (empty.data.message == "No progress. Please create.") {
         //create progress
-        if(this.lang == "Java") {
+        if (this.lang == "Java") {
           payload = {
             lang: this.lang.toLowerCase(0),
             problem_id: this.problemID,
             code: this.assignment.java_starter,
-          }
-        }
-        else {
+          };
+        } else {
           payload = {
             lang: this.lang.toLowerCase(0),
             problem_id: this.problemID,
             code: this.assignment.python_starter,
-          }
+          };
         }
         const initial = await API.apiClient.post(`/code/`, payload);
-        if(this.lang == "Java") {
+        if (this.lang == "Java") {
           this.code_j = this.assignment.java_starter;
           this.codeID = initial.data.id;
-        }
-        else {
+        } else {
           this.code_p = this.assignment.python_starter;
           this.codeID = initial.data.id;
         }
-      }
-      else {
+      } else {
         //otherwise not empty
-        if(this.lang == "Java") {
+        if (this.lang == "Java") {
           this.code_j = empty.data.dump[0].code;
           this.codeID = empty.data.dump[0].id;
-        }
-        else {
+        } else {
           this.code_p = empty.data.dump[0].code;
           this.codeID = empty.data.dump[0].id;
         }
@@ -167,7 +178,7 @@ export default {
       }
     },
     updateContent(e) {
-      this.saveStatus = "Saving..."
+      this.saveStatus = "Saving...";
       if (this.lang == "Java") {
         this.code_j = e.code;
       } else {
@@ -187,18 +198,24 @@ export default {
           code: this.code_p,
         };
         const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
-        this.saveStatus = "All changes have been saved"
+        this.saveStatus = "All changes have been saved";
       }
     }, 1000),
   },
   beforeUnmount() {
     // workspace
     this.$emit("unmounting");
-    this.childIsOpen=false;
+    this.childIsOpen = false;
   },
   async created() {
-    this.childIsOpen=true;
+    this.childIsOpen = true;
     await this.getAssignment();
   },
 };
 </script>
+<style scoped>
+.resizable-content {
+  height: 100%;
+  width: 100%;
+}
+</style>
