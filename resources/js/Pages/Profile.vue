@@ -16,8 +16,15 @@
   <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Profile'">
         <div class="profile-section">
-          <div class="picture">
-            <button class="btn btn-danger btn-block">Change Avatar</button>
+          <img class="pfp" src="this.user.pfp" alt="Profile"/>
+          <div class="picture"><label for="file" class="sr-only"> Upload Course Image </label>
+            <input
+              type="file"
+              :accept="['image/*']"
+              @change="fileChange"
+              id="file"
+            />
+            <button @click="updateAvatar()" class="btn btn-danger btn-block">Change Avatar</button>
           </div>
           <div class="editable">
             <label for="Name">Name</label>
@@ -163,10 +170,15 @@
 import * as API from "../services/API";
 import store from "../Store/index";
 import { useRoute } from "vue-router";
+import FileService from "../services/FileService";
+import FileUpload from "../Components/FileUpload";
 import { defineComponent, reactive, toRefs, computed } from "vue";
 
 const tabs = ["Profile", "Grades", "Security"];
 export default {
+  components: {
+    FileUpload,
+  },
   data() {
     return {
       authUser: null,
@@ -225,7 +237,42 @@ export default {
       this.user.screen_name = this.authUser.fsc_user.screen_name;
       this.user.username = this.authUser.username;
       this.user.fsc_id = this.authUser.fsc_user.fsc_id;
-      this.user.pfp = "";
+      this.user.pfp = this.authUser.pfp_path;
+      if(this.user.pfp == undefined || this.user.pfp == null) {
+        this.user.pfp = "../../img/DefaultPFP.png";
+      }
+    },
+    clearMessage() {
+      this.error = null;
+      this.message = null;
+    },
+    fileChange(event) {
+      this.clearMessage();
+      this.file = event.target.files[0];
+    },
+    async uploadImage() {
+      if (this.file != null) {
+        const payload = {};
+        const formData = new FormData();
+        formData.append("file", this.file);
+        payload.file = formData;
+        payload.endpoint = "/images/store";
+        this.clearMessage();
+        try {
+          const response = await FileService.uploadFile(payload);
+          this.message = "File uploaded.";
+          console.log(response.data.asset_link);
+          this.user.pfp = response.data.asset_link;
+        } catch (error) {
+          this.error = getError(error);
+        }
+      }
+    },
+    async saveProfile() {
+      await this.uploadImage();
+    },
+    async updateAvatar() {
+      await this.uploadImage();
     },
     getGrades() {
       for(let i = 0; i < this.enrolledCourses.length; i++) {

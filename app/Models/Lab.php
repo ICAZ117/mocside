@@ -28,6 +28,7 @@ class Lab extends Model
         'course_id',
         'publish_date',
         'gradebook',
+        'lang'
     ];
 
     public function worth()
