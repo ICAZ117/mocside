@@ -130,27 +130,30 @@
       <tab-panel :val="'Security'">
         <label for="Username">Username</label>
         <input type="text" v-model="user.name" id="Username">
-        <button class="btn btn-danger btn-block">Change Email</button>
-        <div class="change-Email">
+
+        <!-- probably make the pass and email change into modals-->
+        <button @click="showEmail()" class="btn btn-danger btn-block">Change Email</button>
+        <div v-if="showEmailChange" class="change-Email">
           <label for="Verify">Verification Code</label>
           <input type="text" id="Verify">
           <label for="Email">New Email</label>
           <input type="email" id="Email">
-          <button class="btn btn-danger btn-block">Save</button>
+          <button @click="updateEmail()" class="btn btn-danger btn-block">Save</button>
         </div>
-        <button>Change Password</button>
-        <div class="change-Pass">
+        <button @click="showPass()" class="btn btn-danger btn-block">Change Password</button>
+        <div v-if="showPassChange" class="change-Pass">
           <label for="CurrentPass">Current Password</label>
           <input type="password" id="CurrentPass">
           <label for="NewPass">New Password</label>
           <input type="password" id="NewPass">
           <label for="ConfirmPass">Confirm Password</label>
           <input type="password" id="ConfirmPass">
-          <button class="btn btn-danger btn-block">Save</button>
+          <button @click="updatePass()" class="btn btn-danger btn-block">Save</button>
         </div>
+
         <button class="btn btn-danger btn-block">Save</button>
-        <button class="btn btn-danger btn-block">Upgrade User</button>
-        <button class="btn btn-danger btn-block">DownGrade User</button>
+        <button v-if="showUpgrade" class="btn btn-danger btn-block">Upgrade User</button>
+        <button v-if="showUpgrade" class="btn btn-danger btn-block">DownGrade User</button>
         <button class="btn btn-danger btn-block">Delete My Account</button>
       </tab-panel>
   </tab-panels>
@@ -182,7 +185,10 @@ export default {
         fsc_id: "",
         screen_name: "",
         username: "",
-      }
+      },
+      showEmailChange: false,
+      showPassChange: false,
+      showUpgrade: false,
     };
   },
   setup() {
@@ -201,6 +207,18 @@ export default {
     };
   },
   methods: {
+    showPass() {
+      this.showPassChange = true;
+    },
+    showEmail() {
+      this.showEmailChange = true;
+    },
+    updatePass() {
+      this.showPassChange = false;
+    },
+    updateEmail() {
+      this.showEmailChange = false;
+    },
     getUser() {
       this.user.name = this.authUser.name;
       this.user.email = this.authUser.email;
@@ -241,6 +259,8 @@ export default {
         this.progress = res.data.data;
         return this.progress;
       }
+      //is a prof
+      this.showUpgrade = true; //change this later to check for admin instead of professor
       return {};
     },
     async getStudentObject() {
