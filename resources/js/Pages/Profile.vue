@@ -259,8 +259,6 @@ export default {
         this.progress = res.data.data;
         return this.progress;
       }
-      //is a prof
-      this.showUpgrade = true; //change this later to check for admin instead of professor
       return {};
     },
     async getStudentObject() {
@@ -297,6 +295,9 @@ export default {
       await this.getGrades();
     }
     await this.getUser();
+    if(this.isProf) {
+      this.showUpgrade = true; //change this later to check for admin instead of professor
+    }
   },
 };
 
