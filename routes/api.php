@@ -74,6 +74,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/test-cases', [TestCaseController::class, 'store']);
     Route::put('/test-cases/{id}', [TestCaseController::class, 'update']);
     Route::delete('/test-cases/{id}', [TestCaseController::class, 'destroy']);
+    Route::post('/test-cases/export/{id}', [ContainerController::class, 'exportTCs']);
 
     Route::post('/professors', [ProfessorController::class, 'store']);
     Route::put('/professors/{id}', [ProfessorController::class, 'update']);
