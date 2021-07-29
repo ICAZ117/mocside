@@ -37,10 +37,10 @@ export default defineComponent({
   components: { Vue3DraggableResizable },
   data() {
     return {
-      x: 0,
-      y: 0,
-      h: 0,
-      w: 0,
+      x: 100,
+      y: 100,
+      h: 100,
+      w: 100,
       active: false
     }
   },
