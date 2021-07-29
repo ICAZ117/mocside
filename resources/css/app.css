@@ -107,6 +107,7 @@ h4 {
     display: inline-block;
     width: 40px;
     height: 20px;
+    bottom: 15px;
 }
 
 /* Hide default HTML checkbox */
@@ -178,8 +179,8 @@ input:checked + .slider:before {
 .dropdown {
     position: relative;
     display: inline-block;
-    padding: 10;
     z-index: 500;
+    margin-right: 5px;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -215,6 +216,7 @@ input:checked + .slider:before {
 .filterSettings {
     float: right !important;
     position: relative;
+    padding: 0px 10px;
 }
 
 /*============= NAVIGATION =============*/

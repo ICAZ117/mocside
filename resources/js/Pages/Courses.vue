@@ -13,13 +13,13 @@
       >
       <br />
       <div class="filterSettings">
+          <span>Display Archived Courses: </span>
         <label class="switch">
           <!-- <input type="checkbox" @change="filterByDate()" v-model="filter" /> -->
-          <span>Display Archived Courses: </span>
           <input type="checkbox" v-model="showOldCourses" />
           <span class="slider round"></span>
         </label>
-        <br /><br />
+        <br />
         <div class="dropdown">
           <button class="dropbtn fas fa-filter"></button>
           <div class="dropdown-content">
