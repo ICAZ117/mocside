@@ -16,7 +16,7 @@
   <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Profile'">
         <div class="profile-section">
-          {{ user.pfp }}
+          <img class="pfp" src="this.user.pfp" alt="Profile"/>
           <div class="picture"><label for="file" class="sr-only"> Upload Course Image </label>
             <input
               type="file"
@@ -237,7 +237,10 @@ export default {
       this.user.screen_name = this.authUser.fsc_user.screen_name;
       this.user.username = this.authUser.username;
       this.user.fsc_id = this.authUser.fsc_user.fsc_id;
-      this.user.pfp = "";
+      this.user.pfp = this.authUser.user.pfp_path;
+      if(this.user.pfp == undefined || this.user.pfp == null) {
+        this.user.pfp = "../../img/DefaultPFP.png";
+      }
     },
     clearMessage() {
       this.error = null;
