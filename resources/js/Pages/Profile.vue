@@ -16,6 +16,7 @@
   <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Profile'">
         <div class="profile-section">
+          {{ user.pfp }}
           <div class="picture"><label for="file" class="sr-only"> Upload Course Image </label>
             <input
               type="file"
@@ -23,7 +24,7 @@
               @change="fileChange"
               id="file"
             />
-            <button class="btn btn-danger btn-block">Change Avatar</button>
+            <button @click="updateAvatar()" class="btn btn-danger btn-block">Change Avatar</button>
           </div>
           <div class="editable">
             <label for="Name">Name</label>
@@ -265,6 +266,9 @@ export default {
       }
     },
     async saveProfile() {
+      await this.uploadImage();
+    },
+    async updateAvatar() {
       await this.uploadImage();
     },
     getGrades() {
