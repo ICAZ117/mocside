@@ -404,6 +404,12 @@ export default {
       //return true if the course is still in session
       //false otherwise
       var now = new Date(Date.now());
+      if(course.start_date == undefined) {
+        return false;
+      }
+      if(course.end_date == undefined) {
+        return false;
+      }
       var sd = course.start_date.split("-")[2];
       var sm = course.start_date.split("-")[1] - 1;
       var sy = course.start_date.split("-")[0];
