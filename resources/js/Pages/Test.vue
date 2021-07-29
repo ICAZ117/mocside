@@ -11,6 +11,7 @@
         v-model:active="active"
         :draggable="true"
         :resizable="true"
+        :disabledH="true"
         :handles="['mr']"
         @activated="print('activated')"
         @deactivated="print('deactivated')"
@@ -59,5 +60,9 @@ export default defineComponent({
   left: 100px;
   border: 1px solid #000;
   user-select: none;
+}
+
+.vdr-container.active {
+    background-color: lightcoral;
 }
 </style>
