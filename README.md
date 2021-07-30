@@ -9,7 +9,6 @@ IMPORTANT
 ADD PAGES
 * Finish Up About Page
 * Add profile Page....sorta like a dashboard
-    * Overall Course Grades
     * Profile Settings.....username, email, password, profile picture, delete account?...if professor upgrade button 
     * IDE Settings......Theme, language, Console Theme
 * Add Contact Us page
