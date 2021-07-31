@@ -24,7 +24,7 @@
             <img class="pfp" src="this.user.pfp" alt="Profile" id="pfpmodal"/>
             <div class="picture">
               <label for="file" class="sr-only">Upload New Avatar</label>
-              <input type="file" :accept="['image/*']" @change="fileChange" id="file" class="btn btn-danger btn-block"/>
+              <input type="file" :accept="['image/*']" @change="fileChange" id="file"/>
               <button @click="updateImage()" class="btn btn-danger btn-block">Change Avatar</button>
             </div>
             <div class="row">
