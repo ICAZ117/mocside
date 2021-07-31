@@ -285,9 +285,9 @@ export default {
     async saveProfile() {
       console.log("saving profile");
       var payload = {
-        screen_name: "Test",
+        name: "Stephen Robinson",
       }
-      var res = await API.apiClient.put(`/users/auth`, payload);
+      var res = await API.apiClient.put(`/users/auth/${this.authUser.id}`, payload);
       console.log(res);
     },
     async updateImage() {

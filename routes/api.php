@@ -42,7 +42,7 @@ Route::post('/convert-markdown', [StorageController::class, 'convertMarkdown']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users/auth', AuthController::class);
-    Route::put('/users/auth', [UserController::class, 'updateProfile']);
+    Route::put('/users/auth/{id}', [UserController::class, 'updateProfile']);
     Route::get('/users/{id}', function ($id) {
         return User::findOrFail($id);
     });
