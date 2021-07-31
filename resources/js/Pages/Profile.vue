@@ -22,8 +22,9 @@
           <vue-final-modal v-model="showAvatarModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
             <button class="modal-close" @click="showAvatarModal = false">x</button>
             <img class="pfp" src="this.user.pfp" alt="Profile" id="pfpmodal"/>
-            <div class="picture"><label for="file" class="sr-only">Upload New Avatar</label>
-              <input type="file" :accept="['image/*']" @change="fileChange" id="file"/>
+            <div class="picture">
+              <label for="file" class="sr-only">Upload New Avatar</label>
+              <input type="file" :accept="['image/*']" @change="fileChange" id="file" class="btn btn-danger btn-block"/>
               <button @click="updateImage()" class="btn btn-danger btn-block">Change Avatar</button>
             </div>
             <div class="row">
