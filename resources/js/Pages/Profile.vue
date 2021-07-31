@@ -21,7 +21,7 @@
 
           <vue-final-modal v-model="showAvatarModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
             <button class="modal-close" @click="showAvatarModal = false">x</button>
-            <img class="pfp" src="this.user.pfp" alt="Profile" id="pfp"/>
+            <img class="pfp" src="this.user.pfp" alt="Profile" id="pfpmodal"/>
             <div class="picture"><label for="file" class="sr-only">Upload New Avatar</label>
               <input type="file" :accept="['image/*']" @change="fileChange" id="file"/>
               <button @click="updateImage()" class="btn btn-danger btn-block">Show Preview</button>
@@ -204,6 +204,7 @@ export default {
         screen_name: "",
         username: "",
       },
+      temppfp: "",
       showEmailChange: false,
       showPassChange: false,
       showUpgrade: false,
@@ -274,7 +275,7 @@ export default {
           const response = await FileService.uploadFile(payload);
           this.message = "File uploaded.";
           console.log(response.data.asset_link);
-          this.user.pfp = response.data.asset_link;
+          this.temppfp = response.data.asset_link;
         } catch (error) {
           this.error = getError(error);
         }
@@ -286,13 +287,23 @@ export default {
     },
     async updateImage() {
       await this.uploadImage();
-      document.getElementById("pfp").src = this.user.pfp;
+      document.getElementById("pfpmodal").src = this.temppfp;
       console.log("showing the new avatar look on screen but not saving changes yet");
     },
     async changeAvatar() {
       console.log("changing the avatar picture in backend");
+
+      //api call to backend to update pfp path
+
+      //change other frontend pfp
+      this.user.pfp = this.temppfp;
+      document.getElementById("pfp").src = this.user.pfp;
+
+      //after changing in backend
+      this.showAvatarModal = false;
     },
     editAvatar() {
+      document.getElementById("pfpmodal").src = this.user.pfp;
       this.showAvatarModal = true;
     },
     getGrades() {
