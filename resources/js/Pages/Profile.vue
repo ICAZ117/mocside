@@ -102,7 +102,7 @@
             <option value="Red">Red</option>
           </select>
         </div>
-        <button class="btn btn-danger btn-block">Save</button>
+        <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
 
 
       </tab-panel>
@@ -283,8 +283,12 @@ export default {
       }
     },
     async saveProfile() {
-      await this.uploadImage();
-      console.log("uploading the new avatar image to server");
+      console.log("saving profile");
+      var payload = {
+        screen_name: "Test",
+      }
+      var res = await API.apiClient.put(`/users/auth`, payload);
+      console.log(res);
     },
     async updateImage() {
       await this.uploadImage();
