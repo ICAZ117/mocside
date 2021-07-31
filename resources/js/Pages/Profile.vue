@@ -136,7 +136,7 @@
       </tab-panel>
       <tab-panel :val="'Security'">
         <label for="Username">Username</label>
-        <input type="text" v-model="user.name" id="Username">
+        <input type="text" v-model="user.username" id="Username">
 
         <!-- probably make the pass and email change into modals-->
         <button @click="showEmail()" class="btn btn-danger btn-block">Change Email</button>
@@ -164,6 +164,13 @@
         <button class="btn btn-danger btn-block">Delete My Account</button>
       </tab-panel>
   </tab-panels>
+  <vue-final-modal v-model="showModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
+    <button class="modal-close" @click="showModal = false">x</button>
+    <div class="row">
+      <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">Cancel</button>
+      <button @click="changeAvatar" class="col-4 btn btn-lg btn-success mx-1" >Submit Changes</button>
+    </div>
+  </vue-final-modal>
 </template>
 
 <script>
@@ -201,6 +208,8 @@ export default {
       showEmailChange: false,
       showPassChange: false,
       showUpgrade: false,
+      showModal: false,
+      reloadModal: 0,
     };
   },
   setup() {
@@ -230,6 +239,9 @@ export default {
     },
     updateEmail() {
       this.showEmailChange = false;
+    },
+    closeModal() {
+      this.showModal = false;
     },
     getUser() {
       this.user.name = this.authUser.name;
@@ -271,10 +283,15 @@ export default {
     },
     async saveProfile() {
       await this.uploadImage();
+      console.log("uploading the new avatar image to server");
     },
     async updateAvatar() {
       await this.uploadImage();
       document.getElementById("pfp").src = this.user.pfp;
+      console.log("showing the new avatar look on screen but not saving changes yet");
+    },
+    async changeAvatar() {
+      console.log("changing the avatar picture in backend");
     },
     getGrades() {
       for(let i = 0; i < this.enrolledCourses.length; i++) {
@@ -320,6 +337,13 @@ export default {
         var cur = this.enrolledCourses[i];
         const course = await API.apiClient.get(`/courses/${cur}`);
         this.courses.push(course.data.data);
+      }
+    },
+  },
+  watch: {
+    showModal: function () {
+      if (!this.showModal) {
+        this.reloadModal++;
       }
     },
   },
