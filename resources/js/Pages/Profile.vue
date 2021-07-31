@@ -283,6 +283,8 @@ export default {
       }
     },
     async saveProfile() {
+      //route works...jsut can't updated all parts of profile yet
+
       console.log("saving profile");
       var payload = {
         name: "Stephen Robinson",

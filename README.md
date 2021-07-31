@@ -10,6 +10,7 @@ ADD PAGES
 * Finish Up About Page
 * Add profile Page....sorta like a dashboard
     * Profile Settings.....username, email, password, profile picture, delete account?...if professor upgrade button 
+        * update profile route needs addition of updating the pfp_path, and editor and theme settings, which it doesn't have currently
     * IDE Settings......Theme, language, Console Theme
 * Add Contact Us page
 * turn course edit into a course dashboard for professor can change course details as well as see gradebook, students, etc.
