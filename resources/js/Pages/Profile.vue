@@ -26,6 +26,15 @@
             />
             <button @click="updateAvatar()" class="btn btn-danger btn-block">Change Avatar</button>
           </div>
+
+          <vue-final-modal v-model="showModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
+            <button class="modal-close" @click="showModal = false">x</button>
+            <div class="row">
+              <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">Cancel</button>
+              <button @click="changeAvatar" class="col-4 btn btn-lg btn-success mx-1" >Submit Changes</button>
+            </div>
+          </vue-final-modal>
+
           <div class="editable">
             <label for="Name">Name</label>
             <input type="text" v-model="user.name" id=Name>
@@ -164,13 +173,6 @@
         <button class="btn btn-danger btn-block">Delete My Account</button>
       </tab-panel>
   </tab-panels>
-  <vue-final-modal v-model="showModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
-    <button class="modal-close" @click="showModal = false">x</button>
-    <div class="row">
-      <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">Cancel</button>
-      <button @click="changeAvatar" class="col-4 btn btn-lg btn-success mx-1" >Submit Changes</button>
-    </div>
-  </vue-final-modal>
 </template>
 
 <script>
@@ -289,6 +291,7 @@ export default {
       await this.uploadImage();
       document.getElementById("pfp").src = this.user.pfp;
       console.log("showing the new avatar look on screen but not saving changes yet");
+      this.showModal = true;
     },
     async changeAvatar() {
       console.log("changing the avatar picture in backend");
