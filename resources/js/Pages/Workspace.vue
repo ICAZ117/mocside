@@ -7,44 +7,42 @@
   >
     Return to Problems
   </button>
-
-  <Vue3DraggableResizable
-      v-model:x="x"
-      v-model:y="y"
-      v-model:w="w"
-      v-model:h="h"
-      v-model:active="active"
-      :draggable="false"
-      :resizable="true"
-      :disabledH="true"
-      :handles="['mr']"
-      @activated="print('activated')"
-      @deactivated="print('deactivated')"
-      @drag-start="print('drag-start')"
-      @resize-start="print('resize-start')"
-      @dragging="print('dragging')"
-      @resizing="print('resizing')"
-      @drag-end="print('drag-end')"
-      @resize-end="print('resize-end')"
-      @click="active = true"
-      class="instructions"
-    >
-    <!-- class="instructions col-4 p-4" -->
-      <div>
-        <h4>{{ title }}</h4>
-        <hr class="instructions-hr" />
-        <Tiptap
-          :savedText="JSON.parse(description)"
-          :editable="false"
-          :showMenuBar="false"
-          :isDark="true"
-          v-if="childIsOpen"
-        />
-      </div>
-    </Vue3DraggableResizable>
   <div v-if="childIsOpen" class="row">
-    
-
+    <Vue3DraggableResizable
+        :initW="110"
+        :initH="120"
+        v-model:x="x"
+        v-model:y="y"
+        v-model:w="w"
+        v-model:h="h"
+        v-model:active="active"
+        :draggable="false"
+        :resizable="true"
+        :disabledH="true"
+        :handles="['mr']"
+        @activated="print('activated')"
+        @deactivated="print('deactivated')"
+        @drag-start="print('drag-start')"
+        @resize-start="print('resize-start')"
+        @dragging="print('dragging')"
+        @resizing="print('resizing')"
+        @drag-end="print('drag-end')"
+        @resize-end="print('resize-end')"
+        @click="active = true"
+      >
+        This is a test example
+      </Vue3DraggableResizable>
+    <div class="instructions col-4 p-4">
+      <h4>{{ title }}</h4>
+      <hr class="instructions-hr" />
+      <Tiptap
+        :savedText="JSON.parse(description)"
+        :editable="false"
+        :showMenuBar="false"
+        :isDark="true"
+        v-if="childIsOpen"
+      />
+    </div>
     <IDE
       class="col-8"
       :lang="lang"
@@ -89,17 +87,14 @@ export default defineComponent({
       childIsOpen: false,
       saveStatus: "",
       test: {},
-      x: 0,
-      y: 0,
+      x: 100,
+      y: 100,
       h: 100,
-      w: 500,
+      w: 100,
       active: true,
     };
   },
   methods: {
-    print(val) {
-      console.log(val);
-    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
