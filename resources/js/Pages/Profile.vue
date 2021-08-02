@@ -260,6 +260,11 @@ export default {
       this.user.screen_name = this.authUser.fsc_user.screen_name;
       this.user.username = this.authUser.username;
       this.user.fsc_id = this.authUser.fsc_user.fsc_id;
+
+      //make sure this is how they are being received from database
+      this.user.pronouns = this.authUser.pronouns;
+      this.user.settings = this.authUser.settings;
+
       this.user.pfp = this.authUser.pfp_path;
       if(this.user.pfp == undefined || this.user.pfp == null) {
         this.user.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
