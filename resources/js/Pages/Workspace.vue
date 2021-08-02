@@ -9,8 +9,6 @@
   </button>
   <div v-if="childIsOpen" class="row">
     <Vue3DraggableResizable
-      :initW="110"
-      :initH="120"
       v-model:x="x"
       v-model:y="y"
       v-model:w="w"
@@ -87,8 +85,8 @@ export default defineComponent({
       childIsOpen: false,
       saveStatus: "",
       test: {},
-      x: 100,
-      y: 100,
+      x: 0,
+      y: 0,
       h: 100,
       w: 100,
       active: true,
