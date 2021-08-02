@@ -7,8 +7,8 @@
   >
     Return to Problems
   </button>
-  <div v-if="childIsOpen" class="row">
-    <Vue3DraggableResizable
+
+  <Vue3DraggableResizable
       v-model:x="x"
       v-model:y="y"
       v-model:w="w"
@@ -27,8 +27,9 @@
       @drag-end="print('drag-end')"
       @resize-end="print('resize-end')"
       @click="active = true"
-      class="instructions col-4 p-4"
+      class="instructions"
     >
+    <!-- class="instructions col-4 p-4" -->
       <div>
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
@@ -41,6 +42,8 @@
         />
       </div>
     </Vue3DraggableResizable>
+  <div v-if="childIsOpen" class="row">
+    
 
     <IDE
       class="col-8"
@@ -89,7 +92,7 @@ export default defineComponent({
       x: 0,
       y: 0,
       h: 100,
-      w: 100,
+      w: 500,
       active: true,
     };
   },
