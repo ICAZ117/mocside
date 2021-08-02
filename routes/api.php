@@ -131,7 +131,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/invite/{id}', [InviteController::class, 'update']);
     Route::delete('/invite/{id}', [InviteController::class, 'delete']);
 
-    Route::put('/profile/{id}', [ProfileController::class, 'updateFullProfile']);
+    Route::put('/profile/full/{id}', [ProfileController::class, 'updateFullProfile']);
     Route::put('/profile/pfp', [ProfileController::class, 'updatePFP']);
     Route::put('/profile/settings', [ProfileController::class, 'updateSettings']);
     Route::post('/profile/init', [ProfileController::class, 'initProfile']);
