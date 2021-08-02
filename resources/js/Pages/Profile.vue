@@ -251,7 +251,7 @@ export default {
       this.showEmailChange = true;
     },
     updatePass() {
-      if(this.passord.new != this.password.confirm) {
+      if(this.password.new != this.password.confirm) {
         console.log("These passwords do not match");
       }
       else {
