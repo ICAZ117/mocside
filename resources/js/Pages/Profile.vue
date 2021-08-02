@@ -40,12 +40,14 @@
             <input type="text" v-model="user.screen_name" id="ScreenName">
             <label for="FSCID">FSC ID</label>
             <input type="number" v-model="user.fsc_id" id="FSCID" disabled>
+            <label for="pronouns">Preferred Pronouns</label>
+            <input type="text" name="pronouns" id="pronouns">
           </div>
         </div>
         <div clas="Editor-Settings">
           <!-- theme, language, console theme -->
           <label for="Theme">Select A Default Theme</label>
-          <select name="Theme" id="Theme">
+          <select name="Theme" id="Theme" v-model="user.settings.ideOptions.theme">
             <optgroup label="Dark">
               <option value="ambiance">Ambiance</option>
               <option value="chaos">Chaos</option>
@@ -90,17 +92,14 @@
             </optgroup>
           </select>
           <label for="Language">Select A Default Language</label>
-          <select name="Language" id="Language">
+          <select name="Language" id="Language" v-model="user.settings.ideOptions.defaultLang">
             <option value="python">Python</option>
             <option value="Java">Java</option>
           </select>
-          <label for="ConsoleTheme">Select A Defautl Console Theme</label>
-          <select name="ConsoleTheme" id="ConsoleTheme">
-            <option value="Default">Default</option>
-            <option value="Greeen">Green</option>
-            <option value="White">White</option>
-            <option value="Red">Red</option>
-          </select>
+          <label for="ConsoleForeground">Select A Console Foreground Color</label>
+          <input type="color" name="ConsoleForeground" id="ConsoleForeground">
+          <label for="ConsoleBackground">Select A Console Background Color</label>
+          <input type="color" name="ConsoleBackground" id="ConsoleBackground">
         </div>
         <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
 
@@ -204,6 +203,17 @@ export default {
         fsc_id: "",
         screen_name: "",
         username: "",
+        settings: {
+          consoleOptions: {
+            foreground: "",
+            background: "",
+          },
+          ideOptions: {
+            theme: "",
+            defaultLang: "",
+          },
+        },
+        pronouns: "",
       },
       temppfp: "",
       showEmailChange: false,
@@ -287,10 +297,15 @@ export default {
 
       console.log("saving profile");
       var payload = {
-        name: "Stephen Robinson",
+        name: this.user.name,
+        username: this.user.username,
+        screen_name: this.user.screen_name,
+        pfp_path: this.user.pfp,
+        settings: this.user.settings,
+        pronouns: this.user.pronouns,
       }
-      var res = await API.apiClient.put(`/users/auth/${this.authUser.id}`, payload);
-      console.log(res);
+
+      //call route
     },
     async updateImage() {
       await this.uploadImage();
@@ -301,6 +316,9 @@ export default {
       console.log("changing the avatar picture in backend");
 
       //api call to backend to update pfp path
+      var payload = {
+        pfp_path: this.temppfp,
+      }
 
       //change other frontend pfp
       this.user.pfp = this.temppfp;
