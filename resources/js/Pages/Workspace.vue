@@ -29,7 +29,7 @@
       @drag-end="print('drag-end')"
       @resize-end="print('resize-end')"
       @click="active = true"
-      class="instructions p-4"
+      class="instructions"
     >
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
@@ -91,7 +91,10 @@ export default defineComponent({
       x: 0,
       y: 60,
       h: 100,
-      w: 100,
+      w:
+        0.33 * window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth,
       active: true,
     };
   },
