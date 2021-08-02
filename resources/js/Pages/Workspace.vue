@@ -29,12 +29,10 @@
       @drag-end="print('drag-end')"
       @resize-end="print('resize-end')"
       @click="active = true"
-      class="instructions col-4"
+      class="instructions p-4"
     >
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
-    </Vue3DraggableResizable>
-    <div class="instructions col-4 p-4">
       <Tiptap
         :savedText="JSON.parse(description)"
         :editable="false"
@@ -42,7 +40,10 @@
         :isDark="true"
         v-if="childIsOpen"
       />
-    </div>
+    </Vue3DraggableResizable>
+    <!-- <div class="instructions col-4 p-4">
+      
+    </div> -->
     <IDE
       class="col-8"
       :lang="lang"
@@ -87,8 +88,8 @@ export default defineComponent({
       childIsOpen: false,
       saveStatus: "",
       test: {},
-      x: 100,
-      y: 100,
+      x: 0,
+      y: 60,
       h: 100,
       w: 100,
       active: true,
