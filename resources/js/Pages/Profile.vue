@@ -158,9 +158,9 @@
           <label for="CurrentPass">Current Password</label>
           <input type="password" id="CurrentPass">
           <label for="NewPass">New Password</label>
-          <input type="password" id="NewPass">
+          <input type="password" id="NewPass" v-model="password.new">
           <label for="ConfirmPass">Confirm Password</label>
-          <input type="password" id="ConfirmPass">
+          <input type="password" id="ConfirmPass" v-model="password.confirm">
           <button @click="updatePass()" class="btn btn-danger btn-block">Save</button>
         </div>
 
@@ -215,6 +215,11 @@ export default {
         },
         pronouns: "",
       },
+      password: {
+        current: "",
+        new: "",
+        confirm: "",
+      },
       temppfp: "",
       showEmailChange: false,
       showPassChange: false,
@@ -246,8 +251,13 @@ export default {
       this.showEmailChange = true;
     },
     updatePass() {
-      this.showPassChange = false;
-      console.log("updatedPassword");
+      if(this.passord.new != this.password.confirm) {
+        console.log("These passwords do not match");
+      }
+      else {
+        this.showPassChange = false;
+        console.log("updatedPassword");
+      }
     },
     updateEmail() {
       this.showEmailChange = false;
