@@ -18,6 +18,7 @@ use App\Http\Controllers\GradebookController;
 use App\Http\Controllers\InviteController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\StudentController;
@@ -129,6 +130,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/invite/enroll/{key}', [InviteController::class, 'enroll']);
     Route::put('/invite/{id}', [InviteController::class, 'update']);
     Route::delete('/invite/{id}', [InviteController::class, 'delete']);
+
+    Route::put('/profile/{id}', [ProfileController::class, 'updateFullProfile']);
+    Route::put('/profile/pfp', [ProfileController::class, 'updatePFP']);
+    Route::put('/profile/settings', [ProfileController::class, 'updateSettings']);
+    Route::post('/profile/init', [ProfileController::class, 'initProfile']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

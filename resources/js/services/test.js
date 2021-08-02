@@ -212,3 +212,8 @@ var foo = {
         }
     ]
 }
+
+var prefs = {
+    'consoleOptions': {'foreground': '', 'background': ''},
+    'ideOptions': {'theme': '', 'defaultLang': ''},
+}

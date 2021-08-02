@@ -46,7 +46,7 @@ class User extends Authenticatable
         return $this->hasMany(Code::class, 'fsc_id', 'fsc_id');
     }
 
-    public function hasProgress($assignment_id, $lang)
+    public function hasProgress($assignment_id, $lang): bool
     {
         $snaps = $this->code_snaps;
         foreach ($snaps as $snap) {
@@ -70,6 +70,7 @@ class User extends Authenticatable
         'fsc_id',
         'fsc_role',
         'pfp_path',
+        'settings'
     ];
 
     /**
