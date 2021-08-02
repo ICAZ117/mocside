@@ -262,7 +262,7 @@ export default {
       this.user.fsc_id = this.authUser.fsc_user.fsc_id;
 
       //make sure this is how they are being received from database
-      this.user.pronouns = this.authUser.pronouns;
+      this.user.pronouns = this.authUser.fsc_user.pronouns;
       this.user.settings = this.authUser.settings;
 
       this.user.pfp = this.authUser.pfp_path;
