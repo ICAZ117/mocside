@@ -149,8 +149,8 @@
         <div v-if="showEmailChange" class="change-Email">
           <label for="Verify">Verification Code</label>
           <input type="text" id="Verify">
-          <label for="Email">New Email</label>
-          <input type="email" id="Email">
+          <label for="Email">Email</label>
+          <input type="email" id="Email" v-model="user.email">
           <button @click="updateEmail()" class="btn btn-danger btn-block">Save</button>
         </div>
         <button @click="showPass()" class="btn btn-danger btn-block">Change Password</button>
@@ -247,9 +247,15 @@ export default {
     },
     updatePass() {
       this.showPassChange = false;
+      console.log("updatedPassword");
     },
     updateEmail() {
       this.showEmailChange = false;
+      console.log("updateEmail");
+      var payload = {
+        email: this.user.email,
+      };
+      // const res = await API.apiClient.put();
     },
     closeModal() {
       this.showAvatarModal = false;
