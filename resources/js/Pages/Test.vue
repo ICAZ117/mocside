@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import Vue3DraggableResizable from 'vue3-draggable-resizable'
+import { defineComponent } from "vue";
+import Vue3DraggableResizable from "vue3-draggable-resizable";
 //default styles
-import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
+import "vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
 export default defineComponent({
   components: { Vue3DraggableResizable },
   data() {
@@ -42,15 +42,15 @@ export default defineComponent({
       y: 100,
       h: 100,
       w: 100,
-      active: true
-    }
+      active: true,
+    };
   },
   methods: {
     print(val) {
-      console.log(val)
-    }
-  }
-})
+      console.log(val);
+    },
+  },
+});
 </script>
 <style>
 .parent {
@@ -64,6 +64,13 @@ export default defineComponent({
 }
 
 .vdr-container.active {
-    background-color: lightcoral;
+  background-color: lightcoral;
+}
+
+.vdr-handle {
+  height: 100% !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  margin: 0 !important;
 }
 </style>
