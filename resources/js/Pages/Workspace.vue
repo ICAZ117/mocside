@@ -9,30 +9,28 @@
   </button>
   <div v-if="childIsOpen" class="row">
     <Vue3DraggableResizable
-        :initW="110"
-        :initH="120"
-        v-model:x="x"
-        v-model:y="y"
-        v-model:w="w"
-        v-model:h="h"
-        v-model:active="active"
-        :draggable="false"
-        :resizable="true"
-        :disabledH="true"
-        :handles="['mr']"
-        @activated="print('activated')"
-        @deactivated="print('deactivated')"
-        @drag-start="print('drag-start')"
-        @resize-start="print('resize-start')"
-        @dragging="print('dragging')"
-        @resizing="print('resizing')"
-        @drag-end="print('drag-end')"
-        @resize-end="print('resize-end')"
-        @click="active = true"
-      >
-        This is a test example
-      </Vue3DraggableResizable>
-    <div class="instructions col-4 p-4">
+      :initW="110"
+      :initH="120"
+      v-model:x="x"
+      v-model:y="y"
+      v-model:w="w"
+      v-model:h="h"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledH="true"
+      :handles="['mr']"
+      @activated="print('activated')"
+      @deactivated="print('deactivated')"
+      @drag-start="print('drag-start')"
+      @resize-start="print('resize-start')"
+      @dragging="print('dragging')"
+      @resizing="print('resizing')"
+      @drag-end="print('drag-end')"
+      @resize-end="print('resize-end')"
+      @click="active = true"
+      class="instructions"
+    >
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <Tiptap
@@ -42,6 +40,9 @@
         :isDark="true"
         v-if="childIsOpen"
       />
+    </Vue3DraggableResizable>
+    <div class="instructions col-4 p-4">
+      
     </div>
     <IDE
       class="col-8"
@@ -95,6 +96,9 @@ export default defineComponent({
     };
   },
   methods: {
+    print(val) {
+      console.log(val);
+    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
@@ -243,5 +247,17 @@ export default defineComponent({
 .resizable-content {
   height: 100%;
   width: 100%;
+}
+
+.vdr-container.active {
+  background-color: lightcoral;
+}
+
+.vdr-handle {
+  height: 100% !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  margin: 0 !important;
+  display: block !important;
 }
 </style>

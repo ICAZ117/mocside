@@ -861,9 +861,9 @@ thead.gradebook {
 .instructions {
     background-color: rgb(42, 43, 51) !important;
     color: lightgray !important;
-    height: calc(100vh - var(--nav-height)) !important;
+    /* height: calc(100vh - var(--nav-height)) !important;
     margin: 0 !important;
-    padding: 1rem !important;
+    padding: 1rem !important; */
 }
 
 .instructions-hr {
