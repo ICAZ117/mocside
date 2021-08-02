@@ -41,14 +41,10 @@
 
 <script>
 import * as API from "../services/API";
-import VueResizable from "vue-resizable";
 
 export default {
   props: ["problemID", "lang", "labID"],
   emits: ["unmounting", "problemEdited"],
-  components: {
-    VueResizable,
-  },
 
   data() {
     return {
