@@ -22,7 +22,8 @@ class UserResource extends JsonResource
           'isProfessor' => $this->isProf(),
           'fsc_user' => $this->fscUser,
           'username' => $this->username,
-          'settings' => json_decode($this->settings, true)
+          'settings' => json_decode($this->settings, true),
+          'pfp_path' => $this->pfp_path
         ];
     }
 }

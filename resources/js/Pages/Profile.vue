@@ -261,7 +261,6 @@ export default {
       this.user.username = this.authUser.username;
       this.user.fsc_id = this.authUser.fsc_user.fsc_id;
 
-      //make sure this is how they are being received from database
       this.user.pronouns = this.authUser.fsc_user.pronouns;
       this.user.settings = this.authUser.settings;
 
@@ -311,6 +310,7 @@ export default {
       }
 
       //call route
+      const res = await API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload);
     },
     async updateImage() {
       await this.uploadImage();
