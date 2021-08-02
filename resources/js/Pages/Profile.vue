@@ -41,7 +41,7 @@
             <label for="FSCID">FSC ID</label>
             <input type="number" v-model="user.fsc_id" id="FSCID" disabled>
             <label for="pronouns">Preferred Pronouns</label>
-            <input type="text" name="pronouns" id="pronouns">
+            <input type="text" name="pronouns" id="pronouns" v-model="user.pronouns">
           </div>
         </div>
         <div clas="Editor-Settings">
@@ -97,9 +97,9 @@
             <option value="Java">Java</option>
           </select>
           <label for="ConsoleForeground">Select A Console Foreground Color</label>
-          <input type="color" name="ConsoleForeground" id="ConsoleForeground">
+          <input type="color" name="ConsoleForeground" id="ConsoleForeground" v-model="user.settings.consoleOptions.foreground">
           <label for="ConsoleBackground">Select A Console Background Color</label>
-          <input type="color" name="ConsoleBackground" id="ConsoleBackground">
+          <input type="color" name="ConsoleBackground" id="ConsoleBackground" v-model="user.settings.consoleOptions.background">
         </div>
         <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
 
