@@ -41,7 +41,7 @@
             <label for="FSCID">FSC ID</label>
             <input type="number" v-model="user.fsc_id" id="FSCID" disabled>
             <label for="pronouns">Preferred Pronouns</label>
-            <input type="text" name="pronouns" id="pronouns">
+            <input type="text" name="pronouns" id="pronouns" v-model="user.pronouns">
           </div>
         </div>
         <div clas="Editor-Settings">
@@ -97,9 +97,9 @@
             <option value="Java">Java</option>
           </select>
           <label for="ConsoleForeground">Select A Console Foreground Color</label>
-          <input type="color" name="ConsoleForeground" id="ConsoleForeground">
+          <input type="color" name="ConsoleForeground" id="ConsoleForeground" v-model="user.settings.consoleOptions.foreground">
           <label for="ConsoleBackground">Select A Console Background Color</label>
-          <input type="color" name="ConsoleBackground" id="ConsoleBackground">
+          <input type="color" name="ConsoleBackground" id="ConsoleBackground" v-model="user.settings.consoleOptions.background">
         </div>
         <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
 
@@ -149,8 +149,8 @@
         <div v-if="showEmailChange" class="change-Email">
           <label for="Verify">Verification Code</label>
           <input type="text" id="Verify">
-          <label for="Email">New Email</label>
-          <input type="email" id="Email">
+          <label for="Email">Email</label>
+          <input type="email" id="Email" v-model="user.email">
           <button @click="updateEmail()" class="btn btn-danger btn-block">Save</button>
         </div>
         <button @click="showPass()" class="btn btn-danger btn-block">Change Password</button>
@@ -164,10 +164,10 @@
           <button @click="updatePass()" class="btn btn-danger btn-block">Save</button>
         </div>
 
-        <button class="btn btn-danger btn-block">Save</button>
-        <button v-if="showUpgrade" class="btn btn-danger btn-block">Upgrade User</button>
-        <button v-if="showUpgrade" class="btn btn-danger btn-block">DownGrade User</button>
-        <button class="btn btn-danger btn-block">Delete My Account</button>
+        <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
+        <button @click="upgradeUser" v-if="showUpgrade" class="btn btn-danger btn-block">Upgrade User</button>
+        <button @click="downgradeUser" v-if="showUpgrade" class="btn btn-danger btn-block">DownGrade User</button>
+        <button @click="deleteAccount" class="btn btn-danger btn-block">Delete My Account</button>
       </tab-panel>
   </tab-panels>
 </template>
@@ -247,9 +247,15 @@ export default {
     },
     updatePass() {
       this.showPassChange = false;
+      console.log("updatedPassword");
     },
     updateEmail() {
       this.showEmailChange = false;
+      console.log("updateEmail");
+      var payload = {
+        email: this.user.email,
+      };
+      // const res = await API.apiClient.put();
     },
     closeModal() {
       this.showAvatarModal = false;
@@ -336,6 +342,15 @@ export default {
     editAvatar() {
       document.getElementById("pfpmodal").src = this.user.pfp;
       this.showAvatarModal = true;
+    },
+    upgradeUser() {
+      console.log("downgrade user");
+    },
+    downgradeUser() {
+      console.log("upgrade user");
+    },
+    deleteAccount() {
+      console.log("delete account");
     },
     getGrades() {
       for(let i = 0; i < this.enrolledCourses.length; i++) {
