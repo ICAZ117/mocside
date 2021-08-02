@@ -7,22 +7,44 @@
   >
     Return to Problems
   </button>
+
+  <Vue3DraggableResizable
+      v-model:x="x"
+      v-model:y="y"
+      v-model:w="w"
+      v-model:h="h"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledH="true"
+      :handles="['mr']"
+      @activated="print('activated')"
+      @deactivated="print('deactivated')"
+      @drag-start="print('drag-start')"
+      @resize-start="print('resize-start')"
+      @dragging="print('dragging')"
+      @resizing="print('resizing')"
+      @drag-end="print('drag-end')"
+      @resize-end="print('resize-end')"
+      @click="active = true"
+      class="instructions"
+    >
+    <!-- class="instructions col-4 p-4" -->
+      <div>
+        <h4>{{ title }}</h4>
+        <hr class="instructions-hr" />
+        <Tiptap
+          :savedText="JSON.parse(description)"
+          :editable="false"
+          :showMenuBar="false"
+          :isDark="true"
+          v-if="childIsOpen"
+        />
+      </div>
+    </Vue3DraggableResizable>
   <div v-if="childIsOpen" class="row">
-    <!-- <vue-resizable> -->
-      <!-- <div class="resizable-content"> -->
-        <div class="instructions col-4 p-4">
-          <h4>{{ title }}</h4>
-          <hr class="instructions-hr" />
-          <Tiptap
-            :savedText="JSON.parse(description)"
-            :editable="false"
-            :showMenuBar="false"
-            :isDark="true"
-            v-if="childIsOpen"
-          />
-        </div>
-      <!-- </div> -->
-    <!-- </vue-resizable> -->
+    
+
     <IDE
       class="col-8"
       :lang="lang"
@@ -41,10 +63,15 @@
 
 <script>
 import * as API from "../services/API";
+import { defineComponent } from "vue";
+import Vue3DraggableResizable from "vue3-draggable-resizable";
+//default styles
+import "vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
 
-export default {
+export default defineComponent({
   props: ["problemID", "lang", "labID"],
   emits: ["unmounting", "problemEdited"],
+  components: { Vue3DraggableResizable },
 
   data() {
     return {
@@ -62,9 +89,17 @@ export default {
       childIsOpen: false,
       saveStatus: "",
       test: {},
+      x: 0,
+      y: 0,
+      h: 100,
+      w: 500,
+      active: true,
     };
   },
   methods: {
+    print(val) {
+      console.log(val);
+    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
@@ -207,7 +242,7 @@ export default {
     this.childIsOpen = true;
     await this.getAssignment();
   },
-};
+});
 </script>
 <style scoped>
 .resizable-content {
