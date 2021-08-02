@@ -94,6 +94,9 @@ export default defineComponent({
     };
   },
   methods: {
+    print(val) {
+      console.log(val);
+    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
