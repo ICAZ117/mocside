@@ -29,6 +29,7 @@
         @drag-end="print('drag-end')"
         @resize-end="print('resize-end')"
         @click="active = true"
+        class="instructions"
       >
         This is a test example
       </Vue3DraggableResizable>
