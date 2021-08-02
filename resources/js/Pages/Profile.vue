@@ -324,6 +324,7 @@ export default {
       var payload = {
         pfp_path: this.temppfp,
       }
+      const res = await API.apiClient.put(`/profile/pfp`, payload);
 
       //change other frontend pfp
       this.user.pfp = this.temppfp;
