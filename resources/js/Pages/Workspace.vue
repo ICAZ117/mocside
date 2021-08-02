@@ -91,10 +91,7 @@ export default defineComponent({
       x: 0,
       y: 60,
       h: 100,
-      w:
-        0.33 * window.innerWidth ||
-        document.documentElement.clientWidth ||
-        document.body.clientWidth,
+      w: 33.3,
       active: true,
     };
   },
