@@ -164,10 +164,10 @@
           <button @click="updatePass()" class="btn btn-danger btn-block">Save</button>
         </div>
 
-        <button class="btn btn-danger btn-block">Save</button>
-        <button v-if="showUpgrade" class="btn btn-danger btn-block">Upgrade User</button>
-        <button v-if="showUpgrade" class="btn btn-danger btn-block">DownGrade User</button>
-        <button class="btn btn-danger btn-block">Delete My Account</button>
+        <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
+        <button @click="upgradeUser" v-if="showUpgrade" class="btn btn-danger btn-block">Upgrade User</button>
+        <button @click="downgradeUser" v-if="showUpgrade" class="btn btn-danger btn-block">DownGrade User</button>
+        <button @click="deleteAccount" class="btn btn-danger btn-block">Delete My Account</button>
       </tab-panel>
   </tab-panels>
 </template>
@@ -336,6 +336,15 @@ export default {
     editAvatar() {
       document.getElementById("pfpmodal").src = this.user.pfp;
       this.showAvatarModal = true;
+    },
+    upgradeUser() {
+      console.log("downgrade user");
+    },
+    downgradeUser() {
+      console.log("upgrade user");
+    },
+    deleteAccount() {
+      console.log("delete account");
     },
     getGrades() {
       for(let i = 0; i < this.enrolledCourses.length; i++) {
