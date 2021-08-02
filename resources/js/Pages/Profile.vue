@@ -310,7 +310,7 @@ export default {
       }
 
       //call route
-      const res = await API.apiClient.put(`/profile/full/${this.authUser.id}`, payload);
+      const res = await API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload);
     },
     async updateImage() {
       await this.uploadImage();
