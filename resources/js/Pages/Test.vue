@@ -72,5 +72,6 @@ export default defineComponent({
   top: 0 !important;
   bottom: 0 !important;
   margin: 0 !important;
+  display: block!important;
 }
 </style>

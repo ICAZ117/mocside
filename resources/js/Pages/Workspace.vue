@@ -95,6 +95,9 @@ export default defineComponent({
     };
   },
   methods: {
+    print(val) {
+      console.log(val);
+    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
@@ -243,5 +246,17 @@ export default defineComponent({
 .resizable-content {
   height: 100%;
   width: 100%;
+}
+
+.vdr-container.active {
+  background-color: lightcoral;
+}
+
+.vdr-handle {
+  height: 100% !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  margin: 0 !important;
+  display: block!important;
 }
 </style>
