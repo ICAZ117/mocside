@@ -9,30 +9,31 @@
   </button>
   <div v-if="childIsOpen" class="row">
     <Vue3DraggableResizable
-        :initW="110"
-        :initH="120"
-        v-model:x="x"
-        v-model:y="y"
-        v-model:w="w"
-        v-model:h="h"
-        v-model:active="active"
-        :draggable="false"
-        :resizable="true"
-        :disabledH="true"
-        :handles="['mr']"
-        @activated="print('activated')"
-        @deactivated="print('deactivated')"
-        @drag-start="print('drag-start')"
-        @resize-start="print('resize-start')"
-        @dragging="print('dragging')"
-        @resizing="print('resizing')"
-        @drag-end="print('drag-end')"
-        @resize-end="print('resize-end')"
-        @click="active = true"
-        class="instructions"
-      >
-        This is a test example
-      </Vue3DraggableResizable>
+      :initW="110"
+      :initH="120"
+      v-model:x="x"
+      v-model:y="y"
+      v-model:w="w"
+      v-model:h="h"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledH="true"
+      :handles="['mr']"
+      @activated="print('activated')"
+      @deactivated="print('deactivated')"
+      @drag-start="print('drag-start')"
+      @resize-start="print('resize-start')"
+      @dragging="print('dragging')"
+      @resizing="print('resizing')"
+      @drag-end="print('drag-end')"
+      @resize-end="print('resize-end')"
+      @click="active = true"
+      class="instructions"
+    >
+      <h4>{{ title }}</h4>
+      <hr class="instructions-hr" />
+    </Vue3DraggableResizable>
     <div class="instructions col-4 p-4">
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
@@ -258,6 +259,6 @@ export default defineComponent({
   top: 0 !important;
   bottom: 0 !important;
   margin: 0 !important;
-  display: block!important;
+  display: block !important;
 }
 </style>
