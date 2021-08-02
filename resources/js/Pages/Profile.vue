@@ -257,6 +257,7 @@ export default {
       else {
         this.showPassChange = false;
         console.log("updatedPassword");
+        //try fortify route and pass current and new password....i believe it checks for us and returns an error/status code
       }
     },
     updateEmail() {
