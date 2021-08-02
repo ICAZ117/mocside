@@ -27,8 +27,9 @@
       @drag-end="print('drag-end')"
       @resize-end="print('resize-end')"
       @click="active = true"
+      class="instructions col-4 p-4"
     >
-      <div class="instructions col-4 p-4">
+      <div>
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
         <Tiptap
