@@ -390,7 +390,7 @@ export default {
     },
     getGrades() {
       for(let i = 0; i < this.enrolledCourses.length; i++) {
-        if(this.student.gradebook_courses == null) {
+        if(this.student.gradebook_courses == "null" || this.student.gradebook_courses == null) {
           this.letters.push("--");
         }
         var val = JSON.parse(this.student.gradebook_courses).grades[this.enrolledCourses[i]];
