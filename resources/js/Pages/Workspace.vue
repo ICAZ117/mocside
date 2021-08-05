@@ -8,39 +8,40 @@
     Return to Problems
   </button>
   <Vue3DraggableResizable
-      :initW="500"
-      v-model:x="x"
-      v-model:y="y"
-      v-model:w="w"
-      v-model:h="h"
-      v-model:active="active"
-      :draggable="false"
-      :resizable="true"
-      :disabledH="true"
-      :handles="['mr']"
-      @activated="print('activated')"
-      @deactivated="print('deactivated')"
-      @drag-start="print('drag-start')"
-      @resize-start="print('resize-start')"
-      @dragging="print('dragging')"
-      @resizing="print('resizing')"
-      @drag-end="print('drag-end')"
-      @resize-end="print('resize-end')"
-      @click="active = true"
-      class="instructions"
-    >
-      <h4>{{ title }}</h4>
-      <hr class="instructions-hr" />
-      <Tiptap
-        :savedText="JSON.parse(description)"
-        :editable="false"
-        :showMenuBar="false"
-        :isDark="true"
-        v-if="childIsOpen"
-      />
-    </Vue3DraggableResizable>
+    :initW="110"
+    :initH="windowHeight"
+    v-model:x="x"
+    v-model:y="y"
+    v-model:w="w"
+    v-model:h="h"
+    v-model:active="active"
+    :draggable="false"
+    :resizable="true"
+    :disabledH="true"
+    :handles="['mr']"
+    @activated="print('activated')"
+    @deactivated="print('deactivated')"
+    @drag-start="print('drag-start')"
+    @resize-start="print('resize-start')"
+    @dragging="print('dragging')"
+    @resizing="print('resizing')"
+    @drag-end="print('drag-end')"
+    @resize-end="print('resize-end')"
+    @click="active = true"
+    class="instructions"
+  >
+    <h4>{{ title }}</h4>
+    <hr class="instructions-hr" />
+    <Tiptap
+      :savedText="JSON.parse(description)"
+      :editable="false"
+      :showMenuBar="false"
+      :isDark="true"
+      v-if="childIsOpen"
+    />
+  </Vue3DraggableResizable>
+
   <div v-if="childIsOpen" class="row">
-    
     <!-- <div class="instructions col-4 p-4">
       
     </div> -->
@@ -75,6 +76,7 @@ export default defineComponent({
 
   data() {
     return {
+      windowHeight: window.innerHeight,
       assignment: {},
       title: "",
       description: "",
@@ -90,7 +92,7 @@ export default defineComponent({
       saveStatus: "",
       test: {},
       x: 0,
-      y: 60,
+      y: 98,
       h: 100,
       w: 100,
       active: true,
