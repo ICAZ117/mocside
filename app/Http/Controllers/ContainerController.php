@@ -223,7 +223,7 @@ class ContainerController extends Controller
             $path = $tc_id . ".in";
             $file = fopen($path, "w");
             fwrite($file, $temp->input);
-            $filePath = Storage::disk('local')
+            Storage::disk('local')
                 ->putFileAs($head . "/test-cases", new File($path), $path);
             fclose($file);
             unlink($path);
@@ -232,15 +232,21 @@ class ContainerController extends Controller
             $path = $tc_id . ".out";
             $file = fopen($path, "w");
             fwrite($file, $temp->output);
-            $filePath = Storage::disk('local')
+            Storage::disk('local')
                 ->putFileAs($head . "/test-cases", new File($path), $path);
             fclose($file);
             unlink($path);
         }
 
         // copy in supervisor
-        $filePath = Storage::disk('local')
+        Storage::disk('local')
             ->putFileAs($head, $supervisor, 'supervisor.py');
+
+        // copy in junit jars
+        $junit_path = Storage::disk('local')->path('junit/junit-4.13.2.jar');
+        $hamcrest = Storage::disk('local')->path('junit/hamcrest-core-1.3.jar');
+        Storage::disk('local')->putFileAs($head . "/junit", new File($junit_path), 'junit-4.13.2.jar');
+        Storage::disk('local')->putFileAs($head . "/junit", new File($hamcrest), 'hamcrest-core-1.3.jar');
 
         // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);
@@ -368,7 +374,7 @@ class ContainerController extends Controller
         ]);
 
         // grab logs
-        $line = $webSocketStream->read(); 
+        $line = $webSocketStream->read();
         $out = "";
 
         while ($line != null) {
@@ -402,7 +408,7 @@ class ContainerController extends Controller
         return response()->json(["message" => "logs retrieved.", "dump" => $returns, 'isRunning' => $flag], 200);
     }
 
- 
+
     // create a json file containing all test cases for given assingment. 
     public function exportTCs($id)
     {

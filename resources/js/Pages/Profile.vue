@@ -165,7 +165,10 @@
             <label for="NewPass">New Password</label>
             <input type="password" id="NewPass" v-model="password.new">
             <label for="ConfirmPass">Confirm Password</label>
-            <input type="password" id="ConfirmPass" v-model="password.confirm">
+            <input type="password" id="ConfirmPass" v-model="password.confirm" :class="{'is-invalid': passNoMatch,}">
+            <div v-if="passNoMatch" class="invalid-feedback">
+              <span>Your passwords don't match!</span>
+            </div>
             <button @click="updatePass()" class="btn btn-danger btn-block">Save</button>
           </div>
         </vue-final-modal>
@@ -236,6 +239,7 @@ export default {
       reloadEmailModal: 0,
       showPassModal: false,
       reloadPassModal: 0,
+      passNoMatch: false,
     };
   },
   setup() {
@@ -257,9 +261,11 @@ export default {
     updatePass() {
       if(this.password.new != this.password.confirm) {
         console.log("These passwords do not match");
+        this.passNoMatch = true;
       }
       else {
         // this.showPassChange = false;
+        this.passNoMatch = false;
         this.showPassModal = false;
         console.log("updatedPassword");
         //try fortify route and pass current and new password....i believe it checks for us and returns an error/status code
@@ -281,6 +287,7 @@ export default {
       this.showEmailModal = false;
     },
     closePassModal() {
+      this.passNoMatch = false;
       this.showPassModal = false;
     },
     getUser() {
