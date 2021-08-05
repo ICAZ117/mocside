@@ -248,6 +248,7 @@ export default {
       this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
     },
     goToProblem(id) {
+      console.log("go to problem");
       this.childIsOpen = true;
       this.problemID = id;
       this.$router.push({ name: "Assignment", params: { problem_id: id } });
