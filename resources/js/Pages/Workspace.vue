@@ -71,7 +71,7 @@ import "vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
 
 export default defineComponent({
   props: ["problemID", "lang", "labID"],
-  emits: ["unmounting", "problemEdited"],
+  emits: ["unmounting", "problemEdited", "deleteMe"],
   components: { Vue3DraggableResizable },
 
   data() {
