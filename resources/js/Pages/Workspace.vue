@@ -8,7 +8,7 @@
     Return to Problems
   </button>
   <Vue3DraggableResizable
-    :initW="110"
+    :initW="windowWidth"
     :initH="windowHeight"
     v-model:x="x"
     v-model:y="y"
@@ -77,6 +77,7 @@ export default defineComponent({
   data() {
     return {
       windowHeight: window.innerHeight - 98,
+      windowWidth: window.innerWidth * 0.33,
       assignment: {},
       title: "",
       description: "",
