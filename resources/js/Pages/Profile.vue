@@ -183,6 +183,7 @@
 
 <script>
 import * as API from "../services/API";
+import AuthService from "../services/AuthService";
 import store from "../Store/index";
 import { useRoute } from "vue-router";
 import FileService from "../services/FileService";
@@ -273,7 +274,7 @@ export default {
           current_password: this.password.current,
           password: this.password.new,
         }
-        const res = await API.apiClient.put(`user/password`, payload);
+        const res = await AuthService.authClient.put(`user/password`, payload);
       }
     },
     async updateEmail() {
