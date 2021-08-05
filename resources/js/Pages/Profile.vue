@@ -274,6 +274,7 @@ export default {
           current_password: this.password.current,
           password: this.password.new,
         }
+        const res = await AuthService.authClient.get(`user/confirm-password`, this.password.new);
         const res = await AuthService.updatePassword(payload);
       }
     },
