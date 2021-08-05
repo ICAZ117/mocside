@@ -273,7 +273,7 @@ export default {
           current_password: this.password.current,
           password: this.password.new,
         }
-        const res = await API.apiClient.pt(`user/password`, payload);
+        const res = await API.apiClient.put(`user/password`, payload);
       }
     },
     async updateEmail() {
