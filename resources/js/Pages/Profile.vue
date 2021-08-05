@@ -273,7 +273,7 @@ export default {
         var payload = {
           current_password: this.password.current,
           password: this.password.new,
-          "password-confirm": this.password.confirm,
+          password_confirmation: this.password.confirm,
         }
         // const res1 = await AuthService.authClient.get(`user/confirm-password`, this.password.new);
         const res = await AuthService.updatePassword(payload);
