@@ -7,8 +7,7 @@
   >
     Return to Problems
   </button>
-  <div v-if="childIsOpen" class="row">
-    <Vue3DraggableResizable
+  <Vue3DraggableResizable
       :initW="500"
       v-model:x="x"
       v-model:y="y"
@@ -40,6 +39,8 @@
         v-if="childIsOpen"
       />
     </Vue3DraggableResizable>
+  <div v-if="childIsOpen" class="row">
+    
     <!-- <div class="instructions col-4 p-4">
       
     </div> -->
@@ -91,7 +92,7 @@ export default defineComponent({
       x: 0,
       y: 60,
       h: 100,
-      w: 500,
+      w: 100,
       active: true,
     };
   },
