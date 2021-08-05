@@ -1,6 +1,6 @@
 <template>
   <div v-if="!childIsOpen">
-    <!-- Main Page-->
+    <!-- Problems Page-->
     <div class="courses header">
       <div class="heading">
         <h2>{{ this.labName }}</h2>

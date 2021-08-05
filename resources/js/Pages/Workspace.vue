@@ -1,5 +1,5 @@
 <template>
-  <!-- Main Page-->
+  <!-- WorkSpace Page-->
   <button
     v-if="childIsOpen"
     @click="this.$emit('unmounting')"
