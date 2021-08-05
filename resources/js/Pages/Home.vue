@@ -6,7 +6,7 @@
       <div class="carousel-inner h-100">
         <!-- Carousel Item 1 -->
         <div class="carousel-item active">
-          <img src="../../img/carousel/1.jpg" alt="Image carousel" class="w-100" />
+          <!-- <img src="../../img/carousel/1.jpg" alt="Image carousel" class="w-100" /> -->
 
           <div class="carousel-caption">
             <div class="container">
@@ -29,7 +29,7 @@
 
         <!-- Carousel Item 2 -->
         <div class="carousel-item">
-          <img src="../../img/carousel/2.jpg" alt="Image carousel" class="w-100" />
+          <!-- <img src="../../img/carousel/2.jpg" alt="Image carousel" class="w-100" /> -->
 
           <div class="carousel-caption">
             <div class="container">
@@ -48,7 +48,7 @@
 
         <!-- Carousel Item 3 -->
         <div class="carousel-item">
-          <img src="../../img/carousel/3.jpg" alt="Image carousel" class="w-100" />
+          <!-- <img src="../../img/carousel/3.jpg" alt="Image carousel" class="w-100" /> -->
 
           <div class="carousel-caption">
             <div class="container">
