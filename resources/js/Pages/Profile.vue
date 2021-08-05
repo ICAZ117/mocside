@@ -390,6 +390,9 @@ export default {
     },
     getGrades() {
       for(let i = 0; i < this.enrolledCourses.length; i++) {
+        if(this.student.gradebook_courses == null) {
+          this.letters.push("--");
+        }
         var val = JSON.parse(this.student.gradebook_courses).grades[this.enrolledCourses[i]];
         this.grades.push(val);
         if(val >= 90) {
@@ -463,6 +466,9 @@ export default {
   },
   async beforeMount() {
     this.authUser = await store.getters["auth/authUser"];
+    if(this.authUser.settings == null) {
+      const res = await API.apiClient.post(`/profile/init`);
+    }
     this.username = this.authUser.username;
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
