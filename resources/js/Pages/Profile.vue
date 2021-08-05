@@ -270,8 +270,8 @@ export default {
         console.log("updatedPassword");
         //try fortify route and pass current and new password....i believe it checks for us and returns an error/status code
         var payload = {
-          current_password: password.current,
-          password: password.new,
+          current_password: this.password.current,
+          password: this.password.new,
         }
         const res = await API.apiClient.pt(`user/password`, payload);
       }
