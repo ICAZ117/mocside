@@ -161,7 +161,7 @@
           <button class="modal-close" @click="showPassModal = false">x</button>
           <div class="change-Pass">
             <label for="CurrentPass">Current Password</label>
-            <input type="password" id="CurrentPass">
+            <input type="password" id="CurrentPass" v-model="password.current">
             <label for="NewPass">New Password</label>
             <input type="password" id="NewPass" v-model="password.new">
             <label for="ConfirmPass">Confirm Password</label>
