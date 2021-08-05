@@ -9,6 +9,7 @@
   </button>
   <Vue3DraggableResizable
     :initW="110"
+    :initH="window.innerHeight"
     v-model:x="x"
     v-model:y="y"
     v-model:w="w"
