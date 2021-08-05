@@ -28,7 +28,7 @@
               <button @click="updateImage()" class="btn btn-danger btn-block">Change Avatar</button>
             </div>
             <div class="row">
-              <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">Cancel</button>
+              <button @click="closeAvatarModal" class="col-4 btn btn-lg btn-secondary mx-1">Cancel</button>
               <button @click="changeAvatar" class="col-4 btn btn-lg btn-success mx-1" >Submit Changes</button>
             </div>
           </vue-final-modal>
@@ -144,25 +144,31 @@
         <label for="Username">Username</label>
         <input type="text" v-model="user.username" id="Username">
 
-        <!-- probably make the pass and email change into modals-->
-        <button @click="showEmail()" class="btn btn-danger btn-block">Change Email</button>
-        <div v-if="showEmailChange" class="change-Email">
-          <label for="Verify">Verification Code</label>
-          <input type="text" id="Verify">
-          <label for="Email">Email</label>
-          <input type="email" id="Email" v-model="user.email">
-          <button @click="updateEmail()" class="btn btn-danger btn-block">Save</button>
-        </div>
-        <button @click="showPass()" class="btn btn-danger btn-block">Change Password</button>
-        <div v-if="showPassChange" class="change-Pass">
-          <label for="CurrentPass">Current Password</label>
-          <input type="password" id="CurrentPass">
-          <label for="NewPass">New Password</label>
-          <input type="password" id="NewPass" v-model="password.new">
-          <label for="ConfirmPass">Confirm Password</label>
-          <input type="password" id="ConfirmPass" v-model="password.confirm">
-          <button @click="updatePass()" class="btn btn-danger btn-block">Save</button>
-        </div>
+        <button @click="editEmail()" class="btn btn-danger btn-block">Change Email</button>
+        <vue-final-modal v-model="showEmailModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
+          <button class="modal-close" @click="showEmailModal = false">x</button>
+          <div class="change-Email">
+            <label for="Verify">Verification Code</label>
+            <input type="text" id="Verify">
+            <label for="Email">Email</label>
+            <input type="email" id="Email" v-model="user.email">
+            <button @click="updateEmail()" class="btn btn-danger btn-block">Save</button>
+          </div>
+        </vue-final-modal>
+
+        <button @click="editPass()" class="btn btn-danger btn-block">Change Password</button>
+        <vue-final-modal v-model="showPassModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
+          <button class="modal-close" @click="showPassModal = false">x</button>
+          <div class="change-Pass">
+            <label for="CurrentPass">Current Password</label>
+            <input type="password" id="CurrentPass">
+            <label for="NewPass">New Password</label>
+            <input type="password" id="NewPass" v-model="password.new">
+            <label for="ConfirmPass">Confirm Password</label>
+            <input type="password" id="ConfirmPass" v-model="password.confirm">
+            <button @click="updatePass()" class="btn btn-danger btn-block">Save</button>
+          </div>
+        </vue-final-modal>
 
         <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
         <button @click="upgradeUser" v-if="showUpgrade" class="btn btn-danger btn-block">Upgrade User</button>
@@ -226,6 +232,10 @@ export default {
       showUpgrade: false,
       showAvatarModal: false,
       reloadAvatarModal: 0,
+      showEmailModal: false,
+      reloadEmailModal: 0,
+      showPassModal: false,
+      reloadPassModal: 0,
     };
   },
   setup() {
@@ -244,32 +254,34 @@ export default {
     };
   },
   methods: {
-    showPass() {
-      this.showPassChange = true;
-    },
-    showEmail() {
-      this.showEmailChange = true;
-    },
     updatePass() {
       if(this.password.new != this.password.confirm) {
         console.log("These passwords do not match");
       }
       else {
-        this.showPassChange = false;
+        // this.showPassChange = false;
+        this.showPassModal = false;
         console.log("updatedPassword");
         //try fortify route and pass current and new password....i believe it checks for us and returns an error/status code
       }
     },
     updateEmail() {
-      this.showEmailChange = false;
+      // this.showEmailChange = false;
+      this.showEmailModal = false;
       console.log("updateEmail");
       var payload = {
         email: this.user.email,
       };
       // const res = await API.apiClient.put();
     },
-    closeModal() {
+    closeAvatarModal() {
       this.showAvatarModal = false;
+    },
+    closeEmailModal() {
+      this.showEmailModal = false;
+    },
+    closePassModal() {
+      this.showPassModal = false;
     },
     getUser() {
       this.user.name = this.authUser.name;
@@ -354,6 +366,12 @@ export default {
       document.getElementById("pfpmodal").src = this.user.pfp;
       this.showAvatarModal = true;
     },
+    editEmail() {
+      this.showEmailModal = true;
+    },
+    editPass() {
+      this.showPassModal = true;
+    },
     upgradeUser() {
       console.log("downgrade user");
     },
@@ -416,6 +434,16 @@ export default {
         this.reloadAvatarModal++;
       }
     },
+    showEmailModal: function() {
+      if(!this.showEmailModal) {
+        this.reloadEmailModal++;
+      }
+    },
+    showPassModal: function() {
+      if(!this.showPassModal) {
+        this.reloadPassModal++;
+      }
+    }
   },
   computed: {
     isProf: function () {
