@@ -258,7 +258,7 @@ export default {
     };
   },
   methods: {
-    updatePass() {
+    async updatePass() {
       if(this.password.new != this.password.confirm) {
         console.log("These passwords do not match");
         this.passNoMatch = true;
@@ -269,9 +269,14 @@ export default {
         this.showPassModal = false;
         console.log("updatedPassword");
         //try fortify route and pass current and new password....i believe it checks for us and returns an error/status code
+        var payload = {
+          current_password: this.password.current,
+          password: this.password.new,
+        }
+        const res = await API.apiClient.pt(`user/password`, payload);
       }
     },
-    updateEmail() {
+    async updateEmail() {
       // this.showEmailChange = false;
       this.showEmailModal = false;
       console.log("updateEmail");
