@@ -274,7 +274,7 @@ export default {
           current_password: this.password.current,
           password: this.password.new,
         }
-        const res = await AuthService.authClient.put(`user/password`, payload);
+        const res = await AuthService.updatePassword(payload);
       }
     },
     async updateEmail() {
