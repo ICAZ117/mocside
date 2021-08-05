@@ -8,26 +8,28 @@
     Return to Problems
   </button>
   <Vue3DraggableResizable
-      :initW="500"
-      v-model:x="x"
-      v-model:y="y"
-      v-model:w="w"
-      v-model:h="h"
-      v-model:active="active"
-      :draggable="false"
-      :resizable="true"
-      :disabledH="true"
-      :handles="['mr']"
-      @activated="print('activated')"
-      @deactivated="print('deactivated')"
-      @drag-start="print('drag-start')"
-      @resize-start="print('resize-start')"
-      @dragging="print('dragging')"
-      @resizing="print('resizing')"
-      @drag-end="print('drag-end')"
-      @resize-end="print('resize-end')"
-      @click="active = true"
-      class="instructions"
+        :initW="110"
+        :initH="120"
+        v-model:x="x"
+        v-model:y="y"
+        v-model:w="w"
+        v-model:h="h"
+        v-model:active="active"
+        :draggable="false"
+        :resizable="true"
+        :disabledH="true"
+        :handles="['mr']"
+        @activated="print('activated')"
+        @deactivated="print('deactivated')"
+        @drag-start="print('drag-start')"
+        @resize-start="print('resize-start')"
+        @dragging="print('dragging')"
+        @resizing="print('resizing')"
+        @drag-end="print('drag-end')"
+        @resize-end="print('resize-end')"
+        @click="active = true"
+      >
+        class="instructions"
     >
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
@@ -38,7 +40,8 @@
         :isDark="true"
         v-if="childIsOpen"
       />
-    </Vue3DraggableResizable>
+      </Vue3DraggableResizable>
+  
   <div v-if="childIsOpen" class="row">
     
     <!-- <div class="instructions col-4 p-4">
@@ -89,8 +92,8 @@ export default defineComponent({
       childIsOpen: false,
       saveStatus: "",
       test: {},
-      x: 0,
-      y: 60,
+      x: 100,
+      y: 100,
       h: 100,
       w: 100,
       active: true,
