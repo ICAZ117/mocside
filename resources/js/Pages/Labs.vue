@@ -228,23 +228,25 @@
     :labID="labID"
     :labName="labName"
   ></router-view>
-  <div v-for="(lab, key) in labs" :key="lab.id">
-    <div :id="lab.id">
-      <ul id="menu">
-        <li class="menu-item">
-          <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
-            >Edit</a
-          >
-        </li>
-        <li class="menu-item">
-          <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
-            >Delete</a
-          >
-        </li>
-      </ul>
+  <div v-if="!childisOpen">
+    <div v-for="(lab, key) in labs" :key="lab.id">
+      <div :id="lab.id">
+        <ul id="menu">
+          <li class="menu-item">
+            <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
+              >Edit</a
+            >
+          </li>
+          <li class="menu-item">
+            <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
+              >Delete</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
+    <div id="out-click" @click="closeMenu"></div>
   </div>
-  <div id="out-click" @click="closeMenu"></div>
 </template>
 
 <script>

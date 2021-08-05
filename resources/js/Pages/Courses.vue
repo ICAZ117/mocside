@@ -202,7 +202,7 @@
     ></router-view>
   </div>
 
-  <div id="out-click" @click="closeMenu"></div>
+  <div v-if="!childIsOpen" id="out-click" @click="closeMenu"></div>
 </template>
 
 <script>
