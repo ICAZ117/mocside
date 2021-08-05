@@ -76,7 +76,7 @@ export default defineComponent({
 
   data() {
     return {
-      windowHeight: window.innerHeight,
+      windowHeight: window.innerHeight - 98,
       assignment: {},
       title: "",
       description: "",
