@@ -1,6 +1,25 @@
 <template>
   <div v-if="!childIsOpen">
     <!-- Problems Page-->
+    <vue-final-modal
+      v-model="showDeleteModal"
+      classes="modal-container"
+      content-class="modal-content"
+      :esc-to-close="true"
+    >
+      <button class="modal-close" @click="closeDeleting()">x</button>
+      <div class="delete Course">
+        <p>
+          Are you sure you would like to delete {{ deletingProblem.problem.name }}
+        </p>
+        <button class="btn btn-md btn-danger" @click="closeDeleting()">
+          Cancel
+        </button>
+        <button class="btn btn-md btn-danger" @click="deleteProblem()">
+          Delete
+        </button>
+      </div>
+    </vue-final-modal>
     <div class="courses header">
       <div class="heading">
         <h2>{{ this.labName }}</h2>
@@ -75,7 +94,7 @@
                       <!-- <h5>•••</h5> -->
                       <a
                         v-if="isProf"
-                        @click="deleteProblem(problem, key)"
+                        @click="deleting(problem.id, problem, key)"
                         class="courselaunch text-danger mx-2 my-1 no-decor pointer"
                         ><i class="fas fa-trash-alt"></i
                       ></a>
@@ -160,6 +179,13 @@ export default {
       deletedMe: false,
       username: "",
       sort: "0",
+      showDeleteModal: false,
+      reloadDeleteModal: 0,
+      deletingProblem: {
+        id: "",
+        problem: {},
+        key: "",
+      },
     };
   },
   setup() {
@@ -227,7 +253,20 @@ export default {
         params: { problem_id: this.problemID },
       });
     },
-    async deleteProblem(problem, key) {
+    closeDeleting() {
+      this.showDeleteModal = false;
+    },
+    deleting(id, problem, key) {
+      document.getElementById("out-click").style.display = "none";
+      this.showDeleteModal = true;
+      this.deletingProblem.id = id;
+      this.deletingProblem.problem = problem;
+      this.deletingProblem.key = key;
+    },
+    async deleteProblem() {
+      var id = this.deletingProblem.id;
+      var problem = this.deletingProblem.problem;
+      var key = this.deletingProblem.key;
       var flag = confirm(
         "Are you Sure you want to remove " + problem.name + " from this Lab?"
       );
@@ -452,6 +491,13 @@ export default {
         return false;
       } else {
         return store.getters["auth/isProf"];
+      }
+    },
+  },
+  watch: {
+    showDeleteModal: function () {
+      if (!this.showDeleteModal) {
+        this.reloadDeleteModal++;
       }
     },
   },
