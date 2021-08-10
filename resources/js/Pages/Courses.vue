@@ -238,7 +238,7 @@ export default {
       filter: true,
       sort: "4",
       showOldCourses: false,
-      showlDeleteModal: false,
+      showDeleteModal: false,
       reloadDeleteModal: 0,
       deletingCourse: {
         id: "",
