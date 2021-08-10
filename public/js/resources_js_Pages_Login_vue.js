@@ -1108,7 +1108,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         userEmail: "",
         password: ""
       },
-      isSubmitted: false
+      isSubmitted: false,
+      rememberMe: false
     };
   },
   validations: {
@@ -1133,6 +1134,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.login();
     },
+    signUp: function signUp() {
+      this.$router.push({
+        name: "Register"
+      });
+    },
     login: function login() {
       var _this = this;
 
@@ -1144,7 +1150,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 payload = {
                   email: _this.userForm.userEmail,
-                  password: _this.userForm.password
+                  password: _this.userForm.password,
+                  remember: _this.rememberMe
                 };
                 _this.error = null;
                 _context.prev = 2;
@@ -1165,10 +1172,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.$store.dispatch("auth/setGuest", {
                   value: "isNotGuest"
-                });
+                }); // this.$router.push("/courses"); // push home?
+                //redirect to last address
 
-                _this.$router.push("/courses"); // push home?
 
+                _this.$router.go(-1);
 
                 _context.next = 16;
                 break;
@@ -1257,19 +1265,44 @@ var _hoisted_9 = {
   "class": "invalid-feedback"
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<br><div class=\"form-group form-check\"><label class=\"form-check-label\"><input class=\"form-check-input\" type=\"checkbox\" name=\"remember\">Remember Me <div class=\"valid-feedback\">Valid.</div><div class=\"invalid-feedback\">Check this checkbox to continue.</div></label></div>", 2);
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_11 = {
+  "class": "form-group form-check"
+};
+var _hoisted_12 = {
+  "class": "form-check-label"
+};
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Remember Me ");
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "valid-feedback"
+}, "Valid.", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "invalid-feedback"
+}, "Check this checkbox to continue.", -1
+/* HOISTED */
+);
+
+var _hoisted_16 = {
   "class": "form-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+};
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   "class": "btn btn-danger btn-block"
-}, "Login")], -1
+}, "Login", -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login Form "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.handleSubmit && $options.handleSubmit.apply($options, arguments);
     }, ["prevent"])),
     "class": "needs-validation"
@@ -1299,7 +1332,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autocomplete: "current-password"
   }, null, 2
   /* CLASS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.password]]), $data.isSubmitted && $setup.v$.userForm.password.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, " Please enter your password ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------ SUBMIT ------------------"), _hoisted_12], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.password]]), $data.isSubmitted && $setup.v$.userForm.password.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, " Please enter your password ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    "class": "form-check-input",
+    type: "checkbox",
+    name: "remember",
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.rememberMe = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.rememberMe]]), _hoisted_13, _hoisted_14, _hoisted_15])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------ SUBMIT ------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    type: "button",
+    onClick: _cache[4] || (_cache[4] = function ($event) {
+      return $options.signUp();
+    }),
+    "class": "btn btn-danger btn-block"
+  }, "Sign Up")])], 32
   /* HYDRATE_EVENTS */
   )])]);
 }

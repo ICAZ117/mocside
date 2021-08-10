@@ -30,6 +30,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         name: "",
         description: "",
         dateDue: null,
+        timeDue: null,
         datePublish: null
       },
       isSubmitted: false
@@ -98,6 +99,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   beforeUnmount: function beforeUnmount() {
+    //editlab
     this.$emit("unmounting");
   }
 });
@@ -123,7 +125,7 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", {
   "class": "edit-course-title"
-}, "Course Editor", -1
+}, "Edit Lab", -1
 /* HOISTED */
 );
 
@@ -204,7 +206,7 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.handleSubmit && $options.handleSubmit.apply($options, arguments);
     }, ["prevent"])),
     "class": "course-form"
@@ -238,9 +240,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-control col-4"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.labForm.dateDue]])])]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-    type: "Date",
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.labForm.dateDue]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "time",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.labForm.timeDue = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.labForm.timeDue]])])]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "Date",
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.labForm.datePublish = $event;
     }),
     id: "labDatePublish",
