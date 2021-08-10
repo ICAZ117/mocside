@@ -48,7 +48,7 @@
       
     </div> -->
     <div class="col-8"></div>
-    <!-- <IDE
+     <IDE
       class="col-8"
       :lang="lang"
       :showSubmit="true"
@@ -60,7 +60,7 @@
       @update="updateContent"
       :key="forceReload"
       v-if="childIsOpen"
-    /> -->
+    />
   </div>
 </template>
 
