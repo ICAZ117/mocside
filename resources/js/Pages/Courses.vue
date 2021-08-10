@@ -318,6 +318,7 @@ export default {
       this.showDeleteModal = false;
     },
     deleting(id, course, key) {
+      document.getElementById("out-click").style.display = "none";
       this.showDeleteModal = true;
       this.deletingCourse.id = id;
       this.deletingCourse.course = course;
