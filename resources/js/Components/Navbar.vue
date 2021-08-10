@@ -143,7 +143,7 @@ export default {
     },
   },
   mounted() {
-    this.updatePFP();
+    // this.updatePFP();
   },
   computed: {
     isLoggedIn: function () {
