@@ -1,6 +1,25 @@
 <template>
   <div v-if="!childisOpen">
     <!-- Main Page-->
+    <vue-final-modal
+      v-model="showDeleteModal"
+      classes="modal-container"
+      content-class="modal-content"
+      :esc-to-close="true"
+    >
+      <button class="modal-close" @click="closeDeleting()">x</button>
+      <div class="delete Course">
+        <p>
+          Are you sure you would like to delete {{ deletingLab.lab.name }}
+        </p>
+        <button class="btn btn-md btn-danger" @click="closeDeleting()">
+          Cancel
+        </button>
+        <button class="btn btn-md btn-danger" @click="removeLab()">
+          Delete
+        </button>
+      </div>
+    </vue-final-modal>
     <div class="courses header">
       <div class="heading">
         <h2>{{ courseName }}</h2>
@@ -152,7 +171,8 @@
                         ? 0
                         : lab.grade == undefined
                         ? 0
-                        : parseInt((lab.grade / lab.total_points) * 10000) * 0.01
+                        : parseInt((lab.grade / lab.total_points) * 10000) *
+                          0.01
                     }}%
                   </td>
                 </tr>
@@ -185,12 +205,15 @@
                         </thead>
                         <tbody style="border-bottom: 0 !important">
                           <tr
-                            v-for="(problem, key) in grades.labs[index].problems"
+                            v-for="(problem, key) in grades.labs[index]
+                              .problems"
                             :key="key"
                             class="lab pointer"
                           >
                             <td>{{ problems[problem.problemID].name }}</td>
-                            <td>{{ problems[problem.problemID].test_cases }}</td>
+                            <td>
+                              {{ problems[problem.problemID].test_cases }}
+                            </td>
                             <td>{{ problems[problem.problemID].passed }}</td>
                             <td>{{ problems[problem.problemID].due_date }}</td>
                             <td>{{ problem.grade }}</td>
@@ -233,12 +256,18 @@
       <div :id="lab.id">
         <ul id="menu">
           <li class="menu-item">
-            <a v-if="isProf" class="pointer no-decor" @click="editLab(lab.id, lab.name)"
+            <a
+              v-if="isProf"
+              class="pointer no-decor"
+              @click="editLab(lab.id, lab.name)"
               >Edit</a
             >
           </li>
           <li class="menu-item">
-            <a v-if="isProf" class="pointer no-decor" @click="removeLab(lab.id, key)"
+            <a
+              v-if="isProf"
+              class="pointer no-decor"
+              @click="deleting(lab.id, lab, key)"
               >Delete</a
             >
           </li>
@@ -278,6 +307,13 @@ export default defineComponent({
       problems: {},
       expandedProblem: null,
       sort: "0",
+      showDeleteModal: false,
+      reloadDeleteModal: 0,
+      deletingLab: {
+        id: "",
+        lab: {},
+        key: "",
+      },
     };
   },
   setup() {
@@ -315,7 +351,9 @@ export default defineComponent({
     },
     async getStudentObject() {
       console.log(this.authUser);
-      const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
+      const res = await API.apiClient.get(
+        `/students/${this.authUser.fsc_user.fsc_id}`
+      );
       this.student = res.data;
       console.log(res.data);
     },
@@ -331,7 +369,9 @@ export default defineComponent({
         problemIDs = [];
 
       // Get total grade for course
-      grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
+      grades.grade = JSON.parse(this.student.gradebook_courses).grades[
+        this.courseID
+      ];
 
       // Get all labs the student is in
       var studentLabs = JSON.parse(this.student.gradebook_labs);
@@ -342,7 +382,9 @@ export default defineComponent({
       // Loop over all of the labs in the current course
       for (let i = 0; i < this.labs.length; i++) {
         // Get all of the problems for current lab
-        const problemsInLab = await API.apiClient.get(`/gradebook/${this.labs[i].id}`);
+        const problemsInLab = await API.apiClient.get(
+          `/gradebook/${this.labs[i].id}`
+        );
         problemsInLab = problemsInLab.data.data;
 
         // Log labID for later usage
@@ -406,7 +448,9 @@ export default defineComponent({
     },
     closeMenu() {
       try {
-        document.getElementById(this.rightClickID).childNodes[0].classList.remove("show");
+        document
+          .getElementById(this.rightClickID)
+          .childNodes[0].classList.remove("show");
       } catch (e) {}
       document.getElementById("out-click").style.display = "none";
       this.rightClickID = "";
@@ -443,7 +487,10 @@ export default defineComponent({
       console.log("unmounting the problems page");
       console.log(flag);
       if (flag) {
-        this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+        this.$router.push({
+          name: "Labs",
+          params: { course_id: this.courseID },
+        });
       }
     },
     async labEdited() {
@@ -477,20 +524,29 @@ export default defineComponent({
       this.labName = name;
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
-    async removeLab(lab, key) {
-      var flag = confirm(
-        "Are you Sure you want to remove " + lab.name + " from this Course?"
-      );
-      if (flag) {
-        //remove from lab the current course
-        const res = await API.apiClient.delete(`/labs/${lab}`);
+    closeDeleting() {
+      this.showDeleteModal = false;
+    },
+    deleting(id, lab, key) {
+      document.getElementById("out-click").style.display = "none";
+      this.showDeleteModal = true;
+      this.deletingLab.id = id;
+      this.deletingLab.lab = lab;
+      this.deletingLab.key = key;
+    },
+    async removeLab() {
+      var id = this.deletingLab.id;
+      var lab = this.deletingLab.lab;
+      var key = this.deletingLab.key;
+      //remove from lab the current course
+      const res = await API.apiClient.delete(`/labs/${lab.id}`);
 
-        //filter from labs
-        this.labs = this.labs.filter((l, i) => i != key);
+      //filter from labs
+      this.labs = this.labs.filter((l, i) => i != key);
 
-        //filter from unfiltered labs
-        this.unfilteredLabs = this.unfilteredLabs.filter((l) => l.id != lab.id);
-      }
+      //filter from unfiltered labs
+      this.unfilteredLabs = this.unfilteredLabs.filter((l) => l.id != lab.id);
+      this.closeDeleting();
     },
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
@@ -683,6 +739,13 @@ export default defineComponent({
         return false;
       } else {
         return store.getters["auth/isProf"];
+      }
+    },
+  },
+  watch: {
+    showDeleteModal: function () {
+      if (!this.showDeleteModal) {
+        this.reloadDeleteModal++;
       }
     },
   },
