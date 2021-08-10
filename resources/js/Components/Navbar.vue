@@ -38,7 +38,7 @@
                 >Sign Up</router-link
               > 
               <router-link v-if="isLoggedIn" @click="update" to="/about" class="move-up"
-                ><img class="pfp" src="../../img/DefaultPFP.png" alt="Profile"
+                ><img class="pfp" id="pfp" src="../../img/DefaultPFP.png" alt="Profile"
               /></router-link>
               <a @click="logout" v-if="isLoggedIn" class="nav-link">Logout</a>
             </div>
@@ -129,8 +129,16 @@ export default {
       this.$forceUpdate();
     },
   },
+  mounted() {
+    var user_pfp = this.authUser.pfp_path;
+    if(user_pfp == undefined || user_pfp == null) {
+      user_pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+    }
+    document.getElementById("pfp").src = user_pfp;
+  },
   computed: {
     isLoggedIn: function () {
+      console.log("isLoggedIn Computed Called");
       if (this.authUser == null) {
         return false;
       } else {
