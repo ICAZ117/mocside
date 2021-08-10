@@ -80,7 +80,7 @@
                   <a
                     v-show="isProf"
                     class="pointer no-decor"
-                    @click="deleteCourse(course.id, course, key)"
+                    @click="deleting(course.id, course, key)"
                     >Delete</a
                   >
                 </li>
@@ -164,7 +164,7 @@
                     <a
                       v-show="isProf"
                       class="pointer no-decor"
-                      @click="deleteCourse(course.id, course, key)"
+                      @click="deleting(course.id, course, key)"
                       >Delete</a
                     >
                   </li>
@@ -192,6 +192,14 @@
           </div>
         </div>
       </div>
+      <vue-final-modal v-model="showDeleteModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
+        <button class="modal-close" @click="showDeleteModal = false">x</button>
+        <div class="delete Course">
+          <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
+          <button @click="showDeleteModal = false" >Cancel</button>
+          <button @click="deleteCourse()">Delete</button>
+        </div>
+      </vue-final-modal>
     </div>
     <router-view
       @unmounting="Unmounting()"
@@ -226,6 +234,13 @@ export default {
       filter: true,
       sort: "4",
       showOldCourses: false,
+      showlDeleteModal: false,
+      reloadDeleteModal: 0,
+      deletingCourse: {
+        id: "",
+        course: {},
+        key: "",
+      },
     };
   },
   setup() {
@@ -299,7 +314,16 @@ export default {
         params: { course_id: this.courseID },
       });
     },
-    async deleteCourse(id, course, key) {
+    deleting(id, course, key) {
+      this.showDeleteModal = true;
+      this.deletingCourse.id = id;
+      this.deletingCourse.course = course;
+      this.deletingCourse.key = key;
+    },
+    async deleteCourse() {
+      var id = this.deletingCourse.id;
+      var course = this.deletingCourse.course;
+      var key = this.deletingCourse.key;
       var flag = confirm("Are you Sure you want to delete " + course.name);
       if (flag) {
         this.childIsOpen = false;
@@ -609,6 +633,13 @@ export default {
         return false;
       } else {
         return store.getters["auth/isProf"];
+      }
+    },
+  },
+  watch: {
+    showDeleteModal: function () {
+      if (!this.showDeleteModal) {
+        this.reloadDeleteModal++;
       }
     },
   },
