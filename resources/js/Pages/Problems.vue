@@ -10,7 +10,7 @@
       <button class="modal-close" @click="closeDeleting()">x</button>
       <div class="delete Course">
         <p>
-          Are you sure you would like to delete {{ deletingProblem.problem.name }}
+          Are you sure you would like to delete {{ deletingProblem.problem.name }} from this Lab
         </p>
         <button class="btn btn-md btn-danger" @click="closeDeleting()">
           Cancel
@@ -266,16 +266,12 @@ export default {
       var id = this.deletingProblem.id;
       var problem = this.deletingProblem.problem;
       var key = this.deletingProblem.key;
-      var flag = confirm(
-        "Are you Sure you want to remove " + problem.name + " from this Lab?"
-      );
-      if (flag) {
-        // remove this problem from the current lab
-        const res = await API.apiClient.delete(`/problems/${problem.id}`);
+      // remove this problem from the current lab
+      const res = await API.apiClient.delete(`/problems/${problem.id}`);
 
-        //filter the problems list
-        this.problems = this.problems.filter((p, i) => i != key);
-      }
+      //filter the problems list
+      this.problems = this.problems.filter((p, i) => i != key);
+      this.closeDeleting();
     },
     async deleteMe() {
       console.log("deleteMe");
