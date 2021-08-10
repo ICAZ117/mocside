@@ -132,9 +132,7 @@ export default {
     async updatePFP() {
       var au = await this.$store.dispatch("auth/getAuthUser");
       if(this.authUser != null) {
-        console.log(au.pfp_path);
         this.pfp = au.pfp_path;
-        console.log(this.pfp);
         if(this.pfp == undefined || this.pfp == null) {
           this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
         }
@@ -143,7 +141,7 @@ export default {
     },
   },
   mounted() {
-    // this.updatePFP();
+    this.updatePFP();
   },
   computed: {
     isLoggedIn: function () {
