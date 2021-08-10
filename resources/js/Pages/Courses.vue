@@ -194,10 +194,10 @@
       </div>
     </div>
     <vue-final-modal v-model="showDeleteModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
-      <button class="modal-close" @click="showDeleteModal = false">x</button>
+      <button class="modal-close" @click="closeDeleting()">x</button>
       <div class="delete Course">
         <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
-        <button @click="showDeleteModal = false" >Cancel</button>
+        <button @click="closeDeleting()" >Cancel</button>
         <button @click="deleteCourse()">Delete</button>
       </div>
     </vue-final-modal>
@@ -314,6 +314,9 @@ export default {
         params: { course_id: this.courseID },
       });
     },
+    closeDeleting() {
+      this.showDeleteModal = false
+    },
     deleting(id, course, key) {
       this.showDeleteModal = true;
       this.deletingCourse.id = id;
@@ -352,6 +355,7 @@ export default {
       } else {
         console.log("Delete avoided");
       }
+      this.closeDeleting();
     },
     goToLabs(id, name) {
       if (this.rightClickID == "") {
