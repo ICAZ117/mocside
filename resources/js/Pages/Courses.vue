@@ -331,34 +331,29 @@ export default {
       var id = this.deletingCourse.id;
       var course = this.deletingCourse.course;
       var key = this.deletingCourse.key;
-      var flag = confirm("Are you Sure you want to delete " + course.name);
-      if (flag) {
-        this.childIsOpen = false;
-        document.getElementById("out-click").style.display = "none";
-        //delete the course
-        const res = await API.apiClient.delete(`/courses/${id}`);
-        console.log(res);
-        console.log("delete Course: " + id);
-        var i;
-        var ind = null;
-        for (i = 0; i <= this.enrolledCourses.length; i++) {
-          if (this.enrolledCourses[i] == id) {
-            ind = i;
-          }
+      this.childIsOpen = false;
+      document.getElementById("out-click").style.display = "none";
+      //delete the course
+      const res = await API.apiClient.delete(`/courses/${id}`);
+      console.log(res);
+      console.log("delete Course: " + id);
+      var i;
+      var ind = null;
+      for (i = 0; i <= this.enrolledCourses.length; i++) {
+        if (this.enrolledCourses[i] == id) {
+          ind = i;
         }
-        this.enrolledCourses.splice(ind, 1);
-        this.addProfessor();
-        delete this.courses.course;
-        this.courseID = null;
-        // this.getCourses();
-        //delete from unfiltered
-        this.unfilteredCourses = this.unfilteredCourses.filter((c) => c.id != id);
-
-        //filter the courses list
-        this.courses = this.courses.filter((c, i) => i != key);
-      } else {
-        console.log("Delete avoided");
       }
+      this.enrolledCourses.splice(ind, 1);
+      this.addProfessor();
+      delete this.courses.course;
+      this.courseID = null;
+      // this.getCourses();
+      //delete from unfiltered
+      this.unfilteredCourses = this.unfilteredCourses.filter((c) => c.id != id);
+
+      //filter the courses list
+      this.courses = this.courses.filter((c, i) => i != key);
       this.closeDeleting();
     },
     goToLabs(id, name) {
