@@ -2,6 +2,14 @@
   <div>
     <!-- Main Page-->
     <div v-if="!childIsOpen">
+      <vue-final-modal v-model="showDeleteModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
+        <button class="modal-close" @click="closeDeleting()">x</button>
+        <div class="delete Course">
+          <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
+          <button @click="closeDeleting()" >Cancel</button>
+          <button @click="deleteCourse()">Delete</button>
+        </div>
+      </vue-final-modal>
       <div class="courses header">
         <div class="heading">
           <h2>My Courses</h2>
@@ -193,14 +201,6 @@
         </div>
       </div>
     </div>
-    <vue-final-modal v-model="showDeleteModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
-      <button class="modal-close" @click="closeDeleting()">x</button>
-      <div class="delete Course">
-        <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
-        <button @click="closeDeleting()" >Cancel</button>
-        <button @click="deleteCourse()">Delete</button>
-      </div>
-    </vue-final-modal>
     <router-view
       @unmounting="Unmounting()"
       @courseEdited="courseEdited"
@@ -315,7 +315,7 @@ export default {
       });
     },
     closeDeleting() {
-      this.showDeleteModal = false
+      this.showDeleteModal = false;
     },
     deleting(id, course, key) {
       this.showDeleteModal = true;
@@ -640,13 +640,13 @@ export default {
       }
     },
   },
-  // watch: {
-  //   showDeleteModal: function () {
-  //     if (!this.showDeleteModal) {
-  //       this.reloadDeleteModal++;
-  //     }
-  //   },
-  // },
+  watch: {
+    showDeleteModal: function () {
+      if (!this.showDeleteModal) {
+        this.reloadDeleteModal++;
+      }
+    },
+  },
   async mounted() {
     this.childIsOpen = false;
     this.authUser = await store.getters["auth/authUser"];
