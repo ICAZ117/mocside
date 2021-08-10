@@ -226,25 +226,25 @@ import { computed } from "vue";
 
 export default {
   data: () => ({
-    authUser: null,
-    enrolledCourses: [],
-    courses: [], //all courses
-    unfilteredCourses: [], //the filtered courses
-    childIsOpen: false,
-    courseID: null,
-    username: "",
-    rightClickID: "",
-    courseName: "",
-    filter: true,
-    sort: "4",
-    showOldCourses: false,
-    showlDeleteModal: false,
-    reloadDeleteModal: 0,
-    deletingCourse: {
-      id: "",
-      course: {},
-      key: "",
-    },
+      authUser: null,
+      enrolledCourses: [],
+      courses: [], //all courses
+      unfilteredCourses: [], //the filtered courses
+      childIsOpen: false,
+      courseID: null,
+      username: "",
+      rightClickID: "",
+      courseName: "",
+      filter: true,
+      sort: "4",
+      showOldCourses: false,
+      showlDeleteModal: false,
+      reloadDeleteModal: 0,
+      deletingCourse: {
+        id: "",
+        course: {},
+        key: "",
+      },
   }),
   setup() {
     const route = useRoute();
