@@ -1,8 +1,8 @@
 ===============> MocsIDE<===============
 
 IMPORTANT
-* Email Confirmation ( For future, not this week)
-* Password Reset ( For future, not this work)
+* Email Confirmation
+* Password Reset
 * Configure/Add SSL(i.e. https)
 
 
