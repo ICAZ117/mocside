@@ -257,7 +257,6 @@ export default {
       this.showDeleteModal = false;
     },
     deleting(id, problem, key) {
-      document.getElementById("out-click").style.display = "none";
       this.showDeleteModal = true;
       this.deletingProblem.id = id;
       this.deletingProblem.problem = problem;
