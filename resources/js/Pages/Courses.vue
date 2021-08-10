@@ -636,13 +636,13 @@ export default {
       }
     },
   },
-  watch: {
-    showDeleteModal: function () {
-      if (!this.showDeleteModal) {
-        this.reloadDeleteModal++;
-      }
-    },
-  },
+  // watch: {
+  //   showDeleteModal: function () {
+  //     if (!this.showDeleteModal) {
+  //       this.reloadDeleteModal++;
+  //     }
+  //   },
+  // },
   async mounted() {
     this.childIsOpen = false;
     this.authUser = await store.getters["auth/authUser"];
