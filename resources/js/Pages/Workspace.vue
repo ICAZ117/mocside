@@ -251,6 +251,7 @@ export default defineComponent({
   },
   mounted() {
     this.reloadSliders++;
+    document.getElementById("resizeableInstructions").remove();
   },
 });
 </script>
