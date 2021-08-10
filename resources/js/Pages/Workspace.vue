@@ -30,6 +30,7 @@
     @resize-end="print('resize-end')"
     @click="active = true"
     class="instructions"
+    id="resizeableInstructions"
   >
     <h4>{{ title }}</h4>
     <hr class="instructions-hr" />
