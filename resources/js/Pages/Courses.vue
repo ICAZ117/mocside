@@ -220,8 +220,7 @@ import { useRoute } from "vue-router";
 import { computed } from "vue";
 
 export default {
-  data() {
-    return {
+  data: () => ({
       authUser: null,
       enrolledCourses: [],
       courses: [], //all courses
@@ -241,8 +240,7 @@ export default {
         course: {},
         key: "",
       },
-    };
-  },
+  }),
   setup() {
     const route = useRoute();
 
