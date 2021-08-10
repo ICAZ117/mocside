@@ -147,10 +147,10 @@ export default {
   },
   computed: {
     isLoggedIn: function () {
-      this.updatePFP();
       if (this.authUser == null) {
         return false;
       } else {
+        this.updatePFP();
         return true;
       }
     },
