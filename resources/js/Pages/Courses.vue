@@ -11,8 +11,8 @@
         <button class="modal-close" @click="closeDeleting()">x</button>
         <div class="delete Course">
           <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
-          <button @click="closeDeleting()">Cancel</button>
-          <button @click="deleteCourse()">Delete</button>
+          <button class="btn btn-md btn-danger" @click="closeDeleting()">Cancel</button>
+          <button class="btn btn-md btn-danger" @click="deleteCourse()">Delete</button>
         </div>
       </vue-final-modal>
       <div class="courses header">
