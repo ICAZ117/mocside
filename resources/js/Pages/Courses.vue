@@ -2,11 +2,16 @@
   <div>
     <!-- Main Page-->
     <div v-if="!childIsOpen">
-      <vue-final-modal v-model="showDeleteModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
+      <vue-final-modal
+        v-model="showDeleteModal"
+        classes="modal-container"
+        content-class="modal-content"
+        :esc-to-close="true"
+      >
         <button class="modal-close" @click="closeDeleting()">x</button>
         <div class="delete Course">
           <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
-          <button @click="closeDeleting()" >Cancel</button>
+          <button @click="closeDeleting()">Cancel</button>
           <button @click="deleteCourse()">Delete</button>
         </div>
       </vue-final-modal>
@@ -21,7 +26,7 @@
       >
       <br />
       <div class="filterSettings">
-          <span>Display Archived Courses: </span>
+        <span>Display Archived Courses: </span>
         <label class="switch">
           <!-- <input type="checkbox" @change="filterByDate()" v-model="filter" /> -->
           <input type="checkbox" v-model="showOldCourses" />
@@ -220,29 +225,27 @@ import { useRoute } from "vue-router";
 import { computed } from "vue";
 
 export default {
-  data() {
-    return {
-      authUser: null,
-      enrolledCourses: [],
-      courses: [], //all courses
-      unfilteredCourses: [], //the filtered courses
-      childIsOpen: false,
-      courseID: null,
-      username: "",
-      rightClickID: "",
-      courseName: "",
-      filter: true,
-      sort: "4",
-      showOldCourses: false,
-      showlDeleteModal: false,
-      reloadDeleteModal: 0,
-      deletingCourse: {
-        id: "",
-        course: {},
-        key: "",
-      },
-    };
-  },
+  data: () => ({
+    authUser: null,
+    enrolledCourses: [],
+    courses: [], //all courses
+    unfilteredCourses: [], //the filtered courses
+    childIsOpen: false,
+    courseID: null,
+    username: "",
+    rightClickID: "",
+    courseName: "",
+    filter: true,
+    sort: "4",
+    showOldCourses: false,
+    showlDeleteModal: false,
+    reloadDeleteModal: 0,
+    deletingCourse: {
+      id: "",
+      course: {},
+      key: "",
+    },
+  }),
   setup() {
     const route = useRoute();
 
@@ -433,10 +436,10 @@ export default {
       //return true if the course is still in session
       //false otherwise
       var now = new Date(Date.now());
-      if(course.start_date == undefined) {
+      if (course.start_date == undefined) {
         return false;
       }
-      if(course.end_date == undefined) {
+      if (course.end_date == undefined) {
         return false;
       }
       var sd = course.start_date.split("-")[2];
