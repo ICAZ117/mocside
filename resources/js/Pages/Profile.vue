@@ -259,6 +259,17 @@ export default {
     };
   },
   methods: {
+    async updatePFP() {
+      var au = await this.$store.dispatch("auth/getAuthUser");
+      if(this.authUser != null) {
+        this.user.pfp = au.pfp_path;
+        if(this.user.pfp == undefined || this.user.pfp == null) {
+          this.user.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+        }
+        document.getElementById("d_navpfp").src = this.user.pfp;
+        document.getElementById("l_navpfp").src = this.user.pfp;
+      }
+    },
     async updatePass() {
       if(this.password.new != this.password.confirm) {
         console.log("These passwords do not match");
@@ -376,6 +387,7 @@ export default {
 
       //after changing in backend
       this.showAvatarModal = false;
+      this.updatePFP();
     },
     editAvatar() {
       document.getElementById("pfpmodal").src = this.user.pfp;
