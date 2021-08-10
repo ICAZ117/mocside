@@ -388,6 +388,8 @@ export default {
       //after changing in backend
       this.showAvatarModal = false;
       this.updatePFP();
+      //delete old picture
+
     },
     editAvatar() {
       document.getElementById("pfpmodal").src = this.user.pfp;
