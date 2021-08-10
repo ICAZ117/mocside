@@ -538,19 +538,14 @@ export default defineComponent({
       var id = this.deletingLab.id;
       var lab = this.deletingLab.lab;
       var key = this.deletingLab.key;
-      var flag = confirm(
-        "Are you Sure you want to remove " + lab.name + " from this Course?"
-      );
-      if (flag) {
-        //remove from lab the current course
-        const res = await API.apiClient.delete(`/labs/${lab.id}`);
+      //remove from lab the current course
+      const res = await API.apiClient.delete(`/labs/${lab.id}`);
 
-        //filter from labs
-        this.labs = this.labs.filter((l, i) => i != key);
+      //filter from labs
+      this.labs = this.labs.filter((l, i) => i != key);
 
-        //filter from unfiltered labs
-        this.unfilteredLabs = this.unfilteredLabs.filter((l) => l.id != lab.id);
-      }
+      //filter from unfiltered labs
+      this.unfilteredLabs = this.unfilteredLabs.filter((l) => l.id != lab.id);
       this.closeDeleting();
     },
     async getStudent() {
