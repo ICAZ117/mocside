@@ -128,17 +128,20 @@ export default {
     update() {
       this.$forceUpdate();
     },
+    updatePFP() {
+      var user_pfp = this.authUser.pfp_path;
+      if(user_pfp == undefined || user_pfp == null) {
+        user_pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+      }
+      document.getElementById("pfp").src = user_pfp;
+    },
   },
   mounted() {
-    var user_pfp = this.authUser.pfp_path;
-    if(user_pfp == undefined || user_pfp == null) {
-      user_pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
-    }
-    document.getElementById("pfp").src = user_pfp;
+    this.updatePFP();
   },
   computed: {
     isLoggedIn: function () {
-      console.log("isLoggedIn Computed Called");
+      this.updatePFP();
       if (this.authUser == null) {
         return false;
       } else {
