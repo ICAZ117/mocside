@@ -192,15 +192,15 @@
           </div>
         </div>
       </div>
-      <vue-final-modal v-model="showDeleteModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
-        <button class="modal-close" @click="showDeleteModal = false">x</button>
-        <div class="delete Course">
-          <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
-          <button @click="showDeleteModal = false" >Cancel</button>
-          <button @click="deleteCourse()">Delete</button>
-        </div>
-      </vue-final-modal>
     </div>
+    <vue-final-modal v-model="showDeleteModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
+      <button class="modal-close" @click="showDeleteModal = false">x</button>
+      <div class="delete Course">
+        <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
+        <button @click="showDeleteModal = false" >Cancel</button>
+        <button @click="deleteCourse()">Delete</button>
+      </div>
+    </vue-final-modal>
     <router-view
       @unmounting="Unmounting()"
       @courseEdited="courseEdited"
@@ -636,13 +636,13 @@ export default {
       }
     },
   },
-  watch: {
-    showDeleteModal: function () {
-      if (!this.showDeleteModal) {
-        this.reloadDeleteModal++;
-      }
-    },
-  },
+  // watch: {
+  //   showDeleteModal: function () {
+  //     if (!this.showDeleteModal) {
+  //       this.reloadDeleteModal++;
+  //     }
+  //   },
+  // },
   async mounted() {
     this.childIsOpen = false;
     this.authUser = await store.getters["auth/authUser"];
