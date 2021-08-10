@@ -24,7 +24,6 @@ ADD PAGES
 
 
 NEXT UP
-* turn browser alerts into custom modals
 * Double check deleting and copy assingments work as intended
     * some test cases have had the wrong assignment id
 * add modification to Ace-editor, suggestions, autoformat, autocomplete
@@ -44,7 +43,8 @@ STYLE FIXES
 * Workspace
 * Confirm Delete style message on courses, labs, and problems
 * Fix Carousel
-* Combine Logout, with profile pic, and link to profile page
+* Combine Logout, with profile pic, and link to profile 
+* DeleteModals on Courses, Labs, & Problems
 
 
 
