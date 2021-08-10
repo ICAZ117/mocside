@@ -9,7 +9,6 @@ IMPORTANT
 ADD PAGES
 * Finish Up About Page
 * Add profile Page....sorta like a dashboard
-    * updating the pfp doesn't immediately change the navbar pfp, it currently requires a page refresh
     * To Still Be Completed
         * Delete User..only the actual user can delete themselves
         * Downgrade and Upgrade another student buttons
