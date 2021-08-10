@@ -97,7 +97,7 @@
                 @click="update"
                 to="/about"
                 class="dark-move-up"
-                ><img class="pfp" src="../../img/DefaultPFP.png" alt="Profile"
+                ><img class="pfp" id="pfp" src="../../img/DefaultPFP.png" alt="Profile"
               /></router-link>
               <a @click="logout" v-if="isLoggedIn" class="dark-nav-link nav-link"
                 >Logout</a
