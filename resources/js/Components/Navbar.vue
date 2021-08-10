@@ -38,7 +38,7 @@
                 >Sign Up</router-link
               > 
               <router-link v-if="isLoggedIn" @click="update" to="/about" class="move-up"
-                ><img class="pfp" id="pfp" src="../../img/DefaultPFP.png" alt="Profile"
+                ><img class="pfp" id="lnavpfp" src="../../img/DefaultPFP.png" alt="Profile"
               /></router-link>
               <a @click="logout" v-if="isLoggedIn" class="nav-link">Logout</a>
             </div>
@@ -97,7 +97,7 @@
                 @click="update"
                 to="/about"
                 class="dark-move-up"
-                ><img class="pfp" id="pfp" src="../../img/DefaultPFP.png" alt="Profile"
+                ><img class="pfp" id="navpfp" src="../../img/DefaultPFP.png" alt="Profile"
               /></router-link>
               <a @click="logout" v-if="isLoggedIn" class="dark-nav-link nav-link"
                 >Logout</a
@@ -134,7 +134,7 @@ export default {
         if(user_pfp == undefined || user_pfp == null) {
           user_pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
         }
-        document.getElementById("pfp").src = user_pfp;
+        document.getElementById("navpfp").src = user_pfp;
       }
     },
   },
