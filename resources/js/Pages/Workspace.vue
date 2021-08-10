@@ -1,9 +1,37 @@
 <template>
   <!-- WorkSpace Page-->
-  <button v-if="childIsOpen" @click="this.$emit('unmounting')" class="btn btn-danger btn-block">
+  <button
+    v-if="childIsOpen"
+    @click="this.$emit('unmounting')"
+    class="btn btn-danger btn-block"
+  >
     Return to Problems
   </button>
-  <Vue3DraggableResizable :initW="windowWidth" :initH="windowHeight" v-model:x="x" v-model:y="y" v-model:w="w" v-model:h="h" v-model:active="active" :draggable="false" :resizable="true" :disabledH="true" :handles="['mr']" @activated="print('activated')" @deactivated="print('deactivated')" @drag-start="print('drag-start')" @resize-start="print('resize-start')" @dragging="print('dragging')" @resizing="print('resizing')" @drag-end="print('drag-end')" @resize-end="print('resize-end')" @click="active = true" class="instructions">
+  <Vue3DraggableResizable
+    :initW="windowWidth"
+    :initH="windowHeight"
+    v-model:x="x"
+    v-model:y="y"
+    v-model:w="w"
+    v-model:h="h"
+    v-model:active="active"
+    :draggable="false"
+    :resizable="true"
+    :disabledH="true"
+    :handles="['mr']"
+    :key="reloadSliders"
+    @activated="print('activated')"
+    @deactivated="print('deactivated')"
+    @drag-start="print('drag-start')"
+    @resize-start="print('resize-start')"
+    @dragging="print('dragging')"
+    @resizing="print('resizing')"
+    @drag-end="print('drag-end')"
+    @resize-end="print('resize-end')"
+    @click="active = true"
+    class="instructions"
+    id="resizeableInstructions"
+  >
     <h4>{{ title }}</h4>
     <hr class="instructions-hr" />
     <Tiptap
@@ -63,6 +91,7 @@ export default defineComponent({
       pID: "",
       codeID: "",
       forceReload: 0,
+      reloadSliders: 0,
       childIsOpen: false,
       saveStatus: "",
       test: {},
@@ -219,6 +248,9 @@ export default defineComponent({
   async created() {
     this.childIsOpen = true;
     await this.getAssignment();
+  },
+  mounted() {
+    this.reloadSliders++;
   },
 });
 </script>
