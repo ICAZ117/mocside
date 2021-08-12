@@ -47,9 +47,8 @@
     <!-- <div class="instructions col-4 p-4">
       
     </div> -->
-    <div class="col-8"></div>
+    <div></div>
      <IDE
-      class="col-8"
       :lang="lang"
       :showSubmit="true"
       :saved_j="code_j"
