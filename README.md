@@ -14,6 +14,7 @@ ADD PAGES
         * Downgrade and Upgrade another student buttons
         * Change Email
         * Reset Password
+    * was thinking that we should have a route that allows a user to look at another users profile page....ie professors at students...to upgrade downgrade or delete their accounts
 
 * Add Contact Us page
 * turn course edit into a course dashboard for professor can change course details as well as see gradebook, students, etc.
