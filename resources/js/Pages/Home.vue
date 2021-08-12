@@ -96,7 +96,7 @@
   </div>
 </template>
 
-<script>
+<script> 
 import Modal from "../Components/Modal";
 import FormInput from "../Components/FormInput";
 import BaseBtn from "../Components/BaseBtn";
