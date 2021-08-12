@@ -83,6 +83,7 @@
         @update="updateContent"
         :key="forceReload"
         v-if="childIsOpen"
+        :width="w2"
       />
     </Vue3DraggableResizable>
   </div>
