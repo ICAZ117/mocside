@@ -8,6 +8,7 @@
         :lang="editorLangauge"
         :theme="theme"
         :key="forceReload"
+        :style="'width: ' + width + '!important;'"
       />
       <div class="row px-1 my-1">
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
@@ -108,6 +109,7 @@
       :problemID="problemID"
       :lang="lang"
       @programFinished="launchConsole = false"
+      :style="'width: ' + width + '!important;'"
     />
 
     <div v-if="showInput" class="inputHeight row">
@@ -221,7 +223,7 @@ import Accordion from "../Components/Accordion.vue";
 
 export default {
   name: "IDE",
-  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID", "labID"],
+  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID", "labID", "width"],
   emits: ["update"],
   data: () => ({
     theme: "gob",

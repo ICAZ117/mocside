@@ -8,12 +8,12 @@
     Return to Problems
   </button>
   <Vue3DraggableResizable
-    :initW="windowWidth"
-    :initH="windowHeight"
-    v-model:x="x"
-    v-model:y="y"
-    v-model:w="w"
-    v-model:h="h"
+    :initW="instructionsWidth"
+    :initH="instructionsHeight"
+    v-model:x="x1"
+    v-model:y="y1"
+    v-model:w="w1"
+    v-model:h="h1"
     v-model:active="active"
     :draggable="false"
     :resizable="true"
@@ -47,20 +47,45 @@
     <!-- <div class="instructions col-4 p-4">
       
     </div> -->
-    <div class="col-8"></div>
-    <!-- <IDE
-      class="col-8"
-      :lang="lang"
-      :showSubmit="true"
-      :saved_j="code_j"
-      :saved_p="code_p"
-      :problemID="problemID"
-      :codeID="codeID"
-      :labID="labID"
-      @update="updateContent"
-      :key="forceReload"
-      v-if="childIsOpen"
-    /> -->
+    <Vue3DraggableResizable
+      :initW="instructionsWidth"
+      :initH="instructionsHeight"
+      v-model:x="x2"
+      v-model:y="y2"
+      v-model:w="w2"
+      v-model:h="h2"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledH="true"
+      :handles="['ml']"
+      :key="reloadSliders"
+      @activated="print('activated')"
+      @deactivated="print('deactivated')"
+      @drag-start="print('drag-start')"
+      @resize-start="print('resize-start')"
+      @dragging="print('dragging')"
+      @resizing="print('resizing')"
+      @drag-end="print('drag-end')"
+      @resize-end="print('resize-end')"
+      @click="active = true"
+      class="instructions"
+      id="resizeableIDE"
+    >
+      <IDE
+        :lang="lang"
+        :showSubmit="true"
+        :saved_j="code_j"
+        :saved_p="code_p"
+        :problemID="problemID"
+        :codeID="codeID"
+        :labID="labID"
+        @update="updateContent"
+        :key="forceReload"
+        v-if="childIsOpen"
+        :width="w2"
+      />
+    </Vue3DraggableResizable>
   </div>
 </template>
 
@@ -78,8 +103,10 @@ export default defineComponent({
 
   data() {
     return {
-      windowHeight: window.innerHeight - 98,
-      windowWidth: window.innerWidth * 0.33,
+      instructionsHeight: window.innerHeight - 98,
+      instructionsWidth: window.innerWidth * 0.33,
+      IDEHeight: window.innerHeight - 98,
+      IDEWidth: window.innerWidth * 0.66,
       assignment: {},
       title: "",
       description: "",
@@ -95,10 +122,14 @@ export default defineComponent({
       childIsOpen: false,
       saveStatus: "",
       test: {},
-      x: 0,
-      y: 98,
-      h: 100,
-      w: 100,
+      x1: 0,
+      y1: 98,
+      h1: 100,
+      w1: 100,
+      x2: 0,
+      y2: 98,
+      h2: 100,
+      w2: 100,
       active: true,
     };
   },
