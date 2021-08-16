@@ -29,6 +29,7 @@ import AuthService from "../services/AuthService";
 import store from "../Store/index";
 import { useRoute } from "vue-router";
 export default {
+	props: ['fsc_id'],
 	data() {
 		return {
 			user: {
@@ -90,6 +91,7 @@ export default {
 		},
 	},
 	async beforeMounted() {
+		console.log("prop test: " + this.fsc_id);
 		console.log("route params: " + this.$route.params.fsc_id);
 		this.studentID = this.$route.params.fsc_id;
 		await this.getUser();
