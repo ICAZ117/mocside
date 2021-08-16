@@ -17,10 +17,14 @@ ADD PAGES
 
 * Add Contact Us page
 
-* turn course edit into a course dashboard for professor can change course details as well as see gradebook, students, etc.
-    * Change Course Details(currently CourseEdit)
-    * Gradebook
-    * Labs...edit, delete, publish
+* add more to course edit
+    * place sections into boxes...top left details, bottom left keys, top right roster, bottom right labs
+        * course details....name, description, date, img
+        * Keys maintain and Add
+        * roster/gradebook
+        * labs...click to go to problems page, edit, delete from this list
+    * button to see student view
+
 
 
 NEXT UP
