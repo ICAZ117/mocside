@@ -62,8 +62,8 @@ class UserController extends Controller
                 if (!$professor) {
                     $professor = Professor::create([
                         'fsc_id' => $id,
-                        'screen_name' => $user->fscUser->screen_name,
-                        'pronouns' => $user->fscUser->pronouns,
+                        'screen_name' => $target->fscUser->screen_name,
+                        'pronouns' => $target->fscUser->pronouns,
                         'courses' => json_encode(array('courses' => []))
                     ]);
                     return response()->json(['message' => 'User elevated and Prof object created', 'data' => $professor], 200);
