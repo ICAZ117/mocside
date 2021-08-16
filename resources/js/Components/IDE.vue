@@ -329,13 +329,11 @@ export default defineComponent({
         code: this.code,
       };
       const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
-      console.log(res);
 
       payload = {
         lang: this.lang.toLowerCase(),
       };
       const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
-      console.log(res2);
 
       this.launchConsole = true;
       // //code is saved....now need to run it
@@ -352,20 +350,17 @@ export default defineComponent({
         code: this.code,
       };
       const res = await API.apiClient.put(`/code/${this.codeID}`, payload);
-      console.log(res);
 
       payload = {
         lang: this.lang.toLowerCase(),
       };
       const res2 = await API.apiClient.post(`/code/submit/${this.problemID}`, payload);
-      console.log(res2);
 
       //code is saved now need to run and compare it
       const res3 = await API.apiClient.post(
         `/containers/grade/${this.problemID}`,
         payload
       );
-      console.log(res3.data);
 
       const dump = res3.data.dump;
 
@@ -407,7 +402,6 @@ export default defineComponent({
         }
         // ELSE IF the code has a runtime error, handle it
         else if (tc.compare == '"runtimeError"') {
-          console.log(currentTC);
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
@@ -422,7 +416,6 @@ export default defineComponent({
 
           // IF code passed test case
           if (tc.compare[0] == "100.0") {
-            console.log(currentTC);
             this.accordions[currentTC].isSuccessful = true;
             this.accordions[currentTC].text = "Test Case Passed :)";
             this.tcGrades.push({
@@ -436,7 +429,6 @@ export default defineComponent({
               ID: JSON.parse(tc.tcID),
               passed: false,
             });
-            console.log(currentTC);
             this.accordions[currentTC].isSuccessful = false;
             this.accordions[currentTC].text = "Test Case Failed :(";
 
@@ -572,23 +564,17 @@ export default defineComponent({
           gradebook: JSON.stringify(gradebook),
         };
 
-        console.log(payload.gradebook);
         const res = await API.apiClient.post(
           `/gradebook/submit/${this.problemID}`,
           payload
         );
-        console.log("\n\n---------- DID WE GRADE CORRECTLY?");
-        console.log(res.data);
         payload["lang"] = this.lang.toLowerCase();
         const res2 = await API.apiClient.post(
           `/progress/submit/${this.problemID}`,
           payload
         );
-        console.log(res2);
         // router push to labs, we are done here
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
-      } else {
-        console.log("Too late");
       }
     },
     async pastDue() {
@@ -604,13 +590,10 @@ export default defineComponent({
         c.getMilliseconds()
       );
 
-      console.log(new Date(current_time));
-
       //get problem time returned as UTC
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var assignment = res.data.data;
       var due_date = assignment.due_date_utc;
-      console.log(new Date(due_date));
       //assume this is UTC
 
       // var backDate = this.getBackDate(due_date);
@@ -618,20 +601,15 @@ export default defineComponent({
 
       // assuming both times are using the same time zone the following works, or both are utc
       if (due_date > current_time) {
-        console.log("within window?");
         // alert("current: " + current_time + "\nback: " + backdDate);
         return false;
       } else {
-        console.log("not within window?");
         // alert("current: " + current_time + "\nback: " + backDate);
         return true;
       }
     },
     async initAccordion() {
       this.accordions = [];
-      console.log(this.accordions);
-      console.log(this.testCases.data.length);
-      console.log(this.testCases.data.data.length);
 
       for (let i = 0; i < this.testCases.data.data.length; i++) {
         var accordion = {
@@ -645,7 +623,6 @@ export default defineComponent({
           isSuccessful: "running",
           hasError: false,
         };
-        console.log("pushing an accordion to accordion");
         await this.accordions.push(accordion);
       }
     },
@@ -674,11 +651,9 @@ export default defineComponent({
     this.getStyle();
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
-    console.log("\n\nIN MOUNTED");
-    console.log(this.testCases);
-    console.log("\n\n");
-
     await this.initAccordion();
+    this.x2 = this.width;
+    this.reloadSliders++;
   },
 });
 </script>
