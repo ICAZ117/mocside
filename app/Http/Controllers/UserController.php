@@ -56,9 +56,15 @@ class UserController extends Controller
         $user = Auth::user();
         if ($user->isProf() || $user->isAdmin()) {
             $target = User::where('fsc_id', '=', $id)->first();
-            $scn = $target->fscUser->screen_name;
-            $prn = $target->fscUser->pronouns;
             if ($target && ($target->fsc_role == 'student')) { // bruh I hope this line works... operator should 'short circut' and not fail if doesn't exist.
+                $student = Student::where('fsc_id', '=', $id)->first();
+                if ($student) {
+                    $scn = $student->screen_name;
+                    $prn = $student->pronouns;
+                } else {
+                    $scn = "";
+                    $prn = "";
+                }
                 $target->fsc_role = 'professor';
                 $target->save();
                 $professor = Professor::where('fsc_id', '=', $id)->first();
