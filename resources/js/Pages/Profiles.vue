@@ -59,8 +59,9 @@ export default {
 		},
 		async getUser() {
 			//api call to get currentUser
-			const res = await API.apiClient.get(`/users/${this.studentID}`);
+			const res = await API.apiClient.get(`/users/${this.fsc_id}`);
 			console.log(res);
+			this.currentUser = res.data;
 
 			//check if its empty
 			if(this.authUser.settings == null) {
@@ -90,10 +91,7 @@ export default {
 			}
 		},
 	},
-	async beforeMounted() {
-		console.log("prop test: " + this.fsc_id);
-		console.log("route params: " + this.$route.params.fsc_id);
-		this.studentID = this.$route.params.fsc_id;
+	async beforeMount() {
 		await this.getUser();
 	},
 }
