@@ -7,58 +7,19 @@
   >
     Return to Problems
   </button>
-  <Vue3DraggableResizable
-    :initW="instructionsWidth"
-    :initH="instructionsHeight"
-    v-model:x="x1"
-    v-model:y="y1"
-    v-model:w="w1"
-    v-model:h="h1"
-    v-model:active="active"
-    :draggable="false"
-    :resizable="true"
-    :disabledH="true"
-    :handles="['mr']"
-    :key="reloadSliders"
-    @activated="print('activated')"
-    @deactivated="print('deactivated')"
-    @drag-start="print('drag-start')"
-    @resize-start="print('resize-start')"
-    @dragging="print('dragging')"
-    @resizing="print('resizing')"
-    @drag-end="print('drag-end')"
-    @resize-end="print('resize-end')"
-    @click="active = true"
-    class="instructions"
-    id="resizeableInstructions"
-  >
-    <h4>{{ title }}</h4>
-    <hr class="instructions-hr" />
-    <Tiptap
-      :savedText="JSON.parse(description)"
-      :editable="false"
-      :showMenuBar="false"
-      :isDark="true"
-      v-if="childIsOpen"
-    />
-  </Vue3DraggableResizable>
-
-  <div v-if="childIsOpen" class="row">
-    <!-- <div class="instructions col-4 p-4">
-      
-    </div> -->
+  <div v-if="childIsOpen">
     <Vue3DraggableResizable
       :initW="instructionsWidth"
       :initH="instructionsHeight"
-      v-model:x="x2"
-      v-model:y="y2"
-      v-model:w="w2"
-      v-model:h="h2"
+      v-model:x="x1"
+      v-model:y="y1"
+      v-model:w="w1"
+      v-model:h="h1"
       v-model:active="active"
       :draggable="false"
       :resizable="true"
       :disabledH="true"
-      :handles="['ml']"
+      :handles="['mr']"
       :key="reloadSliders"
       @activated="print('activated')"
       @deactivated="print('deactivated')"
@@ -70,22 +31,59 @@
       @resize-end="print('resize-end')"
       @click="active = true"
       class="instructions"
-      id="resizeableIDE"
+      id="resizeableInstructions"
     >
-      <IDE
-        :lang="lang"
-        :showSubmit="true"
-        :saved_j="code_j"
-        :saved_p="code_p"
-        :problemID="problemID"
-        :codeID="codeID"
-        :labID="labID"
-        @update="updateContent"
-        :key="forceReload"
+      <h4>{{ title }}</h4>
+      <hr class="instructions-hr" />
+      <Tiptap
+        :savedText="JSON.parse(description)"
+        :editable="false"
+        :showMenuBar="false"
+        :isDark="true"
         v-if="childIsOpen"
-        :width="w2"
       />
     </Vue3DraggableResizable>
+    <div style="float: right;!important">
+      <Vue3DraggableResizable
+        :initW="instructionsWidth"
+        :initH="instructionsHeight"
+        v-model:x="x2"
+        v-model:y="y2"
+        v-model:w="w2"
+        v-model:h="h2"
+        v-model:active="active"
+        :draggable="false"
+        :resizable="true"
+        :disabledH="true"
+        :handles="['ml']"
+        :key="reloadSliders"
+        @activated="print('activated')"
+        @deactivated="print('deactivated')"
+        @drag-start="print('drag-start')"
+        @resize-start="print('resize-start')"
+        @dragging="print('dragging')"
+        @resizing="print('resizing')"
+        @drag-end="print('drag-end')"
+        @resize-end="print('resize-end')"
+        @click="active = true"
+        class="instructions"
+        id="resizeableIDE"
+      >
+        <IDE
+          :lang="lang"
+          :showSubmit="true"
+          :saved_j="code_j"
+          :saved_p="code_p"
+          :problemID="problemID"
+          :codeID="codeID"
+          :labID="labID"
+          @update="updateContent"
+          :key="forceReload"
+          v-if="childIsOpen"
+          :width="w2"
+        />
+      </Vue3DraggableResizable>
+    </div>
   </div>
 </template>
 
