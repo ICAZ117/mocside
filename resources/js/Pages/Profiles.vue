@@ -68,17 +68,17 @@ export default {
 				const res = await API.apiClient.post(`/profile/init`);
 			}
 
-			// this.user.name = this.currentUser.name;
-			// this.user.email = this.currentUser.email;
-			// this.user.screen_name = this.currentUser.fsc_user.screen_name;
-			// this.user.fsc_id = this.currentUser.fsc_user.fsc_id;
-			// this.user.pronouns = this.currentUser.fsc_user.pronouns;
+			this.user.name = this.currentUser.name;
+			this.user.email = this.currentUser.email;
+			this.user.screen_name = this.currentUser.fsc_user.screen_name;
+			this.user.fsc_id = this.currentUser.fsc_user.fsc_id;
+			this.user.pronouns = this.currentUser.fsc_user.pronouns;
 
-			// this.user.pfp = this.currentUser.pfp_path;
-			// if(this.user.pfp == undefined || this.user.pfp == null || this.user.pfp == "") {
-			// 	this.user.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
-			// }
-			// document.getElementById("pfp").src = this.user.pfp;
+			this.user.pfp = this.currentUser.pfp_path;
+			if(this.user.pfp == undefined || this.user.pfp == null || this.user.pfp == "") {
+				this.user.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+			}
+			document.getElementById("pfp").src = this.user.pfp;
 			//write to check if the picture is loaded...if not then change back to default pfp
 		},
 	},
