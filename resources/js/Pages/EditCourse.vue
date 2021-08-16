@@ -1,33 +1,5 @@
 <template>
   <div class="edit-course">
-    <div class="heading">
-      <tabs v-model="selectedTab">
-        <tab
-          class="tab"
-          v-for="(tab, i) in tabs"
-          :key="`t${i}`"
-          :val="tab"
-          :label="tab"
-          :indicator="true"
-        />
-      </tabs>
-    </div>
-
-    <tab-panels v-model="selectedTab" :animate="true">
-      <tab-panel :val="'Course Details'">
-        course details
-      </tab-panel>
-      <tab-panel :val="'Gradebook'">
-        gradebook
-      </tab-panel>
-      <tab-panel :val="'Labs'">
-        <Labs @unmounting="Unmounting()" @courseEdited="courseEdited" :courseID="courseID" :courseName="courseName"></Labs>
-      </tab-panel>
-    </tab-panels>
-
-
-
-
     <h3 class="edit-course-title">Edit Course</h3>
     <div class="course-create-form">
       <form @submit.prevent="handleSubmit" class="course-form">
@@ -209,16 +181,12 @@ import { getError } from "../utils/helpers";
 import FileService from "../services/FileService";
 import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
-import Labs from "./Labs.vue";
-
-const tabs = ["Course Details","Gradebook","Labs"];
 export default {
-  props: ["courseID", "courseName"],
+  props: ["courseID"],
   emits: ["unmounting", "courseEdited"],
   components: {
     FlashMessage,
     FileUpload,
-    Labs,
   },
   data() {
     return {
@@ -248,21 +216,6 @@ export default {
       keyURL: "",
     };
   },
-  setup() {
-    const route = useRoute();
-
-    const currentDirectory = computed(() => route.path);
-
-    const state = reactive({
-      selectedTab: tabs[0],
-    });
-
-    return {
-      currentDirectory,
-      tabs,
-      ...toRefs(state),
-    };
-  },
   methods: {
     async initKeys() {
       const res = await API.apiClient.get(`/invite/course/${this.courseID}`);
@@ -277,15 +230,11 @@ export default {
       if (this.enrollKey.key == "") {
         this.enrollKey.key = "random";
       }
-
       payload["join_key"] = this.enrollKey.key;
       payload["course_id"] = this.courseID;
-
       const res = await API.apiClient.post(`/invite`, payload);
       var keyCode = res.data.data.id;
-
       payload["join_key"] = res.data.data.join_key;
-
       if (this.enrollKey.perm) {
         //get end time of course
         payload["expire_date"] = this.courseForm.dateEnd;
@@ -297,9 +246,7 @@ export default {
         this.enrollKey.uses = 0;
       }
       payload["max_uses"] = this.enrollKey.uses;
-
       const res2 = await API.apiClient.put(`/invite/${keyCode}`, payload);
-
       this.joinKeys.push(res2.data.data);
     },
     copyKey(key) {
@@ -316,7 +263,6 @@ export default {
     async deleteKey(key, id) {
       //call delete api method
       const res = await API.apiClient.delete(`/invite/${key.id}`);
-
       //filter from front end
       this.joinKeys = this.joinKeys.filter((k, i) => i != id);
     },
@@ -372,7 +318,6 @@ export default {
         }
       }
       const res = await this.updateRoster();
-
       //remove course ID from student's courses list
       var courses = JSON.parse(student.fsc_user.courses).courses;
       for (let i = 0; i < courses.length; i++) {
@@ -382,7 +327,6 @@ export default {
         }
       }
       const res2 = await this.updateStudentCourses(courses);
-
       //remove student object from list
       this.students = this.students.filter((user, i) => i != index);
     },
@@ -397,14 +341,11 @@ export default {
     async addStudent() {
       try {
         const stud = await this.getStudent();
-
         this.courseForm.roster.push(this.studentID);
         const res = await this.updateRoster();
-
         var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
         courses.push(this.courseID);
         const res2 = await this.updateStudentCourses(courses);
-
         //at end add to the students list
         this.students.push(stud.data.data);
       } catch (error) {
@@ -428,9 +369,6 @@ export default {
         `/students/${stud.data.data.fsc_user.fsc_id}`,
         payload
       );
-    },
-    async Unmounting() {
-      console.log("unmounting labs");
     },
   },
   async mounted() {
