@@ -2,7 +2,7 @@
   <!-- WorkSpace Page-->
   <button
     v-if="childIsOpen"
-    @click="unountingWork()"
+    @click="unmountingWork()"
     class="btn btn-danger btn-block"
   >
     Return to Problems
