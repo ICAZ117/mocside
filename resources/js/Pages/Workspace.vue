@@ -1,4 +1,5 @@
 <template>
+<div v-if="childIsOpen" class="workspace-page">
   <!-- WorkSpace Page-->
   <button
     v-if="childIsOpen"
@@ -23,6 +24,7 @@
       :key="reloadSliders"
       class="instructions"
       id="resizeableInstructions"
+      v-if="childIsOpen"
     >
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
@@ -64,6 +66,7 @@
       />
     </Vue3DraggableResizable>
   </div>
+</div>
 </template>
 
 <script>
