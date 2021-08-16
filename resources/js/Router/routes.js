@@ -93,6 +93,7 @@ const routes = [
     {
         path: '/profile/:fsc_id',
         component: () => import("../Pages/Profiles.vue"),
+        props: true,
         name: "Profile",
     },
     {
