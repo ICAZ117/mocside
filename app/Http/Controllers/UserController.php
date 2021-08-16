@@ -51,18 +51,28 @@ class UserController extends Controller
     
     public function update($id)
     {
-        // elevate user to professor
-        if (Auth::user()->isProf())
-        {
-            $user = User::where('fsc_id', '=', $id)->first();
-            $fsc_id = $user->fsc_id;
-            // create prof object for elevated user
-            $prof = Professor::create(['fsc_id' => $fsc_id]);
-            $user->fsc_role = 'professor';
-            $user->save();
-            return new UserResource($user);
+        // elevate student to professor
+        $user = Auth::user();
+        if ($user->isProf() || $user->isAdmin()) {
+            $target = User::where('fsc_id', '=', $id)->first();
+            if ($target && ($target->fsc_role == 'student')) { // bruh I hope this line works... operator should 'short circut' and not fail if doesn't exist.
+                $target->fsc_role = 'professor';
+                $target->save();
+                $professor = Professor::where('fsc_id', '=', $id)->first();
+                if (!$professor) {
+                    $professor = Professor::create([
+                        'fsc_id' => $id,
+                        'screen_name' => $user->fscUser->screen_name,
+                        'pronouns' => $user->fscUser->pronouns,
+                        'courses' => json_encode(array('courses' => []))
+                    ]);
+                    return response()->json(['message' => 'User elevated and Prof object created', 'data' => $professor], 200);
+                }
+                return response()->json(['User elevated and old Prof object found.', 'data' => $professor], 200);
+            }
+            return response()->json(['message' => 'User doesn\'t exist or is already a professor', 'data' => $target]);
         }
-        return response()->json(['message' => 'You must be a professor to complete this action.']);
+        return response()->json(['message' => 'Forbidden'], 403);
     }
 
     public function downgrade($id) 
@@ -71,8 +81,8 @@ class UserController extends Controller
         $user = Auth::user();
         if ($user->isAdmin()) {
             $target = User::where('fsc_id', '=', $id)->first();
-            if ($target->fsc_role == 'professor') {
-                $target->fsc_role = 'professor';
+            if ($target && ($target->fsc_role == 'professor')) {
+                $target->fsc_role = 'student';
                 $target->save();
                 $student = Student::where('fsc_id', '=', $id)->first();
                 if (!$student) {
