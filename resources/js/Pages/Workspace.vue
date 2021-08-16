@@ -24,6 +24,7 @@
       :key="reloadSliders"
       class="instructions"
       id="resizeableInstructions"
+      v-if="childIsOpen"
     >
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
