@@ -15,7 +15,7 @@
       v-model:y="y1"
       v-model:w="w1"
       v-model:h="h1"
-      v-model="active"
+      v-model:active="active"
       :draggable="false"
       :resizable="true"
       :disabledH="true"
