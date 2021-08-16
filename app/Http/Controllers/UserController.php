@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Models\Professor;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
