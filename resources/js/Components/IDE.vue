@@ -293,7 +293,7 @@ export default defineComponent({
     y1: 98,
     h1: 0,
     w1: 0,
-    x2: window.innerWidth * 0.33,
+    x2: 0,
     y2: 400,
     h2: 0,
     w2: 0,
