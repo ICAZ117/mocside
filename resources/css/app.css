@@ -950,6 +950,7 @@ thead.gradebook {
     bottom: 0 !important;
     margin: 0 !important;
     display: block !important;
+    z-index: 10!important;
 }
 
 .vdr-container.active {
@@ -960,6 +961,7 @@ thead.gradebook {
 .vdr-handle-ml {
     top: 0 !important;
     margin-top: 0 !important;
+    z-index: 10!important;
 }
 
 /*========== POPUP MODAL ==========*/
