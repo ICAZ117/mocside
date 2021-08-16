@@ -290,7 +290,7 @@ export default defineComponent({
     canSubmit: true,
 
     consoleHeight: (window.innerHeight - 98) / 2,
-    consolewidth: window.innerWidth * 0.66,
+    consoleWidth: window.innerWidth * 0.66,
     x1: 0,
     y1: 98,
     h1: 0,
