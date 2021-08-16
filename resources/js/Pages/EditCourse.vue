@@ -1,5 +1,33 @@
 <template>
   <div class="edit-course">
+    <div class="heading">
+      <tabs v-model="selectedTab">
+        <tab
+          class="tab"
+          v-for="(tab, i) in tabs"
+          :key="`t${i}`"
+          :val="tab"
+          :label="tab"
+          :indicator="true"
+        />
+      </tabs>
+    </div>
+
+    <tab-panels v-model="selectedTab" :animate="true">
+      <tab-panel :val="'Course Details'">
+        course details
+      </tab-panel>
+      <tab-panel :val="'Gradebook'">
+        gradebook
+      </tab-panel>
+      <tab-panel :val="'Labs'">
+        <Labs @unmounting="Unmounting()" @courseEdited="courseEdited" :courseID="courseID" :courseName="courseName"></Labs>
+      </tab-panel>
+    </tab-panels>
+
+
+
+
     <h3 class="edit-course-title">Edit Course</h3>
     <div class="course-create-form">
       <form @submit.prevent="handleSubmit" class="course-form">
@@ -181,12 +209,16 @@ import { getError } from "../utils/helpers";
 import FileService from "../services/FileService";
 import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
+import Labs from "./Labs.vue";
+
+const tabs = ["Course Details","Gradebook","Labs"];
 export default {
-  props: ["courseID"],
+  props: ["courseID", "courseName"],
   emits: ["unmounting", "courseEdited"],
   components: {
     FlashMessage,
     FileUpload,
+    Labs,
   },
   data() {
     return {
@@ -214,6 +246,21 @@ export default {
       },
       joinKeys: [],
       keyURL: "",
+    };
+  },
+  setup() {
+    const route = useRoute();
+
+    const currentDirectory = computed(() => route.path);
+
+    const state = reactive({
+      selectedTab: tabs[0],
+    });
+
+    return {
+      currentDirectory,
+      tabs,
+      ...toRefs(state),
     };
   },
   methods: {
@@ -381,6 +428,9 @@ export default {
         `/students/${stud.data.data.fsc_user.fsc_id}`,
         payload
       );
+    },
+    async Unmounting() {
+      console.log("unmounting labs");
     },
   },
   async mounted() {
