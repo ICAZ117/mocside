@@ -59,7 +59,7 @@ export default {
 		},
 		async getUser() {
 			//api call to get currentUser
-			const res = await API.apiClient.get(`/users/${this.fsc_id}`);
+			const res = await API.apiClient.get(`/users/profile/${this.fsc_id}`);
 			console.log(res);
 			this.currentUser = res.data;
 
