@@ -941,7 +941,28 @@ thead.gradebook {
 }
 
 .vdr-container {
-    border: none!important;
+    border: none !important;
+}
+
+.vdr-handle {
+    height: 100% !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    z-index: 10!important;
+    background-color: var(--FSCblue);
+}
+
+.vdr-container.active {
+    border-bottom: none !important;
+}
+
+.vdr-handle-mr,
+.vdr-handle-ml {
+    top: 0 !important;
+    margin-top: 0 !important;
+    z-index: 10!important;
 }
 
 /*========== POPUP MODAL ==========*/
