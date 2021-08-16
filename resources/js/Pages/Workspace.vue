@@ -15,7 +15,7 @@
       v-model:y="y1"
       v-model:w="w1"
       v-model:h="h1"
-      v-model:active="active"
+      :active="active"
       :draggable="false"
       :resizable="true"
       :disabledH="true"
@@ -45,13 +45,13 @@
     </Vue3DraggableResizable>
     <div style="float: right;!important">
       <Vue3DraggableResizable
-        :initW="instructionsWidth"
-        :initH="instructionsHeight"
+        :initW="IDEWidth"
+        :initH="IDEHeight"
         v-model:x="x2"
         v-model:y="y2"
         v-model:w="w2"
         v-model:h="h2"
-        v-model:active="active"
+        :active="active"
         :draggable="false"
         :resizable="true"
         :disabledH="true"
