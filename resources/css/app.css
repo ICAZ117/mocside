@@ -951,6 +951,7 @@ thead.gradebook {
     margin: 0 !important;
     display: block !important;
     z-index: 10!important;
+    background-color: var(--FSCblue);
 }
 
 .vdr-container.active {
