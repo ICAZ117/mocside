@@ -52,6 +52,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return new UserResource(User::where('fsc_id', '=', $id)->first());
     });
     Route::post('/users/elevate/{id}', [UserController::class, 'update']);
+    Route::post('/users/downgrade/{id}', [UserController::class, 'downgrade']);
 
     Route::resource('courses', CourseController::class);
     // I hope this works.

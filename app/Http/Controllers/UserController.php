@@ -54,7 +54,7 @@ class UserController extends Controller
         // elevate user to professor
         if (Auth::user()->isProf())
         {
-            $user = User::where('fsc_id', $id)->first();
+            $user = User::where('fsc_id', '=', $id)->first();
             $fsc_id = $user->fsc_id;
             // create prof object for elevated user
             $prof = Professor::create(['fsc_id' => $fsc_id]);
@@ -63,6 +63,28 @@ class UserController extends Controller
             return new UserResource($user);
         }
         return response()->json(['message' => 'You must be a professor to complete this action.']);
+    }
+
+    public function downgrade($id) 
+    {
+        // return user to student perms
+        $user = Auth::user();
+        if ($user->isAdmin()) {
+            $target = User::where('fsc_id', '=', $id)->first();
+            if ($target->fsc_role == 'professor') {
+                $target->fsc_role = 'professor';
+                $target->save();
+                $student = Student::where('fsc_id', '=', $id)->first();
+                if (!$student) {
+                    $student = Student::create(['fsc_id' => $id]);
+                    // init students
+                    return response()->json(['message' => 'New student created. Please POST to api/gradebook/init.', 'data' => $student], 200);
+                }
+                return response()->json(['message' => 'Old student found. Check for gradebook init.', 'data' => $student], 200);
+            }
+            return response()->json(['message' => 'User is not a professor; cannot be downgraded'], 403);
+        }
+        return response()->json(['message' => 'Unauthorized.'], 403);
     }
 
     public function updateProfile(Request $request, $id)
