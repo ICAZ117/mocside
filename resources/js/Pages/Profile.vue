@@ -174,26 +174,7 @@
         </vue-final-modal>
 
         <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
-        <button @click="showUpgradeModal = true" v-if="showUpgrade" class="btn btn-danger btn-block">Upgrade User</button>
-        <button @click="showDowngradeModal = true" v-if="showUpgrade" class="btn btn-danger btn-block">DownGrade User</button>
         <button @click="showDeleteUserModal = true" v-if="isProf" class="btn btn-danger btn-block">Delete Account</button>
-        <vue-final-modal v-model="showUpgradeModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
-          <button class="modal-close" @click="showUpgradeModal = false">x</button>
-          <p>What is the FSC ID of the Account you would like to upgrade to a Professor</p>
-          <label for="fscID"></label>
-          <input type="number" id="fscID" name="fscID" v-model="changeGradeUser">
-          <button @click="showUpgradeModal = false" class="btn btn-danger btn-block">Cancel</button>
-          <button @click="upgradeUser()" class="btn btn-danger btn-block">Submit</button>
-        </vue-final-modal>
-        <vue-final-modal v-model="showDowngradeModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
-          <button class="modal-close" @click="showDowngradeModal = false">x</button>
-          <button class="modal-close" @click="showUpgradeModal = false">x</button>
-          <p>What is the FSC ID of the Account you would like to downgrade to a Professor</p>
-          <label for="fscID"></label>
-          <input type="number" id="fscID" name="fscID" v-model="changeGradeUser">
-          <button @click="showDowngradeModal = false" class="btn btn-danger btn-block">Cancel</button>
-          <button @click="downgradeUser()" class="btn btn-danger btn-block">Submit</button>
-        </vue-final-modal>
         <vue-final-modal v-model="showDeleteUserModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
           <button class="modal-close" @click="showDeleteUserModal = false">x</button>
           <button class="modal-close" @click="showUpgradeModal = false">x</button>
@@ -264,8 +245,6 @@ export default {
       showEmailModal: false,
       showPassModal: false,
       passNoMatch: false,
-      showUpgradeModal: false,
-      showDowngradeModal: false,
       showDeleteUserModal: false,
       changeGradeUser: "",
     };
@@ -335,12 +314,6 @@ export default {
     closePassModal() {
       this.passNoMatch = false;
       this.showPassModal = false;
-    },
-    closeUpgradeModal() {
-      this.showUpgradeModal = false;
-    },
-    closeDowngradeModal() {
-      this.showDowngradeModal = false;
     },
     closeDeleteUserModal() {
       this.showDeleteUserModal = false;
@@ -436,23 +409,6 @@ export default {
     },
     editPass() {
       this.showPassModal = true;
-    },
-    async upgradeUser() {
-      console.log("downgrade user");
-
-
-      //post request
-      var id = this.changeGradeUser;
-      const res = await API.apiClient.post(`/users/elevate/${id}`);
-
-      this.closeUpgradeModal();
-      this.changeGradeUser = "";
-    },
-    async downgradeUser() {
-      console.log("upgrade user");
-
-      this.closeDowngradeModal();
-      this.changeGradeUser = "";
     },
     async deleteAccount() {
       console.log("delete account");
