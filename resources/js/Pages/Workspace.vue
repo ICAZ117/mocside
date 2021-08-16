@@ -47,7 +47,6 @@
         :disabledH="true"
         :handles="['ml']"
         :key="reloadSliders"
-        class="instructions"
         id="resizeableIDE"
       >
         <IDE
