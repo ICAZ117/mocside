@@ -34,35 +34,35 @@
         v-if="childIsOpen"
       />
     </Vue3DraggableResizable>
-      <Vue3DraggableResizable
-        :initW="IDEWidth"
-        :initH="IDEHeight"
-        v-model:x="x2"
-        v-model:y="y2"
-        v-model:w="w2"
-        v-model:h="h2"
-        v-model:active="active"
-        :draggable="false"
-        :resizable="true"
-        :disabledH="true"
-        :handles="['ml']"
-        :key="reloadSliders"
-        id="resizeableIDE"
-      >
-        <IDE
-          :lang="lang"
-          :showSubmit="true"
-          :saved_j="code_j"
-          :saved_p="code_p"
-          :problemID="problemID"
-          :codeID="codeID"
-          :labID="labID"
-          @update="updateContent"
-          :key="forceReload"
-          v-if="childIsOpen"
-          :width="w2"
-        />
-      </Vue3DraggableResizable>
+    <Vue3DraggableResizable
+      :initW="IDEWidth"
+      :initH="IDEHeight"
+      v-model:x="x2"
+      v-model:y="y2"
+      v-model:w="w2"
+      v-model:h="h2"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledH="true"
+      :handles="['ml']"
+      :key="reloadSliders"
+      id="resizeableIDE"
+    >
+      <IDE
+        :lang="lang"
+        :showSubmit="true"
+        :saved_j="code_j"
+        :saved_p="code_p"
+        :problemID="problemID"
+        :codeID="codeID"
+        :labID="labID"
+        @update="updateContent"
+        :key="forceReload"
+        v-if="childIsOpen"
+        :width="w2"
+      />
+    </Vue3DraggableResizable>
   </div>
 </template>
 
@@ -111,12 +111,12 @@ export default defineComponent({
     };
   },
   watch: {
-    w2: function() {
+    w2: function () {
       this.w1 = window.innerWidth - this.w2;
     },
-    active: function() {
+    active: function () {
       this.active = true;
-    }
+    },
   },
   methods: {
     async getAssignment() {
@@ -273,5 +273,4 @@ export default defineComponent({
   height: 100%;
   width: 100%;
 }
-
 </style>
