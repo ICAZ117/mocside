@@ -24,6 +24,7 @@ use App\Http\Controllers\StorageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestCaseController;
 use App\Http\Controllers\UserController;
+use App\Http\Resources\UserResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/users/auth/{id}', [UserController::class, 'updateProfile']);
     Route::get('/users/{id}', function ($id) {
         return User::findOrFail($id);
+    });
+    Route::get('/users/profile/{id}', function ($id) {
+        return new UserResource(User::where('fsc_id', '=', $id)->first());
     });
     Route::post('/users/elevate/{id}', [UserController::class, 'update']);
 
