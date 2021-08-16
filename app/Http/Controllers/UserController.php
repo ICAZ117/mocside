@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Models\Professor;
+use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -56,14 +57,22 @@ class UserController extends Controller
         if ($user->isProf() || $user->isAdmin()) {
             $target = User::where('fsc_id', '=', $id)->first();
             if ($target && ($target->fsc_role == 'student')) { // bruh I hope this line works... operator should 'short circut' and not fail if doesn't exist.
+                $student = Student::where('fsc_id', '=', $id)->first();
+                if ($student) {
+                    $scn = $student->screen_name;
+                    $prn = $student->pronouns;
+                } else {
+                    $scn = "";
+                    $prn = "";
+                }
                 $target->fsc_role = 'professor';
                 $target->save();
                 $professor = Professor::where('fsc_id', '=', $id)->first();
                 if (!$professor) {
                     $professor = Professor::create([
                         'fsc_id' => $id,
-                        'screen_name' => $user->fscUser->screen_name,
-                        'pronouns' => $user->fscUser->pronouns,
+                        'screen_name' => $scn,
+                        'pronouns' => $prn,
                         'courses' => json_encode(array('courses' => []))
                     ]);
                     return response()->json(['message' => 'User elevated and Prof object created', 'data' => $professor], 200);
