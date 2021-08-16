@@ -61,10 +61,10 @@ export default {
 			//api call to get currentUser
 			const res = await API.apiClient.get(`/users/profile/${this.fsc_id}`);
 			console.log(res);
-			this.currentUser = res.data;
+			this.currentUser = res.data.data;
 
 			//check if its empty
-			if(this.authUser.settings == null) {
+			if(this.currentUser.settings == null) {
 				const res = await API.apiClient.post(`/profile/init`);
 			}
 
