@@ -478,6 +478,7 @@ export default {
     this.authUser = await store.getters["auth/authUser"];
     if(this.authUser.settings == null) {
       const res = await API.apiClient.post(`/profile/init`);
+      this.authUser = await store.getters["auth/authUser"];
     }
     this.username = this.authUser.username;
     if (this.authUser.fsc_user.courses) {

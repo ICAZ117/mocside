@@ -15,9 +15,9 @@
 				<input type="email" v-model="user.email" id="email" disabled>
 				<label for="FSCID">FSC ID</label>
 				<input type="number" v-model="user.fsc_id" id="FSCID" disabled>
-				<button class="btn btn-danger btn-block">Upgrade User</button>
-				<button class="btn btn-danger btn-block">DownGrade User</button>
-				<button class="btn btn-danger btn-block">Delete User</button>
+				<button @click="upgradeUser()" class="btn btn-danger btn-block">Upgrade User</button>
+				<button @click="downgradeUser()" class="btn btn-danger btn-block">DownGrade User</button>
+				<button @click="deleteUser()" class="btn btn-danger btn-block">Delete User</button>
 			</div>
 	  </div>
   </div>
@@ -48,8 +48,7 @@ export default {
 		async upgradeUser() {
 			console.log("upgrade User");
 			//post request
-			// var id = this.changeGradeUser;
-			// const res = await API.apiClient.post(`/users/elevate/${id}`);
+			const res = await API.apiClient.post(`/users/elevate/${this.fsc_id}`);
 		},
 		async downgradeUser() {
 			console.log("downgrade User");
