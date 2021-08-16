@@ -90,7 +90,7 @@ export default {
 			}
 		},
 	},
-	async beforeMounted() {
+	async beforeMount() {
 		await this.getUser();
 	},
 }
