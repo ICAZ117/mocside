@@ -855,6 +855,11 @@ thead.gradebook {
 .work-area {
     padding: 0 !important;
     margin: 0 !important;
+    background-color: black !important;
+    color: lightgray !important;
+    font-family: consolas !important;
+    font-weight: lighter !important;
+    font-size: 12pt !important;
 }
 
 .instructions {
@@ -950,8 +955,8 @@ thead.gradebook {
     bottom: 0 !important;
     margin: 0 !important;
     display: block !important;
-    z-index: 10!important;
-    background-color: var(--FSCblue)!important;
+    z-index: 10 !important;
+    background-color: var(--FSCblue) !important;
 }
 
 .vdr-container.active {
@@ -959,13 +964,13 @@ thead.gradebook {
 }
 
 .vdr-handle-mr {
-    display: none!important;
+    display: none !important;
 }
 
 .vdr-handle-ml {
     top: 0 !important;
     margin-top: 0 !important;
-    z-index: 10!important;
+    z-index: 10 !important;
 }
 
 /*========== POPUP MODAL ==========*/

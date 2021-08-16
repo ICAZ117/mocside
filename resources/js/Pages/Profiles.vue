@@ -15,9 +15,9 @@
 				<input type="email" v-model="user.email" id="email" disabled>
 				<label for="FSCID">FSC ID</label>
 				<input type="number" v-model="user.fsc_id" id="FSCID" disabled>
-				<button class="btn btn-danger btn-block">Upgrade User</button>
-				<button class="btn btn-danger btn-block">DownGrade User</button>
-				<button class="btn btn-danger btn-block">Delete User</button>
+				<button @click="upgradeUser()" class="btn btn-danger btn-block">Upgrade User</button>
+				<button @click="downgradeUser()" class="btn btn-danger btn-block">DownGrade User</button>
+				<button @click="deleteUser()" class="btn btn-danger btn-block">Delete User</button>
 			</div>
 	  </div>
   </div>
@@ -48,8 +48,7 @@ export default {
 		async upgradeUser() {
 			console.log("upgrade User");
 			//post request
-			// var id = this.changeGradeUser;
-			// const res = await API.apiClient.post(`/users/elevate/${id}`);
+			const res = await API.apiClient.post(`/users/elevate/${this.fsc_id}`);
 		},
 		async downgradeUser() {
 			console.log("downgrade User");
@@ -59,26 +58,26 @@ export default {
 		},
 		async getUser() {
 			//api call to get currentUser
-			const res = await API.apiClient.get(`/users/${this.fsc_id}`);
+			const res = await API.apiClient.get(`/users/profile/${this.fsc_id}`);
 			console.log(res);
-			this.currentUser = res.data;
+			this.currentUser = res.data.data;
 
 			//check if its empty
-			if(this.authUser.settings == null) {
+			if(this.currentUser.settings == null) {
 				const res = await API.apiClient.post(`/profile/init`);
 			}
 
-			// this.user.name = this.currentUser.name;
-			// this.user.email = this.currentUser.email;
-			// this.user.screen_name = this.currentUser.fsc_user.screen_name;
-			// this.user.fsc_id = this.currentUser.fsc_user.fsc_id;
-			// this.user.pronouns = this.currentUser.fsc_user.pronouns;
+			this.user.name = this.currentUser.name;
+			this.user.email = this.currentUser.email;
+			this.user.screen_name = this.currentUser.fsc_user.screen_name;
+			this.user.fsc_id = this.currentUser.fsc_user.fsc_id;
+			this.user.pronouns = this.currentUser.fsc_user.pronouns;
 
-			// this.user.pfp = this.currentUser.pfp_path;
-			// if(this.user.pfp == undefined || this.user.pfp == null || this.user.pfp == "") {
-			// 	this.user.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
-			// }
-			// document.getElementById("pfp").src = this.user.pfp;
+			this.user.pfp = this.currentUser.pfp_path;
+			if(this.user.pfp == undefined || this.user.pfp == null || this.user.pfp == "") {
+				this.user.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+			}
+			document.getElementById("pfp").src = this.user.pfp;
 			//write to check if the picture is loaded...if not then change back to default pfp
 		},
 	},

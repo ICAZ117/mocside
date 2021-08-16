@@ -21,18 +21,9 @@
       :disabledH="true"
       :handles="['mr']"
       :key="reloadSliders"
-      @activated="print('activated')"
-      @deactivated="print('deactivated')"
-      @drag-start="print('drag-start')"
-      @resize-start="print('resize-start')"
-      @dragging="print('dragging')"
-      @resizing="print('resizing')"
-      @drag-end="print('drag-end')"
-      @resize-end="print('resize-end')"
       class="instructions"
       id="resizeableInstructions"
     >
-    <!-- @click="active = true" -->
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <Tiptap
@@ -43,47 +34,35 @@
         v-if="childIsOpen"
       />
     </Vue3DraggableResizable>
-    <div style="float: right;!important">
-      <Vue3DraggableResizable
-        :initW="IDEWidth"
-        :initH="IDEHeight"
-        v-model:x="x2"
-        v-model:y="y2"
-        v-model:w="w2"
-        v-model:h="h2"
-        v-model:active="active"
-        :draggable="false"
-        :resizable="true"
-        :disabledH="true"
-        :handles="['ml']"
-        :key="reloadSliders"
-        @activated="print('activated')"
-        @deactivated="print('deactivated')"
-        @drag-start="print('drag-start')"
-        @resize-start="print('resize-start')"
-        @dragging="print('dragging')"
-        @resizing="print('resizing')"
-        @drag-end="print('drag-end')"
-        @resize-end="print('resize-end')"
-        class="instructions"
-        id="resizeableIDE"
-      >
-      <!-- @click="active = true" -->
-        <IDE
-          :lang="lang"
-          :showSubmit="true"
-          :saved_j="code_j"
-          :saved_p="code_p"
-          :problemID="problemID"
-          :codeID="codeID"
-          :labID="labID"
-          @update="updateContent"
-          :key="forceReload"
-          v-if="childIsOpen"
-          :width="w2"
-        />
-      </Vue3DraggableResizable>
-    </div>
+    <Vue3DraggableResizable
+      :initW="IDEWidth"
+      :initH="IDEHeight"
+      v-model:x="x2"
+      v-model:y="y2"
+      v-model:w="w2"
+      v-model:h="h2"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledH="true"
+      :handles="['ml']"
+      :key="reloadSliders"
+      id="resizeableIDE"
+    >
+      <IDE
+        :lang="lang"
+        :showSubmit="true"
+        :saved_j="code_j"
+        :saved_p="code_p"
+        :problemID="problemID"
+        :codeID="codeID"
+        :labID="labID"
+        @update="updateContent"
+        :key="forceReload"
+        v-if="childIsOpen"
+        :width="w2"
+      />
+    </Vue3DraggableResizable>
   </div>
 </template>
 
@@ -132,17 +111,14 @@ export default defineComponent({
     };
   },
   watch: {
-    w2: function() {
+    w2: function () {
       this.w1 = window.innerWidth - this.w2;
     },
-    active: function() {
+    active: function () {
       this.active = true;
-    }
+    },
   },
   methods: {
-    print(val) {
-      console.log(val);
-    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
@@ -297,5 +273,4 @@ export default defineComponent({
   height: 100%;
   width: 100%;
 }
-
 </style>

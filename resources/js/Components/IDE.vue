@@ -10,107 +10,134 @@
         :key="forceReload"
         :style="'width: ' + width + '!important;'"
       />
-      <div class="row px-1 my-1">
-        <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
-          {{ IOmessage }}
-        </button>
-        <button
-          @click="runCode()"
-          type="run"
-          name="run"
-          class="run-code col-1 btn btn-success"
-          :disabled="launchConsole"
-        >
-          Run
-        </button>
-        <button
-          v-show="showSubmit"
-          @click="submitCode()"
-          type="submit"
-          name="submit"
-          class="submit-code col-1 btn btn-success"
-        >
-          Submit
-        </button>
-        <vue-final-modal
-          v-model="showModal"
-          classes="modal-container"
-          content-class="modal-content"
-          :esc-to-close="true"
-        >
-          <Accordion :accordions="accordions" :key="reloadModal" />
-          <button class="modal-close" @click="showModal = false">x</button>
-          <div class="row">
-            <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">
-              Keep trying
-            </button>
-            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1" :disabled="!canSubmit">
-              Submit
-            </button>
-          </div>
-        </vue-final-modal>
-        <div :style="style">
-          <div style="float: right !important">
-            <div class="configure-editor">
-              <label for="theme" class="workspace-label">Theme: </label>
-              <select v-model="theme" id="theme" class="console-select form-select">
-                <optgroup label="Dark">
-                  <option value="ambiance">Ambiance</option>
-                  <option value="chaos">Chaos</option>
-                  <option value="clouds_midnight">Clouds Midnight</option>
-                  <option value="dracula">Dracula</option>
-                  <option value="cobalt">Cobalt</option>
-                  <option value="gruvbox">Gruvbox</option>
-                  <option value="gob" selected>Green on Black</option>
-                  <option value="idle_fingers">idle Fingers</option>
-                  <option value="kr_theme">krTheme</option>
-                  <option value="merbivore">Merbivore</option>
-                  <option value="merbivore_soft">Merbivore Soft</option>
-                  <option value="mono_industrial">Mono Industrial</option>
-                  <option value="monokai">Monokai</option>
-                  <option value="nord_dark">Nord Dark</option>
-                  <option value="pastel_on_dark">Pastel on dark</option>
-                  <option value="solarized_dark">Solarized Dark</option>
-                  <option value="terminal">Terminal</option>
-                  <option value="tomorrow_night">Tomorrow Night</option>
-                  <option value="tomorrow_night_blue">Tomorrow Night Blue</option>
-                  <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
-                  <option value="tomorrow_night_eighties">Tomorrow Night 80s</option>
-                  <option value="twilight">Twilight</option>
-                  <option value="vibrant_ink">Vibrant Ink</option>
-                </optgroup>
-                <optgroup label="Light">
-                  <option value="chrome">Chrome</option>
-                  <option value="clouds">Clouds</option>
-                  <option value="crimson_editor">Crimson Editor</option>
-                  <option value="dawn">Dawn</option>
-                  <option value="dreamweaver">Dreamweaver</option>
-                  <option value="eclipse">Eclipse</option>
-                  <option value="github">GitHub</option>
-                  <option value="iplastic">IPlastic</option>
-                  <option value="solarized_light">Solarized Light</option>
-                  <option value="textmate">TextMate</option>
-                  <option value="tomorrow">Tomorrow</option>
-                  <option value="xcode">Xcode</option>
-                  <option value="kuroir">Kuroir</option>
-                  <option value="katzenmilch">KatzenMilch</option>
-                  <option value="sqlserver">SQL Server</option>
-                </optgroup>
-              </select>
+    </div>
+
+    <Vue3DraggableResizable
+      :initW="IDEWidth"
+      :initH="IDEHeight"
+      v-model:x="x2"
+      v-model:y="y2"
+      v-model:w="w2"
+      v-model:h="h2"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledW="true"
+      :handles="['tm']"
+      :key="reloadSliders"
+      id="resizeableIDE"
+    >
+      <div>
+        <div class="row px-1 my-1">
+          <button
+            @click="toggleIO"
+            id="buttonWidth"
+            class="toggleIO col-1 btn btn-success"
+          >
+            {{ IOmessage }}
+          </button>
+          <button
+            @click="runCode()"
+            type="run"
+            name="run"
+            class="run-code col-1 btn btn-success"
+            :disabled="launchConsole"
+          >
+            Run
+          </button>
+          <button
+            v-show="showSubmit"
+            @click="submitCode()"
+            type="submit"
+            name="submit"
+            class="submit-code col-1 btn btn-success"
+          >
+            Submit
+          </button>
+          <vue-final-modal
+            v-model="showModal"
+            classes="modal-container"
+            content-class="modal-content"
+            :esc-to-close="true"
+          >
+            <Accordion :accordions="accordions" :key="reloadModal" />
+            <button class="modal-close" @click="showModal = false">x</button>
+            <div class="row">
+              <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">
+                Keep trying
+              </button>
+              <button
+                @click="submitForGrade"
+                class="col-4 btn btn-lg btn-success mx-1"
+                :disabled="!canSubmit"
+              >
+                Submit
+              </button>
+            </div>
+          </vue-final-modal>
+          <div :style="style">
+            <div style="float: right !important">
+              <div class="configure-editor">
+                <label for="theme" class="workspace-label">Theme: </label>
+                <select v-model="theme" id="theme" class="console-select form-select">
+                  <optgroup label="Dark">
+                    <option value="ambiance">Ambiance</option>
+                    <option value="chaos">Chaos</option>
+                    <option value="clouds_midnight">Clouds Midnight</option>
+                    <option value="dracula">Dracula</option>
+                    <option value="cobalt">Cobalt</option>
+                    <option value="gruvbox">Gruvbox</option>
+                    <option value="gob" selected>Green on Black</option>
+                    <option value="idle_fingers">idle Fingers</option>
+                    <option value="kr_theme">krTheme</option>
+                    <option value="merbivore">Merbivore</option>
+                    <option value="merbivore_soft">Merbivore Soft</option>
+                    <option value="mono_industrial">Mono Industrial</option>
+                    <option value="monokai">Monokai</option>
+                    <option value="nord_dark">Nord Dark</option>
+                    <option value="pastel_on_dark">Pastel on dark</option>
+                    <option value="solarized_dark">Solarized Dark</option>
+                    <option value="terminal">Terminal</option>
+                    <option value="tomorrow_night">Tomorrow Night</option>
+                    <option value="tomorrow_night_blue">Tomorrow Night Blue</option>
+                    <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
+                    <option value="tomorrow_night_eighties">Tomorrow Night 80s</option>
+                    <option value="twilight">Twilight</option>
+                    <option value="vibrant_ink">Vibrant Ink</option>
+                  </optgroup>
+                  <optgroup label="Light">
+                    <option value="chrome">Chrome</option>
+                    <option value="clouds">Clouds</option>
+                    <option value="crimson_editor">Crimson Editor</option>
+                    <option value="dawn">Dawn</option>
+                    <option value="dreamweaver">Dreamweaver</option>
+                    <option value="eclipse">Eclipse</option>
+                    <option value="github">GitHub</option>
+                    <option value="iplastic">IPlastic</option>
+                    <option value="solarized_light">Solarized Light</option>
+                    <option value="textmate">TextMate</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="xcode">Xcode</option>
+                    <option value="kuroir">Kuroir</option>
+                    <option value="katzenmilch">KatzenMilch</option>
+                    <option value="sqlserver">SQL Server</option>
+                  </optgroup>
+                </select>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- CONSOLE HERE, V_IF !ShowInput -->
-    <Console
-      :launchConsole="launchConsole"
-      :problemID="problemID"
-      :lang="lang"
-      @programFinished="launchConsole = false"
-      :style="'width: ' + width + '!important;'"
-    />
+        <!-- CONSOLE HERE, V_IF !ShowInput -->
+        <Console
+          :launchConsole="launchConsole"
+          :problemID="problemID"
+          :lang="lang"
+          @programFinished="launchConsole = false"
+          :style="'width: ' + width + '!important;'"
+        />
+      </div>
+    </Vue3DraggableResizable>
 
     <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
@@ -218,13 +245,32 @@ import "ace-builds/src-noconflict/mode-python";
 }
 
 import * as API from "../services/API";
+import { defineComponent } from "vue";
 import Console from "./Console.vue";
 import Accordion from "../Components/Accordion.vue";
+import Vue3DraggableResizable from "vue3-draggable-resizable";
+//default styles
+import "vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
 
-export default {
+export default defineComponent({
   name: "IDE",
-  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID", "labID", "width"],
+  props: [
+    "lang",
+    "showSubmit",
+    "saved_j",
+    "saved_p",
+    "problemID",
+    "codeID",
+    "labID",
+    "width",
+  ],
   emits: ["update"],
+  components: {
+    VAceEditor,
+    Console,
+    Accordion,
+    Vue3DraggableResizable,
+  },
   data: () => ({
     theme: "gob",
     editorLangauge: "",
@@ -242,12 +288,19 @@ export default {
     reloadModal: 0,
     tcGrades: [],
     canSubmit: true,
+
+    x1: 0,
+    y1: 98,
+    h1: 0,
+    w1: 0,
+    x2: window.innerWidth - this.width,
+    y2: 575,
+    h2: 0,
+    w2: 0,
+    active: true,
+    reloadSliders: 0,
   }),
-  components: {
-    VAceEditor,
-    Console,
-    Accordion,
-  },
+
   methods: {
     toggleIO() {
       this.showInput = !this.showInput;
@@ -291,7 +344,7 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
-      this.canSubmit =  !(await this.pastDue());
+      this.canSubmit = !(await this.pastDue());
       this.showModal = true;
       this.tcGrades = [];
 
@@ -534,8 +587,7 @@ export default {
         console.log(res2);
         // router push to labs, we are done here
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
-      }
-      else {
+      } else {
         console.log("Too late");
       }
     },
@@ -628,7 +680,7 @@ export default {
 
     await this.initAccordion();
   },
-};
+});
 </script>
 
 <style scoped>
