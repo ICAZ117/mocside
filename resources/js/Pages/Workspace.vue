@@ -2,7 +2,7 @@
   <!-- WorkSpace Page-->
   <button
     v-if="childIsOpen"
-    @click="this.$emit('unmounting')"
+    @click="unountingWork()"
     class="btn btn-danger btn-block"
   >
     Return to Problems
@@ -119,6 +119,11 @@ export default defineComponent({
     },
   },
   methods: {
+    async unmountingWork() {
+      console.log("unmountingWork");
+      //go back in router by 1
+      this.$router.go(-1);
+    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
