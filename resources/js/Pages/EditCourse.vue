@@ -12,16 +12,6 @@
             name="courseName"
             class="form-control"
           />
-          <!-- :class="{
-              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
-            }" -->
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <!-- <div
-            v-if="isSubmitted && v$.userForm.userEmail.$error"
-            class="invalid-feedback"
-          >
-            Please enter the Course Name
-          </div> -->
         </div>
         <br />
 
@@ -34,16 +24,6 @@
             name="courseDescription"
             class="form-control"
           />
-          <!-- :class="{
-              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
-            }" -->
-          <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-          <!-- <div
-            v-if="isSubmitted && v$.userForm.userEmail.$error"
-            class="invalid-feedback"
-          >
-            Please enter the Course Name
-          </div> -->
         </div>
         <br />
 
@@ -77,29 +57,12 @@
               name="courseDateEnd"
               class="form-control col-7"
             />
-            <!-- :class="{
-              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,
-            }" -->
-            <!-- <div v-if="isSubmitted && !v$.userForm.name.required" class="invalid-feedback"> -->
-            <!-- <div
-            v-if="isSubmitted && v$.userForm.userEmail.$error"
-            class="invalid-feedback"
-          >
-            Please enter the Course Name
-          </div> -->
           </div>
         </div>
         <br />
 
         <div class="form-group">
           <label for="Course Roster">Course Roster</label>
-          <!-- <input
-            type="text"
-            v-model="courseForm.roster"
-            id="courseRoster"
-            name="courseRoster"
-            class="form-control"
-          /> -->
           <ul>
             <li v-for="(student, key) in students" :key="student.id">
               {{ student.name }}
@@ -110,17 +73,6 @@
         <br />
 
         <div class="form-group">
-          <!-- <label for="AddStudent">Add Student by ID</label>
-          <div class="row">
-            <input
-              type="number"
-              v-model="studentID"
-              id="AddStudent"
-              name="AddStudent"
-              class="form-control col-7"
-            />
-          </div>
-          <button @click="addStudent" class="btn btn-danger btn-block">Add Student</button> -->
           <ul>
             <li v-for="(k, id) in joinKeys" :key="k">
               {{ k.join_key }}
