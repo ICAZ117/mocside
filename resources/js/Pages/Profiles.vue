@@ -24,6 +24,10 @@
 </template>
 
 <script>
+import * as API from "../services/API";
+import AuthService from "../services/AuthService";
+import store from "../Store/index";
+import { useRoute } from "vue-router";
 export default {
 	data() {
 		return {
