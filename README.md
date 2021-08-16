@@ -27,6 +27,7 @@ NEXT UP
 * Double check deleting and copy assingments work as intended
     * some test cases have had the wrong assignment id
 * add modification to Ace-editor, suggestions, autoformat, autocomplete
+* after updating the pfp it updates the navbar pfp, until you go home....then it uses the default pfp...not sure why...and it fixes itself permanently after a hard refresh
 
 
 
