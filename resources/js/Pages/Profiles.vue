@@ -48,7 +48,7 @@ export default {
 		async upgradeUser() {
 			console.log("upgrade User");
 			//post request
-			const res = await API.apiClient.post(`/users/elevate/${fsc_id}`);
+			const res = await API.apiClient.post(`/users/elevate/${this.fsc_id}`);
 		},
 		async downgradeUser() {
 			console.log("downgrade User");
