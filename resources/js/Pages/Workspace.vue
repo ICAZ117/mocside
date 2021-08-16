@@ -124,7 +124,7 @@ export default defineComponent({
       y1: 98,
       h1: 100,
       w1: 100,
-      x2: 0,
+      x2: 500,
       y2: 98,
       h2: 100,
       w2: 100,
