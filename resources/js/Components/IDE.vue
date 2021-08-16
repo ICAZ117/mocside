@@ -13,8 +13,8 @@
     </div>
 
     <Vue3DraggableResizable
-      :initW="IDEWidth"
-      :initH="IDEHeight"
+      :initW="consoleWidth"
+      :initH="consoleHeight"
       v-model:x="x2"
       v-model:y="y2"
       v-model:w="w2"
@@ -289,6 +289,8 @@ export default defineComponent({
     tcGrades: [],
     canSubmit: true,
 
+    consoleHeight: (window.innerHeight - 98) / 2,
+    consolewidth: window.innerWidth * 0.66,
     x1: 0,
     y1: 98,
     h1: 0,
