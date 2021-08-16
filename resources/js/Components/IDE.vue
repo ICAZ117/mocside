@@ -10,7 +10,10 @@
         :key="forceReload"
         :style="'width: ' + width + '!important;'"
       />
-      <div class="row px-1 my-1">
+      
+    </div>
+<div>
+    <div class="row px-1 my-1">
         <button @click="toggleIO" id="buttonWidth" class="toggleIO col-1 btn btn-success">
           {{ IOmessage }}
         </button>
@@ -44,7 +47,11 @@
             <button @click="closeModal" class="col-4 btn btn-lg btn-secondary mx-1">
               Keep trying
             </button>
-            <button @click="submitForGrade" class="col-4 btn btn-lg btn-success mx-1" :disabled="!canSubmit">
+            <button
+              @click="submitForGrade"
+              class="col-4 btn btn-lg btn-success mx-1"
+              :disabled="!canSubmit"
+            >
               Submit
             </button>
           </div>
@@ -101,7 +108,6 @@
           </div>
         </div>
       </div>
-    </div>
 
     <!-- CONSOLE HERE, V_IF !ShowInput -->
     <Console
@@ -111,7 +117,7 @@
       @programFinished="launchConsole = false"
       :style="'width: ' + width + '!important;'"
     />
-
+</div>
     <div v-if="showInput" class="inputHeight row">
       <VAceEditor :theme="'chaos'" v-model:value="input" @input="updateContent" />
     </div>
@@ -218,13 +224,27 @@ import "ace-builds/src-noconflict/mode-python";
 }
 
 import * as API from "../services/API";
+import { defineComponent } from "vue";
 import Console from "./Console.vue";
 import Accordion from "../Components/Accordion.vue";
+import Vue3DraggableResizable from "vue3-draggable-resizable";
+//default styles
+import "vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
 
-export default {
+export default defineComponent({
   name: "IDE",
-  props: ["lang", "showSubmit", "saved_j", "saved_p", "problemID", "codeID", "labID", "width"],
+  props: [
+    "lang",
+    "showSubmit",
+    "saved_j",
+    "saved_p",
+    "problemID",
+    "codeID",
+    "labID",
+    "width",
+  ],
   emits: ["update"],
+  components: { Vue3DraggableResizable },
   data: () => ({
     theme: "gob",
     editorLangauge: "",
@@ -242,6 +262,16 @@ export default {
     reloadModal: 0,
     tcGrades: [],
     canSubmit: true,
+
+    x1: 0,
+    y1: 98,
+    h1: 0,
+    w1: 0,
+    x2: window.innerWidth * 0.33,
+    y2: 98,
+    h2: 0,
+    w2: 0,
+    active: true,
   }),
   components: {
     VAceEditor,
@@ -291,7 +321,7 @@ export default {
       // this.containerID = res3.data.message;
     },
     async submitCode() {
-      this.canSubmit =  !(await this.pastDue());
+      this.canSubmit = !(await this.pastDue());
       this.showModal = true;
       this.tcGrades = [];
 
@@ -534,8 +564,7 @@ export default {
         console.log(res2);
         // router push to labs, we are done here
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
-      }
-      else {
+      } else {
         console.log("Too late");
       }
     },
@@ -628,7 +657,7 @@ export default {
 
     await this.initAccordion();
   },
-};
+});
 </script>
 
 <style scoped>

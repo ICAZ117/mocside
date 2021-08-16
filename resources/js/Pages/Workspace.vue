@@ -21,18 +21,9 @@
       :disabledH="true"
       :handles="['mr']"
       :key="reloadSliders"
-      @activated="print('activated')"
-      @deactivated="print('deactivated')"
-      @drag-start="print('drag-start')"
-      @resize-start="print('resize-start')"
-      @dragging="print('dragging')"
-      @resizing="print('resizing')"
-      @drag-end="print('drag-end')"
-      @resize-end="print('resize-end')"
       class="instructions"
       id="resizeableInstructions"
     >
-    <!-- @click="active = true" -->
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <Tiptap
@@ -43,7 +34,6 @@
         v-if="childIsOpen"
       />
     </Vue3DraggableResizable>
-    <div style="float: right;!important">
       <Vue3DraggableResizable
         :initW="IDEWidth"
         :initH="IDEHeight"
@@ -57,18 +47,9 @@
         :disabledH="true"
         :handles="['ml']"
         :key="reloadSliders"
-        @activated="print('activated')"
-        @deactivated="print('deactivated')"
-        @drag-start="print('drag-start')"
-        @resize-start="print('resize-start')"
-        @dragging="print('dragging')"
-        @resizing="print('resizing')"
-        @drag-end="print('drag-end')"
-        @resize-end="print('resize-end')"
         class="instructions"
         id="resizeableIDE"
       >
-      <!-- @click="active = true" -->
         <IDE
           :lang="lang"
           :showSubmit="true"
@@ -83,7 +64,6 @@
           :width="w2"
         />
       </Vue3DraggableResizable>
-    </div>
   </div>
 </template>
 
@@ -140,9 +120,6 @@ export default defineComponent({
     }
   },
   methods: {
-    print(val) {
-      console.log(val);
-    },
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
