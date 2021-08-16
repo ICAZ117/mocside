@@ -24,6 +24,10 @@
 </template>
 
 <script>
+import * as API from "../services/API";
+import AuthService from "../services/AuthService";
+import store from "../Store/index";
+import { useRoute } from "vue-router";
 export default {
 	data() {
 		return {
@@ -36,6 +40,7 @@ export default {
 				fsc_id: "",
 			},
 			currentUser: {},
+			studentID: "",
 		}
 	},
 	methods: {
@@ -85,6 +90,7 @@ export default {
 		},
 	},
 	async beforeMounted() {
+		this.studentID = this.$route.params.fsc_id;
 		await this.getUser();
 	},
 }
