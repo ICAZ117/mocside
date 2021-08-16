@@ -10,11 +10,9 @@ ADD PAGES
 * Finish Up About Page
 * Add profile Page....sorta like a dashboard
     * To Still Be Completed
-        * Delete User
-        * Downgrade and Upgrade another student buttons
+        * Delete User...more of a toggle allow sign in
         * Change Email
         * Reset Password/Forgot Password
-    * was thinking that we should have a route that allows a user to look at another users profile page....ie professors at students...to upgrade downgrade or delete their accounts
 
 * Add Contact Us page
 * turn course edit into a course dashboard for professor can change course details as well as see gradebook, students, etc.
