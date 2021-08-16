@@ -852,7 +852,6 @@ thead.gradebook {
 }
 
 /*============= WORKSPACE =============*/
-
 .work-area {
     padding: 0 !important;
     margin: 0 !important;
@@ -939,6 +938,10 @@ thead.gradebook {
 
 .inputHeight {
     height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important;
+}
+
+.vdr-container {
+    border: none!important;
 }
 
 /*========== POPUP MODAL ==========*/

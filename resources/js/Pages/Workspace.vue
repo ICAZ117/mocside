@@ -292,6 +292,7 @@ export default defineComponent({
 
 .vdr-container.active {
   background-color: lightcoral;
+  border-bottom: none!important;
 }
 
 .vdr-handle {
