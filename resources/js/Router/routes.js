@@ -88,7 +88,12 @@ const routes = [
     {
         path: "/profile",
         component: () => import("../Pages/Profile.vue"),
-        name: "Profile"
+        name: "MyProfile"
+    },
+    {
+        path: '/profile/:fsc_id',
+        component: () => import("../Pages/Profiles.vue"),
+        name: "Profile",
     },
     {
         path: "/contact",
