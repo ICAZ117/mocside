@@ -8,6 +8,7 @@ IMPORTANT
 
 ADD PAGES
 * Finish Up About Page
+
 * Add profile Page....sorta like a dashboard
     * To Still Be Completed
         * Delete User...more of a toggle allow sign in
@@ -15,6 +16,7 @@ ADD PAGES
         * Reset Password/Forgot Password
 
 * Add Contact Us page
+
 * turn course edit into a course dashboard for professor can change course details as well as see gradebook, students, etc.
     * Change Course Details(currently CourseEdit)
     * Gradebook
