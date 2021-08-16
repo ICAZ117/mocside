@@ -15,7 +15,7 @@
       v-model:y="y1"
       v-model:w="w1"
       v-model:h="h1"
-      :active="active"
+      v-model:active="active"
       :draggable="false"
       :resizable="true"
       :disabledH="true"
@@ -51,7 +51,7 @@
         v-model:y="y2"
         v-model:w="w2"
         v-model:h="h2"
-        :active="active"
+        v-model:active="active"
         :draggable="false"
         :resizable="true"
         :disabledH="true"
@@ -292,6 +292,7 @@ export default defineComponent({
 
 .vdr-container.active {
   background-color: lightcoral;
+  border-bottom: none!important;
 }
 
 .vdr-handle {
