@@ -293,8 +293,8 @@ export default defineComponent({
     y1: 98,
     h1: 0,
     w1: 0,
-    x2: 300,
-    y2: 575,
+    x2: window.innerWidth * 0.33,
+    y2: 400,
     h2: 0,
     w2: 0,
     active: true,
@@ -652,8 +652,6 @@ export default defineComponent({
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
-    this.x2 = this.width;
-    this.reloadSliders++;
   },
 });
 </script>
