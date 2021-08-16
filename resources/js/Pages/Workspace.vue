@@ -1,4 +1,5 @@
 <template>
+<div v-if="childIsOpen" class="workspace-page">
   <!-- WorkSpace Page-->
   <button
     v-if="childIsOpen"
@@ -64,6 +65,7 @@
       />
     </Vue3DraggableResizable>
   </div>
+</div>
 </template>
 
 <script>
