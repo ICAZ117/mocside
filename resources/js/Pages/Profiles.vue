@@ -40,6 +40,7 @@ export default {
 				fsc_id: "",
 			},
 			currentUser: {},
+			studentID: "",
 		}
 	},
 	methods: {
@@ -89,6 +90,7 @@ export default {
 		},
 	},
 	async beforeMounted() {
+		this.studentID = this.$route.params.fsc_id;
 		await this.getUser();
 	},
 }
