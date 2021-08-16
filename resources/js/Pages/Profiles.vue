@@ -52,6 +52,8 @@ export default {
 		},
 		async downgradeUser() {
 			console.log("downgrade User");
+
+			const res = await API.apiClient.post(`/users/downgrade/${this.fsc_id}`);
 		},
 		async deleteUser() {
 			console.log("delete User");
