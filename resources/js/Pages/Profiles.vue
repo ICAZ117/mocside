@@ -90,6 +90,7 @@ export default {
 		},
 	},
 	async beforeMounted() {
+		console.log("route params: " + this.$route.params.fsc_id);
 		this.studentID = this.$route.params.fsc_id;
 		await this.getUser();
 	},
