@@ -29,10 +29,10 @@
       @resizing="print('resizing')"
       @drag-end="print('drag-end')"
       @resize-end="print('resize-end')"
-      @click="active = true"
       class="instructions"
       id="resizeableInstructions"
     >
+    <!-- @click="active = true" -->
       <h4>{{ title }}</h4>
       <hr class="instructions-hr" />
       <Tiptap
@@ -65,10 +65,10 @@
         @resizing="print('resizing')"
         @drag-end="print('drag-end')"
         @resize-end="print('resize-end')"
-        @click="active = true"
         class="instructions"
         id="resizeableIDE"
       >
+      <!-- @click="active = true" -->
         <IDE
           :lang="lang"
           :showSubmit="true"
@@ -130,6 +130,14 @@ export default defineComponent({
       w2: 0,
       active: true,
     };
+  },
+  watch: {
+    w2: function() {
+      this.w1 = window.innerWidth - this.w2;
+    },
+    active: function() {
+      this.active = true;
+    }
   },
   methods: {
     print(val) {
