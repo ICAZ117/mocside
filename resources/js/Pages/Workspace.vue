@@ -290,16 +290,4 @@ export default defineComponent({
   width: 100%;
 }
 
-.vdr-container.active {
-  background-color: lightcoral;
-  border-bottom: none!important;
-}
-
-.vdr-handle {
-  height: 100% !important;
-  top: 0 !important;
-  bottom: 0 !important;
-  margin: 0 !important;
-  display: block !important;
-}
 </style>
