@@ -45,8 +45,8 @@
     </Vue3DraggableResizable>
     <div style="float: right;!important">
       <Vue3DraggableResizable
-        :initW="instructionsWidth"
-        :initH="instructionsHeight"
+        :initW="IDEWidth"
+        :initH="IDEHeight"
         v-model:x="x2"
         v-model:y="y2"
         v-model:w="w2"
