@@ -124,7 +124,7 @@ export default defineComponent({
       y1: 98,
       h1: 0,
       w1: 0,
-      x2: window.innerWidth - this.instructionsWidth,
+      x2: this.instructionsWidth,
       y2: 98,
       h2: 0,
       w2: 0,
