@@ -75,51 +75,6 @@
           <br />
 
           <div class="form-group">
-            <ul>
-              <li v-for="(k, id) in joinKeys" :key="k">
-                {{ k.join_key }}
-                <a @click="copyKey(k)">Copy Url</a>
-                <a @click="deleteKey(k, id)">Delete Key</a>
-              </li>
-            </ul>
-            <div class="key-options">
-              <label>Enroll Key</label>
-              <input placeholder="Random" type="text" v-model="enrollKey.key" />
-              <br>
-              <label>Permanent Key</label>
-              <label class="switch">
-                <input type="checkbox" v-model="enrollKey.perm" />
-                <span class="slider round"></span>
-              </label>
-              <br>
-              <label>Expire Date</label>
-              <input
-                type="date"
-                :disabled="enrollKey.perm"
-                v-model="enrollKey.datetime"
-              />
-              <br>
-              <label>Expire Time</label>
-              <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time">
-              <br>
-              <label>Max Uses</label>
-              <input
-                placeholder="0 for unlimited use"
-                type="text"
-                v-model="enrollKey.uses"
-              />
-            </div>
-            <button
-              type="button"
-              @click="generateKey"
-              class="btn btn-danger btn-block"
-            >
-              Generate Course Enroll Key
-            </button>
-          </div>
-          <br />
-
-          <div class="form-group">
             <button type="submit" class="btn btn-danger btn-block">
               Submit Changes
             </button>
@@ -127,15 +82,58 @@
         </form>
       </div>
     </div>
-    <div class="bottom-left key-gen">
-      key gen
+  </div>
+  <div class="top-left course-details"></div>
+  <div class="bottom-left key-gen">
+    <div class="form-group">
+      <ul>
+        <li v-for="(k, id) in joinKeys" :key="k">
+          {{ k.join_key }}
+          <a @click="copyKey(k)">Copy Url</a>
+          <a @click="deleteKey(k, id)">Delete Key</a>
+        </li>
+      </ul>
+      <div class="key-options">
+        <label>Enroll Key</label>
+        <input placeholder="Random" type="text" v-model="enrollKey.key" />
+        <br>
+        <label>Permanent Key</label>
+        <label class="switch">
+          <input type="checkbox" v-model="enrollKey.perm" />
+          <span class="slider round"></span>
+        </label>
+        <br>
+        <label>Expire Date</label>
+        <input
+          type="date"
+          :disabled="enrollKey.perm"
+          v-model="enrollKey.datetime"
+        />
+        <br>
+        <label>Expire Time</label>
+        <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time">
+        <br>
+        <label>Max Uses</label>
+        <input
+          placeholder="0 for unlimited use"
+          type="text"
+          v-model="enrollKey.uses"
+        />
+      </div>
+      <button
+        type="button"
+        @click="generateKey"
+        class="btn btn-danger btn-block"
+      >
+        Generate Course Enroll Key
+      </button>
     </div>
-    <div class="top-right grades">
-      grades
-    </div>
-    <div class="bottom-right labs">
-      labs
-    </div>
+  </div>
+  <div class="top-right grades">
+    grades
+  </div>
+  <div class="bottom-right labs">
+    labs
   </div>
 </template>
 
