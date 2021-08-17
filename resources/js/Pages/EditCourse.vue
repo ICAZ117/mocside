@@ -64,17 +64,6 @@
           <br />
 
           <div class="form-group">
-            <label for="Course Roster">Course Roster</label>
-            <ul>
-              <li v-for="(student, key) in students" :key="student.id">
-                {{ student.name }}
-                <a @click="removeStudent(student, key)">X</a>
-              </li>
-            </ul>
-          </div>
-          <br />
-
-          <div class="form-group">
             <button type="submit" class="btn btn-danger btn-block">
               Submit Changes
             </button>
@@ -131,6 +120,15 @@
   </div>
   <div class="top-right grades">
     grades
+    <div class="form-group">
+      <label for="Course Roster">Course Roster</label>
+      <ul>
+        <li v-for="(student, key) in students" :key="student.id">
+          {{ student.name }}
+          <a @click="removeStudent(student, key)">X</a>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="bottom-right labs">
     labs
