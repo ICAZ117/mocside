@@ -164,6 +164,7 @@ export default {
       } else {
         this.isDark = false;
       }
+      this.updatePFP();
       this.$emit("forceReload");
     },
   },
