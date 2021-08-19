@@ -22,14 +22,14 @@
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="true"
+      :disabledW="false"
       :handles="['tm']"
       :key="reloadConsoleVDR"
       id="resizeableIDE"
-      style="z-index: 4!important;"
+      style="z-index: 4 !important"
     >
       <div>
-        <div class="row p-2" style="background-color: black!important;">
+        <div class="row p-2" style="background-color: black !important">
           <button
             @click="toggleIO"
             id="buttonWidth"
@@ -305,10 +305,13 @@ export default defineComponent({
     dynamicWidth: window.innerWidth * 0.66,
   }),
   watch: {
-    width: function() {
-      this.reloadConsoleVDR++;
-      this.dynamicWidth = this.width;
-      this.getStyle();
+    immediate: true,
+    width(val, oldVal) {
+      if (val != oldVal) {
+        this.reloadConsoleVDR++;
+        this.dynamicWidth = this.width;
+        this.getStyle();
+      }
     },
   },
   methods: {
