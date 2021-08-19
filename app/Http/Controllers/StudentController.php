@@ -46,7 +46,11 @@ class StudentController extends Controller
         // as an admin, this will return the user that contains the student
         if (Auth::user()->isAdmin())
         {
-            $user = Student::where('fsc_id', $id)->first()->user;
+            $user = Student::where('fsc_id', $id)->first();
+            if (!$user) {
+                return response()->json(['message' => 'couldn\'t find student with id '.$id], 410);
+            }
+            $user = $user->user;
             return new UserResource($user);
             // return response()->json(['message' => $user]);
         }
