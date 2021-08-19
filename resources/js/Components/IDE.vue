@@ -307,6 +307,7 @@ export default defineComponent({
   watch: {
     width: function() {
       this.dynamicWidth = this.width;
+      this.getStyle();
     },
   },
   methods: {
