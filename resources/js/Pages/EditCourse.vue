@@ -417,6 +417,11 @@ export default {
         return 0;
       });
     },
+    goToProblems(id, name) {
+      this.labID = id;
+      this.labName = name;
+      this.$router.push({ name: "Problems", params: { lab_id: id } });
+    },
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
