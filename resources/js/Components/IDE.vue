@@ -311,7 +311,7 @@ export default defineComponent({
     consoleHeight: (window.innerHeight - 98) / 2,
     consoleWidth: window.innerWidth * 0.66,
     x1: 0,
-    y1: 98,
+    y1: 0,
     h1: 0,
     w1: 0,
     x2: 0,
