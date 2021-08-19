@@ -1,5 +1,21 @@
 <template>
   <div class="work-area">
+    <Vue3DraggableResizable
+      :initW="width"
+      :initH="consoleHeight"
+      v-model:x="x1"
+      v-model:y="y1"
+      v-model:w="w1"
+      v-model:h="h1"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledW="true"
+      :handles="['bm']"
+      :key="width"
+      id="resizableConsole"
+      style="z-index: 3 !important"
+    >
     <div class="editor row">
       <VAceEditor
         class="editor"
@@ -11,6 +27,7 @@
         :style="'width: ' + width + '!important;'"
       />
     </div>
+    </Vue3DraggableResizable>
 
     <Vue3DraggableResizable
       :initW="width"
@@ -23,9 +40,9 @@
       :draggable="false"
       :resizable="true"
       :disabledW="true"
-      
       :handles="['tm']"
       :key="width"
+      @resize-end="adjustEditorHeight"
       id="resizableConsole"
       style="z-index: 4 !important"
     >
@@ -312,17 +329,11 @@ export default defineComponent({
         this.reloadModal++;
       }
     },
-    w2: function () {
-      console.log("HERE");
-      console.log("Width:");
-      console.log(this.width);
-      console.log("\nw2:");
-      console.log(this.w2);
-      // .style.width = this.width + "px!important";
-      // this.w2 = this.width;
-    }
   },
   methods: {
+    adjustEditorHeight() {
+      this.h1 = window.innerHeight - 98 - this.h2;
+    },
     toggleIO() {
       this.showInput = !this.showInput;
       this.IOmessage = this.showInput ? "Show Output" : "Show Input";
@@ -665,7 +676,6 @@ export default defineComponent({
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
-    console.log(document.getElementById("resizableConsole").style.width);
   },
 });
 </script>

@@ -963,15 +963,19 @@ thead.gradebook {
     border-bottom: none !important;
 }
 
-.vdr-handle-mr {
-    display: none !important;
-}
-
 .vdr-handle-tm {
     width: 100% !important;
     left: 0 !important;
     margin-top: 0 !important;
     z-index: 10 !important;
+}
+
+.vdr-handle-bm {
+    display: none !important;
+}
+
+.vdr-handle-mr {
+    display: none !important;
 }
 
 .vdr-handle-ml {
