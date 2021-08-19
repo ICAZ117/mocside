@@ -26,7 +26,7 @@
       :disabledX="true"
       :disabledY="false"
       :handles="['tm']"
-      :key="reloadConsoleVDR"
+      :key="width"
       id="resizeableIDE"
       style="z-index: 4 !important"
     >
@@ -307,14 +307,20 @@ export default defineComponent({
     dynamicWidth: window.innerWidth * 0.66,
   }),
   watch: {
-    immediate: true,
-    width(val, oldVal) {
-      if (val != oldVal) {
-        this.reloadConsoleVDR++;
-        this.dynamicWidth = this.width;
-        this.getStyle();
+    showModal: function () {
+      if (!this.showModal) {
+        this.initAccordion();
+        this.reloadModal++;
       }
     },
+    w2: function () {
+      console.log("HERE");
+      console.log("Width:");
+      console.log(this.width);
+      console.log("\nw2:");
+      console.log(this.w2);
+      this.w2 = this.width;
+    }
   },
   methods: {
     toggleIO() {
@@ -645,14 +651,6 @@ export default defineComponent({
       this.showModal = false;
     },
   },
-  watch: {
-    showModal: function () {
-      if (!this.showModal) {
-        this.initAccordion();
-        this.reloadModal++;
-      }
-    },
-  },
   async mounted() {
     try {
       if (this.lang == "Java") {
@@ -667,7 +665,6 @@ export default defineComponent({
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
-    this.dynamicWidth = this.width;
   },
 });
 </script>
