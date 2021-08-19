@@ -26,7 +26,7 @@
       :disabledX="true"
       :disabledY="false"
       :handles="['tm']"
-      :key="reloadConsoleVDR"
+      :key="width"
       id="resizeableIDE"
       style="z-index: 4 !important"
     >
@@ -307,14 +307,10 @@ export default defineComponent({
     dynamicWidth: window.innerWidth * 0.66,
   }),
   watch: {
-    immediate: true,
-    width(val, oldVal) {
-      if (val != oldVal) {
-        this.reloadConsoleVDR++;
-        this.dynamicWidth = this.width;
-        this.getStyle();
-      }
-    },
+    w2: function() {
+      console.log(this.width);
+      this.w2 = this.width;
+    }
   },
   methods: {
     toggleIO() {
@@ -667,7 +663,6 @@ export default defineComponent({
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
-    this.dynamicWidth = this.width;
   },
 });
 </script>
