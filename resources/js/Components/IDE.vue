@@ -307,8 +307,18 @@ export default defineComponent({
     dynamicWidth: window.innerWidth * 0.66,
   }),
   watch: {
-    w2: function() {
+    showModal: function () {
+      if (!this.showModal) {
+        this.initAccordion();
+        this.reloadModal++;
+      }
+    },
+    w2: function () {
+      console.log("HERE");
+      console.log("Width:");
       console.log(this.width);
+      console.log("\nw2:");
+      console.log(this.w2);
       this.w2 = this.width;
     }
   },
@@ -639,14 +649,6 @@ export default defineComponent({
     },
     closeModal() {
       this.showModal = false;
-    },
-  },
-  watch: {
-    showModal: function () {
-      if (!this.showModal) {
-        this.initAccordion();
-        this.reloadModal++;
-      }
     },
   },
   async mounted() {
