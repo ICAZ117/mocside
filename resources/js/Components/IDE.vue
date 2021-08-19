@@ -23,6 +23,8 @@
       :draggable="false"
       :resizable="true"
       :disabledW="false"
+      :disabledX="true"
+      :disabledY="false"
       :handles="['tm']"
       :key="reloadConsoleVDR"
       id="resizeableIDE"
