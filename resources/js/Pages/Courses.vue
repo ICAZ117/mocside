@@ -369,11 +369,13 @@ export default {
       }
     },
     pushToLabs: function(params) {
-      var id = params[0];
-      var name = params[1];
+      var courseID = params[0];
+      var courseName = params[1];
+      var id = params[2];
+      var name = params[3];
       this.Unmounting();
-      // this.goToLabs(id, name);
-      this.$router.push({ name: "Problems", params: { lab_id: id } });
+      this.goToLabs(courseID, courseName);
+      // this.$router.push({ name: "Problems", params: { lab_id: id } });
     },
     async getCourses() {
       this.courses = [];
