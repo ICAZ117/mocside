@@ -13,18 +13,18 @@
     </div>
 
     <Vue3DraggableResizable
-      :initW="consoleWidth"
+      :initW="width"
       :initH="consoleHeight"
       v-model:x="x2"
       v-model:y="y2"
-      :w="width"
+      v-model:w="w2"
       v-model:h="h2"
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="false"
+      :disabledW="true"
       :handles="['tm']"
-      :key="reloadSliders"
+      :key="reloadConsoleVDR"
       id="resizeableIDE"
       style="z-index: 4!important;"
     >
@@ -301,11 +301,12 @@ export default defineComponent({
     h2: 0,
     w2: 0,
     active: true,
-    reloadSliders: 0,
+    reloadConsoleVDR: 0,
     dynamicWidth: window.innerWidth * 0.66,
   }),
   watch: {
     width: function() {
+      this.reloadConsoleVDR++;
       this.dynamicWidth = this.width;
       this.getStyle();
     },
