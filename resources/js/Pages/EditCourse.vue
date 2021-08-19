@@ -356,28 +356,31 @@ export default {
 .course-dashboard {
   width: 100%;
   height: 90%;
-  display: flex;
 }
 .top-row {
   height: 44.5%;
   width: 100%;
-  flex: auto;
+  display: flex;
 }
 .bottom-row {
   height: 44.5%;
   width: 100%;
-  flex: auto;
+  display: flex;
 }
 .course-details {
   width: 45.5%;
+  margin: 1rem;
 }
 .grades {
   width: 45.5%;
+  margin: 1rem;
 }
 .key-gen {
   width: 45.5%;
+  margin: 1rem;
 }
 .labs {
   width: 45.5%;
+  margin: 1rem;
 }
 </style>
