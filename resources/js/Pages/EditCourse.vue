@@ -75,7 +75,7 @@
           <label for="Course Roster">Course Roster</label>
           <ul>
             <li v-for="(student, key) in students" :key="student.id">
-              {{ student.name }}
+              {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }} {{ JSON.parse(student.fsc_user.gradebook_courses).grades[courseID] }}
               <!-- <a @click="removeStudent(student, key)">X</a> -->
             </li>
           </ul>
