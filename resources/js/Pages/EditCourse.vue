@@ -1,135 +1,140 @@
 <template>
-  <div class="edit-course">
-    <h3 class="edit-course-title">Edit Course</h3>
-  </div>
-  <div class="top-left course-details">
-    <div class="course-create-form">
-      <form @submit.prevent="handleSubmit" class="course-form">
-        <div class="form-group">
-          <label for="Course Name">Course Name</label>
-          <input
-            type="text"
-            v-model="courseForm.name"
-            id="courseName"
-            name="courseName"
-            class="form-control"
-          />
-        </div>
-        <br />
+  <div class="course-dashboard">
+    <div class="top-row">
+      <div class="top-left course-details">
+        <div class="course-create-form">
+          <form @submit.prevent="handleSubmit" class="course-form">
+            <div class="form-group">
+              <label for="Course Name">Course Name</label>
+              <input
+                type="text"
+                v-model="courseForm.name"
+                id="courseName"
+                name="courseName"
+                class="form-control"
+              />
+            </div>
+            <br />
 
-        <div class="form-group">
-          <label for="Course Description">Course Description</label>
-          <input
-            type="text"
-            v-model="courseForm.description"
-            id="courseDescription"
-            name="courseDescription"
-            class="form-control"
-          />
-        </div>
-        <br />
+            <div class="form-group">
+              <label for="Course Description">Course Description</label>
+              <input
+                type="text"
+                v-model="courseForm.description"
+                id="courseDescription"
+                name="courseDescription"
+                class="form-control"
+              />
+            </div>
+            <br />
 
+            <div class="form-group">
+              <div class="mb-4">
+                <label for="file" class="sr-only"> Upload Course Image </label>
+                <input
+                  type="file"
+                  :accept="['image/*']"
+                  @change="fileChange"
+                  id="file"
+                />
+              </div>
+            </div>
+            <br />
+
+            <div class="form-group">
+              <label for="Course Dates">Course Dates</label>
+              <div class="row">
+                <input
+                  type="Date"
+                  v-model="courseForm.dateStart"
+                  id="courseDateStart"
+                  name="courseDateStart"
+                  class="form-control col-4"
+                />
+                <input
+                  type="Date"
+                  v-model="courseForm.dateEnd"
+                  id="courseDateEnd"
+                  name="courseDateEnd"
+                  class="form-control col-7"
+                />
+              </div>
+            </div>
+            <br />
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-danger btn-block">
+                Submit Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="top-right grades">
+        grades
         <div class="form-group">
-          <div class="mb-4">
-            <label for="file" class="sr-only"> Upload Course Image </label>
+          <label for="Course Roster">Course Roster</label>
+          <ul>
+            <li v-for="(student, key) in students" :key="student.id">
+              {{ student.name }}
+              <a @click="removeStudent(student, key)">X</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-row">
+      <div class="bottom-left key-gen">
+        <div class="form-group">
+          <ul>
+            <li v-for="(k, id) in joinKeys" :key="k">
+              {{ k.join_key }}
+              <a @click="copyKey(k)">Copy Url</a>
+              <a @click="deleteKey(k, id)">Delete Key</a>
+            </li>
+          </ul>
+          <div class="key-options">
+            <label>Enroll Key</label>
+            <input placeholder="Random" type="text" v-model="enrollKey.key" />
+            <br />
+            <label>Permanent Key</label>
+            <label class="switch">
+              <input type="checkbox" v-model="enrollKey.perm" />
+              <span class="slider round"></span>
+            </label>
+            <br />
+            <label>Expire Date</label>
             <input
-              type="file"
-              :accept="['image/*']"
-              @change="fileChange"
-              id="file"
+              type="date"
+              :disabled="enrollKey.perm"
+              v-model="enrollKey.datetime"
+            />
+            <br />
+            <label>Expire Time</label>
+            <input
+              type="time"
+              :disabled="enrollKey.perm"
+              v-model="enrollKey.time"
+            />
+            <br />
+            <label>Max Uses</label>
+            <input
+              placeholder="0 for unlimited use"
+              type="text"
+              v-model="enrollKey.uses"
             />
           </div>
-        </div>
-        <br />
-
-        <div class="form-group">
-          <label for="Course Dates">Course Dates</label>
-          <div class="row">
-            <input
-              type="Date"
-              v-model="courseForm.dateStart"
-              id="courseDateStart"
-              name="courseDateStart"
-              class="form-control col-4"
-            />
-            <input
-              type="Date"
-              v-model="courseForm.dateEnd"
-              id="courseDateEnd"
-              name="courseDateEnd"
-              class="form-control col-7"
-            />
-          </div>
-        </div>
-        <br />
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-danger btn-block">
-            Submit Changes
+          <button
+            type="button"
+            @click="generateKey"
+            class="btn btn-danger btn-block"
+          >
+            Generate Course Enroll Key
           </button>
         </div>
-      </form>
-    </div>
-  </div>
-  <div class="bottom-left key-gen">
-    <div class="form-group">
-      <ul>
-        <li v-for="(k, id) in joinKeys" :key="k">
-          {{ k.join_key }}
-          <a @click="copyKey(k)">Copy Url</a>
-          <a @click="deleteKey(k, id)">Delete Key</a>
-        </li>
-      </ul>
-      <div class="key-options">
-        <label>Enroll Key</label>
-        <input placeholder="Random" type="text" v-model="enrollKey.key" />
-        <br>
-        <label>Permanent Key</label>
-        <label class="switch">
-          <input type="checkbox" v-model="enrollKey.perm" />
-          <span class="slider round"></span>
-        </label>
-        <br>
-        <label>Expire Date</label>
-        <input
-          type="date"
-          :disabled="enrollKey.perm"
-          v-model="enrollKey.datetime"
-        />
-        <br>
-        <label>Expire Time</label>
-        <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time">
-        <br>
-        <label>Max Uses</label>
-        <input
-          placeholder="0 for unlimited use"
-          type="text"
-          v-model="enrollKey.uses"
-        />
       </div>
-      <button
-        type="button"
-        @click="generateKey"
-        class="btn btn-danger btn-block"
-      >
-        Generate Course Enroll Key
-      </button>
+      <div class="bottom-right labs">labs</div>
     </div>
-  </div>
-  <div class="top-right grades">
-    grades
-    <div class="form-group">
-      <label for="Course Roster">Course Roster</label>
-      <ul>
-        <li v-for="(student, key) in students" :key="student.id">
-          {{ student.name }}
-          <a @click="removeStudent(student, key)">X</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="bottom-right labs">
-    labs
   </div>
 </template>
 
@@ -211,11 +216,11 @@ export default {
       this.keyURL = "http://mocside.com:8000/" + key.join_key + "/enroll";
       //copy to clipboard
       var copyText = this.keyURL;
-      const textarea = document.createElement('textarea');
+      const textarea = document.createElement("textarea");
       textarea.value = copyText;
       document.body.appendChild(textarea);
       textarea.select();
-      document.execCommand('copy');
+      document.execCommand("copy");
       document.body.removeChild(textarea);
     },
     async deleteKey(key, id) {
@@ -348,4 +353,26 @@ export default {
 </script>
 
 <style>
+/* .course-dashboard {
+  width: 100%;
+  height: 90%;
+}
+.top-row {
+  height: 44.5%;
+}
+.bottom-row {
+  height: 44.5%;
+}
+.course-details {
+  width: 45.5%;
+}
+.grades {
+  width: 45.5%;
+}
+.key-gen {
+  width: 45.5%;
+}
+.labs {
+  width: 45.5%;
+} */
 </style>
