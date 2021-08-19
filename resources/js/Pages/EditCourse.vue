@@ -468,4 +468,7 @@ export default {
   width: 45.5%;
   margin: 1rem;
 }
+.labtable {
+  max-width: 45.5%;
+}
 </style>
