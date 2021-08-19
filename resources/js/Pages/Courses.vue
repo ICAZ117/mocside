@@ -574,9 +574,11 @@ export default {
       this.courseID = null;
       var flag = this.refreshPage();
       console.log("unmounting the labs page");
-      console.log(flag);
-      if (flag && this.routeToChild()) {
+      if (flag) {
         this.$router.push({ name: "Courses" });
+      }
+      else {
+        this.routeToChild();
       }
     },
     async courseEdited() {
@@ -617,7 +619,7 @@ export default {
         if (path == "labs") {
           //check if can go there
           if (this.hasLabAccess(cID)) {
-            this.goToLabs(cID);
+            this.goToLabs(cID, "");
           }
         } else if (path == "edit") {
           //check if can go there
@@ -638,6 +640,10 @@ export default {
         console.log("on home page");
         return false;
       } else {
+        var c = r.substring(sub.length);
+        if(c != "") {
+          return false;
+        }
         return true;
       }
     },
