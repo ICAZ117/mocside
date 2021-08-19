@@ -640,10 +640,11 @@ export default {
         console.log("on home page");
         return false;
       } else {
-        var c = r.substring(sub.length);
-        if(c != "") {
-          return false;
-        }
+        // var c = r.substring(sub.length);
+        // if(c != "") {
+        //   return false;
+        // }
+        // causes problem when the user wants to go from says labs back to courses
         return true;
       }
     },

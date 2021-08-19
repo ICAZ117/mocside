@@ -419,7 +419,7 @@ export default {
     },
     goToProblems(id, name) {
       // this.$emit("pushToLabs", [id, name]);
-      this.$router.push('/courses/2290/labs/2/problems');
+      // this.$router.push('/courses/2290/labs/2/problems');
     },
   },
   async mounted() {
