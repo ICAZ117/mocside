@@ -17,7 +17,7 @@
       :initH="consoleHeight"
       v-model:x="x2"
       v-model:y="y2"
-      v-model:w="width"
+      v-model:w="dynamicWidth"
       v-model:h="h2"
       v-model:active="active"
       :draggable="false"
@@ -302,8 +302,13 @@ export default defineComponent({
     w2: 0,
     active: true,
     reloadSliders: 0,
+    dynamicWidth: window.innerWidth * 0.66,
   }),
-
+  watch: {
+    width: function() {
+      this.dynamicWidth = this.width;
+    },
+  },
   methods: {
     toggleIO() {
       this.showInput = !this.showInput;
@@ -655,6 +660,7 @@ export default defineComponent({
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
+    this.dynamicWidth = this.width;
   },
 });
 </script>

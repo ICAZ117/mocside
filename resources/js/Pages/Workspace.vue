@@ -109,7 +109,7 @@ export default defineComponent({
       x2: window.innerWidth * 0.33,
       y2: 98,
       h2: 0,
-      w2: 0,
+      w2: window.innerWidth * 0.66,
       active: true,
     };
   },
