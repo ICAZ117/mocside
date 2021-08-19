@@ -350,7 +350,7 @@ export default {
 </script>
 
 <style>
-.course-dashboard {
+/* .course-dashboard {
   width: 100%;
   height: 90%;
 }
@@ -371,5 +371,5 @@ export default {
 }
 .labs {
   width: 45.5%;
-}
+} */
 </style>
