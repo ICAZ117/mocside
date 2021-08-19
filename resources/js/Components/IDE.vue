@@ -27,7 +27,7 @@
       :disabledY="false"
       :handles="['tm']"
       :key="width"
-      id="resizableIDE"
+      id="resizableConsole"
       style="z-index: 4 !important"
     >
       <div>
@@ -319,7 +319,8 @@ export default defineComponent({
       console.log(this.width);
       console.log("\nw2:");
       console.log(this.w2);
-      // document.getElementById("resizableIDE").style.width = this.width + "px!important";
+      console.log(document.getElementById("resizableConsole"));
+      // .style.width = this.width + "px!important";
       // this.w2 = this.width;
     }
   },
