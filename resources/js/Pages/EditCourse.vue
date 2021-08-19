@@ -75,7 +75,7 @@
           <label for="Course Roster">Course Roster</label>
           <ul>
             <li v-for="(student, key) in students" :key="student.id">
-              {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }} {{ JSON.parse(student.fsc_user.gradebook_courses).grades }}
+              {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }} {{ JSON.parse(course.gradebook).grades[student.fsc_user.fsc_id] }}
               <!-- <a @click="removeStudent(student, key)">X</a> -->
             </li>
           </ul>
@@ -430,6 +430,7 @@ export default {
     this.courseForm.dateStart = this.course.data.data.start_date;
     this.courseForm.dateEnd = this.course.data.data.end_date;
     this.courseForm.roster = JSON.parse(this.course.data.data.roster).roster;
+    this.course = this.course.data.data;
     this.getStudents();
     this.initKeys();
     await this.getLabs();
