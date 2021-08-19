@@ -22,9 +22,8 @@
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="false"
-      :disabledX="true"
-      :disabledY="false"
+      :disabledW="true"
+      
       :handles="['tm']"
       :key="width"
       id="resizableConsole"
