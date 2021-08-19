@@ -350,4 +350,26 @@ export default {
 </script>
 
 <style>
+.course-dashboard {
+  width: 100%;
+  height: 90%;
+}
+.top-row {
+  height: 44.5%;
+}
+.bottom-row {
+  height: 44.5%;
+}
+.course-details {
+  width: 45.5%;
+}
+.grades {
+  width: 45.5%;
+}
+.key-gen {
+  width: 45.5%;
+}
+.labs {
+  width: 45.5%;
+}
 </style>
