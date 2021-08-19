@@ -17,12 +17,12 @@
       :initH="consoleHeight"
       v-model:x="x2"
       v-model:y="y2"
-      v-model:w="dynamicWidth"
+      :w="width"
       v-model:h="h2"
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="true"
+      :disabledW="false"
       :handles="['tm']"
       :key="reloadSliders"
       id="resizeableIDE"
@@ -307,6 +307,7 @@ export default defineComponent({
   watch: {
     width: function() {
       this.dynamicWidth = this.width;
+      this.getStyle();
     },
   },
   methods: {
