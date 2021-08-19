@@ -182,7 +182,7 @@ import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
 export default {
   props: ["courseID"],
-  emits: ["unmounting", "courseEdited"],
+  emits: ["unmounting", "courseEdited", "pushToLabs"],
   components: {
     FlashMessage,
     FileUpload,
@@ -416,6 +416,10 @@ export default {
         }
         return 0;
       });
+    },
+    goToProblems(id, name) {
+      // this.$router.push({ name: "Problems", params: { lab_id: id } });
+      this.$emit("pushToLabs", id);
     },
   },
   async mounted() {
