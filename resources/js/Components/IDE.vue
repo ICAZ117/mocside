@@ -24,7 +24,7 @@
       :resizable="true"
       :disabledW="false"
       :disabledX="true"
-      :disabledY="true"
+      :disabledY="false"
       :handles="['tm']"
       :key="reloadConsoleVDR"
       id="resizeableIDE"
