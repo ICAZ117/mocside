@@ -360,10 +360,12 @@ export default {
 }
 .top-row {
   height: 44.5%;
+  width: 100%;
   flex: auto;
 }
 .bottom-row {
   height: 44.5%;
+  width: 100%;
   flex: auto;
 }
 .course-details {
