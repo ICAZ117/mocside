@@ -41,7 +41,7 @@
       :resizable="true"
       :disabledW="true"
       :handles="['tm']"
-      
+      :key="width"
       @resize-end="adjustEditorHeight"
       id="resizableConsole"
       style="z-index: 4 !important"
