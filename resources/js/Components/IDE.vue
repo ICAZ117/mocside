@@ -319,7 +319,7 @@ export default defineComponent({
       console.log(this.width);
       console.log("\nw2:");
       console.log(this.w2);
-      console.log(document.getElementById("resizableConsole"));
+      console.log(document.getElementById("resizableConsole").style);
       // .style.width = this.width + "px!important";
       // this.w2 = this.width;
     }
