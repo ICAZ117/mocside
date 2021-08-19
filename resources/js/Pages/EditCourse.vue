@@ -353,15 +353,18 @@ export default {
 </script>
 
 <style>
-/* .course-dashboard {
+.course-dashboard {
   width: 100%;
   height: 90%;
+  display: flex;
 }
 .top-row {
   height: 44.5%;
+  flex: auto;
 }
 .bottom-row {
   height: 44.5%;
+  flex: auto;
 }
 .course-details {
   width: 45.5%;
@@ -374,5 +377,5 @@ export default {
 }
 .labs {
   width: 45.5%;
-} */
+}
 </style>
