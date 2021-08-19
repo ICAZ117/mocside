@@ -1,72 +1,69 @@
 <template>
-<div v-if="childIsOpen" class="workspace-page">
-  <!-- WorkSpace Page-->
-  <button
-    v-if="childIsOpen"
-    @click="unmountingWork()"
-    class="btn btn-danger btn-block"
-  >
-    Return to Problems
-  </button>
-  <div v-if="childIsOpen">
-    <Vue3DraggableResizable
-      :initW="instructionsWidth"
-      :initH="instructionsHeight"
-      v-model:x="x1"
-      v-model:y="y1"
-      v-model:w="w1"
-      v-model:h="h1"
-      v-model:active="active"
-      :draggable="false"
-      :resizable="true"
-      :disabledH="true"
-      :handles="['mr']"
-      :key="reloadSliders"
-      class="instructions"
-      id="resizeableInstructions"
-      v-if="childIsOpen"
-    >
-      <h4>{{ title }}</h4>
-      <hr class="instructions-hr" />
-      <Tiptap
-        :savedText="JSON.parse(description)"
-        :editable="false"
-        :showMenuBar="false"
-        :isDark="true"
+  <div v-if="childIsOpen" class="workspace-page">
+    <!-- WorkSpace Page-->
+    <button v-if="childIsOpen" @click="unmountingWork()" class="btn btn-danger btn-block">
+      Return to Problems
+    </button>
+    <div v-if="childIsOpen">
+      <Vue3DraggableResizable
+        :initW="instructionsWidth"
+        :initH="instructionsHeight"
+        v-model:x="x1"
+        v-model:y="y1"
+        v-model:w="w1"
+        v-model:h="h1"
+        v-model:active="active"
+        :draggable="false"
+        :resizable="true"
+        :disabledH="true"
+        :handles="['mr']"
+        :key="reloadSliders"
+        class="instructions"
+        id="resizeableInstructions"
         v-if="childIsOpen"
-      />
-    </Vue3DraggableResizable>
-    <Vue3DraggableResizable
-      :initW="IDEWidth"
-      :initH="IDEHeight"
-      v-model:x="x2"
-      v-model:y="y2"
-      v-model:w="w2"
-      v-model:h="h2"
-      v-model:active="active"
-      :draggable="false"
-      :resizable="true"
-      :disabledH="true"
-      :handles="['ml']"
-      :key="reloadSliders"
-      id="resizeableIDE"
-    >
-      <IDE
-        :lang="lang"
-        :showSubmit="true"
-        :saved_j="code_j"
-        :saved_p="code_p"
-        :problemID="problemID"
-        :codeID="codeID"
-        :labID="labID"
-        @update="updateContent"
-        :key="forceReload"
-        v-if="childIsOpen"
-        :width="w2"
-      />
-    </Vue3DraggableResizable>
+      >
+        <h4>{{ title }}</h4>
+        <hr class="instructions-hr" />
+        <Tiptap
+          :savedText="JSON.parse(description)"
+          :editable="false"
+          :showMenuBar="false"
+          :isDark="true"
+          v-if="childIsOpen"
+        />
+      </Vue3DraggableResizable>
+      <Vue3DraggableResizable
+        :initW="IDEWidth"
+        :initH="IDEHeight"
+        v-model:x="x2"
+        v-model:y="y2"
+        v-model:w="w2"
+        v-model:h="h2"
+        v-model:active="active"
+        :draggable="false"
+        :resizable="true"
+        :disabledH="true"
+        :handles="['ml']"
+        @resize-end="debouncedWidth = w2"
+        :key="reloadSliders"
+        id="resizeableIDE"
+      >
+        <IDE
+          :lang="lang"
+          :showSubmit="true"
+          :saved_j="code_j"
+          :saved_p="code_p"
+          :problemID="problemID"
+          :codeID="codeID"
+          :labID="labID"
+          @update="updateContent"
+          :key="forceReload"
+          v-if="childIsOpen"
+          :width="debouncedWidth"
+        />
+      </Vue3DraggableResizable>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -111,6 +108,7 @@ export default defineComponent({
       h2: 0,
       w2: window.innerWidth * 0.66,
       active: true,
+      debouncedWidth: window.innerWidth * 0.66,
     };
   },
   watch: {
