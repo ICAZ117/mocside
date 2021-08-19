@@ -17,7 +17,7 @@
       :initH="consoleHeight"
       v-model:x="x2"
       v-model:y="y2"
-      v-model:w="w2"
+      v-model:w="width"
       v-model:h="h2"
       v-model:active="active"
       :draggable="false"
@@ -26,9 +26,10 @@
       :handles="['tm']"
       :key="reloadSliders"
       id="resizeableIDE"
+      style="z-index: 4!important;"
     >
       <div>
-        <div class="row p-2" style="z-index: 4!important; background-color: black!important;">
+        <div class="row p-2" style="background-color: black!important;">
           <button
             @click="toggleIO"
             id="buttonWidth"
