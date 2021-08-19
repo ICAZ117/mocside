@@ -332,7 +332,7 @@ export default defineComponent({
   },
   methods: {
     adjustEditorHeight() {
-      this.h1 = window.innerHeight - 118 - this.h2;
+      setTimeout(() => {  this.h1 = window.innerHeight - 118 - this.h2; }, 100);
     },
     toggleIO() {
       this.showInput = !this.showInput;
