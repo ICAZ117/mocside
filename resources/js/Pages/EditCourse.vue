@@ -71,13 +71,12 @@
         </div>
       </div>
       <div class="top-right grades">
-        grades
         <div class="form-group">
           <label for="Course Roster">Course Roster</label>
           <ul>
             <li v-for="(student, key) in students" :key="student.id">
               {{ student.name }}
-              <a @click="removeStudent(student, key)">X</a>
+              <!-- <a @click="removeStudent(student, key)">X</a> -->
             </li>
           </ul>
         </div>
