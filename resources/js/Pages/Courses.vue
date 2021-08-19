@@ -575,7 +575,7 @@ export default {
       var flag = this.refreshPage();
       console.log("unmounting the labs page");
       console.log(flag);
-      if (flag) {
+      if (flag && this.routeToChild()) {
         this.$router.push({ name: "Courses" });
       }
     },
@@ -607,6 +607,7 @@ export default {
       var c = r.substring(sub.length);
       if (c == "") {
         console.log("just on the courses page");
+        return true;
       } else {
         console.log("on this page: " + c);
         var c = c.split("/");
@@ -626,6 +627,7 @@ export default {
         } else {
           console.log(path);
         }
+        return false;
       }
     },
     refreshPage() {
