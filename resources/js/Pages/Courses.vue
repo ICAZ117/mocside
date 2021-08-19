@@ -369,8 +369,11 @@ export default {
       }
     },
     pushToLabs: function(params) {
-      var id = params;
-      console.log("params id: " + id);
+      var id = params[0];
+      var name = params[1];
+      this.Unmounting();
+      // this.goToLabs(id, name);
+      this.$router.push({ name: "Problems", params: { lab_id: id } });
     },
     async getCourses() {
       this.courses = [];
