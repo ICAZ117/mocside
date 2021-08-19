@@ -1,78 +1,76 @@
 <template>
   <div class="edit-course">
     <h3 class="edit-course-title">Edit Course</h3>
+  </div>
+  <div class="top-left course-details">
+    <div class="course-create-form">
+      <form @submit.prevent="handleSubmit" class="course-form">
+        <div class="form-group">
+          <label for="Course Name">Course Name</label>
+          <input
+            type="text"
+            v-model="courseForm.name"
+            id="courseName"
+            name="courseName"
+            class="form-control"
+          />
+        </div>
+        <br />
 
-    <div class="top-left course-details">
-      <div class="course-create-form">
-        <form @submit.prevent="handleSubmit" class="course-form">
-          <div class="form-group">
-            <label for="Course Name">Course Name</label>
+        <div class="form-group">
+          <label for="Course Description">Course Description</label>
+          <input
+            type="text"
+            v-model="courseForm.description"
+            id="courseDescription"
+            name="courseDescription"
+            class="form-control"
+          />
+        </div>
+        <br />
+
+        <div class="form-group">
+          <div class="mb-4">
+            <label for="file" class="sr-only"> Upload Course Image </label>
             <input
-              type="text"
-              v-model="courseForm.name"
-              id="courseName"
-              name="courseName"
-              class="form-control"
+              type="file"
+              :accept="['image/*']"
+              @change="fileChange"
+              id="file"
             />
           </div>
-          <br />
+        </div>
+        <br />
 
-          <div class="form-group">
-            <label for="Course Description">Course Description</label>
+        <div class="form-group">
+          <label for="Course Dates">Course Dates</label>
+          <div class="row">
             <input
-              type="text"
-              v-model="courseForm.description"
-              id="courseDescription"
-              name="courseDescription"
-              class="form-control"
+              type="Date"
+              v-model="courseForm.dateStart"
+              id="courseDateStart"
+              name="courseDateStart"
+              class="form-control col-4"
+            />
+            <input
+              type="Date"
+              v-model="courseForm.dateEnd"
+              id="courseDateEnd"
+              name="courseDateEnd"
+              class="form-control col-7"
             />
           </div>
-          <br />
+        </div>
+        <br />
 
-          <div class="form-group">
-            <div class="mb-4">
-              <label for="file" class="sr-only"> Upload Course Image </label>
-              <input
-                type="file"
-                :accept="['image/*']"
-                @change="fileChange"
-                id="file"
-              />
-            </div>
-          </div>
-          <br />
-
-          <div class="form-group">
-            <label for="Course Dates">Course Dates</label>
-            <div class="row">
-              <input
-                type="Date"
-                v-model="courseForm.dateStart"
-                id="courseDateStart"
-                name="courseDateStart"
-                class="form-control col-4"
-              />
-              <input
-                type="Date"
-                v-model="courseForm.dateEnd"
-                id="courseDateEnd"
-                name="courseDateEnd"
-                class="form-control col-7"
-              />
-            </div>
-          </div>
-          <br />
-
-          <div class="form-group">
-            <button type="submit" class="btn btn-danger btn-block">
-              Submit Changes
-            </button>
-          </div>
-        </form>
-      </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger btn-block">
+            Submit Changes
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="top-left course-details"></div>
   <div class="bottom-left key-gen">
     <div class="form-group">
       <ul>
