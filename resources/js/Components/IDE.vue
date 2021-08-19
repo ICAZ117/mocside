@@ -319,7 +319,6 @@ export default defineComponent({
       console.log(this.width);
       console.log("\nw2:");
       console.log(this.w2);
-      console.log(document.getElementById("resizableConsole").style.width);
       // .style.width = this.width + "px!important";
       // this.w2 = this.width;
     }
@@ -667,6 +666,7 @@ export default defineComponent({
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
+    console.log(document.getElementById("resizableConsole").style.width);
   },
 });
 </script>
