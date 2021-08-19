@@ -213,6 +213,7 @@ export default {
       joinKeys: [],
       keyURL: "",
       labs: [],
+      course: {},
     };
   },
   methods: {
@@ -422,13 +423,13 @@ export default {
     },
   },
   async mounted() {
-    const course = await API.apiClient.get(`/courses/${this.courseID}`);
-    this.courseForm.name = course.data.data.name;
-    this.courseForm.description = course.data.data.description;
-    this.courseForm.img = course.data.data.img_loc;
-    this.courseForm.dateStart = course.data.data.start_date;
-    this.courseForm.dateEnd = course.data.data.end_date;
-    this.courseForm.roster = JSON.parse(course.data.data.roster).roster;
+    this.course = await API.apiClient.get(`/courses/full/${this.courseID}`);
+    this.courseForm.name = this.course.data.data.name;
+    this.courseForm.description = this.course.data.data.description;
+    this.courseForm.img = this.course.data.data.img_loc;
+    this.courseForm.dateStart = this.course.data.data.start_date;
+    this.courseForm.dateEnd = this.course.data.data.end_date;
+    this.courseForm.roster = JSON.parse(this.course.data.data.roster).roster;
     this.getStudents();
     this.initKeys();
     await this.getLabs();
