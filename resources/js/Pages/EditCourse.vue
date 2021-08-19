@@ -133,7 +133,43 @@
           </button>
         </div>
       </div>
-      <div class="bottom-right labs">labs</div>
+      <div class="bottom-right labs">
+        <div
+          style="
+            border: 1px solid #9e9e9e !important;
+            padding: 0 !important;
+            width: min-content !important;
+            margin: 2rem 2rem 2rem 2rem !important;
+          "
+        >
+          <table class="table labtable" style="margin: 0 !important">
+            <thead class="labtable">
+              <tr>
+                <th>Title</th>
+                <th># Problems</th>
+                <th>Due Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="lab in labs" :key="lab.id">
+                <tr
+                  class="lab pointer"
+                  @click.prevent="goToProblems(lab.id, lab.name)"
+                  @contextmenu.prevent="showMenu(lab.id)"
+                >
+                  <td><a>{{ lab.name }}</a></td>
+                  <td>{{ lab.num_problems }}</td>
+                  <td>{{ lab.due_date }}</td>
+                </tr>
+              </template>
+
+              <tr v-if="isProf" class="lab pointer" @click="addLab">
+                <td colspan="5">Add Lab</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -177,6 +213,7 @@ export default {
       },
       joinKeys: [],
       keyURL: "",
+      labs: [],
     };
   },
   methods: {
@@ -333,6 +370,53 @@ export default {
         payload
       );
     },
+    async getLabs() {
+      const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
+      // this.labs = rawLabs.data.data;
+      this.labs = rawLabs.data.data;
+      await this.sortLabs();
+    },
+    published(lab) {
+      //return true if the lab is published
+      //false otherwise
+      var now = new Date(Date.now());
+      if (lab.publish_date == "" || lab.publish_date == null) {
+        return false;
+      }
+      var pd = lab.publish_date.split("-")[2];
+      var pm = lab.publish_date.split("-")[1] - 1;
+      var py = lab.publish_date.split("-")[0];
+
+      var published = new Date(py, pm, pd, 0, 0, 0, 0);
+
+      if (published < now) {
+        return true;
+      }
+      return false;
+    },
+    async sortLabs() {
+      //get sort method and call it
+      await this.sortByDueDate();
+      //call the filter after sorting
+      return "";
+    },
+    async sortByDueDate() {
+      //sorts the unfiltered results by start date
+      this.labs.sort((a, b) => {
+        //if a should be first return -1, 0 for tie, -1 if b first
+        let la = a.due_date.split("-");
+        let lb = b.due_date.split("-");
+        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+        if (fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
+    },
   },
   async mounted() {
     const course = await API.apiClient.get(`/courses/${this.courseID}`);
@@ -344,6 +428,7 @@ export default {
     this.courseForm.roster = JSON.parse(course.data.data.roster).roster;
     this.getStudents();
     this.initKeys();
+    await this.getLabs();
   },
   beforeUnmount() {
     //editcourse
@@ -382,5 +467,8 @@ export default {
 .labs {
   width: 45.5%;
   margin: 1rem;
+}
+.labtable {
+  max-width: 45.5%;
 }
 </style>
