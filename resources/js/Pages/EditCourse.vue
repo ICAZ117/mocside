@@ -418,8 +418,7 @@ export default {
       });
     },
     goToProblems(id, name) {
-      // this.$router.push({ name: "Problems", params: { lab_id: id } });
-      this.$emit("pushToLabs", id);
+      this.$emit("pushToLabs", [id, name]);
     },
   },
   async mounted() {
