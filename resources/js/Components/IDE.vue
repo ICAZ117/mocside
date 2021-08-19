@@ -319,6 +319,7 @@ export default defineComponent({
       console.log(this.width);
       console.log("\nw2:");
       console.log(this.w2);
+      document.getElementById("resizeableIDE").style.width = this.width + "px!important";
       // this.w2 = this.width;
     }
   },
