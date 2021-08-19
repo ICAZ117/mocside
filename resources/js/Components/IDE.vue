@@ -28,7 +28,7 @@
       id="resizeableIDE"
     >
       <div>
-        <div class="row px-1 my-1">
+        <div class="row p-2" style="z-index: 4!important; background-color: black!important;">
           <button
             @click="toggleIO"
             id="buttonWidth"
