@@ -209,6 +209,7 @@
     <router-view
       @unmounting="Unmounting()"
       @courseEdited="courseEdited"
+      @pushToLabs="pushToLabs"
       v-if="childIsOpen"
       :courseID="courseID"
       :courseName="courseName"
@@ -366,6 +367,10 @@ export default {
           params: { course_id: this.courseID },
         });
       }
+    },
+    pushToLabs: function(params) {
+      var id = params;
+      console.log("params id: " + id);
     },
     async getCourses() {
       this.courses = [];
