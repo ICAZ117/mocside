@@ -22,7 +22,7 @@
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="true"
+      :disabledW="false"
       :handles="['tm']"
       :key="reloadConsoleVDR"
       id="resizeableIDE"
