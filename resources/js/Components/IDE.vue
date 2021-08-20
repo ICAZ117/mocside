@@ -309,7 +309,6 @@ export default defineComponent({
     canSubmit: true,
 
     consoleHeight: (window.innerHeight - 60) / 2,
-    consoleComponentHeight: ((window.innerHeight - 60) / 2) - 20 - document.getElementById("editorConfig").clientHeight,
     consoleWidth: window.innerWidth * 0.66,
     x1: 0,
     y1: 0,
@@ -331,6 +330,9 @@ export default defineComponent({
       }
     },
   },
+  computed: {
+    consoleComponentHeight: ((window.innerHeight - 60) / 2) - 20 - document.getElementById("editorConfig").clientHeight,
+  },
   methods: {
     adjustEditorHeight() {
       setTimeout(() => {  
@@ -339,7 +341,6 @@ export default defineComponent({
         console.log("h2: " + this.h2);
         console.log("total: " + window.innerHeight - 80 - this.h2);
         this.h1 = window.innerHeight - 80 - this.h2; 
-        this.consoleComponentHeight = this.h2 - 20 - document.getElementById("editorConfig").clientHeight;
         }, 100);
     },
     toggleIO() {
