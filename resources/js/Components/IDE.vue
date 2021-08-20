@@ -332,7 +332,7 @@ export default defineComponent({
   },
   computed: {
     consoleComponentHeight() {
-      return (window.innerHeight - 60 - this.h1) - 20 - 47;
+      return (window.innerHeight - 60 - this.h1) - 66;
     }
   },
   methods: {
