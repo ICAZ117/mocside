@@ -687,6 +687,7 @@ export default defineComponent({
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
+    this.h1++;
   },
 });
 </script>
