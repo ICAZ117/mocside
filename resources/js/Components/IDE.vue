@@ -44,7 +44,7 @@
       :key="width"
       @resize-end="adjustEditorHeight"
       id="resizableConsole"
-      style="z-index: 4 !important"
+      style="z-index: 4 !important; bottom: 0!important;"
     >
       <div>
         <div class="row p-2" style="background-color: black !important">
