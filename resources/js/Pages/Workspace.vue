@@ -1,9 +1,9 @@
 <template>
   <div v-if="childIsOpen" class="workspace-page">
     <!-- WorkSpace Page-->
-    <button v-if="childIsOpen" @click="unmountingWork()" class="btn btn-danger btn-block">
+    <!-- <button v-if="childIsOpen" @click="unmountingWork()" class="btn btn-danger btn-block">
       Return to Problems
-    </button>
+    </button> -->
     <div v-if="childIsOpen">
       <Vue3DraggableResizable
         :initW="instructionsWidth"
