@@ -331,9 +331,8 @@ export default defineComponent({
     },
   },
   computed: {
-    self: this,
-    consoleComponentHeight: function() {
-      return (window.innerHeight - 60 - self.h1) - 20 - 47;
+    consoleComponentHeight() {
+      return (window.innerHeight - 60 - this.h1) - 20 - 47;
     }
   },
   methods: {
