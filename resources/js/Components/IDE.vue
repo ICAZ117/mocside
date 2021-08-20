@@ -684,7 +684,6 @@ export default defineComponent({
         this.code = this.saved_p;
       }
     } catch (e) {}
-    this.getStyle();
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
