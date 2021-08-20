@@ -308,14 +308,14 @@ export default defineComponent({
     tcGrades: [],
     canSubmit: true,
 
-    consoleHeight: (window.innerHeight - 98) / 2,
+    consoleHeight: (window.innerHeight - 60) / 2,
     consoleWidth: window.innerWidth * 0.66,
     x1: 0,
-    y1: 0,
+    y1: 60,
     h1: 0,
     w1: 0,
     x2: 0,
-    y2: 400,
+    y2: (window.innerHeight - 60) / 2,
     h2: 0,
     w2: 0,
     active: true,
@@ -334,10 +334,10 @@ export default defineComponent({
     adjustEditorHeight() {
       setTimeout(() => {  
         console.log("window.innerHeight: " + window.innerHeight);
-        console.log("window.innerHeight - 118: " + window.innerHeight - 118);
+        console.log("window.innerHeight - 80: " + window.innerHeight - 80);
         console.log("h2: " + this.h2);
-        console.log("total: " + window.innerHeight - 118 - this.h2);
-        this.h1 = window.innerHeight - 118 - this.h2; 
+        console.log("total: " + window.innerHeight - 80 - this.h2);
+        this.h1 = window.innerHeight - 80 - this.h2; 
         
         }, 100);
     },
