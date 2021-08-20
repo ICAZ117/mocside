@@ -321,7 +321,7 @@ export default defineComponent({
     active: true,
     reloadConsoleVDR: 0,
     dynamicWidth: window.innerWidth * 0.66,
-    consoleComponentHeight: ((window.innerHeight - 60) / 2) - 20 - document.getElementById("editorConfig").clientHeight,
+    consoleComponentHeight: ((window.innerHeight - 60) / 2) - 20 - 47,
   }),
   watch: {
     showModal: function () {
