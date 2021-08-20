@@ -333,7 +333,19 @@ export default defineComponent({
   computed: {
     consoleComponentHeight() {
       return (window.innerHeight - 60 - this.h1) - 66;
-    }
+    },
+    getStyle() {
+      // width: " + (this.showSubmit ? "67%" : "89%") + "!important
+      var button = document.getElementById("buttonWidth");
+      var numButtons = this.showSubmit ? 3 : 2;
+      this.style =
+        "width: calc((100% - " +
+        numButtons +
+        "%) - " +
+        (numButtons * button.clientWidth + 2) +
+        "px)!important;";
+      return this.style;
+    },
   },
   methods: {
     adjustEditorHeight() {
@@ -348,17 +360,6 @@ export default defineComponent({
     toggleIO() {
       this.showInput = !this.showInput;
       this.IOmessage = this.showInput ? "Show Output" : "Show Input";
-    },
-    getStyle() {
-      // width: " + (this.showSubmit ? "67%" : "89%") + "!important
-      var button = document.getElementById("buttonWidth");
-      var numButtons = this.showSubmit ? 3 : 2;
-      this.style =
-        "width: calc((100% - " +
-        numButtons +
-        "%) - " +
-        (numButtons * button.clientWidth + 2) +
-        "px)!important;";
     },
     updateContent() {
       var data = {
