@@ -47,7 +47,7 @@
       style="z-index: 4 !important; bottom: 0!important;"
     >
       <div>
-        <div class="row p-2" style="background-color: black !important">
+        <div id="editorConfig" class="row p-2" style="background-color: black !important">
           <button
             @click="toggleIO"
             id="buttonWidth"
@@ -153,7 +153,7 @@
           :problemID="problemID"
           :lang="lang"
           @programFinished="launchConsole = false"
-          :style="'width: ' + width + '!important;'"
+          :style="'width: ' + width + 'px !important; height: ' + consoleComponentHeight + 'px !important;'"
         />
       </div>
     </Vue3DraggableResizable>
@@ -309,9 +309,10 @@ export default defineComponent({
     canSubmit: true,
 
     consoleHeight: (window.innerHeight - 60) / 2,
+    consoleComponentHeight: ((window.innerHeight - 60) / 2) - 20 - document.getElementById("editorConfig").clientHeight;
     consoleWidth: window.innerWidth * 0.66,
     x1: 0,
-    y1: 60,
+    y1: 0,
     h1: 0,
     w1: 0,
     x2: 0,
@@ -338,7 +339,7 @@ export default defineComponent({
         console.log("h2: " + this.h2);
         console.log("total: " + window.innerHeight - 80 - this.h2);
         this.h1 = window.innerHeight - 80 - this.h2; 
-        
+        this.consoleComponentHeight = this.h2 - 20 - document.getElementById("editorConfig").clientHeight;
         }, 100);
     },
     toggleIO() {
