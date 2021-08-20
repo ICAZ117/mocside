@@ -321,7 +321,6 @@ export default defineComponent({
     active: true,
     reloadConsoleVDR: 0,
     dynamicWidth: window.innerWidth * 0.66,
-    consoleComponentHeight: ((window.innerHeight - 60) / 2) - 20 - 47,
   }),
   watch: {
     showModal: function () {
@@ -331,9 +330,9 @@ export default defineComponent({
       }
     },
   },
-  // computed: {
-    
-  // },
+  computed: {
+    consoleComponentHeight: (window.innerHeight - 60 - this.h1) - 20 - 47,
+  },
   methods: {
     adjustEditorHeight() {
       setTimeout(() => {  
