@@ -331,7 +331,10 @@ export default defineComponent({
     },
   },
   computed: {
-    consoleComponentHeight: (window.innerHeight - 60 - this.h1) - 20 - 47,
+    self: this,
+    consoleComponentHeight: function() {
+      return (window.innerHeight - 60 - self.h1) - 20 - 47;
+    }
   },
   methods: {
     adjustEditorHeight() {
