@@ -309,7 +309,7 @@ export default defineComponent({
     canSubmit: true,
 
     consoleHeight: (window.innerHeight - 60) / 2,
-    consoleComponentHeight: ((window.innerHeight - 60) / 2) - 20 - document.getElementById("editorConfig").clientHeight;
+    consoleComponentHeight: ((window.innerHeight - 60) / 2) - 20 - document.getElementById("editorConfig").clientHeight,
     consoleWidth: window.innerWidth * 0.66,
     x1: 0,
     y1: 0,
