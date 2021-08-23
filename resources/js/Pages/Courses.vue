@@ -385,7 +385,7 @@ export default {
       console.log(this.ignoreUnmount);
       this.$router.push('/courses/' + courseID + '/labs/' + labID + '/problems');
     },
-    pushTolabEdit: function(params) {
+    pushToLabEdit: function(params) {
       this.ignoreUnmount = true;
       var courseID = params[0];
       var courseName = params[1];
