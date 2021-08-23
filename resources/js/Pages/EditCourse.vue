@@ -473,7 +473,7 @@ export default {
       var key = this.deletingLab.key;
 
       //remove from lab the current course
-      // const res = await API.apiClient.delete(`/labs/${id}`);
+      const res = await API.apiClient.delete(`/labs/${id}`);
 
       //filter from labs
       this.labs = this.labs.filter((l, i) => i != key);
