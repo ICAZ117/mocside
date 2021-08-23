@@ -350,14 +350,14 @@ export default defineComponent({
         if (this.dynamicWidth != this.width) {
           this.dynamicWidth = this.width;
         }
-      }, 100);
+      }, 10);
     },
     evenDynamicerWidth: function () {
       setTimeout(() => {
         if (this.evenDynamicerWidth != this.width) {
           this.evenDynamicerWidth = this.width;
         }
-      }, 100);
+      }, 10);
     },
   },
   computed: {
@@ -388,7 +388,7 @@ export default defineComponent({
 
       if (button != null) {
         var numButtons = this.showSubmit ? 3 : 2;
-        this.style = "width: calc(100% - " + numButtons * 143 + "px)!important;";
+        this.style = "width: " + this.evenDynamicerWidth - 16 + (numButtons * 143) + "px!important;";
       }
     },
     adjustEditorHeight() {
