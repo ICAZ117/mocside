@@ -11,7 +11,7 @@ ADD PAGES
 
 * Add profile Page....sorta like a dashboard
     * To Still Be Completed
-        * Delete User...more of a toggle allow sign in
+        * Delete User...more of a toggle allow sign in..otherwise students could delete their accounts before end of semester to stop professors from seeing their individual grades
         * Change Email
         * Reset Password/Forgot Password
 
