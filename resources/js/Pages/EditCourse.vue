@@ -187,7 +187,7 @@
         <button class="btn btn-md btn-danger" @click="closeDeleting()">
           Cancel
         </button>
-        <button class="btn btn-md btn-danger" @click="deleting()">
+        <button class="btn btn-md btn-danger" @click="removeLab()">
           Delete
         </button>
       </div>
