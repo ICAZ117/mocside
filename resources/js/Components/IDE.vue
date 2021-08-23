@@ -2,7 +2,7 @@
   <div class="work-area">
     <Vue3DraggableResizable
       :initW="width"
-      :initH="consoleHeight"
+      :initH="consoleHeight + 1"
       v-model:x="x1"
       v-model:y="y1"
       v-model:w="w1"
@@ -343,7 +343,7 @@ export default defineComponent({
   },
   computed: {
     consoleComponentHeight() {
-      return window.innerHeight - 60 - this.h1 - 66;
+      return window.innerHeight - 60 - this.h1 - 46;
     },
     // getStyle() {
     //   // width: " + (this.showSubmit ? "67%" : "89%") + "!important
