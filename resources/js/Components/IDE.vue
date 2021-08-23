@@ -31,7 +31,7 @@
 
     <Vue3DraggableResizable
       :initW="width"
-      :initH="consoleHeight"
+      :initH="consoleHeight - 1"
       v-model:x="x2"
       v-model:y="y2"
       v-model:w="evenDynamicerWidth"
