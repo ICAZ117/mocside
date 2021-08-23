@@ -162,7 +162,7 @@
                   <td>{{ lab.due_date }}</td>
                 </tr>
                 <a @click="editLab(lab.id, lab.name)">...</a>
-                <a @click="removeLab(lab.id, lab.name, key)">X</a>
+                <a @click="removeLab(lab.id, lab, key)">X</a>
               </template>
 
               <tr v-if="isProf" class="lab pointer" @click="addLab">
@@ -240,6 +240,7 @@ export default {
       reloadDeleteModal: 0,
       deletingLab: {
         id: "",
+        lab: "",
         key: "",
       },
     };
@@ -459,10 +460,11 @@ export default {
     closeDeleting() {
       this.showDeleteModal = false;
     },
-    deleting(id, key) {
+    deleting(id, lab, key) {
       document.getElementById("out-click").style.display = "none";
       this.showDeleteModal = true;
       this.deletingLab.id = id;
+      this.deletingLab.lab = lab;
       this.deletingLab.key = key;
     },
     removeLab() {
