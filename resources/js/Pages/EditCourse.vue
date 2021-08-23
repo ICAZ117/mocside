@@ -162,7 +162,7 @@
                   <td>{{ lab.due_date }}</td>
                 </tr>
                 <a @click="editLab(lab.id, lab.name)">...</a>
-                <a @click="removeLab(lab.id, lab.name)">X</a>
+                <a @click="removeLab(lab.id, lab.name, key)">X</a>
               </template>
 
               <tr v-if="isProf" class="lab pointer" @click="addLab">
@@ -173,6 +173,25 @@
         </div>
       </div>
     </div>
+    <vue-final-modal
+      v-model="showDeleteModal"
+      classes="modal-container"
+      content-class="modal-content"
+      :esc-to-close="true"
+    >
+      <button class="modal-close" @click="closeDeleting()">x</button>
+      <div class="delete Course">
+        <p>
+          Are you sure you would like to delete {{ deletingLab.lab.name }}
+        </p>
+        <button class="btn btn-md btn-danger" @click="closeDeleting()">
+          Cancel
+        </button>
+        <button class="btn btn-md btn-danger" @click="deleting()">
+          Delete
+        </button>
+      </div>
+    </vue-final-modal>
   </div>
 </template>
 
@@ -217,6 +236,12 @@ export default {
       keyURL: "",
       labs: [],
       course: {},
+      showDeleteModal: false,
+      reloadDeleteModal: 0,
+      deletingLab: {
+        id: "",
+        key: "",
+      },
     };
   },
   methods: {
@@ -431,9 +456,30 @@ export default {
       console.log("edit Lab");
       this.$emit("editLab", [this.courseID, this.course.name, id, name]);
     },
-    removeLab(id, name) {
-      console.log("remove lab");
+    closeDeleting() {
+      this.showDeleteModal = false;
     },
+    deleting(id, key) {
+      document.getElementById("out-click").style.display = "none";
+      this.showDeleteModal = true;
+      this.deletingLab.id = id;
+      this.deletingLab.key = key;
+    },
+    removeLab() {
+      console.log("remove lab");
+      var id = this.deletingLab.id;
+      var key = this.deletingLab.key;
+
+      //remove from lab the current course
+      // const res = await API.apiClient.delete(`/labs/${id}`);
+
+      //filter from labs
+      this.labs = this.labs.filter((l, i) => i != key);
+      this.closeDeleting();
+    },
+    addLab() {
+      console.log("add lab");
+    }
   },
   async mounted() {
     this.course = await API.apiClient.get(`/courses/full/${this.courseID}`);
@@ -451,6 +497,13 @@ export default {
   beforeUnmount() {
     //editcourse
     this.$emit("unmounting");
+  },
+  watch: {
+    showDeleteModal: function () {
+      if (!this.showDeleteModal) {
+        this.reloadDeleteModal++;
+      }
+    },
   },
 };
 </script>
