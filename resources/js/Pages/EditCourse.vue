@@ -151,7 +151,7 @@
               </tr>
             </thead>
             <tbody>
-              <template v-for="lab in labs" :key="lab.id">
+              <template v-for="(lab, key) in labs" :key="lab.id">
                 <tr
                   class="lab pointer"
                   @click.prevent="goToProblems(lab.id, lab.name)"
@@ -467,21 +467,29 @@ export default {
       this.deletingLab.lab = lab;
       this.deletingLab.key = key;
     },
-    removeLab() {
+    async removeLab() {
       console.log("remove lab");
       var id = this.deletingLab.id;
       var key = this.deletingLab.key;
 
       //remove from lab the current course
-      // const res = await API.apiClient.delete(`/labs/${id}`);
+      const res = await API.apiClient.delete(`/labs/${id}`);
 
       //filter from labs
       this.labs = this.labs.filter((l, i) => i != key);
       this.closeDeleting();
     },
-    addLab() {
-      console.log("add lab");
-    }
+    async addLab() {
+      var payload = {
+        name: "New Lab",
+        description: "New Lab",
+        course_id: this.courseID,
+        due_date: "2021-06-03",
+      };
+      const lab = await API.apiClient.post(`/labs/`, payload);
+      this.labs.push(lab.data.data);
+      this.sortLabs();
+    },
   },
   async mounted() {
     this.course = await API.apiClient.get(`/courses/full/${this.courseID}`);
