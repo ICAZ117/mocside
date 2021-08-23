@@ -151,7 +151,7 @@
               </tr>
             </thead>
             <tbody>
-              <template v-for="lab in labs" :key="lab.id">
+              <template v-for="(lab, key) in labs" :key="lab.id">
                 <tr
                   class="lab pointer"
                   @click.prevent="goToProblems(lab.id, lab.name)"
