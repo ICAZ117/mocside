@@ -852,6 +852,9 @@ thead.gradebook {
 }
 
 /*============= WORKSPACE =============*/
+.workspace-page {
+    background-color: black;
+}
 .work-area {
     padding: 0 !important;
     margin: 0 !important;
