@@ -362,7 +362,7 @@ export default defineComponent({
   },
   computed: {
     consoleComponentHeight() {
-      return window.innerHeight - 60 - this.h1 - 46;
+      return window.innerHeight - 60 - this.h1 - 47;
     },
     // getStyle() {
     //   // width: " + (this.showSubmit ? "67%" : "89%") + "!important
