@@ -161,6 +161,8 @@
                   <td>{{ lab.num_problems }}</td>
                   <td>{{ lab.due_date }}</td>
                 </tr>
+                <a @click="editLab(lab.id, lab.name)">...</a>
+                <a @click="removeLab(lab.id, lab.name)">X</a>
               </template>
 
               <tr v-if="isProf" class="lab pointer" @click="addLab">
@@ -182,7 +184,7 @@ import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
 export default {
   props: ["courseID"],
-  emits: ["unmounting", "courseEdited", "pushToLabs", "studentView"],
+  emits: ["unmounting", "courseEdited", "pushToLabs", "studentView", "editLab"],
   components: {
     FlashMessage,
     FileUpload,
@@ -424,7 +426,14 @@ export default {
     },
     studentView() {
       this.$emit("studentView", [this.courseID, this.course.name]);
-    }
+    },
+    editLab(id, name) {
+      console.log("edit Lab");
+      this.$emit("editLab", [this.courseID, this.course.name, id, name]);
+    },
+    removeLab(id, name) {
+      console.log("remove lab");
+    },
   },
   async mounted() {
     this.course = await API.apiClient.get(`/courses/full/${this.courseID}`);
