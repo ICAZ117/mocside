@@ -211,6 +211,7 @@
       @courseEdited="courseEdited"
       @pushToLabs="pushToLabs"
       @studentView="pushToCourses"
+      @editLab="pushToLabEdit"
       v-if="childIsOpen"
       :courseID="courseID"
       :courseName="courseName"
@@ -383,6 +384,19 @@ export default {
       console.log("routeToLabs");
       console.log(this.ignoreUnmount);
       this.$router.push('/courses/' + courseID + '/labs/' + labID + '/problems');
+    },
+    pushTolabEdit: function(params) {
+      this.ignoreUnmount = true;
+      var courseID = params[0];
+      var courseName = params[1];
+      var id = params[2];
+      var name = params[3];
+      this.routeToLabEdit(courseID, id);
+    },
+    routeToLabEdit(courseID, labID) {
+      console.log("route to lab edit");
+      console.log(this.ignoreUnmount);
+      this.$router.push('/courses/' + courseID + '/labs/' + labID + '/edit');
     },
     pushToCourses: function(params) {
       this.ignoreUnmount = true;
