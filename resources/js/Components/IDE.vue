@@ -524,8 +524,8 @@ export default defineComponent({
             this.accordions[currentTC].isSuccessful = false;
             this.accordions[currentTC].text = "Test Case Failed :(";
 
-            tc.userOut = JSON.parse(tc.userOut)[0];
-            tc.profOut = JSON.parse(tc.profOut)[0];
+            // tc.userOut = JSON.parse(tc.userOut)[0];
+            // tc.profOut = JSON.parse(tc.profOut)[0];
 
             this.accordions[currentTC].profOut = tc.profOut.replace(
               /\n/g,
