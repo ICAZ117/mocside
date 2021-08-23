@@ -418,8 +418,8 @@ export default {
       });
     },
     goToProblems(id, name) {
-      // this.$emit("pushToLabs", [id, name]);
-      // this.$router.push('/courses/2290/labs/2/problems');
+      //emit push to labs but on parent just set boolean since it is about to be unmounted
+      this.$emit("pushToLabs", [this.courseID, this.course.name, id, name]);
     },
   },
   async mounted() {

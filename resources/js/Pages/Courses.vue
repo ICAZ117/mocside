@@ -246,6 +246,7 @@ export default {
         course: {},
         key: "",
       },
+      ignoreUnmount: false,
   }),
   setup() {
     const route = useRoute();
@@ -369,13 +370,21 @@ export default {
       }
     },
     pushToLabs: function(params) {
+      this.ignoreUnmount = true;
       var courseID = params[0];
       var courseName = params[1];
       var id = params[2];
       var name = params[3];
       this.Unmounting();
-      this.goToLabs(courseID, courseName);
+      this.routeToLabs(courseID, id);
+      // this.goToLabs(courseID, courseName);
       // this.$router.push({ name: "Problems", params: { lab_id: id } });
+    },
+    routeToLabs(courseID, labID) {
+      //first go to labs page
+      this.$router.push('/courses/' + courseID + '/labs/' + labID + '/problems');
+      //then go to problems page
+      this.ignoreUnmount = false;
     },
     async getCourses() {
       this.courses = [];
@@ -570,15 +579,17 @@ export default {
       });
     },
     Unmounting() {
-      this.childIsOpen = false;
-      this.courseID = null;
-      var flag = this.refreshPage();
-      console.log("unmounting the labs page");
-      if (flag) {
-        this.$router.push({ name: "Courses" });
-      }
-      else {
-        this.routeToChild();
+      if(!this.ignoreUnmount) {
+        this.childIsOpen = false;
+        this.courseID = null;
+        var flag = this.refreshPage();
+        console.log("unmounting the labs page");
+        if (flag) {
+          this.$router.push({ name: "Courses" });
+        }
+        else {
+          this.routeToChild();
+        }
       }
     },
     async courseEdited() {
