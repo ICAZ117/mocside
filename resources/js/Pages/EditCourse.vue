@@ -201,6 +201,7 @@ import { getError } from "../utils/helpers";
 import FileService from "../services/FileService";
 import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
+import store from "../Store/index";
 export default {
   props: ["courseID"],
   emits: ["unmounting", "courseEdited", "pushToLabs", "studentView", "editLab"],
@@ -499,6 +500,15 @@ export default {
   beforeUnmount() {
     //editcourse
     this.$emit("unmounting");
+  },
+  computed: {
+    isProf: function () {
+      if (store.getters["auth/isProf"] == null) {
+        return false;
+      } else {
+        return store.getters["auth/isProf"];
+      }
+    },
   },
   watch: {
     showDeleteModal: function () {
