@@ -338,6 +338,8 @@ export default defineComponent({
     width: function (newVal, oldVal) {
       // watch it
       console.log("Prop changed: ", newVal, " | was: ", oldVal);
+      this.w1 = this.width;
+      this.w2 = this.width;
       this.getStyle();
     },
   },
