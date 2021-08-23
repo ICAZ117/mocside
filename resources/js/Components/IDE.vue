@@ -713,6 +713,8 @@ export default defineComponent({
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
     this.h1++;
+    this.h1--;
+    this.getStyle();
   },
 });
 </script>
