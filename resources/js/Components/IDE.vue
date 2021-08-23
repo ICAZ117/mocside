@@ -370,11 +370,7 @@ export default defineComponent({
       if (button != null) {
         var numButtons = this.showSubmit ? 3 : 2;
         this.style =
-          "width: calc((100% - " +
-          numButtons +
-          "%) - " +
-          numButtons * button.clientWidth +
-          "px)!important;";
+          "width: calc(100% - " + (numButtons * 143) + "px)!important;";
       }
     },
     adjustEditorHeight() {
