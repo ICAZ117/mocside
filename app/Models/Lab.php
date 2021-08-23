@@ -31,7 +31,7 @@ class Lab extends Model
         'lang'
     ];
 
-    public function worth()
+    public function worth(): int
     {
         $assignments = $this->assignments;
         $total = 0;
