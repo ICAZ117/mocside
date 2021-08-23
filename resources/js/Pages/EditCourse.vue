@@ -72,10 +72,11 @@
       </div>
       <div class="top-right grades">
         <div class="form-group">
+          <button @click="studentView()" class="btn btn-danger btn-block">Student View</button>
           <label for="Course Roster">Course Roster</label>
           <ul>
             <li v-for="(student, key) in students" :key="student.id">
-              {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }} {{ JSON.parse(student.fsc_user.gradebook_courses).grades }}
+              {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }} {{ Math.floor((JSON.parse(course.gradebook).grades[student.fsc_user.fsc_id] / course.worth) * 100 * 100) / 100 }}%
               <!-- <a @click="removeStudent(student, key)">X</a> -->
             </li>
           </ul>
@@ -160,6 +161,8 @@
                   <td>{{ lab.num_problems }}</td>
                   <td>{{ lab.due_date }}</td>
                 </tr>
+                <a @click="editLab(lab.id, lab.name)">...</a>
+                <a @click="removeLab(lab.id, lab.name)">X</a>
               </template>
 
               <tr v-if="isProf" class="lab pointer" @click="addLab">
@@ -181,7 +184,7 @@ import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
 export default {
   props: ["courseID"],
-  emits: ["unmounting", "courseEdited", "pushToLabs"],
+  emits: ["unmounting", "courseEdited", "pushToLabs", "studentView", "editLab"],
   components: {
     FlashMessage,
     FileUpload,
@@ -418,8 +421,18 @@ export default {
       });
     },
     goToProblems(id, name) {
-      // this.$emit("pushToLabs", [id, name]);
-      // this.$router.push('/courses/2290/labs/2/problems');
+      //emit push to labs but on parent just set boolean since it is about to be unmounted
+      this.$emit("pushToLabs", [this.courseID, this.course.name, id, name]);
+    },
+    studentView() {
+      this.$emit("studentView", [this.courseID, this.course.name]);
+    },
+    editLab(id, name) {
+      console.log("edit Lab");
+      this.$emit("editLab", [this.courseID, this.course.name, id, name]);
+    },
+    removeLab(id, name) {
+      console.log("remove lab");
     },
   },
   async mounted() {
@@ -430,6 +443,7 @@ export default {
     this.courseForm.dateStart = this.course.data.data.start_date;
     this.courseForm.dateEnd = this.course.data.data.end_date;
     this.courseForm.roster = JSON.parse(this.course.data.data.roster).roster;
+    this.course = this.course.data.data;
     this.getStudents();
     this.initKeys();
     await this.getLabs();

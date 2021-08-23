@@ -1,9 +1,9 @@
 <template>
   <div v-if="childIsOpen" class="workspace-page">
     <!-- WorkSpace Page-->
-    <button v-if="childIsOpen" @click="unmountingWork()" class="btn btn-danger btn-block">
+    <!-- <button v-if="childIsOpen" @click="unmountingWork()" class="btn btn-danger btn-block">
       Return to Problems
-    </button>
+    </button> -->
     <div v-if="childIsOpen">
       <Vue3DraggableResizable
         :initW="instructionsWidth"
@@ -44,7 +44,7 @@
         :resizable="true"
         :disabledH="true"
         :handles="['ml']"
-        @resize-end="debouncedWidth = w2"
+        @resize-end="resizeEnd"
         :key="reloadSliders"
         id="resizeableIDE"
       >
@@ -80,10 +80,10 @@ export default defineComponent({
 
   data() {
     return {
-      instructionsHeight: window.innerHeight - 98,
+      instructionsHeight: window.innerHeight - 60,
       instructionsWidth: window.innerWidth * 0.33,
-      IDEHeight: window.innerHeight - 98,
-      IDEWidth: window.innerWidth * 0.66,
+      IDEHeight: window.innerHeight - 60,
+      IDEWidth: window.innerWidth * 0.67,
       assignment: {},
       title: "",
       description: "",
@@ -100,15 +100,15 @@ export default defineComponent({
       saveStatus: "",
       test: {},
       x1: 0,
-      y1: 98,
+      y1: 60,
       h1: 0,
       w1: 0,
       x2: window.innerWidth * 0.33,
-      y2: 98,
+      y2: 60,
       h2: 0,
-      w2: window.innerWidth * 0.66,
+      w2: window.innerWidth * 0.67,
       active: true,
-      debouncedWidth: window.innerWidth * 0.66,
+      debouncedWidth: window.innerWidth * 0.67,
     };
   },
   watch: {
@@ -120,6 +120,9 @@ export default defineComponent({
     },
   },
   methods: {
+    resizeEnd() {
+      this.debouncedWidth = this.w2;
+    },
     async unmountingWork() {
       console.log("unmountingWork");
       //go back in router by 1
@@ -274,9 +277,4 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
-.resizable-content {
-  height: 100%;
-  width: 100%;
-}
-</style>
+

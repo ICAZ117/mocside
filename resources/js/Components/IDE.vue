@@ -1,36 +1,53 @@
 <template>
   <div class="work-area">
-    <div class="editor row">
-      <VAceEditor
-        class="editor"
-        v-model:value="code"
-        @input="updateContent"
-        :lang="editorLangauge"
-        :theme="theme"
-        :key="forceReload"
-        :style="'width: ' + width + '!important;'"
-      />
-    </div>
+    <Vue3DraggableResizable
+      :initW="width"
+      :initH="consoleHeight + 1"
+      v-model:x="x1"
+      v-model:y="y1"
+      :w="width"
+      v-model:h="h1"
+      v-model:active="active"
+      :draggable="false"
+      :resizable="true"
+      :disabledW="true"
+      :handles="['bm']"
+      
+      id="resizableEditor"
+      style="z-index: 3 !important"
+    >
+      <div class="editor row">
+        <VAceEditor
+          class="editor"
+          v-model:value="code"
+          @input="updateContent"
+          :lang="editorLangauge"
+          :theme="theme"
+          :key="forceReload"
+          :style="'width: ' + width + '!important;'"
+        />
+      </div>
+    </Vue3DraggableResizable>
 
     <Vue3DraggableResizable
       :initW="width"
       :initH="consoleHeight"
       v-model:x="x2"
       v-model:y="y2"
-      v-model:w="w2"
+      :w="width"
       v-model:h="h2"
       v-model:active="active"
       :draggable="false"
       :resizable="true"
       :disabledW="true"
-      
       :handles="['tm']"
-      :key="width"
+      
+      @resize-end="adjustEditorHeight"
       id="resizableConsole"
-      style="z-index: 4 !important"
+      style="z-index: 4 !important; bottom: 0 !important"
     >
       <div>
-        <div class="row p-2" style="background-color: black !important">
+        <div id="editorConfig" class="row p-2" style="background-color: black !important">
           <button
             @click="toggleIO"
             id="buttonWidth"
@@ -136,7 +153,13 @@
           :problemID="problemID"
           :lang="lang"
           @programFinished="launchConsole = false"
-          :style="'width: ' + width + '!important;'"
+          :style="
+            'width: ' +
+            width +
+            'px !important; height: ' +
+            consoleComponentHeight +
+            'px !important;'
+          "
         />
       </div>
     </Vue3DraggableResizable>
@@ -291,19 +314,19 @@ export default defineComponent({
     tcGrades: [],
     canSubmit: true,
 
-    consoleHeight: (window.innerHeight - 98) / 2,
-    consoleWidth: window.innerWidth * 0.66,
+    consoleHeight: (window.innerHeight - 60) / 2,
+    consoleWidth: window.innerWidth * 0.67,
     x1: 0,
-    y1: 98,
+    y1: 0,
     h1: 0,
     w1: 0,
     x2: 0,
-    y2: 400,
+    y2: (window.innerHeight - 60) / 2,
     h2: 0,
     w2: 0,
     active: true,
     reloadConsoleVDR: 0,
-    dynamicWidth: window.innerWidth * 0.66,
+    dynamicWidth: window.innerWidth * 0.67,
   }),
   watch: {
     showModal: function () {
@@ -312,31 +335,58 @@ export default defineComponent({
         this.reloadModal++;
       }
     },
-    w2: function () {
-      console.log("HERE");
-      console.log("Width:");
-      console.log(this.width);
-      console.log("\nw2:");
-      console.log(this.w2);
-      // .style.width = this.width + "px!important";
-      // this.w2 = this.width;
-    }
+    width: function (newVal, oldVal) {
+      // watch it
+      console.log("Prop changed: ", newVal, " | was: ", oldVal);
+      this.w1 = this.width;
+      this.w2 = this.width;
+      this.getStyle();
+    },
+  },
+  computed: {
+    consoleComponentHeight() {
+      return window.innerHeight - 60 - this.h1 - 46;
+    },
+    // getStyle() {
+    //   // width: " + (this.showSubmit ? "67%" : "89%") + "!important
+    //   var button = document.getElementById("buttonWidth");
+
+    //   if (button != null) {
+    //     var numButtons = this.showSubmit ? 3 : 2;
+    //     this.style =
+    //       "width: calc((100% - " +
+    //       numButtons +
+    //       "%) - " +
+    //       numButtons * button.clientWidth +
+    //       "px)!important;";
+    //     return this.style;
+    //   }
+    //   return "";
+    // },
   },
   methods: {
-    toggleIO() {
-      this.showInput = !this.showInput;
-      this.IOmessage = this.showInput ? "Show Output" : "Show Input";
-    },
     getStyle() {
       // width: " + (this.showSubmit ? "67%" : "89%") + "!important
       var button = document.getElementById("buttonWidth");
-      var numButtons = this.showSubmit ? 3 : 2;
-      this.style =
-        "width: calc((100% - " +
-        numButtons +
-        "%) - " +
-        (numButtons * button.clientWidth + 2) +
-        "px)!important;";
+
+      if (button != null) {
+        var numButtons = this.showSubmit ? 3 : 2;
+        this.style =
+          "width: calc(100% - " + (numButtons * 143) + "px)!important;";
+      }
+    },
+    adjustEditorHeight() {
+      setTimeout(() => {
+        console.log("window.innerHeight: " + window.innerHeight);
+        console.log("window.innerHeight - 60: " + window.innerHeight - 60);
+        console.log("h2: " + this.h2);
+        console.log("total: " + window.innerHeight - 60 - this.h2);
+        this.h1 = window.innerHeight - 60 - this.h2;
+      }, 100);
+    },
+    toggleIO() {
+      this.showInput = !this.showInput;
+      this.IOmessage = this.showInput ? "Show Output" : "Show Input";
     },
     updateContent() {
       var data = {
@@ -661,11 +711,12 @@ export default defineComponent({
         this.code = this.saved_p;
       }
     } catch (e) {}
-    this.getStyle();
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
-    console.log(document.getElementById("resizableConsole").style.width);
+    this.h1++;
+    this.h1--;
+    this.getStyle();
   },
 });
 </script>
