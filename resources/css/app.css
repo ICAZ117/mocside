@@ -930,11 +930,9 @@ thead.gradebook {
 .run-code,
 .submit-code {
     border: none !important;
-    min-width: 10% !important;
-    width: 10% !important;
-    max-width: 10% !important;
-    margin-right: 1% !important;
-    max-height: 31px !important;
+    width: 130px !important;
+    margin-right: 13px !important;
+    height: 31px !important;
 }
 
 .configure-editor {
