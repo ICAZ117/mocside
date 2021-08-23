@@ -210,6 +210,7 @@
       @unmounting="Unmounting()"
       @courseEdited="courseEdited"
       @pushToLabs="pushToLabs"
+      @studentView="pushToCourses"
       v-if="childIsOpen"
       :courseID="courseID"
       :courseName="courseName"
@@ -376,14 +377,23 @@ export default {
       var id = params[2];
       var name = params[3];
       this.routeToLabs(courseID, id);
-      // this.goToLabs(courseID, courseName);
-      // this.$router.push({ name: "Problems", params: { lab_id: id } });
     },
     routeToLabs(courseID, labID) {
       //first go to labs page
       console.log("routeToLabs");
       console.log(this.ignoreUnmount);
       this.$router.push('/courses/' + courseID + '/labs/' + labID + '/problems');
+    },
+    pushToCourses: function(params) {
+      this.ignoreUnmount = true;
+      var courseID = params[0];
+      var courseName = params[1];
+      this.routeToCourses(courseID);
+    },
+    routeToCourses(courseID) {
+      console.log("routeToCourses");
+      console.log(this.ignoreUnmount);
+      this.$router.push('/courses/' + courseID + '/labs');
     },
     async getCourses() {
       this.courses = [];
