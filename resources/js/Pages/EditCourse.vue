@@ -479,9 +479,17 @@ export default {
       this.labs = this.labs.filter((l, i) => i != key);
       this.closeDeleting();
     },
-    addLab() {
-      console.log("add lab");
-    }
+    async addLab() {
+      var payload = {
+        name: "New Lab",
+        description: "New Lab",
+        course_id: this.courseID,
+        due_date: "2021-06-03",
+      };
+      const lab = await API.apiClient.post(`/labs/`, payload);
+      this.labs.push(lab.data.data);
+      this.sortLabs();
+    },
   },
   async mounted() {
     this.course = await API.apiClient.get(`/courses/full/${this.courseID}`);
