@@ -13,7 +13,6 @@
       :disabledW="false"
       :disabledX="true"
       :handles="['bm']"
-      
       id="resizableEditor"
       style="z-index: 3 !important"
     >
@@ -43,7 +42,6 @@
       :disabledW="false"
       :disabledX="true"
       :handles="['tm']"
-      
       @resize-end="adjustEditorHeight"
       id="resizableConsole"
       style="z-index: 4 !important; bottom: 0 !important"
@@ -348,15 +346,19 @@ export default defineComponent({
       this.getStyle();
     },
     dynamicWidth: function () {
-      if (this.dynamicWidth != this.width) {
-        this.dynamicWidth = this.width;
-      }
+      setTimeout(() => {
+        if (this.dynamicWidth != this.width) {
+          this.dynamicWidth = this.width;
+        }
+      }, 100);
     },
     evenDynamicerWidth: function () {
-      if (this.evenDynamicerWidth != this.width) {
-        this.evenDynamicerWidth = this.width;
-      }
-    }
+      setTimeout(() => {
+        if (this.evenDynamicerWidth != this.width) {
+          this.evenDynamicerWidth = this.width;
+        }
+      }, 100);
+    },
   },
   computed: {
     consoleComponentHeight() {
@@ -386,8 +388,7 @@ export default defineComponent({
 
       if (button != null) {
         var numButtons = this.showSubmit ? 3 : 2;
-        this.style =
-          "width: calc(100% - " + (numButtons * 143) + "px)!important;";
+        this.style = "width: calc(100% - " + numButtons * 143 + "px)!important;";
       }
     },
     adjustEditorHeight() {
