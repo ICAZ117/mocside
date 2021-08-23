@@ -382,6 +382,8 @@ export default {
     },
     routeToLabs(courseID, labID) {
       //first go to labs page
+      console.log("routeToLabs");
+      console.log(this.ignoreUnmount);
       this.$router.push('/courses/' + courseID + '/labs/' + labID + '/problems');
       //then go to problems page
       this.ignoreUnmount = false;
