@@ -338,26 +338,45 @@ export default defineComponent({
     width: function (newVal, oldVal) {
       // watch it
       console.log("Prop changed: ", newVal, " | was: ", oldVal);
+      this.getStyle();
     },
   },
   computed: {
     consoleComponentHeight() {
       return window.innerHeight - 60 - this.h1 - 66;
     },
+    // getStyle() {
+    //   // width: " + (this.showSubmit ? "67%" : "89%") + "!important
+    //   var button = document.getElementById("buttonWidth");
+
+    //   if (button != null) {
+    //     var numButtons = this.showSubmit ? 3 : 2;
+    //     this.style =
+    //       "width: calc((100% - " +
+    //       numButtons +
+    //       "%) - " +
+    //       numButtons * button.clientWidth +
+    //       "px)!important;";
+    //     return this.style;
+    //   }
+    //   return "";
+    // },
+  },
+  methods: {
     getStyle() {
       // width: " + (this.showSubmit ? "67%" : "89%") + "!important
       var button = document.getElementById("buttonWidth");
-      var numButtons = this.showSubmit ? 3 : 2;
-      this.style =
-        "width: calc((100% - " +
-        numButtons +
-        "%) - " +
-        numButtons * button.clientWidth +
-        "px)!important;";
-      return this.style;
+
+      if (button != null) {
+        var numButtons = this.showSubmit ? 3 : 2;
+        this.style =
+          "width: calc((100% - " +
+          numButtons +
+          "%) - " +
+          numButtons * button.clientWidth +
+          "px)!important;";
+      }
     },
-  },
-  methods: {
     adjustEditorHeight() {
       setTimeout(() => {
         console.log("window.innerHeight: " + window.innerHeight);
