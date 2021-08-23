@@ -277,9 +277,4 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
-.resizable-content {
-  height: 100%;
-  width: 100%;
-}
-</style>
+

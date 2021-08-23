@@ -12,8 +12,8 @@
       :resizable="true"
       :disabledW="true"
       :handles="['bm']"
-      :key="width"
-      id="resizableConsole"
+      
+      id="resizableEditor"
       style="z-index: 3 !important"
     >
       <div class="editor row">
@@ -41,7 +41,7 @@
       :resizable="true"
       :disabledW="true"
       :handles="['tm']"
-      :key="width"
+      
       @resize-end="adjustEditorHeight"
       id="resizableConsole"
       style="z-index: 4 !important; bottom: 0 !important"
