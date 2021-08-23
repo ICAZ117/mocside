@@ -72,6 +72,7 @@
       </div>
       <div class="top-right grades">
         <div class="form-group">
+          <button @click="studentView()" class="btn btn-danger btn-block">Student View</button>
           <label for="Course Roster">Course Roster</label>
           <ul>
             <li v-for="(student, key) in students" :key="student.id">
@@ -181,7 +182,7 @@ import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
 export default {
   props: ["courseID"],
-  emits: ["unmounting", "courseEdited", "pushToLabs"],
+  emits: ["unmounting", "courseEdited", "pushToLabs", "studentView"],
   components: {
     FlashMessage,
     FileUpload,
@@ -421,6 +422,9 @@ export default {
       //emit push to labs but on parent just set boolean since it is about to be unmounted
       this.$emit("pushToLabs", [this.courseID, this.course.name, id, name]);
     },
+    studentView() {
+      this.$emit("studentView", [this.courseID, this.course.name]);
+    }
   },
   async mounted() {
     this.course = await API.apiClient.get(`/courses/full/${this.courseID}`);
