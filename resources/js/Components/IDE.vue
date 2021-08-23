@@ -453,6 +453,8 @@ export default defineComponent({
 
       const dump = res3.data.dump;
 
+      console.log(dump);
+
       var currentTC = 0;
 
       for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
