@@ -5,14 +5,14 @@
       :initH="consoleHeight + 1"
       v-model:x="x1"
       v-model:y="y1"
-      :w="width"
+      v-model:w="dynamicWidth"
       v-model:h="h1"
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="true"
+      :disabledW="false"
+      :disabledX="true"
       :handles="['bm']"
-      
       id="resizableEditor"
       style="z-index: 3 !important"
     >
@@ -31,17 +31,17 @@
 
     <Vue3DraggableResizable
       :initW="width"
-      :initH="consoleHeight"
+      :initH="consoleHeight - 1"
       v-model:x="x2"
       v-model:y="y2"
-      :w="width"
+      v-model:w="evenDynamicerWidth"
       v-model:h="h2"
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="true"
+      :disabledW="false"
+      :disabledX="true"
       :handles="['tm']"
-      
       @resize-end="adjustEditorHeight"
       id="resizableConsole"
       style="z-index: 4 !important; bottom: 0 !important"
@@ -326,7 +326,8 @@ export default defineComponent({
     w2: 0,
     active: true,
     reloadConsoleVDR: 0,
-    dynamicWidth: window.innerWidth * 0.67,
+    dynamicWidth: 0,
+    evenDynamicerWidth: 0,
   }),
   watch: {
     showModal: function () {
@@ -340,7 +341,23 @@ export default defineComponent({
       console.log("Prop changed: ", newVal, " | was: ", oldVal);
       this.w1 = this.width;
       this.w2 = this.width;
+      this.dynamicWidth = this.width;
+      this.evenDynamicerWidth = this.width;
       this.getStyle();
+    },
+    dynamicWidth: function () {
+      setTimeout(() => {
+        if (this.dynamicWidth != this.width) {
+          this.dynamicWidth = this.width;
+        }
+      }, 10);
+    },
+    evenDynamicerWidth: function () {
+      setTimeout(() => {
+        if (this.evenDynamicerWidth != this.width) {
+          this.evenDynamicerWidth = this.width;
+        }
+      }, 10);
     },
   },
   computed: {
@@ -371,8 +388,7 @@ export default defineComponent({
 
       if (button != null) {
         var numButtons = this.showSubmit ? 3 : 2;
-        this.style =
-          "width: calc(100% - " + (numButtons * 143) + "px)!important;";
+        this.style = "width: " + ((this.evenDynamicerWidth - 16) - (numButtons * 143) - 10) + "px !important;";
       }
     },
     adjustEditorHeight() {
@@ -382,6 +398,8 @@ export default defineComponent({
         console.log("h2: " + this.h2);
         console.log("total: " + window.innerHeight - 60 - this.h2);
         this.h1 = window.innerHeight - 60 - this.h2;
+        this.dynamicWidth++;
+        this.evenDynamicerWidth++;
       }, 100);
     },
     toggleIO() {

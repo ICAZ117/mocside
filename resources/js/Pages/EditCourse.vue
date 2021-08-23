@@ -151,7 +151,7 @@
               </tr>
             </thead>
             <tbody>
-              <template v-for="lab in labs" :key="lab.id">
+              <template v-for="(lab, key) in labs" :key="lab.id">
                 <tr
                   class="lab pointer"
                   @click.prevent="goToProblems(lab.id, lab.name)"
@@ -162,7 +162,7 @@
                   <td>{{ lab.due_date }}</td>
                 </tr>
                 <a @click="editLab(lab.id, lab.name)">...</a>
-                <a @click="removeLab(lab.id, lab.name)">X</a>
+                <a @click="deleting(lab.id, lab, key)">X</a>
               </template>
 
               <tr v-if="isProf" class="lab pointer" @click="addLab">
@@ -173,6 +173,25 @@
         </div>
       </div>
     </div>
+    <vue-final-modal
+      v-model="showDeleteModal"
+      classes="modal-container"
+      content-class="modal-content"
+      :esc-to-close="true"
+    >
+      <button class="modal-close" @click="closeDeleting()">x</button>
+      <div class="delete Course">
+        <p>
+          Are you sure you would like to delete {{ deletingLab.lab.name }}
+        </p>
+        <button class="btn btn-md btn-danger" @click="closeDeleting()">
+          Cancel
+        </button>
+        <button class="btn btn-md btn-danger" @click="removeLab()">
+          Delete
+        </button>
+      </div>
+    </vue-final-modal>
   </div>
 </template>
 
@@ -182,6 +201,7 @@ import { getError } from "../utils/helpers";
 import FileService from "../services/FileService";
 import FlashMessage from "../Components/FlashMessage";
 import FileUpload from "../Components/FileUpload";
+import store from "../Store/index";
 export default {
   props: ["courseID"],
   emits: ["unmounting", "courseEdited", "pushToLabs", "studentView", "editLab"],
@@ -217,6 +237,13 @@ export default {
       keyURL: "",
       labs: [],
       course: {},
+      showDeleteModal: false,
+      reloadDeleteModal: 0,
+      deletingLab: {
+        id: "",
+        lab: "",
+        key: "",
+      },
     };
   },
   methods: {
@@ -280,7 +307,6 @@ export default {
         end_date: this.courseForm.dateEnd,
       };
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
-      alert("Processed finished with status code: " + res.statusCode);
       this.$emit("courseEdited");
     },
     updateImage() {
@@ -431,8 +457,38 @@ export default {
       console.log("edit Lab");
       this.$emit("editLab", [this.courseID, this.course.name, id, name]);
     },
-    removeLab(id, name) {
+    closeDeleting() {
+      this.showDeleteModal = false;
+    },
+    deleting(id, lab, key) {
+      // document.getElementById("out-click").style.display = "none";
+      this.showDeleteModal = true;
+      this.deletingLab.id = id;
+      this.deletingLab.lab = lab;
+      this.deletingLab.key = key;
+    },
+    async removeLab() {
       console.log("remove lab");
+      var id = this.deletingLab.id;
+      var key = this.deletingLab.key;
+
+      //remove from lab the current course
+      const res = await API.apiClient.delete(`/labs/${id}`);
+
+      //filter from labs
+      this.labs = this.labs.filter((l, i) => i != key);
+      this.closeDeleting();
+    },
+    async addLab() {
+      var payload = {
+        name: "New Lab",
+        description: "New Lab",
+        course_id: this.courseID,
+        due_date: "2021-06-03",
+      };
+      const lab = await API.apiClient.post(`/labs/`, payload);
+      this.labs.push(lab.data.data);
+      this.sortLabs();
     },
   },
   async mounted() {
@@ -451,6 +507,22 @@ export default {
   beforeUnmount() {
     //editcourse
     this.$emit("unmounting");
+  },
+  computed: {
+    isProf: function () {
+      if (store.getters["auth/isProf"] == null) {
+        return false;
+      } else {
+        return store.getters["auth/isProf"];
+      }
+    },
+  },
+  watch: {
+    showDeleteModal: function () {
+      if (!this.showDeleteModal) {
+        this.reloadDeleteModal++;
+      }
+    },
   },
 };
 </script>
