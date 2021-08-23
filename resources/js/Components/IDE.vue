@@ -44,10 +44,10 @@
       :key="width"
       @resize-end="adjustEditorHeight"
       id="resizableConsole"
-      style="z-index: 4 !important"
+      style="z-index: 4 !important; bottom: 0!important;"
     >
       <div>
-        <div class="row p-2" style="background-color: black !important">
+        <div id="editorConfig" class="row p-2" style="background-color: black !important">
           <button
             @click="toggleIO"
             id="buttonWidth"
@@ -153,7 +153,7 @@
           :problemID="problemID"
           :lang="lang"
           @programFinished="launchConsole = false"
-          :style="'width: ' + width + '!important;'"
+          :style="'width: ' + width + 'px !important; height: ' + consoleComponentHeight + 'px !important;'"
         />
       </div>
     </Vue3DraggableResizable>
@@ -308,14 +308,14 @@ export default defineComponent({
     tcGrades: [],
     canSubmit: true,
 
-    consoleHeight: (window.innerHeight - 98) / 2,
+    consoleHeight: (window.innerHeight - 60) / 2,
     consoleWidth: window.innerWidth * 0.66,
     x1: 0,
     y1: 0,
     h1: 0,
     w1: 0,
     x2: 0,
-    y2: 400,
+    y2: (window.innerHeight - 60) / 2,
     h2: 0,
     w2: 0,
     active: true,
@@ -330,13 +330,9 @@ export default defineComponent({
       }
     },
   },
-  methods: {
-    adjustEditorHeight() {
-      this.h1 = window.innerHeight - 118 - this.h2;
-    },
-    toggleIO() {
-      this.showInput = !this.showInput;
-      this.IOmessage = this.showInput ? "Show Output" : "Show Input";
+  computed: {
+    consoleComponentHeight() {
+      return (window.innerHeight - 60 - this.h1) - 66;
     },
     getStyle() {
       // width: " + (this.showSubmit ? "67%" : "89%") + "!important
@@ -348,6 +344,22 @@ export default defineComponent({
         "%) - " +
         (numButtons * button.clientWidth + 2) +
         "px)!important;";
+      return this.style;
+    },
+  },
+  methods: {
+    adjustEditorHeight() {
+      setTimeout(() => {  
+        console.log("window.innerHeight: " + window.innerHeight);
+        console.log("window.innerHeight - 80: " + window.innerHeight - 80);
+        console.log("h2: " + this.h2);
+        console.log("total: " + window.innerHeight - 80 - this.h2);
+        this.h1 = window.innerHeight - 80 - this.h2; 
+        }, 100);
+    },
+    toggleIO() {
+      this.showInput = !this.showInput;
+      this.IOmessage = this.showInput ? "Show Output" : "Show Input";
     },
     updateContent() {
       var data = {
@@ -672,10 +684,10 @@ export default defineComponent({
         this.code = this.saved_p;
       }
     } catch (e) {}
-    this.getStyle();
     this.forceReload++;
     this.testCases = await API.apiClient.get(`/test-cases/${this.problemID}`);
     await this.initAccordion();
+    this.h1++;
   },
 });
 </script>

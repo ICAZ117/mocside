@@ -1,9 +1,9 @@
 <template>
   <div v-if="childIsOpen" class="workspace-page">
     <!-- WorkSpace Page-->
-    <button v-if="childIsOpen" @click="unmountingWork()" class="btn btn-danger btn-block">
+    <!-- <button v-if="childIsOpen" @click="unmountingWork()" class="btn btn-danger btn-block">
       Return to Problems
-    </button>
+    </button> -->
     <div v-if="childIsOpen">
       <Vue3DraggableResizable
         :initW="instructionsWidth"
@@ -80,9 +80,9 @@ export default defineComponent({
 
   data() {
     return {
-      instructionsHeight: window.innerHeight - 98,
+      instructionsHeight: window.innerHeight - 60,
       instructionsWidth: window.innerWidth * 0.33,
-      IDEHeight: window.innerHeight - 98,
+      IDEHeight: window.innerHeight - 60,
       IDEWidth: window.innerWidth * 0.66,
       assignment: {},
       title: "",
@@ -100,11 +100,11 @@ export default defineComponent({
       saveStatus: "",
       test: {},
       x1: 0,
-      y1: 98,
+      y1: 60,
       h1: 0,
       w1: 0,
       x2: window.innerWidth * 0.33,
-      y2: 98,
+      y2: 60,
       h2: 0,
       w2: window.innerWidth * 0.66,
       active: true,
