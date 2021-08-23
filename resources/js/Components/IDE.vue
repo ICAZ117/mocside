@@ -454,7 +454,7 @@ export default defineComponent({
 
       const dump = res3.data.dump;
 
-      console.log(dump);
+      console.log(JSON.parse(dump));
 
       var currentTC = 0;
 
