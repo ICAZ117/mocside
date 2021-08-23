@@ -18,12 +18,11 @@ ADD PAGES
 * Add Contact Us page
 
 * add more to course edit
-    * place sections into boxes...top left details, bottom left keys, top right roster, bottom right labs
-        * course details....name, description, date, img
-        * Keys maintain and Add
-        * roster/gradebook
-        * labs...click to go to problems page, edit, delete from this list
-    * button to see student view
+    * styling
+    * when you click the course router link i believe the out-click div is still up causing issues when trying to click to open a course
+
+
+
 
 
 
