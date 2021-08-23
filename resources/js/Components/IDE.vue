@@ -376,10 +376,10 @@ export default defineComponent({
     adjustEditorHeight() {
       setTimeout(() => {
         console.log("window.innerHeight: " + window.innerHeight);
-        console.log("window.innerHeight - 80: " + window.innerHeight - 80);
+        console.log("window.innerHeight - 60: " + window.innerHeight - 60);
         console.log("h2: " + this.h2);
-        console.log("total: " + window.innerHeight - 80 - this.h2);
-        this.h1 = window.innerHeight - 80 - this.h2;
+        console.log("total: " + window.innerHeight - 60 - this.h2);
+        this.h1 = window.innerHeight - 60 - this.h2;
       }, 100);
     },
     toggleIO() {
