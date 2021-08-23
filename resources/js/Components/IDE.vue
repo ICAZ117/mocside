@@ -10,7 +10,7 @@
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="true"
+      :disabledW="false"
       :handles="['bm']"
       
       id="resizableEditor"
@@ -39,7 +39,7 @@
       v-model:active="active"
       :draggable="false"
       :resizable="true"
-      :disabledW="true"
+      :disabledW="false"
       :handles="['tm']"
       
       @resize-end="adjustEditorHeight"
