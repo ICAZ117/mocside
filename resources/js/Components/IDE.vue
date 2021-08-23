@@ -390,6 +390,7 @@ export default defineComponent({
         console.log("h2: " + this.h2);
         console.log("total: " + window.innerHeight - 60 - this.h2);
         this.h1 = window.innerHeight - 60 - this.h2;
+        this.dynamicWidth++;
       }, 100);
     },
     toggleIO() {
