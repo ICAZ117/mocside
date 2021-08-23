@@ -461,7 +461,7 @@ export default {
       this.showDeleteModal = false;
     },
     deleting(id, lab, key) {
-      document.getElementById("out-click").style.display = "none";
+      // document.getElementById("out-click").style.display = "none";
       this.showDeleteModal = true;
       this.deletingLab.id = id;
       this.deletingLab.lab = lab;
