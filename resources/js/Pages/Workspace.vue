@@ -44,7 +44,7 @@
         :resizable="true"
         :disabledH="true"
         :handles="['ml']"
-        @resize-end="debouncedWidth = w2"
+        @resize-end="resizeEnd"
         :key="reloadSliders"
         id="resizeableIDE"
       >
@@ -120,6 +120,9 @@ export default defineComponent({
     },
   },
   methods: {
+    resizeEnd() {
+      this.debouncedWidth = this.w2;
+    },
     async unmountingWork() {
       console.log("unmountingWork");
       //go back in router by 1
