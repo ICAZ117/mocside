@@ -37,6 +37,7 @@
       v-model:w="evenDynamicerWidth"
       v-model:h="h2"
       v-model:active="active"
+      :minH="100"
       :draggable="false"
       :resizable="true"
       :disabledW="false"
