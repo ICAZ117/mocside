@@ -989,6 +989,11 @@ thead.gradebook {
     z-index: 10 !important;
 }
 
+.ProseMirror > * + * {
+    margin: 0.75em 0 0.75em 0 !important;
+    border: none !important;
+}
+
 /*========== POPUP MODAL ==========*/
 .modal-container {
     display: flex;
