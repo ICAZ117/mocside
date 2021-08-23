@@ -16,17 +16,17 @@
       id="resizableConsole"
       style="z-index: 3 !important"
     >
-    <div class="editor row">
-      <VAceEditor
-        class="editor"
-        v-model:value="code"
-        @input="updateContent"
-        :lang="editorLangauge"
-        :theme="theme"
-        :key="forceReload"
-        :style="'width: ' + width + '!important;'"
-      />
-    </div>
+      <div class="editor row">
+        <VAceEditor
+          class="editor"
+          v-model:value="code"
+          @input="updateContent"
+          :lang="editorLangauge"
+          :theme="theme"
+          :key="forceReload"
+          :style="'width: ' + width + '!important;'"
+        />
+      </div>
     </Vue3DraggableResizable>
 
     <Vue3DraggableResizable
@@ -44,7 +44,7 @@
       :key="width"
       @resize-end="adjustEditorHeight"
       id="resizableConsole"
-      style="z-index: 4 !important; bottom: 0!important;"
+      style="z-index: 4 !important; bottom: 0 !important"
     >
       <div>
         <div id="editorConfig" class="row p-2" style="background-color: black !important">
@@ -153,7 +153,13 @@
           :problemID="problemID"
           :lang="lang"
           @programFinished="launchConsole = false"
-          :style="'width: ' + width + 'px !important; height: ' + consoleComponentHeight + 'px !important;'"
+          :style="
+            'width: ' +
+            width +
+            'px !important; height: ' +
+            consoleComponentHeight +
+            'px !important;'
+          "
         />
       </div>
     </Vue3DraggableResizable>
@@ -329,10 +335,14 @@ export default defineComponent({
         this.reloadModal++;
       }
     },
+    width: function (newVal, oldVal) {
+      // watch it
+      console.log("Prop changed: ", newVal, " | was: ", oldVal);
+    },
   },
   computed: {
     consoleComponentHeight() {
-      return (window.innerHeight - 60 - this.h1) - 66;
+      return window.innerHeight - 60 - this.h1 - 66;
     },
     getStyle() {
       // width: " + (this.showSubmit ? "67%" : "89%") + "!important
@@ -342,20 +352,20 @@ export default defineComponent({
         "width: calc((100% - " +
         numButtons +
         "%) - " +
-        (numButtons * button.clientWidth + 2) +
+        numButtons * button.clientWidth +
         "px)!important;";
       return this.style;
     },
   },
   methods: {
     adjustEditorHeight() {
-      setTimeout(() => {  
+      setTimeout(() => {
         console.log("window.innerHeight: " + window.innerHeight);
         console.log("window.innerHeight - 80: " + window.innerHeight - 80);
         console.log("h2: " + this.h2);
         console.log("total: " + window.innerHeight - 80 - this.h2);
-        this.h1 = window.innerHeight - 80 - this.h2; 
-        }, 100);
+        this.h1 = window.innerHeight - 80 - this.h2;
+      }, 100);
     },
     toggleIO() {
       this.showInput = !this.showInput;
