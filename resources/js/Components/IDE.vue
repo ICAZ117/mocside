@@ -11,6 +11,7 @@
       :draggable="false"
       :resizable="true"
       :disabledW="false"
+      :disabledX="true"
       :handles="['bm']"
       
       id="resizableEditor"
@@ -40,6 +41,7 @@
       :draggable="false"
       :resizable="true"
       :disabledW="false"
+      :disabledX="true"
       :handles="['tm']"
       
       @resize-end="adjustEditorHeight"
