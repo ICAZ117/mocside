@@ -496,7 +496,7 @@ export default defineComponent({
         else if (tc.compare == 'runtimeError') {
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
-          this.accordions[currentTC].text = tc.userOut;
+          this.accordions[currentTC].text = JSON.parse(tc.userOut);
           this.tcGrades.push({
             ID: JSON.parse(tc.tcID),
             passed: false,
