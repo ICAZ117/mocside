@@ -35,7 +35,7 @@
       :initH="consoleHeight"
       v-model:x="x2"
       v-model:y="y2"
-      v-model:w="dynamicWidth"
+      v-model:w="evenDynamicerWidth"
       v-model:h="h2"
       v-model:active="active"
       :draggable="false"
@@ -329,6 +329,7 @@ export default defineComponent({
     active: true,
     reloadConsoleVDR: 0,
     dynamicWidth: 0,
+    evenDynamicerWidth: 0,
   }),
   watch: {
     showModal: function () {
@@ -343,11 +344,17 @@ export default defineComponent({
       this.w1 = this.width;
       this.w2 = this.width;
       this.dynamicWidth = this.width;
+      this.evenDynamicerWidth = this.width;
       this.getStyle();
     },
     dynamicWidth: function () {
       if (this.dynamicWidth != this.width) {
         this.dynamicWidth = this.width;
+      }
+    },
+    evenDynamicerWidth: function () {
+      if (this.evenDynamicerWidth != this.width) {
+        this.evenDynamicerWidth = this.width;
       }
     }
   },
@@ -391,6 +398,7 @@ export default defineComponent({
         console.log("total: " + window.innerHeight - 60 - this.h2);
         this.h1 = window.innerHeight - 60 - this.h2;
         this.dynamicWidth++;
+        this.evenDynamicerWidth++;
       }, 100);
     },
     toggleIO() {
