@@ -182,9 +182,10 @@ class ContainerController extends Controller
         $hostConfig = new HostConfig();
         $mountsConfig = new Mount();
 
+        $containerConfig->setImage('supervisor');
+
         if (strcasecmp($validData['lang'], 'python') == 0) {
-            $containerConfig->setImage('python');
-            $containerConfig->setCmd(['supervisor.py']);
+            $containerConfig->setCmd(['supervisor.py', '-l', 'python', '-p', 'testCases.json']);
             $containerConfig->setEntrypoint(["python3"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
@@ -192,10 +193,8 @@ class ContainerController extends Controller
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
-            $supervisor = Storage::disk('local')->path('supervisor-python.py');
         } else {
-            $containerConfig->setImage('supervisor');
-            $containerConfig->setCmd(['supervisor.py']);
+            $containerConfig->setCmd(['supervisor.py', '-l', 'java', '-p', 'testCases.json']);
             $containerConfig->setEntrypoint(["python3"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
@@ -203,7 +202,6 @@ class ContainerController extends Controller
             $containerConfig->setTty(true);
             $containerConfig->setOpenStdin(true);
             $containerConfig->setWorkingDir('/usr/src');
-            $supervisor = Storage::disk('local')->path('supervisor-java.py');
         }
         // create host config
         $mountsConfig->setType("bind");
@@ -215,38 +213,25 @@ class ContainerController extends Controller
 
 
         // save test cases to file
-        for ($i = 0; $i < count($test_cases); $i++) {
-            $temp = $test_cases[$i];
-            $tc_id = $temp->id;
-
-            // save tc/input
-            $path = $tc_id . ".in";
-            $file = fopen($path, "w");
-            fwrite($file, $temp->input);
-            Storage::disk('local')
-                ->putFileAs($head . "/test-cases", new File($path), $path);
-            fclose($file);
-            unlink($path);
-
-            // save tc/output
-            $path = $tc_id . ".out";
-            $file = fopen($path, "w");
-            fwrite($file, $temp->output);
-            Storage::disk('local')
-                ->putFileAs($head . "/test-cases", new File($path), $path);
-            fclose($file);
-            unlink($path);
-        }
+        $assignment = Assignment::find($id);
+        $test_cases = $assignment->test_cases;
+        $path = "testCases.json";
+        $file = fopen($path, "w");
+        fwrite($file, json_encode($test_cases));
+        Storage::disk('local')->putFileAs($head, new File($path), $path);
+        fclose($file);
+        unlink($path);
 
         // copy in supervisor
+        $supervisor = Storage::disk('local')->path('supervisor.py');
         Storage::disk('local')
             ->putFileAs($head, $supervisor, 'supervisor.py');
 
         // copy in junit jars
         $junit_path = Storage::disk('local')->path('junit/junit-4.13.2.jar');
         $hamcrest = Storage::disk('local')->path('junit/hamcrest-core-1.3.jar');
-        Storage::disk('local')->putFileAs($head . "/junit", new File($junit_path), 'junit-4.13.2.jar');
-        Storage::disk('local')->putFileAs($head . "/junit", new File($hamcrest), 'hamcrest-core-1.3.jar');
+        Storage::disk('local')->putFileAs($head, new File($junit_path), 'junit-4.13.2.jar');
+        Storage::disk('local')->putFileAs($head, new File($hamcrest), 'hamcrest-core-1.3.jar');
 
         // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);
