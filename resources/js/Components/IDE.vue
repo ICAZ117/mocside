@@ -388,7 +388,7 @@ export default defineComponent({
 
       if (button != null) {
         var numButtons = this.showSubmit ? 3 : 2;
-        this.style = "width: " + this.evenDynamicerWidth - 16 + (numButtons * 143) + "px!important;";
+        this.style = "width: " + ((this.evenDynamicerWidth - 16) - (numButtons * 143)) + "px!important;";
       }
     },
     adjustEditorHeight() {
