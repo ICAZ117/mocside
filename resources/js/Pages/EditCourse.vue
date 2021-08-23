@@ -162,7 +162,7 @@
                   <td>{{ lab.due_date }}</td>
                 </tr>
                 <a @click="editLab(lab.id, lab.name)">...</a>
-                <a @click="removeLab(lab.id, lab, key)">X</a>
+                <a @click="deleting(lab.id, lab, key)">X</a>
               </template>
 
               <tr v-if="isProf" class="lab pointer" @click="addLab">
