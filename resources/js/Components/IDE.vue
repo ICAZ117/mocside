@@ -469,7 +469,7 @@ export default defineComponent({
         var self = this;
 
         // IF the code has a compile error, handle it
-        if (tc.compare == '"compilationError"') {
+        if (tc.compare == 'compilationError') {
           this.accordions = [
             {
               title: "Compilation Error",
@@ -493,7 +493,7 @@ export default defineComponent({
           break;
         }
         // ELSE IF the code has a runtime error, handle it
-        else if (tc.compare == '"runtimeError"') {
+        else if (tc.compare == 'runtimeError') {
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut)[0][0];
