@@ -541,7 +541,8 @@ export default defineComponent({
             // the correct test case, set the current accordion's input to the correct test case's
             // input.
             for (let j = 0; j < this.testCases.data.data.length; j++) {
-              if ('"' + self.testCases.data.data[j].id + '"' == tc.tcID) {
+              // if ('"' + self.testCases.data.data[j].id + '"' == tc.tcID) {
+                if (self.testCases.data.data[j].id == Number(tc.tcID)) {
                 self.accordions[currentTC].input = self.testCases.data.data[j].input;
               }
             }
