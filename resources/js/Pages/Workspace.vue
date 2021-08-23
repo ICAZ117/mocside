@@ -122,7 +122,6 @@ export default defineComponent({
   methods: {
     resizeEnd() {
       this.debouncedWidth = this.w2;
-      this.forceReload++;
     },
     async unmountingWork() {
       console.log("unmountingWork");
