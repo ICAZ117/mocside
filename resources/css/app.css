@@ -855,7 +855,7 @@ thead.gradebook {
 .workspace-page {
     background-color: black!important;
     width: 100vw!important;
-    height: 100vh!important;
+    height: calc(100vh - var(--nav-height))!important;
 }
 .work-area {
     padding: 0 !important;
