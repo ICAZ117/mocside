@@ -375,7 +375,6 @@ export default {
       var courseName = params[1];
       var id = params[2];
       var name = params[3];
-      this.Unmounting();
       this.routeToLabs(courseID, id);
       // this.goToLabs(courseID, courseName);
       // this.$router.push({ name: "Problems", params: { lab_id: id } });
@@ -385,8 +384,6 @@ export default {
       console.log("routeToLabs");
       console.log(this.ignoreUnmount);
       this.$router.push('/courses/' + courseID + '/labs/' + labID + '/problems');
-      //then go to problems page
-      this.ignoreUnmount = false;
     },
     async getCourses() {
       this.courses = [];
@@ -593,6 +590,7 @@ export default {
           this.routeToChild();
         }
       }
+      this.ignoreUnmount = false;
     },
     async courseEdited() {
       ///update the list of courses
