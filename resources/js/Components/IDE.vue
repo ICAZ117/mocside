@@ -5,7 +5,7 @@
       :initH="consoleHeight + 1"
       v-model:x="x1"
       v-model:y="y1"
-      :w="width"
+      v-model:w="dynamicWidth"
       v-model:h="h1"
       v-model:active="active"
       :draggable="false"
@@ -35,7 +35,7 @@
       :initH="consoleHeight"
       v-model:x="x2"
       v-model:y="y2"
-      :w="width"
+      v-model:w="dynamicWidth"
       v-model:h="h2"
       v-model:active="active"
       :draggable="false"
@@ -328,7 +328,7 @@ export default defineComponent({
     w2: 0,
     active: true,
     reloadConsoleVDR: 0,
-    dynamicWidth: window.innerWidth * 0.67,
+    dynamicWidth: 0,
   }),
   watch: {
     showModal: function () {
@@ -342,8 +342,14 @@ export default defineComponent({
       console.log("Prop changed: ", newVal, " | was: ", oldVal);
       this.w1 = this.width;
       this.w2 = this.width;
+      this.dynamicWidth = this.width;
       this.getStyle();
     },
+    dynamicWidth: function () {
+      if (this.dynamicWidth != this.width) {
+        this.dynamicWidth = this.width;
+      }
+    }
   },
   computed: {
     consoleComponentHeight() {
