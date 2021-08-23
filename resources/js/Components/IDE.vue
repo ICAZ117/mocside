@@ -315,7 +315,7 @@ export default defineComponent({
     canSubmit: true,
 
     consoleHeight: (window.innerHeight - 60) / 2,
-    consoleWidth: window.innerWidth * 0.66,
+    consoleWidth: window.innerWidth * 0.67,
     x1: 0,
     y1: 0,
     h1: 0,
@@ -326,7 +326,7 @@ export default defineComponent({
     w2: 0,
     active: true,
     reloadConsoleVDR: 0,
-    dynamicWidth: window.innerWidth * 0.66,
+    dynamicWidth: window.innerWidth * 0.67,
   }),
   watch: {
     showModal: function () {

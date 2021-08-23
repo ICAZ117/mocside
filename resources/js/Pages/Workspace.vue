@@ -83,7 +83,7 @@ export default defineComponent({
       instructionsHeight: window.innerHeight - 60,
       instructionsWidth: window.innerWidth * 0.33,
       IDEHeight: window.innerHeight - 60,
-      IDEWidth: window.innerWidth * 0.66,
+      IDEWidth: window.innerWidth * 0.67,
       assignment: {},
       title: "",
       description: "",
@@ -106,9 +106,9 @@ export default defineComponent({
       x2: window.innerWidth * 0.33,
       y2: 60,
       h2: 0,
-      w2: window.innerWidth * 0.66,
+      w2: window.innerWidth * 0.67,
       active: true,
-      debouncedWidth: window.innerWidth * 0.66,
+      debouncedWidth: window.innerWidth * 0.67,
     };
   },
   watch: {
