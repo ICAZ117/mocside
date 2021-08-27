@@ -34,7 +34,15 @@
         </div>
       </div>
 
-      <IDE :lang="lang" :problemID="problemID" :showSubmit="false" v-model:saved_j="template_j" v-model:saved_p="template_p" @update="updateContent" />
+      <IDE
+        :width="windowWidth"
+        :lang="lang"
+        :problemID="problemID"
+        :showSubmit="false"
+        v-model:saved_j="template_j"
+        v-model:saved_p="template_p"
+        @update="updateContent"
+      />
     </div>
   </div>
 </template>
@@ -53,14 +61,15 @@ export default {
       content: "",
       template_j: "",
       template_p: "",
+      windowWidth: window.innerWidth,
     };
   },
   watch: {
-    content: function(val) {
-      this.saveStatus = "Saving..."
+    content: function (val) {
+      this.saveStatus = "Saving...";
       console.log("Change status to saving");
       this.timeout(this.problemID);
-    }
+    },
   },
   methods: {
     launchEditor() {
@@ -73,18 +82,17 @@ export default {
     updateContent(e) {
       this.content = e.code;
     },
-    timeout: _.debounce(async function(assignmentID) {
+    timeout: _.debounce(async function (assignmentID) {
       var payload = {};
-      if(this.lang =="Java") {
+      if (this.lang == "Java") {
         payload = {
-          "java_starter": this.content,
-        }
+          java_starter: this.content,
+        };
+      } else {
+        payload = {
+          python_starter: this.content,
+        };
       }
-      else {
-        payload = {
-          "python_starter": this.content,
-        }
-      };
       console.log(payload);
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
       this.saveStatus = "All changes have been saved";
@@ -98,7 +106,7 @@ export default {
   },
   beforeMount() {
     this.getStarter();
-  }
+  },
 };
 </script>
 
