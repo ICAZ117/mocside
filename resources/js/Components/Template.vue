@@ -34,15 +34,17 @@
         </div>
       </div>
 
-      <IDE
-        :width="windowWidth"
-        :lang="lang"
-        :problemID="problemID"
-        :showSubmit="false"
-        v-model:saved_j="template_j"
-        v-model:saved_p="template_p"
-        @update="updateContent"
-      />
+      <div class="template-IDE">
+        <IDE
+          :width="windowWidth"
+          :lang="lang"
+          :problemID="problemID"
+          :showSubmit="false"
+          v-model:saved_j="template_j"
+          v-model:saved_p="template_p"
+          @update="updateContent"
+        />
+      </div>
     </div>
   </div>
 </template>

@@ -1216,6 +1216,10 @@ thead.gradebook {
     padding-top: calc(0.4 * (100vh - (var(--nav-height) + 88.2px))) !important;
 }
 
+.template-IDE {
+    margin-top: 150px!important;
+}
+
 .save-template,
 .save-model {
     width: 100vw !important;
