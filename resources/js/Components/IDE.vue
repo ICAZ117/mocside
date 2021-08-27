@@ -289,6 +289,7 @@ export default defineComponent({
     "codeID",
     "labID",
     "width",
+    "offsetTop"
   ],
   emits: ["update"],
   components: {
@@ -363,7 +364,7 @@ export default defineComponent({
   },
   computed: {
     consoleComponentHeight() {
-      return window.innerHeight - 60 - this.h1 - 47;
+      return window.innerHeight - this.offsetTop - this.h1 - 47;
     },
     // getStyle() {
     //   // width: " + (this.showSubmit ? "67%" : "89%") + "!important
@@ -395,10 +396,10 @@ export default defineComponent({
     adjustEditorHeight() {
       setTimeout(() => {
         console.log("window.innerHeight: " + window.innerHeight);
-        console.log("window.innerHeight - 60: " + window.innerHeight - 60);
+        console.log("window.innerHeight - offsetTop: " + window.innerHeight - this.offsetTop);
         console.log("h2: " + this.h2);
-        console.log("total: " + window.innerHeight - 60 - this.h2);
-        this.h1 = window.innerHeight - 60 - this.h2;
+        console.log("total: " + window.innerHeight - this.offsetTop - this.h2);
+        this.h1 = window.innerHeight - this.offsetTop - this.h2;
         this.dynamicWidth++;
         this.evenDynamicerWidth++;
       }, 100);
@@ -739,6 +740,9 @@ export default defineComponent({
     this.h1++;
     this.h1--;
     this.getStyle();
+    this.consoleHeight = (window.innerHeight - this.offsetTop) / 2;
+    this.y2 = (window.innerHeight - this.offsetTop) / 2;
+    this.y1 = this.offsetTop;
   },
 });
 </script>

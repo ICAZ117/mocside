@@ -36,6 +36,7 @@
 
       <div class="template-IDE">
         <IDE
+          :offsetTop="197"
           :width="windowWidth"
           :lang="lang"
           :problemID="problemID"
