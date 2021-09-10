@@ -82,7 +82,6 @@ export default {
   props: {
     goBack: {
       default: false,
-      type: Boolean,
     }
   },
   data() {
