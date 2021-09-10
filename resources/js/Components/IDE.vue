@@ -289,7 +289,7 @@ export default defineComponent({
     "codeID",
     "labID",
     "width",
-    "offsetTop"
+    "offsetTop",
   ],
   emits: ["update"],
   components: {
@@ -361,15 +361,24 @@ export default defineComponent({
         }
       }, 10);
     },
-    h1: function() {
+    h1: function () {
       setTimeout(() => {
         this.y2 = this.offsetTop + this.h1;
       }, 10);
-    }
+    },
+    h2: function () {
+      setTimeout(() => {
+        this.h2 = this.h2 - 60;
+      }, 10);
+    },
   },
   computed: {
     consoleComponentHeight() {
-      return window.innerHeight - this.offsetTop - this.h1 - 47;
+      if (this.offsetTop == 0) {
+        return window.innerHeight - 60 - this.h1 - 47;
+      } else {
+        return window.innerHeight - this.offsetTop - this.h1 - 47;
+      }
     },
     // getStyle() {
     //   // width: " + (this.showSubmit ? "67%" : "89%") + "!important
@@ -395,13 +404,18 @@ export default defineComponent({
 
       if (button != null) {
         var numButtons = this.showSubmit ? 3 : 2;
-        this.style = "width: " + ((this.evenDynamicerWidth - 16) - (numButtons * 143) - 10) + "px !important;";
+        this.style =
+          "width: " +
+          (this.evenDynamicerWidth - 16 - numButtons * 143 - 10) +
+          "px !important;";
       }
     },
     adjustEditorHeight() {
       setTimeout(() => {
         console.log("window.innerHeight: " + window.innerHeight);
-        console.log("window.innerHeight - offsetTop: " + window.innerHeight - this.offsetTop);
+        console.log(
+          "window.innerHeight - offsetTop: " + window.innerHeight - this.offsetTop
+        );
         console.log("h2: " + this.h2);
         console.log("total: " + window.innerHeight - this.offsetTop - this.h2);
         this.h1 = window.innerHeight - this.offsetTop - this.h2;
@@ -475,7 +489,7 @@ export default defineComponent({
         var self = this;
 
         // IF the code has a compile error, handle it
-        if (tc.compare == 'compilationError') {
+        if (tc.compare == "compilationError") {
           this.accordions = [
             {
               title: "Compilation Error",
@@ -499,7 +513,7 @@ export default defineComponent({
           break;
         }
         // ELSE IF the code has a runtime error, handle it
-        else if (tc.compare == 'runtimeError') {
+        else if (tc.compare == "runtimeError") {
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut);
@@ -548,7 +562,7 @@ export default defineComponent({
             // input.
             for (let j = 0; j < this.testCases.data.data.length; j++) {
               // if ('"' + self.testCases.data.data[j].id + '"' == tc.tcID) {
-                if (self.testCases.data.data[j].id == Number(tc.tcID)) {
+              if (self.testCases.data.data[j].id == Number(tc.tcID)) {
                 self.accordions[currentTC].input = self.testCases.data.data[j].input;
               }
             }
