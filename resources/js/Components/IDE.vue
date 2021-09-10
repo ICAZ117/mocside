@@ -365,9 +365,10 @@ export default defineComponent({
       setTimeout(() => {
         this.y2 = this.offsetTop + this.h1;
         setTimeout(() => {
-          // this.h2 = this.h2 - 60;
-          this.h2 = this.consoleComponentHeight + 47;
-        }, 1);
+          this.h2 = this.h2 - 60;
+          // this.h2 = this.consoleComponentHeight + 47;
+        }, 10);
+        this.h2 = this.h2 + 60;
       }, 10);
     },
   },
