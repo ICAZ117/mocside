@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="template-IDE">
+      <div class="template-IDE"> 
         <IDE
           :offsetTop="197.5"
           :width="windowWidth"
