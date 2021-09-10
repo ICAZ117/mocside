@@ -79,7 +79,6 @@ const routes = [
     },
     {
         path: "/login",
-        meta: { requiresLog: true },
         component: () => import("../Pages/Login.vue"),
         name: "Login",
         props: true,
