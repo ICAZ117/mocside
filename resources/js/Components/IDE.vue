@@ -368,9 +368,9 @@ export default defineComponent({
     },
     h2: function () {
       setTimeout(() => {
-        this.h2 = this.h2 - 60;
+        this.h2 = this.consoleComponentHeight() + 47;
       }, 10);
-    },
+    }
   },
   computed: {
     consoleComponentHeight() {
