@@ -64,6 +64,13 @@ const routes = [
         path: "/:course_key/enroll",
         component: () => import("../Pages/CourseEnroll.vue"),
         name: "CourseEnroll",
+        children: [
+            {
+                path: "/enroll/login",
+                component: () => import("../Pages/Login.vue"),
+                name: "enroll-login",
+            }
+        ],
     },
     {
         path: "/about",
@@ -72,6 +79,7 @@ const routes = [
     },
     {
         path: "/login",
+        meta: { requiresLog: true },
         component: () => import("../Pages/Login.vue"),
         name: "Login",
         props: true,
