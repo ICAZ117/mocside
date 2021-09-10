@@ -150,9 +150,11 @@ export default {
       //get the previous route.....if an enroll page redirect there
       //otherwise redirect to courses
       if (this.goBack == true) {
+        console.log("course-enroll");
         this.$router.go(-1);
       }
       else {
+        console.log("courses");
         this.$router.push({ name: "Courses" });
       }
 
