@@ -79,6 +79,12 @@ export default {
       v$: useVuelidate(),
     };
   },
+  props: {
+    goBack: {
+      default: false,
+      type: Boolean,
+    }
+  },
   data() {
     return {
       error: null,
@@ -128,7 +134,7 @@ export default {
           this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
           // this.$router.push("/courses"); // push home?
           //redirect to last address
-          this.$router.go(-1);
+          this.goRouter();
         } else {
           const error = Error(
             "Unable to fetch user after login, check your API settings."
@@ -139,6 +145,16 @@ export default {
       } catch (error) {
         this.error = getError(error);
       }
+    },
+    goRouter() {
+      //get the previous route.....if an enroll page redirect there
+      //otherwise redirect to courses
+
+
+      //if enroll
+      console.log(this.goBack);
+      this.$router.go(-1);
+
     },
   },
 };

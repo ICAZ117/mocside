@@ -30,6 +30,7 @@ NEXT UP
 * Double check deleting and copy assingments work as intended
     * some test cases have had the wrong assignment id
 * add modification to Ace-editor, suggestions, autoformat, autocompletes
+* Work on logging in going to courses, and if coming from the /enroll page goes to that course
 
 
 
