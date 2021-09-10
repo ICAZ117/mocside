@@ -741,7 +741,7 @@ export default defineComponent({
     this.h1--;
     this.getStyle();
     this.consoleHeight = (window.innerHeight - this.offsetTop) / 2;
-    this.y2 = (window.innerHeight - this.offsetTop) / 2;
+    this.y2 = this.offsetTop + ((window.innerHeight - this.offsetTop) / 2);
     this.y1 = this.offsetTop;
   },
 });
