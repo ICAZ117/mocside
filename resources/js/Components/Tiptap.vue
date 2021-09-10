@@ -104,7 +104,7 @@ export default {
   border-bottom: 2px solid #0d0d0d;
 }
 .editor__content {
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 1rem 0 1rem;
   flex: 1 1 auto;
   overflow-x: hidden;
   overflow-y: auto;
