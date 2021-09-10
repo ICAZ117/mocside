@@ -364,7 +364,7 @@ export default defineComponent({
     h1: function () {
       setTimeout(() => {
         this.y2 = this.offsetTop + this.h1;
-        this.h2 = this.h2 - 1;
+        this.h2 = this.h2 - 60;
       }, 10);
     },
   },
