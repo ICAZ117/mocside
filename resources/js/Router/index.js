@@ -15,16 +15,21 @@ router.beforeEach((to, from, next) => {
     const loginQuery = { path: "/login", query: { redirect: to.fullPath}, };
     const enrollQuery = { name: "Login", params: {goBack: true}, query: { redirect: to.fullPath },};
   
+    console.log("from");
+    console.log(from);
+    console.log("to");
+    console.log(to);
+
     if (reqAuth && !authUser) {
       store.dispatch("auth/getAuthUser").then(() => {
         if (!store.getters["auth/authUser"]) next(loginQuery);
         else next();
       });
-    } else if(reqLog && !authUser) {
-      store.dispatch("auth/getAuthUser").then(() => {
-        if(!store.getters["auth/authUser"]) next(enrollQuery);
-        else next();
-      });
+    // } else if(reqLog && !authUser) {
+    //   store.dispatch("auth/getAuthUser").then(() => {
+    //     if(!store.getters["auth/authUser"]) next(enrollQuery);
+    //     else next();
+    //   });
     } else {
       next(); // make sure to always call next()!
     }
