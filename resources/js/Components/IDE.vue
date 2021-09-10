@@ -361,6 +361,11 @@ export default defineComponent({
         }
       }, 10);
     },
+    h1: function() {
+      setTimeout(() => {
+        this.y2 = this.offsetTop + this.h1;
+      }, 10);
+    }
   },
   computed: {
     consoleComponentHeight() {
@@ -741,7 +746,7 @@ export default defineComponent({
     this.h1--;
     this.getStyle();
     this.consoleHeight = (window.innerHeight - this.offsetTop) / 2;
-    this.y2 = this.offsetTop + ((window.innerHeight - this.offsetTop) / 2);
+    this.y2 = this.offsetTop + this.consoleHeight + 1;
     this.y1 = this.offsetTop;
   },
 });
