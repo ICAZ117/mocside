@@ -364,14 +364,9 @@ export default defineComponent({
     h1: function () {
       setTimeout(() => {
         this.y2 = this.offsetTop + this.h1;
+        this.h2 = this.h2 - 1;
       }, 10);
     },
-    h2: function () {
-      setTimeout(() => {
-        console.log("Hello")
-        this.h2 = this.h2 - 60;
-      }, 100);
-    }
   },
   computed: {
     consoleComponentHeight() {
