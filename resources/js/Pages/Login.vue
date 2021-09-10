@@ -79,7 +79,12 @@ export default {
       v$: useVuelidate(),
     };
   },
-  props: ["goBack"],
+  props: {
+    goBack: {
+      default: false,
+      type: Boolean,
+    }
+  },
   data() {
     return {
       error: null,
