@@ -49,7 +49,7 @@
         id="resizeableIDE"
       >
         <IDE
-          :offsetTop="60"
+          :offsetTop="0"
           :lang="lang"
           :showSubmit="true"
           :saved_j="code_j"
