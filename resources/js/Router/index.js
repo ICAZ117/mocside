@@ -20,6 +20,9 @@ router.beforeEach((to, from, next) => {
     console.log("to");
     console.log(to);
 
+    if(from.name == "CourseEnroll") {
+      to.params = {goBack: true};
+    }
     if (reqAuth && !authUser) {
       store.dispatch("auth/getAuthUser").then(() => {
         if (!store.getters["auth/authUser"]) next(loginQuery);
