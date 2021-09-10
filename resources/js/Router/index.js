@@ -13,7 +13,7 @@ router.beforeEach((to, from, next) => {
     const reqAuth = to.matched.some((record) => record.meta.requiresAuth);
     const reqLog = to.matched.some((record) => record.meta.requiresLog);
     const loginQuery = { path: "/login", query: { redirect: to.fullPath}, };
-    const enrollQuery = {name: "Login", params: {goBack: true}};
+    const enrollQuery = { name: "Login", params: {goBack: true}, query: { redirect: to.fullPath },};
   
     if (reqAuth && !authUser) {
       store.dispatch("auth/getAuthUser").then(() => {
@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
       });
     } else if(reqLog && !authUser) {
       store.dispatch("auth/getAuthUser").then(() => {
-        if(!store.getters["auth/authUser"]) next (enrollQuery);
+        if(!store.getters["auth/authUser"]) next(enrollQuery);
         else next();
       });
     } else {
