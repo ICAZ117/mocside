@@ -11,8 +11,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const authUser = store.getters["auth/authUser"];
     const reqAuth = to.matched.some((record) => record.meta.requiresAuth);
-    const loginQuery = { path: "/login", query: { redirect: to.fullPath } };
-    console.log("index.js");
+    const loginQuery = { path: "/login", query: { redirect: to.fullPath }, params: {goBack: true} };
   
     if (reqAuth && !authUser) {
       store.dispatch("auth/getAuthUser").then(() => {
