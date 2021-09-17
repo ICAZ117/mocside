@@ -160,9 +160,13 @@ export default defineComponent({
         if (this.lang == "Java") {
           this.code_j = this.assignment.java_starter;
           this.codeID = initial.data.id;
+          console.log("initial.id "+ initial.data.id);
+          console.log(this.codeID);
         } else {
           this.code_p = this.assignment.python_starter;
           this.codeID = initial.data.id;
+          console.log("initial.id "+ initial.data.id);
+          console.log(this.codeID);
         }
       } else {
         //otherwise not empty
