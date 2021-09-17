@@ -70,7 +70,7 @@ export default {
   watch: {
     tab: function (newVal, oldVal) {
       if (newVal != "Template") {
-        showEditor = false;
+        this.showEditor = false;
       }
     },
     content: function (val) {
