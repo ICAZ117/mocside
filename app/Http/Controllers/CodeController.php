@@ -21,6 +21,20 @@ class CodeController extends Controller
         // in this case, we are creating a new code entry.
         // like with checking, we must touch progress
         $progress = Progress::where('fsc_id', '=', $user->fsc_id)->first();
+        if (!$progress) {
+            // create progress?
+            // I hope we can take care of this in user creation,
+            // but if it's not done, we get a 500 here.
+            $labs_book = [];
+            $problems_book = [];
+            $progress_book = [];
+            $progress = Progress::create([
+                'fsc_id' => $user->fsc_id,
+                'labs' => json_encode($labs_book),
+                'assignments' => json_encode($problems_book),
+                'progress' => json_encode($progress_book)
+            ]);
+        }
         $progress->touchDate($validData['problem_id']);
 
         return Code::create([
