@@ -6,7 +6,7 @@
         class="delete-modal"
         v-model="showDeleteModal"
         classes="modal-container"
-        content-class="modal-content"
+        content-class="modal-content delete-modal"
         :esc-to-close="true"
       >
         <button class="modal-close" @click="closeDeleting()">x</button>
