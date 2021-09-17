@@ -96,11 +96,15 @@ class ContainerController extends Controller
         if (!$code) {
             return response()->json(['message' => 'Fatal error, no code found.'], 404);
         }
-        else if ($validData['lang'] == 'python'){
-            Storage::disk('local')->putFileAs($head, new File($code->code), 'main.py');
+        $temp = fopen('code.temp', 'w');
+        fwrite($temp, $code->code);
+        if ($validData['lang'] == 'python'){
+            Storage::disk('local')->putFileAs($head, new File($temp), 'main.py');
         } else {
-            Storage::disk('local')->putFileAs($head, new File($code->code), 'Main.java');
+            Storage::disk('local')->putFileAs($head, new File($temp), 'Main.java');
         }
+        fclose($temp);
+        unlink($temp);
 
         // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);
