@@ -178,7 +178,7 @@ export default {
       fscID: null,
       deletedMe: false,
       username: "",
-      sort: "0",
+      sort: "1",
       showDeleteModal: false,
       reloadDeleteModal: 0,
       deletingProblem: {
@@ -413,10 +413,10 @@ export default {
       //get sort method and call it
       if (this.sort == 0) {
         //dueDate
-        //default
         await this.sortByDueDate();
       } else if (this.sort == 1) {
         //name
+        //default
         await this.sortByName();
       } else {
         //course ID

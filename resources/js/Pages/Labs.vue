@@ -306,7 +306,7 @@ export default defineComponent({
       grades: {},
       problems: {},
       expandedProblem: null,
-      sort: "0",
+      sort: "1",
       showDeleteModal: false,
       reloadDeleteModal: 0,
       deletingLab: {
@@ -663,10 +663,10 @@ export default defineComponent({
       //get sort method and call it
       if (this.sort == 0) {
         //dueDate
-        //default
         await this.sortByDueDate();
       } else if (this.sort == 1) {
         //name
+        //default
         await this.sortByName();
       } else {
         //course ID
