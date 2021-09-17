@@ -96,12 +96,13 @@ class ContainerController extends Controller
         if (!$code) {
             return response()->json(['message' => 'Fatal error, no code found.'], 404);
         }
-        $temp = fopen('code.temp', 'w');
+        $temp_path = 'code.temp';
+        $temp = fopen($temp_path, 'w');
         fwrite($temp, $code->code);
         if ($validData['lang'] == 'python'){
-            Storage::disk('local')->putFileAs($head, new File($temp), 'main.py');
+            Storage::disk('local')->putFileAs($head, new File($temp_path), 'main.py');
         } else {
-            Storage::disk('local')->putFileAs($head, new File($temp), 'Main.java');
+            Storage::disk('local')->putFileAs($head, new File($temp_path), 'Main.java');
         }
         fclose($temp);
         unlink($temp);
