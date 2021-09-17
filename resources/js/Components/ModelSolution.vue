@@ -42,7 +42,7 @@
 <script>
 import * as API from "../services/API";
 export default {
-  props: ["problemID"],
+  props: ["problemID", "tab"],
   data() {
     return {
       saveStatus: "",
@@ -54,6 +54,11 @@ export default {
     };
   },
   watch: {
+    tab: function (newVal, oldVal) {
+      if (newVal != "Template") {
+        this.showEditor = false;
+      }
+    },
     content: function(val) {
       this.saveStatus = "Saving..."
       this.timeout(this.problemID);
