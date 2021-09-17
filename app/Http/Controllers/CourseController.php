@@ -62,7 +62,7 @@ class CourseController extends Controller
         try {
             $course = Course::findOrFail($id);
             return new CourseResource($course);
-        } catch (ModelNotFoundException $e) {
+        } catch (ErrorException $e) {
             // Giving a misinfomed 200 here to try and not block processing.
             return response()->json(['message' => 'Resource not found. Please remove course from list.'], 200); 
         }
