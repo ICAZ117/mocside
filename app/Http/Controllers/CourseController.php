@@ -59,7 +59,13 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        return new CourseResource(Course::find($id));
+        try {
+            $course = Course::findOrFail($id);
+            return new CourseResource($course);
+        } catch (ModelNotFoundException $e) {
+            // Giving a misinfomed 200 here to try and not block processing.
+            return response()->json(['message' => 'Resource not found. Please remove course from list.'], 200); 
+        }
     }
 
     // displays course with gradebook, for admins and owners only.
