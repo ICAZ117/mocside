@@ -1087,11 +1087,11 @@ thead.gradebook {
 }
 
 /*========= DELETE MODAL =========*/
-/* .delete-modal {
-    width: 40%;
+.delete-modal {
+    /* width: 40%; */
     font-size: 22px;
-    height: 20%;
-} */
+    /* height: 20%; */
+}
 
 .delete-buttons {
     float:right;
