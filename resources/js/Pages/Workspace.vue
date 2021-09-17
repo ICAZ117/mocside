@@ -160,18 +160,26 @@ export default defineComponent({
         if (this.lang == "Java") {
           this.code_j = this.assignment.java_starter;
           this.codeID = initial.data.id;
+          console.log("initial.id "+ initial.data.id);
+          console.log(this.codeID);
         } else {
           this.code_p = this.assignment.python_starter;
           this.codeID = initial.data.id;
+          console.log("initial.id "+ initial.data.id);
+          console.log(this.codeID);
         }
       } else {
         //otherwise not empty
         if (this.lang == "Java") {
           this.code_j = empty.data.dump[0].code;
           this.codeID = empty.data.dump[0].id;
+          console.log("empty.data.dump[0].id " + empty.data.dump[0].id);
+          console.log(this.codeID);
         } else {
           this.code_p = empty.data.dump[0].code;
           this.codeID = empty.data.dump[0].id;
+          console.log("empty.data.dump[0].id " + empty.data.dump[0].id);
+          console.log(this.codeID);
         }
       }
       this.forceReload = 1;
