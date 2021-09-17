@@ -1097,7 +1097,7 @@ thead.gradebook {
     float:right;
 }
 
-.btn btn-md btn-danger delete {
+.btn .btn-md .btn-danger .delete {
     margin: 3px;
 }
 
