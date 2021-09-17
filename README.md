@@ -44,7 +44,6 @@ STYLE FIXES
     * Highlighting problems
 * Problem Edit
 * Workspace
-    * when typing in the editor the position moves further and further away the further you type
 * Confirm Delete style message on courses, labs, and problems
 * Fix Carousel
 * Combine Logout, with profile pic, and link to profile 
