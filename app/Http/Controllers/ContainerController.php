@@ -88,24 +88,24 @@ class ContainerController extends Controller
         $hostConfig->setMounts([$mountsConfig]);
         $containerConfig->setHostConfig($hostConfig);
 
-        // check version on student code - make sure present
-        $code = Code::where('fsc_id', '=', $user->fsc_id)
-            ->where('assignment_id', '=', $id)
-            ->where('lang', '=', $validData['lang'])
-            ->first();
-        if (!$code) {
-            return response()->json(['message' => 'Fatal error, no code found.'], 404);
-        }
-        $temp_path = 'code.temp';
-        $temp = fopen($temp_path, 'w');
-        fwrite($temp, $code->code);
-        if ($validData['lang'] == 'python'){
-            Storage::disk('local')->putFileAs($head, new File($temp_path), 'main.py');
-        } else {
-            Storage::disk('local')->putFileAs($head, new File($temp_path), 'Main.java');
-        }
-        fclose($temp);
-        unlink($temp_path);
+        // // check version on student code - make sure present
+        // $code = Code::where('fsc_id', '=', $user->fsc_id)
+        //     ->where('assignment_id', '=', $id)
+        //     ->where('lang', '=', $validData['lang'])
+        //     ->first();
+        // if (!$code) {
+        //     return response()->json(['message' => 'Fatal error, no code found.'], 404);
+        // }
+        // $temp_path = 'code.temp';
+        // $temp = fopen($temp_path, 'w');
+        // fwrite($temp, $code->code);
+        // if ($validData['lang'] == 'python'){
+        //     Storage::disk('local')->putFileAs($head, new File($temp_path), 'main.py');
+        // } else {
+        //     Storage::disk('local')->putFileAs($head, new File($temp_path), 'Main.java');
+        // }
+        // fclose($temp);
+        // unlink($temp_path);
 
         // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);

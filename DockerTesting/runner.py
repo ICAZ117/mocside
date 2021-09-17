@@ -24,7 +24,7 @@ def compile_java():
 # run python code
 def run_python():
     # We are going to use pty.spawn()
-    spawn(['python3', 'main.py'])
+    spawn(['python3', 'submission.py'])
     # In theory, this will give control of our programs stdin and stdout
     # where it will then read from the stream and (hopefully) output to the file.
 
