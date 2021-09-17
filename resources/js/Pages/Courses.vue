@@ -3,6 +3,7 @@
     <!-- Main Page-->
     <div v-if="!childIsOpen">
       <vue-final-modal
+        class="delete-modal"
         v-model="showDeleteModal"
         classes="modal-container"
         content-class="modal-content"
