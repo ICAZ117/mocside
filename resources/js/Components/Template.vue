@@ -55,7 +55,7 @@ import _ from "lodash";
 import * as API from "../services/API";
 
 export default {
-  props: ["problemID"],
+  props: ["problemID", "tab"],
   data() {
     return {
       saveStatus: "",
