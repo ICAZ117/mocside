@@ -1086,6 +1086,24 @@ thead.gradebook {
     align-items: flex-end !important;
 }
 
+/*========= DELETE MODAL =========*/
+.delete-modal {
+    /* width: 40%; */
+    font-size: 22px;
+    /* height: 20%; */
+}
+
+.delete-buttons {
+    float:right;
+}
+
+.delete-button {
+    margin: 3px;
+}
+
+
+
+
 /*========= ADD ASSIGNMENT =========*/
 .assignment-title {
     font-size: 20pt !important;
