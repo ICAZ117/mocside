@@ -169,9 +169,13 @@ export default defineComponent({
         if (this.lang == "Java") {
           this.code_j = empty.data.dump[0].code;
           this.codeID = empty.data.dump[0].id;
+          console.log("empty.data.dump[0].id " + empty.data.dump[0].id);
+          console.log(this.codeID);
         } else {
           this.code_p = empty.data.dump[0].code;
           this.codeID = empty.data.dump[0].id;
+          console.log("empty.data.dump[0].id " + empty.data.dump[0].id);
+          console.log(this.codeID);
         }
       }
       this.forceReload = 1;
