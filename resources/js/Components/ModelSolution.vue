@@ -55,7 +55,7 @@ export default {
   },
   watch: {
     tab: function (newVal, oldVal) {
-      if (newVal != "Template") {
+      if (newVal != "Model Solution") {
         this.showEditor = false;
       }
     },
