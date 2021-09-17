@@ -1003,6 +1003,7 @@ thead.gradebook {
 .modal-content {
     overflow: auto;
     padding: 2.5rem 1rem 1rem 1rem !important;
+    width: 40% !important;
 }
 .modal-close {
     position: absolute;
