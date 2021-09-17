@@ -34,10 +34,16 @@
           :problemID="assignmentID"
         />
       </tab-panel>
-      <tab-panel :val="'Assign'"> <Assign :problemID="problemID" @delete-problem="deleteProblem" /> </tab-panel>
-      <tab-panel :val="'Template'"> <Template :problemID="problemID" :tab="selectedTab"/> </tab-panel>
+      <tab-panel :val="'Assign'">
+        <Assign :problemID="problemID" @delete-problem="deleteProblem" />
+      </tab-panel>
+      <tab-panel :val="'Template'">
+        <Template :problemID="problemID" :tab="selectedTab" />
+      </tab-panel>
       <tab-panel :val="'Test Bench'"> <TestBench :problemID="problemID" /> </tab-panel>
-      <tab-panel :val="'Model Solution'"><ModelSolution :problemID="problemID" /></tab-panel>
+      <tab-panel :val="'Model Solution'"
+        ><ModelSolution :problemID="problemID" :tab="selectedTab"
+      /></tab-panel>
       <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID" /> </tab-panel>
     </tab-panels>
   </div>
@@ -92,8 +98,8 @@ export default defineComponent({
     };
   },
   watch: {
-    assignmentTitle: function(val) {
-      if(this.assignmentTitle != "") {
+    assignmentTitle: function (val) {
+      if (this.assignmentTitle != "") {
         this.timeout(this.problemID);
       }
     },
@@ -112,7 +118,7 @@ export default defineComponent({
     },
     updateOverview(e) {
       console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEE");
-      
+
       //will be removing this in place of using debounce on each specific tab and then saving only that tab at a time
       this.overview = e;
     },
@@ -124,7 +130,7 @@ export default defineComponent({
     },
     timeout: _.debounce(async function (assignmentID) {
       var payload = {
-        "name": this.assignmentTitle,
+        name: this.assignmentTitle,
       };
       const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
     }, 500),
