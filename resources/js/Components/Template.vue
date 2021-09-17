@@ -68,6 +68,11 @@ export default {
     };
   },
   watch: {
+    tab: function (newVal, oldVal) {
+      if (newVal != "Template") {
+        this.showEditor = false;
+      }
+    },
     content: function (val) {
       this.saveStatus = "Saving...";
       console.log("Change status to saving");

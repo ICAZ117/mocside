@@ -59,9 +59,13 @@ export default {
         `/containers/spin-up/${this.problemID}`,
         payload
       );
-      
+
       // Get the docker container ID
       this.containerID = res.data.message;
+
+      setTimeout(async () => {
+        const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`)
+      }, 120000); // shutdown container in 2 minutes
 
       // Get the new input/output
       this.new = res.data.dump;

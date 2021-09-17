@@ -49,7 +49,7 @@ class ContainerController extends Controller
 
         if (strcasecmp($validData['lang'], 'python') == 0) {
             $containerConfig->setImage('python');
-            $containerConfig->setCmd(['run.py']);
+            $containerConfig->setCmd(['run.py', '-l', 'python']);
             $containerConfig->setEntrypoint(["python3"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
@@ -59,12 +59,12 @@ class ContainerController extends Controller
             $containerConfig->setWorkingDir('/usr/src');
 
             // copy in timout controller
-            $bash = Storage::disk('local')->path('run.py');
+            $bash = Storage::disk('local')->path('runner.py');
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File($bash), 'run.py');
         } else {
             $containerConfig->setImage('d9fa82599cdd'); // supervisor 
-            $containerConfig->setCmd(['run.py']);
+            $containerConfig->setCmd(['run.py', '-l', 'java']);
             $containerConfig->setEntrypoint(["python3"]);
             $containerConfig->setAttachStdin(true);
             $containerConfig->setAttachStdout(true);
@@ -74,7 +74,7 @@ class ContainerController extends Controller
             $containerConfig->setWorkingDir('/usr/src');
 
             // copy in timeout controller
-            $bash = Storage::disk('local')->path('run-java.py');
+            $bash = Storage::disk('local')->path('runner.py');
             $filePath = Storage::disk('local')
                 ->putFileAs($head, new File($bash), 'run.py');
         }
