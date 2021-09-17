@@ -766,7 +766,7 @@ export default defineComponent({
     this.h1--;
     this.getStyle();
     this.consoleHeight = (window.innerHeight - this.offsetTop) / 2;
-    this.y2 = this.offsetTop + this.consoleHeight + 1;
+    this.y2 = this.offsetTop + this.consoleHeight -40;
     this.y1 = this.offsetTop;
     this.reloadConsole();
   },
