@@ -742,6 +742,12 @@ export default defineComponent({
     closeModal() {
       this.showModal = false;
     },
+    reloadConsole() {
+      setTimeout(() => {
+        this.y2++;
+        this.y2--;
+      }, 100);
+    },
   },
   async mounted() {
     try {
@@ -762,6 +768,7 @@ export default defineComponent({
     this.consoleHeight = (window.innerHeight - this.offsetTop) / 2;
     this.y2 = this.offsetTop + this.consoleHeight + 1;
     this.y1 = this.offsetTop;
+    this.reloadConsole();
   },
 });
 </script>
