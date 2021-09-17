@@ -12,12 +12,14 @@
         <p>
           Are you sure you would like to delete {{ deletingLab.lab.name }}
         </p>
-        <button class="btn btn-md btn-danger" @click="closeDeleting()">
-          Cancel
-        </button>
-        <button class="btn btn-md btn-danger" @click="removeLab()">
-          Delete
-        </button>
+        <div class="delete-buttons">
+          <button class="btn btn-md btn-danger delete-button" @click="closeDeleting()">
+            Cancel
+          </button>
+          <button class="btn btn-md btn-danger delete-button" @click="removeLab()">
+            Delete
+          </button>
+        </div>
       </div>
     </vue-final-modal>
     <div class="courses header">

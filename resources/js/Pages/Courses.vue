@@ -3,16 +3,19 @@
     <!-- Main Page-->
     <div v-if="!childIsOpen">
       <vue-final-modal
+        class="delete-modal"
         v-model="showDeleteModal"
         classes="modal-container"
-        content-class="modal-content"
+        content-class="modal-content delete-modal"
         :esc-to-close="true"
       >
         <button class="modal-close" @click="closeDeleting()">x</button>
         <div class="delete Course">
           <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
-          <button class="btn btn-md btn-danger" @click="closeDeleting()">Cancel</button>
-          <button class="btn btn-md btn-danger" @click="deleteCourse()">Delete</button>
+          <div class="delete-buttons">
+            <button class="btn btn-md btn-danger delete-button" @click="closeDeleting()">Cancel</button>
+            <button class="btn btn-md btn-danger delete-button" @click="deleteCourse()">Delete</button>
+          </div>
         </div>
       </vue-final-modal>
       <div class="courses header">
