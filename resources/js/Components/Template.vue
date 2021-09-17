@@ -69,7 +69,7 @@ export default {
   },
   watch: {
     tab: function (newVal, oldVal) {
-      if (tab != "Template") {
+      if (newVal != "Template") {
         showEditor = false;
       }
     },
