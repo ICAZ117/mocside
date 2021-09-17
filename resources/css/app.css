@@ -862,7 +862,7 @@ thead.gradebook {
     margin: 0 !important;
     background-color: black !important;
     color: lightgray !important;
-    font-family: consolas !important;
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     font-weight: lighter !important;
     font-size: 12pt !important;
 }
@@ -882,7 +882,7 @@ thead.gradebook {
 }
 
 .editor {
-    font-family: consolas !important;
+    /* font-family: consolas !important; */
     font-weight: lighter !important;
     font-size: 12pt !important;
     /* min-height: calc((100vh - var(--nav-height)) / 2) !important; */
@@ -903,7 +903,7 @@ thead.gradebook {
 .console {
     background-color: var(--consoleBG) !important;
     color: lime !important;
-    font-family: consolas !important;
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     /* height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important; */
     height: 100%!important;
     margin: 0 !important;
