@@ -13,8 +13,8 @@
         <div class="delete Course">
           <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
           <div class="delete-buttons">
-            <button class="btn btn-md btn-danger" @click="closeDeleting()">Cancel</button>
-            <button class="btn btn-md btn-danger" @click="deleteCourse()">Delete</button>
+            <button class="btn btn-md btn-danger delete" @click="closeDeleting()">Cancel</button>
+            <button class="btn btn-md btn-danger delete" @click="deleteCourse()">Delete</button>
           </div>
         </div>
       </vue-final-modal>

@@ -1091,11 +1091,16 @@ thead.gradebook {
     width: 40%;
     font-size: 22px;
     height: 20%;
-}
+} */
 
 .delete-buttons {
-    display: flex;
-} */
+    float:right;
+}
+
+.btn btn-md btn-danger delete {
+    margin: 3px;
+}
+
 
 
 
