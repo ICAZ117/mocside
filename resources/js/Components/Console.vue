@@ -63,7 +63,7 @@ export default {
       // Get the docker container ID
       this.containerID = res.data.message;
 
-      setTimeout(() => {
+      setTimeout(async () => {
         const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`)
       }, 120000); // shutdown container in 2 minutes
 
