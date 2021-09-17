@@ -104,8 +104,8 @@ class ContainerController extends Controller
         } else {
             Storage::disk('local')->putFileAs($head, new File($temp_path), 'Main.java');
         }
-        fclose($temp);
-        unlink($temp);
+        fclose($temp_path);
+        unlink($temp_path);
 
         // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);
