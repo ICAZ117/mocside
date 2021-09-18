@@ -480,10 +480,10 @@ export default defineComponent({
 
       for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
         var tc = {
-          tcID: dump[i],
-          userOut: dump[i + 1],
-          profOut: dump[i + 2],
-          compare: dump[i + 3],
+          tcID: JSON.parse(dump[i]),
+          userOut: JSON.parse(dump[i + 1]),
+          profOut: JSON.parse(dump[i + 2]),
+          compare: JSON.parse(dump[i + 3]),
         };
 
         var self = this;
