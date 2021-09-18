@@ -46,6 +46,7 @@ import { Editor, EditorContent, BubbleMenu } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
 import TextAlign from "@tiptap/extension-text-align";
+import Image from "@tiptap/extension-image"
 
 export default {
   props: ["savedText", "editable", "showMenuBar", "isDark"],
@@ -69,6 +70,7 @@ export default {
           history: true,
         }),
         TextAlign,
+        Image,
       ],
       content: this.savedText,
       editable: this.editable,
