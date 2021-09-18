@@ -713,7 +713,10 @@ export default defineComponent({
       // console.log(backDate);
 
       // assuming both times are using the same time zone the following works, or both are utc
-      if (due_date > current_time) {
+      if (due_date == null) { // (Max) I am adding this catch case because imported courses
+        return true           // Don't have a properly saved due_date_utc, but they do in future
+      }                       // versions of the migrate software (9/18/21)
+      else if (due_date > current_time) {
         // alert("current: " + current_time + "\nback: " + backdDate);
         return false;
       } else {
