@@ -297,7 +297,10 @@ class GradebookController extends Controller
         // now, propogate earned points.
         $lab = Lab::find($assignment->lab_id);
         $course = Course::find($lab->course_id);
-        
+        $course_book = json_decode($course->gradebook, true);
+        if (!$course_book) {
+            return response()->json(['message' => 'Gradebook has not been initialized for course.'], 418);
+        }
         // first, give points in assignment books
         $assignment_book = json_decode($assignment->gradebook, true);
         $student_assignment_book = json_decode($student->gradebook_problems, true);
@@ -347,7 +350,7 @@ class GradebookController extends Controller
         $student->gradebook_labs = json_encode($student_lab_book);
 
         // then, add points to course.
-        $course_book = json_decode($course->gradebook, true);
+        // $course_book = json_decode($course->gradebook, true);
         $student_course_book = json_decode($student->gradebook_courses, true);
         // the student MUST be in the course to have submitted this lab
         if ($hasAssignmentProgress) {
