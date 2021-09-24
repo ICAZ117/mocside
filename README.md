@@ -28,8 +28,9 @@ ADD PAGES
 
 NEXT UP
 * Double check deleting and copy assingments work as intended
-    * some test cases have had the wrong assignment id
+    * some test cases have had the wrong assignment idempty
 * add modification to Ace-editor, suggestions, autoformat, autocompletes
+* Upon creating an assignment it should auto set the template for both python and java
 
 
 

@@ -18,6 +18,10 @@ class CodeController extends Controller
             'code' => 'nullable',
         ]);
 
+        if ($validData['code'] == null) {
+            $validData['code'] == ' ';
+        }
+
         // in this case, we are creating a new code entry.
         // like with checking, we must touch progress
         $progress = Progress::where('fsc_id', '=', $user->fsc_id)->first();
