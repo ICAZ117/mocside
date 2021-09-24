@@ -324,6 +324,7 @@ export default {
           break;
         }
       }
+      console.log(c);
       if (problem.test_cases == 0) {
         return "0%";
       } else if (!c) {
