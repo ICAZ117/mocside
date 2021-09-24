@@ -314,19 +314,23 @@ export default {
       return this.progress;
     },
     async getPercent(problem) {
+      console.log("in percent");
       var d = JSON.parse(this.progress.assignments);
       var c;
+      console.log(d);
       for (let i = 0; i < d.length; i++) {
         if (d[i].assignment_id == problem.id) {
           c = d[i];
           break;
         }
       }
+      console.log(c);
       if (problem.test_cases == 0) {
         return "0%";
       } else if (!c) {
         return "0%";
       } else {
+        console.log(parseInt((c.cases_passed / problem.test_cases) * 100) + "%");
         return parseInt((c.cases_passed / problem.test_cases) * 100) + "%";
       }
     },
@@ -361,7 +365,12 @@ export default {
     async Unmounting() {
       this.problems = this.problems.filter((p) => p.id != this.problemID);
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      console.log("percent " + problem.data.data);
+      problem.data.data["percent"] = await this.getPercent(problem.data.data);
+      problem.data.data["activity"] = await this.getActivity(problem.data.data);
       this.problems.push(problem.data.data);
+      //recall sort method
+      await this.sortProblems();
       this.childIsOpen = false;
       this.problemID = null;
       var flag = this.refreshPage();
