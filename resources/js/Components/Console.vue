@@ -150,6 +150,7 @@ export default {
         this.hasNewLine = this.new[this.new.length - 1] === "" || !this.isWaiting;
 
         for (let i = 0; i < this.new.length - 1; i++) {
+          this.new[i] = this.new[i].replace('\u0003è', '');
           this.contents += this.new[i] + "\n";
           this.currLog += this.new[i] + "\n";
         }
@@ -185,6 +186,7 @@ export default {
         if (!(self.currLog == tempNew)) {
           // find new output
           var newText = tempNew.substring(self.currLog.length);
+          newText = newText.replace('\u0003è', ''); // Can we filter this character?
           self.new = newText.split("\n");
 
           // display output

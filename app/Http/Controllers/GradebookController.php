@@ -316,10 +316,12 @@ class GradebookController extends Controller
         if (!$hasAssignmentProgress) {
             // add assignment ID to list
             array_push($student_assignment_book['assignments'], $id);
+            $earned_diff = $earned_points;
         }
         $student_assignment_book['grades'][$id] = $earned_points;
         $assignment->gradebook = json_encode($assignment_book);
         $student->gradebook_problems = json_encode($student_assignment_book);
+
 
         // then, give points to lab
         // we have to find if the user has made progress on this lab
