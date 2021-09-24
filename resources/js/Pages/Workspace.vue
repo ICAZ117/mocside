@@ -282,6 +282,7 @@ export default defineComponent({
     console.log("unmounting workspace");
     this.$emit("unmounting");
     this.childIsOpen = false;
+    document.getElementById("thisIsTheDumbestThingIHaveEverHadToDo").style = "";
   },
   async created() {
     this.childIsOpen = true;
@@ -290,6 +291,7 @@ export default defineComponent({
   mounted() {
     this.reloadSliders++;
     document.getElementById("resizeableInstructions").remove();
+    document.getElementById("thisIsTheDumbestThingIHaveEverHadToDo").style = "overflow: hidden!important";
   },
 });
 </script>
