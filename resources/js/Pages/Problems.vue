@@ -340,11 +340,11 @@ export default {
     },
     async problemEdited() {
       var tempID = this.problemID;
-      ///update the list of courses
-      this.problems = this.problems.filter((p) => p.id != this.problemID);
-      const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      this.problems.push(problem.data.data);
-      console.log(problem.data.data);
+      // ///update the list of courses
+      // this.problems = this.problems.filter((p) => p.id != this.problemID);
+      // const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      // this.problems.push(problem.data.data);
+      // console.log(problem.data.data);
       await this.Unmounting();
 
       //check if the problem was deleted from child
@@ -357,7 +357,11 @@ export default {
         this.problems = this.problems.filter((p) => p.id != tempID);
       }
     },
+
     async Unmounting() {
+      this.problems = this.problems.filter((p) => p.id != this.problemID);
+      const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      this.problems.push(problem.data.data);
       this.childIsOpen = false;
       this.problemID = null;
       var flag = this.refreshPage();
