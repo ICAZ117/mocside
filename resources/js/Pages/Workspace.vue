@@ -142,15 +142,12 @@ export default defineComponent({
       const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
       this.test = empty;
       console.log(this.assignment.python_starter);
-      console.log(this.assignment.python_starter == "");
-      console.log(this.assignment.python_starter == null);
-      console.log(this.assignment.python_starter == "" || this.assignment.python_starter == null);
       if(this.assignment.python_starter == "" || this.assignment.python_starter == null) {
-        this.assignment.python_starter == "def main():\n\nmain()";
+        this.assignment.python_starter = "def main():\n\nmain()";
       }
       console.log(this.assignment.python_starter);
       if(this.assignment.java_starter == "" || this.assignment.java_starter == null) {
-        this.assignment.java_starter == "public class Main {\n\tpublic static void main(String[] args) {\n\t\t}}";
+        this.assignment.java_starter = "public class Main {\n\tpublic static void main(String[] args) {\n\t\t}}";
       }
       if (empty.data.message == "No progress. Please create.") {
         //create progress
