@@ -361,6 +361,8 @@ export default {
     async Unmounting() {
       this.problems = this.problems.filter((p) => p.id != this.problemID);
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      problem.data.data["percent"] = await this.getPercent(problem.data.data);
+      problem.data.data["activity"] = await this.getActivity(problem.data.data);
       this.problems.push(problem.data.data);
       this.childIsOpen = false;
       this.problemID = null;
