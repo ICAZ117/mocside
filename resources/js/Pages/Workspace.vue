@@ -142,6 +142,9 @@ export default defineComponent({
       const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
       this.test = empty;
       console.log(this.assignment.python_starter);
+      console.log(this.assignment.python_starter == "");
+      console.log(this.assignment.python_starter == null);
+      console.log(this.assignment.python_starter == "" || this.assignment.python_starter == null);
       if(this.assignment.python_starter == "" || this.assignment.python_starter == null) {
         this.assignment.python_starter == "def main():\n\nmain()";
       }
