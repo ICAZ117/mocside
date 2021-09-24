@@ -480,10 +480,10 @@ export default defineComponent({
 
       for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
         var tc = {
-          tcID: dump[i],
-          userOut: dump[i + 1],
-          profOut: dump[i + 2],
-          compare: dump[i + 3],
+          tcID: JSON.parse(dump[i]),
+          userOut: JSON.parse(dump[i + 1]),
+          profOut: JSON.parse(dump[i + 2]),
+          compare: JSON.parse(dump[i + 3]),
         };
 
         var self = this;
@@ -713,7 +713,11 @@ export default defineComponent({
       // console.log(backDate);
 
       // assuming both times are using the same time zone the following works, or both are utc
-      if (due_date > current_time) {
+      console.log(due_date)
+      if (due_date == null) { // (Max) I am adding this catch case because imported courses
+        return false;         // Don't have a properly saved due_date_utc, but they do in future
+      }                       // versions of the migrate software (9/18/21)
+      else if (due_date > current_time) {
         // alert("current: " + current_time + "\nback: " + backdDate);
         return false;
       } else {

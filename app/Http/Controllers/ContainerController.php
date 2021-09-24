@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Code;
 // use App\Events\InputSent;
 // use App\Events\ContainerOut;
 use Illuminate\Http\Request;
@@ -86,6 +87,7 @@ class ContainerController extends Controller
         $mountsConfig->setReadOnly(false);
         $hostConfig->setMounts([$mountsConfig]);
         $containerConfig->setHostConfig($hostConfig);
+
 
         // create container
         $containerCreateResult = $docker->containerCreate($containerConfig);
@@ -350,13 +352,18 @@ class ContainerController extends Controller
         // $id is container_id
 
         // HOPEFULLY this won't fail once container is dead.
-        $webSocketStream = $docker->containerAttachWebsocket($id, [
-            "logs" => true,
-            "stream" => true,
-            "stdout" => true,
-            "stderr" => true,
-            "stdin" => true,
-        ]);
+        // Reporting 9/17/21 - it does
+        try {
+            $webSocketStream = $docker->containerAttachWebsocket($id, [
+                "logs" => true,
+                "stream" => true,
+                "stdout" => true,
+                "stderr" => true,
+                "stdin" => true,
+            ]);
+        } catch (ContainerAttachWebsocketNotFoundException $e) {
+            return response()->json(['message' => 'container closed'], 200);
+        }
 
         // grab logs
         $line = $webSocketStream->read();

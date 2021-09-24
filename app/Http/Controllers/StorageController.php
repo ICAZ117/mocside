@@ -54,7 +54,7 @@ class StorageController extends Controller
             $code = $progress->code;
             fwrite($file, $code);
             $filePath = Storage::disk('local')
-                ->putFileAs($head, new File($path), "submission.py");
+                ->putFileAs($head, new File($path), "main.py");
             fclose($file);
             unlink($path);
             return response()->json([
