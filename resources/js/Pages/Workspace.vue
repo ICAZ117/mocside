@@ -141,6 +141,12 @@ export default defineComponent({
       };
       const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
       this.test = empty;
+      if(this.assignment.python_starter == "") {
+        this.assignment.python_starter == "def main()\n\nmain()";
+      }
+      if(this.assignment.java_starter == "") {
+        this.assignment.java_starter == "public class Main {\n\tpublic static void main(String[] args) {\n\t\t}}";
+      }
       if (empty.data.message == "No progress. Please create.") {
         //create progress
         if (this.lang == "Java") {
@@ -149,20 +155,12 @@ export default defineComponent({
             problem_id: this.problemID,
             code: this.assignment.java_starter,
           };
-          //janky fix
-          if (payload.code == "" || payload.code == null) {
-            payload.code = "Write Code Here";
-          }
         } else {
           payload = {
             lang: this.lang.toLowerCase(0),
             problem_id: this.problemID,
             code: this.assignment.python_starter,
           };
-          //janky fix
-          if (payload.code == "" || payload.code == null) {
-            payload.code = "Write Code Here";
-          }
         }
         const initial = await API.apiClient.post(`/code/`, payload);
         if (this.lang == "Java") {
