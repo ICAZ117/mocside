@@ -362,7 +362,7 @@ class ContainerController extends Controller
                 "stdin" => true,
             ]);
         } catch (ContainerAttachWebsocketNotFoundException $e) {
-            return response
+            return response()->json(['message' => 'container closed'], 200);
         }
 
         // grab logs
