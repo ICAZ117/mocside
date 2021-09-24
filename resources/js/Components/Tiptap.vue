@@ -189,7 +189,6 @@ export default {
 
 /* Basic editor styles */
 .ProseMirror > * + * {
-  margin: 0.75em !important;
   border: none !important;
 }
 .ProseMirror ul,
