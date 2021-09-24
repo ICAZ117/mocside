@@ -8,7 +8,7 @@
         <!-- Style CSS -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
-    <body>
+    <body id="thisIsTheDumbestThingIHaveEverHadToDo">
         <div id="app">
             <app></app>
         </div>
