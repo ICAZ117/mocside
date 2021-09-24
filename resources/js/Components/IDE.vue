@@ -714,7 +714,7 @@ export default defineComponent({
 
       // assuming both times are using the same time zone the following works, or both are utc
       console.log("due_date " + due_date)
-      if (due_date == null) { // (Max) I am adding this catch case because imported courses
+      if (due_date == null || due_date == 0) { // (Max) I am adding this catch case because imported courses
         return false;         // Don't have a properly saved due_date_utc, but they do in future
       }                       // versions of the migrate software (9/18/21)
       else if (due_date > current_time) {
