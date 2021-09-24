@@ -223,6 +223,9 @@ input:checked + .slider:before {
     padding: 0px 10px;
 }
 
+.darkBG {
+    background-color: #222222;
+}
 /*============= NAVIGATION =============*/
 
 nav {
@@ -1350,6 +1353,12 @@ footer .svg-inline--fa:hover {
 }
 
 /*============= PROFILE =============*/
+.large-pfp {
+    height: 250px !important;
+    width: 250px !important;
+    border: 1px solid #333333 !important;
+    border-radius: 50% !important;
+}
 
 /*============= ENROLL =============*/
 .center-height {
