@@ -21,6 +21,7 @@
         class="instructions"
         id="resizeableInstructions"
         v-if="childIsOpen"
+        style="overflow: auto!important"
       >
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
