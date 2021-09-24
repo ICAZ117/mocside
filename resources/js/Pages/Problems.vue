@@ -364,6 +364,8 @@ export default {
       problem.data.data["percent"] = await this.getPercent(problem.data.data);
       problem.data.data["activity"] = await this.getActivity(problem.data.data);
       this.problems.push(problem.data.data);
+      //recall sort method
+      await this.sortProblems();
       this.childIsOpen = false;
       this.problemID = null;
       var flag = this.refreshPage();
