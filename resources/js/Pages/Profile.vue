@@ -261,6 +261,7 @@ import { defineComponent, reactive, toRefs, computed } from "vue";
 
 const tabs = ["Profile", "Grades", "Security"];
 export default defineComponent({
+  name: "Profile",
   components: {
     FileUpload,
   },
