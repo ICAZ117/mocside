@@ -149,12 +149,20 @@ export default defineComponent({
             problem_id: this.problemID,
             code: this.assignment.java_starter,
           };
+          //janky fix
+          if (payload.code == "" || payload.code == null) {
+            payload.code = "Write Code Here";
+          }
         } else {
           payload = {
             lang: this.lang.toLowerCase(0),
             problem_id: this.problemID,
             code: this.assignment.python_starter,
           };
+          //janky fix
+          if (payload.code == "" || payload.code == null) {
+            payload.code = "Write Code Here";
+          }
         }
         const initial = await API.apiClient.post(`/code/`, payload);
         if (this.lang == "Java") {
