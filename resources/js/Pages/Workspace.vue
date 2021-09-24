@@ -142,7 +142,7 @@ export default defineComponent({
       const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
       this.test = empty;
       if(this.assignment.python_starter == "") {
-        this.assignment.python_starter == "def main()\n\nmain()";
+        this.assignment.python_starter == "def main():\n\nmain()";
       }
       if(this.assignment.java_starter == "") {
         this.assignment.java_starter == "public class Main {\n\tpublic static void main(String[] args) {\n\t\t}}";
