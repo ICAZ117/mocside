@@ -15,7 +15,7 @@ class CodeController extends Controller
         $validData = $request->validate([
             'lang' => 'required',
             'problem_id' => 'required',
-            'code' => 'required',
+            'code' => 'required|nullable',
         ]);
 
         // in this case, we are creating a new code entry.
