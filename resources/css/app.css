@@ -441,6 +441,10 @@ nav {
     align-items: unset !important;
 }
 
+.carousel__pagination {
+    background-color: var(--FSCgrey);
+}
+
 /*-- Carousel Content --*/
 
 .carousel__item {
