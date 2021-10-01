@@ -16,13 +16,13 @@
   <tab-panels v-model="selectedTab" :animate="true">
     <tab-panel :val="'Profile'" class="profile darkBG">
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           <div class="profile-picture">
             <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp" />
             <button @click="editAvatar()" class="btn btn-danger btn-block">Edit</button>
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-9">
           <div class="profile-section">
             <div class="editable">
               <label for="Name">Name</label>
