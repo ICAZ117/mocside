@@ -108,9 +108,8 @@
             />
           </div>
         </div>
-        <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
+        <button @click="saveProfile" class="btn btn-danger btn-sm btn-block">Save</button>
       </div>
-      <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
 
       <vue-final-modal
         v-model="showAvatarModal"
