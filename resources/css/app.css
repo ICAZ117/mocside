@@ -1362,6 +1362,7 @@ footer .svg-inline--fa:hover {
 
 .profile {
     height: calc(100vh - var(--nav-height) - 45.2px)!important;
+    padding: 20px!important;
 }
 
 /*============= ENROLL =============*/
