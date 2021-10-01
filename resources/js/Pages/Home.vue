@@ -1,6 +1,6 @@
 <template>
   <div>
-      <Carousel :wrap-around="true" :autoplay="6000">
+      <Carousel :wrap-around="true" :autoplay="6000" :transition="100" :pauseAutoplayOnHover="true">
         <Slide v-for="slide in 10" :key="slide">
           <div class="carousel__item">{{ slide }}</div>
         </Slide>
