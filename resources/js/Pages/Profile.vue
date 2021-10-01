@@ -16,11 +16,17 @@
   <tab-panels v-model="selectedTab" :animate="true">
     <tab-panel :val="'Profile'" class="profile darkBG">
       <div class="row h-100">
-        <div class="col-3" style="border-right: 1px var(--FSCgrey) solid !important;">
+        <div class="col-3" style="border-right: 1px var(--FSCgrey) solid !important">
           <div class="profile-picture">
             <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp" />
             <br />
-            <button @click="editAvatar()" class="btn btn-danger btn-block" style="width: 252px">Edit</button>
+            <button
+              @click="editAvatar()"
+              class="btn btn-danger btn-block"
+              style="width: 252px"
+            >
+              Edit
+            </button>
           </div>
         </div>
         <div class="col-9">
@@ -107,8 +113,10 @@
               v-model="user.settings.consoleOptions.background"
             />
           </div>
+          <button @click="saveProfile" class="btn btn-danger btn-md btn-block">
+            Save
+          </button>
         </div>
-        <button @click="saveProfile" class="btn btn-danger btn-sm btn-block">Save</button>
       </div>
 
       <vue-final-modal
