@@ -14,7 +14,7 @@
     </div>
   </div>
   <tab-panels v-model="selectedTab" :animate="true">
-    <tab-panel :val="'Profile'" class="darkBG">
+    <tab-panel :val="'Profile'" class="profile darkBG">
       <div class="row">
         <div class="col-4">
           <div class="profile-picture">

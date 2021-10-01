@@ -1360,6 +1360,10 @@ footer .svg-inline--fa:hover {
     border-radius: 50% !important;
 }
 
+.profile {
+    height: calc(100vh - var(--nav-height) - 45.2px)!important;
+}
+
 /*============= ENROLL =============*/
 .center-height {
     margin-top: calc(100vh - var(--nav-height)) !important;
