@@ -344,11 +344,6 @@ export default {
     },
     async problemEdited() {
       var tempID = this.problemID;
-      // ///update the list of courses
-      // this.problems = this.problems.filter((p) => p.id != this.problemID);
-      // const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      // this.problems.push(problem.data.data);
-      // console.log(problem.data.data);
       await this.Unmounting();
 
       //check if the problem was deleted from child
@@ -363,12 +358,15 @@ export default {
     },
 
     async Unmounting() {
-      this.problems = this.problems.filter((p) => p.id != this.problemID);
+      this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      console.log("percent " + problem.data.data);
+      const res = await API.apiClient.get(`/progress/${this.fscID}`);
+      this.progress = res.data.data;
       problem.data.data["percent"] = await this.getPercent(problem.data.data);
       problem.data.data["activity"] = await this.getActivity(problem.data.data);
-      this.problems.push(problem.data.data);
+      this.unfilteredProblems.push(problem.data.data);
+      //set expanded problem to null
+      this.expandedProblem = null;
       //recall sort method
       await this.sortProblems();
       this.childIsOpen = false;
