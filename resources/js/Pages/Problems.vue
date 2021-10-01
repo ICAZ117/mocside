@@ -358,7 +358,7 @@ export default {
     },
 
     async Unmounting() {
-      this.problems = this.problems.filter((p) => p.id != this.problemID);
+      this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       console.log("percent " + problem.data.data);
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
