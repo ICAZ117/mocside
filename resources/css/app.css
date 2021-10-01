@@ -428,21 +428,12 @@ nav {
 
 /*============= CAROUSEL =============*/
 
-#carousel {
+.carousel {
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1) !important;
 }
 
-.carousel-inner {
+.carousel__viewport {
     height: calc(100vh - 60px) !important;
-}
-
-/*---Change Carousel Transition Speed --*/
-
-.carousel-item-next,
-.carousel-item-prev,
-.carousel-item-active {
-    transition-timing-function: linear !important;
-    transition-duration: 0.5s !important;
 }
 
 /*-- Carousel Content --*/
