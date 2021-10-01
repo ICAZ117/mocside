@@ -149,7 +149,9 @@ export default {
     async getCases() {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
       var rawCases = res.data;
-      this.cases = rawCases;
+      async () => {
+        this.cases = rawCases;
+      };
       if(this.cases.length != 0) {
         this.setCurrent(0);
       }

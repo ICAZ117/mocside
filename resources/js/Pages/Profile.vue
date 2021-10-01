@@ -15,12 +15,12 @@
   </div>
   <tab-panels v-model="selectedTab" :animate="true">
     <tab-panel :val="'Profile'" class="profile darkBG">
-      <div class="row">
-        <div class="col-3">
+      <div class="row h-100">
+        <div class="col-3" style="border-right: 1px var(--FSCgrey) solid !important;">
           <div class="profile-picture">
             <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp" />
             <br />
-            <button @click="editAvatar()" class="btn btn-danger btn-block">Edit</button>
+            <button @click="editAvatar()" class="btn btn-danger btn-block" style="width: 252px">Edit</button>
           </div>
         </div>
         <div class="col-9">
@@ -108,6 +108,7 @@
             />
           </div>
         </div>
+        <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
       </div>
       <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
 
