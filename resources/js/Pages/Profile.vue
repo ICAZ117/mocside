@@ -197,6 +197,7 @@ import FileService from "../services/FileService";
 import FileUpload from "../Components/FileUpload";
 import { defineComponent, reactive, toRefs, computed } from "vue";
 const tabs = ["Profile", "Grades", "Security"];
+//whitespace
 export default {
   components: {
     FileUpload,
