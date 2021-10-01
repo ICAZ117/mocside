@@ -35,12 +35,18 @@
               <div class="row">
                 <div class="col-6">
                   <label for="Name">Name</label>
-                  <input type="text" v-model="user.name" id="Name" />
+                  <input
+                    class="profile-field"
+                    type="text"
+                    v-model="user.name"
+                    id="Name"
+                  />
 
-                  <br />
+                  <br /><br />
 
                   <label for="pronouns">Preferred Pronouns</label>
                   <input
+                    class="profile-field"
                     type="text"
                     name="pronouns"
                     id="pronouns"
@@ -49,12 +55,23 @@
                 </div>
                 <div class="col-6">
                   <label for="ScreenName">ScreenName</label>
-                  <input type="text" v-model="user.screen_name" id="ScreenName" />
+                  <input
+                    class="profile-field"
+                    type="text"
+                    v-model="user.screen_name"
+                    id="ScreenName"
+                  />
 
-                  <br />
+                  <br /><br />
 
                   <label for="FSCID">FSC ID</label>
-                  <input type="number" v-model="user.fsc_id" id="FSCID" disabled />
+                  <input
+                    class="profile-field"
+                    type="number"
+                    v-model="user.fsc_id"
+                    id="FSCID"
+                    disabled
+                  />
                 </div>
               </div>
             </div>
@@ -62,7 +79,12 @@
           <div class="Editor-Settings">
             <!-- theme, language, console theme -->
             <label for="Theme">Select A Default Theme</label>
-            <select name="Theme" id="Theme" v-model="user.settings.ideOptions.theme">
+            <select
+              class="profile-field"
+              name="Theme"
+              id="Theme"
+              v-model="user.settings.ideOptions.theme"
+            >
               <optgroup label="Dark">
                 <option value="ambiance">Ambiance</option>
                 <option value="chaos">Chaos</option>
@@ -108,6 +130,7 @@
             </select>
             <label for="Language">Select A Default Language</label>
             <select
+              class="profile-field"
               name="Language"
               id="Language"
               v-model="user.settings.ideOptions.defaultLang"
@@ -117,6 +140,7 @@
             </select>
             <label for="ConsoleForeground">Select A Console Foreground Color</label>
             <input
+              class="profile-field"
               type="color"
               name="ConsoleForeground"
               id="ConsoleForeground"
@@ -124,6 +148,7 @@
             />
             <label for="ConsoleBackground">Select A Console Background Color</label>
             <input
+              class="profile-field"
               type="color"
               name="ConsoleBackground"
               id="ConsoleBackground"

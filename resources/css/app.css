@@ -1397,6 +1397,14 @@ footer .svg-inline--fa:hover {
     margin: auto!important;
 }
 
+.profile-field, .profile-field:focus-visible {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+}
+
 /*============= ENROLL =============*/
 .center-height {
     margin-top: calc(100vh - var(--nav-height)) !important;
