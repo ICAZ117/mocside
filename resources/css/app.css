@@ -436,6 +436,10 @@ nav {
     height: calc(100vh - var(--nav-height)) !important;
 }
 
+.carousel__slide {
+    align-items: unset !important;
+}
+
 /*-- Carousel Content --*/
 
 .carousel__item {
