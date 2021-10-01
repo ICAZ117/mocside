@@ -433,7 +433,7 @@ nav {
 }
 
 .carousel__viewport {
-    height: calc(100vh - 60px) !important;
+    height: calc(100vh - var(--nav-height)) !important;
 }
 
 /*-- Carousel Content --*/
