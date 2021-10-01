@@ -74,7 +74,7 @@ const tabs = [
   "Save & Exit",
 ];
 
-export default defineComponent({
+export default {
   props: ["problemID"],
   emits: ["unmounting", "problemEdited", "deleteMe"],
   components: { Overview, Assign, Template, TestBench, ModelSolution, GradeBook },
@@ -146,7 +146,7 @@ export default defineComponent({
     this.childIsOpen = false;
     this.$emit("problemEdited");
   },
-});
+};
 </script>
 
 <style></style>
