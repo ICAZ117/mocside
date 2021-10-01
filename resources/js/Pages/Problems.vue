@@ -358,7 +358,9 @@ export default {
     },
 
     async Unmounting() {
+      console.log(this.unfilteredProblems);
       this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
+      console.log(this.unfilteredProblems);
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       console.log("percent " + problem.data.data);
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
@@ -367,6 +369,8 @@ export default {
       problem.data.data["activity"] = await this.getActivity(problem.data.data);
       console.log(problem.data.data);
       this.unfilteredProblems.push(problem.data.data);
+      //set expanded problem to null
+      this.expandedProblem = null;
       //recall sort method
       await this.sortProblems();
       this.childIsOpen = false;
