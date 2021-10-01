@@ -358,16 +358,12 @@ export default {
     },
 
     async Unmounting() {
-      console.log(this.unfilteredProblems);
       this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
-      console.log(this.unfilteredProblems);
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      console.log("percent " + problem.data.data);
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
       this.progress = res.data.data;
       problem.data.data["percent"] = await this.getPercent(problem.data.data);
       problem.data.data["activity"] = await this.getActivity(problem.data.data);
-      console.log(problem.data.data);
       this.unfilteredProblems.push(problem.data.data);
       //set expanded problem to null
       this.expandedProblem = null;
