@@ -52,4 +52,26 @@ export default {
 
 <style>
 
+.carousel__item {
+  min-height: 200px;
+  width: 100%;
+  background-color: var(--carousel-color-primary);
+  color:  var(--carousel-color-white);
+  font-size: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel__slide {
+  padding: 10px;
+}
+
+.carousel__prev,
+.carousel__next {
+  box-sizing: content-box;
+  border: 5px solid white;
+}
+
 </style>
