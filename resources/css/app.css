@@ -437,7 +437,7 @@ nav {
 }
 
 .carousel__slide {
-    display: unset;
+    display: unset !important;
     align-items: unset !important;
 }
 
