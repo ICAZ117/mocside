@@ -1,9 +1,9 @@
 <template>
   <div>
       <Carousel >
-        <slide v-for="slide in 10" :key="slide">
-          {{ slide }}
-        </slide>
+        <Slide v-for="slide in 10" :key="slide">
+          <div class="carousel_item">{{ slide }}</div>
+        </Slide>
 
         <template #addons>
           <Navigation />
@@ -45,7 +45,7 @@ export default {
     };
   },
   methods: {
-    
+
   },
 };
 </script>
