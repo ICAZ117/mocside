@@ -5,7 +5,7 @@
           <div class="carousel__item">{{ slide }}</div>
         </Slide> -->
         <Slide :key="0">
-          <div class="carousel-item">
+          <div class="carousel__item">
             <img src="../../img/carousel/1.jpg" alt="Image carousel" class="w-100" />
 
             <div class="carousel-caption">
@@ -28,7 +28,7 @@
           </div>
         </Slide>
         <Slide :key="1">
-          <div class="carousel-item">
+          <div class="carousel__item">
             <img src="../../img/carousel/2.jpg" alt="Image carousel" class="w-100" />
 
             <div class="carousel-caption">
@@ -47,7 +47,7 @@
           </div>
         </Slide>
         <Slide :key="2">
-          <div class="carousel-item">
+          <div class="carousel__item">
             <img src="../../img/carousel/3.jpg" alt="Image carousel" class="w-100" />
 
             <div class="carousel-caption">
@@ -112,27 +112,5 @@ export default {
 </script>
 
 <style>
-
-.carousel__item {
-  min-height: 200px;
-  width: 100%;
-  background-color: blue;
-  color:  red;
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.carousel__slide {
-  padding: 10px;
-}
-
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  border: 5px solid green;
-}
 
 </style>
