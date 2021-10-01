@@ -19,6 +19,7 @@
         <div class="col-3">
           <div class="profile-picture">
             <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp" />
+            <br />
             <button @click="editAvatar()" class="btn btn-danger btn-block">Edit</button>
           </div>
         </div>
