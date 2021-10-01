@@ -2,7 +2,7 @@
   <div>
       <Carousel >
         <Slide v-for="slide in 10" :key="slide">
-          <div class="carousel_item">{{ slide }}</div>
+          <div class="carousel__item">{{ slide }}</div>
         </Slide>
 
         <template #addons>
@@ -55,8 +55,8 @@ export default {
 .carousel__item {
   min-height: 200px;
   width: 100%;
-  background-color: var(--carousel-color-primary);
-  color:  var(--carousel-color-white);
+  background-color: blue;
+  color:  red;
   font-size: 20px;
   border-radius: 8px;
   display: flex;
@@ -71,7 +71,7 @@ export default {
 .carousel__prev,
 .carousel__next {
   box-sizing: content-box;
-  border: 5px solid white;
+  border: 5px solid green;
 }
 
 </style>
