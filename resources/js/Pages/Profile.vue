@@ -29,17 +29,34 @@
             </button>
           </div>
         </div>
-        <div class="col-9">
+        <div class="col-9" style="padding: 50px !important">
           <div class="profile-section">
             <div class="editable">
-              <label for="Name">Name</label>
-              <input type="text" v-model="user.name" id="Name" />
-              <label for="ScreenName">ScreenName</label>
-              <input type="text" v-model="user.screen_name" id="ScreenName" />
-              <label for="FSCID">FSC ID</label>
-              <input type="number" v-model="user.fsc_id" id="FSCID" disabled />
-              <label for="pronouns">Preferred Pronouns</label>
-              <input type="text" name="pronouns" id="pronouns" v-model="user.pronouns" />
+              <div class="row">
+                <div class="col-6">
+                  <label for="Name">Name</label>
+                  <input type="text" v-model="user.name" id="Name" />
+
+                  <br />
+
+                  <label for="pronouns">Preferred Pronouns</label>
+                  <input
+                    type="text"
+                    name="pronouns"
+                    id="pronouns"
+                    v-model="user.pronouns"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="ScreenName">ScreenName</label>
+                  <input type="text" v-model="user.screen_name" id="ScreenName" />
+
+                  <br />
+
+                  <label for="FSCID">FSC ID</label>
+                  <input type="number" v-model="user.fsc_id" id="FSCID" disabled />
+                </div>
+              </div>
             </div>
           </div>
           <div class="Editor-Settings">
