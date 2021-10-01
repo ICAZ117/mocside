@@ -16,12 +16,12 @@
   <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Profile'">
         <div class="profile-section">
-          <img class="pfp" src="this.user.pfp" alt="Profile" id="pfp"/>
+          <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp"/>
           <button @click="editAvatar()" class="btn btn-danger btn-block">Edit</button>
 
           <vue-final-modal v-model="showAvatarModal" classes="modal-container" content-class="modal-content" :esc-to-close="true">
             <button class="modal-close" @click="showAvatarModal = false">x</button>
-            <img class="pfp" src="this.user.pfp" alt="Profile" id="pfpmodal"/>
+            <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfpmodal"/>
             <div class="picture">
               <label for="file" class="sr-only">Upload New Avatar</label>
               <input type="file" :accept="['image/*']" @change="fileChange" id="file"/>
