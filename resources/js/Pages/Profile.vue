@@ -260,7 +260,7 @@ import FileUpload from "../Components/FileUpload";
 import { defineComponent, reactive, toRefs, computed } from "vue";
 
 const tabs = ["Profile", "Grades", "Security"];
-export default defineComponent({
+export default {
   name: "Profile",
   components: {
     FileUpload,
@@ -558,7 +558,7 @@ export default defineComponent({
       this.showUpgrade = true; //change this later to check for admin instead of professor
     }
   },
-});
+};
 </script>
 
 <style></style>
