@@ -66,6 +66,16 @@
         </div>
       </div>
       <!-- End Carousel Content -->
+      <Carousel >
+        <slide v-for="slide in 10" :key="slide">
+          {{ slide }}
+        </slide>
+
+        <template #addons>
+          <Navigation />
+          <Pagination />
+        </template>
+      </Carousel>
 
       <!-- Previous & Next Buttons -->
       <a href="" class="carousel-control-prev" role="button" data-slide="prev">
@@ -100,8 +110,10 @@
 import Modal from "../Components/Modal";
 import FormInput from "../Components/FormInput";
 import BaseBtn from "../Components/BaseBtn";
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 export default {
-  components: { Modal, FormInput, BaseBtn },
+  components: { Modal, FormInput, BaseBtn, Carousel, Slide, Pagination, Navigation },
   data() {
     return {
       email: null,
