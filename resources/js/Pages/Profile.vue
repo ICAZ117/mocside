@@ -14,9 +14,6 @@
     </div>
   </div>
   <tab-panels v-model="selectedTab" :animate="true">
-    <!--------------------------->
-    <!------- PROFILE TAB ------->
-    <!--------------------------->
       <tab-panel :val="'Profile'">
         <div class="profile-section">
           <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp"/>
