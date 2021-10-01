@@ -15,12 +15,11 @@
   </div>
   <tab-panels v-model="selectedTab" :animate="true">
     <tab-panel :val="'Profile'">
+      <div class="profile-picture">
+        <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp" />
+        <button @click="editAvatar()" class="btn btn-danger btn-block">Edit</button>
+      </div>
       <div class="profile-section">
-        <div class="profile-picture">
-          <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp" />
-          <button @click="editAvatar()" class="btn btn-danger btn-block">Edit</button>
-        </div>
-
         <div class="editable">
           <label for="Name">Name</label>
           <input type="text" v-model="user.name" id="Name" />
@@ -106,30 +105,29 @@
       <button @click="saveProfile" class="btn btn-danger btn-block">Save</button>
 
       <vue-final-modal
-          v-model="showAvatarModal"
-          classes="modal-container"
-          content-class="modal-content"
-          :esc-to-close="true"
-        >
-          <button class="modal-close" @click="showAvatarModal = false">x</button>
-          <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfpmodal" />
-          <div class="picture">
-            <label for="file" class="sr-only">Upload New Avatar</label>
-            <input type="file" :accept="['image/*']" @change="fileChange" id="file" />
-            <button @click="updateImage()" class="btn btn-danger btn-block">
-              Change Avatar
-            </button>
-          </div>
-          <div class="row">
-            <button @click="closeAvatarModal" class="col-4 btn btn-lg btn-secondary mx-1">
-              Cancel
-            </button>
-            <button @click="changeAvatar" class="col-4 btn btn-lg btn-success mx-1">
-              Submit Changes
-            </button>
-          </div>
-        </vue-final-modal>
-        
+        v-model="showAvatarModal"
+        classes="modal-container"
+        content-class="modal-content"
+        :esc-to-close="true"
+      >
+        <button class="modal-close" @click="showAvatarModal = false">x</button>
+        <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfpmodal" />
+        <div class="picture">
+          <label for="file" class="sr-only">Upload New Avatar</label>
+          <input type="file" :accept="['image/*']" @change="fileChange" id="file" />
+          <button @click="updateImage()" class="btn btn-danger btn-block">
+            Change Avatar
+          </button>
+        </div>
+        <div class="row">
+          <button @click="closeAvatarModal" class="col-4 btn btn-lg btn-secondary mx-1">
+            Cancel
+          </button>
+          <button @click="changeAvatar" class="col-4 btn btn-lg btn-success mx-1">
+            Submit Changes
+          </button>
+        </div>
+      </vue-final-modal>
     </tab-panel>
     <tab-panel :val="'Grades'">
       <div
