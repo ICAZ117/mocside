@@ -1,4 +1,4 @@
-<template>
+<template class="darkBG">
   <div class="courses header">
     <div class="heading">
       <tabs v-model="selectedTab">
