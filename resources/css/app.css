@@ -447,11 +447,11 @@ nav {
 }
 
 .carousel__pagination-button--active {
-    color: var(--FSCred) !important;
+    background-color: var(--FSCred) !important;
 }
 
 .carousel__pagination-button {
-    color: white;
+    background-color: white !important;
 }
 
 /*-- Carousel Content --*/
