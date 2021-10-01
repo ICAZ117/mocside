@@ -32,6 +32,7 @@
         <div class="col-9" style="padding: 50px !important">
           <div class="profile-section">
             <div class="editable">
+              <h3>Profile Options</h3>
               <div class="row">
                 <div class="col-6">
                   <label for="Name">Name</label>
@@ -76,84 +77,104 @@
               </div>
             </div>
           </div>
+
+          <br />
+          <br />
+          <hr />
+          <br />
+          <br />
+
           <div class="Editor-Settings">
-            <!-- theme, language, console theme -->
-            <label for="Theme">Select A Default Theme</label>
-            <select
-              class="profile-field"
-              name="Theme"
-              id="Theme"
-              v-model="user.settings.ideOptions.theme"
-            >
-              <optgroup label="Dark">
-                <option value="ambiance">Ambiance</option>
-                <option value="chaos">Chaos</option>
-                <option value="clouds_midnight">Clouds Midnight</option>
-                <option value="dracula">Dracula</option>
-                <option value="cobalt">Cobalt</option>
-                <option value="gruvbox">Gruvbox</option>
-                <option value="gob" selected>Green on Black</option>
-                <option value="idle_fingers">idle Fingers</option>
-                <option value="kr_theme">krTheme</option>
-                <option value="merbivore">Merbivore</option>
-                <option value="merbivore_soft">Merbivore Soft</option>
-                <option value="mono_industrial">Mono Industrial</option>
-                <option value="monokai">Monokai</option>
-                <option value="nord_dark">Nord Dark</option>
-                <option value="pastel_on_dark">Pastel on dark</option>
-                <option value="solarized_dark">Solarized Dark</option>
-                <option value="terminal">Terminal</option>
-                <option value="tomorrow_night">Tomorrow Night</option>
-                <option value="tomorrow_night_blue">Tomorrow Night Blue</option>
-                <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
-                <option value="tomorrow_night_eighties">Tomorrow Night 80s</option>
-                <option value="twilight">Twilight</option>
-                <option value="vibrant_ink">Vibrant Ink</option>
-              </optgroup>
-              <optgroup label="Light">
-                <option value="chrome">Chrome</option>
-                <option value="clouds">Clouds</option>
-                <option value="crimson_editor">Crimson Editor</option>
-                <option value="dawn">Dawn</option>
-                <option value="dreamweaver">Dreamweaver</option>
-                <option value="eclipse">Eclipse</option>
-                <option value="github">GitHub</option>
-                <option value="iplastic">IPlastic</option>
-                <option value="solarized_light">Solarized Light</option>
-                <option value="textmate">TextMate</option>
-                <option value="tomorrow">Tomorrow</option>
-                <option value="xcode">Xcode</option>
-                <option value="kuroir">Kuroir</option>
-                <option value="katzenmilch">KatzenMilch</option>
-                <option value="sqlserver">SQL Server</option>
-              </optgroup>
-            </select>
-            <label for="Language">Select A Default Language</label>
-            <select
-              class="profile-field"
-              name="Language"
-              id="Language"
-              v-model="user.settings.ideOptions.defaultLang"
-            >
-              <option value="python">Python</option>
-              <option value="Java">Java</option>
-            </select>
-            <label for="ConsoleForeground">Select A Console Foreground Color</label>
-            <input
-              class="profile-field"
-              type="color"
-              name="ConsoleForeground"
-              id="ConsoleForeground"
-              v-model="user.settings.consoleOptions.foreground"
-            />
-            <label for="ConsoleBackground">Select A Console Background Color</label>
-            <input
-              class="profile-field"
-              type="color"
-              name="ConsoleBackground"
-              id="ConsoleBackground"
-              v-model="user.settings.consoleOptions.background"
-            />
+            <h3>Console Options</h3>
+            <div class="row">
+              <div class="col-6">
+                <!-- theme, language, console theme -->
+                <label for="Theme">Default Theme</label>
+                <select
+                  class="profile-field"
+                  name="Theme"
+                  id="Theme"
+                  v-model="user.settings.ideOptions.theme"
+                >
+                  <optgroup label="Dark">
+                    <option value="ambiance">Ambiance</option>
+                    <option value="chaos">Chaos</option>
+                    <option value="clouds_midnight">Clouds Midnight</option>
+                    <option value="dracula">Dracula</option>
+                    <option value="cobalt">Cobalt</option>
+                    <option value="gruvbox">Gruvbox</option>
+                    <option value="gob" selected>Green on Black</option>
+                    <option value="idle_fingers">idle Fingers</option>
+                    <option value="kr_theme">krTheme</option>
+                    <option value="merbivore">Merbivore</option>
+                    <option value="merbivore_soft">Merbivore Soft</option>
+                    <option value="mono_industrial">Mono Industrial</option>
+                    <option value="monokai">Monokai</option>
+                    <option value="nord_dark">Nord Dark</option>
+                    <option value="pastel_on_dark">Pastel on dark</option>
+                    <option value="solarized_dark">Solarized Dark</option>
+                    <option value="terminal">Terminal</option>
+                    <option value="tomorrow_night">Tomorrow Night</option>
+                    <option value="tomorrow_night_blue">Tomorrow Night Blue</option>
+                    <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
+                    <option value="tomorrow_night_eighties">Tomorrow Night 80s</option>
+                    <option value="twilight">Twilight</option>
+                    <option value="vibrant_ink">Vibrant Ink</option>
+                  </optgroup>
+                  <optgroup label="Light">
+                    <option value="chrome">Chrome</option>
+                    <option value="clouds">Clouds</option>
+                    <option value="crimson_editor">Crimson Editor</option>
+                    <option value="dawn">Dawn</option>
+                    <option value="dreamweaver">Dreamweaver</option>
+                    <option value="eclipse">Eclipse</option>
+                    <option value="github">GitHub</option>
+                    <option value="iplastic">IPlastic</option>
+                    <option value="solarized_light">Solarized Light</option>
+                    <option value="textmate">TextMate</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="xcode">Xcode</option>
+                    <option value="kuroir">Kuroir</option>
+                    <option value="katzenmilch">KatzenMilch</option>
+                    <option value="sqlserver">SQL Server</option>
+                  </optgroup>
+                </select>
+
+                <br /><br />
+
+                <label for="ConsoleForeground">Console Foreground Color</label>
+                <input
+                  class="profile-field"
+                  type="color"
+                  name="ConsoleForeground"
+                  id="ConsoleForeground"
+                  v-model="user.settings.consoleOptions.foreground"
+                />
+              </div>
+              <div class="col-6">
+                <label for="Language">Default Language</label>
+                <select
+                  class="profile-field"
+                  name="Language"
+                  id="Language"
+                  v-model="user.settings.ideOptions.defaultLang"
+                >
+                  <option value="python">Python</option>
+                  <option value="Java">Java</option>
+                </select>
+
+                <br /><br />
+
+                <label for="ConsoleBackground">Console Background Color</label>
+                <input
+                  class="profile-field"
+                  type="color"
+                  name="ConsoleBackground"
+                  id="ConsoleBackground"
+                  v-model="user.settings.consoleOptions.background"
+                />
+              </div>
+            </div>
           </div>
           <button @click="saveProfile" class="btn btn-danger btn-md btn-block">
             Save
