@@ -437,6 +437,7 @@ nav {
 }
 
 .carousel__slide {
+    display: unset;
     align-items: unset !important;
 }
 
@@ -452,10 +453,6 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .carousel__slide {
-    padding: 10px;
   }
   
   .carousel__prev,
