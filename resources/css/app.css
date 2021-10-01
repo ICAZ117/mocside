@@ -443,6 +443,11 @@ nav {
 
 .carousel__pagination {
     background-color: var(--FSCgrey);
+    margin-bottom: 0;
+}
+
+.carousel__pagination-button--active {
+    color: var(--FSCred);
 }
 
 /*-- Carousel Content --*/
