@@ -1,14 +1,14 @@
 <template>
   <div>
       <Carousel :wrap-around="true" :autoplay="6000" :transition="600" :pauseAutoplayOnHover="true">
-        <Slide v-for="slide in 10" :key="slide">
+        <!-- <Slide v-for="slide in 10" :key="slide">
           <div class="carousel__item">{{ slide }}</div>
-        </Slide>
-        <Slide :key="11"><div class="carousel__item">Hello</div></Slide>
-        <Slide :key="12"><div class="carousel__item">Bye</div></Slide>
-        <Slide  :key="13"><div class="carousel__item">Senor</div></Slide>
-        <Slide  :key="14"><div class="carousel__item">Faster</div></Slide>
-        <Slide  :key="15"><div class="carousel__item">Ibraheem</div></Slide>
+        </Slide> -->
+        <Slide :key="0"><div class="carousel__item">Hello</div></Slide>
+        <Slide :key="1"><div class="carousel__item">Bye</div></Slide>
+        <Slide :key="2"><div class="carousel__item">Senor</div></Slide>
+        <Slide :key="3"><div class="carousel__item">Faster</div></Slide>
+        <Slide :key="4"><div class="carousel__item">Ibraheem</div></Slide>
 
         <template #addons>
           <Navigation />
