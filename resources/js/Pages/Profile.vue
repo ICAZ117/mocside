@@ -1,4 +1,4 @@
-<template class="darkBG">
+<template>
   <div class="courses header">
     <div class="heading">
       <tabs v-model="selectedTab">
@@ -14,7 +14,7 @@
     </div>
   </div>
   <tab-panels v-model="selectedTab" :animate="true">
-    <tab-panel :val="'Profile'">
+    <tab-panel :val="'Profile'" class="darkBG">
       <div class="row">
         <div class="col-4">
           <div class="profile-picture">
