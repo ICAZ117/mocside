@@ -57,7 +57,7 @@
           <input type="text" name="pronouns" id="pronouns" v-model="user.pronouns" />
         </div>
       </div>
-      <div clas="Editor-Settings">
+      <div class="Editor-Settings">
         <!-- theme, language, console theme -->
         <label for="Theme">Select A Default Theme</label>
         <select name="Theme" id="Theme" v-model="user.settings.ideOptions.theme">
