@@ -445,6 +445,7 @@ nav {
 .carousel__pagination {
     background-color: var(--FSCgrey) !important;
     margin-bottom: 0;
+    padding-left: 0;
 }
 
 .carousel__pagination-button--active {
