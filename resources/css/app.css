@@ -442,12 +442,16 @@ nav {
 }
 
 .carousel__pagination {
-    background-color: var(--FSCgrey);
+    background-color: var(--FSCgrey) !important;
     margin-bottom: 0;
 }
 
 .carousel__pagination-button--active {
-    color: var(--FSCred);
+    color: var(--FSCred) !important;
+}
+
+.carousel__pagination-button {
+    color: white;
 }
 
 /*-- Carousel Content --*/
