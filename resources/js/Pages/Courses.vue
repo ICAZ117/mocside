@@ -270,6 +270,8 @@ export default {
         const outClick = document.getElementById("out-click");
         console.log("ClientY: " + window.event.clientY);
         console.log("ClientX: " + window.event.clientX);
+        console.log(menu.event.clientY);
+        console.log(menu.event.clientX);
         menu.style.top = `${window.event.clientY}px` - 209;
         menu.style.left = `${window.event.clientX}px` - 40;
         menu.classList.add("show");
