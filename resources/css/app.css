@@ -1421,6 +1421,28 @@ footer .svg-inline--fa:hover {
     border-radius: unset;
 }
 
+.profile-select {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+}
+
+.profile-select:focus-visible {
+    border: 1px solid lightgray !important;
+    border-radius: 5px !important;
+    background-color: rgb(32, 32, 32) !important;
+    transition-timing-function: ease-in-out !important;
+    transition-duration: 1000ms !important;
+    max-height: 30px !important;
+    max-width: 250px !important;
+    display: inline-block !important;
+    padding: 0 0 0 5px !important;
+    margin: 5px 0 0 5px !important;
+    color: lightgray !important;
+}
+
 .settings {
     scrollbar-width: thin;
     scrollbar-color: var(--FSCgrey) #333333;
@@ -1434,6 +1456,7 @@ footer .svg-inline--fa:hover {
 
 .settings::-webkit-scrollbar-track {
     background: #333333;
+    border-radius: 50px;
 }
 
 .settings::-webkit-scrollbar-thumb {
