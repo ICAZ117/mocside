@@ -176,6 +176,24 @@
               </div>
             </div>
           </div>
+          <div class="sampleIDE">
+            <div class="row">
+
+              <div class="col-6">
+                <VAceEditor :theme="user.settings.ideOptions.theme" />
+              </div>
+
+              <div class="col-6">
+                <textarea
+                  class="sampleConsole"
+                  contenteditable="true"
+                  spellcheck="false"
+                  :style="'background-color: ' + user.settings.consoleOptions.background + '; color: ' + user.settings.consoleOptions.foreground + ';'"
+                ></textarea>
+              </div>
+
+            </div>
+          </div>
           <button @click="saveProfile" class="btn btn-danger btn-md btn-block">
             Save
           </button>
