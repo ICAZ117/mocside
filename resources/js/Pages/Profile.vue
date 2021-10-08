@@ -178,9 +178,13 @@
           </div>
           <div class="sampleIDE">
             <div class="row">
-
               <div class="col-6">
-                <VAceEditor :theme="user.settings.ideOptions.theme" v-model:value="content"/>
+                <VAceEditor
+                  :theme="user.settings.ideOptions.theme"
+                  v-model:value="content"
+                  lang="text"
+                  style="width: 100%; height: 200px;"
+                />
               </div>
 
               <div class="col-6">
@@ -188,10 +192,15 @@
                   class="sampleConsole"
                   contenteditable="true"
                   spellcheck="false"
-                  :style="'background-color: ' + user.settings.consoleOptions.background + '; color: ' + user.settings.consoleOptions.foreground + ';'"
+                  :style="
+                    'background-color: ' +
+                    user.settings.consoleOptions.background +
+                    '; color: ' +
+                    user.settings.consoleOptions.foreground +
+                    ';'
+                  "
                 ></textarea>
               </div>
-
             </div>
           </div>
           <button @click="saveProfile" class="btn btn-danger btn-md btn-block">
@@ -393,11 +402,13 @@ import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/theme-vibrant_ink";
 import "ace-builds/src-noconflict/theme-xcode";
 
+import "ace-builds/src-noconflict/mode-text";
+
 //whitespace
 export default {
   components: {
     FileUpload,
-    VAceEditor
+    VAceEditor,
   },
   data() {
     return {
