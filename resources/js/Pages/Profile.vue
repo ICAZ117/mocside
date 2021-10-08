@@ -186,7 +186,7 @@
                 <VAceEditor
                   :theme="user.settings.ideOptions.theme"
                   v-model:value="content"
-                  lang="text"
+                  :lang="user.settings.ideOptions.defaultLang"
                   style="width: 100%; height: 200px"
                   :key="user.settings.ideOptions.defaultLang"
                 />
