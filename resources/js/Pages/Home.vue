@@ -63,10 +63,9 @@
           </div>
         </Slide>
 
-        <template #addons="{ currentSlide }">
+        <template #addons>
           <Navigation />
           <Pagination />
-          {{ currentSlide }}
         </template>
       </Carousel>
     <!-- Start Footer -->
