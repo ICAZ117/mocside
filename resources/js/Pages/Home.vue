@@ -63,9 +63,10 @@
           </div>
         </Slide>
 
-        <template #addons>
+        <template #addons="{ currentSlide }">
           <Navigation />
           <Pagination />
+          {{ currentSlide }}
         </template>
       </Carousel>
     <!-- Start Footer -->
@@ -99,7 +100,6 @@ export default {
       email: null,
       password: null,
       error: null,
-      // props: ["isLoginOpen"],
     };
   },
   methods: {
@@ -111,3 +111,4 @@ export default {
 <style>
 
 </style>
+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
