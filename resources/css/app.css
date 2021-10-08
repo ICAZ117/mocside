@@ -449,8 +449,8 @@ nav {
 }
 
 .carousel__pagination-button {
-    height: calc(var(--vc-pgn-height) * 1.5);
-    width: calc(var(--vc-pgn-width) * 2);
+    height: calc(var(--vc-pgn-height) * 1.5) !important;
+    width: calc(var(--vc-pgn-width) * 1.5) !important;
 }
 
 .carousel__pagination-button--active {
