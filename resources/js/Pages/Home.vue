@@ -63,7 +63,7 @@
           </div>
         </Slide>
 
-        <template #addons>
+        <template #addons="{ currentSlide }">
           <Navigation />
           <Pagination />
         </template>
@@ -99,11 +99,13 @@ export default {
       email: null,
       password: null,
       error: null,
-      // props: ["isLoginOpen"],
     };
   },
   methods: {
 
+  },
+  mounted() {
+    console.log("Mounted " + currentSlide);
   },
 };
 </script>
