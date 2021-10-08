@@ -29,7 +29,7 @@
             </button>
           </div>
         </div>
-        <div class="col-9" style="padding: 50px !important">
+        <div class="col-9 settings" style="padding: 50px !important; height: 100%;">
           <div class="profile-section">
             <div class="editable">
               <h3>Profile Options</h3>
@@ -45,7 +45,7 @@
 
                   <br /><br />
 
-                  <label for="pronouns">Preferred Pronouns</label>
+                  <label for="pronouns">Preferred Pronouns: </label>
                   <input
                     class="profile-field"
                     type="text"
@@ -55,7 +55,7 @@
                   />
                 </div>
                 <div class="col-6">
-                  <label for="ScreenName">ScreenName</label>
+                  <label for="ScreenName">ScreenName: </label>
                   <input
                     class="profile-field"
                     type="text"
@@ -65,7 +65,7 @@
 
                   <br /><br />
 
-                  <label for="FSCID">FSC ID</label>
+                  <label for="FSCID">FSC ID: </label>
                   <input
                     class="profile-field"
                     type="number"
@@ -89,9 +89,9 @@
             <div class="row">
               <div class="col-6">
                 <!-- theme, language, console theme -->
-                <label for="Theme">Default Theme</label>
+                <label for="Theme">Default Theme: </label>
                 <select
-                  class="profile-field"
+                  class="profile-select"
                   name="Theme"
                   id="Theme"
                   v-model="user.settings.ideOptions.theme"
@@ -142,7 +142,7 @@
 
                 <br /><br />
 
-                <label for="ConsoleForeground">Console Foreground Color</label>
+                <label for="ConsoleForeground">Console Foreground Color: </label>
                 <input
                   class="profile-field"
                   type="color"
@@ -152,9 +152,9 @@
                 />
               </div>
               <div class="col-6">
-                <label for="Language">Default Language</label>
+                <label for="Language">Default Language: </label>
                 <select
-                  class="profile-field"
+                  class="profile-select"
                   name="Language"
                   id="Language"
                   v-model="user.settings.ideOptions.defaultLang"
@@ -165,7 +165,7 @@
 
                 <br /><br />
 
-                <label for="ConsoleBackground">Console Background Color</label>
+                <label for="ConsoleBackground">Console Background Color: </label>
                 <input
                   class="profile-field"
                   type="color"
@@ -173,6 +173,33 @@
                   id="ConsoleBackground"
                   v-model="user.settings.consoleOptions.background"
                 />
+              </div>
+            </div>
+          </div>
+          <div class="sampleIDE">
+            <div class="row">
+              <div class="col-6">
+                <VAceEditor
+                  :theme="user.settings.ideOptions.theme"
+                  v-model:value="content"
+                  lang="text"
+                  style="width: 100%; height: 200px;"
+                />
+              </div>
+
+              <div class="col-6">
+                <textarea
+                  class="sampleConsole"
+                  contenteditable="true"
+                  spellcheck="false"
+                  :style="
+                    'background-color: ' +
+                    user.settings.consoleOptions.background +
+                    '; color: ' +
+                    user.settings.consoleOptions.foreground +
+                    ';'
+                  "
+                ></textarea>
               </div>
             </div>
           </div>
@@ -327,12 +354,61 @@ import store from "../Store/index";
 import { useRoute } from "vue-router";
 import FileService from "../services/FileService";
 import FileUpload from "../Components/FileUpload";
-import { defineComponent, reactive, toRefs, computed } from "vue";
+import { reactive, toRefs, computed } from "vue";
 const tabs = ["Profile", "Grades", "Security"];
+
+import { VAceEditor } from "vue3-ace-editor";
+
+//////////////////////////////////////////////////////////////////////
+//                            THEMES                                //
+//////////////////////////////////////////////////////////////////////
+import "ace-builds/src-noconflict/ext-themelist";
+import "ace-builds/src-noconflict/theme-ambiance";
+import "ace-builds/src-noconflict/theme-chaos";
+import "ace-builds/src-noconflict/theme-chrome";
+import "ace-builds/src-noconflict/theme-clouds";
+import "ace-builds/src-noconflict/theme-clouds_midnight";
+import "ace-builds/src-noconflict/theme-cobalt";
+import "ace-builds/src-noconflict/theme-crimson_editor";
+import "ace-builds/src-noconflict/theme-dawn";
+import "ace-builds/src-noconflict/theme-dracula";
+import "ace-builds/src-noconflict/theme-dreamweaver";
+import "ace-builds/src-noconflict/theme-eclipse";
+import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-gob";
+import "ace-builds/src-noconflict/theme-gruvbox";
+import "ace-builds/src-noconflict/theme-idle_fingers";
+import "ace-builds/src-noconflict/theme-iplastic";
+import "ace-builds/src-noconflict/theme-katzenmilch";
+import "ace-builds/src-noconflict/theme-kr_theme";
+import "ace-builds/src-noconflict/theme-kuroir";
+import "ace-builds/src-noconflict/theme-merbivore";
+import "ace-builds/src-noconflict/theme-merbivore_soft";
+import "ace-builds/src-noconflict/theme-mono_industrial";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-nord_dark";
+import "ace-builds/src-noconflict/theme-pastel_on_dark";
+import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/theme-solarized_light";
+import "ace-builds/src-noconflict/theme-sqlserver";
+import "ace-builds/src-noconflict/theme-terminal";
+import "ace-builds/src-noconflict/theme-textmate";
+import "ace-builds/src-noconflict/theme-tomorrow";
+import "ace-builds/src-noconflict/theme-tomorrow_night";
+import "ace-builds/src-noconflict/theme-tomorrow_night_blue";
+import "ace-builds/src-noconflict/theme-tomorrow_night_bright";
+import "ace-builds/src-noconflict/theme-tomorrow_night_eighties";
+import "ace-builds/src-noconflict/theme-twilight";
+import "ace-builds/src-noconflict/theme-vibrant_ink";
+import "ace-builds/src-noconflict/theme-xcode";
+
+import "ace-builds/src-noconflict/mode-text";
+
 //whitespace
 export default {
   components: {
     FileUpload,
+    VAceEditor,
   },
   data() {
     return {
@@ -345,6 +421,7 @@ export default {
       letters: [],
       enrolledCourses: [],
       courses: [],
+      content: "",
       user: {
         name: "",
         email: "",
