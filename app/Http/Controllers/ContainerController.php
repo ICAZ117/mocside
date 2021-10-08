@@ -113,15 +113,24 @@ class ContainerController extends Controller
         $line = $webSocketStream->read();
         $out = "";
 
+        // requets hang during infinite runs because of this loop below
+        // so I'm going to start a basic timer and stop reading after half a second.
+        $time_pre = microtime(true);
+
         while ($line != null) {
             $out .= $line;
-            try {
-                $line = $webSocketStream->read();
-                // this is in reference to an error found in the 
-                // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
-                // ... final solution there. This should do nothing, but I'm scared.
-            } catch (ErrorException $e) {
-                echo $e;
+            $time_curr = microtime(true);
+            if (($time_curr - $time_pre) < 500000) {
+                try {
+                    $line = $webSocketStream->read();
+                    // this is in reference to an error found in the 
+                    // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
+                    // ... final solution there. This should do nothing, but I'm scared.
+                } catch (ErrorException $e) {
+                    // echo $e;
+                    $line = null;
+                }
+            } else {
                 $line = null;
             }
         }
@@ -309,15 +318,24 @@ class ContainerController extends Controller
         $line = $webSocketStream->read(); // this will hold user input
         $out = "";
 
+        // requets hang during infinite runs because of this loop below
+        // so I'm going to start a basic timer and stop reading after half a second.
+        $time_pre = microtime(true);
+
         while ($line != null) {
             $out .= $line;
-            try {
-                $line = $webSocketStream->read();
-                // this is in reference to an error found in the 
-                // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
-                // ... final solution there. This should do nothing, but I'm scared.
-            } catch (ErrorException $e) {
-                echo $e;
+            $time_curr = microtime(true);
+            if (($time_curr - $time_pre) < 500000) {
+                try {
+                    $line = $webSocketStream->read();
+                    // this is in reference to an error found in the 
+                    // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
+                    // ... final solution there. This should do nothing, but I'm scared.
+                } catch (ErrorException $e) {
+                    // echo $e;
+                    $line = null;
+                }
+            } else {
                 $line = null;
             }
         }
@@ -369,15 +387,24 @@ class ContainerController extends Controller
         $line = $webSocketStream->read();
         $out = "";
 
+        // requets hang during infinite runs because of this loop below
+        // so I'm going to start a basic timer and stop reading after half a second.
+        $time_pre = microtime(true);
+
         while ($line != null) {
             $out .= $line;
-            try {
-                $line = $webSocketStream->read();
-                // this is in reference to an error found in the 
-                // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
-                // ... final solution there. This should do nothing, but I'm scared.
-            } catch (ErrorException $e) {
-                echo $e;
+            $time_curr = microtime(true);
+            if (($time_curr - $time_pre) < 500000) {
+                try {
+                    $line = $webSocketStream->read();
+                    // this is in reference to an error found in the 
+                    // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
+                    // ... final solution there. This should do nothing, but I'm scared.
+                } catch (ErrorException $e) {
+                    // echo $e;
+                    $line = null;
+                }
+            } else {
                 $line = null;
             }
         }
