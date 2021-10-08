@@ -457,8 +457,7 @@ nav {
 .carousel__item {
     min-height: 200px;
     width: 100%;
-    background-color: blue;
-    color: red;
+    background-color: rgba(0, 0, 0, 0);
     font-size: 20px;
     border-radius: 8px;
     display: flex;
