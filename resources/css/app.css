@@ -469,16 +469,16 @@ nav {
 }
 
 .carousel__icon {
-    width: calc(var(--vc-icn-width)*2) !important;
-    height: calc(var(--vc-icn-width)*2) !important;
+    width: calc(var(--vc-icn-width) * 2) !important;
+    height: calc(var(--vc-icn-width) * 2) !important;
 }
 
 .carousel__prev,
 .carousel__next {
     box-sizing: content-box;
     border: 5px solid green;
-    width: calc(var(--vc-nav-width)*2) !important;
-    height: calc(var(--vc-nav-height)*2) !important;
+    width: calc(var(--vc-nav-width) * 2) !important;
+    height: calc(var(--vc-nav-height) * 2) !important;
 }
 
 .carousel__prev {
@@ -1430,17 +1430,29 @@ footer .svg-inline--fa:hover {
 }
 
 .profile-select:focus-visible {
-    border: 1px solid lightgray !important;
-    border-radius: 5px !important;
-    background-color: rgb(32, 32, 32) !important;
-    transition-timing-function: ease-in-out !important;
-    transition-duration: 1000ms !important;
+    background-color: #222222 !important;
     max-height: 30px !important;
-    max-width: 250px !important;
     display: inline-block !important;
-    padding: 0 0 0 5px !important;
-    margin: 5px 0 0 5px !important;
     color: lightgray !important;
+    outline: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--FSCgrey) #333333;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.profile-select:focus-visible::-webkit-scrollbar {
+    width: 10px;
+}
+
+.profile-select:focus-visible::-webkit-scrollbar-track {
+    background: #333333;
+    border-radius: 50px;
+}
+
+.profile-select:focus-visible::-webkit-scrollbar-thumb {
+    background-color: var(--FSCgrey);
+    border-radius: 50px;
+    border: 3px solid #333333;
 }
 
 .settings {
