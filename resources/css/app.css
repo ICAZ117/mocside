@@ -1435,6 +1435,18 @@ footer .svg-inline--fa:hover {
     border: 3px solid #333333;
 }
 
+.sampleConsole {
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
+    /* height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important; */
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 20px;
+    border: none !important;
+    width: 100% !important;
+    border-radius: 0px !important;
+}
+
 /*============= ENROLL =============*/
 .center-height {
     margin-top: calc(100vh - var(--nav-height)) !important;
