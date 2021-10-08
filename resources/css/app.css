@@ -448,6 +448,11 @@ nav {
     padding-left: 0;
 }
 
+.carousel__pagination-button {
+    height: calc(var(--vc-pgn-height) * 1.5);
+    width: calc(var(--vc-pgn-width) * 2);
+}
+
 .carousel__pagination-button--active {
     background-color: var(--FSCred) !important;
 }
