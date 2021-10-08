@@ -180,7 +180,7 @@
             <div class="row">
 
               <div class="col-6">
-                <VAceEditor :theme="user.settings.ideOptions.theme" />
+                <VAceEditor :theme="user.settings.ideOptions.theme" v-model:value="content"/>
               </div>
 
               <div class="col-6">
@@ -410,6 +410,7 @@ export default {
       letters: [],
       enrolledCourses: [],
       courses: [],
+      content: "",
       user: {
         name: "",
         email: "",
