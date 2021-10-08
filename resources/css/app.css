@@ -452,26 +452,25 @@ nav {
     background-color: var(--FSCred) !important;
 }
 
-
 /*-- Carousel Content --*/
 
 .carousel__item {
     min-height: 200px;
     width: 100%;
     background-color: blue;
-    color:  red;
+    color: red;
     font-size: 20px;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .carousel__prev,
-  .carousel__next {
+}
+
+.carousel__prev,
+.carousel__next {
     box-sizing: content-box;
     border: 5px solid green;
-  }
+}
 
 .carousel-caption {
     position: absolute !important;
@@ -882,16 +881,17 @@ thead.gradebook {
 
 /*============= WORKSPACE =============*/
 .workspace-page {
-    background-color: black!important;
-    width: 100vw!important;
-    height: calc(100vh - var(--nav-height))!important;
+    background-color: black !important;
+    width: 100vw !important;
+    height: calc(100vh - var(--nav-height)) !important;
 }
 .work-area {
     padding: 0 !important;
     margin: 0 !important;
     background-color: black !important;
     color: lightgray !important;
-    font: 12pt/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
     font-weight: lighter !important;
     font-size: 12pt !important;
 }
@@ -915,7 +915,7 @@ thead.gradebook {
     font-weight: lighter !important;
     font-size: 12pt !important;
     /* min-height: calc((100vh - var(--nav-height)) / 2) !important; */
-    height: 100%!important;
+    height: 100% !important;
     margin: 0 !important;
 }
 
@@ -932,9 +932,10 @@ thead.gradebook {
 .console {
     background-color: var(--consoleBG) !important;
     color: lime !important;
-    font: 12pt/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
     /* height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important; */
-    height: 100%!important;
+    height: 100% !important;
     margin: 0 !important;
     padding: 20px;
     border: none !important;
@@ -1124,15 +1125,12 @@ thead.gradebook {
 }
 
 .delete-buttons {
-    float:right;
+    float: right;
 }
 
 .delete-button {
     margin: 3px;
 }
-
-
-
 
 /*========= ADD ASSIGNMENT =========*/
 .assignment-title {
@@ -1265,7 +1263,7 @@ thead.gradebook {
 }
 
 .template-IDE {
-    margin-top: 150px!important;
+    margin-top: 150px !important;
 }
 
 .save-template,
@@ -1388,21 +1386,43 @@ footer .svg-inline--fa:hover {
 }
 
 .profile {
-    height: calc(100vh - var(--nav-height) - 45.2px)!important;
-    padding: 20px 20px 20px 0!important;
+    height: calc(100vh - var(--nav-height) - 45.2px) !important;
+    padding: 20px 20px 20px 0 !important;
 }
 
 .profile-picture {
-    width: fit-content!important;
-    margin: auto!important;
+    width: fit-content !important;
+    margin: auto !important;
 }
 
-.profile-field, .profile-field:focus-visible {
+.profile-field,
+.profile-field:focus-visible {
     background-color: transparent;
     color: lightgray;
     border: none;
     border-bottom: 2px var(--FSCgrey) solid;
     border-radius: unset;
+}
+
+.settings {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+    overflow-y: scroll;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.settings::-webkit-scrollbar {
+    width: 12px;
+}
+
+.settings::-webkit-scrollbar-track {
+    background: orange;
+}
+
+.settings::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 20px;
+    border: 3px solid orange;
 }
 
 /*============= ENROLL =============*/

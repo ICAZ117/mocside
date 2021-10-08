@@ -29,7 +29,7 @@
             </button>
           </div>
         </div>
-        <div class="col-9" style="padding: 50px !important">
+        <div class="col-9 settings" style="padding: 50px !important">
           <div class="profile-section">
             <div class="editable">
               <h3>Profile Options</h3>
