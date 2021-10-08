@@ -29,7 +29,7 @@
             </button>
           </div>
         </div>
-        <div class="col-9 settings" style="padding: 50px !important">
+        <div class="col-9 settings" style="padding: 50px !important; height: 100%;">
           <div class="profile-section">
             <div class="editable">
               <h3>Profile Options</h3>
@@ -45,7 +45,7 @@
 
                   <br /><br />
 
-                  <label for="pronouns">Preferred Pronouns</label>
+                  <label for="pronouns">Preferred Pronouns: </label>
                   <input
                     class="profile-field"
                     type="text"
@@ -55,7 +55,7 @@
                   />
                 </div>
                 <div class="col-6">
-                  <label for="ScreenName">ScreenName</label>
+                  <label for="ScreenName">ScreenName: </label>
                   <input
                     class="profile-field"
                     type="text"
@@ -65,7 +65,7 @@
 
                   <br /><br />
 
-                  <label for="FSCID">FSC ID</label>
+                  <label for="FSCID">FSC ID: </label>
                   <input
                     class="profile-field"
                     type="number"
@@ -89,9 +89,9 @@
             <div class="row">
               <div class="col-6">
                 <!-- theme, language, console theme -->
-                <label for="Theme">Default Theme</label>
+                <label for="Theme">Default Theme: </label>
                 <select
-                  class="profile-field"
+                  class="profile-select"
                   name="Theme"
                   id="Theme"
                   v-model="user.settings.ideOptions.theme"
@@ -142,7 +142,7 @@
 
                 <br /><br />
 
-                <label for="ConsoleForeground">Console Foreground Color</label>
+                <label for="ConsoleForeground">Console Foreground Color: </label>
                 <input
                   class="profile-field"
                   type="color"
@@ -152,9 +152,9 @@
                 />
               </div>
               <div class="col-6">
-                <label for="Language">Default Language</label>
+                <label for="Language">Default Language: </label>
                 <select
-                  class="profile-field"
+                  class="profile-select"
                   name="Language"
                   id="Language"
                   v-model="user.settings.ideOptions.defaultLang"
@@ -165,7 +165,7 @@
 
                 <br /><br />
 
-                <label for="ConsoleBackground">Console Background Color</label>
+                <label for="ConsoleBackground">Console Background Color: </label>
                 <input
                   class="profile-field"
                   type="color"
