@@ -269,6 +269,8 @@ export default {
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
         console.log("ClientY: " + window.event.clientY);
+        console.log("calcY" + (window.event.clientY - 236));
+        console.log("calcX" + (window.event.clientX - 277.5));
         console.log("ClientX: " + window.event.clientX);
         menu.style.top = `${window.event.clientY}px`;
         menu.style.left = `${window.event.clientX}px`;
