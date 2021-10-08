@@ -457,8 +457,6 @@ nav {
     background-color: var(--FSCred) !important;
 }
 
-/*-- Carousel Content --*/
-
 .carousel__item {
     min-height: 200px;
     width: 100%;
@@ -474,6 +472,14 @@ nav {
 .carousel__next {
     box-sizing: content-box;
     border: 5px solid green;
+}
+
+.carousel__prev {
+    left: 20px;
+}
+
+.carousel__next {
+    right: 20px;
 }
 
 .carousel-caption {
