@@ -468,10 +468,17 @@ nav {
     align-items: center;
 }
 
+.carousel__icon {
+    width: calc(var(--vc-icn-width)*2) !important;
+    height: calc(var(--vc-icn-width)*2) !important;
+}
+
 .carousel__prev,
 .carousel__next {
     box-sizing: content-box;
     border: 5px solid green;
+    width: calc(var(--vc-nav-width)*2) !important;
+    height: calc(var(--vc-nav-height)*2) !important;
 }
 
 .carousel__prev {

@@ -45,7 +45,6 @@ STYLE FIXES
     * Highlighting problems
 * Problem Edit
 * Workspace
-* Fix Carousel
 * Combine Logout, with profile pic, and link to profile 
 * DeleteModals on Courses, Labs, & Problems
 
