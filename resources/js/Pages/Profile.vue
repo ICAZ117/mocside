@@ -409,6 +409,8 @@ import "ace-builds/src-noconflict/theme-vibrant_ink";
 import "ace-builds/src-noconflict/theme-xcode";
 
 import "ace-builds/src-noconflict/mode-text";
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/mode-python";
 
 //whitespace
 export default {
