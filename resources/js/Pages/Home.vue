@@ -105,13 +105,10 @@ export default {
   methods: {
 
   },
-  mounted() {
-    console.log("Mounted");
-    console.log(currentSlide);
-  },
 };
 </script>
 
 <style>
 
 </style>
+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
