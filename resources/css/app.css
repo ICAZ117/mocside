@@ -475,11 +475,11 @@ nav {
 }
 
 .carousel__prev {
-    left: 20px;
+    left: 20px !important;
 }
 
 .carousel__next {
-    right: 20px;
+    right: 20px !important;
 }
 
 .carousel-caption {
