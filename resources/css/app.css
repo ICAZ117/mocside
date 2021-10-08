@@ -448,6 +448,11 @@ nav {
     padding-left: 0;
 }
 
+.carousel__pagination-button {
+    height: calc(var(--vc-pgn-height) * 1.5) !important;
+    width: calc(var(--vc-pgn-width) * 1.5) !important;
+}
+
 .carousel__pagination-button--active {
     background-color: var(--FSCred) !important;
 }
@@ -457,8 +462,7 @@ nav {
 .carousel__item {
     min-height: 200px;
     width: 100%;
-    background-color: blue;
-    color: red;
+    background-color: rgba(0, 0, 0, 0);
     font-size: 20px;
     border-radius: 8px;
     display: flex;
