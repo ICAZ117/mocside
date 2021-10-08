@@ -472,6 +472,8 @@ nav {
 .carousel__next {
     box-sizing: content-box;
     border: 5px solid green;
+    width: calc(var(--vc-nav-width)*2) !important;
+    height: calc(var(--vc-nav-height)*2) !important;
 }
 
 .carousel__prev {
