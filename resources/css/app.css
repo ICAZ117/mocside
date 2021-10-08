@@ -1406,23 +1406,23 @@ footer .svg-inline--fa:hover {
 
 .settings {
     scrollbar-width: thin;
-    scrollbar-color: blue orange;
+    scrollbar-color: var(--FSCgrey) #505050;
     overflow-y: scroll;
 }
 
 /* Works on Chrome, Edge, and Safari */
 .settings::-webkit-scrollbar {
-    width: 12px;
+    width: 10px;
 }
 
 .settings::-webkit-scrollbar-track {
-    background: orange;
+    background: #505050;
 }
 
 .settings::-webkit-scrollbar-thumb {
-    background-color: blue;
-    border-radius: 20px;
-    border: 3px solid orange;
+    background-color: var(--FSCgrey);
+    border-radius: 50%;
+    border: 3px solid #505050;
 }
 
 /*============= ENROLL =============*/
