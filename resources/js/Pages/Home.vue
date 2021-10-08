@@ -105,10 +105,15 @@ export default {
   methods: {
 
   },
+  mounted() {
+    let buttonsNext = document.getElementsByClassName('carousel__next');
+    if (buttonsNext.length > 0) {
+      buttonsNext.item(0).click();
+    }
+  },
 };
 </script>
 
 <style>
 
 </style>
-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
