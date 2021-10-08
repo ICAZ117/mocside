@@ -29,13 +29,16 @@
             </button>
           </div>
         </div>
-        <div class="col-9 settings" style="padding: 50px !important; height: 100%;">
+        <div
+          class="col-9 settings"
+          style="padding: 50px !important; height: 100%; color: #888"
+        >
           <div class="profile-section">
             <div class="editable">
               <h3>Profile Options</h3>
               <div class="row">
                 <div class="col-6">
-                  <label for="Name">Name</label>
+                  <label for="Name">Name: </label>
                   <input
                     class="profile-field"
                     type="text"
@@ -176,6 +179,7 @@
               </div>
             </div>
           </div>
+          <br /><br />
           <div class="sampleIDE">
             <div class="row">
               <div class="col-6">
@@ -183,7 +187,8 @@
                   :theme="user.settings.ideOptions.theme"
                   v-model:value="content"
                   lang="text"
-                  style="width: 100%; height: 200px;"
+                  style="width: 100%; height: 200px"
+                  :key="user.settings.ideOptions.defaultLang"
                 />
               </div>
 
@@ -199,10 +204,11 @@
                     user.settings.consoleOptions.foreground +
                     ';'
                   "
-                ></textarea>
+                >{{ user.username }}@mocside.com:/usr/src$ </textarea>
               </div>
             </div>
           </div>
+          <br />
           <button @click="saveProfile" class="btn btn-danger btn-md btn-block">
             Save
           </button>
