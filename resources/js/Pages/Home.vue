@@ -66,6 +66,7 @@
         <template #addons="{ currentSlide }">
           <Navigation />
           <Pagination />
+          {{ currentSlide }}
         </template>
       </Carousel>
     <!-- Start Footer -->
@@ -105,7 +106,8 @@ export default {
 
   },
   mounted() {
-    console.log("Mounted " + currentSlide);
+    console.log("Mounted");
+    console.log(currentSlide);
   },
 };
 </script>
