@@ -1,7 +1,7 @@
 <template>
   <div>
       <Carousel class="carousel" :wrap-around="true" :transition="600" :pauseAutoplayOnHover="true">
-        <Slide :key="-1">
+        <Slide :key="0">
           <div class="carousel__item">
             <img src="../../img/carousel/1.jpg" alt="Image carousel" class="w-100" />
 
@@ -24,7 +24,7 @@
             </div>
           </div>
         </Slide>
-        <Slide :key="0">
+        <Slide :key="1">
           <div class="carousel__item">
             <img src="../../img/carousel/2.jpg" alt="Image carousel" class="w-100" />
 
@@ -43,7 +43,7 @@
             </div>
           </div>
         </Slide>
-        <Slide :key="1">
+        <Slide :key="2">
           <div class="carousel__item">
             <img src="../../img/carousel/3.jpg" alt="Image carousel" class="w-100" />
 
