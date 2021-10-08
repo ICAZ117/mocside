@@ -4,7 +4,7 @@ from sys import exit
 import argparse
 
 parser = argparse.ArgumentParser(
-                        description='Set room to broadcast changes to.')
+                        description='Set language of student code to be run.')
 parser.add_argument('-l', '--lang', metavar='lang', type=str, nargs=1,
                         help='Language of student code', required=True)
 args = parser.parse_args()

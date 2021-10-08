@@ -31,6 +31,7 @@ NEXT UP
     * some test cases have had the wrong assignment idempty
 * add modification to Ace-editor, suggestions, autoformat, autocompletes
 * Upon creating an assignment it should auto set the template for both python and java
+* course edit/delete button menu is positioned relative to the parent course, but getting mouse position is done relative to the body element currently causing the menu to shift away too far
 
 
 

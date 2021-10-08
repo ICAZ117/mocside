@@ -440,8 +440,7 @@ export default defineComponent({
         this.rightClickID = String(course_id);
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
-
-        menu.style.top = `${window.event.clientY}px`;
+        menu.style.top = `${window.event.clientY + document.body.scrollTop}px`;
         menu.style.left = `${window.event.clientX}px`;
         menu.classList.add("show");
 
