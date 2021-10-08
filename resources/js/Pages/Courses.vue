@@ -268,7 +268,8 @@ export default {
         this.rightClickID = String(course_id);
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
-
+        console.log("ClientY: " + window.event.clientY);
+        console.log("ClientX: " + window.event.clientX);
         menu.style.top = `${window.event.clientY}px`;
         menu.style.left = `${window.event.clientX}px`;
         menu.classList.add("show");
