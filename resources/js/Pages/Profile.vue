@@ -163,7 +163,7 @@
                   v-model="user.settings.ideOptions.defaultLang"
                 >
                   <option value="python">Python</option>
-                  <option value="Java">Java</option>
+                  <option value="java">Java</option>
                 </select>
 
                 <br /><br />
