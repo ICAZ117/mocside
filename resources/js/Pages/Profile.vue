@@ -397,6 +397,7 @@ import "ace-builds/src-noconflict/theme-xcode";
 export default {
   components: {
     FileUpload,
+    VAceEditor
   },
   data() {
     return {
