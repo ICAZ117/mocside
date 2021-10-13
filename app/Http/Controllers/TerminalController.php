@@ -14,7 +14,7 @@ class TerminalController extends Controller
             'message' => 'required'
         ])
         $user = Auth::user();
-        broadcast(new InputSent($user, $validMessage['message']))
+        broadcast(new InputSent($user, $validMessage['message']))->toOthers();
         return response()->json(['message' => 'input sent']);
     }
 }
