@@ -38,7 +38,7 @@ class InputSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // normally 'channel-name'
-        return new Channel('term.'.$user->id);
+        // Users can only send input to their own terminals
+        return new Channel('term.'.$this->user->id);
     }
 }

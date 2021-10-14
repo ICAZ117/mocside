@@ -275,7 +275,7 @@ class ContainerController extends Controller
                 // fread() of ./docker-php/src/Stream AttachWebSocketStream.php @line 164 
                 // ... final solution there. This should do nothing, but I'm scared.
             } catch (ErrorException $e) {
-                echo $e;
+                // echo $e;
                 $line = null;
             }
         }

@@ -3,7 +3,7 @@
 namespace App\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PrivateChannel;
+// use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -18,15 +18,17 @@ class ContainerOut implements ShouldBroadcast
 
     // public $container_id;
 
+    public int $uid;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(?array $message)
+    public function __construct(int $user_id, ?array $message)
     {
         $this->message = $message;
-        // $this->container_id = $id;
+        $this->uid = $user_id;
     }
 
     /**
@@ -37,6 +39,6 @@ class ContainerOut implements ShouldBroadcast
     public function broadcastOn()
     {
         // normally 'channel-name'
-        return new Channel('test');
+        return new Channel('term'.$this->uid);
     }
 }

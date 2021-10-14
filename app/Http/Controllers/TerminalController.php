@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ContainerOut;
 use App\Events\InputSent;
+use Broadcast;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,9 +14,18 @@ class TerminalController extends Controller
     {
         $validMessage = $request->validate([
             'message' => 'required'
-        ])
+        ]);
         $user = Auth::user();
         broadcast(new InputSent($user, $validMessage['message']))->toOthers();
-        return response()->json(['message' => 'input sent']);
+        return response()->json(['message' => 'input sent'], 200);
+    }
+
+    public function bounceLogs(Request $request, $user_id)
+    {
+        $validMessage = $request->validate([
+            'message' => 'required',
+        ]);
+        broadcast(new ContainerOut($user_id, $validMessage['message']))->toOthers();
+        return response()->json(['message' => 'log sent.'], 200);
     }
 }
