@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class TerminalController extends Controller
 {
+    // NOTE: This file is most likely useless, since I want client to be triggering events
+    // and this implementation would get stuck in rate limiting.
     public function sendInput(Request $request)
     {
         $validMessage = $request->validate([
