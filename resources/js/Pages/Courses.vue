@@ -269,12 +269,16 @@ export default {
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
 
-        console.log(menu);
-        var rect = menu.parentElement.getBoundingClientRect();
-        var x = window.event.clientX - rect.left; //x position within the element
-        var y = window.event.clientY - rect.top; //y position within the element
-        menu.style.top = `${y}px`;
-        menu.style.left = `${x}px`;
+        // console.log(menu);
+        // var rect = menu.parentElement.getBoundingClientRect();
+        // var x = window.event.clientX - rect.left; //x position within the element
+        // var y = window.event.clientY - rect.top; //y position within the element
+        // menu.style.top = `${y}px`;
+        // menu.style.left = `${x}px`;
+
+        menu.style.position = `absolute`;
+        menu.style.top = `${window.event.pageY}px`;
+        mennu.style.left = `${window.event.pageX}px`;
 
         //offset top and offset left are giving me the starting position of the card element
         //pageX instead of clientX will give position relative to entire page rather than scrolled
