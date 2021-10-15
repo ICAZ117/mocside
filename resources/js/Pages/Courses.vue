@@ -279,6 +279,9 @@ export default {
       var offsetLeft = 0;
       do {
         console.log(elem);
+        if(elem.parentElement == null) {
+          break;
+        }
         if ( !isNaN( elem.offsetLeft ) )
         {
             offsetLeft += elem.offsetLeft;
@@ -296,6 +299,10 @@ export default {
     },
     getParentOffsetY(elem) {
       var offsetTop = 0;
+      console.log(elem);
+      if(elem.parentElement == null) {
+          break;
+        }
       do {
         if ( !isNaN( elem.offsetTop ) )
         {
