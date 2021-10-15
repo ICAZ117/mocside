@@ -740,26 +740,39 @@ export default {
       this.showUpgrade = true; //change this later to check for admin instead of professor
     }
   },
-  async waitForDecision() {
-    while (this.leavePage != "") {
-      continue;
-    }
-  },
-  async beforeRouteLeave(to, from, next) {
-    console.log("HERE");
+  // async waitForDecision() {
+  //   while (this.leavePage != "") {
+  //     continue;
+  //   }
+  // },
+  // async beforeRouteLeave(to, from, next) {
+  //   console.log("HERE");
+  //   if (this.hasUnsavedChanges) {
+  //     this.showUnsavedChangesModal = true;
+
+  //     await waitForDecision();
+  //     console.log("HAS UNSAVED CHANGES");
+
+  //     if (this.leavePage == "yes") {
+  //       this.leavePage = "";
+  //       this.showUnsavedChangesModal = false;
+  //       return next();
+  //     } else {
+  //       this.leavePage = "";
+  //       this.showUnsavedChangesModal = false;
+  //       return next(false);
+  //     }
+  //   }
+  //   return next();
+  // },
+  beforeRouteLeave(to, from, next) {
     if (this.hasUnsavedChanges) {
-      this.showUnsavedChangesModal = true;
-
-      await waitForDecision();
-      console.log("HAS UNSAVED CHANGES");
-
-      if (this.leavePage == "yes") {
-        this.leavePage = "";
-        this.showUnsavedChangesModal = false;
+      const answer = (window.confirm = function (e) {
+        return "Do you really want to leave? you have unsaved changes!";
+      });
+      if (answer) {
         return next();
       } else {
-        this.leavePage = "";
-        this.showUnsavedChangesModal = false;
         return next(false);
       }
     }
