@@ -497,6 +497,7 @@ export default {
   watch: {
     user: function (newVal, oldVal) {
       if (newVal != oldVal) {
+        console.log("Unsaved changes");
         this.hasUnsavedChanges = true;
       }
     },
@@ -767,17 +768,12 @@ export default {
   // },
   beforeRouteLeave(to, from, next) {
     if (this.hasUnsavedChanges) {
-      const answer = (window.confirm = function (e) {
-        return "Do you really want to leave? you have unsaved changes!";
-      });
-      if (answer) {
-        return next();
-      } else {
-        return next(false);
+      if (!window.confirm("Leave without saving?")) {
+        return;
       }
     }
-    return next();
-  },
+    next();
+  }
 };
 </script>
 
