@@ -711,10 +711,14 @@ export default {
         this.courses.push(course.data.data);
       }
     },
-    async waitForDecision() {
+    waitForDecision() {
+      this.showUnsavedChangesModal = true;
+
       while (this.leavePage == "") {
         continue;
       }
+
+      return this.leavePage;
     },
   },
   computed: {
@@ -753,12 +757,10 @@ export default {
   async beforeRouteLeave(to, from, next) {
     console.log("HERE");
     if (this.hasUnsavedChanges) {
-      this.showUnsavedChangesModal = true;
-
-      await this.waitForDecision();
+      const decision = await this.waitForDecision();
       console.log("HAS UNSAVED CHANGES");
 
-      if (this.leavePage == "yes") {
+      if (decision == "yes") {
         this.leavePage = "";
         this.showUnsavedChangesModal = false;
         return next();
