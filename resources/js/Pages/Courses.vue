@@ -276,8 +276,8 @@ export default {
         // let startY = 0;
         // let startX = 0;
         
-        menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu)}px`;
-        menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu)}px`;
+        menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu.parentElement)}px`;
+        menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu.parentElement)}px`;
         menu.classList.add("show");
         outClick.style.display = "block";
       }
