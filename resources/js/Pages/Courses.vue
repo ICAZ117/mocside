@@ -146,7 +146,7 @@
         </div>
       </div>
 
-      <div v-if="showOldCourses" style="position: absolute; top: 500; width: 100%">
+      <div id="archived-courses" v-if="showOldCourses" style="position: absolute; top: 500; width: 100%">
         <div class="oldCourseHeader">
           <h4>Archived Courses</h4>
           <hr />
@@ -278,9 +278,14 @@ export default {
     getParentOffsetX(elem) {
       var offsetLeft = 0;
       do {
+        console.log(elem);
         if ( !isNaN( elem.offsetLeft ) )
         {
             offsetLeft += elem.offsetLeft;
+        }
+        if (elem.parentElement.id == "archived-courses") {
+          console.log("archived-courses break position");
+          break;
         }
       } while( elem = elem.offsetParent );
       return offsetLeft;
