@@ -276,8 +276,8 @@ export default {
         // let startY = 0;
         // let startX = 0;
         
-        menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu)}px`;
-        menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu)}px`;
+        menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu.parentElement)}px`;
+        menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu.parentElement)}px`;
         menu.classList.add("show");
         outClick.style.display = "block";
       }
@@ -745,4 +745,10 @@ export default {
     this.routeToChild();
   },
 };
+document.getElementById(this.rightClickID).childNodes[0].onclick = function clickEvent(e) {
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left; //x position within the element.
+    var y = e.clientY - rect.top;  //y position within the element.
+    console.log("Left? : " + x + " ; Top? : " + y + ".");
+  }
 </script>
