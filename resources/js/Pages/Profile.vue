@@ -745,39 +745,39 @@ export default {
     }
     this.hasUnsavedChanges = false;
   },
-  // async waitForDecision() {
-  //   while (this.leavePage != "") {
-  //     continue;
-  //   }
-  // },
-  // async beforeRouteLeave(to, from, next) {
-  //   console.log("HERE");
-  //   if (this.hasUnsavedChanges) {
-  //     this.showUnsavedChangesModal = true;
-
-  //     await waitForDecision();
-  //     console.log("HAS UNSAVED CHANGES");
-
-  //     if (this.leavePage == "yes") {
-  //       this.leavePage = "";
-  //       this.showUnsavedChangesModal = false;
-  //       return next();
-  //     } else {
-  //       this.leavePage = "";
-  //       this.showUnsavedChangesModal = false;
-  //       return next(false);
-  //     }
-  //   }
-  //   return next();
-  // },
-  beforeRouteLeave(to, from, next) {
+  async waitForDecision() {
+    while (this.leavePage != "") {
+      continue;
+    }
+  },
+  async beforeRouteLeave(to, from, next) {
+    console.log("HERE");
     if (this.hasUnsavedChanges) {
-      if (!window.confirm("Leave without saving?")) {
-        return;
+      this.showUnsavedChangesModal = true;
+
+      await waitForDecision();
+      console.log("HAS UNSAVED CHANGES");
+
+      if (this.leavePage == "yes") {
+        this.leavePage = "";
+        this.showUnsavedChangesModal = false;
+        return next();
+      } else {
+        this.leavePage = "";
+        this.showUnsavedChangesModal = false;
+        return next(false);
       }
     }
-    next();
+    return next();
   },
+  // beforeRouteLeave(to, from, next) {
+  //   if (this.hasUnsavedChanges) {
+  //     if (!window.confirm("Leave without saving?")) {
+  //       return;
+  //     }
+  //   }
+  //   next();
+  // },
 };
 </script>
 
