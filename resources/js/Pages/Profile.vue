@@ -495,14 +495,11 @@ export default {
     };
   },
   watch: {
-    user: {
-      deep: true,
-      hander(newVal, oldVal) {
+    userString: function(newVal, oldVal) {
         if (newVal != oldVal) {
           console.log("Unsaved changes");
           this.hasUnsavedChanges = true;
         }
-      },
     },
   },
   setup() {
@@ -723,6 +720,9 @@ export default {
         return store.getters["auth/isProf"];
       }
     },
+    userString: function() {
+      return JSON.stringify(this.user);
+    }
   },
   async beforeMount() {
     this.authUser = await store.getters["auth/authUser"];
