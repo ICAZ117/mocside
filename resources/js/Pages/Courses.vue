@@ -299,11 +299,11 @@ export default {
     },
     getParentOffsetY(elem) {
       var offsetTop = 0;
-      console.log(elem);
-      if(elem.parentElement == null) {
+      do {
+        console.log(elem);
+        if(elem.parentElement == null) {
           break;
         }
-      do {
         if ( !isNaN( elem.offsetTop ) )
         {
             offsetTop += elem.offsetTop;
