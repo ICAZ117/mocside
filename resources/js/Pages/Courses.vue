@@ -271,8 +271,8 @@ export default {
 
         console.log(menu);
         var rect = menu.parentElement.getBoundingClientRect();
-        var x = e.clientX - rect.left; //x position within the element
-        var y = e.clientY - rect.top; //y position within the element
+        var x = window.event.clientX - rect.left; //x position within the element
+        var y = window.event.clientY - rect.top; //y position within the element
         menu.style.top = `${y}px`;
         menu.style.left = `${x}px`;
 
