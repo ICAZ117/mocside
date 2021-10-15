@@ -743,6 +743,7 @@ export default {
     if (this.isProf) {
       this.showUpgrade = true; //change this later to check for admin instead of professor
     }
+    this.hasUnsavedChanges = false;
   },
   // async waitForDecision() {
   //   while (this.leavePage != "") {
