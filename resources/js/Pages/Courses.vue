@@ -268,13 +268,6 @@ export default {
         this.rightClickID = String(course_id);
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
-
-        document.getElementById(this.rightClickID).childNodes[0].onclick = function clickEvent(e) {
-          var rect = e.target.getBoundingClientRect();
-          var x = e.clientX - rect.left; //x position within the element.
-          var y = e.clientY - rect.top;  //y position within the element.
-          console.log("Left? : " + x + " ; Top? : " + y + ".");
-        }
         
         menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu.parentElement)}px`;
         menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu.parentElement)}px`;
