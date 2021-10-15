@@ -741,6 +741,7 @@ export default {
   async beforeUnmount() {
   },
   async beforeRouteLeave(to, from, next) {
+    console.log("HERE");
     if (this.hasUnsavedChanges) {
       this.showUnsavedChangesModal = true;
 
