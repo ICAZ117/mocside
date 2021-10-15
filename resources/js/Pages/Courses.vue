@@ -743,12 +743,12 @@ export default {
     await this.getCourses();
     this.separateCourses();
     this.routeToChild();
-    document.getElementById(this.rightClickID).childNodes[0].onclick = function clickEvent(e) {
-      var rect = e.target.getBoundingClientRect();
-      var x = e.clientX - rect.left; //x position within the element.
-      var y = e.clientY - rect.top;  //y position within the element.
-      console.log("Left? : " + x + " ; Top? : " + y + ".");
-    }
   },
 };
+document.getElementById(this.rightClickID).childNodes[0].onclick = function clickEvent(e) {
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left; //x position within the element.
+    var y = e.clientY - rect.top;  //y position within the element.
+    console.log("Left? : " + x + " ; Top? : " + y + ".");
+  }
 </script>
