@@ -574,7 +574,7 @@ export default {
     async saveProfile() {
       //route works...jsut can't updated all parts of profile yet
       console.log("saving profile");
-      this.$notify({ type: "success", text: "Your changes have been saved!", duration: -1});
+      this.$notify({ type: "success", text: "Your changes have been saved!"});
       var payload = {
         name: this.user.name,
         username: this.user.username,
