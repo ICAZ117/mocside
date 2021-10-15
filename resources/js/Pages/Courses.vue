@@ -269,12 +269,12 @@ export default {
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
 
-        //offset top and offset left are giving me the starting position of the card element from the row start point
-        //pageX instead of clientX will give position relative to entire page rather than scrolled
-
-        //subtract the x and y value of the elements pagex and pagey values
-        // let startY = 0;
-        // let startX = 0;
+        document.getElementById(this.rightClickID).childNodes[0].onclick = function clickEvent(e) {
+          var rect = e.target.getBoundingClientRect();
+          var x = e.clientX - rect.left; //x position within the element.
+          var y = e.clientY - rect.top;  //y position within the element.
+          console.log("Left? : " + x + " ; Top? : " + y + ".");
+        }
         
         menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu.parentElement)}px`;
         menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu.parentElement)}px`;
