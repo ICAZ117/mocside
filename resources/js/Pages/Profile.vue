@@ -495,11 +495,14 @@ export default {
     };
   },
   watch: {
-    user: function (newVal, oldVal) {
-      if (newVal != oldVal) {
-        console.log("Unsaved changes");
-        this.hasUnsavedChanges = true;
-      }
+    user: {
+      deep: true,
+      hander(newVal, oldVal) {
+        if (newVal != oldVal) {
+          console.log("Unsaved changes");
+          this.hasUnsavedChanges = true;
+        }
+      },
     },
   },
   setup() {
@@ -773,7 +776,7 @@ export default {
       }
     }
     next();
-  }
+  },
 };
 </script>
 
