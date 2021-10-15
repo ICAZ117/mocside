@@ -287,7 +287,7 @@ export default {
           console.log("archived-courses break position");
           break;
         }
-      } while( elem = elem.offsetParent );
+      } while( elem = elem.parentElement );
       return offsetLeft;
     },
     getParentOffsetY(elem) {
