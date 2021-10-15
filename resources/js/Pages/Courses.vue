@@ -269,7 +269,6 @@ export default {
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
         
-        menu.style.position =`absolute`;
         menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu.parentElement)}px`;
         menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu.parentElement)}px`;
         menu.classList.add("show");
