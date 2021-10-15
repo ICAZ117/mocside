@@ -146,7 +146,7 @@
         </div>
       </div>
 
-      <div v-if="showOldCourses" style="position: absolute; top: 500; width: 100%">
+      <div id="archived-courses" v-if="showOldCourses" style="position: absolute; top: 500; width: 100%">
         <div class="oldCourseHeader">
           <h4>Archived Courses</h4>
           <hr />
@@ -269,7 +269,6 @@ export default {
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
         
-        menu.style.position =`absolute`;
         menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu.parentElement)}px`;
         menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu.parentElement)}px`;
         menu.classList.add("show");
@@ -279,9 +278,14 @@ export default {
     getParentOffsetX(elem) {
       var offsetLeft = 0;
       do {
+        console.log(elem);
         if ( !isNaN( elem.offsetLeft ) )
         {
             offsetLeft += elem.offsetLeft;
+        }
+        if (elem.parentElement.id == 'archived-courses' || elem.id == 'archived-courses') {
+          console.log("archived-courses break position");
+          break;
         }
       } while( elem = elem.offsetParent );
       return offsetLeft;
