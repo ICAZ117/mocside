@@ -4,6 +4,7 @@
       <Navbar :authUser="authUser" :key="key" @forceReload="reload" />
     </div>
     <router-view></router-view>
+    <notifications position="bottom left"/>
   </div>
 </template>
 
