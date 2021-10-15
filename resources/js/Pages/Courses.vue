@@ -283,7 +283,7 @@ export default {
         {
             offsetLeft += elem.offsetLeft;
         }
-        if (elem.parentElement.id == "archived-courses") {
+        if (elem.parentElement.id == 'archived-courses' || elem.id == 'archived-courses') {
           console.log("archived-courses break position");
           break;
         }
