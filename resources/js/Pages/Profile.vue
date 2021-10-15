@@ -21,9 +21,11 @@
         content-class="modal-content"
         :esc-to-close="true"
       >
-      <p style="margin: auto!important;">You have unsaved changes! Are you sure you want to continue?</p>
-      <br>
-      <div class="row">
+        <p style="margin: auto !important">
+          You have unsaved changes! Are you sure you want to continue?
+        </p>
+        <br />
+        <div class="row">
           <button @click="leavePage = 'yes'" class="col-4 btn btn-lg btn-danger mx-1">
             Leave page
           </button>
@@ -738,16 +740,18 @@ export default {
       this.showUpgrade = true; //change this later to check for admin instead of professor
     }
   },
-  async beforeUnmount() {
+  async waitForDecision() {
+    while (this.leavePage != "") {
+      continue;
+    }
   },
   async beforeRouteLeave(to, from, next) {
     console.log("HERE");
     if (this.hasUnsavedChanges) {
       this.showUnsavedChangesModal = true;
 
-      while (this.leavePage != "") {
-        continue;
-      }
+      await waitForDecision();
+      console.log("HAS UNSAVED CHANGES");
 
       if (this.leavePage == "yes") {
         this.leavePage = "";
