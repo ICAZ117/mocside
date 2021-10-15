@@ -271,8 +271,8 @@ export default {
         console.log(menu.offsetTop);
         console.log(menu.offsetLeft);
 
-        menu.style.top = `${window.event.clientY}px`;
-        menu.style.left = `${window.event.clientX}px`;
+        menu.style.top = `${window.event.clientY - menu.offsetTop}px`;
+        menu.style.left = `${window.event.clientX - menu.offsetLeft}px`;
         menu.classList.add("show");
         outClick.style.display = "block";
       }
