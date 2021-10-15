@@ -153,7 +153,7 @@
         </div>
         <br />
 
-        <div class="coursecontainer">
+        <div id="course-container" class="coursecontainer">
           <div class="courserow row mb-5">
             <div
               class="fixed-course-width"
@@ -284,7 +284,11 @@ export default {
             offsetLeft += elem.offsetLeft;
         }
         if (elem.parentElement.id == 'archived-courses' || elem.id == 'archived-courses') {
-          console.log("archived-courses break position");
+          console.log("archived-courses break point");
+          break;
+        }
+        if(elem.parentElement.id == 'course-container' || elem.id == 'course-container') {
+          console.log('course container break point');
           break;
         }
       } while( elem = elem.parentElement );
@@ -297,7 +301,15 @@ export default {
         {
             offsetTop += elem.offsetTop;
         }
-      } while( elem = elem.offsetParent );
+        if (elem.parentElement.id == 'archived-courses' || elem.id == 'archived-courses') {
+          console.log("archived-courses break point");
+          break;
+        }
+        if(elem.parentElement.id == 'course-container' || elem.id == 'course-container') {
+          console.log('course container break point');
+          break;
+        }
+      } while( elem = elem.parentElement );
       return offsetTop;
     },
     closeMenu() {
