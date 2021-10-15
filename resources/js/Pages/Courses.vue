@@ -268,11 +268,13 @@ export default {
         this.rightClickID = String(course_id);
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
-        console.log("ClientY: " + window.event.clientY);
-        console.log("ClientX: " + window.event.clientX);
-        console.log(menu.offsetLeft, menu.offsetTop);
-        menu.style.top = `${window.event.clientY -209}px`;
-        menu.style.left = `${window.event.clientX - 40}px`;
+
+        console.log(menu);
+        
+        menu.style.top = `${menu.offsetTop}px`;
+        menu.style.left = `${menu.offsetLeft}px`;
+        // menu.style.top = `${window.event.clientY - menu.offsetTop}px`;
+        // menu.style.left = `${window.event.clientX - menu.offsetLeft}px`;
         menu.classList.add("show");
         outClick.style.display = "block";
       }
