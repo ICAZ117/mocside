@@ -712,7 +712,7 @@ export default {
       }
     },
     async waitForDecision() {
-      while (this.leavePage != "") {
+      while (this.leavePage == "") {
         continue;
       }
     },
