@@ -23,7 +23,7 @@
             <button
               @click="editAvatar()"
               class="btn btn-danger btn-block"
-              style="width: 252px"
+              style="width: 252px; margin-top: 20px;"
             >
               Edit
             </button>
@@ -574,6 +574,7 @@ export default {
     async saveProfile() {
       //route works...jsut can't updated all parts of profile yet
       console.log("saving profile");
+      this.$notify({ type: "success", text: "Your changes have been saved!", duration: -1});
       var payload = {
         name: this.user.name,
         username: this.user.username,

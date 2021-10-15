@@ -227,6 +227,14 @@ input:checked + .slider:before {
 .darkBG {
     background-color: #222222;
 }
+
+.vue-notification.success {
+    border-top-right-radius: 5px;
+    background: #68CD86!important;
+    border-left-color: #42A85F;
+    border-bottom-right-radius: 5px;
+}
+
 /*============= NAVIGATION =============*/
 
 nav {

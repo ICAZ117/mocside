@@ -28,9 +28,13 @@ import Tiptap from "./Components/Tiptap.vue";
 // Modal
 import VueFinalModal from "vue-final-modal";
 
+// Popup notification
+import Notifications from '@kyvg/vue3-notification'
+
 const app = createApp(App);
 app.component("IDE", IDE);
 app.component("Tiptap", Tiptap);
+app.use(Notifications);
 app.use(VueFinalModal());
 app.use(Tabs);
 app.use(VuelidatePlugin);
