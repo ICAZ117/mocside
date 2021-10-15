@@ -278,7 +278,7 @@ export default {
 
         menu.style.position = `absolute`;
         menu.style.top = `${window.event.pageY}px`;
-        mennu.style.left = `${window.event.pageX}px`;
+        menu.style.left = `${window.event.pageX}px`;
 
         //offset top and offset left are giving me the starting position of the card element
         //pageX instead of clientX will give position relative to entire page rather than scrolled
