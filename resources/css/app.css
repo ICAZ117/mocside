@@ -220,7 +220,8 @@ input:checked + .slider:before {
 
 .filterSettings {
     float: right !important;
-    position: relative;
+    position: absolute;
+    left: calc(100vw - 285.5px) !important;
     padding: 0px 10px;
 }
 
