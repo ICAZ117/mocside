@@ -15,6 +15,23 @@
   </div>
   <tab-panels v-model="selectedTab" :animate="true">
     <tab-panel :val="'Profile'" class="profile darkBG">
+      <vue-final-modal
+        v-model="showUnsavedChangesModal"
+        classes="modal-container"
+        content-class="modal-content"
+        :esc-to-close="true"
+      >
+      <p style="margin: auto!important;">You have unsaved changes! Are you sure you want to continue?</p>
+      <br>
+      <div class="row">
+          <button @click="leavePage = 'yes'" class="col-4 btn btn-lg btn-danger mx-1">
+            Leave page
+          </button>
+          <button @click="leavePage = 'no'" class="col-4 btn btn-lg btn-danger mx-1">
+            Cancel
+          </button>
+        </div>
+      </vue-final-modal>
       <div class="row h-100">
         <div class="col-3" style="border-right: 1px var(--FSCgrey) solid !important">
           <div class="profile-picture">
@@ -23,7 +40,7 @@
             <button
               @click="editAvatar()"
               class="btn btn-danger btn-block"
-              style="width: 252px; margin-top: 20px;"
+              style="width: 252px; margin-top: 20px"
             >
               Edit
             </button>
@@ -204,7 +221,8 @@
                     user.settings.consoleOptions.foreground +
                     ';'
                   "
-                >{{ user.username }}@mocside.com:/usr/src$ </textarea>
+                  >{{ user.username }}@mocside.com:/usr/src$ </textarea
+                >
               </div>
             </div>
           </div>
@@ -341,13 +359,18 @@
       >
         <button class="modal-close" @click="showDeleteUserModal = false">x</button>
         <button class="modal-close" @click="showUpgradeModal = false">x</button>
-        <p>Are you sure you would like to delete your account</p>
+        <p>
+          Are you sure you would like to delete your account? You will no longer be able
+          to sign in to your account or access your courses!
+        </p>
         <label for="fscID"></label>
         <input type="number" id="fscID" name="fscID" />
         <button @click="showDeleteUserModal = false" class="btn btn-danger btn-block">
           Cancel
         </button>
-        <button @click="deleteAccount()" class="btn btn-danger btn-block">Submit</button>
+        <button @click="deleteAccount()" class="btn btn-danger btn-block">
+          Yes, delete my account
+        </button>
       </vue-final-modal>
     </tab-panel>
   </tab-panels>
@@ -463,8 +486,18 @@ export default {
       showPassModal: false,
       passNoMatch: false,
       showDeleteUserModal: false,
+      showUnsavedChangesModal: false,
       changeGradeUser: "",
+      hasUnsavedChanges: false,
+      leavePage: "",
     };
+  },
+  watch: {
+    user: function (newVal, oldVal) {
+      if (newVal != oldVal) {
+        this.hasUnsavedChanges = true;
+      }
+    },
   },
   setup() {
     const route = useRoute();
@@ -574,7 +607,8 @@ export default {
     async saveProfile() {
       //route works...jsut can't updated all parts of profile yet
       console.log("saving profile");
-      this.$notify({ type: "success", text: "Your changes have been saved!"});
+      this.$notify({ type: "success", text: "Your changes have been saved!" });
+      this.hasUnsavedChanges = false;
       var payload = {
         name: this.user.name,
         username: this.user.username,
@@ -588,6 +622,7 @@ export default {
         `/profile/full/${this.authUser.fsc_user.fsc_id}`,
         payload
       );
+      console.log(res);
     },
     async updateImage() {
       await this.uploadImage();
@@ -702,6 +737,28 @@ export default {
     if (this.isProf) {
       this.showUpgrade = true; //change this later to check for admin instead of professor
     }
+  },
+  async beforeUnmount() {
+  },
+  async beforeRouteLeave(to, from, next) {
+    if (this.hasUnsavedChanges) {
+      this.showUnsavedChangesModal = true;
+
+      while (this.leavePage != "") {
+        continue;
+      }
+
+      if (this.leavePage == "yes") {
+        this.leavePage = "";
+        this.showUnsavedChangesModal = false;
+        return next();
+      } else {
+        this.leavePage = "";
+        this.showUnsavedChangesModal = false;
+        return next(false);
+      }
+    }
+    return next();
   },
 };
 </script>
