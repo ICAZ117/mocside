@@ -16,99 +16,203 @@
   <tab-panels v-model="selectedTab" :animate="true">
     <tab-panel :val="'Profile'" class="profile darkBG">
       <div class="row h-100">
-        <div class="col-3" style="border-right: 1px var(--FSCgrey) solid !important;">
+        <div class="col-3" style="border-right: 1px var(--FSCgrey) solid !important">
           <div class="profile-picture">
             <img class="large-pfp" src="this.user.pfp" alt="Profile" id="pfp" />
             <br />
-            <button @click="editAvatar()" class="btn btn-danger btn-block" style="width: 252px">Edit</button>
+            <button
+              @click="editAvatar()"
+              class="btn btn-danger btn-block"
+              style="width: 252px"
+            >
+              Edit
+            </button>
           </div>
         </div>
-        <div class="col-9">
+        <div
+          class="col-9 settings"
+          style="padding: 50px !important; height: 100%; color: #888"
+        >
           <div class="profile-section">
             <div class="editable">
-              <label for="Name">Name</label>
-              <input type="text" v-model="user.name" id="Name" />
-              <label for="ScreenName">ScreenName</label>
-              <input type="text" v-model="user.screen_name" id="ScreenName" />
-              <label for="FSCID">FSC ID</label>
-              <input type="number" v-model="user.fsc_id" id="FSCID" disabled />
-              <label for="pronouns">Preferred Pronouns</label>
-              <input type="text" name="pronouns" id="pronouns" v-model="user.pronouns" />
+              <h3>Profile Options</h3>
+              <div class="row">
+                <div class="col-6">
+                  <label for="Name">Name: </label>
+                  <input
+                    class="profile-field"
+                    type="text"
+                    v-model="user.name"
+                    id="Name"
+                  />
+
+                  <br /><br />
+
+                  <label for="pronouns">Preferred Pronouns: </label>
+                  <input
+                    class="profile-field"
+                    type="text"
+                    name="pronouns"
+                    id="pronouns"
+                    v-model="user.pronouns"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="ScreenName">ScreenName: </label>
+                  <input
+                    class="profile-field"
+                    type="text"
+                    v-model="user.screen_name"
+                    id="ScreenName"
+                  />
+
+                  <br /><br />
+
+                  <label for="FSCID">FSC ID: </label>
+                  <input
+                    class="profile-field"
+                    type="number"
+                    v-model="user.fsc_id"
+                    id="FSCID"
+                    disabled
+                  />
+                </div>
+              </div>
             </div>
           </div>
+
+          <br />
+          <br />
+          <hr />
+          <br />
+          <br />
+
           <div class="Editor-Settings">
-            <!-- theme, language, console theme -->
-            <label for="Theme">Select A Default Theme</label>
-            <select name="Theme" id="Theme" v-model="user.settings.ideOptions.theme">
-              <optgroup label="Dark">
-                <option value="ambiance">Ambiance</option>
-                <option value="chaos">Chaos</option>
-                <option value="clouds_midnight">Clouds Midnight</option>
-                <option value="dracula">Dracula</option>
-                <option value="cobalt">Cobalt</option>
-                <option value="gruvbox">Gruvbox</option>
-                <option value="gob" selected>Green on Black</option>
-                <option value="idle_fingers">idle Fingers</option>
-                <option value="kr_theme">krTheme</option>
-                <option value="merbivore">Merbivore</option>
-                <option value="merbivore_soft">Merbivore Soft</option>
-                <option value="mono_industrial">Mono Industrial</option>
-                <option value="monokai">Monokai</option>
-                <option value="nord_dark">Nord Dark</option>
-                <option value="pastel_on_dark">Pastel on dark</option>
-                <option value="solarized_dark">Solarized Dark</option>
-                <option value="terminal">Terminal</option>
-                <option value="tomorrow_night">Tomorrow Night</option>
-                <option value="tomorrow_night_blue">Tomorrow Night Blue</option>
-                <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
-                <option value="tomorrow_night_eighties">Tomorrow Night 80s</option>
-                <option value="twilight">Twilight</option>
-                <option value="vibrant_ink">Vibrant Ink</option>
-              </optgroup>
-              <optgroup label="Light">
-                <option value="chrome">Chrome</option>
-                <option value="clouds">Clouds</option>
-                <option value="crimson_editor">Crimson Editor</option>
-                <option value="dawn">Dawn</option>
-                <option value="dreamweaver">Dreamweaver</option>
-                <option value="eclipse">Eclipse</option>
-                <option value="github">GitHub</option>
-                <option value="iplastic">IPlastic</option>
-                <option value="solarized_light">Solarized Light</option>
-                <option value="textmate">TextMate</option>
-                <option value="tomorrow">Tomorrow</option>
-                <option value="xcode">Xcode</option>
-                <option value="kuroir">Kuroir</option>
-                <option value="katzenmilch">KatzenMilch</option>
-                <option value="sqlserver">SQL Server</option>
-              </optgroup>
-            </select>
-            <label for="Language">Select A Default Language</label>
-            <select
-              name="Language"
-              id="Language"
-              v-model="user.settings.ideOptions.defaultLang"
-            >
-              <option value="python">Python</option>
-              <option value="Java">Java</option>
-            </select>
-            <label for="ConsoleForeground">Select A Console Foreground Color</label>
-            <input
-              type="color"
-              name="ConsoleForeground"
-              id="ConsoleForeground"
-              v-model="user.settings.consoleOptions.foreground"
-            />
-            <label for="ConsoleBackground">Select A Console Background Color</label>
-            <input
-              type="color"
-              name="ConsoleBackground"
-              id="ConsoleBackground"
-              v-model="user.settings.consoleOptions.background"
-            />
+            <h3>Console Options</h3>
+            <div class="row">
+              <div class="col-6">
+                <!-- theme, language, console theme -->
+                <label for="Theme">Default Theme: </label>
+                <select
+                  class="profile-select"
+                  name="Theme"
+                  id="Theme"
+                  v-model="user.settings.ideOptions.theme"
+                >
+                  <optgroup label="Dark">
+                    <option value="ambiance">Ambiance</option>
+                    <option value="chaos">Chaos</option>
+                    <option value="clouds_midnight">Clouds Midnight</option>
+                    <option value="dracula">Dracula</option>
+                    <option value="cobalt">Cobalt</option>
+                    <option value="gruvbox">Gruvbox</option>
+                    <option value="gob" selected>Green on Black</option>
+                    <option value="idle_fingers">idle Fingers</option>
+                    <option value="kr_theme">krTheme</option>
+                    <option value="merbivore">Merbivore</option>
+                    <option value="merbivore_soft">Merbivore Soft</option>
+                    <option value="mono_industrial">Mono Industrial</option>
+                    <option value="monokai">Monokai</option>
+                    <option value="nord_dark">Nord Dark</option>
+                    <option value="pastel_on_dark">Pastel on dark</option>
+                    <option value="solarized_dark">Solarized Dark</option>
+                    <option value="terminal">Terminal</option>
+                    <option value="tomorrow_night">Tomorrow Night</option>
+                    <option value="tomorrow_night_blue">Tomorrow Night Blue</option>
+                    <option value="tomorrow_night_bright">Tomorrow Night Bright</option>
+                    <option value="tomorrow_night_eighties">Tomorrow Night 80s</option>
+                    <option value="twilight">Twilight</option>
+                    <option value="vibrant_ink">Vibrant Ink</option>
+                  </optgroup>
+                  <optgroup label="Light">
+                    <option value="chrome">Chrome</option>
+                    <option value="clouds">Clouds</option>
+                    <option value="crimson_editor">Crimson Editor</option>
+                    <option value="dawn">Dawn</option>
+                    <option value="dreamweaver">Dreamweaver</option>
+                    <option value="eclipse">Eclipse</option>
+                    <option value="github">GitHub</option>
+                    <option value="iplastic">IPlastic</option>
+                    <option value="solarized_light">Solarized Light</option>
+                    <option value="textmate">TextMate</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="xcode">Xcode</option>
+                    <option value="kuroir">Kuroir</option>
+                    <option value="katzenmilch">KatzenMilch</option>
+                    <option value="sqlserver">SQL Server</option>
+                  </optgroup>
+                </select>
+
+                <br /><br />
+
+                <label for="ConsoleForeground">Console Foreground Color: </label>
+                <input
+                  class="profile-field"
+                  type="color"
+                  name="ConsoleForeground"
+                  id="ConsoleForeground"
+                  v-model="user.settings.consoleOptions.foreground"
+                />
+              </div>
+              <div class="col-6">
+                <label for="Language">Default Language: </label>
+                <select
+                  class="profile-select"
+                  name="Language"
+                  id="Language"
+                  v-model="user.settings.ideOptions.defaultLang"
+                >
+                  <option value="python">Python</option>
+                  <option value="java">Java</option>
+                </select>
+
+                <br /><br />
+
+                <label for="ConsoleBackground">Console Background Color: </label>
+                <input
+                  class="profile-field"
+                  type="color"
+                  name="ConsoleBackground"
+                  id="ConsoleBackground"
+                  v-model="user.settings.consoleOptions.background"
+                />
+              </div>
+            </div>
           </div>
+          <br /><br />
+          <div class="sampleIDE">
+            <div class="row">
+              <div class="col-6">
+                <VAceEditor
+                  :theme="user.settings.ideOptions.theme"
+                  v-model:value="content"
+                  :lang="user.settings.ideOptions.defaultLang"
+                  style="width: 100%; height: 200px"
+                  :key="user.settings.ideOptions.defaultLang"
+                />
+              </div>
+
+              <div class="col-6">
+                <textarea
+                  class="sampleConsole"
+                  contenteditable="true"
+                  spellcheck="false"
+                  :style="
+                    'background-color: ' +
+                    user.settings.consoleOptions.background +
+                    '; color: ' +
+                    user.settings.consoleOptions.foreground +
+                    ';'
+                  "
+                >{{ user.username }}@mocside.com:/usr/src$ </textarea>
+              </div>
+            </div>
+          </div>
+          <br />
+          <button @click="saveProfile" class="btn btn-danger btn-md btn-block">
+            Save
+          </button>
         </div>
-        <button @click="saveProfile" class="btn btn-danger btn-sm btn-block">Save</button>
       </div>
 
       <vue-final-modal
@@ -256,12 +360,63 @@ import store from "../Store/index";
 import { useRoute } from "vue-router";
 import FileService from "../services/FileService";
 import FileUpload from "../Components/FileUpload";
-import { defineComponent, reactive, toRefs, computed } from "vue";
+import { reactive, toRefs, computed } from "vue";
 const tabs = ["Profile", "Grades", "Security"];
+
+import { VAceEditor } from "vue3-ace-editor";
+
+//////////////////////////////////////////////////////////////////////
+//                            THEMES                                //
+//////////////////////////////////////////////////////////////////////
+import "ace-builds/src-noconflict/ext-themelist";
+import "ace-builds/src-noconflict/theme-ambiance";
+import "ace-builds/src-noconflict/theme-chaos";
+import "ace-builds/src-noconflict/theme-chrome";
+import "ace-builds/src-noconflict/theme-clouds";
+import "ace-builds/src-noconflict/theme-clouds_midnight";
+import "ace-builds/src-noconflict/theme-cobalt";
+import "ace-builds/src-noconflict/theme-crimson_editor";
+import "ace-builds/src-noconflict/theme-dawn";
+import "ace-builds/src-noconflict/theme-dracula";
+import "ace-builds/src-noconflict/theme-dreamweaver";
+import "ace-builds/src-noconflict/theme-eclipse";
+import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-gob";
+import "ace-builds/src-noconflict/theme-gruvbox";
+import "ace-builds/src-noconflict/theme-idle_fingers";
+import "ace-builds/src-noconflict/theme-iplastic";
+import "ace-builds/src-noconflict/theme-katzenmilch";
+import "ace-builds/src-noconflict/theme-kr_theme";
+import "ace-builds/src-noconflict/theme-kuroir";
+import "ace-builds/src-noconflict/theme-merbivore";
+import "ace-builds/src-noconflict/theme-merbivore_soft";
+import "ace-builds/src-noconflict/theme-mono_industrial";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-nord_dark";
+import "ace-builds/src-noconflict/theme-pastel_on_dark";
+import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/theme-solarized_light";
+import "ace-builds/src-noconflict/theme-sqlserver";
+import "ace-builds/src-noconflict/theme-terminal";
+import "ace-builds/src-noconflict/theme-textmate";
+import "ace-builds/src-noconflict/theme-tomorrow";
+import "ace-builds/src-noconflict/theme-tomorrow_night";
+import "ace-builds/src-noconflict/theme-tomorrow_night_blue";
+import "ace-builds/src-noconflict/theme-tomorrow_night_bright";
+import "ace-builds/src-noconflict/theme-tomorrow_night_eighties";
+import "ace-builds/src-noconflict/theme-twilight";
+import "ace-builds/src-noconflict/theme-vibrant_ink";
+import "ace-builds/src-noconflict/theme-xcode";
+
+import "ace-builds/src-noconflict/mode-text";
+import "ace-builds/src-noconflict/mode-java";
+import "ace-builds/src-noconflict/mode-python";
+
 //whitespace
 export default {
   components: {
     FileUpload,
+    VAceEditor,
   },
   data() {
     return {
@@ -274,6 +429,7 @@ export default {
       letters: [],
       enrolledCourses: [],
       courses: [],
+      content: "",
       user: {
         name: "",
         email: "",

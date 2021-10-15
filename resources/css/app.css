@@ -448,30 +448,46 @@ nav {
     padding-left: 0;
 }
 
+.carousel__pagination-button {
+    height: calc(var(--vc-pgn-height) * 1.5) !important;
+    width: calc(var(--vc-pgn-width) * 1.5) !important;
+}
+
 .carousel__pagination-button--active {
     background-color: var(--FSCred) !important;
 }
 
-
-/*-- Carousel Content --*/
-
 .carousel__item {
     min-height: 200px;
     width: 100%;
-    background-color: blue;
-    color:  red;
+    background-color: rgba(0, 0, 0, 0);
     font-size: 20px;
     border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .carousel__prev,
-  .carousel__next {
+}
+
+.carousel__icon {
+    width: calc(var(--vc-icn-width) * 2) !important;
+    height: calc(var(--vc-icn-width) * 2) !important;
+}
+
+.carousel__prev,
+.carousel__next {
     box-sizing: content-box;
     border: 5px solid green;
-  }
+    width: calc(var(--vc-nav-width) * 2) !important;
+    height: calc(var(--vc-nav-height) * 2) !important;
+}
+
+.carousel__prev {
+    left: 20px !important;
+}
+
+.carousel__next {
+    right: 20px !important;
+}
 
 .carousel-caption {
     position: absolute !important;
@@ -882,16 +898,17 @@ thead.gradebook {
 
 /*============= WORKSPACE =============*/
 .workspace-page {
-    background-color: black!important;
-    width: 100vw!important;
-    height: calc(100vh - var(--nav-height))!important;
+    background-color: black !important;
+    width: 100vw !important;
+    height: calc(100vh - var(--nav-height)) !important;
 }
 .work-area {
     padding: 0 !important;
     margin: 0 !important;
     background-color: black !important;
     color: lightgray !important;
-    font: 12pt/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
     font-weight: lighter !important;
     font-size: 12pt !important;
 }
@@ -915,7 +932,7 @@ thead.gradebook {
     font-weight: lighter !important;
     font-size: 12pt !important;
     /* min-height: calc((100vh - var(--nav-height)) / 2) !important; */
-    height: 100%!important;
+    height: 100% !important;
     margin: 0 !important;
 }
 
@@ -932,9 +949,10 @@ thead.gradebook {
 .console {
     background-color: var(--consoleBG) !important;
     color: lime !important;
-    font: 12pt/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
     /* height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important; */
-    height: 100%!important;
+    height: 100% !important;
     margin: 0 !important;
     padding: 20px;
     border: none !important;
@@ -1124,15 +1142,12 @@ thead.gradebook {
 }
 
 .delete-buttons {
-    float:right;
+    float: right;
 }
 
 .delete-button {
     margin: 3px;
 }
-
-
-
 
 /*========= ADD ASSIGNMENT =========*/
 .assignment-title {
@@ -1265,7 +1280,7 @@ thead.gradebook {
 }
 
 .template-IDE {
-    margin-top: 150px!important;
+    margin-top: 150px !important;
 }
 
 .save-template,
@@ -1388,13 +1403,90 @@ footer .svg-inline--fa:hover {
 }
 
 .profile {
-    height: calc(100vh - var(--nav-height) - 45.2px)!important;
-    padding: 20px 20px 20px 0!important;
+    height: calc(100vh - var(--nav-height) - 45.2px) !important;
+    padding: 20px 20px 20px 0 !important;
 }
 
 .profile-picture {
-    width: fit-content!important;
-    margin: auto!important;
+    width: fit-content !important;
+    margin: auto !important;
+}
+
+.profile-field,
+.profile-field:focus-visible {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+}
+
+.profile-select {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+}
+
+.profile-select:focus-visible {
+    background-color: #222222 !important;
+    max-height: 30px !important;
+    display: inline-block !important;
+    color: lightgray !important;
+    outline: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--FSCgrey) #333333;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.profile-select:focus-visible::-webkit-scrollbar {
+    width: 10px;
+}
+
+.profile-select:focus-visible::-webkit-scrollbar-track {
+    background: #333333;
+    border-radius: 50px;
+}
+
+.profile-select:focus-visible::-webkit-scrollbar-thumb {
+    background-color: var(--FSCgrey);
+    border-radius: 50px;
+    border: 3px solid #333333;
+}
+
+.settings {
+    scrollbar-width: thin;
+    scrollbar-color: var(--FSCgrey) #333333;
+    overflow-y: scroll;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.settings::-webkit-scrollbar {
+    width: 10px;
+}
+
+.settings::-webkit-scrollbar-track {
+    background: #333333;
+    border-radius: 50px;
+}
+
+.settings::-webkit-scrollbar-thumb {
+    background-color: var(--FSCgrey);
+    border-radius: 50px;
+    border: 3px solid #333333;
+}
+
+.sampleConsole {
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
+    /* height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important; */
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 20px;
+    border: none !important;
+    width: 100% !important;
+    border-radius: 0px !important;
 }
 
 /*============= ENROLL =============*/

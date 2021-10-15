@@ -4,10 +4,10 @@ namespace App\Events;
 
 use App\Models\User;
 
-// use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 // use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
+// use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -38,7 +38,7 @@ class InputSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // normally 'channel-name'
-        return new PrivateChannel('test');
+        // Users can only send input to their own terminals
+        return new Channel('term.'.$this->user->id);
     }
 }
