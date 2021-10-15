@@ -269,17 +269,6 @@ export default {
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
 
-        // console.log(menu);
-        // var rect = menu.parentElement.getBoundingClientRect();
-        // var x = window.event.clientX - rect.left; //x position within the element
-        // var y = window.event.clientY - rect.top; //y position within the element
-         var y = menu.getBoundingClientRect().top + document.documentElement.scrollTop;
-         var x = menu.getBoundingClientRect().left + document.documentElement.scrollLeft;
-        menu.style.top = `${y}px`;
-        menu.style.left = `${x}px`;
-
-
-
         //offset top and offset left are giving me the starting position of the card element from the row start point
         //pageX instead of clientX will give position relative to entire page rather than scrolled
 
@@ -287,11 +276,31 @@ export default {
         // let startY = 0;
         // let startX = 0;
         
-        // menu.style.top = `${window.event.clientY - startY}px`;
-        // menu.style.left = `${window.event.clientX - startX}px`;
+        menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu)}px`;
+        menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu)}px`;
         menu.classList.add("show");
         outClick.style.display = "block";
       }
+    },
+    getParentOffsetX(elem) {
+      var offsetLeft = 0;
+      do {
+        if ( !isNaN( elem.offsetLeft ) )
+        {
+            offsetLeft += elem.offsetLeft;
+        }
+      } while( elem = elem.offsetParent );
+      return offsetLeft;
+    },
+    getParentOffsetY(elem) {
+      var offsetTop = 0;
+      do {
+        if ( !isNaN( elem.offsetTop ) )
+        {
+            offsetTop += elem.offsetTop;
+        }
+      } while( elem = elem.offsetParent );
+      return offsetTop;
     },
     closeMenu() {
       try {
