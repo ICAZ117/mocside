@@ -269,55 +269,11 @@ export default {
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
         
-        menu.style.top = `${window.event.clientY - this.getParentOffsetY(menu.parentElement)}px`;
-        menu.style.left = `${window.event.clientX - this.getParentOffsetX(menu.parentElement)}px`;
+        menu.style.top = `${window.event.pageY}px`;
+        menu.style.left = `${window.event.pageX}px`;
         menu.classList.add("show");
         outClick.style.display = "block";
       }
-    },
-    getParentOffsetX(elem) {
-      var offsetLeft = 0;
-      do {
-        console.log(elem);
-        if(elem.parentElement == null) {
-          break;
-        }
-        if ( !isNaN( elem.offsetLeft ) )
-        {
-            offsetLeft += elem.offsetLeft;
-        }
-        if (elem.parentElement.id == 'archived-courses' || elem.id == 'archived-courses') {
-          console.log("archived-courses break point");
-          break;
-        }
-        if(elem.parentElement.id == 'course-container' || elem.id == 'course-container') {
-          console.log('course container break point');
-          break;
-        }
-      } while( elem = elem.parentElement );
-      return offsetLeft;
-    },
-    getParentOffsetY(elem) {
-      var offsetTop = 0;
-      do {
-        console.log(elem);
-        if(elem.parentElement == null) {
-          break;
-        }
-        if ( !isNaN( elem.offsetTop ) )
-        {
-            offsetTop += elem.offsetTop;
-        }
-        if (elem.parentElement.id == 'archived-courses' || elem.id == 'archived-courses') {
-          console.log("archived-courses break point");
-          break;
-        }
-        if(elem.parentElement.id == 'course-container' || elem.id == 'course-container') {
-          console.log('course container break point');
-          break;
-        }
-      } while( elem = elem.parentElement );
-      return offsetTop;
     },
     closeMenu() {
       try {
