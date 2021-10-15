@@ -269,7 +269,8 @@ export default {
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
         
-        menu.style.top = `${window.event.pageY}px`;
+        // menu.style.top = `${window.event.pageY}px`;
+        menu.style.top = '0px';
         menu.style.left = `${window.event.pageX}px`;
         menu.classList.add("show");
         outClick.style.display = "block";
