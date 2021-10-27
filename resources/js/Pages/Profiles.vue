@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="darkBG">
 	  <div class="row h-100">
 		  <div class="col-3" style="border-right: 1px var(--FSCgrey) solid !important">
 			  <div class="profile-picture">
@@ -31,7 +31,7 @@
 				  </div>
 			  </div>
 			  <div class="professor-section">
-				  
+
 			  </div>
 		  </div>
 	  </div>
