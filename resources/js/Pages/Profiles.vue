@@ -48,7 +48,7 @@
 				  <hr>
 				  <br><br>
 				  <div class="row">
-					  <div class="col-6">
+					  <div class="col-6 justify-content-between">
 						  <button @click="upgradeUser()" class="btn btn-danger btn-block">Upgrade User</button>
 						  <button @click="downgradeUser()" class="btn btn-danger btn-block">DownGrade User</button>
 					  </div>
