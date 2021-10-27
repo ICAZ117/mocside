@@ -358,8 +358,8 @@ export default {
       //delete from unfiltered
       this.unfilteredCourses = this.unfilteredCourses.filter((c) => c.id != id);
 
-      //filter the courses list
-      this.courses = this.courses.filter((c) => c.id != id);
+      //reset courses lists
+      this.separateCourses();
       this.closeDeleting();
     },
     goToLabs(id, name) {
@@ -620,9 +620,10 @@ export default {
     },
     async courseEdited() {
       ///update the list of courses
-      this.courses = this.courses.filter((c) => c.id != this.courseID);
+      this.unfilteredCourses = this.unfilteredCourses.filter((c) => c.id != this.courseID);
       const course = await API.apiClient.get(`/courses/${this.courseID}`);
-      this.courses.push(course.data.data);
+      this.unfilteredCourses.push(course.data.data);
+      this.separateCourses();
       this.Unmounting();
     },
     hasLabAccess(cID) {
