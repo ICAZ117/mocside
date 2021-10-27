@@ -27,6 +27,9 @@
 					  </div>
 				  </div>
 			  </div>
+			  <br /><br />
+			  <hr>
+			  <br /><br />
 			  <div v-if="isProf" class="professor-section">
 				  <h3>Edit Student</h3>
 				  <div class="row">
