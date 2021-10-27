@@ -495,11 +495,11 @@ export default {
     };
   },
   watch: {
-    userString: function(newVal, oldVal) {
-        if (newVal != oldVal) {
-          console.log("Unsaved changes");
-          this.hasUnsavedChanges = true;
-        }
+    userString: function (newVal, oldVal) {
+      if (newVal != oldVal) {
+        console.log("Unsaved changes");
+        this.hasUnsavedChanges = true;
+      }
     },
   },
   setup() {
@@ -711,6 +711,15 @@ export default {
         this.courses.push(course.data.data);
       }
     },
+    waitForDecision() {
+      this.showUnsavedChangesModal = true;
+
+      while (this.leavePage == "") {
+        continue;
+      }
+
+      return this.leavePage;
+    },
   },
   computed: {
     isProf: function () {
@@ -720,9 +729,9 @@ export default {
         return store.getters["auth/isProf"];
       }
     },
-    userString: function() {
+    userString: function () {
       return JSON.stringify(this.user);
-    }
+    },
   },
   async beforeMount() {
     this.authUser = await store.getters["auth/authUser"];
@@ -745,20 +754,13 @@ export default {
     }
     this.hasUnsavedChanges = false;
   },
-  async waitForDecision() {
-    while (this.leavePage != "") {
-      continue;
-    }
-  },
   async beforeRouteLeave(to, from, next) {
     console.log("HERE");
     if (this.hasUnsavedChanges) {
-      this.showUnsavedChangesModal = true;
-
-      await waitForDecision();
+      const decision = await this.waitForDecision();
       console.log("HAS UNSAVED CHANGES");
 
-      if (this.leavePage == "yes") {
+      if (decision == "yes") {
         this.leavePage = "";
         this.showUnsavedChangesModal = false;
         return next();

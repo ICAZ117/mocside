@@ -677,6 +677,8 @@ hr.courses {
     width: auto !important;
     margin-left: 1rem !important;
     margin-right: 1rem !important;
+    height: 236px!important;
+    overflow: visible;
 }
 
 .oldcourseHeader {
