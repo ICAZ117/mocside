@@ -37,13 +37,22 @@
 						  <label for="FSCID">FSC ID: </label>
 						  <input class="profile-field" type="number" v-model="user.fsc_id" id="FSCID" disabled>
 						  <br /><br />
-						  <button @click="upgradeUser()" class="btn btn-danger btn-block">Upgrade User</button>
-						  <button @click="downgradeUser()" class="btn btn-danger btn-block">DownGrade User</button>
 					  </div>
 					  <div class="col-6">
 						  <label for="email">Email: </label>
 						  <input class="profile-field" type="email" v-model="user.email" name="email" id="email" disabled>
 						  <br /><br />
+					  </div>
+				  </div>
+				  <br><br>
+				  <hr>
+				  <br><br>
+				  <div class="row">
+					  <div class="col-6">
+						  <button @click="upgradeUser()" class="btn btn-danger btn-block">Upgrade User</button>
+						  <button @click="downgradeUser()" class="btn btn-danger btn-block">DownGrade User</button>
+					  </div>
+					  <div class="col-6">
 						  <button @click="deleteUser()" class="btn btn-danger btn-block">Delete User</button>
 					  </div>
 				  </div>
