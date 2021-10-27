@@ -47,27 +47,6 @@
 			  </div>
 		  </div>
 	  </div>
-
-	  <div class="profile">
-		    <img class="pfp" src="this.user.pfp" alt="Profile" id="pfp"/>
-			<label for="Name">Name</label>
-            <input type="text" v-model="user.name" id=Name disabled>
-            <label for="ScreenName">ScreenName</label>
-            <input type="text" v-model="user.screen_name" id="ScreenName" disabled>
-			<label for="pronouns">Preferred Pronouns</label>
-            <input type="text" name="pronouns" id="pronouns" v-model="user.pronouns" disabled>
-
-			<!-- Professor Only-->
-			<div class="Professor-Only" v-if="isProf">
-				<label for="email">Email</label>
-				<input type="email" v-model="user.email" id="email" disabled>
-				<label for="FSCID">FSC ID</label>
-				<input type="number" v-model="user.fsc_id" id="FSCID" disabled>
-				<button @click="upgradeUser()" class="btn btn-danger btn-block">Upgrade User</button>
-				<button @click="downgradeUser()" class="btn btn-danger btn-block">DownGrade User</button>
-				<button @click="deleteUser()" class="btn btn-danger btn-block">Delete User</button>
-			</div>
-	  </div>
   </div>
 </template>
 
