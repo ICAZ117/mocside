@@ -1,5 +1,38 @@
 <template>
   <div>
+	  <div class="row h-100">
+		  <div class="col-3" style="border-right: 1px var(--FSCgrey) solid !important">
+			  <div class="profile-picture">
+				  <img src="this.user.pfp" alt="Profile" class="large-pfp" id="pfp">
+				  <br>
+			  </div>
+		  </div>
+		  <div class="col-9 settings" style="padding: 50px !important; height: 100%; color: #888">
+			  <div class="profile-section">
+				  <div class="editable">
+					  <h3>Profile Options</h3>
+					  <div class="row">
+						  <div class="col-6">
+							  <label for="Name">Name: </label>
+							  <input class="profile-field" type="text" v-model="user.name" id="Name"/>
+
+							  <label for="pronouns">Preferred Pronouns: </label>
+							  <br><br>
+							  <input type="text" class="profile-field" name="pronouns" id="pronouns" v-model="user.pronouns">
+						  </div>
+						  <div class="col-6">
+							  <label for="ScreenName">ScreenName: </label>
+							  <input class="profile-field" type="text" v-model="user.screen_name" id="ScreenName">
+							  <br><br>
+							  <label for="FSCID">FSC ID: </label>
+							  <input class="profile-field" type="number" v-model="user.fsc_id" id="FSCID" disabled>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+
 	  <div class="profile">
 		    <img class="pfp" src="this.user.pfp" alt="Profile" id="pfp"/>
 			<label for="Name">Name</label>
