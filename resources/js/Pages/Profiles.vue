@@ -17,18 +17,21 @@
 							  <input class="profile-field" type="text" v-model="user.name" id="Name"/>
 
 							  <label for="pronouns">Preferred Pronouns: </label>
-							  <br><br>
+							  <br /><br />
 							  <input type="text" class="profile-field" name="pronouns" id="pronouns" v-model="user.pronouns">
 						  </div>
 						  <div class="col-6">
 							  <label for="ScreenName">ScreenName: </label>
 							  <input class="profile-field" type="text" v-model="user.screen_name" id="ScreenName">
-							  <br><br>
+							  <br /><br />
 							  <label for="FSCID">FSC ID: </label>
 							  <input class="profile-field" type="number" v-model="user.fsc_id" id="FSCID" disabled>
 						  </div>
 					  </div>
 				  </div>
+			  </div>
+			  <div class="professor-section">
+				  
 			  </div>
 		  </div>
 	  </div>
