@@ -15,9 +15,8 @@
 						  <div class="col-6">
 							  <label for="Name">Name: </label>
 							  <input class="profile-field" type="text" v-model="user.name" id="Name"/>
-
-							  <label for="pronouns">Preferred Pronouns: </label>
 							  <br /><br />
+							  <label for="pronouns">Preferred Pronouns: </label>
 							  <input type="text" class="profile-field" name="pronouns" id="pronouns" v-model="user.pronouns">
 						  </div>
 						  <div class="col-6">
