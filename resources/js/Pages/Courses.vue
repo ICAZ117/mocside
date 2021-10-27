@@ -359,7 +359,7 @@ export default {
       this.unfilteredCourses = this.unfilteredCourses.filter((c) => c.id != id);
 
       //filter the courses list
-      this.courses = this.courses.filter((c, i) => i != key);
+      this.courses = this.courses.filter((c) => c.id != id);
       this.closeDeleting();
     },
     goToLabs(id, name) {
