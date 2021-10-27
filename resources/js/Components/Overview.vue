@@ -65,7 +65,7 @@ export default {
     async deleteProblem() {
       this.childIsOpen = false;
       this.closeDeleting();
-      await this.$emit("delete-problem");
+      await this.$emit("delete-problem", this.problemID);
     },
     closeDeleting() {
       this.showDeleteModal = false;

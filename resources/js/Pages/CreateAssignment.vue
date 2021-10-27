@@ -134,8 +134,8 @@ export default defineComponent({
       };
       const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
     }, 500),
-    async deleteProblem() {
-      await this.$emit("deleteMe");
+    async deleteProblem(id) {
+      await this.$emit("deleteMe", id);
     },
   },
   beforeMount() {

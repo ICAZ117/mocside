@@ -275,8 +275,8 @@ export default {
       this.problems = this.problems.filter((p, i) => i != key);
       this.closeDeleting();
     },
-    async deleteMe() {
-      console.log("deleteMe");
+    async deleteMe(id) {
+      console.log("deleteMe " + id);
 
       //set variable to be used when problemEdited event is called
       this.deletedMe = true;
@@ -344,7 +344,6 @@ export default {
     },
     async problemEdited() {
       var tempID = this.problemID;
-      await this.Unmounting();
 
       //check if the problem was deleted from child
       if (this.deletedMe) {
@@ -355,6 +354,7 @@ export default {
         //filter the problems list
         this.problems = this.problems.filter((p) => p.id != tempID);
       }
+      await this.Unmounting();
     },
 
     async Unmounting() {
