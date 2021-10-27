@@ -23,14 +23,27 @@
 							  <label for="ScreenName">ScreenName: </label>
 							  <input class="profile-field" type="text" v-model="user.screen_name" id="ScreenName">
 							  <br /><br />
-							  <label for="FSCID">FSC ID: </label>
-							  <input class="profile-field" type="number" v-model="user.fsc_id" id="FSCID" disabled>
 						  </div>
 					  </div>
 				  </div>
 			  </div>
-			  <div class="professor-section">
-
+			  <div v-if="isProf" class="professor-section">
+				  <h3>Edit Student</h3>
+				  <div class="row">
+					  <div class="col-6">
+						  <label for="FSCID">FSC ID: </label>
+						  <input class="profile-field" type="number" v-model="user.fsc_id" id="FSCID" disabled>
+						  <br /><br />
+						  <button @click="upgradeUser()" class="btn btn-danger btn-block">Upgrade User</button>
+						  <button @click="downgradeUser()" class="btn btn-danger btn-block">DownGrade User</button>
+					  </div>
+					  <div class="col-6">
+						  <label for="email">Email: </label>
+						  <input class="profile-field" type="email" v-model="user.email" name="email" id="email" disabled>
+						  <br /><br />
+						  <button @click="deleteUser()" class="btn btn-danger btn-block">Delete User</button>
+					  </div>
+				  </div>
 			  </div>
 		  </div>
 	  </div>
