@@ -64,7 +64,6 @@ export default {
     },
     async deleteProblem() {
       this.childIsOpen = false;
-      document.getElementById("out-click").style.display = "none";
       this.closeDeleting();
       await this.$emit("delete-problem");
     },
@@ -72,7 +71,6 @@ export default {
       this.showDeleteModal = false;
     },
     deleting() {
-      document.getElementById("out-click").style.display = "none";
       this.showDeleteModal = true;
     },
   },
