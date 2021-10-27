@@ -28,10 +28,10 @@ ADD PAGES
 
 NEXT UP
 * Double check deleting and copy assingments work as intended
-    * some test cases have had the wrong assignment idempty
+    * some test cases have had the wrong assignment id empty
 * add modification to Ace-editor, suggestions, autoformat, autocompletes
 * Upon creating an assignment it should auto set the template for both python and javaupdated
-* when deleted from the assignment overview....not removed from problems list
+* Issues when deleting problem from problems page and or overview page
 
 
 
