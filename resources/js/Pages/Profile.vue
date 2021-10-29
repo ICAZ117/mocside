@@ -772,14 +772,14 @@ export default {
     }
     return next();
   },
-  // beforeRouteLeave(to, from, next) {
-  //   if (this.hasUnsavedChanges) {
-  //     if (!window.confirm("Leave without saving?")) {
-  //       return;
-  //     }
-  //   }
-  //   next();
-  // },
+  beforeRouteLeave(to, from, next) {
+    if (this.hasUnsavedChanges) {
+      if (!window.confirm("You have unsaved changes! Are you sure you want to leave this page?")) {
+        return;
+      }
+    }
+    next();
+  },
 };
 </script>
 
