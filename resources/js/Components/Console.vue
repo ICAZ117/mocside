@@ -51,9 +51,12 @@ export default {
       }
     },
     newTermContent: function (newVal, oldVal) {
-      this.oldContents += this.newTermContent.substring(this.oldTermContent.length, this.newTermContent.length);
+      this.oldContents += this.newTermContent.substring(
+        this.oldTermContent.length,
+        this.newTermContent.length
+      );
       this.contents = this.oldContents;
-    }
+    },
   },
   methods: {
     async startDocker() {
@@ -247,12 +250,6 @@ export default {
       }, 1000);
     },
   },
-  async beforeMount() {
-    this.authUser = await this.$store.dispatch("auth/getAuthUser");
-    this.username = authUser.username;
-    this.oldContents = this.username + "@mocside:/usr/src$ ";
-    this.contents = this.username + "@mocside:/usr/src$ ";
-  },
   async beforeUnmount() {
     //console
     if (this.isWaiting || this.isPolling) {
@@ -263,6 +260,10 @@ export default {
     this.$emit("unmount");
   },
   async mounted() {
+    this.authUser = await this.$store.dispatch("auth/getAuthUser");
+    this.username = authUser.username;
+    this.oldContents = this.username + "@mocside:/usr/src$ ";
+    this.contents = this.username + "@mocside:/usr/src$ ";
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`).listen(".console_out", (e) => {
       this.newTermContent = e.log;
     });
