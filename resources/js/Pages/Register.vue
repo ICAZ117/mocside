@@ -73,7 +73,7 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input
-            type="email"
+            type="text"
             v-model="userForm.email"
             id="email"
             name="email"
@@ -291,8 +291,15 @@ export default {
       const res4 = await API.apiClient.post('/progress');
       console.log(res4);
 
+      // update user pfp
+      var payload2 = {
+        pfp_path: "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
+      }
+      const res5 = API.apiClient.put(`/profile/full/${res2.data.data.id}`, payload2);
+      console.log(res5);
+
       // now, push to login
-      this.$router.push('/login') // this will get them properly authorized,
+      this.$router.push('/courses'); // this will get them properly authorized,
       // and in the future possibly aid email verification.
     },
   },

@@ -365,7 +365,7 @@ export default {
     async Unmounting() {
       this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
       // check if problem is deleted if not then add back in
-      if(!this.deleteMe) {
+      if(!this.deletedMe) {
         const problem = await API.apiClient.get(`/problems/full/${this.problemID}`); 
         problem.data.data["percent"] = await this.getPercent(problem.data.data);
         problem.data.data["activity"] = await this.getActivity(problem.data.data);
