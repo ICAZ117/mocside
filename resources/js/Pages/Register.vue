@@ -295,8 +295,11 @@ export default {
       var payload2 = {
         pfp_path: "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
       }
+      document.getElementById("pfp").src = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
       const res5 = API.apiClient.put(`/profile/full/${res2.data.data.id}`, payload2);
       console.log(res5);
+
+      //update user record in store to get new pfp path?
 
       // now, push to login
       this.$router.push('/courses'); // this will get them properly authorized,
