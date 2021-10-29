@@ -272,11 +272,11 @@
         <table class="table problemtable" style="margin: 0 !important">
           <thead class="problemtable" style="border: none !important">
             <tr>
-              <th>Course</th>
-              <th>Letter Grade</th>
-              <th>Grade Percentage</th>
-              <th>Start Date</th>
-              <th>End Date</th>
+              <th width="41.6%">Course</th>
+              <th width="14.0%">Letter Grade</th>
+              <th width="19.5%">Grade Percentage</th>
+              <th width="12.2%">Start Date</th>
+              <th width="12.7%">End Date</th>
             </tr>
           </thead>
           <tbody>
@@ -284,11 +284,11 @@
             <template v-for="(course, index) in courses" :key="index">
               <!-- Regular table row -->
               <tr class="problem pointer">
-                <td>{{ course.name }}</td>
-                <td>{{ letters[index] == undefined ? "--" : letters[index] }}</td>
-                <td>{{ grades[index] == undefined ? "--" : grades[index] + "%" }}</td>
-                <td>{{ course.start_date }}</td>
-                <td>{{ course.end_date }}</td>
+                <td width="41.6%">{{ course.name }}</td>
+                <td width="14.0%">{{ letters[index] == undefined ? "--" : letters[index] }}</td>
+                <td width="19.5%">{{ grades[index] == undefined ? "--" : grades[index] + "%" }}</td>
+                <td width="12.2%">{{ course.start_date }}</td>
+                <td width="12.7%">{{ course.end_date }}</td>
               </tr>
             </template>
           </tbody>
