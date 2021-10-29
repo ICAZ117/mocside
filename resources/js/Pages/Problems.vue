@@ -273,6 +273,7 @@ export default {
 
       //filter the problems list
       this.problems = this.problems.filter((p, i) => i != key);
+      //remove from the unfiltered list
       this.unfilteredProblems = this.unfilteredProblems.filter((p, i) => i != key);
       this.closeDeleting();
     },
