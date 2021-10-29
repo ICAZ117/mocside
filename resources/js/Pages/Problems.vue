@@ -294,6 +294,7 @@ export default {
     },
     async getProblems() {
       try {
+        console.log("gotToProblem");
         const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
         // this.problems = rawProblems.data.data;
         this.unfilteredProblems = rawProblems.data.data;
@@ -363,6 +364,7 @@ export default {
 
     async Unmounting() {
       this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
+      console.log("problems unmounting method");
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
       this.progress = res.data.data;

@@ -123,6 +123,7 @@ export default defineComponent({
       this.overview = e;
     },
     async getInfo() {
+      console.log("get info");
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problem = rawproblem.data.data;
       this.assignmentTitle = this.problem.name;
