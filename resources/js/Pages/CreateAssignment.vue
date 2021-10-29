@@ -20,6 +20,7 @@
             :val="tab"
             :label="tab"
             :indicator="true"
+            @click="pressTab"
           />
         </tabs>
       </div>
@@ -45,7 +46,7 @@
         ><ModelSolution :problemID="problemID" :tab="selectedTab"
       /></tab-panel>
       <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID" /> </tab-panel>
-      <tab-panel :val="'Save & Exit'" @click="exit"></tab-panel>
+      <tab-panel :val="'Save & Exit'"></tab-panel>
     </tab-panels>
   </div>
 </template>
@@ -106,8 +107,8 @@ export default defineComponent({
     },
   },
   methods: {
-    async exit() {
-      console.log("exit");
+    async pressTab() {
+      console.log("pressed a tab");
     },
     async handleSubmit() {
       //perhaps later replace this with a debounce method for autosaving
