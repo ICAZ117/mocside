@@ -110,6 +110,9 @@ export default defineComponent({
     async pressTab() {
       console.log("pressed a tab");
       console.log(this.selectedTab);
+      if(this.selectedTab == "Save & Exit") {
+        this.beforeUnmount();
+      }
     },
     async handleSubmit() {
       //perhaps later replace this with a debounce method for autosaving
