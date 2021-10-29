@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
-use App\Models\Code;
-// use App\Events\InputSent;
-// use App\Events\ContainerOut;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -234,7 +231,7 @@ class ContainerController extends Controller
         unlink($path);
 
         // copy in supervisor
-        $supervisor = Storage::disk('local')->path('supervisor.py');
+        $supervisor = Storage::disk('local')->path('grader.py');
         Storage::disk('local')
             ->putFileAs($head, $supervisor, 'supervisor.py');
 
@@ -669,4 +666,91 @@ class ContainerController extends Controller
         return response()->json(["message" => $id], 200);
     }
     */
+
+    // WEEEEE'RE BACK 10/29/21
+    // Time to rewrite spinUp and sendIn without reading.
+
+    // Send Input to container without reading logs after.
+    public function sendInNoRead(Request $request, $id)
+    {
+        $validData = $request->validate([
+            'input' => 'required',
+        ]);
+        // $id is container_id
+        // spin up container
+        $webSocketStream = Docker::create()->containerAttachWebsocket($id, [
+            "logs" => false,
+            "stream" => true,
+            "stdout" => false,
+            "stderr" => false,
+            "stdin" => true,
+        ]);
+        $webSocketStream->write($validData['input']);
+        $webSocketStream->write("\n");
+        return response()->json(['message' => 'input sent'], 200);
+    }
+
+    // spinWLib without reading. return container ID.
+    public function spinUpNoRead(Request $request, $id)
+    {
+        $user = Auth::user();
+        $validData = $request->validate([
+            'lang' => 'required',
+        ]);
+        $head = "submissions/".$user->fsc_id."/".$id;
+
+        $docker = Docker::create();
+        $containerConfig = new ContainersCreatePostBody();
+        $hostConfig = new HostConfig();
+        $mountsConfig = new Mount();
+        $ulimits = new ResourcesUlimits();
+        // set global timeout
+        $ulimits->setName("cpu"); // this sets a cpu time limit
+        $ulimits->setSoft(30);    // but in the case of a print infinite loop,
+        $ulimits->setHard(60);    // it is no help.
+        $hostConfig->setUlimits([$ulimits]);
+
+        $containerConfig->setStopTimeout(3); // time container will wait before force after get "shutdown" cmd
+        $containerConfig->setImage("673eda123d55");
+        $containerConfig->setEntrypoint(['python3']);
+        $containerConfig->setCmd([
+            '-u', 'supervisor.py', 
+            '-l', $validData['lang'], 
+            '>', 'console.log', '|',
+            'python3', 'watchdog.py',
+            '-i', $user->fsc_id,
+            '-t', '30'
+        ]);
+        $containerConfig->setWorkingDir('/usr/src');
+        $containerConfig->setAttachStdin(true);
+        $containerConfig->setAttachStdout(true);
+        $containerConfig->setAttachStderr(true);
+        $containerConfig->setTty(true);
+        $containerConfig->setOpenStdin(true);
+
+        // create host config
+        $mountsConfig->setType("bind");
+        $mountsConfig->setSource("/home/max/mocside/storage/app/" . $head . "/");
+        $mountsConfig->setTarget("/usr/src");
+        $mountsConfig->setReadOnly(false);
+        $hostConfig->setMounts([$mountsConfig]);
+        $containerConfig->setHostConfig($hostConfig);
+
+        // copy in controllers
+        $watchdog = Storage::disk('local')->path('watchdog.py');
+        $supervisor = Storage::disk('local')->path('supervisor.py');
+        Storage::disk('local')->putFileAs($head, new File($watchdog), 'watchdog.py');
+        Storage::disk('local')->putFileAs($head, new File($supervisor), 'supervisor.py');
+
+        // create container
+        $containerCreateResult = $docker->containerCreate($containerConfig);
+        $container_id = $containerCreateResult->getId();
+
+        // start container
+        $docker->containerStart($container_id);
+
+        // return container ID
+        return response()->json(['message' => $container_id], 200);
+    }
+
 }
