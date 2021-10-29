@@ -4,6 +4,7 @@ IMPORTANT
 * Email Confirmation
 * Password Reset
 * Configure/Add SSL(i.e. https)
+* Secure Transfer of personal information, most importantly passwords
 
 
 ADD PAGES
