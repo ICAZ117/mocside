@@ -262,7 +262,7 @@ export default {
   },
   async mounted() {
     this.authUser = await store.getters["auth/authUser"];
-    this.username = authUser.username;
+    this.username =this.authUser.username;
     this.oldContents = this.username + "@mocside:/usr/src$ ";
     this.contents = this.username + "@mocside:/usr/src$ ";
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`).listen(".console_out", (e) => {
