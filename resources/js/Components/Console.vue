@@ -56,6 +56,7 @@ export default {
         this.oldTermContent.length,
         this.newTermContent.length
       );
+      this.oldTermContent = this.newTermContent;
       this.contents = this.oldContents;
     },
   },
