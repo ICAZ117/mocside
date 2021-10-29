@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       isDark: false,
-      pfp: "",
+      pfp: "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
     };
   },
   methods: {
