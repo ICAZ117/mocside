@@ -135,6 +135,7 @@ export default defineComponent({
       const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
     }, 500),
     async deleteProblem(id) {
+      console.log("create-assignment problemid " + id);
       await this.$emit("deleteMe", id);
     },
   },

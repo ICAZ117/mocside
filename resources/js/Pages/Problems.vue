@@ -265,6 +265,7 @@ export default {
       this.deletingProblem.key = key;
     },
     async deleteProblem() {
+      console.log("deleting problem");
       var id = this.deletingProblem.id;
       var problem = this.deletingProblem.problem;
       var key = this.deletingProblem.key;
@@ -349,6 +350,7 @@ export default {
 
       //check if the problem was deleted from child
       if (this.deletedMe) {
+        console.log("inside the problem edited deletedMe");
         //child deleted button was pressed
         // remove this problem from the current lab
         const res = await API.apiClient.delete(`/problems/${tempID}`);
