@@ -33,6 +33,7 @@ NEXT UP
 * add modification to Ace-editor, suggestions, autoformat, autocompletes
 * Upon creating an assignment it should auto set the template for both python and javaupdated
 * leaving the profile page opens a broswer alert about unsaved changes instead of a modal
+* When trying to join a course with an enroll code if the code is out of date, it needs to be displayed to the user that it is..curently only a console log
 
 
 
