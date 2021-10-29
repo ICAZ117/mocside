@@ -265,6 +265,7 @@ export default {
       this.deletingProblem.key = key;
     },
     async deleteProblem() {
+      console.log("deleting problem");
       var id = this.deletingProblem.id;
       var problem = this.deletingProblem.problem;
       var key = this.deletingProblem.key;
@@ -273,6 +274,8 @@ export default {
 
       //filter the problems list
       this.problems = this.problems.filter((p, i) => i != key);
+      //remove from the unfiltered list
+      this.unfilteredProblems = this.unfilteredProblems.filter((p, i) => i != key);
       this.closeDeleting();
     },
     async deleteMe(id) {
@@ -291,6 +294,7 @@ export default {
     },
     async getProblems() {
       try {
+        console.log("gotToProblem");
         const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
         // this.problems = rawProblems.data.data;
         this.unfilteredProblems = rawProblems.data.data;
@@ -347,6 +351,7 @@ export default {
 
       //check if the problem was deleted from child
       if (this.deletedMe) {
+        console.log("inside the problem edited deletedMe");
         //child deleted button was pressed
         // remove this problem from the current lab
         const res = await API.apiClient.delete(`/problems/${tempID}`);
@@ -359,6 +364,7 @@ export default {
 
     async Unmounting() {
       this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
+      console.log("problems unmounting method");
       const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
       this.progress = res.data.data;
