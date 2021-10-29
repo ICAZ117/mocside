@@ -364,13 +364,15 @@ export default {
 
     async Unmounting() {
       this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
-      console.log("problems unmounting method");
-      const problem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      // check if problem is deleted if not then add back in
+      if(!this.deleteMe) {
+        const problem = await API.apiClient.get(`/problems/full/${this.problemID}`); 
+        problem.data.data["percent"] = await this.getPercent(problem.data.data);
+        problem.data.data["activity"] = await this.getActivity(problem.data.data);
+        this.unfilteredProblems.push(problem.data.data);
+      }
       const res = await API.apiClient.get(`/progress/${this.fscID}`);
       this.progress = res.data.data;
-      problem.data.data["percent"] = await this.getPercent(problem.data.data);
-      problem.data.data["activity"] = await this.getActivity(problem.data.data);
-      this.unfilteredProblems.push(problem.data.data);
       //set expanded problem to null
       this.expandedProblem = null;
       //recall sort method
