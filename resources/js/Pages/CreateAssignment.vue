@@ -45,6 +45,7 @@
         ><ModelSolution :problemID="problemID" :tab="selectedTab"
       /></tab-panel>
       <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID" /> </tab-panel>
+      <tab-panel :val="'Save & Exit'" @click="exit"></tab-panel>
     </tab-panels>
   </div>
 </template>
@@ -105,6 +106,9 @@ export default defineComponent({
     },
   },
   methods: {
+    async exit() {
+      console.log("exit");
+    },
     async handleSubmit() {
       //perhaps later replace this with a debounce method for autosaving
       //save information before returning to the problems page
