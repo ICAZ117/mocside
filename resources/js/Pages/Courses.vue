@@ -722,7 +722,7 @@ export default {
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
       .listen(".console_out", (e) => {
         console.log(e);
-      })
+      });
   },
 };
 </script>

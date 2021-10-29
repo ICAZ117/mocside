@@ -123,6 +123,7 @@ export default defineComponent({
       this.overview = e;
     },
     async getInfo() {
+      console.log("get info");
       const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problem = rawproblem.data.data;
       this.assignmentTitle = this.problem.name;
@@ -135,6 +136,7 @@ export default defineComponent({
       const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
     }, 500),
     async deleteProblem(id) {
+      console.log("create-assignment problemid " + id);
       await this.$emit("deleteMe", id);
     },
   },

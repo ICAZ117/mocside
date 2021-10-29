@@ -21,6 +21,9 @@ export default {
       containerID: 0,
       oldContents: "",
       contents: "",
+      oldTermContent: "",
+      termContent: "",
+      newTermContent: "",
       new: [],
       isWaiting: false,
       hasNewLine: false,
@@ -46,15 +49,25 @@ export default {
         this.contents = this.oldContents;
       }
     },
+    newTermContent: function (newVal, oldVal) {
+      this.oldContents += this.newTermContent.substring(this.oldTermContent.length, this.newTermContent.length);
+      this.contents = this.oldContents;
+    }
   },
   methods: {
     async startDocker() {
+      // When the user clicks "Run"
+      // If the selected language is Java, add some text to the terminal content
       if (this.lang == "Java") {
         this.contents += "javac Main.java\n";
       }
+
+      // Create payload
       var payload = {
         lang: this.lang,
       };
+
+      // Start the actual docker
       const res = await API.apiClient.post(
         `/containers/spin-up/${this.problemID}`,
         payload
@@ -63,8 +76,9 @@ export default {
       // Get the docker container ID
       this.containerID = res.data.message;
 
+      // Automatically shut down the docker after 2 mins
       setTimeout(async () => {
-        const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`)
+        const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
       }, 120000); // shutdown container in 2 minutes
 
       // Get the new input/output
@@ -75,6 +89,7 @@ export default {
       this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
       this.hasNewLine = this.new[this.new.length - 1] === "" || !this.isWaiting;
 
+      // Check the language and add the appropriate content to the console
       if (this.lang == "Python") {
         this.contents += "python3 submission.py\n";
       } else if (this.lang == "Java") {
@@ -101,9 +116,9 @@ export default {
         }
         this.isPolling = false;
         this.$emit("programFinished");
-      } else if (!this.isPolling){
+      } else if (!this.isPolling) {
         this.checkLogs();
-      } 
+      }
 
       this.oldContents = this.contents;
     },
@@ -141,7 +156,7 @@ export default {
 
         // Get the new output
         this.new = res.data.dump;
-        
+
         // send input to currlog
         this.currLog += this.newInput;
 
@@ -150,7 +165,7 @@ export default {
         this.hasNewLine = this.new[this.new.length - 1] === "" || !this.isWaiting;
 
         for (let i = 0; i < this.new.length - 1; i++) {
-          this.new[i] = this.new[i].replace('\u0003è', '');
+          this.new[i] = this.new[i].replace("\u0003è", "");
           this.contents += this.new[i] + "\n";
           this.currLog += this.new[i] + "\n";
         }
@@ -169,10 +184,12 @@ export default {
         this.oldContents = this.contents;
       }
     },
+
+    // We should probably delete this whole method
     async checkLogs() {
       var self = this;
       this.isPolling = true;
-      setTimeout(async function() {
+      setTimeout(async function () {
         const res = await API.apiClient.get(`/containers/logs/${self.containerID}`);
 
         // Get the new output
@@ -186,7 +203,7 @@ export default {
         if (!(self.currLog == tempNew)) {
           // find new output
           var newText = tempNew.substring(self.currLog.length);
-          newText = newText.replace('\u0003è', ''); // Can we filter this character?
+          newText = newText.replace("\u0003è", ""); // Can we filter this character?
           self.new = newText.split("\n");
 
           // display output
@@ -214,7 +231,7 @@ export default {
           } else {
             self.oldContents = self.contents;
             self.checkLogs();
-          } 
+          }
         } else if (self.isWaiting) {
           self.checkLogs();
         } else {
@@ -227,7 +244,7 @@ export default {
           self.$emit("programFinished");
         }
       }, 1000);
-    }
+    },
   },
   async beforeMount() {
     const authUser = await this.$store.dispatch("auth/getAuthUser");
@@ -242,8 +259,13 @@ export default {
       const res = API.apiClient.delete(`/containers/${this.containerID}`);
       console.log(res.data);
     }
-    this.$emit('unmount');
-  }
+    this.$emit("unmount");
+  },
+  async mounted() {
+    Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`).listen(".console_out", (e) => {
+      this.newTermContent = e.log;
+    });
+  },
 };
 </script>
 
