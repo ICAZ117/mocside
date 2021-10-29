@@ -33,6 +33,7 @@ NEXT UP
 * add modification to Ace-editor, suggestions, autoformat, autocompletes
 * Upon creating an assignment it should auto set the template for both python and javaupdated
 * Issues when deleting problem from problems page and or overview page
+* add function exit (myabe save) to createAssignment page
 
 
 
