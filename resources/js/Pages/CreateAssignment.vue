@@ -109,6 +109,7 @@ export default defineComponent({
   methods: {
     async pressTab() {
       console.log("pressed a tab");
+      console.log(this.selectedTab);
     },
     async handleSubmit() {
       //perhaps later replace this with a debounce method for autosaving
