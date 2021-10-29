@@ -704,6 +704,7 @@ export default {
     },
   },
   async mounted() {
+    console.log("mounted course page");
     this.childIsOpen = false;
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
