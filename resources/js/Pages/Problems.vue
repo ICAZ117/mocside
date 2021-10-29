@@ -273,6 +273,7 @@ export default {
 
       //filter the problems list
       this.problems = this.problems.filter((p, i) => i != key);
+      this.unfilteredProblems = this.unfilteredProblems((p, i) => i != key);
       this.closeDeleting();
     },
     async deleteMe(id) {
