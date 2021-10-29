@@ -186,7 +186,6 @@
         <!-------------------- SUBMIT -------------------->
         <div class="form-group">
           <button class="btn btn-danger btn-block">Register</button>
-          <button class="btn btn-danger btn-block" @click="login()" type="button">Log In</button>
         </div>
       </form>
     </div>
@@ -257,9 +256,6 @@ export default {
         return;
       }
       this.registerUser();
-    },
-    login() {
-      this.$router.push({ name: "Login"});
     },
     async registerUser() {
       this.error = null;
