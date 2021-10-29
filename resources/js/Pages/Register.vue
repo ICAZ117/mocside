@@ -73,7 +73,7 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input
-            type="email"
+            type="text"
             v-model="userForm.email"
             id="email"
             name="email"
