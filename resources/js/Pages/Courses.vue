@@ -718,11 +718,11 @@ export default {
     this.separateCourses();
     this.routeToChild();
 
-    // test of laravel-echo on 10/16/21
-    Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
-      .listen(".console_out", (e) => {
-        console.log(e);
-      });
+    // // test of laravel-echo on 10/16/21
+    // Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
+    //   .listen(".console_out", (e) => {
+    //     console.log(e);
+    //   });
   },
 };
 </script>
