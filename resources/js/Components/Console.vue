@@ -12,6 +12,7 @@
 
 <script>
 import * as API from "../services/API";
+import store from "../Store/index";
 
 export default {
   props: ["launchConsole", "problemID", "lang"],
@@ -260,7 +261,7 @@ export default {
     this.$emit("unmount");
   },
   async mounted() {
-    this.authUser = await this.$store.dispatch("auth/getAuthUser");
+    this.authUser = await store.getters["auth/authUser"];
     this.username = authUser.username;
     this.oldContents = this.username + "@mocside:/usr/src$ ";
     this.contents = this.username + "@mocside:/usr/src$ ";
