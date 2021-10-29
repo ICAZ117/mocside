@@ -18,6 +18,7 @@ export default {
 
   data() {
     return {
+      authUser: "",
       containerID: 0,
       oldContents: "",
       contents: "",
@@ -247,7 +248,7 @@ export default {
     },
   },
   async beforeMount() {
-    const authUser = await this.$store.dispatch("auth/getAuthUser");
+    this.authUser = await this.$store.dispatch("auth/getAuthUser");
     this.username = authUser.username;
     this.oldContents = this.username + "@mocside:/usr/src$ ";
     this.contents = this.username + "@mocside:/usr/src$ ";
