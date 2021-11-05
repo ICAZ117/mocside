@@ -90,6 +90,9 @@ export default {
         const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
       }, 120000); // shutdown container in 2 minutes
 
+      console.log("Test timer");
+    
+
       // Check the language and add the appropriate content to the console
       if (this.lang == "Python") {
         this.contents += "python3 submission.py\n";
