@@ -722,12 +722,7 @@ class ContainerController extends Controller
         // ]);
         // $containerConfig->setCmd(['\"python3', '-u', '--version\"']);
         $containerConfig->setCmd([
-            '-c', '\"\"python3', '-u', 'supervisor.py',
-            '-l', strtolower($validData['lang']),
-            '>', 'console.log', '|',
-            'python3', 'watchdog_laravel.py',
-            '-i', $user->fsc_id,
-            '-t', '30\"\"'
+            '-c', 'python3 -u supervisor.py -l '.strtolower($validData['lang']).' > console.log | python3 watchdog_laravel.py -i '.$user->fsc_id.'-t 30'
         ]);
         $containerConfig->setEntrypoint(['/bin/bash']);
         $containerConfig->setWorkingDir('/usr/src');
