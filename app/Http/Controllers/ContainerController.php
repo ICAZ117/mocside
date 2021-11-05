@@ -722,15 +722,15 @@ class ContainerController extends Controller
         // ]);
         // $containerConfig->setCmd(['--version']);
         $containerConfig->setCmd([
-            '-c', '\"python3', 
-            '-u', 'supervisor.py',
+            '\"cd', '/usr/src;',
+            'python3', '-u', 'supervisor.py',
             '-l', strtolower($validData['lang']),
             '>', 'console.log', '|',
             'python3', 'watchdog.py',
             '-i', $user->fsc_id,
             '-t', '30\"'
         ]);
-        $containerConfig->setEntrypoint(['/bin/bash']);
+        $containerConfig->setEntrypoint(['/bin/bash', '-c']);
         $containerConfig->setWorkingDir('/usr/src');
         $containerConfig->setAttachStdin(true);
         $containerConfig->setAttachStdout(true);
