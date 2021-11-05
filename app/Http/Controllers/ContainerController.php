@@ -725,9 +725,9 @@ class ContainerController extends Controller
             '\"python3', '-u', 'supervisor.py',
             '-l', strtolower($validData['lang']),
             '>', 'console.log\"',// '|',
-            'python3', 'watchdog.py',
-            '-i', $user->fsc_id,
-            '-t', '30\"'//
+            // 'python3', 'watchdog.py',
+            // '-i', $user->fsc_id,
+            // '-t', '30\"'
         ]);
         $containerConfig->setEntrypoint(['/bin/bash', '-c']);
         $containerConfig->setWorkingDir('/usr/src');
