@@ -80,6 +80,8 @@ export default {
         payload
       );
 
+      console.log("Started docker");
+
       // Get the docker container ID
       this.containerID = res.data.message;
 
