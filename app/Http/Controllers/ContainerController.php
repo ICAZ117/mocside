@@ -712,15 +712,15 @@ class ContainerController extends Controller
 
         $containerConfig->setStopTimeout(3); // time container will wait before force after get "shutdown" cmd
         $containerConfig->setImage("673eda123d55");
-        // $containerConfig->setCmd([
-        //     '-u', 'supervisor.py',
-        //     '-l', $validData['lang'],
-        //     '>', 'console.log', '|',
-        //     'python3', 'watchdog.py',
-        //     '-i', $user->fsc_id,
-        //     '-t', '30'
-        // ]);
-        $containerConfig->setCmd(['--version']);
+        $containerConfig->setCmd([
+            'supervisor.py', // '-u',
+            '-l', $validData['lang'],
+            '>', 'console.log', '|',
+            'python3', 'watchdog.py',
+            '-i', $user->fsc_id,
+            '-t', '30'
+        ]);
+        // $containerConfig->setCmd(['--version']);
         $containerConfig->setEntrypoint(['python3']);
         $containerConfig->setWorkingDir('/usr/src');
         $containerConfig->setAttachStdin(true);
