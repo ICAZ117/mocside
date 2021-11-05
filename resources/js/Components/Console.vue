@@ -87,14 +87,6 @@ export default {
         const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
       }, 120000); // shutdown container in 2 minutes
 
-      // Get the new input/output
-      this.new = res.data.dump;
-      this.currLog = "";
-
-      // Check if the program is still running/waiting on input
-      this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
-      this.hasNewLine = this.new[this.new.length - 1] === "" || !this.isWaiting;
-
       // Check the language and add the appropriate content to the console
       if (this.lang == "Python") {
         this.contents += "python3 submission.py\n";
@@ -102,17 +94,6 @@ export default {
         this.contents += this.username + "@mocside:/usr/src$ java Main\n";
       } else {
         this.contents += "\n" + this.username + "@mocside:/usr/src$ ";
-      }
-
-      // (this.hasNewLine ? this.new.length - 1 : this.new.length)
-      for (let i = 0; i < this.new.length - 1; i++) {
-        this.contents += this.new[i] + "\n";
-        this.currLog += this.new[i] + "\n";
-      }
-
-      if (!this.hasNewLine) {
-        this.contents += this.new[this.new.length - 1];
-        this.currLog += this.new[this.new.length - 1];
       }
 
       if (!this.isWaiting) {
@@ -131,21 +112,14 @@ export default {
     async enter() {
       this.newInput = this.contents.substring(this.oldContents.length);
 
+      // Get ALL containers (ignore the request syntax... it's dumb)
       this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
       this.isWaiting = false;
 
+      // Check if the current container is running
       for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
         this.isWaiting = this.containers.data.data[i] == this.containerID;
-      }
-
-      if (!this.isWaiting) {
-        if (this.isPolling) {
-          // if were polling this is first to catch, otherwise this has already been printed
-          self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
-        }
-        this.isPolling = false;
-        this.$emit("programFinished");
       }
 
       this.oldContents = this.contents;
@@ -160,96 +134,13 @@ export default {
           payload
         );
 
-        // Get the new output
-        this.new = res.data.dump;
-
-        // send input to currlog
-        this.currLog += this.newInput;
-
-        // Check if the program is still running/waiting on input
-        this.isWaiting = !(this.new[this.new.length - 1] === "\u0003è");
-        this.hasNewLine = this.new[this.new.length - 1] === "" || !this.isWaiting;
-
-        for (let i = 0; i < this.new.length - 1; i++) {
-          this.new[i] = this.new[i].replace("\u0003è", "");
-          this.contents += this.new[i] + "\n";
-          this.currLog += this.new[i] + "\n";
-        }
-
-        if (!this.hasNewLine) {
-          this.contents += this.new[this.new.length - 1];
-          this.currLog += this.new[this.new.length - 1];
-        }
-
-        // we will handle this in our listener function
-        // if (!this.isWaiting) {
-        //   this.contents += this.username + "@mocside:/usr/src$ ";
-        //   this.$emit("programFinished");
-        // }
-
         this.oldContents = this.contents;
       }
     },
-
-    // We should probably delete this whole method
-    async checkLogs() {
-      var self = this;
-      this.isPolling = true;
-      setTimeout(async function () {
-        const res = await API.apiClient.get(`/containers/logs/${self.containerID}`);
-
-        // Get the new output
-        self.new = res.data.dump;
-
-        // check is waiting
-        self.isWaiting = res.data.isRunning;
-
-        // if new == currLog, nothing new to write
-        var tempNew = self.new.join("\n");
-        if (!(self.currLog == tempNew)) {
-          // find new output
-          var newText = tempNew.substring(self.currLog.length);
-          newText = newText.replace("\u0003è", ""); // Can we filter this character?
-          self.new = newText.split("\n");
-
-          // display output
-          self.hasNewLine = self.new[self.new.length - 1] === "";
-
-          for (let i = 0; i < self.new.length - 1; i++) {
-            self.contents += self.new[i] + "\n";
-            self.currLog += self.new[i] + "\n";
-          }
-
-          if (!self.hasNewLine) {
-            self.contents += self.new[self.new.length - 1];
-            self.currLog += self.new[self.new.length - 1];
-          }
-
-          // recurse if still active
-          if (!self.isWaiting) {
-            if (self.isPolling) {
-              // if were polling this is first to catch, otherwise this has already been printed
-              self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
-            }
-            self.oldContents = self.contents;
-            self.isPolling = false;
-            self.$emit("programFinished");
-          } else {
-            self.oldContents = self.contents;
-            self.checkLogs();
-          }
-        } else if (self.isWaiting) {
-          self.checkLogs();
-        } else {
-          if (self.isPolling) {
-            // if were polling this is first to catch, otherwise this has already been printed
-            self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
-          }
-          self.oldContents = self.contents;
-          self.isPolling = false;
-          self.$emit("programFinished");
-        }
-      }, 1000);
+    async programFinished() {
+      this.$emit("programFinished");
+      this.oldContents += "\n" + this.username + "@mocside:/usr/src$ ";
+      this.contents = this.oldContents;
     },
   },
   async beforeUnmount() {
@@ -263,12 +154,16 @@ export default {
   },
   async mounted() {
     this.authUser = await store.getters["auth/authUser"];
-    this.username =this.authUser.username;
+    this.username = this.authUser.username;
     this.oldContents = this.username + "@mocside:/usr/src$ ";
     this.contents = this.username + "@mocside:/usr/src$ ";
-    Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`).listen(".console_out", (e) => {
-      this.newTermContent = e.log;
-    });
+    Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
+      .listen(".console_out", (e) => {
+        this.newTermContent = e.log;
+      })
+      .listen(".end", (e) => {
+        this.programFinished();
+      });
   },
 };
 </script>

@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       isDark: false,
-      pfp: "",
+      pfp: "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
     };
   },
   methods: {
@@ -137,7 +137,7 @@ export default {
         this.pfp = au.pfp_path;
         if(this.pfp == undefined || this.pfp == null) {
           console.log("empty path");
-          this.pfp = "../../img/DefaultPFP.png";
+          this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
         }
         document.getElementById("d_navpfp").src = this.pfp;
         document.getElementById("l_navpfp").src = this.pfp;

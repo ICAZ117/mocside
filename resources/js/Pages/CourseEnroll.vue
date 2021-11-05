@@ -106,8 +106,12 @@ export default {
       //join class
       const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
 
+      //update authUser
+      
+
       //move to course page
-      this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      // this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+      this.$router.push({name: "Courses" });
     },
     cancelCourse() {
       //move to home since not joining page
