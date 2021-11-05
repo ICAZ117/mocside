@@ -723,8 +723,8 @@ class ContainerController extends Controller
         // $containerConfig->setCmd(['\"python3', '-u', '--version\"']);
         $containerConfig->setCmd([
             '\"python3', '-u', 'supervisor.py',
-            '-l', strtolower($validData['lang']),
-            '>', 'console.log\"',// '|',
+            '-l', strtolower($validData['lang']).'\"',
+            //'>', 'console.log\"',// '|',
             // 'python3', 'watchdog.py',
             // '-i', $user->fsc_id,
             // '-t', '30\"'
