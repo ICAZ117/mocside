@@ -39,6 +39,7 @@ export default {
   watch: {
     launchConsole: function () {
       if (this.launchConsole && this.problemID != "" && this.problemID != null) {
+        console.log("WE STARTIN BOIS")
         this.startDocker();
       }
     },
