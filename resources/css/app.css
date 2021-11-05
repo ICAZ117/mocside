@@ -958,8 +958,8 @@ thead.gradebook {
 }
 
 .console {
-    background-color: var(--consoleBG) !important;
-    color: lime !important;
+    /* background-color: var(--consoleBG) !important;
+    color: lime !important; */
     font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
         "source-code-pro", monospace;
     /* height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important; */

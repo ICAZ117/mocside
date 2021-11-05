@@ -157,6 +157,13 @@ export default {
     this.username = this.authUser.username;
     this.oldContents = this.username + "@mocside:/usr/src$ ";
     this.contents = this.username + "@mocside:/usr/src$ ";
+
+    // console.log(this.authUser);
+    // console.log("color: " + this.authUser.settings.consoleOptions.foreground + "!important; background-color: " + this.authUser.settings.consoleOptions.background + "!important;");
+    // var el = document.getElementById("scrollToBottom");
+    document.getElementById("scrollToBottom").style = "color: " + this.authUser.settings.consoleOptions.foreground + "!important; background-color: " + this.authUser.settings.consoleOptions.background + "!important;"
+
+
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
       .listen(".console_out", (e) => {
         this.newTermContent = e.log;
