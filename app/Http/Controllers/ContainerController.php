@@ -724,7 +724,7 @@ class ContainerController extends Controller
         $containerConfig->setCmd([
             '\"python3', '-u', 'supervisor.py',
             '-l', strtolower($validData['lang']),
-            '>', 'console.log\"', '|',
+            '>', 'console.log', '|',
             'python3', 'watchdog_laravel.py',
             '-i', $user->fsc_id,
             '-t', '30\"'
