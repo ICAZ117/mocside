@@ -703,7 +703,7 @@ class ContainerController extends Controller
         $containerConfig = new ContainersCreatePostBody();
         $hostConfig = new HostConfig();
         $mountsConfig = new Mount();
-        $ulimits = new ResourcesUlimits();
+        $ulimits = new ResourcesUlimitsItem();
         // set global timeout
         $ulimits->setName("cpu"); // this sets a cpu time limit
         $ulimits->setSoft(30);    // but in the case of a print infinite loop,
