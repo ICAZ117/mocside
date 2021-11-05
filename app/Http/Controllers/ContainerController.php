@@ -723,11 +723,11 @@ class ContainerController extends Controller
         // $containerConfig->setCmd(['\"python3', '-u', '--version\"']);
         $containerConfig->setCmd([
             '\"python3', '-u', 'supervisor.py',
-            '-l', strtolower($validData['lang']).'\"',
-            //'>', 'console.log\"',// '|',
-            // 'python3', 'watchdog.py',
-            // '-i', $user->fsc_id,
-            // '-t', '30\"'
+            '-l', strtolower($validData['lang']),
+            '>', 'console.log\"', '|',
+            'python3', 'watchdog_laravel.py',
+            '-i', $user->fsc_id,
+            '-t', '30\"'
         ]);
         $containerConfig->setEntrypoint(['/bin/bash', '-c']);
         $containerConfig->setWorkingDir('/usr/src');
@@ -748,7 +748,7 @@ class ContainerController extends Controller
         // copy in controllers
         $watchdog = Storage::disk('local')->path('watchdog.py');
         $supervisor = Storage::disk('local')->path('supervisor.py');
-        Storage::disk('local')->putFileAs($head, new File($watchdog), 'watchdog.py');
+        Storage::disk('local')->putFileAs($head, new File($watchdog), 'watchdog_laravel.py');
         Storage::disk('local')->putFileAs($head, new File($supervisor), 'supervisor.py');
 
         // create container
