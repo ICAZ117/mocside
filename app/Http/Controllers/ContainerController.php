@@ -720,7 +720,7 @@ class ContainerController extends Controller
         //     '-i', $user->fsc_id,
         //     '-t', '30'
         // ]);
-        $containerConfig->setCmd(['\"python3', '--version\"']);
+        $containerConfig->setCmd(['\"python3', '-u', '--version\"']);
         // $containerConfig->setCmd([
         //     '\"cd', '/usr/src;',
         //     'python3', '-u', 'supervisor.py',
