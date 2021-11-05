@@ -703,24 +703,25 @@ class ContainerController extends Controller
         $containerConfig = new ContainersCreatePostBody();
         $hostConfig = new HostConfig();
         $mountsConfig = new Mount();
-        $ulimits = new ResourcesUlimits();
+        // $ulimits = new ResourcesUlimitsItem();
         // set global timeout
-        $ulimits->setName("cpu"); // this sets a cpu time limit
-        $ulimits->setSoft(30);    // but in the case of a print infinite loop,
-        $ulimits->setHard(60);    // it is no help.
-        $hostConfig->setUlimits([$ulimits]);
+        // $ulimits->setName("cpu"); // this sets a cpu time limit
+        // $ulimits->setSoft(30);    // but in the case of a print infinite loop,
+        // $ulimits->setHard(60);    // it is no help.
+        // $hostConfig->setUlimits([$ulimits]);
 
         $containerConfig->setStopTimeout(3); // time container will wait before force after get "shutdown" cmd
         $containerConfig->setImage("673eda123d55");
-        $containerConfig->setEntrypoint(['python3']);
         $containerConfig->setCmd([
-            '-u', 'supervisor.py', 
-            '-l', $validData['lang'], 
-            '>', 'console.log', '|',
-            'python3', 'watchdog.py',
-            '-i', $user->fsc_id,
-            '-t', '30'
+            '-u', 'supervisor.py',
+            '-l', strtolower($validData['lang']),
+             '>', 'console.log', //'|',
+            // 'python3', 'watchdog.py',
+            // '-i', $user->fsc_id,
+            // '-t', '30'
         ]);
+        // $containerConfig->setCmd(['--version']);
+        $containerConfig->setEntrypoint(['python3']);
         $containerConfig->setWorkingDir('/usr/src');
         $containerConfig->setAttachStdin(true);
         $containerConfig->setAttachStdout(true);
