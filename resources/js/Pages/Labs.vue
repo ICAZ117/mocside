@@ -479,6 +479,29 @@ export default defineComponent({
       }
       console.log("get labs");
       await this.sortLabs();
+      await this.getColors();
+    },
+    async getColors() {
+
+      for(let i = 0; i < this.unfilteredLabs.length; i++) {
+        console.log(this.unfilteredLabs[i].id + " " + this.unfilteredLabs[i]["percent"]);
+        if(this.unfilteredLabs[i]["percent"] == "100%") {
+          //green background
+          console.log("green background");
+          var element = document.getElementById(this.unfilteredLabs[i].id);
+          element.classList.add("complete");
+        }
+        else if(this.unfilteredLabs[i]["percent"] != "0%") {
+          //red background
+          console.log("red background");
+          var element = document.getElementById(this.unfilteredLabs[i].id);
+          element.classList.add("incomplete");
+        }
+        else {
+          //standard background
+          console.log("blank color background");
+        }
+      }
     },
     Unmounting() {
       this.childisOpen = false;
