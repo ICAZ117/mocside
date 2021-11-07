@@ -118,7 +118,7 @@ export default {
       try {
         const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
         if(!res.ok) {
-          console.log(res);
+          console.log(res.status);
           if(res.status == 403) {
             console.log("getting a 403 error");
           }
