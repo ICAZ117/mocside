@@ -354,34 +354,20 @@ export default {
         if(this.unfilteredProblems[i]["percent"] == "100%") {
           //green background
           console.log("green background");
+          var element = document.getElementById(this.unfilteredProblems[i].id);
+          element.classList.add("complete");
         }
         else if(this.unfilteredProblems[i]["percent"] != "0%") {
           //red background
           console.log("red background");
+          var element = document.getElementById(this.unfilteredProblems[i].id);
+          element.classList.add("incomplete");
         }
         else {
           //standard background
           console.log("blank color background");
         }
       }
-
-
-      // if (this.unfilteredProblems[i]["percent"] == "100%") {
-      //       //green background
-      //       var element = await document.getElementById(this.unfilteredProblems[i].id);
-      //       // element.classList.add("complete");
-      //       console.log(element + " 100")
-      //     }
-      //     else if(this.unfilteredProblems[i]["percent"] == "0%") {
-      //       //ignore don't change color
-      //       console.log(this.unfilteredProblems[i] + " 0")
-      //     }
-      //     else {
-      //       //set red background
-      //       var element = await document.getElementById(this.unfilteredProblems[i].id);
-      //       // element.classList.add("incomplete");
-      //       console.log(element + " not 0 or 100")
-      //     }
     },
     async problemEdited() {
       var tempID = this.problemID;
