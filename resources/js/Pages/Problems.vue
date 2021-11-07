@@ -305,13 +305,13 @@ export default {
       if (!this.isProf) {
         for (let i = 0; i < this.unfilteredProblems.length; i++) {
           this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
-          if (this.unfilteredProblems[i] == "100%") {
+          if (this.unfilteredProblems[i]["percent"] == "100%") {
             //green background
             // var element = document.getElementById(`${i}`);
             // element.classList.add("complete");
             console.log(i + " 100")
           }
-          else if(this.unfilteredProblems[i] == "0%") {
+          else if(this.unfilteredProblems[i]["percent"] == "0%") {
             //ignore don't change color
             console.log(i + " 0")
           }
