@@ -307,16 +307,19 @@ export default {
           this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
           if (this.unfilteredProblems[i] == "100%") {
             //green background
-            var element = document.getElementById(`${i}`);
-            element.classList.add("complete");
+            // var element = document.getElementById(`${i}`);
+            // element.classList.add("complete");
+            console.log(i + " 100")
           }
           else if(this.unfilteredProblems[i] == "0%") {
             //ignore don't change color
+            console.log(i + " 0")
           }
           else {
             //set red background
-            var element = document.getElementById(`${i}`);
-            element.classList.add("incomplete");
+            // var element = document.getElementById(`${i}`);
+            // element.classList.add("incomplete");
+            console.log(i + " not 0 or 100")
           }
           this.unfilteredProblems[i]["activity"] = await this.getActivity(this.unfilteredProblems[i]);
         }
