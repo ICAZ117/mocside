@@ -66,7 +66,7 @@
         </thead>
         <tbody>
           <template v-for="(problem, key) in problems" :key="problem.id">
-            <tr class="problem pointer" @click="toggleExpansion(problem.id)">
+            <tr class="problem pointer" :id="key" @click="toggleExpansion(problem.id)">
               <td v-show="!isExpanded(problem.id)">
                 <i class="fas fa-chevron-right"></i>
               </td>
