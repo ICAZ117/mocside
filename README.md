@@ -33,7 +33,6 @@ NEXT UP
 * add modification to Ace-editor, suggestions, autoformat, autocompletes
 * Upon creating an assignment it should auto set the template for both python and javaupdated
 * leaving the profile page opens a broswer alert about unsaved changes instead of a modal
-* update authUser upon joining a course before navigating to courses page...otherwise courses don't display until you refresh
 * Ensure that when a course is deleted the course enroll code is also deleted
 * Students can currently join a course twice disable this, this adds to both student course list and the courses roster list
 
