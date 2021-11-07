@@ -117,7 +117,7 @@ export default {
       //join class
       try {
         const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
-        if(!res.ok) {
+        if(res.status != 200) {
           throw new Error(res);
         }
 
