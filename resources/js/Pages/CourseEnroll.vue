@@ -139,6 +139,7 @@ export default {
         //display modal saying course invite code is no longer active
         console.log("something went wrong in try");
         console.log(exception);
+        console.log(exception.response.status);
         this.joining();
       }
 
