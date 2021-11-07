@@ -307,19 +307,19 @@ export default {
           this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
           if (this.unfilteredProblems[i]["percent"] == "100%") {
             //green background
-            var element = document.getElementById(this.unfilteredProblems[i].id);
-            element.classList.add("complete");
-            console.log(i + " 100")
+            var element = await document.getElementById(this.unfilteredProblems[i].id);
+            // element.classList.add("complete");
+            console.log(element + " 100")
           }
           else if(this.unfilteredProblems[i]["percent"] == "0%") {
             //ignore don't change color
-            console.log(i + " 0")
+            console.log(this.unfilteredProblems[i].id + " 0")
           }
           else {
             //set red background
-            var element = document.getElementById(this.unfilteredProblems[i].id);
-            element.classList.add("incomplete");
-            console.log(i + " not 0 or 100")
+            var element = await document.getElementById(this.unfilteredProblems[i].id);
+            // element.classList.add("incomplete");
+            console.log(element + " not 0 or 100")
           }
           this.unfilteredProblems[i]["activity"] = await this.getActivity(this.unfilteredProblems[i]);
         }
