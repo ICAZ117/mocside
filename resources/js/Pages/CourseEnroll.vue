@@ -118,13 +118,6 @@ export default {
       try {
         const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
         if(!res.ok) {
-          console.log(res.status);
-          if(res.status == 403) {
-            console.log("getting a 403 error");
-          }
-          else {
-            console.log(res.status + " error code");
-          }
           throw new Error(res);
         }
 
@@ -138,8 +131,9 @@ export default {
       catch(exception) {
         //display modal saying course invite code is no longer active
         console.log("something went wrong in try");
-        console.log(exception);
-        console.log(exception.response.status);
+        if(exception.response.status == 403) {
+          console.log(exception.response.message);
+        }
         this.joining();
       }
 
