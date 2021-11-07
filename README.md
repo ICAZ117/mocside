@@ -36,7 +36,7 @@ NEXT UP
 * Ensure that when a course is deleted the course enroll code is also deleted
 * Students can currently join a course twice disable this, this adds to both student course list and the courses roster list
 * Need a return to problems button in the workspace page
-
+* remove the show input/output button, or add functionality in workspace
 
 
 STYLE FIXES
