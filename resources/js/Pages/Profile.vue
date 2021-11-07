@@ -670,9 +670,7 @@ export default {
           this.letters.push("--");
           continue;
         }
-        var val = JSON.parse(this.student.gradebook_courses).grades[
-          this.enrolledCourses[i]
-        ];
+        var val = JSON.parse(this.student.gradebook_courses).grades[this.enrolledCourses[i]];
         this.grades.push(val);
         if (val >= 90) {
           this.letters.push("A");
