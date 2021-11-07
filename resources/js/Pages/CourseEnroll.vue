@@ -115,11 +115,17 @@ export default {
 
     async joinCourse() {
       //join class
-      var res;
       try {
-        res = await API.apiClient.post(`/invite/enroll/${this.key}`).catch(error => {
-          console.error(error.message);
-        });
+        const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
+        if(!res.ok) {
+          if(res.status == 403) {
+            console.log("getting a 403 error");
+          }
+          else {
+            console.log(res.status + " error code");
+          }
+          throw new Error(res);
+        }
 
         //update authUser
       
@@ -128,8 +134,10 @@ export default {
         // this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
         this.$router.push({name: "Courses" });
       }
-      catch {
+      catch(exception) {
         //display modal saying course invite code is no longer active
+        console.log("something went wrong in try");
+        console.log(exception);
         this.joining();
       }
 
