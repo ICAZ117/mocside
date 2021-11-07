@@ -307,7 +307,7 @@ export default {
           this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
           if (this.unfilteredProblems[i] == "100%") {
             //green background
-            var element = document.getElementById(i);
+            var element = document.getElementById(`${i}`);
             element.classList.add("complete");
           }
           else if(this.unfilteredProblems[i] == "0%") {
@@ -315,7 +315,7 @@ export default {
           }
           else {
             //set red background
-            var element = document.getElementById(i);
+            var element = document.getElementById(`${i}`);
             element.classList.add("incomplete");
           }
           this.unfilteredProblems[i]["activity"] = await this.getActivity(this.unfilteredProblems[i]);
