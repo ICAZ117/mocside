@@ -351,6 +351,18 @@ export default {
 
       for(let i = 0; i < this.unfilteredProblems.length; i++) {
         console.log(this.unfilteredProblems[i].id + " " + this.unfilteredProblems[i]["percent"]);
+        if(this.unfilteredProblems[i]["percent"] == "100%") {
+          //green background
+          console.log("green background");
+        }
+        else if(this.unfilteredProblems[i]["percent"] != "0%") {
+          //red background
+          console.log("red background");
+        }
+        else {
+          //standard background
+          console.log("blank color background");
+        }
       }
 
 
