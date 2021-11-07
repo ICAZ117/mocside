@@ -408,6 +408,7 @@ export default {
       if (flag) {
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
       }
+      await this.getColors();
     },
     isExpanded(key) {
       // return this.expandedProblem.indexOf(key) !== -1;

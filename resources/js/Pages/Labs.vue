@@ -522,6 +522,7 @@ export default defineComponent({
       this.labs = this.labs.filter((l) => l.id != this.labID);
       const lab = await API.apiClient.get(`/labs/full/${this.labID}`);
       this.labs.push(lab.data.data);
+      await this.getColors();
       this.Unmounting();
     },
     async addLab() {
