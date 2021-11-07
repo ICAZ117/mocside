@@ -117,7 +117,9 @@ export default {
       //join class
       var res;
       try {
-        res = await API.apiClient.post(`/invite/enroll/${this.key}`);
+        res = await API.apiClient.post(`/invite/enroll/${this.key}`).catch(error => {
+          console.error(error.message);
+        });
 
         //update authUser
       
@@ -128,14 +130,7 @@ export default {
       }
       catch {
         //display modal saying course invite code is no longer active
-        if(res.message == "Code no longer valid.") {
-          console.log("Code no longer valid");
-          this.joining();
-        }
-        else {
-          console.log("some other error");
-          console.log(res.message);
-        }
+        this.joining();
       }
 
     },
