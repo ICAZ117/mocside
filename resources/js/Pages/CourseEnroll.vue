@@ -1,5 +1,14 @@
 <template>
   <div>
+    <vue-final-modal class="delete-modal" v-model="showInfoModal" classes="modal-container" content-class="modal-content delete-modal" :esc-to-close="true">
+      <button class="modal-close" @click="closeInfo()">x</button>
+      <div class="delete Course">
+        <p>This Invite Code has expired please contact your professor</p>
+        <div class="delete-buttons">
+          <button class="btn btn-md btn-danger delete-button" @click="closeInfo()">OK</button>
+        </div>
+      </div>
+    </vue-final-modal>
     <div
       :style="'background-image: url(&quot;' + this.courseImg + '&quot;)'"
       class="inviteBG"
@@ -55,6 +64,8 @@ export default {
         height: 0,
         fScaleToTargetWidth: true,
       },
+      showInfoModal: false,
+      reloadInfoModal: 0,
     };
   },
   methods: {
@@ -104,14 +115,29 @@ export default {
 
     async joinCourse() {
       //join class
-      const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
+      var res;
+      try {
+        res = await API.apiClient.post(`/invite/enroll/${this.key}`);
 
-      //update authUser
+        //update authUser
       
 
-      //move to course page
-      // this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
-      this.$router.push({name: "Courses" });
+        //move to course page
+        // this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
+        this.$router.push({name: "Courses" });
+      }
+      catch {
+        //display modal saying course invite code is no longer active
+        if(res.message == "Code no longer valid.") {
+          console.log("Code no longer valid");
+          this.joining();
+        }
+        else {
+          console.log("some other error");
+          console.log(res.message);
+        }
+      }
+
     },
     cancelCourse() {
       //move to home since not joining page
@@ -137,6 +163,19 @@ export default {
       var r = window.location.pathname;
       r = r.split("/");
       this.key = r[1];
+    },
+    closeInfo() {
+      this.showInfoModal = false;
+    },
+    joining() {
+      this.showInfoModal = true;
+    },
+  },
+  watch: {
+    showInfoModal: function () {
+      if (!this.showInfoModal) {
+        this.reloadInfoModal++;
+      }
     },
   },
   async beforeMount() {
