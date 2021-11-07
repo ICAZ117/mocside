@@ -35,6 +35,7 @@ NEXT UP
 * leaving the profile page opens a broswer alert about unsaved changes instead of a modal
 * When trying to join a course with an enroll code if the code is out of date, it needs to be displayed to the user that it is..curently only a console log
 * update authUser upon joining a course before navigating to courses page...otherwise courses don't display until you refresh
+* Ensure that when a course is deleted the course enroll code is also deleted
 
 
 
