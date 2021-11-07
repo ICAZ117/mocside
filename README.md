@@ -13,25 +13,6 @@ IMPORTANT & Ending
 * remove the need to add port 8000 to the url
 
 
-ADD PAGES
-* Finish Up About Page
-
-* Add profile Page....sorta like a dashboard
-    * To Still Be Completed
-        * Delete User...more of a toggle allow sign in..otherwise students could delete their accounts before end of semester to stop professors from seeing their individual grades
-        * Change Email
-        * Reset Password/Forgot Password
-
-* Add Contact Us page
-
-* add more to course edit
-    * styling
-    * when you click the course router link i believe the out-click div is still up causing issues when trying to click to open a course
-
-
-
-
-
 
 NEXT UP
 * Add 404 not found page
@@ -46,13 +27,12 @@ NEXT UP
 * remove the show input/output button, or add functionality in workspace
 * Grades in the grades section of a student profile are calculated wrong, or static
 * Style Security Page in Student Profile
-
-
-STYLE FIXES
-* Course Edit...change to course dashboard
-* Lab Edit
-* Problems
-    * Highlighting problems
-* Workspace
-* Combine Logout, with profile pic, and link to profile 
-* DeleteModals on Courses, Labs, & Problems
+* Style Course Edit
+* Style Lab Edit
+* Stlye Problems to have color background based on percent of problem complete, maybe do for labs as well?
+* Combine Logout with profile pic, into dropdown menu with link to profile and logout button
+* Style DeleteModals on Courses, Labs, & Problems
+* Style joining error modal on course Enroll
+* Profile Page add change email, and password functionality
+* profile page add delete user....really jsut disables user in order to keep the data stored
+* Complete new iteration of the workspace console and terminal connection to backend docker
