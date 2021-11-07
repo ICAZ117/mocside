@@ -1,10 +1,16 @@
 ===============> MocsIDE<===============
 
-IMPORTANT
+IMPORTANT & Ending
 * Email Confirmation
 * Password Reset
 * Configure/Add SSL(i.e. https)
 * Secure Transfer of personal information, most importantly passwords
+* speed up load time by adjusting picture size
+* Fill Homepage with necessary information
+* complete bug fixing and Testing
+* resolve all the errors on page loading
+* turn into production build
+* remove the need to add port 8000 to the url
 
 
 ADD PAGES
@@ -43,25 +49,10 @@ NEXT UP
 
 
 STYLE FIXES
-* Home
-* Navbar
-* Courses
 * Course Edit...change to course dashboard
-* Labs
 * Lab Edit
 * Problems
     * Highlighting problems
-* Problem Edit
 * Workspace
 * Combine Logout, with profile pic, and link to profile 
 * DeleteModals on Courses, Labs, & Problems
-
-
-
-FINAL
-* speed up load time by adjusting picture size
-* Fill Homepage with necessary information
-* complete bug fixing and Testing
-* resolve all the errors on page loading
-* turn into production build
-* remove the need to add port 8000 to the url
