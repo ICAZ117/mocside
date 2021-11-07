@@ -305,26 +305,11 @@ export default {
       if (!this.isProf) {
         for (let i = 0; i < this.unfilteredProblems.length; i++) {
           this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
-          if (this.unfilteredProblems[i]["percent"] == "100%") {
-            //green background
-            var element = await document.getElementById(this.unfilteredProblems[i].id);
-            // element.classList.add("complete");
-            console.log(element + " 100")
-          }
-          else if(this.unfilteredProblems[i]["percent"] == "0%") {
-            //ignore don't change color
-            console.log(this.unfilteredProblems[i].id + " 0")
-          }
-          else {
-            //set red background
-            var element = await document.getElementById(this.unfilteredProblems[i].id);
-            // element.classList.add("incomplete");
-            console.log(element + " not 0 or 100")
-          }
           this.unfilteredProblems[i]["activity"] = await this.getActivity(this.unfilteredProblems[i]);
         }
       }
       await this.sortProblems();
+      await this.getColors();
     },
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
@@ -361,6 +346,30 @@ export default {
           return d[i].last_progress;
         }
       }
+    },
+    async getColors() {
+
+      for(let i = 0; i < this.unfilteredProblems.length; i++) {
+        console.log(this.unfilteredProblems[i].id + " " + this.unfilteredProblems[i]["percent"]);
+      }
+
+
+      // if (this.unfilteredProblems[i]["percent"] == "100%") {
+      //       //green background
+      //       var element = await document.getElementById(this.unfilteredProblems[i].id);
+      //       // element.classList.add("complete");
+      //       console.log(element + " 100")
+      //     }
+      //     else if(this.unfilteredProblems[i]["percent"] == "0%") {
+      //       //ignore don't change color
+      //       console.log(this.unfilteredProblems[i] + " 0")
+      //     }
+      //     else {
+      //       //set red background
+      //       var element = await document.getElementById(this.unfilteredProblems[i].id);
+      //       // element.classList.add("incomplete");
+      //       console.log(element + " not 0 or 100")
+      //     }
     },
     async problemEdited() {
       var tempID = this.problemID;
