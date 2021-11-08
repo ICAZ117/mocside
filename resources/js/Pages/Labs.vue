@@ -494,7 +494,7 @@ export default defineComponent({
         console.log(this.grades.labs[i].id + " " + this.grades.labs[i].percentComplete);
         if(this.grades.labs[i].percentComplete == "100%") {
           //green background
-          consol.log("green background");
+          console.log("green background");
           var element = document.getElementById("gl" + this.grades.labs[i].id);
           elemtent.classList.add("complete");
         }
@@ -502,7 +502,7 @@ export default defineComponent({
           //red background
           console.log("red background");
           var element = document.getElementById("gl" + this.grades.labs[i].id);
-          elemtent.classList.add("incomplete");
+          element.classList.add("incomplete");
         }
         else {
           //standard background
@@ -522,7 +522,7 @@ export default defineComponent({
             //red background
             console.log("red background");
             var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
-            elemtent.classList.add("incomplete");
+            element.classList.add("incomplete");
           }
           else {
             //standard background
