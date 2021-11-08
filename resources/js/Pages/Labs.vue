@@ -154,7 +154,7 @@
               <!-- Loop over all LABS -->
               <template v-for="(lab, index) in grades.labs" :key="index">
                 <!-- Regular table row -->
-                <tr class="problem pointer" :id="lab.id" @click="toggleExpansion(lab.labID)">
+                <tr class="problem pointer" :id="lab.labID" @click="toggleExpansion(lab.labID)">
                   <td v-if="!isExpanded(lab.labID)">
                     <i class="fas fa-chevron-right"></i>
                   </td>
