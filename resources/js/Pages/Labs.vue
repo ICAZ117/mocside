@@ -496,7 +496,7 @@ export default defineComponent({
           //green background
           console.log("green background");
           var element = document.getElementById("gl" + this.grades.labs[i].id);
-          elemtent.classList.add("complete");
+          element.classList.add("complete");
         }
         else if (this.grades.labs[i].percentComplete != "0%") {
           //red background
