@@ -503,7 +503,7 @@ export default defineComponent({
         }
       }
     },
-    Unmounting() {
+    async Unmounting() {
       this.childisOpen = false;
       this.labID = null;
       this.labName = null;
