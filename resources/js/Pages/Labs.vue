@@ -145,7 +145,7 @@
               <!-- Loop over all LABS -->
               <template v-for="(lab, index) in grades.labs" :key="index">
                 <!-- Regular table row -->
-                <tr class="problem pointer" :id="lab.labID" @click="toggleExpansion(lab.labID)">
+                <tr class="problem pointer" :id="'gl' + lab.labID" @click="toggleExpansion(lab.labID)">
                   <td v-if="!isExpanded(lab.labID)">
                     <i class="fas fa-chevron-right"></i>
                   </td>
@@ -197,7 +197,7 @@
                           </tr>
                         </thead>
                         <tbody style="border-bottom: 0 !important">
-                          <tr v-for="(problem, key) in grades.labs[index].problems" :key="key" class="lab pointer" :id="'p' + problem.problemID">
+                          <tr v-for="(problem, key) in grades.labs[index].problems" :key="key" class="lab pointer" :id="'gp' + problem.problemID">
                             <td>{{ problems[problem.problemID].name }}</td>
                             <td>
                               {{ problems[problem.problemID].test_cases }}
@@ -486,6 +486,46 @@ export default defineComponent({
         else {
           //standard background
           console.log("blank color background");
+        }
+      }
+      for(let i = 0; i < this.grades.labs.length; i++) {
+        console.log(this.grades.labs[i].id + " " + this.grades.labs[i].percentComplete);
+        if(this.grades.labs[i].percentComplete == "100%") {
+          //green background
+          consol.log("green background");
+          var element = document.getElementById("gl" + this.grades.labs[i].id);
+          elemtent.classList.add("complete");
+        }
+        else if (this.grades.labs[i].percentComplete != "0%") {
+          //red background
+          console.log("red background");
+          var element = document.getElementById("gl" + this.grades.labs[i].id);
+          elemtent.classList.add("incomplete");
+        }
+        else {
+          //standard background
+          console.log("blank color background");
+        }
+
+        //loop through the problems
+        for(let j = 0; j< this.grades.labs[i].problems.length; j++) {
+          console.log(this.grades.labs[i].problems[j].problemID + " " + this.grades.labs[i].problems[j].grade);
+          if(this.grades.labs[i].problems[j].grade == 100) {
+            //green background
+            console.log("green background");
+            var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
+            element.classList.add("complete");
+          }
+          else if (this.grades.labs[i].problems[j].grade != 0) {
+            //red background
+            console.log("red background");
+            var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
+            elemtent.classList.add("incomplete");
+          }
+          else {
+            //standard background
+            console.log("blank color background");
+          }
         }
       }
     },
