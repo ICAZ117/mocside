@@ -488,6 +488,8 @@ export default defineComponent({
           console.log("blank color background");
         }
       }
+    },
+    async getGradeColors() {
       for(let i = 0; i < this.grades.labs.length; i++) {
         console.log(this.grades.labs[i].id + " " + this.grades.labs[i].percentComplete);
         if(this.grades.labs[i].percentComplete == "100%") {
@@ -543,6 +545,7 @@ export default defineComponent({
         });
       }
       await this.getColors();
+      await this.getGradeColors();
     },
     async labEdited() {
       ///update the list of courses
@@ -550,6 +553,7 @@ export default defineComponent({
       const lab = await API.apiClient.get(`/labs/full/${this.labID}`);
       this.labs.push(lab.data.data);
       await this.getColors();
+      await this.getGradeColors();
       this.Unmounting();
     },
     async addLab() {
@@ -815,6 +819,7 @@ export default defineComponent({
       await this.getStudentObject();
       await this.getGrades();
     }
+    await this.getGradeColors();
     console.log("HELLO");
   },
   beforeUnmount() {
