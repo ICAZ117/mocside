@@ -79,12 +79,7 @@
             </thead>
             <tbody>
               <template v-for="lab in labs" :key="lab.id">
-                <tr
-                  v-if="!isProf"
-                  class="lab pointer"
-                  :id = "lab.labID"
-                  @click="goToProblems(lab.id, lab.name)"
-                >
+                <tr v-if="!isProf" class="lab pointer" :id = "lab.labID" @click="goToProblems(lab.id, lab.name)">
                   <td>
                     <a>{{ lab.name }}</a>
                   </td>
@@ -96,12 +91,7 @@
                   <!-- <td>4/20/0420</td> -->
                 </tr>
 
-                <tr
-                  v-if="isProf"
-                  class="lab pointer"
-                  @click.prevent="goToProblems(lab.id, lab.name)"
-                  @contextmenu.prevent="showMenu(lab.id)"
-                >
+                <tr v-if="isProf" class="lab pointer" @click.prevent="goToProblems(lab.id, lab.name)" @contextmenu.prevent="showMenu(lab.id)">
                   <td>
                     <a>{{ lab.name }}</a>
                   </td>
