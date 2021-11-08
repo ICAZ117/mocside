@@ -495,13 +495,13 @@ export default defineComponent({
         if(this.grades.labs[i].percentComplete == "100%") {
           //green background
           console.log("green background");
-          var element = document.getElementById("gl" + this.grades.labs[i].id);
+          var element = document.getElementById("gl" + this.grades.labs[i].labID);
           element.classList.add("complete");
         }
         else if (this.grades.labs[i].percentComplete != "0%") {
           //red background
           console.log("red background");
-          var element = document.getElementById("gl" + this.grades.labs[i].id);
+          var element = document.getElementById("gl" + this.grades.labs[i].labID);
           element.classList.add("incomplete");
         }
         else {
