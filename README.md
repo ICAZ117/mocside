@@ -29,7 +29,7 @@ NEXT UP
 * Style Security Page in Student Profile
 * Style Course Edit
 * Style Lab Edit
-* Style Labs to have background colors, check that once problem is solved it changes colors on problems page
+* Style Labs to have background colors
 * Combine Logout with profile pic, into dropdown menu with link to profile and logout button
 * Style DeleteModals on Courses, Labs, & Problems
 * Style joining error modal on course Enroll
