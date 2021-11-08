@@ -145,7 +145,7 @@
               <!-- Loop over all LABS -->
               <template v-for="(lab, index) in grades.labs" :key="index">
                 <!-- Regular table row -->
-                <tr class="problem pointer" :id="lab.id" @click="toggleExpansion(lab.labID)">
+                <tr class="problem pointer" :id="lab.labID" @click="toggleExpansion(lab.labID)">
                   <td v-if="!isExpanded(lab.labID)">
                     <i class="fas fa-chevron-right"></i>
                   </td>
@@ -197,12 +197,7 @@
                           </tr>
                         </thead>
                         <tbody style="border-bottom: 0 !important">
-                          <tr
-                            v-for="(problem, key) in grades.labs[index]
-                              .problems"
-                            :key="key"
-                            class="lab pointer"
-                          >
+                          <tr v-for="(problem, key) in grades.labs[index].problems" :key="key" class="lab pointer" :id="'p' + problem.problemID">
                             <td>{{ problems[problem.problemID].name }}</td>
                             <td>
                               {{ problems[problem.problemID].test_cases }}
