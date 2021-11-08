@@ -79,7 +79,7 @@
             </thead>
             <tbody>
               <template v-for="lab in labs" :key="lab.id">
-                <tr v-if="!isProf" class="lab pointer" :id = "lab.labID" @click="goToProblems(lab.id, lab.name)">
+                <tr v-if="!isProf" class="lab pointer" :id="lab.labID" @click="goToProblems(lab.id, lab.name)">
                   <td>
                     <a>{{ lab.name }}</a>
                   </td>
