@@ -66,7 +66,7 @@
         </thead>
         <tbody>
           <template v-for="(problem, key) in problems" :key="problem.id">
-            <tr class="problem pointer" :id="problem.id" @click="toggleExpansion(problem.id)">
+            <tr class="problem pointer" :id="'p' + problem.id" @click="toggleExpansion(problem.id)">
               <td v-show="!isExpanded(problem.id)">
                 <i class="fas fa-chevron-right"></i>
               </td>
@@ -354,13 +354,13 @@ export default {
         if(this.unfilteredProblems[i]["percent"] == "100%") {
           //green background
           console.log("green background");
-          var element = document.getElementById(this.unfilteredProblems[i].id);
+          var element = document.getElementById("p" + this.unfilteredProblems[i].id);
           element.classList.add("complete");
         }
         else if(this.unfilteredProblems[i]["percent"] != "0%") {
           //red background
           console.log("red background");
-          var element = document.getElementById(this.unfilteredProblems[i].id);
+          var element = document.getElementById("p" + this.unfilteredProblems[i].id);
           element.classList.add("incomplete");
         }
         else {
