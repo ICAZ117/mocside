@@ -103,6 +103,9 @@ export default {
       // Get new input
       this.newInput = this.content.substring(this.oldContent.length);
 
+      // Add to recent log
+      this.recentLog += this.newInput;
+
       // Get ALL containers (ignore the request syntax... it's dumb)
       this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
