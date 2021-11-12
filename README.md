@@ -15,13 +15,15 @@ IMPORTANT & Ending
 
 
 NEXT UP
-* Add 404 not found page
+* Add 404 not found page 
+    * -> Progress: redirects to /pages/NotFound.vue on unknown route (11/12/21)
 * Double check deleting and copy assingments work as intended
     * some test cases have had the wrong assignment id empty
 * add modification to Ace-editor, suggestions, autoformat, autocompletes
 * Upon creating an assignment it should auto set the template for both python and javaupdated
 * leaving the profile page opens a broswer alert about unsaved changes instead of a modal
-* Ensure that when a course is deleted the course enroll code is also deleted
+* Ensure that when a course is deleted the course enroll code is also deleted 
+    * -> logically fixed, untested (11/12/21)
 * Students can currently join a course twice disable this, this adds to both student course list and the courses roster list
 * Need a return to problems button in the workspace page
 * remove the show input/output button, or add functionality in workspace
