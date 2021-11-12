@@ -46,9 +46,9 @@ export default {
         console.log("Do nothing");
       } else {
         console.log("Recent Log:");
-        console.log(this.recentLog);
+        console.log({a:this.recentLog});
         console.log("New Log:");
-        console.log(this.newLog);
+        console.log({a:this.newLog});
         console.log("\n\n");
 
         this.content += this.newLog.substring(this.recentLog.length);
