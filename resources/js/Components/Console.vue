@@ -34,6 +34,7 @@ export default {
       username: "",
       currLog: "",
       isPolling: false,
+      enteredInput = false,
     };
   },
   watch: {
@@ -110,6 +111,7 @@ export default {
       this.oldContents = this.contents;
     },
     async enter() {
+      this.enteredInput = true;
       // Get ALL containers (ignore the request syntax... it's dumb)
       this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
@@ -134,6 +136,7 @@ export default {
     async programFinished() {
       this.$emit("programFinished");
       this.newInput = "";
+      this.isRunning = false;
       this.oldContents += "\n" + this.username + "@mocside:/usr/src$ ";
       this.contents = this.oldContents;
     },
@@ -161,8 +164,13 @@ export default {
 
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
       .listen(".console_out", (e) => {
-        this.newTermContent = e.log;
         console.log(e);
+        if(this.enteredInput) {
+          this.enteredInput = false;
+        }
+        else {
+          this.newTermContent = e.log;
+        }
       })
       .listen(".end", (e) => {
         this.programFinished();
