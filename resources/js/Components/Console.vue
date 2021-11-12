@@ -170,7 +170,14 @@ export default {
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
       .listen(".console_out", (e) => {
         this.newTermContent = e.log;
+        console.log("\n\nEVENT RECIEVED FROM WEBSOCKET");
+        console.log("\nCONTENT:");
         console.log(e);
+        console.log("\noldTermContent:");
+        console.log(this.oldTermContent);
+        console.log("\nnewTermContent:");
+        console.log(this.newTermContent);
+        console.log("\n______________________________________\n");
         // if(this.enteredInput) {
         //   this.oldTermContent = e.log;
         //   console.log("Entered Input");
