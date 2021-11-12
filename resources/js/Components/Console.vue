@@ -22,7 +22,7 @@ export default {
       isRunning: false,
       authUser: "",
       containerID: 0,
-      oldContents: "",
+      oldContents: "", 
       contents: "",
       oldTermContent: "",
       termContent: "",
