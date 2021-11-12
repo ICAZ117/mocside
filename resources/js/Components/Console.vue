@@ -103,6 +103,9 @@ export default {
       // Get new input
       this.newInput = this.content.substring(this.oldContent.length);
 
+      console.log("\n\nNEW INPUT");
+      console.log({in: this.newInput});
+      console.log("\n");
       // Add to recent log
       this.recentLog += this.newInput;
 
