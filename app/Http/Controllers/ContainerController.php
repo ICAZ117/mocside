@@ -713,7 +713,7 @@ class ContainerController extends Controller
         $containerConfig->setStopTimeout(3); // time container will wait before force after get "shutdown" cmd
         $containerConfig->setImage("673eda123d55"); // this is the image we want to use
         $containerConfig->setCmd([
-            '-c', 'python3 -u supervisor.py -l '.strtolower($validData['lang']).' > console.log | python3 watchdog_laravel.py -i '.$user->fsc_id.'-t 30'
+            '-c', 'python3 -u supervisor.py -l '.strtolower($validData['lang']).' > console.log | python3 watchdog_laravel.py -i '.$user->fsc_id.' -t 30'
         ]);
         $containerConfig->setEntrypoint(['/bin/bash']);
         $containerConfig->setWorkingDir('/usr/src');
