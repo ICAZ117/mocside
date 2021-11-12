@@ -58,12 +58,24 @@
           </button>
           <button
             @click="runCode()"
+            v-if="!launchConsole"
             type="run"
             name="run"
             class="run-code col-1 btn btn-success"
             :disabled="launchConsole"
+            
           >
             Run
+          </button>
+          <button
+            @click="terminate = true"
+            v-if="launchConsole"
+            type="run"
+            name="run"
+            class="run-code col-1 btn btn-success"
+            :disabled="!launchConsole"
+          >
+            Stop
           </button>
           <button
             v-show="showSubmit"
@@ -152,8 +164,10 @@
         <Console
           :launchConsole="launchConsole"
           :problemID="problemID"
+          :terminate="terminate"
           :lang="lang"
           @programFinished="launchConsole = false"
+          @terminated="terminate = false"
           :style="
             'width: ' +
             width +
@@ -299,6 +313,7 @@ export default defineComponent({
     Vue3DraggableResizable,
   },
   data: () => ({
+    terminate: false,
     theme: "gob",
     editorLangauge: "",
     style: "",

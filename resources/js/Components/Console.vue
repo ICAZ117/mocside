@@ -15,7 +15,7 @@ import * as API from "../services/API";
 import store from "../Store/index";
 
 export default {
-  props: ["launchConsole", "problemID", "lang"],
+  props: ["launchConsole", "problemID", "lang", "terminate"],
 
   data() {
     return {
@@ -35,6 +35,15 @@ export default {
     };
   },
   watch: {
+    terminate: function () {
+      if (this.terminate && this.isRunning) {
+        while(this.containerID == 0) {
+          continue;
+        }
+
+        const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
+      }
+    },
     launchConsole: function () {
       if (this.launchConsole && this.problemID != "" && this.problemID != null) {
         console.log("WE STARTIN BOIS");
@@ -85,7 +94,9 @@ export default {
 
       // Automatically shut down the docker after 2 mins
       setTimeout(async () => {
-        const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
+        if (isRunning) {
+          const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
+        }
       }, 120000); // shutdown container in 2 minutes
 
       // Check the language and add the appropriate content to the console
@@ -136,6 +147,7 @@ export default {
       this.content = this.oldContent;
       this.newLog = "";
       this.recentLog = "";
+      this.containerID = 0;
     },
   },
   async beforeUnmount() {
