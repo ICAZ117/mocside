@@ -510,27 +510,43 @@ export default defineComponent({
         }
 
         console.log("About to get Problem Colors");
-
-        //loop through the problems
-        for(let j = 0; j< this.grades.labs[i].problems.length; j++) {
+        for(let j = 0; j < this.grades.labs[i].problems.length; j++) {
+          Console.log("problem: " + j + " in lab: " + i);
           console.log(this.grades.labs[i].problems[j].problemID + " " + this.grades.labs[i].problems[j].grade);
           if(this.grades.labs[i].problems[j].grade == 100) {
             //green background
             console.log("green background");
-            var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
-            element.classList.add("complete");
           }
           else if (this.grades.labs[i].problems[j].grade != 0) {
             //red background
             console.log("red background");
-            var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
-            element.classList.add("incomplete");
           }
           else {
             //standard background
-            console.log("blank color background");
+            console.log("Standard Background");
           }
         }
+
+        //loop through the problems
+        // for(let j = 0; j< this.grades.labs[i].problems.length; j++) {
+        //   console.log(this.grades.labs[i].problems[j].problemID + " " + this.grades.labs[i].problems[j].grade);
+        //   if(this.grades.labs[i].problems[j].grade == 100) {
+        //     //green background
+        //     console.log("green background");
+        //     var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
+        //     element.classList.add("complete");
+        //   }
+        //   else if (this.grades.labs[i].problems[j].grade != 0) {
+        //     //red background
+        //     console.log("red background");
+        //     var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
+        //     element.classList.add("incomplete");
+        //   }
+        //   else {
+        //     //standard background
+        //     console.log("blank color background");
+        //   }
+        // }
       }
     },
     async Unmounting() {
