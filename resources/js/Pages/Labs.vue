@@ -509,7 +509,6 @@ export default defineComponent({
           console.log("blank color background");
         }
 
-  ///test
         //loop through the problems
         // for(let j = 0; j< this.grades.labs[i].problems.length; j++) {
         //   console.log(this.grades.labs[i].problems[j].problemID + " " + this.grades.labs[i].problems[j].grade);
