@@ -516,10 +516,14 @@ export default defineComponent({
           if(this.grades.labs[i].problems[j].grade == 100) {
             //green background
             console.log("green background");
+            var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
+            console.log(elementp);
           }
           else if (this.grades.labs[i].problems[j].grade != 0) {
             //red background
             console.log("red background");
+            var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
+            console.log(elementp);
           }
           else {
             //standard background
