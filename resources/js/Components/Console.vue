@@ -34,7 +34,7 @@ export default {
       username: "",
       currLog: "",
       isPolling: false,
-      enteredInput = false,
+      enteredInput = false, // e?
     };
   },
   watch: {
