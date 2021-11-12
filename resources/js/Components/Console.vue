@@ -113,6 +113,7 @@ export default {
     async enter() {
       this.enteredInput = true;
       this.newInput = this.contents.substring(this.oldContents.length);
+      this.oldTermContent += this.newInput;
       // Get ALL containers (ignore the request syntax... it's dumb)
       this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
@@ -133,6 +134,7 @@ export default {
         );
 
         this.oldContents = this.contents;
+        this.enteredInput = false;
     },
     async programFinished() {
       this.$emit("programFinished");
@@ -140,6 +142,8 @@ export default {
       this.isRunning = false;
       this.oldContents += "\n" + this.username + "@mocside:/usr/src$ ";
       this.contents = this.oldContents;
+      this.newTermContent = "";
+      this.oldTermContent = "";
     },
   },
   async beforeUnmount() {
@@ -165,17 +169,17 @@ export default {
 
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
       .listen(".console_out", (e) => {
-        console.log(e);
-        if(this.enteredInput) {
-          this.enteredInput = false;
-          this.oldTermContent = e.log;
-          console.log("Entered Input");
-          console.log("oldTermContent: " + this.oldTermContent);
-        }
-        else {
-          console.log("Program Output");
-          this.newTermContent = e.log;
-        }
+        this.newTermContent = e.log;
+        // console.log(e);
+        // if(this.enteredInput) {
+        //   this.oldTermContent = e.log;
+        //   console.log("Entered Input");
+        //   console.log("oldTermContent: " + this.oldTermContent);
+        // }
+        // else {
+        //   console.log("Program Output");
+        //   this.newTermContent = e.log;
+        // }
       })
       .listen(".end", (e) => {
         this.programFinished();
