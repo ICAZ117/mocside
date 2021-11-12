@@ -66,7 +66,7 @@
         </thead>
         <tbody>
           <template v-for="(problem, key) in problems" :key="problem.id">
-            <tr class="problem pointer" @click="toggleExpansion(problem.id)">
+            <tr class="problem pointer" :id="'p' + problem.id" @click="toggleExpansion(problem.id)">
               <td v-show="!isExpanded(problem.id)">
                 <i class="fas fa-chevron-right"></i>
               </td>
@@ -309,6 +309,7 @@ export default {
         }
       }
       await this.sortProblems();
+      await this.getColors();
     },
     async getStudent() {
       this.authUser = store.getters["auth/authUser"];
@@ -343,6 +344,28 @@ export default {
       for (let i = 0; i < d.length; i++) {
         if (d[i].assignment_id == problem.id) {
           return d[i].last_progress;
+        }
+      }
+    },
+    async getColors() {
+
+      for(let i = 0; i < this.unfilteredProblems.length; i++) {
+        console.log(this.unfilteredProblems[i].id + " " + this.unfilteredProblems[i]["percent"]);
+        if(this.unfilteredProblems[i]["percent"] == "100%") {
+          //green background
+          console.log("green background");
+          var element = document.getElementById("p" + this.unfilteredProblems[i].id);
+          element.classList.add("complete");
+        }
+        else if(this.unfilteredProblems[i]["percent"] != "0%") {
+          //red background
+          console.log("red background");
+          var element = document.getElementById("p" + this.unfilteredProblems[i].id);
+          element.classList.add("incomplete");
+        }
+        else {
+          //standard background
+          console.log("blank color background");
         }
       }
     },
@@ -385,6 +408,7 @@ export default {
       if (flag) {
         this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
       }
+      await this.getColors();
     },
     isExpanded(key) {
       // return this.expandedProblem.indexOf(key) !== -1;

@@ -79,11 +79,7 @@
             </thead>
             <tbody>
               <template v-for="lab in labs" :key="lab.id">
-                <tr
-                  v-if="!isProf"
-                  class="lab pointer"
-                  @click="goToProblems(lab.id, lab.name)"
-                >
+                <tr v-if="!isProf" class="lab pointer" :id="lab.id" @click="goToProblems(lab.id, lab.name)">
                   <td>
                     <a>{{ lab.name }}</a>
                   </td>
@@ -95,12 +91,7 @@
                   <!-- <td>4/20/0420</td> -->
                 </tr>
 
-                <tr
-                  v-if="isProf"
-                  class="lab pointer"
-                  @click.prevent="goToProblems(lab.id, lab.name)"
-                  @contextmenu.prevent="showMenu(lab.id)"
-                >
+                <tr v-if="isProf" class="lab pointer" @click.prevent="goToProblems(lab.id, lab.name)" @contextmenu.prevent="showMenu(lab.id)">
                   <td>
                     <a>{{ lab.name }}</a>
                   </td>
@@ -154,7 +145,7 @@
               <!-- Loop over all LABS -->
               <template v-for="(lab, index) in grades.labs" :key="index">
                 <!-- Regular table row -->
-                <tr class="problem pointer" @click="toggleExpansion(lab.labID)">
+                <tr class="problem pointer" :id="'gl' + lab.labID" @click="toggleExpansion(lab.labID)">
                   <td v-if="!isExpanded(lab.labID)">
                     <i class="fas fa-chevron-right"></i>
                   </td>
@@ -206,12 +197,7 @@
                           </tr>
                         </thead>
                         <tbody style="border-bottom: 0 !important">
-                          <tr
-                            v-for="(problem, key) in grades.labs[index]
-                              .problems"
-                            :key="key"
-                            class="lab pointer"
-                          >
+                          <tr v-for="(problem, key) in grades.labs[index].problems" :key="key" class="lab pointer" :id="'gp' + problem.problemID">
                             <td>{{ problems[problem.problemID].name }}</td>
                             <td>
                               {{ problems[problem.problemID].test_cases }}
@@ -479,8 +465,73 @@ export default defineComponent({
       }
       console.log("get labs");
       await this.sortLabs();
+      await this.getColors();
     },
-    Unmounting() {
+    async getColors() {
+
+      for(let i = 0; i < this.unfilteredLabs.length; i++) {
+        console.log(this.unfilteredLabs[i].id + " " + this.unfilteredLabs[i]["percent"]);
+        if(this.unfilteredLabs[i]["percent"] == "100%") {
+          //green background
+          console.log("green background");
+          var element = document.getElementById(this.unfilteredLabs[i].id);
+          element.classList.add("complete");
+        }
+        else if(this.unfilteredLabs[i]["percent"] != "0%") {
+          //red background
+          console.log("red background");
+          var element = document.getElementById(this.unfilteredLabs[i].id);
+          element.classList.add("incomplete");
+        }
+        else {
+          //standard background
+          console.log("blank color background");
+        }
+      }
+    },
+    async getGradeColors() {
+      for(let i = 0; i < this.grades.labs.length; i++) {
+        console.log(this.grades.labs[i].id + " " + this.grades.labs[i].percentComplete);
+        if(this.grades.labs[i].percentComplete == "100%") {
+          //green background
+          console.log("green background");
+          var element = document.getElementById("gl" + this.grades.labs[i].labID);
+          element.classList.add("complete");
+        }
+        else if (this.grades.labs[i].percentComplete != "0%") {
+          //red background
+          console.log("red background");
+          var element = document.getElementById("gl" + this.grades.labs[i].labID);
+          element.classList.add("incomplete");
+        }
+        else {
+          //standard background
+          console.log("blank color background");
+        }
+
+        //loop through the problems
+        for(let j = 0; j< this.grades.labs[i].problems.length; j++) {
+          console.log(this.grades.labs[i].problems[j].problemID + " " + this.grades.labs[i].problems[j].grade);
+          if(this.grades.labs[i].problems[j].grade == 100) {
+            //green background
+            console.log("green background");
+            var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
+            element.classList.add("complete");
+          }
+          else if (this.grades.labs[i].problems[j].grade != 0) {
+            //red background
+            console.log("red background");
+            var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
+            element.classList.add("incomplete");
+          }
+          else {
+            //standard background
+            console.log("blank color background");
+          }
+        }
+      }
+    },
+    async Unmounting() {
       this.childisOpen = false;
       this.labID = null;
       this.labName = null;
@@ -493,12 +544,16 @@ export default defineComponent({
           params: { course_id: this.courseID },
         });
       }
+      await this.getColors();
+      await this.getGradeColors();
     },
     async labEdited() {
       ///update the list of courses
       this.labs = this.labs.filter((l) => l.id != this.labID);
       const lab = await API.apiClient.get(`/labs/full/${this.labID}`);
       this.labs.push(lab.data.data);
+      await this.getColors();
+      await this.getGradeColors();
       this.Unmounting();
     },
     async addLab() {
@@ -764,6 +819,7 @@ export default defineComponent({
       await this.getStudentObject();
       await this.getGrades();
     }
+    await this.getGradeColors();
     console.log("HELLO");
   },
   beforeUnmount() {

@@ -6,7 +6,7 @@
     v-model="contents"
     @keyup.enter="enter"
     spellcheck="false"
-    :readonly="!isWaiting"
+    :readonly="!isRunning"
   ></textarea>
 </template>
 
@@ -19,6 +19,7 @@ export default {
 
   data() {
     return {
+      isRunning: false,
       authUser: "",
       containerID: 0,
       oldContents: "",
@@ -27,7 +28,6 @@ export default {
       termContent: "",
       newTermContent: "",
       new: [],
-      isWaiting: false,
       hasNewLine: false,
       newInput: "",
       containers: {},
@@ -39,6 +39,7 @@ export default {
   watch: {
     launchConsole: function () {
       if (this.launchConsole && this.problemID != "" && this.problemID != null) {
+        console.log("WE STARTIN BOIS")
         this.startDocker();
       }
     },
@@ -49,6 +50,9 @@ export default {
       const uneditable = this.contents.substring(0, this.oldContents.length);
       if (uneditable != this.oldContents) {
         this.contents = this.oldContents;
+      }
+      else if (this.isRunning) {
+        this.newInput = this.contents.substring(this.oldContents.length);
       }
     },
     newTermContent: function (newVal, oldVal) {
@@ -79,6 +83,10 @@ export default {
         payload
       );
 
+      console.log("Started docker");
+
+      this.isRunning = true;
+
       // Get the docker container ID
       this.containerID = res.data.message;
 
@@ -86,6 +94,9 @@ export default {
       setTimeout(async () => {
         const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
       }, 120000); // shutdown container in 2 minutes
+
+      console.log("Test timer");
+    
 
       // Check the language and add the appropriate content to the console
       if (this.lang == "Python") {
@@ -96,26 +107,11 @@ export default {
         this.contents += "\n" + this.username + "@mocside:/usr/src$ ";
       }
 
-      if (!this.isWaiting) {
-        if (this.isPolling) {
-          // if were polling this is first to catch, otherwise this has already been printed
-          self.contents += "\n" + self.username + "@mocside:/usr/src$ ";
-        }
-        this.isPolling = false;
-        this.$emit("programFinished");
-      } else if (!this.isPolling) {
-        this.checkLogs();
-      }
-
       this.oldContents = this.contents;
     },
     async enter() {
-      this.newInput = this.contents.substring(this.oldContents.length);
-
       // Get ALL containers (ignore the request syntax... it's dumb)
       this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
-
-      this.isWaiting = false;
 
       // Check if the current container is running
       for (let i = 0; i < this.containers.data.data.length && !this.isWaiting; i++) {
@@ -124,7 +120,6 @@ export default {
 
       this.oldContents = this.contents;
 
-      if (this.isWaiting) {
         var payload = {
           input: this.newInput,
         };
@@ -135,10 +130,10 @@ export default {
         );
 
         this.oldContents = this.contents;
-      }
     },
     async programFinished() {
       this.$emit("programFinished");
+      this.newInput = "";
       this.oldContents += "\n" + this.username + "@mocside:/usr/src$ ";
       this.contents = this.oldContents;
     },
