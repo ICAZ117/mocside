@@ -133,6 +133,7 @@ export default {
         );
 
         this.oldContents = this.contents;
+        this.enteredInput = false;
     },
     async programFinished() {
       this.$emit("programFinished");
@@ -167,7 +168,6 @@ export default {
       .listen(".console_out", (e) => {
         console.log(e);
         if(this.enteredInput) {
-          this.enteredInput = false;
           this.oldTermContent = e.log;
           console.log("Entered Input");
           console.log("oldTermContent: " + this.oldTermContent);
