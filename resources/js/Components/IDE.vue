@@ -72,7 +72,7 @@
             v-if="launchConsole"
             type="run"
             name="run"
-            class="run-code col-1 btn btn-success"
+            class="run-code col-1 btn btn-danger"
             :disabled="!launchConsole"
           >
             Stop
