@@ -169,9 +169,11 @@ export default {
         if(this.enteredInput) {
           this.enteredInput = false;
           this.oldTermContent = e.log;
+          console.log("Entered Input");
           console.log("oldTermContent: " + this.oldTermContent);
         }
         else {
+          console.log("Program Output");
           this.newTermContent = e.log;
         }
       })
