@@ -491,7 +491,7 @@ export default defineComponent({
     },
     async getGradeColors() {
       for(let i = 0; i < this.grades.labs.length; i++) {
-        console.log(this.grades.labs[i].id + " " + this.grades.labs[i].percentComplete);
+        console.log(this.grades.labs[i].labID + " " + this.grades.labs[i].percentComplete);
         if(this.grades.labs[i].percentComplete == "100%") {
           //green background
           console.log("green background");
