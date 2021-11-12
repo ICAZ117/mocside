@@ -812,6 +812,13 @@ export default defineComponent({
         this.reloadDeleteModal++;
       }
     },
+    grades: {
+      deep: true,
+      handler() {
+        console.log("grades handler watch");
+        await this.getProblemColors();
+      }
+    },
   },
   async mounted() {
     console.log("Mounted");
