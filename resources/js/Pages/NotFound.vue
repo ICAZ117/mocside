@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <h1>404</h1>
-        <p>Page not found</p>
+        <h1 class="display-1">404</h1>
+        <p class="display-3">Page not found</p>
     </div>
 </template>
 
