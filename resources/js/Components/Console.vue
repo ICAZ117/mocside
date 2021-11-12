@@ -47,6 +47,7 @@ export default {
       } else {
         this.content += this.newLog.substring(this.recentLog.length);
         this.oldContent = this.content;
+        this.recentLog = this.newLog;
       }
     },
   },
