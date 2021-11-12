@@ -171,7 +171,7 @@
                 </tr>
 
                 <!-- Dropdown table row -->
-                <tr v-if="isExpanded(lab.labID)">
+                <tr v-show="isExpanded(lab.labID)">
                   <td class="description-data" colspan="8">
                     <div
                       style="
