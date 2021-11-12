@@ -35,7 +35,7 @@ export default {
     };
   },
   watch: {
-    terminate: function () {
+    terminate: async function () {
       if (this.terminate && this.isRunning) {
         while(this.containerID == 0) {
           continue;
