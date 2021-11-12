@@ -42,7 +42,7 @@ export default {
       }
     },
     newLog: function () {
-      if (this.newLog == this.recentLog) {
+      if (this.newLog.replace(/^\n|\n$/g, '') == this.recentLog.replace(/^\n|\n$/g, '')) {
         console.log("Do nothing");
       } else {
         console.log("Recent Log:");
