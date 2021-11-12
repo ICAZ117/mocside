@@ -171,14 +171,14 @@
                 </tr>
 
                 <!-- Dropdown table row -->
-                <tr v-show="isExpanded(lab.labID)">
+                <tr class="lab-tableDrop" v-show="isExpanded(lab.labID)">
                   <td class="description-data" colspan="8">
                     <div
                       style="
                         border: 1px solid #9e9e9e !important;
                         border-right: none !important;
                         padding: 0 !important;
-                        margin: 0 0 0rem 1rem !important;
+                        margin: 0.5rem 1rem 0.5rem 1rem !important;
                       "
                     >
                       <table

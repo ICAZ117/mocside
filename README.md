@@ -34,10 +34,9 @@ NEXT UP
 * Style Security Page in Student Profile
 * Style Course Edit
 * Style Lab Edit
-* Style Labs and problem dropdowns in the grades tab
 * Combine Logout with profile pic, into dropdown menu with link to profile and logout button
 * Style DeleteModals on Courses, Labs, & Problems
 * Style joining error modal on course Enroll
 * Profile Page add change email, and password functionality
-* profile page add delete user....really jsut disables user in order to keep the data stored
+* profile page add delete user....really just disables user in order to keep the data stored
 * Complete new iteration of the workspace console and terminal connection to backend docker
