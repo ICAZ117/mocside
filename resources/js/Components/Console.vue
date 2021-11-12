@@ -123,7 +123,7 @@ export default {
         input: this.newInput,
       };
 
-      const res = await API.apiClient.post(
+      const res = API.apiClient.post(
         `/containers/send-in/${this.containerID}`,
         payload
       );
