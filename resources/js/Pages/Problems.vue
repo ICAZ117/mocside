@@ -563,6 +563,7 @@ export default {
   async mounted() {
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
+    await this.getColors();
   },
 };
 </script>
