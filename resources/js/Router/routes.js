@@ -109,6 +109,12 @@ const routes = [
         component: () => import("../Pages/Contact.vue"),
         name: "Contact"
     },
+    {
+        // catch-all path
+        path: "/:pathMatch(.*)*",
+        component: () => import("../Pages/NotFound.vue"),
+        name: "NotFound"
+    }
 ]
 
 export default routes;

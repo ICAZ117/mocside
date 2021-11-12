@@ -703,24 +703,15 @@ class ContainerController extends Controller
         $containerConfig = new ContainersCreatePostBody();
         $hostConfig = new HostConfig();
         $mountsConfig = new Mount();
-        // $ulimits = new ResourcesUlimitsItem();
+        $ulimits = new ResourcesUlimitsItem();
         // set global timeout
-        // $ulimits->setName("cpu"); // this sets a cpu time limit
-        // $ulimits->setSoft(30);    // but in the case of a print infinite loop,
-        // $ulimits->setHard(60);    // it is no help.
-        // $hostConfig->setUlimits([$ulimits]);
+        $ulimits->setName("cpu"); // this sets a cpu time limit
+        $ulimits->setSoft(30);    // but in the case of a print infinite loop,
+        $ulimits->setHard(60);    // it is no help.
+        $hostConfig->setUlimits([$ulimits]);
 
         $containerConfig->setStopTimeout(3); // time container will wait before force after get "shutdown" cmd
-        $containerConfig->setImage("673eda123d55");
-        // $containerConfig->setCmd([
-        //     '-u', 'supervisor.py',
-        //     '-l', strtolower($validData['lang']),
-        //      '>', 'console.log', '|',
-        //     'python3', 'watchdog.py',
-        //     '-i', $user->fsc_id,
-        //     '-t', '30'
-        // ]);
-        // $containerConfig->setCmd(['\"python3', '-u', '--version\"']);
+        $containerConfig->setImage("673eda123d55"); // this is the image we want to use
         $containerConfig->setCmd([
             '-c', 'python3 -u supervisor.py -l '.strtolower($validData['lang']).' > console.log | python3 watchdog_laravel.py -i '.$user->fsc_id.'-t 30'
         ]);
