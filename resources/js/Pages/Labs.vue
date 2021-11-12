@@ -511,7 +511,7 @@ export default defineComponent({
 
         console.log("About to get Problem Colors");
         for(let j = 0; j < this.grades.labs[i].problems.length; j++) {
-          Console.log("problem: " + j + " in lab: " + i);
+          console.log("problem: " + j + " in lab: " + i);
           console.log(this.grades.labs[i].problems[j].problemID + " " + this.grades.labs[i].problems[j].grade);
           if(this.grades.labs[i].problems[j].grade == 100) {
             //green background
