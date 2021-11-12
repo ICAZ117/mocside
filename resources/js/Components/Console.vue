@@ -34,7 +34,7 @@ export default {
       username: "",
       currLog: "",
       isPolling: false,
-      enteredInput = false,
+      enteredInput: false, // e?eee
     };
   },
   watch: {
@@ -52,9 +52,9 @@ export default {
       if (uneditable != this.oldContents) {
         this.contents = this.oldContents;
       }
-      else if (this.isRunning) {
-        this.newInput = this.contents.substring(this.oldContents.length);
-      }
+      // else if (this.isRunning) {
+      //   this.newInput = this.contents.substring(this.oldContents.length);
+      // }
     },
     newTermContent: function (newVal, oldVal) {
       this.oldContents += this.newTermContent.substring(
@@ -112,6 +112,7 @@ export default {
     },
     async enter() {
       this.enteredInput = true;
+      this.newInput = this.contents.substring(this.oldContents.length);
       // Get ALL containers (ignore the request syntax... it's dumb)
       this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
@@ -167,6 +168,8 @@ export default {
         console.log(e);
         if(this.enteredInput) {
           this.enteredInput = false;
+          this.oldTermContent = e.log;
+          console.log("oldTermContent: " + this.oldTermContent);
         }
         else {
           this.newTermContent = e.log;
