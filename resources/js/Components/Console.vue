@@ -162,6 +162,7 @@ export default {
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
       .listen(".console_out", (e) => {
         this.newTermContent = e.log;
+        console.log(e);
       })
       .listen(".end", (e) => {
         this.programFinished();
