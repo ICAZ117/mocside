@@ -518,40 +518,24 @@ export default defineComponent({
             console.log("green background");
             var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
             console.log(elementp);
+            elementp.classList.add("complete");
           }
           else if (this.grades.labs[i].problems[j].grade != 0) {
             //red background
             console.log("red background");
             var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
             console.log(elementp);
+            elementp.classList.add("incomplete");
           }
           else {
             //standard background
             console.log("Standard Background");
           }
         }
-
-        //loop through the problems
-        // for(let j = 0; j< this.grades.labs[i].problems.length; j++) {
-        //   console.log(this.grades.labs[i].problems[j].problemID + " " + this.grades.labs[i].problems[j].grade);
-        //   if(this.grades.labs[i].problems[j].grade == 100) {
-        //     //green background
-        //     console.log("green background");
-        //     var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
-        //     element.classList.add("complete");
-        //   }
-        //   else if (this.grades.labs[i].problems[j].grade != 0) {
-        //     //red background
-        //     console.log("red background");
-        //     var element = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
-        //     element.classList.add("incomplete");
-        //   }
-        //   else {
-        //     //standard background
-        //     console.log("blank color background");
-        //   }
-        // }
       }
+    },
+    async getProblemColors() {
+      console.log(document.getElementById("gp701"));
     },
     async Unmounting() {
       this.childisOpen = false;
@@ -568,6 +552,7 @@ export default defineComponent({
       }
       await this.getColors();
       await this.getGradeColors();
+      await this.getProblemColors();
     },
     async labEdited() {
       ///update the list of courses
@@ -576,6 +561,7 @@ export default defineComponent({
       this.labs.push(lab.data.data);
       await this.getColors();
       await this.getGradeColors();
+      await this.getProblemColors();
       this.Unmounting();
     },
     async addLab() {
@@ -842,6 +828,7 @@ export default defineComponent({
       await this.getGrades();
     }
     await this.getGradeColors();
+    await this.getProblemColors();
     console.log("HELLO");
   },
   beforeUnmount() {
