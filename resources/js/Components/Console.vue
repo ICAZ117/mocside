@@ -45,10 +45,15 @@ export default {
       if (this.newLog == this.recentLog) {
         console.log("Do nothing");
       } else {
+        console.log("Recent Log:");
+        console.log(this.recentLog);
+        console.log("New Log:");
+        console.log(this.newLog);
+        console.log("\n\n");
+
         this.content += this.newLog.substring(this.recentLog.length);
         this.oldContent = this.content;
         this.recentLog = this.newLog;
-        console.log(this.newLog);
       }
     },
   },
