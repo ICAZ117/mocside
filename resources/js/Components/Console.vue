@@ -42,6 +42,8 @@ export default {
         }
 
         const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
+        await this.programFinished();
+        this.$emit("terminated");
       }
     },
     launchConsole: function () {
