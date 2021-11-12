@@ -27,7 +27,7 @@ export default {
       termContent: "",
       newTermContent: "",
       new: [],
-      isWaiting: false,
+      isWaiting: true,
       hasNewLine: false,
       newInput: "",
       containers: {},
