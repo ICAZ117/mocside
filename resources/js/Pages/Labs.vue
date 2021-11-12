@@ -816,7 +816,7 @@ export default defineComponent({
       deep: true,
       handler() {
         console.log("grades handler watch");
-        await this.getProblemColors();
+        this.getProblemColors();
       }
     },
   },
