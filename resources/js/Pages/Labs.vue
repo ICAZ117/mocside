@@ -815,6 +815,7 @@ export default defineComponent({
   },
   async mounted() {
     console.log("Mounted");
+    await this.getProblemColors();
   },
   async beforeMount() {
     console.log("Before Mount");
