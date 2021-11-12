@@ -130,16 +130,16 @@ class LabController extends Controller
             $new_lab->gradebook = "[]";
             $new_lab->save();
             // now, make assignment copies
-            for ($i = 0; $i < count($assignments); $i++) {
-                $temp_assignment = $assignments[$i]->replicate();
+            foreach ($assignments as $assignment) {
+                $temp_assignment = $assignment->replicate();
                 $temp_assignment->push();
                 $temp_assignment->lab_id = $new_lab->id;
                 $temp_assignment->gradebook = "[]";
                 $temp_assignment->save();
                 // and test case copies
-                $test_cases = $assignments[$i]->test_cases;
-                for ($j = 0; $j < count($test_cases); $j++) {
-                    $temp_case = $test_cases[$i]->replicate();
+                $test_cases = $assignment->test_cases;
+                foreach ($test_cases as $test_case) {
+                    $temp_case = $test_case->replicate();
                     $temp_case->push();
                     $temp_case->assignment_id = $temp_assignment->id;
                     $temp_case->save();

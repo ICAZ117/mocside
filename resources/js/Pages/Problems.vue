@@ -236,7 +236,7 @@ export default {
         copy_id: this.labID,
         java_starter:
           "public class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}",
-        python_starter: 'def main():\n\n\n\nif __name__ == "__main__":\n\tmain()',
+        python_starter: 'def main():\n\t// Your code here\n\n\nif __name__ == "__main__":\n\tmain()',
       };
       const problem = await API.apiClient.post(`/problems`, payload);
       this.problemID = problem.data.data.id;
