@@ -167,6 +167,7 @@ export default {
         console.log(e);
         if(this.enteredInput) {
           this.enteredInput = false;
+          this.oldTermContent = e.log;
         }
         else {
           this.newTermContent = e.log;
