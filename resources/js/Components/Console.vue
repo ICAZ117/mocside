@@ -46,9 +46,9 @@ export default {
         console.log("Do nothing");
       } else {
         console.log("Recent Log:");
-        console.log(this.recentLog);
+        console.log({a:this.recentLog});
         console.log("New Log:");
-        console.log(this.newLog);
+        console.log({a:this.newLog});
         console.log("\n\n");
 
         this.content += this.newLog.substring(this.recentLog.length);
@@ -102,6 +102,12 @@ export default {
     async enter() {
       // Get new input
       this.newInput = this.content.substring(this.oldContent.length);
+
+      console.log("\n\nNEW INPUT");
+      console.log({in: this.newInput});
+      console.log("\n");
+      // Add to recent log
+      this.recentLog += this.newInput;
 
       // Get ALL containers (ignore the request syntax... it's dumb)
       this.containers = await API.apiClient.get(`/containers/${this.containerID}`);

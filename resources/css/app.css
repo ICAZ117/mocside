@@ -1503,7 +1503,7 @@ footer .svg-inline--fa:hover {
 
 /*============= ENROLL =============*/
 .center-height {
-    margin-top: calc(100vh - var(--nav-height)) !important;
+    margin-top: calc((100vh - var(--nav-height)) / 2) !important;
 }
 
 .invite-card {
