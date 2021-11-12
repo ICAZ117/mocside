@@ -102,10 +102,17 @@ class InviteController extends Controller
             $code->save();
         }
 
+        // check to make sure student is not already in roser
+        $course_roster = json_decode($course->roster, true);
+        foreach ($course_roster['roster'] as $student_id) {
+            if ($student_id == $user->fsc_id) {
+                return response()->json(['message' => 'Student is already enrolled in this course.'], 403);
+            }
+        }
+
         // populate rosters
         // IF this code fails, it will be because the user does not have these
         // columns properly initialized by init/gradebook 
-        $course_roster = json_decode($course->roster, true);
         $student_roster = json_decode($student->courses, true);
         array_push($student_roster['courses'], $course->id);
         array_push($course_roster['roster'], $user->fsc_id);
