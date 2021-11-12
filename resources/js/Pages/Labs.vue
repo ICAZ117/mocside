@@ -547,9 +547,9 @@ export default defineComponent({
           params: { course_id: this.courseID },
         });
       }
-      // await this.getColors();
-      // await this.getGradeColors();
-      // await this.getProblemColors();
+      await this.getColors();
+      await this.getGradeColors();
+      await this.getProblemColors();
     },
     async labEdited() {
       ///update the list of courses
