@@ -34,7 +34,6 @@ NEXT UP
 * Style Security Page in Student Profile
 * Style Course Edit
 * Style Lab Edit
-* Style Labs and problem dropdowns in the grades tab
 * Combine Logout with profile pic, into dropdown menu with link to profile and logout button
 * Style DeleteModals on Courses, Labs, & Problems
 * Style joining error modal on course Enroll
