@@ -543,6 +543,7 @@ export default {
     },
   },
   async beforeMount() {
+    console.log("BeforeMount");
     this.childIsOpen = false;
     await this.getProblems();
 
@@ -557,10 +558,12 @@ export default {
     console.log(this.problems);
   },
   beforeUnmount() {
+    console.log("BeforeUnmount");
     //problems
     this.$emit("unmounting");
   },
   async mounted() {
+    console.log("Mounted");
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
     await this.getColors();
