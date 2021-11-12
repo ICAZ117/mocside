@@ -382,6 +382,7 @@ export default {
         //filter the problems list
         this.problems = this.problems.filter((p) => p.id != tempID);
       }
+      await this.getColors();
       await this.Unmounting();
     },
 
