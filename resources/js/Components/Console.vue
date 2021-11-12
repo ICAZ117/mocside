@@ -134,6 +134,8 @@ export default {
       this.isRunning = false;
       this.oldContent += "\n" + this.username + "@mocside:/usr/src$ ";
       this.content = this.oldContent;
+      this.newLog = "";
+      this.recentLog = "";
     },
   },
   async beforeUnmount() {
