@@ -518,14 +518,14 @@ export default defineComponent({
             console.log("green background");
             var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
             console.log(elementp);
-            elementp.classList.add("complete");
+            // elementp.classList.add("complete");
           }
           else if (this.grades.labs[i].problems[j].grade != 0) {
             //red background
             console.log("red background");
             var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
             console.log(elementp);
-            elementp.classList.add("incomplete");
+            // elementp.classList.add("incomplete");
           }
           else {
             //standard background
