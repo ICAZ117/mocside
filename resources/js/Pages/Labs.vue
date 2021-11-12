@@ -518,14 +518,14 @@ export default defineComponent({
             console.log("green background");
             var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
             console.log(elementp);
-            // elementp.classList.add("complete");
+            elementp.classList.add("complete");
           }
           else if (this.grades.labs[i].problems[j].grade != 0) {
             //red background
             console.log("red background");
             var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
             console.log(elementp);
-            // elementp.classList.add("incomplete");
+            elementp.classList.add("incomplete");
           }
           else {
             //standard background
@@ -533,9 +533,6 @@ export default defineComponent({
           }
         }
       }
-    },
-    async getProblemColors() {
-      console.log(document.getElementById("gp701"));
     },
     async Unmounting() {
       this.childisOpen = false;
@@ -812,17 +809,9 @@ export default defineComponent({
         this.reloadDeleteModal++;
       }
     },
-    grades: {
-      deep: true,
-      handler() {
-        console.log("grades handler watch");
-        this.getProblemColors();
-      }
-    },
   },
   async mounted() {
     console.log("Mounted");
-    await this.getProblemColors();
   },
   async beforeMount() {
     console.log("Before Mount");
@@ -836,7 +825,6 @@ export default defineComponent({
       await this.getGrades();
     }
     await this.getGradeColors();
-    await this.getProblemColors();
     console.log("HELLO");
   },
   beforeUnmount() {
