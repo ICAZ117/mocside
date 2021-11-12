@@ -55,4 +55,10 @@ class Course extends Model
         }
         return $total;
     }
+
+    public function invites()
+    {
+        return $this->hasMany(Invite::class, 'course_id', 'id');
+    }
+
 }

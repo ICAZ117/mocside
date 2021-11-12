@@ -128,6 +128,12 @@ class CourseController extends Controller
             $sections = explode("/", $fileURL);
             $fileID = end($sections);
             Storage::disk('public')->delete('images/' . $fileID);
+
+            // we also have to delete all Invites for this course
+            foreach ($course->invites as $invite) {
+                $invite->delete();
+            }
+
             $course->delete();
             return response()->json(['message' => 'Successfully deleted course.'], 200);
         }
