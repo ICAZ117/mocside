@@ -18,6 +18,21 @@
           </div>
         </div>
       </vue-final-modal>
+      <vue-final-modal
+        class="delete-modal"
+        v-model="showEnrollModal"
+        classes="modal-container"
+        content-class="modal-content delete-modal"
+        :esc-to-close="true"
+      >
+        <button class="modal-close" @click="closeDeleting()">x</button>
+        <div class="enrollModal">
+          <label for="enrollCode">Course Enroll Code:&nbsp;&nbsp;</label>
+          <input id="enrollCode" name="enrollCode" type="text" v-model="enrollCode">
+          <br>
+          <button class="btn btn-success btn-md" @click="enroll()">Enroll</button>
+        </div>
+      </vue-final-modal>
       <div class="courses header">
         <div class="heading">
           <h2>My Courses</h2>
@@ -121,8 +136,30 @@
               </div>
             </span>
           </div>
+          <!-- Create New Course as Professor -->
           <div v-if="isProf" class="add-course fixed-course-width">
             <a @click="addCourse()" class="no-decor pointer">
+              <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div
+                  class="card coursecard w-100"
+                  style="background-color: transparent !important"
+                >
+                  <div class="courses card-img-add"></div>
+                  <!-- <div class="courses card-content">
+                    <h6 class="card-title my-3 mx-2 mb-0">Add Course</h6>
+                    <hr class="courses my-0" />
+
+                    <a class="courselaunch text-danger mx-2 my-1 no-decor"></a
+                    >
+                  </div> -->
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Enroll in course as student -->
+          <div v-if="!isProf" class="add-course fixed-course-width">
+            <a @click="showEnrollModal = true" class="no-decor pointer">
               <div class="width col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
                 <div
                   class="card coursecard w-100"
@@ -245,6 +282,7 @@ export default {
       sort: "4",
       showOldCourses: false,
       showDeleteModal: false,
+      showEnrollModal: false,
       reloadDeleteModal: 0,
       deletingCourse: {
         id: "",
@@ -252,6 +290,7 @@ export default {
         key: "",
       },
       ignoreUnmount: false,
+      enrollCode: "",
   }),
   setup() {
     const route = useRoute();
@@ -263,6 +302,16 @@ export default {
     };
   },
   methods: {
+    async enroll() {
+      const res = await API.apiClient.get(`/invite/${this.key}`);
+      
+      if(res.data == "") {
+        console.log("Course not found!")
+      }
+      else {
+        this.$router.push('/' + this.enrollCode + '/enroll');
+      }
+    },
     showMenu(course_id) {
       if (this.isProf) {
         this.rightClickID = String(course_id);
