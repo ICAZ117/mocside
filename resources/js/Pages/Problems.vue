@@ -357,13 +357,13 @@ export default {
           var element = document.getElementById("p" + this.unfilteredProblems[i].id);
           console.log("element: ");
           console.log(element);
-          (element == null) ? element.classList.add("complete") : console.log("element is null");
+          (element != null) ? element.classList.add("complete") : console.log("element is null");
         }
         else if(this.unfilteredProblems[i]["percent"] != "0%") {
           //red background
           console.log("red background");
           var element = document.getElementById("p" + this.unfilteredProblems[i].id);
-          (element == null) ? element.classList.add("incomplete") : console.log("element is null");
+          (element != null) ? element.classList.add("incomplete") : console.log("element is null");
         }
         else {
           //standard background
