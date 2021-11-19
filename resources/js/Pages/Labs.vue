@@ -561,6 +561,7 @@ export default defineComponent({
       await this.getColors();
       await this.getGradeColors();
       await this.getProblemColors();
+      this.childisOpen = false;
       this.Unmounting();
     },
     async addLab() {
