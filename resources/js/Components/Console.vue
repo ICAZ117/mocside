@@ -3,7 +3,7 @@
     class="console"
     id="scrollToBottom"
     contenteditable="true"
-    v-model="contents"
+    v-model="content"
     @keyup.enter="enter"
     spellcheck="false"
     :readonly="!isRunning"
@@ -15,54 +15,57 @@ import * as API from "../services/API";
 import store from "../Store/index";
 
 export default {
-  props: ["launchConsole", "problemID", "lang"],
+  props: ["launchConsole", "problemID", "lang", "terminate"],
 
   data() {
     return {
       isRunning: false,
       authUser: "",
       containerID: 0,
-      oldContents: "",
-      contents: "",
-      oldTermContent: "",
-      termContent: "",
-      newTermContent: "",
       new: [],
       hasNewLine: false,
       newInput: "",
       containers: {},
       username: "",
       currLog: "",
-      isPolling: false,
-      enteredInput: false, // e?eee
+      content: "",
+      recentLog: "",
+      newLog: "",
+      oldContent: "",
     };
   },
   watch: {
+    terminate: async function () {
+      if (this.terminate && this.isRunning) {
+        while(this.containerID == 0) {
+          continue;
+        }
+
+        const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
+        await this.programFinished();
+        this.$emit("terminated");
+      }
+    },
     launchConsole: function () {
       if (this.launchConsole && this.problemID != "" && this.problemID != null) {
-        console.log("WE STARTIN BOIS")
+        console.log("WE STARTIN BOIS");
         this.startDocker();
       }
     },
-    contents: function () {
-      var text = document.getElementById("scrollToBottom");
-      text.scrollTop = text.scrollHeight;
+    newLog: function () {
+      if (this.newLog.replace(/^\n|\n$/g, '') == this.recentLog.replace(/^\n|\n$/g, '')) {
+        console.log("Do nothing");
+      } else {
+        console.log("Recent Log:");
+        console.log({a:this.recentLog});
+        console.log("New Log:");
+        console.log({a:this.newLog});
+        console.log("\n\n");
 
-      const uneditable = this.contents.substring(0, this.oldContents.length);
-      if (uneditable != this.oldContents) {
-        this.contents = this.oldContents;
+        this.content += this.newLog.substring(this.recentLog.length);
+        this.oldContent = this.content;
+        this.recentLog = this.newLog;
       }
-      // else if (this.isRunning) {
-      //   this.newInput = this.contents.substring(this.oldContents.length);
-      // }
-    },
-    newTermContent: function (newVal, oldVal) {
-      this.oldContents += this.newTermContent.substring(
-        this.oldTermContent.length,
-        this.newTermContent.length
-      );
-      this.oldTermContent = this.newTermContent;
-      this.contents = this.oldContents;
     },
   },
   methods: {
@@ -70,7 +73,7 @@ export default {
       // When the user clicks "Run"
       // If the selected language is Java, add some text to the terminal content
       if (this.lang == "Java") {
-        this.contents += "javac Main.java\n";
+        this.content += "javac Main.java\n";
       }
 
       // Create payload
@@ -93,27 +96,32 @@ export default {
 
       // Automatically shut down the docker after 2 mins
       setTimeout(async () => {
-        const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
+        if (isRunning) {
+          const shutdown = await API.apiClient.delete(`/containers/${this.containerID}`);
+        }
       }, 120000); // shutdown container in 2 minutes
-
-      console.log("Test timer");
-    
 
       // Check the language and add the appropriate content to the console
       if (this.lang == "Python") {
-        this.contents += "python3 submission.py\n";
+        this.content += "python3 submission.py\n";
       } else if (this.lang == "Java") {
-        this.contents += this.username + "@mocside:/usr/src$ java Main\n";
+        this.content += this.username + "@mocside:/usr/src$ java Main\n";
       } else {
-        this.contents += "\n" + this.username + "@mocside:/usr/src$ ";
+        this.content += "\n" + this.username + "@mocside:/usr/src$ ";
       }
 
-      this.oldContents = this.contents;
+      this.oldContent = this.content;
     },
     async enter() {
-      this.enteredInput = true;
-      this.newInput = this.contents.substring(this.oldContents.length);
-      this.oldTermContent += this.newInput;
+      // Get new input
+      this.newInput = this.content.substring(this.oldContent.length);
+
+      console.log("\n\nNEW INPUT");
+      console.log({in: this.newInput});
+      console.log("\n");
+      // Add to recent log
+      this.recentLog += this.newInput;
+
       // Get ALL containers (ignore the request syntax... it's dumb)
       this.containers = await API.apiClient.get(`/containers/${this.containerID}`);
 
@@ -122,28 +130,26 @@ export default {
         this.isWaiting = this.containers.data.data[i] == this.containerID;
       }
 
-      this.oldContents = this.contents;
+      this.oldContent = this.content;
 
-        var payload = {
-          input: this.newInput,
-        };
+      var payload = {
+        input: this.newInput,
+      };
 
-        const res = await API.apiClient.post(
-          `/containers/send-in/${this.containerID}`,
-          payload
-        );
-
-        this.oldContents = this.contents;
-        this.enteredInput = false;
+      const res = API.apiClient.post(
+        `/containers/send-in/${this.containerID}`,
+        payload
+      );
     },
     async programFinished() {
       this.$emit("programFinished");
       this.newInput = "";
       this.isRunning = false;
-      this.oldContents += "\n" + this.username + "@mocside:/usr/src$ ";
-      this.contents = this.oldContents;
-      this.newTermContent = "";
-      this.oldTermContent = "";
+      this.oldContent += "\n" + this.username + "@mocside:/usr/src$ ";
+      this.content = this.oldContent;
+      this.newLog = "";
+      this.recentLog = "";
+      this.containerID = 0;
     },
   },
   async beforeUnmount() {
@@ -158,26 +164,33 @@ export default {
   async mounted() {
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
-    this.oldContents = this.username + "@mocside:/usr/src$ ";
-    this.contents = this.username + "@mocside:/usr/src$ ";
+    this.content = this.username + "@mocside:/usr/src$ ";
+    this.oldContent = this.content;
 
     // console.log(this.authUser);
     // console.log("color: " + this.authUser.settings.consoleOptions.foreground + "!important; background-color: " + this.authUser.settings.consoleOptions.background + "!important;");
     // var el = document.getElementById("scrollToBottom");
-    document.getElementById("scrollToBottom").style = "color: " + this.authUser.settings.consoleOptions.foreground + "!important; background-color: " + this.authUser.settings.consoleOptions.background + "!important;"
-
+    document.getElementById("scrollToBottom").style =
+      "color: " +
+      this.authUser.settings.consoleOptions.foreground +
+      "!important; background-color: " +
+      this.authUser.settings.consoleOptions.background +
+      "!important;";
 
     Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
       .listen(".console_out", (e) => {
-        this.newTermContent = e.log;
-        console.log("\n\nEVENT RECIEVED FROM WEBSOCKET");
-        console.log("\nCONTENT:");
-        console.log(e);
-        console.log("\noldTermContent:");
-        console.log(this.oldTermContent);
-        console.log("\nnewTermContent:");
-        console.log(this.newTermContent);
-        console.log("\n______________________________________\n");
+        this.newLog = e.log;
+
+        // this.newTermContent = e.log;
+        // console.log("\n\nEVENT RECIEVED FROM WEBSOCKET");
+        // console.log("\nCONTENT:");
+        // console.log(e);
+        // console.log("\noldTermContent:");
+        // console.log(this.oldTermContent);
+        // console.log("\nnewTermContent:");
+        // console.log(this.newTermContent);
+        // console.log("\n______________________________________\n");
+
         // if(this.enteredInput) {
         //   this.oldTermContent = e.log;
         //   console.log("Entered Input");

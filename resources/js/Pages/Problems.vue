@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!childIsOpen">
+  <div v-show="!childIsOpen">
     <!-- Problems Page-->
     <vue-final-modal
       v-model="showDeleteModal"
@@ -355,13 +355,15 @@ export default {
           //green background
           console.log("green background");
           var element = document.getElementById("p" + this.unfilteredProblems[i].id);
-          element.classList.add("complete");
+          console.log("element: ");
+          console.log(element);
+          (element != null) ? element.classList.add("complete") : console.log("element is null");
         }
         else if(this.unfilteredProblems[i]["percent"] != "0%") {
           //red background
           console.log("red background");
           var element = document.getElementById("p" + this.unfilteredProblems[i].id);
-          element.classList.add("incomplete");
+          (element != null) ? element.classList.add("incomplete") : console.log("element is null");
         }
         else {
           //standard background
@@ -382,6 +384,7 @@ export default {
         //filter the problems list
         this.problems = this.problems.filter((p) => p.id != tempID);
       }
+      await this.getColors();
       await this.Unmounting();
     },
 
@@ -542,8 +545,9 @@ export default {
     },
   },
   async beforeMount() {
+    console.log("BeforeMount");
     this.childIsOpen = false;
-    await this.getProblems();
+    await this.getProblems().then(this.getColors());
 
     console.log("\n\nBefore date convert");
     console.log(this.problems);
@@ -556,12 +560,15 @@ export default {
     console.log(this.problems);
   },
   beforeUnmount() {
+    console.log("BeforeUnmount");
     //problems
     this.$emit("unmounting");
   },
   async mounted() {
+    console.log("Mounted");
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
+    await this.getColors();
   },
 };
 </script>
