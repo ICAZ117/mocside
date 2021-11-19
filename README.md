@@ -39,8 +39,6 @@ NEXT UP
 * Style joining error modal on course Enroll
 * Profile Page add change email, and password functionality
 * profile page add delete user....really just disables user in order to keep the data stored
-* After opening a problem both labs and problems page colors are gone
 * Complete new iteration of the workspace console and terminal connection to backend docker -> COMPLETE (11/12/21)
 * Notes from testing: (11/13/21)
     * Profile button doesn't work in workspace, redirects to courses?
-    * Problem highlights dissapear/don't render after a submission
