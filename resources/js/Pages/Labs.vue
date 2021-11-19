@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!childisOpen">
+  <div v-show="!childisOpen">
     <!-- Main Page-->
     <vue-final-modal
       v-model="showDeleteModal"
