@@ -355,6 +355,8 @@ export default {
           //green background
           console.log("green background");
           var element = document.getElementById("p" + this.unfilteredProblems[i].id);
+          console.log("element: ");
+          console.log(element);
           element.classList.add("complete");
         }
         else if(this.unfilteredProblems[i]["percent"] != "0%") {
