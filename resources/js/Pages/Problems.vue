@@ -547,7 +547,7 @@ export default {
   async beforeMount() {
     console.log("BeforeMount");
     this.childIsOpen = false;
-    await this.getProblems();
+    await this.getProblems().then(this.getColors());
 
     console.log("\n\nBefore date convert");
     console.log(this.problems);
