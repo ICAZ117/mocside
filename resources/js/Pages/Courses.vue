@@ -25,7 +25,7 @@
         content-class="modal-content delete-modal"
         :esc-to-close="true"
       >
-        <button class="modal-close" @click="closeDeleting()">x</button>
+        <button class="modal-close" @click="showEnrollModal = false">x</button>
         <div class="enrollModal">
           <label for="enrollCode">Course Enroll Code:&nbsp;&nbsp;</label>
           <input id="enrollCode" name="enrollCode" type="text" v-model="enrollCode">
@@ -305,6 +305,7 @@ export default {
     async enroll() {
       const res = await API.apiClient.get(`/invite/${this.key}`);
       
+      console.log(res)
       if(res.data == "") {
         console.log("Course not found!")
       }
