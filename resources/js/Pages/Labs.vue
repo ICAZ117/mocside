@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!childisOpen">
+  <div v-show="!childisOpen">
     <!-- Main Page-->
     <vue-final-modal
       v-model="showDeleteModal"
@@ -495,13 +495,15 @@ export default defineComponent({
         if(this.grades.labs[i].percentComplete == "100%") {
           //green background
           console.log("green background");
-          var element = document.getElementById("gl" + this.grades.labs[i].labID);
+          let tmp = "gl" + this.grades.labs[i].labID;
+          var element = document.getElementById(tmp);
           element.classList.add("complete");
         }
         else if (this.grades.labs[i].percentComplete != "0%") {
           //red background
           console.log("red background");
-          var element = document.getElementById("gl" + this.grades.labs[i].labID);
+          let tmp = "gl" + this.grades.labs[i].labID;
+          var element = document.getElementById(tmp);
           element.classList.add("incomplete");
         }
         else {
@@ -553,6 +555,8 @@ export default defineComponent({
     },
     async labEdited() {
       ///update the list of courses
+      console.log("lab is edited");
+      this.childisOpen = false;
       this.labs = this.labs.filter((l) => l.id != this.labID);
       const lab = await API.apiClient.get(`/labs/full/${this.labID}`);
       this.labs.push(lab.data.data);

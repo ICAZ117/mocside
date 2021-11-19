@@ -57,7 +57,7 @@
         <br />
 
         <div class="form-group">
-          <button class="btn btn-danger btn-block">Submit Changes</button>
+          <button @click="handleSubmit" class="btn btn-danger btn-block">Submit Changes</button>
         </div>
       </form>
     </div>
