@@ -58,7 +58,7 @@ class Course extends Model
 
     public function invites()
     {
-        return $this->hasMany(Invite::class, 'course_id', 'id');
+        return $this->hasMany(Invite::class, 'id', 'course_id');
     }
 
 }
