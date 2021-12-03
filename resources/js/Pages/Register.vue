@@ -306,6 +306,22 @@ export default {
         document.getElementById("l_navpfp").src = this.pfp;
       }
 
+      //update the user's default backround to green and black
+      var payload = {
+        settings: {
+          consoleOptions: {
+            foreground: "green",
+            background: "black",
+          },
+          ideOptions: {
+            theme: "gob",
+            defaultLang: "python",
+          },
+        },
+      };
+      //call route
+      const res = await API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload);
+
       // now, push to login
       this.$router.push('/courses'); // this will get them properly authorized,
       // and in the future possibly aid email verification.
