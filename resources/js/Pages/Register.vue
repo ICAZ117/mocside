@@ -273,37 +273,42 @@ export default {
       //   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
       //   .catch((error) => (this.error = getError(error)));
 
-      const res = await AuthService.registerUser(payload).catch(function(response) {
-        console.log(response.errors);
-      });
-      console.log(res);
-      // then, create student. Any user signed up from the front end STARTS as a student.
-      // is there a chance this doesn't work? (CSRF mismatch, likely)
-      const res2 = await API.apiClient.post('/students', { fsc_id: payload.fsc_id });
-      console.log(res2);
+      try {
 
-      // if we've made it this far, they have a student (probably), and we can push to login
-      // but not before we init gradebook!
-      const res3 = await API.apiClient.post(`/gradebook/init/${res2.data.data.id}`, { scope: "student" });
-      console.log(res3);
-      const res4 = await API.apiClient.post('/progress');
-      console.log(res4);
+        const res = await AuthService.registerUser(payload);
+        console.log(res);
+        // then, create student. Any user signed up from the front end STARTS as a student.
+        // is there a chance this doesn't work? (CSRF mismatch, likely)
+        const res2 = await API.apiClient.post('/students', { fsc_id: payload.fsc_id });
+        console.log(res2);
 
-      //update user record in store to get new pfp path?
-      var au = await this.$store.dispatch("auth/getAuthUser");
-      if(this.authUser != null) {
-        this.pfp = au.pfp_path;
-        if(this.pfp == undefined || this.pfp == null) {
-          console.log("empty path");
-          this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+        // if we've made it this far, they have a student (probably), and we can push to login
+        // but not before we init gradebook!
+        const res3 = await API.apiClient.post(`/gradebook/init/${res2.data.data.id}`, { scope: "student" });
+        console.log(res3);
+        const res4 = await API.apiClient.post('/progress');
+        console.log(res4);
+
+        //update user record in store to get new pfp path?
+        var au = await this.$store.dispatch("auth/getAuthUser");
+        if(this.authUser != null) {
+          this.pfp = au.pfp_path;
+          if(this.pfp == undefined || this.pfp == null) {
+            console.log("empty path");
+            this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+          }
+          document.getElementById("d_navpfp").src = this.pfp;
+          document.getElementById("l_navpfp").src = this.pfp;
         }
-        document.getElementById("d_navpfp").src = this.pfp;
-        document.getElementById("l_navpfp").src = this.pfp;
+
+        // now, push to login
+        this.$router.push('/courses'); // this will get them properly authorized,
+        // and in the future possibly aid email verification.
       }
 
-      // now, push to login
-      this.$router.push('/courses'); // this will get them properly authorized,
-      // and in the future possibly aid email verification.
+      catch (err) {
+        console.log(err);
+      }
     },
   },
   computed: {
