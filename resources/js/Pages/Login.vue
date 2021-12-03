@@ -141,12 +141,12 @@ export default {
           throw error;
         }
       } catch (error) {
-        this.error = getError(error);
-        console.log("\n\n\nMY ERROR STUFF:");
-        console.log(error.response.data.errors.email[1]);
-        console.log("\n\n\nLogin Response:");
+        this.error = error.response;
+        console.log("\n\nCATCH:");
         console.log(this.error);
-        console.log(this.error.error.response.data.errors.email[1]);
+        console.log(this.error.data);
+
+        
       }
     },
     goRouter() {
