@@ -274,9 +274,9 @@ export default {
       //   .catch((error) => (this.error = getError(error)));
 
 
-      const res = await AuthService.registerUser(payload).catch(function (response) {
-        console.log(response);
-        console.log(response.errors);
+      const res = await AuthService.registerUser(payload).catch(function (error) {
+        console.log(error);
+        console.log(error.response);
         if(response.data.errors.hasOwnProperty("email")) {
           console.log("Email Error");
         }
