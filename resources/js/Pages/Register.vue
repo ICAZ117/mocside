@@ -277,6 +277,7 @@ export default {
       const res = await AuthService.registerUser(payload);
       console.log("error register");
       console.log(res);
+      console.log(res.response.data.errors);
       // then, create student. Any user signed up from the front end STARTS as a student.
       // is there a chance this doesn't work? (CSRF mismatch, likely)
       const res2 = await API.apiClient.post('/students', { fsc_id: payload.fsc_id });
