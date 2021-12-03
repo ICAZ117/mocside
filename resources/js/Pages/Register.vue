@@ -277,14 +277,17 @@ export default {
       const res = await AuthService.registerUser(payload).catch(function (error) {
         if(error.response.data.errors.hasOwnProperty("email")) {
           console.log("Email Error");
+          this.$notify({ type: "error", text: "An account with your email already exists!" });
         }
         if(error.response.data.errors.hasOwnProperty("username")) {
           console.log("Username Error");
+          this.$notify({ type: "error", text: "An account with your username already exists!" });
         }
         if(error.response.data.errors.hasOwnProperty("fsc_id")) {
           console.log("FSC ID Error");
+          this.$notify({ type: "error", text: "An account with your FSC ID already exists!" });
         }
-      }).then(function(response){
+      }).then(async function(response){
         // then, create student. Any user signed up from the front end STARTS as a student.
         // is there a chance this doesn't work? (CSRF mismatch, likely)
         const res2 = await API.apiClient.post('/students', { fsc_id: payload.fsc_id });
