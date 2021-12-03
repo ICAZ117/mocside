@@ -134,6 +134,13 @@ class CourseController extends Controller
                 $invite->delete();
             }
 
+            // for each student in the course, call archive method
+            $roster = json_decode($course->roster, true);
+            foreach ($roster['roster'] as $student) {
+                $student_obj = Student::find($student);
+                $student_obj->courseArchived($course->id);
+            }
+
             $course->delete();
             return response()->json(['message' => 'Successfully deleted course.'], 200);
         }
