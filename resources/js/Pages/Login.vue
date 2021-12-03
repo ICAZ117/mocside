@@ -141,7 +141,7 @@ export default {
       } catch (error) {
         this.error = getError(error);
         console.log("\n\n\nMY ERROR STUFF:");
-        console.log(error.error);
+        console.log(error);
         console.log("\n\n\nLogin Response:");
         console.log(this.error);
         console.log(this.error.error.response.data.errors.email[1]);
