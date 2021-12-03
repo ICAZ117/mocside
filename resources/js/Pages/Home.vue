@@ -13,7 +13,7 @@
 
                     <div class="border-top border-danger w-50 mx-auto my-3"></div>
 
-                    <h4>A modern, free to use online IDE for virtual classrooms</h4>
+                    <h4>A modern, freeee to use online IDE for virtual classrooms</h4>
 
                     <router-link to="/login" class="btn btn-danger btn-lg mr-2">Login</router-link>
 
