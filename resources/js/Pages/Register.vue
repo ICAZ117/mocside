@@ -273,8 +273,7 @@ export default {
       //   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
       //   .catch((error) => (this.error = getError(error)));
 
-      const res = await AuthService.registerUser(payload);
-      res.catch(function(response) {
+      const res = await AuthService.registerUser(payload).catch(function(response) {
         console.log(response.errors);
       });
       console.log(res);
