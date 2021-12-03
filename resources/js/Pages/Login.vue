@@ -124,7 +124,9 @@ export default {
       this.error = null;
       try {
         const res = await AuthService.login(payload);
+        console.log("Authservice res:");
         console.log(res);
+        console.log("\n\n\n\n");
         const authUser = await this.$store.dispatch("auth/getAuthUser");
         if (authUser) {
           this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
