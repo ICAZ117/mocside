@@ -124,6 +124,7 @@ export default {
       this.error = null;
       try {
         const res = await AuthService.login(payload);
+        console.log(res);
         const authUser = await this.$store.dispatch("auth/getAuthUser");
         if (authUser) {
           this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
@@ -139,10 +140,8 @@ export default {
         }
       } catch (error) {
         this.error = getError(error);
-        console.log("\n\n\nMY DEBUG:");
-        const res = console.debug({error});
-        console.log("\n\n\nRES FROM DEBUG:");
-        console.log(res);
+        console.log("\n\n\nMY ERROR STUFF:");
+        console.log(error);
         console.log("\n\n\nLogin Response:");
         console.log(this.error);
         console.log(this.error.error.response.data.errors.email[1]);
