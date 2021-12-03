@@ -124,8 +124,6 @@ export default {
       this.error = null;
       try {
         const res = await AuthService.login(payload);
-        console.log("Login Response:");
-        console.log(res);
         const authUser = await this.$store.dispatch("auth/getAuthUser");
         if (authUser) {
           this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
@@ -141,6 +139,11 @@ export default {
         }
       } catch (error) {
         this.error = getError(error);
+        console.log("\n\n\nMY DEBUG:");
+        console.debug({error});
+        console.log("\n\n\nLogin Response:");
+        console.log(this.error);
+        console.log(this.error.error.response.data.errors.email[1]);
       }
     },
     goRouter() {
