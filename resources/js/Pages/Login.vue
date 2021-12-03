@@ -141,12 +141,14 @@ export default {
           throw error;
         }
       } catch (error) {
-        this.error = error.response;
-        console.log("\n\nCATCH:");
-        console.log(this.error);
-        console.log(this.error.data.errors.email);
-        console.log(this.error.data.errors.email[0]);
+        this.error = error.response.data.errors.email[0];
         
+        if (this.error == "Invalid email or username.") {
+          this.$notify({ type: "error", text: "Your email/username does not exist!" });
+        }
+        else if (this.error == "Invalid password.") {
+          this.$notify({ type: "error", text: "Your password is incorrect!" });
+        }
       }
     },
     goRouter() {
