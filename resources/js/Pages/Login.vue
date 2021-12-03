@@ -140,7 +140,9 @@ export default {
       } catch (error) {
         this.error = getError(error);
         console.log("\n\n\nMY DEBUG:");
-        console.debug({error});
+        const res = console.debug({error});
+        console.log("\n\n\nRES FROM DEBUG:");
+        console.log(res);
         console.log("\n\n\nLogin Response:");
         console.log(this.error);
         console.log(this.error.error.response.data.errors.email[1]);
