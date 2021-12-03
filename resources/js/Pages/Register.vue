@@ -320,7 +320,7 @@ export default {
         },
       };
       //call route
-      const res = await API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload3);
+      const res6 = await API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload3);
 
       // now, push to login
       this.$router.push('/courses'); // this will get them properly authorized,
