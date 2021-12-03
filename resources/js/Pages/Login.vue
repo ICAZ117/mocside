@@ -145,7 +145,7 @@ export default {
         console.log("\n\nCATCH:");
         console.log(this.error);
         console.log(this.error.data.errors.email);
-
+        console.log(this.error.data.errors.email[0]);
         
       }
     },
