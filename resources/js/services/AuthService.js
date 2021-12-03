@@ -22,8 +22,8 @@ authClient.interceptors.response.use(
     ) {
       store.dispatch("auth/logout");
     }
-    // return Promise.reject(error);
-    return Promise.resolve(error);
+    return Promise.reject(error);
+    // return Promise.resolve(error);
   }
 );
 
