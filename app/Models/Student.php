@@ -41,4 +41,19 @@ class Student extends Model
         }
         return false;
     }
+
+    public function courseArchived($course_id) {
+        // moves course_id from courses to archived_courses
+        $courses = json_decode($this->courses, true);
+        // this check is here because legacy users (before 12/3/21) don't have an archived_courses field
+        if($courses['archived']) {
+            $courses['archived'] = array_merge($courses['archived'], [$course_id]);
+        } else {
+            $courses['archived'] = [$course_id];
+        }
+        // remove course_id from courses['courses']
+        $courses['courses'] = array_diff($courses['courses'], [$course_id]);
+        $this->courses = json_encode($courses);
+        $this->save();
+    }
 }
