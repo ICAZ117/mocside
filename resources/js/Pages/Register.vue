@@ -273,7 +273,9 @@ export default {
       //   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
       //   .catch((error) => (this.error = getError(error)));
 
-      const res = await AuthService.registerUser(payload);
+      const res = await AuthService.registerUser(payload).catch(function(response) {
+        console.log(response.errors);
+      });
       console.log(res);
       // then, create student. Any user signed up from the front end STARTS as a student.
       // is there a chance this doesn't work? (CSRF mismatch, likely)
