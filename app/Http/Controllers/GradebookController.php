@@ -43,11 +43,23 @@ class GradebookController extends Controller
                     'courses' => [],
                     'archived' => [],
                 );
+                $user_settings = array(
+                    'consoleOptions' => array(
+                        'foreground' => 'green',
+                        'background' => 'black',
+                    ),
+                    'ideOptions' => array(
+                        'theme' => 'gob',
+                        'defaultLang' => 'python',
+                    )
+                );
+                $user->settings = json_encode($user_settings);
                 $student->courses = json_encode($courses);
                 $student->gradebook_courses = json_encode($course_book);
                 $student->gradebook_labs = json_encode($lab_book);
                 $student->gradebook_problems = json_encode($assignment_book);
                 $student->save();
+                $user->save();
                 return response()->json(['message' => 'Student gradebook initialized', 'dump' => $student], 200);
             } else {
                 return response()->json(['message' => 'This is not your student record!'], 403);
