@@ -303,7 +303,7 @@ export default {
       var payload2 = {
         pfp_path: "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
       }
-      const res5 = API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload2);
+      const res5 = await API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload2);
       console.log(res5);
 
       //update the user's default backround to green and black

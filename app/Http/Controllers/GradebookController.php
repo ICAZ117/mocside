@@ -40,7 +40,8 @@ class GradebookController extends Controller
                     'grades' => array(),
                 );
                 $courses = array(
-                    'courses' => []
+                    'courses' => [],
+                    'archived' => [],
                 );
                 $student->courses = json_encode($courses);
                 $student->gradebook_courses = json_encode($course_book);
