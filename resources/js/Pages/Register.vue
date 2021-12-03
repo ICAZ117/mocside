@@ -274,6 +274,9 @@ export default {
       //   .catch((error) => (this.error = getError(error)));
 
       const res = await AuthService.registerUser(payload);
+      res.catch(function(response) {
+        console.log(response.errors);
+      });
       console.log(res);
       // then, create student. Any user signed up from the front end STARTS as a student.
       // is there a chance this doesn't work? (CSRF mismatch, likely)
