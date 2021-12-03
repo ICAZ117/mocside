@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 
 use App\Http\Responses\LoginResponse;
@@ -61,11 +62,24 @@ class FortifyServiceProvider extends ServiceProvider
             $user = User::where('email', $request->email)
                 ->orWhere('username', $request->email)
                 ->first();
-            if (
-                $user &&
-                Hash::check($request->password, $user->password)
-            ) {
-                return $user;
+            // if (
+            //     $user &&
+            //     Hash::check($request->password, $user->password)
+            // ) {
+            //     return $user;
+            // }
+            if ($user) {
+                if (Hash::check($request->password, $user->password)) {
+                    return $user;
+                } else {
+                    throw ValidationException::withMessages([
+                        Fortify::username() => "Invalid password.",
+                    ]);
+                } 
+            } else {
+                throw ValidationException::withMessages([
+                    Fortify::username() => "Invalid email or username.",
+                ]);
             }
         });
     }
