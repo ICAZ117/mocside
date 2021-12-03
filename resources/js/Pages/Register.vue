@@ -273,19 +273,19 @@ export default {
       //   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
       //   .catch((error) => (this.error = getError(error)));
 
-
+      const self = this;
       const res = await AuthService.registerUser(payload).catch(function (error) {
         if(error.response.data.errors.hasOwnProperty("email")) {
           console.log("Email Error");
-          this.$notify({ type: "error", text: "An account with your email already exists!" });
+          self.$notify({ type: "error", text: "An account with your email already exists!" });
         }
         if(error.response.data.errors.hasOwnProperty("username")) {
           console.log("Username Error");
-          this.$notify({ type: "error", text: "An account with your username already exists!" });
+          self.$notify({ type: "error", text: "An account with your username already exists!" });
         }
         if(error.response.data.errors.hasOwnProperty("fsc_id")) {
           console.log("FSC ID Error");
-          this.$notify({ type: "error", text: "An account with your FSC ID already exists!" });
+          self.$notify({ type: "error", text: "An account with your FSC ID already exists!" });
         }
       }).then(async function(response){
         // then, create student. Any user signed up from the front end STARTS as a student.
