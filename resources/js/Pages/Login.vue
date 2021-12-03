@@ -140,7 +140,8 @@ export default {
       } catch (error) {
         this.error = getError(error);
         console.log("Login Response:");
-        console.log(error.error.response.data.errors.email[1]);
+        console.log(this.error);
+        console.log(this.error.error.response.data.errors.email[1]);
       }
     },
     goRouter() {
