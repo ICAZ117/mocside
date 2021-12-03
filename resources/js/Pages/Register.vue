@@ -287,13 +287,6 @@ export default {
       const res4 = await API.apiClient.post('/progress');
       console.log(res4);
 
-      // update user pfp
-      var payload2 = {
-        pfp_path: "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
-      }
-      const res5 = API.apiClient.put(`/profile/full/${res2.data.data.id}`, payload2);
-      console.log(res5);
-
       //update user record in store to get new pfp path?
       var au = await this.$store.dispatch("auth/getAuthUser");
       if(this.authUser != null) {
@@ -305,6 +298,29 @@ export default {
         document.getElementById("d_navpfp").src = this.pfp;
         document.getElementById("l_navpfp").src = this.pfp;
       }
+
+      // update user pfp
+      var payload2 = {
+        pfp_path: "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
+      }
+      const res5 = API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload2);
+      console.log(res5);
+
+      //update the user's default backround to green and black
+      var payload3 = {
+        settings: {
+          consoleOptions: {
+            foreground: "green",
+            background: "black",
+          },
+          ideOptions: {
+            theme: "gob",
+            defaultLang: "python",
+          },
+        },
+      };
+      //call route
+      const res6 = await API.apiClient.put(`/profile/full/${this.authUser.fsc_user.fsc_id}`, payload3);
 
       // now, push to login
       this.$router.push('/courses'); // this will get them properly authorized,
