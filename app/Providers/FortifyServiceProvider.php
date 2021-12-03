@@ -61,11 +61,24 @@ class FortifyServiceProvider extends ServiceProvider
             $user = User::where('email', $request->email)
                 ->orWhere('username', $request->email)
                 ->first();
-            if (
-                $user &&
-                Hash::check($request->password, $user->password)
-            ) {
-                return $user;
+            // if (
+            //     $user &&
+            //     Hash::check($request->password, $user->password)
+            // ) {
+            //     return $user;
+            // }
+            if ($user) {
+                if (Hash::check($request->password, $user->password)) {
+                    return $user;
+                } else {
+                    throw ValidationException::withMessages([
+                        Fortify::username() => "Invalid password.",
+                    ]);
+                } 
+            } else {
+                throw ValidationException::withMessages([
+                    Fortify::username() => "Invalid email or username.",
+                ]);
             }
         });
     }
