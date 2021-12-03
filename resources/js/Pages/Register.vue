@@ -275,15 +275,13 @@ export default {
 
 
       const res = await AuthService.registerUser(payload).catch(function (error) {
-        console.log(error);
-        console.log(error.response);
-        if(response.data.errors.hasOwnProperty("email")) {
+        if(error.response.data.errors.hasOwnProperty("email")) {
           console.log("Email Error");
         }
-        if(response.data.errors.hasOwnProperty("username")) {
+        if(error.response.data.errors.hasOwnProperty("username")) {
           console.log("Username Error");
         }
-        if(response.data.errors.hasOwnProperty("fsc_id")) {
+        if(error.response.data.errors.hasOwnProperty("fsc_id")) {
           console.log("FSC ID Error");
         }
       });
