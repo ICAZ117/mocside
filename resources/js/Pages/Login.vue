@@ -122,7 +122,7 @@ export default {
         remember: this.rememberMe,
       };
       this.error = null;
-      try {
+      // try {
         const res = await AuthService.login(payload);
         console.log("Login Response:");
         console.log(res.error.response.data.errors.email[1]);
@@ -139,9 +139,9 @@ export default {
           error.name = "Fetch User";
           throw error;
         }
-      } catch (error) {
-        this.error = getError(error);
-      }
+      // } catch (error) {
+      //   this.error = getError(error);
+      // }
     },
     goRouter() {
       //get the previous route.....if an enroll page redirect there
