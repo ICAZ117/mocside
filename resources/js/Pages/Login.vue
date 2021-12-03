@@ -122,10 +122,8 @@ export default {
         remember: this.rememberMe,
       };
       this.error = null;
-      // try {
+      try {
         const res = await AuthService.login(payload);
-        console.log("Login Response:");
-        console.log(res.error.response.data.errors.email[1]);
         const authUser = await this.$store.dispatch("auth/getAuthUser");
         if (authUser) {
           this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
@@ -139,9 +137,11 @@ export default {
           error.name = "Fetch User";
           throw error;
         }
-      // } catch (error) {
-      //   this.error = getError(error);
-      // }
+      } catch (error) {
+        this.error = getError(error);
+        console.log("Login Response:");
+        console.log(error.error.response.data.errors.email[1]);
+      }
     },
     goRouter() {
       //get the previous route.....if an enroll page redirect there
