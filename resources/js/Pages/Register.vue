@@ -276,7 +276,7 @@ export default {
 
       const res = await AuthService.registerUser(payload).catch(function (response) {
         console.log(response);
-        console.log(response.data.errors);
+        console.log(response.errors);
         if(response.data.errors.hasOwnProperty("email")) {
           console.log("Email Error");
         }
