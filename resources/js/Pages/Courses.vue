@@ -321,22 +321,22 @@ export default {
               text:
                 "The maximum number of uses for that course key has already been reached!",
             });
-          } else {
-            var date = new Date();
-            date.setDate(date.getDate());
-            var month = "" + (date.getMonth() + 1),
-              day = "" + date.getDate(),
-              year = date.getFullYear();
-
-            if (month.length < 2) month = "0" + month;
-            if (day.length < 2) day = "0" + day;
-
-            var ymd = [year, month, day].join("-");
-            var time = date.getUTCDate();
-            console.log(ymd);
-            console.log(time);
           }
         }
+
+        var date = new Date();
+        date.setDate(date.getDate());
+        var month = "" + (date.getMonth() + 1),
+          day = "" + date.getDate(),
+          year = date.getFullYear();
+
+        if (month.length < 2) month = "0" + month;
+        if (day.length < 2) day = "0" + day;
+
+        var ymd = [year, month, day].join("-");
+        var time = date.getUTCDate();
+        console.log(ymd);
+        console.log(time);
       }
       // else {
       //   this.$router.push('/' + this.enrollCode + '/enroll');
