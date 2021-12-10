@@ -326,6 +326,9 @@ export default {
           else {
             var currentTime = new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0];
             var dueDate = course.expiration_date;
+
+            var date1 = new Date(currentTime);
+            console.log(date1);
           }
 
         var currentTime = new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0];
