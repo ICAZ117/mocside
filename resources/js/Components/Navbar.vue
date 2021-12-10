@@ -132,10 +132,11 @@ export default {
       this.$forceUpdate();
     },
     async updatePFP() {
+      console.log("Updating PFP");
       var au = await this.$store.dispatch("auth/getAuthUser");
       if(this.authUser != null) {
         this.pfp = au.pfp_path;
-        if(this.pfp == undefined || this.pfp == null) {
+        if(this.pfp == undefined || this.pfp == null || this.pfp == "") {
           console.log("empty path");
           this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
         }
@@ -152,6 +153,7 @@ export default {
       if (this.authUser == null) {
         return false;
       } else {
+        console.log("Detects Login");
         this.updatePFP();
         return true;
       }
@@ -164,6 +166,7 @@ export default {
       } else {
         this.isDark = false;
       }
+      console.log("Detects change in route from home route");
       this.updatePFP();
       this.$emit("forceReload");
     },
