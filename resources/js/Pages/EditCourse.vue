@@ -270,7 +270,7 @@ export default {
         payload["expire_date"] = this.courseForm.dateEnd;
       } else {
         //expire date is set to datetime
-        payload["expire_date"] = this.enrollKey.datetime;
+        payload["expire_date"] = this.enrollKey.datetime + " " + this.enrollKey.time;
       }
       if (this.enrollKey.uses == "") {
         this.enrollKey.uses = 0;
