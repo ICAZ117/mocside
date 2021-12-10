@@ -132,16 +132,16 @@ export default {
       this.$forceUpdate();
     },
     async updatePFP() {
-      // var au = await this.$store.dispatch("auth/getAuthUser");
-      // if(this.authUser != null) {
-      //   this.pfp = au.pfp_path;
-      //   if(this.pfp == undefined || this.pfp == null) {
-      //     console.log("empty path");
-      //     this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
-      //   }
-      //   document.getElementById("d_navpfp").src = this.pfp;
-      //   document.getElementById("l_navpfp").src = this.pfp;
-      // }
+      var au = await this.$store.dispatch("auth/getAuthUser");
+      if(this.authUser != null) {
+        this.pfp = au.pfp_path;
+        if(this.pfp == undefined || this.pfp == null || this.pfp == "") {
+          console.log("empty path");
+          this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+        }
+        document.getElementById("d_navpfp").src = this.pfp;
+        document.getElementById("l_navpfp").src = this.pfp;
+      }
     },
   },
   mounted() {
