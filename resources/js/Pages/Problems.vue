@@ -228,11 +228,23 @@ export default {
       return month + " " + day;
     },
     async addProblem() {
+      var date = new Date();
+      date.setDate(date.getDate() + 7);
+      var month = '' + (date.getMonth() + 1),
+        day = '' + date.getDate(),
+        year = date.getFullYear();
+
+      if (month.length < 2) 
+          month = '0' + month;
+      if (day.length < 2) 
+          day = '0' + day;
+
+      var ymd = [year, month, day].join('-');
       var payload = {
         name: "New Problem",
         description: JSON.stringify({ ops: [{ insert: "New Problem" }] }),
         lab_id: this.labID,
-        due_date: "2021-05-29 13:04:03",
+        due_date: ymd + " 23:59:59",
         copy_id: this.labID,
         java_starter:
           "public class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}",
