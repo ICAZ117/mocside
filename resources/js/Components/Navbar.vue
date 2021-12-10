@@ -38,7 +38,7 @@
                 >Sign Up</router-link
               > 
               <router-link v-show="isLoggedIn" @click="update" to="/profile" class="move-up"
-                ><img class="pfp" id="l_navpfp" src="" alt="Profile"
+                ><img class="pfp" id="l_navpfp" src="images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=" alt="Profile"
               /></router-link>
               <a @click="logout" v-if="isLoggedIn" class="nav-link">Logout</a>
             </div>
@@ -97,7 +97,7 @@
                 @click="update"
                 to="/profile"
                 class="dark-move-up"
-                ><img class="pfp" id="d_navpfp" src="" alt="Profile"
+                ><img class="pfp" id="d_navpfp" src="images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=" alt="Profile"
               /></router-link>
               <a @click="logout" v-if="isLoggedIn" class="dark-nav-link nav-link"
                 >Logout</a
