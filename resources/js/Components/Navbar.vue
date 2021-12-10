@@ -134,6 +134,9 @@ export default {
     async updatePFP() {
       console.log("Updating PFP");
       var au = await this.$store.dispatch("auth/getAuthUser");
+      console.log(au);
+      console.log(this.authUser);
+      // this.authUser = au;
       if(this.authUser != null) {
         this.pfp = au.pfp_path;
         if(this.pfp == undefined || this.pfp == null || this.pfp == "") {
