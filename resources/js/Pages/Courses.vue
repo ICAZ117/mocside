@@ -338,7 +338,7 @@ export default {
         console.log(ymd);
         console.log(time);
 
-        console.log(new Date().toISOString().split('T')[0] + " bob " + new Date().toISOString().split('T')[1]);
+        console.log(new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0]);
       }
       // else {
       //   this.$router.push('/' + this.enrollCode + '/enroll');
