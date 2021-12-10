@@ -314,36 +314,32 @@ export default {
 
       if (course == null) {
         console.log("Course not found!");
-        this.$notify({ type: "error", text: "That course code is invalid!" });
+        this.$notify({ type: "error", text: "That course enroll code is invalid!" });
       } else {
-          if (course.max_uses != 0 && course.uses >= course.max_uses) {
+        if (course.max_uses != 0 && course.uses >= course.max_uses) {
+          this.$notify({
+            type: "error",
+            text:
+              "The maximum number of uses for that course enroll code has already been reached!",
+          });
+        } else {
+          var currentTime = new Date(
+            new Date().toISOString().split("T")[0] +
+              " " +
+              new Date().toISOString().split("T")[1].split(".")[0]
+          );
+          var expirationDate = new Date(course.expire_date);
+
+          if (currentTime > expirationDate) {
             this.$notify({
               type: "error",
-              text:
-                "The maximum number of uses for that course key has already been reached!",
+              text: "That course enroll code has expired!",
             });
+          } else {
+            this.$router.push("/" + this.enrollCode + "/enroll");
           }
-          else {
-            var currentTime = new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0];
-            var dueDate = course.expire_date;
-
-            var currentTimeDate = new Date(currentTime);
-            var dueDateDate = new Date(dueDate);
-
-            console.log(currentTimeDate);
-            console.log(dueDate);
-            console.log(dueDateDate);
-            console.log(currentTimeDate < dueDateDate);
-            console.log(currentTimeDate.getTime() == dueDateDate.getTime());
-            console.log(currentTimeDate > dueDateDate);
-
-          }
-
-        var currentTime = new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0];
+        }
       }
-      // else {
-      //   this.$router.push('/' + this.enrollCode + '/enroll');
-      // }}
     },
     showMenu(course_id) {
       if (this.isProf) {
