@@ -38,7 +38,7 @@
                 >Sign Up</router-link
               > 
               <router-link v-show="isLoggedIn" @click="update" to="/profile" class="move-up"
-                ><img class="pfp" id="l_navpfp" src="images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=" alt="Profile"
+                ><img class="pfp" id="l_navpfp" src="" alt="Profile"
               /></router-link>
               <a @click="logout" v-if="isLoggedIn" class="nav-link">Logout</a>
             </div>
@@ -97,7 +97,7 @@
                 @click="update"
                 to="/profile"
                 class="dark-move-up"
-                ><img class="pfp" id="d_navpfp" src="images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=" alt="Profile"
+                ><img class="pfp" id="d_navpfp" src="" alt="Profile"
               /></router-link>
               <a @click="logout" v-if="isLoggedIn" class="dark-nav-link nav-link"
                 >Logout</a
@@ -120,7 +120,7 @@ export default {
   data() {
     return {
       isDark: false,
-      pfp: "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
+      pfp: "http://mocside.com:8000/images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=",
     };
   },
   methods: {
@@ -141,7 +141,7 @@ export default {
         this.pfp = au.pfp_path;
         if(this.pfp == undefined || this.pfp == null || this.pfp == "") {
           console.log("empty path");
-          this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+          this.pfp = "http://mocside.com:8000/images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
         }
         document.getElementById("d_navpfp").src = this.pfp;
         document.getElementById("l_navpfp").src = this.pfp;
