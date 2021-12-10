@@ -13,8 +13,12 @@
         <div class="delete Course">
           <p>Are you sure you would like to delete {{ deletingCourse.course.name }}</p>
           <div class="delete-buttons">
-            <button class="btn btn-md btn-danger delete-button" @click="closeDeleting()">Cancel</button>
-            <button class="btn btn-md btn-danger delete-button" @click="deleteCourse()">Delete</button>
+            <button class="btn btn-md btn-danger delete-button" @click="closeDeleting()">
+              Cancel
+            </button>
+            <button class="btn btn-md btn-danger delete-button" @click="deleteCourse()">
+              Delete
+            </button>
           </div>
         </div>
       </vue-final-modal>
@@ -28,8 +32,8 @@
         <button class="modal-close" @click="showEnrollModal = false">x</button>
         <div class="enrollModal">
           <label for="enrollCode">Course Enroll Code:&nbsp;&nbsp;</label>
-          <input id="enrollCode" name="enrollCode" type="text" v-model="enrollCode">
-          <br>
+          <input id="enrollCode" name="enrollCode" type="text" v-model="enrollCode" />
+          <br />
           <button class="btn btn-success btn-md" @click="enroll()">Enroll</button>
         </div>
       </vue-final-modal>
@@ -269,28 +273,28 @@ import { computed } from "vue";
 
 export default {
   data: () => ({
-      authUser: null,
-      enrolledCourses: [],
-      courses: [], //all courses
-      unfilteredCourses: [], //the filtered courses
-      childIsOpen: false,
-      courseID: null,
-      username: "",
-      rightClickID: "",
-      courseName: "",
-      filter: true,
-      sort: "4",
-      showOldCourses: false,
-      showDeleteModal: false,
-      showEnrollModal: false,
-      reloadDeleteModal: 0,
-      deletingCourse: {
-        id: "",
-        course: {},
-        key: "",
-      },
-      ignoreUnmount: false,
-      enrollCode: "",
+    authUser: null,
+    enrolledCourses: [],
+    courses: [], //all courses
+    unfilteredCourses: [], //the filtered courses
+    childIsOpen: false,
+    courseID: null,
+    username: "",
+    rightClickID: "",
+    courseName: "",
+    filter: true,
+    sort: "4",
+    showOldCourses: false,
+    showDeleteModal: false,
+    showEnrollModal: false,
+    reloadDeleteModal: 0,
+    deletingCourse: {
+      id: "",
+      course: {},
+      key: "",
+    },
+    ignoreUnmount: false,
+    enrollCode: "",
   }),
   setup() {
     const route = useRoute();
@@ -304,23 +308,48 @@ export default {
   methods: {
     async enroll() {
       const res = await API.apiClient.get(`/invite/${this.enrollCode}`);
-      
-      console.log("HERE'S THE RESPONSE:");
-      console.log(res.data.data);
+      const course = res.data.data;
 
-      if(res.data.config.url == "/invite/undefined") {
-        console.log("Course not found!")
+      if (course == null) {
+        console.log("Course not found!");
+        this.$notify({ type: "error", text: "That course code is invalid!" });
+      } else {
+        if (course.max_uses != 0) {
+          if (course.uses >= course.max_uses) {
+            this.$notify({
+              type: "error",
+              text:
+                "The maximum number of uses for that course key has already been reached!",
+            });
+          }
+        }
+
+        var date = new Date();
+        date.setDate(date.getDate());
+        var month = "" + (date.getMonth() + 1),
+          day = "" + date.getDate(),
+          year = date.getFullYear();
+
+        if (month.length < 2) month = "0" + month;
+        if (day.length < 2) day = "0" + day;
+
+        var ymd = [year, month, day].join("-");
+        var time = date.get;
+        console.log(ymd);
+        console.log(time);
+
+        console.log(new Date().toISOString().split('T')[0] + " bob " + new Date().toISOString().split('T')[1]);
       }
-      else {
-        this.$router.push('/' + this.enrollCode + '/enroll');
-      }
+      // else {
+      //   this.$router.push('/' + this.enrollCode + '/enroll');
+      // }}
     },
     showMenu(course_id) {
       if (this.isProf) {
         this.rightClickID = String(course_id);
         const menu = document.getElementById(this.rightClickID).childNodes[0];
         const outClick = document.getElementById("out-click");
-        
+
         menu.style.top = `${window.event.pageY}px`;
         menu.style.left = `${window.event.pageX}px`;
         menu.classList.add("show");
@@ -425,7 +454,7 @@ export default {
         });
       }
     },
-    pushToLabs: function(params) {
+    pushToLabs: function (params) {
       this.ignoreUnmount = true;
       var courseID = params[0];
       var courseName = params[1];
@@ -437,9 +466,9 @@ export default {
       //first go to labs page
       console.log("routeToLabs");
       console.log(this.ignoreUnmount);
-      this.$router.push('/courses/' + courseID + '/labs/' + labID + '/problems');
+      this.$router.push("/courses/" + courseID + "/labs/" + labID + "/problems");
     },
-    pushToLabEdit: function(params) {
+    pushToLabEdit: function (params) {
       this.ignoreUnmount = true;
       var courseID = params[0];
       var courseName = params[1];
@@ -450,9 +479,9 @@ export default {
     routeToLabEdit(courseID, labID) {
       console.log("route to lab edit");
       console.log(this.ignoreUnmount);
-      this.$router.push('/courses/' + courseID + '/labs/' + labID + '/edit');
+      this.$router.push("/courses/" + courseID + "/labs/" + labID + "/edit");
     },
-    pushToCourses: function(params) {
+    pushToCourses: function (params) {
       this.ignoreUnmount = true;
       var courseID = params[0];
       var courseName = params[1];
@@ -461,7 +490,7 @@ export default {
     routeToCourses(courseID) {
       console.log("routeToCourses");
       console.log(this.ignoreUnmount);
-      this.$router.push('/courses/' + courseID + '/labs');
+      this.$router.push("/courses/" + courseID + "/labs");
     },
     async getCourses() {
       this.courses = [];
@@ -656,15 +685,14 @@ export default {
       });
     },
     Unmounting() {
-      if(!this.ignoreUnmount) {
+      if (!this.ignoreUnmount) {
         this.childIsOpen = false;
         this.courseID = null;
         var flag = this.refreshPage();
         console.log("unmounting the labs page");
         if (flag) {
           this.$router.push({ name: "Courses" });
-        }
-        else {
+        } else {
           this.routeToChild();
         }
       }
@@ -672,7 +700,9 @@ export default {
     },
     async courseEdited() {
       ///update the list of courses
-      this.unfilteredCourses = this.unfilteredCourses.filter((c) => c.id != this.courseID);
+      this.unfilteredCourses = this.unfilteredCourses.filter(
+        (c) => c.id != this.courseID
+      );
       const course = await API.apiClient.get(`/courses/${this.courseID}`);
       this.unfilteredCourses.push(course.data.data);
       this.separateCourses();
