@@ -334,9 +334,13 @@ export default {
         if (day.length < 2) day = "0" + day;
 
         var ymd = [year, month, day].join("-");
-        var time = date.getUTCDate();
+        var time = date.get;
         console.log(ymd);
         console.log(time);
+
+        var date2 = new Date().format('Y-m-d h:i:s');
+        console.log(date2);
+        console.log(new Date().toISOString().split('T')[0] + " bob " + new Date().toISOString().split('T')[1]);
       }
       // else {
       //   this.$router.push('/' + this.enrollCode + '/enroll');
