@@ -303,7 +303,7 @@ export default {
   },
   methods: {
     async enroll() {
-      const res = await API.apiClient.get(`/invite/${this.key}`);
+      const res = await API.apiClient.get(`/invite/${this.enrollCode}`);
       
       console.log("HERE'S THE RESPONSE:");
       console.log(res);
