@@ -145,6 +145,7 @@ export default {
         }
         document.getElementById("d_navpfp").src = this.pfp;
         document.getElementById("l_navpfp").src = this.pfp;
+        console.log(this.pfp);
       }
     },
   },
