@@ -338,8 +338,6 @@ export default {
         console.log(ymd);
         console.log(time);
 
-        var date2 = new Date().format('Y-m-d h:i:s');
-        console.log(date2);
         console.log(new Date().toISOString().split('T')[0] + " bob " + new Date().toISOString().split('T')[1]);
       }
       // else {
