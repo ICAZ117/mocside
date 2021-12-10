@@ -325,12 +325,13 @@ export default {
           }
           else {
             var currentTime = new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0];
-            var dueDate = course.expiration_date;
+            var dueDate = course.expire_date;
 
             var currentTimeDate = new Date(currentTime);
             var dueDateDate = new Date(dueDate);
 
             console.log(currentTimeDate);
+            console.log(dueDate);
             console.log(dueDateDate);
             console.log(currentTimeDate < dueDateDate);
             console.log(currentTimeDate.getTime() == dueDateDate.getTime());
