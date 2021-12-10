@@ -310,35 +310,25 @@ export default {
       const res = await API.apiClient.get(`/invite/${this.enrollCode}`);
       const course = res.data.data;
 
+      console.log(course);
+
       if (course == null) {
         console.log("Course not found!");
         this.$notify({ type: "error", text: "That course code is invalid!" });
       } else {
-        if (course.max_uses != 0) {
-          if (course.uses >= course.max_uses) {
+          if (course.max_uses != 0 && course.uses >= course.max_uses) {
             this.$notify({
               type: "error",
               text:
                 "The maximum number of uses for that course key has already been reached!",
             });
           }
-        }
+          else {
+            var currentTime = new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0];
+            var dueDate = course.expiration_date;
+          }
 
-        var date = new Date();
-        date.setDate(date.getDate());
-        var month = "" + (date.getMonth() + 1),
-          day = "" + date.getDate(),
-          year = date.getFullYear();
-
-        if (month.length < 2) month = "0" + month;
-        if (day.length < 2) day = "0" + day;
-
-        var ymd = [year, month, day].join("-");
-        var time = date.get;
-        console.log(ymd);
-        console.log(time);
-
-        console.log(new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0]);
+        var currentTime = new Date().toISOString().split('T')[0] + " " + new Date().toISOString().split('T')[1].split(".")[0];
       }
       // else {
       //   this.$router.push('/' + this.enrollCode + '/enroll');
