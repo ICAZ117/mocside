@@ -94,13 +94,17 @@ class InviteController extends Controller
         $code = InviteCode::where('join_key', '=', $key)->first();
         $course = Course::findOrFail($code->course_id);
 
-        // check for code expiracy             max_uses = 0 => infinite uses
-        if (($code->uses >= $code->max_uses && $code->max_uses != 0) || date("Y-m-d H:i:s") >= $code->expire_date) {
-            return response()->json(['message' => 'Code no longer valid.'], 403);
-        } else {
-            $code->uses = $code->uses + 1;
-            $code->save();
+        // check for code expiracy
+        if ($code->max_uses > 0 && $code->uses >= $code->max_uses) {
+            return response()->json(['message' => 'This code has been used too many times.'], 403);
         }
+
+        if ($code->expire_date != null && date("Y-m-d H:i:s") >= $code->expire_date) {
+            return response()->json(['message' => 'Code no longer valid.'], 403);
+        }
+
+        $code->uses = $code->uses + 1;
+        $code->save();
 
         // check to make sure student is not already in roser
         $course_roster = json_decode($course->roster, true);
