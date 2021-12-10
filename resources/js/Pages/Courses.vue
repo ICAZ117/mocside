@@ -306,7 +306,8 @@ export default {
       const res = await API.apiClient.get(`/invite/${this.enrollCode}`);
       
       console.log("HERE'S THE RESPONSE:");
-      console.log(res);
+      console.log(res.data.data);
+
       if(res.data.config.url == "/invite/undefined") {
         console.log("Course not found!")
       }
