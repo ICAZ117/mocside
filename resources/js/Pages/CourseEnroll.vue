@@ -122,6 +122,7 @@ export default {
         }
 
         //update authUser
+        const authUser = await this.$store.dispatch("auth/getAuthUser");
       
 
         //move to course page
