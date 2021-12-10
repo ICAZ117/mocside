@@ -132,6 +132,7 @@ export default {
       this.$forceUpdate();
     },
     async updatePFP() {
+      console.log("Updating PFP");
       var au = await this.$store.dispatch("auth/getAuthUser");
       if(this.authUser != null) {
         this.pfp = au.pfp_path;
@@ -152,6 +153,7 @@ export default {
       if (this.authUser == null) {
         return false;
       } else {
+        console.log("Detects Login");
         this.updatePFP();
         return true;
       }
@@ -164,6 +166,7 @@ export default {
       } else {
         this.isDark = false;
       }
+      console.log("Detects change in route from home route");
       this.updatePFP();
       this.$emit("forceReload");
     },
