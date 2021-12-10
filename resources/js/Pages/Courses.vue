@@ -330,9 +330,9 @@ export default {
             var currentTimeDate = new Date(currentTime);
             var dueDateDate = new Date(dueDate);
 
-            console.log(currentTimeDate.getTime() < dueDateDate.getTime());
+            console.log(currentTimeDate < dueDateDate);
             console.log(currentTimeDate.getTime() == dueDateDate.getTime());
-            console.log(currentTimeDate.getTime() > dueDateDate.getTime());
+            console.log(currentTimeDate > dueDateDate);
 
           }
 
