@@ -203,7 +203,9 @@ export default {
       })
       .listen(".end", (e) => {
         this.newLog = e.log;
-        this.programFinished();
+        setTimeout(() => {
+          this.programFinished();
+        }, 100);
       });
   },
 };
