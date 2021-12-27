@@ -22,6 +22,10 @@ class User extends Authenticatable
         return $this->is_admin;
     }
 
+    public function isActive(): bool
+    {
+        return $this->status;
+    }
     public function isProf(): bool
     {
         $fscRole = $this->fsc_role;
@@ -70,7 +74,8 @@ class User extends Authenticatable
         'fsc_id',
         'fsc_role',
         'pfp_path',
-        'settings'
+        'settings',
+        'status'
     ];
 
     /**
@@ -91,5 +96,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean',
+        'status' => 'boolean'
     ];
 }

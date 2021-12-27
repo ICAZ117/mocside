@@ -121,13 +121,52 @@ class UserController extends Controller
     // this should be achieved by storing the image and sending the updateProfile request with the correct path
 
     /**
-     * Remove the specified resource from storage.
+     * Deactivates user account without deleting.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        // change active status to false
+        $user = Auth::user();
+        if ($user->isAdmin() || $user->id == $id) {
+            $target = User::where('fsc_id', '=', $id)->first();
+            if ($target) {
+                $target->is_active = false;
+                $target->save();
+                return response()->json(['message' => 'User deactivated.', 'data' => $target], 200);
+            }
+            return response()->json(['message' => 'User not found.'], 404);
+        }
+    }
+
+    public function activate($id)
+    {
+        // change active status to true
+        $user = Auth::user();
+        if ($user->isAdmin()) {
+            $target = User::where('fsc_id', '=', $id)->first();
+            if ($target) {
+                $target->is_active = true;
+                $target->save();
+                return response()->json(['message' => 'User activated.', 'data' => $target], 200);
+            }
+            return response()->json(['message' => 'User not found.'], 404);
+        }
+    }
+
+    public function bigDelete($id)
+    {
+        // actually delete user resource
+        $user = Auth::user();
+        if ($user->isAdmin()) {
+            $target = User::where('fsc_id', '=', $id)->first();
+            if ($target) {
+                $target->delete();
+                return response()->json(['message' => 'User deleted.', 'data' => $target], 200);
+            }
+            return response()->json(['message' => 'User not found.'], 404);
+        }
     }
 }

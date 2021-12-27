@@ -42,7 +42,7 @@ Route::post('/sanctum/token', TokenController::class);
 // I want this out of auth lock :) 
 Route::post('/convert-markdown', [StorageController::class, 'convertMarkdown']);
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum', 'active'])->group(function () {
     Route::get('/users/auth', AuthController::class);
     Route::put('/users/auth/{id}', [UserController::class, 'updateProfile']);
     Route::get('/users/{id}', function ($id) {
@@ -53,6 +53,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::post('/users/elevate/{id}', [UserController::class, 'update']);
     Route::post('/users/downgrade/{id}', [UserController::class, 'downgrade']);
+    Route::delete('/users/disable/{id}', [UserController::class, 'destroy']); // this is a soft delete
+    Route::delete('/users/delete/{id}', [UserController::class, 'delete']); // this is a hard delete
+    Route::post('/users/activate/{id}', [UserController::class, 'activate']);
 
     Route::resource('courses', CourseController::class);
     // I hope this works.
