@@ -1,7 +1,6 @@
 <template>
-  <!-- <div v-if="!isDark"> -->
   <div>
-    <div v-if="!isDark">
+    <div v-show="!isDark">
       <nav class="navbar bg-light navbar-light navbar-expand-xl">
         <router-link to="/" class="navbar-brand">
           <img src="../../img/logo/brandlight.png" alt="Mocs-IDE" title="Logo" />
@@ -21,17 +20,17 @@
             <div class="nav-item">
               <router-link @click="update" to="/" class="nav-link">Home</router-link>
               <router-link
-                v-if="isLoggedIn"
+                v-show="isLoggedIn"
                 @click="update"
                 to="/courses"
                 class="nav-link"
                 >Courses</router-link
               > 
-              <router-link v-if="!isLoggedIn" @click="update" to="/login" class="nav-link"
+              <router-link v-show="!isLoggedIn" @click="update" to="/login" class="nav-link"
                 >Login</router-link
               >
               <router-link
-                v-if="!isLoggedIn"
+                v-show="!isLoggedIn"
                 @click="update"
                 to="/register"
                 class="nav-link"
@@ -40,7 +39,7 @@
               <router-link v-show="isLoggedIn" @click="update" to="/profile" class="move-up"
                 ><img class="pfp" id="l_navpfp" src="" alt="Profile"
               /></router-link>
-              <a @click="logout" v-if="isLoggedIn" class="nav-link">Logout</a>
+              <a @click="logout" v-show="isLoggedIn" class="nav-link">Logout</a>
             </div>
           </div>
         </div>
@@ -50,7 +49,7 @@
     </div>
 
     <!-- DARK NAVBAR -->
-    <div v-if="isDark">
+    <div v-show="isDark">
       <nav class="dark-navbar navbar navbar-expand-xl">
         <router-link to="/" class="navbar-brand">
           <img src="../../img/logo/branddark.png" alt="Mocs-IDE" title="Logo" />
@@ -72,21 +71,21 @@
                 >Home</router-link
               >
               <router-link
-                v-if="isLoggedIn"
+                v-show="isLoggedIn"
                 @click="update"
                 to="/courses"
                 class="dark-nav-link nav-link"
                 >Courses</router-link
               >
               <router-link
-                v-if="!isLoggedIn"
+                v-show="!isLoggedIn"
                 @click="update"
                 to="/login"
                 class="dark-nav-link nav-link"
                 >Login</router-link
               >
               <router-link
-                v-if="!isLoggedIn"
+                v-show="!isLoggedIn"
                 @click="update"
                 to="/register"
                 class="dark-nav-link nav-link"
@@ -99,7 +98,7 @@
                 class="dark-move-up"
                 ><img class="pfp" id="d_navpfp" src="" alt="Profile"
               /></router-link>
-              <a @click="logout" v-if="isLoggedIn" class="dark-nav-link nav-link"
+              <a @click="logout" v-show="isLoggedIn" class="dark-nav-link nav-link"
                 >Logout</a
               >
             </div>
@@ -125,9 +124,12 @@ export default {
   },
   methods: {
     async logout() {
-      this.$router.push({name: "Home"});
-      // this.$forceUpdate();
-      await this.$store.dispatch("auth/logout");
+      await this.$router.push({name: "Home"}).then(() => {
+        this.$store.dispatch("auth/logout");
+      });
+      // await this.$store.dispatch("auth/logout").then(() => {
+      //   this.$router.push({name: "Home"});
+      // });
     },
     update() {
       this.$forceUpdate();
@@ -152,6 +154,10 @@ export default {
   },
   mounted() {
     this.updatePFP();
+    console.log("we are mounting the navbar component");
+  },
+  unmounted() {
+    console.log("unmounting the navbar component which should never happen");
   },
   computed: {
     isLoggedIn: function () {

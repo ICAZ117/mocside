@@ -202,7 +202,10 @@ export default {
         // }
       })
       .listen(".end", (e) => {
-        this.programFinished();
+        this.newLog = e.log;
+        setTimeout(() => {
+          this.programFinished();
+        }, 100);
       });
   },
 };
