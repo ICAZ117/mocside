@@ -203,6 +203,7 @@ export default {
       })
       .listen(".end", (e) => {
         this.newLog = e.log;
+        console.log(e.log);
         this.programFinished();
       });
   },
