@@ -63,9 +63,9 @@ class FortifyServiceProvider extends ServiceProvider
                 ->orWhere('username', $request->email)
                 ->first();
             if ($user) {
-                if (!$user->is_active) {
+                if (!$user->isActive()) {
                     throw ValidationException::withMessages([
-                        Fortify::username() => "This user is not active. (login)",
+                        Fortify::username() => "This user is not active.",
                     ]);
                 } elseif (Hash::check($request->password, $user->password)) {
                     return $user;
