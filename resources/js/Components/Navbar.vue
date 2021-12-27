@@ -155,6 +155,7 @@ export default {
   },
   mounted() {
     this.updatePFP();
+    console.log("we are mounting the navbar component");
   },
   computed: {
     isLoggedIn: function () {
