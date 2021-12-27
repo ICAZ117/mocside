@@ -1,8 +1,9 @@
 <template>
   <div class="app">
-    <div @click="key = !key">
+    <!-- <div @click="key = !key">
       <Navbar :authUser="authUser" :key="key" @forceReload="reload" />
-    </div>
+    </div> -->
+    <Navbar :authUser="authUser" :key="key" @forceReload="reload" />
     <router-view></router-view>
     <notifications position="bottom left"/>
   </div>
