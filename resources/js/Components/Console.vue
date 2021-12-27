@@ -141,9 +141,7 @@ export default {
         payload
       );
     },
-    async programFinished(e) {
-      console.log("Program finished");
-      console.log(e.log)
+    async programFinished() {
       this.$emit("programFinished");
       this.newInput = "";
       this.isRunning = false;
@@ -204,7 +202,8 @@ export default {
         // }
       })
       .listen(".end", (e) => {
-        this.programFinished(e);
+        this.newLog = e.log;
+        this.programFinished();
       });
   },
 };
