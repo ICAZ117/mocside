@@ -133,7 +133,7 @@ class UserController extends Controller
         if ($user->isAdmin() || $user->id == $id) {
             $target = User::where('fsc_id', '=', $id)->first();
             if ($target) {
-                $target->is_active = false;
+                $target->status = false;
                 $target->save();
                 return response()->json(['message' => 'User deactivated.', 'data' => $target], 200);
             }
@@ -148,7 +148,7 @@ class UserController extends Controller
         if ($user->isAdmin()) {
             $target = User::where('fsc_id', '=', $id)->first();
             if ($target) {
-                $target->is_active = true;
+                $target->status = true;
                 $target->save();
                 return response()->json(['message' => 'User activated.', 'data' => $target], 200);
             }
@@ -168,5 +168,8 @@ class UserController extends Controller
             }
             return response()->json(['message' => 'User not found.'], 404);
         }
+        // THIS FUNCTION IS NOT COMPLETE
+        // IT MUST CLEAN THE USER ID FROM ALL PLACES IT IS USED
+        // AND THEN DELETE THE USER
     }
 }
