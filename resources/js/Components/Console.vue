@@ -141,7 +141,8 @@ export default {
         payload
       );
     },
-    async programFinished() {
+    async programFinished(e) {
+      console.log(e)
       this.$emit("programFinished");
       this.newInput = "";
       this.isRunning = false;
@@ -202,7 +203,7 @@ export default {
         // }
       })
       .listen(".end", (e) => {
-        this.programFinished();
+        this.programFinished(e);
       });
   },
 };
