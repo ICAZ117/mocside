@@ -125,9 +125,12 @@ export default {
   },
   methods: {
     async logout() {
-      await this.$router.push({name: "Home"}).then(() => {
-        this.$store.dispatch("auth/logout");
-      });
+      // await this.$router.push({name: "Home"}).then(() => {
+      //   this.$store.dispatch("auth/logout");
+      // });
+      await this.$store.dispatch("auth/logout").then(() => {
+        this.$router.push({name: "Home"});
+      })
     },
     update() {
       this.$forceUpdate();
