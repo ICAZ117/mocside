@@ -25,6 +25,9 @@
           :theme="theme"
           :key="forceReload"
           :style="'width: ' + width + '!important;'"
+          :options="{enableBasicAutocompletion: true,
+        enableSnippets: true,
+        enableLiveAutocompletion: false}"
         />
       </div>
     </Vue3DraggableResizable>
@@ -241,13 +244,13 @@ import "ace-builds/src-noconflict/mode-python";
   //////////////////////////////////////////////////////////////////////
   //                            EXTRAS                                //
   //////////////////////////////////////////////////////////////////////
-  // import "ace-builds/src-noconflict/ext-beautify";
+  import "ace-builds/src-noconflict/ext-beautify";
   // import "ace-builds/src-noconflict/ext-code_lens";
   // import "ace-builds/src-noconflict/ext-elastic_tabstops_lite";
   // import "ace-builds/src-noconflict/ext-emmet";
   // import "ace-builds/src-noconflict/ext-error_marker";
   // import "ace-builds/src-noconflict/ext-keybinding_menu";
-  // import "ace-builds/src-noconflict/ext-language_tools";
+  import "ace-builds/src-noconflict/ext-language_tools";
   // import "ace-builds/src-noconflict/ext-linking";
   // import "ace-builds/src-noconflict/ext-modelist";
   // import "ace-builds/src-noconflict/ext-options";
