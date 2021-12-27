@@ -240,7 +240,7 @@ import "ace-builds/src-noconflict/theme-xcode";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-python";
 
-{
+
   //////////////////////////////////////////////////////////////////////
   //                            EXTRAS                                //
   //////////////////////////////////////////////////////////////////////
@@ -285,7 +285,7 @@ import "ace-builds/src-noconflict/mode-python";
   // import "ace-builds/src-noconflict/worker-php";
   // import "ace-builds/src-noconflict/worker-xml";
   // import "ace-builds/src-noconflict/worker-xquery";
-}
+
 
 import * as API from "../services/API";
 import { defineComponent } from "vue";
