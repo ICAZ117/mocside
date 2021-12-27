@@ -157,6 +157,9 @@ export default {
     this.updatePFP();
     console.log("we are mounting the navbar component");
   },
+  unmounted() {
+    console.log("unmounting the navbar component which should never happen");
+  },
   computed: {
     isLoggedIn: function () {
       if (this.authUser == null) {
