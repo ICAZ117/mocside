@@ -1,7 +1,7 @@
 <template>
   <!-- <div v-if="!isDark"> -->
   <div>
-    <div v-if="!isDark">
+    <div v-show="!isDark">
       <nav class="navbar bg-light navbar-light navbar-expand-xl">
         <router-link to="/" class="navbar-brand">
           <img src="../../img/logo/brandlight.png" alt="Mocs-IDE" title="Logo" />
@@ -50,7 +50,7 @@
     </div>
 
     <!-- DARK NAVBAR -->
-    <div v-if="isDark">
+    <div v-show="isDark">
       <nav class="dark-navbar navbar navbar-expand-xl">
         <router-link to="/" class="navbar-brand">
           <img src="../../img/logo/branddark.png" alt="Mocs-IDE" title="Logo" />
