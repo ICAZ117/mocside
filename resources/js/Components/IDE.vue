@@ -25,9 +25,7 @@
           :theme="theme"
           :key="forceReload"
           :style="'width: ' + width + '!important;'"
-          :options="{enableBasicAutocompletion: false,
-        enableSnippets: true,
-        enableLiveAutocompletion: true}"
+          :options="{enableSnippets: true, enableLiveAutocompletion: true}"
         />
       </div>
     </Vue3DraggableResizable>
