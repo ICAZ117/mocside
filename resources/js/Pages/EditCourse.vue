@@ -1,5 +1,7 @@
 <template>
   <div class="course-dashboard">
+
+    <!-------------- TOP ROW -------------->
     <div class="top-row">
       <div class="top-left course-details">
         <div class="course-create-form">
@@ -31,12 +33,7 @@
             <div class="form-group">
               <div class="mb-4">
                 <label for="file" class="sr-only"> Upload Course Image </label>
-                <input
-                  type="file"
-                  :accept="['image/*']"
-                  @change="fileChange"
-                  id="file"
-                />
+                <input type="file" :accept="['image/*']" @change="fileChange" id="file" />
               </div>
             </div>
             <br />
@@ -72,11 +69,21 @@
       </div>
       <div class="top-right grades">
         <div class="form-group">
-          <button @click="studentView()" class="btn btn-danger btn-block">Student View</button>
+          <button @click="studentView()" class="btn btn-danger btn-block">
+            Student View
+          </button>
           <label for="Course Roster">Course Roster</label>
           <ul>
             <li v-for="(student, key) in students" :key="student.id">
-              {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }} {{ Math.floor((JSON.parse(course.gradebook).grades[student.fsc_user.fsc_id] / course.worth) * 100 * 100) / 100 }}%
+              {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }}
+              {{
+                Math.floor(
+                  (JSON.parse(course.gradebook).grades[student.fsc_user.fsc_id] /
+                    course.worth) *
+                    100 *
+                    100
+                ) / 100
+              }}%
               <!-- <a @click="removeStudent(student, key)">X</a> -->
             </li>
           </ul>
@@ -104,18 +111,10 @@
             </label>
             <br />
             <label>Expire Date</label>
-            <input
-              type="date"
-              :disabled="enrollKey.perm"
-              v-model="enrollKey.datetime"
-            />
+            <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
             <br />
             <label>Expire Time</label>
-            <input
-              type="time"
-              :disabled="enrollKey.perm"
-              v-model="enrollKey.time"
-            />
+            <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
             <br />
             <label>Max Uses</label>
             <input
@@ -124,11 +123,7 @@
               v-model="enrollKey.uses"
             />
           </div>
-          <button
-            type="button"
-            @click="generateKey"
-            class="btn btn-danger btn-block"
-          >
+          <button type="button" @click="generateKey" class="btn btn-danger btn-block">
             Generate Course Enroll Key
           </button>
         </div>
@@ -157,7 +152,9 @@
                   @click.prevent="goToProblems(lab.id, lab.name)"
                   @contextmenu.prevent="showMenu(lab.id)"
                 >
-                  <td><a>{{ lab.name }}</a></td>
+                  <td>
+                    <a>{{ lab.name }}</a>
+                  </td>
                   <td>{{ lab.num_problems }}</td>
                   <td>{{ lab.due_date }}</td>
                 </tr>
@@ -181,15 +178,9 @@
     >
       <button class="modal-close" @click="closeDeleting()">x</button>
       <div class="delete Course">
-        <p>
-          Are you sure you would like to delete {{ deletingLab.lab.name }}
-        </p>
-        <button class="btn btn-md btn-danger" @click="closeDeleting()">
-          Cancel
-        </button>
-        <button class="btn btn-md btn-danger" @click="removeLab()">
-          Delete
-        </button>
+        <p>Are you sure you would like to delete {{ deletingLab.lab.name }}</p>
+        <button class="btn btn-md btn-danger" @click="closeDeleting()">Cancel</button>
+        <button class="btn btn-md btn-danger" @click="removeLab()">Delete</button>
       </div>
     </vue-final-modal>
   </div>
@@ -361,9 +352,7 @@ export default {
     },
     async getStudents() {
       for (let i = 0; i < this.courseForm.roster.length; i++) {
-        const res = await API.apiClient.get(
-          `/students/${this.courseForm.roster[i]}`
-        );
+        const res = await API.apiClient.get(`/students/${this.courseForm.roster[i]}`);
         this.students.push(res.data.data);
       }
     },

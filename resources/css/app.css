@@ -231,8 +231,8 @@ input:checked + .slider:before {
 
 .vue-notification.success {
     border-top-right-radius: 5px;
-    background: #68CD86!important;
-    border-left-color: #42A85F;
+    background: #68cd86 !important;
+    border-left-color: #42a85f;
     border-bottom-right-radius: 5px;
 }
 
@@ -677,7 +677,7 @@ hr.courses {
     width: auto !important;
     margin-left: 1rem !important;
     margin-right: 1rem !important;
-    height: 236px!important;
+    height: 236px !important;
     overflow: visible;
 }
 
@@ -702,6 +702,11 @@ hr.courses {
 
 .dates {
     display: flex !important;
+}
+
+.top-row, .bottom-row {
+    height: calc(((100vh - var(--nav-height)) / 2)) !important;
+    width: 100vw;
 }
 
 /*============== LABS and PROBLEMS ==============*/
@@ -1430,7 +1435,7 @@ footer .svg-inline--fa:hover {
     border: none;
     border-bottom: 2px var(--FSCgrey) solid;
     border-radius: unset;
-    outline: none!important;
+    outline: none !important;
 }
 
 .profile-select {
