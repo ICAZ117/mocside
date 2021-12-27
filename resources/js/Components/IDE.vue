@@ -291,6 +291,7 @@ import Accordion from "../Components/Accordion.vue";
 import Vue3DraggableResizable from "vue3-draggable-resizable";
 //default styles
 import "vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
+import store from "../Store/index";
 
 export default defineComponent({
   name: "IDE",
@@ -313,6 +314,7 @@ export default defineComponent({
     Vue3DraggableResizable,
   },
   data: () => ({
+    authUser: "",
     terminate: false,
     theme: "gob",
     editorLangauge: "",
@@ -769,6 +771,8 @@ export default defineComponent({
     },
   },
   async mounted() {
+    this.authUser = await store.getters["auth/authUser"];
+    this.theme = this.authUser.settings.ideOptions.theme;
     try {
       if (this.lang == "Java") {
         this.editorLangauge = "java";
