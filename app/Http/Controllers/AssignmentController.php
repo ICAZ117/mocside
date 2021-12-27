@@ -218,15 +218,27 @@ class AssignmentController extends Controller
                     $first->save();
                     // delete copies[1]
                     $husk = $copies[1];
+                    // delete test cases from husk
+                    foreach ($husk->test_cases as $tc) {
+                        $tc->delete();
+                    }
                     $husk->delete();
                     return response()->json(['message' => 'Delete successful and pointers cleaned.', 'data' => $husk], 200);
                 } else {
                     // we are deleting sole copy
+                    // delete test cases
+                    foreach ($first->test_cases as $tc) {
+                        $tc->delete();
+                    }
                     $first->delete();
                     return response()->json(['message' => 'Delete sucessful with no cleanup.', 'data' => $first], 200);
                 }
             }
             // delete $id
+            // delete test cases
+            foreach ($first->test_cases as $tc) {
+                $tc->delete();
+            }
             $first->delete();
             return response()->json(['message' => 'Delete sucessful with no cleanup.', 'data' => $first], 200);
         }
