@@ -17,6 +17,6 @@ class CheckActive
         {
             return $next($request);
         }
-        return response()->json(['message' => 'This user is not active.'], 403);
+        return response()->json(['message' => 'This user is not active. (middleware)'], 403);
     }
 }

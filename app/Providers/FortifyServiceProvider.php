@@ -65,7 +65,7 @@ class FortifyServiceProvider extends ServiceProvider
             if ($user) {
                 if (!$user->is_active) {
                     throw ValidationException::withMessages([
-                        Fortify::username() => "This user is not active.",
+                        Fortify::username() => "This user is not active. (login)",
                     ]);
                 } elseif (Hash::check($request->password, $user->password)) {
                     return $user;
