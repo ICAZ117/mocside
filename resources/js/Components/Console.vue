@@ -142,7 +142,8 @@ export default {
       );
     },
     async programFinished(e) {
-      console.log(e)
+      console.log("Program finished");
+      console.log(e.log)
       this.$emit("programFinished");
       this.newInput = "";
       this.isRunning = false;
