@@ -517,7 +517,7 @@ export default defineComponent({
           this.accordions = [
             {
               title: "Compilation Error",
-              text: JSON.parse(tc.userOut)[0],
+              text: tc.userOut[0],
               input: "",
               userOut: "",
               profOut: "",
