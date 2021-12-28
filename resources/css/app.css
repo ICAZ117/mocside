@@ -710,6 +710,21 @@ hr.courses {
     
 }
 
+.course-dashboard {
+    height: 100vh!important;
+    color: rgb(136, 136, 136);
+}
+
+.course-edit-label {
+    color: darkgray;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.course-edit-field {
+    display: inline-block;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable,
@@ -859,6 +874,15 @@ thead.gradebook {
     left: 0;
     z-index: 15;
     display: none;
+}
+
+.tc-editor {
+    /* font-family: consolas !important; */
+    font-weight: lighter !important;
+    font-size: 12pt !important;
+    /* min-height: calc((100vh - var(--nav-height)) / 2) !important; */
+    height: 250px !important;
+    margin: 0 !important;
 }
 
 /*============= LOGIN PAGE =============*/

@@ -77,7 +77,7 @@
         >Input (Will be passed into the student's program's stdin)</label
       >
       <VAceEditor
-        class="editor"
+        class="tc-editor"
         id="tcInput"
         @change="changeInput"
         v-model:value="tc.Input"
@@ -89,7 +89,7 @@
         >Output (Will be matched against the output of the student's program)</label
       >
       <VAceEditor
-        class="editor"
+        class="tc-editor"
         id="tcOutput"
         @change="changeOutput"
         v-model:value="tc.Output"
