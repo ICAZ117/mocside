@@ -525,6 +525,7 @@ export default {
     },
     refreshPage() {
       var r = window.location.pathname;
+      console.log("problems: \t" + r);
       var sub = "/courses";
       var c = r.substring(sub.length);
       if (c == "") {
