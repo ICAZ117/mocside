@@ -25,7 +25,7 @@
           :theme="theme"
           :key="forceReload"
           :style="'width: ' + width + '!important;'"
-          :options="{enableSnippets: true, enableLiveAutocompletion: true}"
+          :options="{enableBasicAutocompletion: true, enableSnippets: true, enableLiveAutocompletion: true}"
         />
       </div>
     </Vue3DraggableResizable>
@@ -495,14 +495,19 @@ export default defineComponent({
       console.log(dump);
 
       var currentTC = 0;
+      console.log("\n\n\n\n\n\n\n\n--------------- STARTING COMPARISON ---------------");
 
       for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
+        console.log("\n\ni = " + i);
+
         var tc = {
           tcID: JSON.parse(dump[i]),
           userOut: JSON.parse(dump[i + 1]),
           profOut: JSON.parse(dump[i + 2]),
           compare: JSON.parse(dump[i + 3]),
         };
+
+        console.log(tc);
 
         var self = this;
 
@@ -531,7 +536,7 @@ export default defineComponent({
           break;
         }
         // ELSE IF the code has a runtime error, handle it
-        else if (tc.compare == "runtimeError") {
+        else if (tc.compare == "runtimeError" || tc.compare == '"runtimeError"') {
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut);
