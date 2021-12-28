@@ -131,8 +131,8 @@ class AssignmentController extends Controller
         $owner = $lab->course->owner_id;
 
         $isOriginal = $assignment->copy_id == $assignment->id;
-        $hasChildren = count(Assignment::where('copy_id', $assignment->id)->get()) > 1;
         $copies = Assignment::where('copy_id', $assignment->copy_id)->orderBy('id')->get();
+        $hasChildren = count($copies) > 1;
 
         if ($isOriginal && $hasChildren) {
             // create new object with edited data

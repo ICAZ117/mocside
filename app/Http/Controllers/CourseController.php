@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\Course;
+use App\Models\Student;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\FullCourseResource;
 
