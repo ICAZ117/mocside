@@ -721,6 +721,8 @@ export default {
       }
     },
     routeToChild() {
+      console.log("route to child pathname");
+      console.log(window.location.pathname);
       if(window.location.pathname == "/profile") {
         console.log("should be going to profile not course page");
       }
