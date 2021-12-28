@@ -13,7 +13,7 @@
                 v-model="courseForm.name"
                 id="courseName"
                 name="courseName"
-                class="form-control"
+                class="profile-field"
               />
             </div>
             <br />
@@ -25,7 +25,7 @@
                 v-model="courseForm.description"
                 id="courseDescription"
                 name="courseDescription"
-                class="form-control"
+                class="profile-field"
               />
             </div>
             <br />
@@ -46,14 +46,14 @@
                   v-model="courseForm.dateStart"
                   id="courseDateStart"
                   name="courseDateStart"
-                  class="form-control col-4"
+                  class="profile-field col-4"
                 />
                 <input
                   type="Date"
                   v-model="courseForm.dateEnd"
                   id="courseDateEnd"
                   name="courseDateEnd"
-                  class="form-control col-7"
+                  class="profile-field col-7"
                 />
               </div>
             </div>
