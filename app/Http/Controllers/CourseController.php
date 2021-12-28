@@ -138,7 +138,7 @@ class CourseController extends Controller
             // for each student in the course, call archive method
             $roster = json_decode($course->roster, true);
             foreach ($roster['roster'] as $student) {
-                $student_obj = Student::find($student);
+                $student_obj = Student::where('fsc_id', $student)->first();
                 $student_obj->courseArchived($course->id);
             }
 
