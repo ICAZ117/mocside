@@ -715,6 +715,16 @@ hr.courses {
     color: rgb(136, 136, 136);
 }
 
+.course-edit-label {
+    color: darkgray;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.course-edit-field {
+    display: inline-block;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable,

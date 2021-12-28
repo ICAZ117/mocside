@@ -1,59 +1,60 @@
 <template>
   <div class="course-dashboard darkBG">
-
     <!-------------- TOP ROW -------------->
     <div class="top-row">
       <div class="top-left course-details">
         <div class="course-create-form">
           <form @submit.prevent="handleSubmit" class="course-form">
             <div class="form-group">
-              <label for="Course Name">Course Name</label>
+              <label for="Course Name" class="course-edit-label">Course Name</label>
               <input
                 type="text"
                 v-model="courseForm.name"
                 id="courseName"
                 name="courseName"
-                class="profile-field"
+                class="profile-field course-edit-field"
               />
             </div>
             <br />
 
             <div class="form-group">
-              <label for="Course Description">Course Description</label>
+              <label for="Course Description" class="course-edit-label"
+                >Course Description</label
+              >
               <input
                 type="text"
                 v-model="courseForm.description"
                 id="courseDescription"
                 name="courseDescription"
-                class="profile-field"
+                class="profile-field course-edit-field"
               />
             </div>
             <br />
 
             <div class="form-group">
               <div class="mb-4">
-                <label for="file" class="sr-only"> Upload Course Image </label>
+                <label for="file" class="course-edit-label"> Upload Course Image </label>
                 <input type="file" :accept="['image/*']" @change="fileChange" id="file" />
               </div>
             </div>
             <br />
 
             <div class="form-group">
-              <label for="Course Dates">Course Dates</label>
+              <label for="Course Dates" class="course-edit-label">Course Dates</label>
               <div class="row">
                 <input
                   type="Date"
                   v-model="courseForm.dateStart"
                   id="courseDateStart"
                   name="courseDateStart"
-                  class="profile-field col-4"
+                  class="profile-field course-edit-field col-4"
                 />
                 <input
                   type="Date"
                   v-model="courseForm.dateEnd"
                   id="courseDateEnd"
                   name="courseDateEnd"
-                  class="profile-field col-7"
+                  class="profile-field course-edit-field col-7"
                 />
               </div>
             </div>
@@ -72,9 +73,9 @@
           <button @click="studentView()" class="btn btn-danger btn-block">
             Student View
           </button>
-          <label for="Course Roster">Course Roster</label>
+          <label for="Course Roster" class="course-edit-label">Course Roster</label>
           <ul>
-            <li v-for="(student, key) in students" :key="student.id">
+            <li v-for="student in students" :key="student.id">
               {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }}
               {{
                 Math.floor(
@@ -101,26 +102,32 @@
             </li>
           </ul>
           <div class="key-options">
-            <label>Enroll Key</label>
-            <input placeholder="Random" type="text" v-model="enrollKey.key" />
+            <label class="course-edit-label">Enroll Key</label>
+            <input
+              placeholder="Random"
+              type="text"
+              v-model="enrollKey.key"
+              class="profile-field course-edit-field"
+            />
             <br />
-            <label>Permanent Key</label>
+            <label class="course-edit-label">Permanent Key</label>
             <label class="switch">
               <input type="checkbox" v-model="enrollKey.perm" />
               <span class="slider round"></span>
             </label>
             <br />
-            <label>Expire Date</label>
+            <label class="course-edit-label">Expire Date</label>
             <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
             <br />
             <label>Expire Time</label>
             <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
             <br />
-            <label>Max Uses</label>
+            <label class="course-edit-label">Max Uses</label>
             <input
               placeholder="0 for unlimited use"
               type="text"
               v-model="enrollKey.uses"
+              class="profile-field course-edit-field"
             />
           </div>
           <button type="button" @click="generateKey" class="btn btn-danger btn-block">
