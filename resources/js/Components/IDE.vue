@@ -512,7 +512,8 @@ export default defineComponent({
         var self = this;
 
         // IF the code has a compile error, handle it
-        if (tc.compare[0] == "compilationError") {
+        if (tc.compare == "compilationError") {
+          console.log("----> CODE HAD A COMPILATION ERROR");
           this.accordions = [
             {
               title: "Compilation Error",
@@ -537,6 +538,7 @@ export default defineComponent({
         }
         // ELSE IF the code has a runtime error, handle it
         else if (tc.compare[0] == "runtimeError" || tc.compare[0] == '"runtimeError"') {
+          console.log("----> CODE HAD A RUNTIME ERROR");
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut);
@@ -547,6 +549,7 @@ export default defineComponent({
         }
         // ELSE, the code ran successfully. Now check if it passed the test case or not.
         else {
+          console.log("----> CODE RAN SUCCESSFULLY");
           tc.compare = JSON.parse(tc.compare);
 
           // IF code passed test case
