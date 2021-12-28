@@ -180,6 +180,7 @@ export default {
       console.log("Detects change in route from home route");
       this.updatePFP();
       this.$emit("forceReload");
+      console.log(to);
       if(to.fullPath == "/profile") {
         console.log("watch profile page change before course unmount annoyance");
       }
