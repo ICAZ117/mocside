@@ -707,6 +707,7 @@ hr.courses {
 .top-row, .bottom-row {
     height: calc(((100vh - var(--nav-height)) / 2)) !important;
     width: 100vw;
+    
 }
 
 /*============== LABS and PROBLEMS ==============*/
