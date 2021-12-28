@@ -757,6 +757,9 @@ export default {
       if (r == "/") {
         console.log("on home page");
         return false;
+      }
+      else if (r == "/profile") {
+        return false;
       } else {
         // var c = r.substring(sub.length);
         // if(c != "") {
