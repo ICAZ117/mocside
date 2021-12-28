@@ -782,6 +782,7 @@ export default defineComponent({
     },
     refreshPage() {
       var r = window.location.pathname;
+      console.log("Labs: \t" + r);
       var sub = "/courses";
       var c = r.substring(sub.length);
       console.log(c);

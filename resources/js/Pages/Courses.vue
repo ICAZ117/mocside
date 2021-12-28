@@ -751,6 +751,7 @@ export default {
     },
     refreshPage() {
       var r = window.location.pathname;
+      console.log("courses: \t" + r);
       console.log(r);
       var sub = "/courses";
       if (r == "/") {
