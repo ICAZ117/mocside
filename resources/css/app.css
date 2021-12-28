@@ -861,6 +861,15 @@ thead.gradebook {
     display: none;
 }
 
+.tc-editor {
+    /* font-family: consolas !important; */
+    font-weight: lighter !important;
+    font-size: 12pt !important;
+    /* min-height: calc((100vh - var(--nav-height)) / 2) !important; */
+    height: 250px !important;
+    margin: 0 !important;
+}
+
 /*============= LOGIN PAGE =============*/
 
 .login {
