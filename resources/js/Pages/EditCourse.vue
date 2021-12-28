@@ -6,20 +6,29 @@
         <div class="course-create-form">
           <form @submit.prevent="handleSubmit" class="course-form">
             <div class="form-group">
-              <label for="Course Name" class="course-edit-label">Course Name</label>
+              <label
+                for="Course Name"
+                class="course-edit-label"
+                style="width: 21% !important"
+                >Course Name:</label
+              >
               <input
                 type="text"
                 v-model="courseForm.name"
                 id="courseName"
                 name="courseName"
                 class="profile-field course-edit-field"
+                style="width: 79% !important"
               />
             </div>
             <br />
 
             <div class="form-group">
-              <label for="Course Description" class="course-edit-label"
-                >Course Description</label
+              <label
+                for="Course Description"
+                class="course-edit-label"
+                style="width: 29% !important"
+                >Course Description:</label
               >
               <input
                 type="text"
@@ -27,42 +36,47 @@
                 id="courseDescription"
                 name="courseDescription"
                 class="profile-field course-edit-field"
+                style="width: 71% !important"
               />
             </div>
             <br />
 
             <div class="form-group">
               <div class="mb-4">
-                <label for="file" class="course-edit-label"> Upload Course Image </label>
+                <label for="file" class="course-edit-label">Upload Course Image:</label>
+                <br />
                 <input type="file" :accept="['image/*']" @change="fileChange" id="file" />
               </div>
             </div>
-            <br />
 
             <div class="form-group">
-              <label for="Course Dates" class="course-edit-label">Course Dates</label>
+              <label for="Course Dates" class="course-edit-label">Course Dates:</label>
               <div class="row">
-                <input
-                  type="Date"
-                  v-model="courseForm.dateStart"
-                  id="courseDateStart"
-                  name="courseDateStart"
-                  class="profile-field course-edit-field col-4"
-                />
-                <input
-                  type="Date"
-                  v-model="courseForm.dateEnd"
-                  id="courseDateEnd"
-                  name="courseDateEnd"
-                  class="profile-field course-edit-field col-7"
-                />
+                <div class="col-6">
+                  <label for="courseDateStart" style="color: darkgray!important">Start date:&nbsp;</label>
+                  <input
+                    type="Date"
+                    id="courseDateStart"
+                    name="courseDateStart"
+                    class="profile-field course-edit-field"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="courseDateEnd" style="color: darkgray!important">End date:&nbsp;</label>
+                  <input
+                    type="Date"
+                    id="courseDateEnd"
+                    name="courseDateEnd"
+                    class="profile-field course-edit-field"
+                  />
+                </div>
               </div>
             </div>
             <br />
 
             <div class="form-group">
-              <button type="submit" class="btn btn-danger btn-block">
-                Submit Changes
+              <button type="submit" class="btn btn-success btn-block">
+                Save Changes
               </button>
             </div>
           </form>
