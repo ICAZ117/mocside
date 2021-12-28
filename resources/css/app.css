@@ -710,6 +710,11 @@ hr.courses {
     
 }
 
+.course-dashboard {
+    height: 100vh!important;
+    color: rgb(136, 136, 136);
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable,

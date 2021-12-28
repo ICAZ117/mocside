@@ -1,5 +1,5 @@
 <template>
-  <div class="course-dashboard">
+  <div class="course-dashboard darkBG">
 
     <!-------------- TOP ROW -------------->
     <div class="top-row">
