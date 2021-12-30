@@ -1,5 +1,5 @@
 <template>
-  <div style="height: fit-content!important; overflow-y: scroll !important;">
+  <div style="height: 90%!important;">
     <bubble-menu
       class="bubble-menu"
       :tippy-options="{ duration: 100 }"
