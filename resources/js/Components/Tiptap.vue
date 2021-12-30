@@ -1,5 +1,5 @@
 <template>
-  <div style="height: fit-content!important;">
+  <div style="height: 90%!important;">
     <bubble-menu
       class="bubble-menu"
       :tippy-options="{ duration: 100 }"
@@ -36,7 +36,7 @@
       "
     >
       <menu-bar class="editor__header" :editor="editor" v-if="showMenuBar" />
-      <editor-content class="editor__content" :editor="editor" />
+      <editor-content class="dark-scroll-bar editor__content" :editor="editor" />
     </div>
   </div>
 </template>

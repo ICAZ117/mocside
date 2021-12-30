@@ -236,6 +236,29 @@ input:checked + .slider:before {
     border-bottom-right-radius: 5px;
 }
 
+.dark-scroll-bar {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--FSCgrey) #373842 !important;
+    overflow-y: scroll !important;
+    margin-right: 5px !important;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.dark-scroll-bar::-webkit-scrollbar {
+    width: 10px !important;
+}
+
+.dark-scroll-bar::-webkit-scrollbar-track {
+    background: #373842 !important;
+    border-radius: 50px !important;
+}
+
+.dark-scroll-bar::-webkit-scrollbar-thumb {
+    background-color: #24252c !important;
+    border-radius: 50px !important;
+    border: 3px solid #373842 !important;
+}
+
 /*============= NAVIGATION =============*/
 
 nav {
@@ -707,12 +730,13 @@ hr.courses {
 .top-row, .bottom-row {
     height: calc(((100vh - var(--nav-height)) / 2)) !important;
     width: 100vw;
-    
+    display: flex;
 }
 
 .course-dashboard {
     height: 100vh!important;
     color: rgb(136, 136, 136);
+    width: 100vw!important;
 }
 
 .course-edit-label {
@@ -724,6 +748,11 @@ hr.courses {
 .course-edit-field {
     display: inline-block;
 }
+
+.course-details, .grades, .key-gen, .labs {
+    width: 50%;
+    margin: 1rem;
+  }
 
 /*============== LABS and PROBLEMS ==============*/
 
