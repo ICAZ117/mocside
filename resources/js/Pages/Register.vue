@@ -151,7 +151,7 @@
               >Please enter a password <br></span
             >
             <span v-if="v$.userForm.password.minLength.$invalid"
-              >Passwords must be at <i>LEAST</i> 10 characters long <br></span
+              >Passwords must be at <i>LEAST</i>&nbsp;10 characters long <br></span
             >
             <span v-if="v$.userForm.password.mustContainLower.$invalid">Passwords must contain a lowercase character <br></span>
             <span v-if="v$.userForm.password.mustContainUpper.$invalid">Passwords must contain an uppercase character <br></span>
