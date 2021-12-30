@@ -202,12 +202,12 @@ import { getError } from "../utils/helpers";
 import { required, email, minLength, maxLength, between, integer } from "@vuelidate/validators";
 import AuthService from "../services/AuthService";
 import * as API from "../services/API";
+const mustContainLower = (value) => /[a-z]/.test(value);
+const mustContainUpper = (value) => /[A-Z]/.test(value);
+const mustContainNumber = (value) => /\d/.test(value);
+const mustContainSymbol = (value) => (/[|\\/~^:,;?!&%$@#()-_={}`<>.'"*+]/).test(value);
 export default {
   setup() {
-    const mustContainLower = (value) => /[a-z]/.test(value);
-    const mustContainUpper = (value) => /[A-Z]/.test(value);
-    const mustContainNumber = (value) => /\d/.test(value);
-    const mustContainSymbol = (value) => (/[|\\/~^:,;?!&%$@#()-_={}`<>.'"*+]/).test(value);
     return {
       v$: useVuelidate(),
     };    
