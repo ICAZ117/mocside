@@ -1,13 +1,16 @@
 <template>
-  <textarea
-    class="console"
-    id="scrollToBottom"
-    contenteditable="true"
-    v-model="content"
-    @keyup.enter="enter"
-    spellcheck="false"
-    :readonly="!isRunning"
-  ></textarea>
+  <form name="consoleForm">
+    <textarea
+      name="console"
+      class="console"
+      id="scrollToBottom"
+      contenteditable="true"
+      v-model="content"
+      @keyup.enter="enter"
+      spellcheck="false"
+      :readonly="!isRunning"
+    ></textarea>
+  </form>
 </template>
 
 <script>
@@ -37,7 +40,7 @@ export default {
   watch: {
     terminate: async function () {
       if (this.terminate && this.isRunning) {
-        while(this.containerID == 0) {
+        while (this.containerID == 0) {
           continue;
         }
 
@@ -53,13 +56,13 @@ export default {
       }
     },
     newLog: function () {
-      if (this.newLog.replace(/^\n|\n$/g, '') == this.recentLog.replace(/^\n|\n$/g, '')) {
+      if (this.newLog.replace(/^\n|\n$/g, "") == this.recentLog.replace(/^\n|\n$/g, "")) {
         console.log("Do nothing");
       } else {
         console.log("Recent Log:");
-        console.log({a:this.recentLog});
+        console.log({ a: this.recentLog });
         console.log("New Log:");
-        console.log({a:this.newLog});
+        console.log({ a: this.newLog });
         console.log("\n\n");
 
         this.content += this.newLog.substring(this.recentLog.length);
@@ -87,6 +90,7 @@ export default {
         payload
       );
 
+      document.consoleForm.console.focus();
       console.log("Started docker");
 
       this.isRunning = true;
@@ -117,7 +121,7 @@ export default {
       this.newInput = this.content.substring(this.oldContent.length);
 
       console.log("\n\nNEW INPUT");
-      console.log({in: this.newInput});
+      console.log({ in: this.newInput });
       console.log("\n");
       // Add to recent log
       this.recentLog += this.newInput;
@@ -136,10 +140,7 @@ export default {
         input: this.newInput,
       };
 
-      const res = API.apiClient.post(
-        `/containers/send-in/${this.containerID}`,
-        payload
-      );
+      const res = API.apiClient.post(`/containers/send-in/${this.containerID}`, payload);
     },
     async programFinished() {
       this.$emit("programFinished");
