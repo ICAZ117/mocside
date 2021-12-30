@@ -21,16 +21,19 @@
         class="instructions"
         id="resizeableInstructions"
         v-if="childIsOpen"
-        style="overflow: auto!important"
+        style="overflow: auto !important"
       >
         <small class="navigation">
-          <btn class="btn btn-danger btn-sm" @click="this.$emit('unmounting')">↩ Return to Problems</btn>
+          <btn class="btn btn-danger btn-sm" @click="this.$emit('unmounting')"
+            >↩ Return to Problems</btn
+          >
         </small>
-        <br>
-        <br>
+        <br />
+        <br />
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
         <Tiptap
+          class="dark-scroll-bar"
           :savedText="JSON.parse(description)"
           :editable="false"
           :showMenuBar="false"
@@ -147,11 +150,15 @@ export default defineComponent({
       };
       const empty = await API.apiClient.post(`/code/check/${this.problemID}`, payload);
       this.test = empty;
-      if(this.assignment.python_starter == "" || this.assignment.python_starter == null) {
+      if (
+        this.assignment.python_starter == "" ||
+        this.assignment.python_starter == null
+      ) {
         this.assignment.python_starter = "def main():\n\nmain()";
       }
-      if(this.assignment.java_starter == "" || this.assignment.java_starter == null) {
-        this.assignment.java_starter = "public class Main {\n\tpublic static void main(String[] args) {\n\t\t}}";
+      if (this.assignment.java_starter == "" || this.assignment.java_starter == null) {
+        this.assignment.java_starter =
+          "public class Main {\n\tpublic static void main(String[] args) {\n\t\t}}";
       }
       if (empty.data.message == "No progress. Please create.") {
         //create progress
@@ -172,12 +179,12 @@ export default defineComponent({
         if (this.lang == "Java") {
           this.code_j = this.assignment.java_starter;
           this.codeID = initial.data.id;
-          console.log("initial.id "+ initial.data.id);
+          console.log("initial.id " + initial.data.id);
           console.log(this.codeID);
         } else {
           this.code_p = this.assignment.python_starter;
           this.codeID = initial.data.id;
-          console.log("initial.id "+ initial.data.id);
+          console.log("initial.id " + initial.data.id);
           console.log(this.codeID);
         }
       } else {
@@ -296,8 +303,8 @@ export default defineComponent({
   mounted() {
     this.reloadSliders++;
     document.getElementById("resizeableInstructions").remove();
-    document.getElementById("thisIsTheDumbestThingIHaveEverHadToDo").style = "overflow: hidden!important";
+    document.getElementById("thisIsTheDumbestThingIHaveEverHadToDo").style =
+      "overflow: hidden!important";
   },
 });
 </script>
-
