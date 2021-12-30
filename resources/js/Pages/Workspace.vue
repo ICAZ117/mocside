@@ -24,7 +24,7 @@
         style="overflow-y: hidden !important; overflow-x: auto !important;"
       >
         <small class="navigation">
-          <btn class="btn btn-danger btn-sm" @click="this.$emit('unmounting')"
+          <btn :style="'width: ' + w1 - 10 + 'px !important; margin: auto !important'" class="btn btn-danger btn-sm" @click="this.$emit('unmounting')"
             >↩ Return to Problems</btn
           >
         </small>
