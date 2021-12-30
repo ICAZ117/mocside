@@ -236,27 +236,23 @@ input:checked + .slider:before {
     border-bottom-right-radius: 5px;
 }
 
-.dark-scroll-bar:focus-visible {
-    background-color: #222222 !important;
-    max-height: 30px !important;
-    display: inline-block !important;
-    color: lightgray !important;
-    outline: none;
+.dark-scroll-bar {
     scrollbar-width: thin;
     scrollbar-color: var(--FSCgrey) #333333;
+    overflow-y: scroll;
 }
 
 /* Works on Chrome, Edge, and Safari */
-.dark-scroll-bar:focus-visible::-webkit-scrollbar {
+.dark-scroll-bar::-webkit-scrollbar {
     width: 10px;
 }
 
-.dark-scroll-bar:focus-visible::-webkit-scrollbar-track {
+.dark-scroll-bar::-webkit-scrollbar-track {
     background: #333333;
     border-radius: 50px;
 }
 
-.dark-scroll-bar:focus-visible::-webkit-scrollbar-thumb {
+.dark-scroll-bar::-webkit-scrollbar-thumb {
     background-color: var(--FSCgrey);
     border-radius: 50px;
     border: 3px solid #333333;
