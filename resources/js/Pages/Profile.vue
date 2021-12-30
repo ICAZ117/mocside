@@ -487,6 +487,10 @@ export default {
       showEmailModal: false,
       showPassModal: false,
       passNoMatch: false,
+      hasLowerCase: false,
+      hasUpperCase: false,
+      hasNumber: false,
+      hasSymbol: false,
       showDeleteUserModal: false,
       showUnsavedChangesModal: false,
       changeGradeUser: "",
@@ -532,18 +536,46 @@ export default {
         this.passNoMatch = true;
       } else {
         // this.showPassChange = false;
-        this.passNoMatch = false;
-        this.showPassModal = false;
-        console.log("updatedPassword");
-        //try fortify route and pass current and new password....i believe it checks for us and returns an error/status code
-        var payload = {
-          current_password: this.password.current,
-          password: this.password.new,
-          password_confirmation: this.password.confirm,
-        };
-        // const res1 = await AuthService.authClient.get(`user/confirm-password`, this.password.new);
-        const res = await AuthService.updatePassword(payload);
+
+
+        if(passCheck(this.password.new) == true) {
+          // do this if pass the other checks
+          this.passNoMatch = false;
+          this.showPassModal = false;
+          console.log("updatedPassword");
+          //try fortify route and pass current and new password....i believe it checks for us and returns an error/status code
+          var payload = {
+            current_password: this.password.current,
+            password: this.password.new,
+            password_confirmation: this.password.confirm,
+          };
+          // const res1 = await AuthService.authClient.get(`user/confirm-password`, this.password.new);
+          const res = await AuthService.updatePassword(payload);
+        }
+        else {
+          //password doesn't pass the requirements
+          console.log("password does not meet requirements");
+        }
       }
+    },
+    async passCheck(value) {
+      if(!/[a-z]/.test(value)) {
+        this.$notify({ type: "error", text: "Your password must have a lowercase letter!" });
+        return false;
+      }
+      if (!/[A-Z]/.test(value)) {
+        this.$notify({ type: "error", text: "Your password must have an uppercase letter!" });
+        return false;
+      }
+      if(!/\d/.test(value)) {
+        this.$notify({ type: "error", text: "Your password must have a numeric digit!" });
+        return false;
+      }
+      if(!(/\W/).test(value)) {
+        this.$notify({ type: "error", text: "Your password must contain a symbol!" });
+        return false;
+      }
+      return true;
     },
     async updateEmail() {
       // this.showEmailChange = false;
@@ -562,6 +594,10 @@ export default {
     },
     closePassModal() {
       this.passNoMatch = false;
+      this.hasUpperCase = false;
+      this.hasLowerCase = false;
+      this.hasNumber = false;
+      this.hasSymbol = false;
       this.showPassModal = false;
     },
     closeDeleteUserModal() {
