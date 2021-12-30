@@ -538,7 +538,7 @@ export default {
         // this.showPassChange = false;
 
 
-        if(passCheck(this.password.new) == true) {
+        if(this.passCheck(this.password.new) == true) {
           // do this if pass the other checks
           this.passNoMatch = false;
           this.showPassModal = false;
