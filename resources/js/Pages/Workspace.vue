@@ -33,7 +33,6 @@
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
         <Tiptap
-          class="dark-scroll-bar"
           style="overflow-y: scroll !important;"
           :savedText="JSON.parse(description)"
           :editable="false"
