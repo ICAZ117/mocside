@@ -151,7 +151,7 @@
               >Please enter a password <br></span
             >
             <span v-if="v$.userForm.password.minLength.$invalid"
-              >Passwords must be at <i>LEAST</i> 10 characters long <br></span
+              >Passwords must be at <i>LEAST</i>&nbsp;&nbsp;10 characters long <br></span
             >
             <span v-if="v$.userForm.password.mustContainLower.$invalid">Passwords must contain a lowercase character <br></span>
             <span v-if="v$.userForm.password.mustContainUpper.$invalid">Passwords must contain an uppercase character <br></span>
@@ -205,7 +205,7 @@ import * as API from "../services/API";
 const mustContainLower = (value) => /[a-z]/.test(value);
 const mustContainUpper = (value) => /[A-Z]/.test(value);
 const mustContainNumber = (value) => /\d/.test(value);
-const mustContainSymbol = (value) => (/[|\\/~^:,;?!&%$@#()-_={}`<>.'"*+]/).test(value);
+const mustContainSymbol = (value) => (/\W/).test(value);
 export default {
   setup() {
     return {
