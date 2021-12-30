@@ -24,8 +24,9 @@
         style="overflow: auto!important"
       >
         <small class="navigation">
-          <span class="pointer underline" @click="this.$emit('unmounting')">↩ Return to Problems</span>
+          <btn class="btn btn-danger btn-sm" @click="this.$emit('unmounting')">↩ Return to Problems</btn>
         </small>
+        <br>
         <br>
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
