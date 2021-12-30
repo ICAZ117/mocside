@@ -105,6 +105,15 @@
         </div>
       </div>
     </div>
+    <hr style="margin: 0;
+    padding: 0;
+    color: white;
+    transform: rotate(90deg);">
+    <hr style="margin: 0;
+    padding: 0;
+    color: white;
+    transform: rotate(90deg);">
+
     <div class="bottom-row">
       <div class="bottom-left key-gen">
         <div class="form-group">
@@ -538,37 +547,4 @@ export default {
 </script>
 
 <style>
-.course-dashboard {
-  width: 100%;
-  height: 90%;
-}
-.top-row {
-  height: 44.5%;
-  width: 100%;
-  display: flex;
-}
-.bottom-row {
-  height: 44.5%;
-  width: 100%;
-  display: flex;
-}
-.course-details {
-  width: 45.5%;
-  margin: 1rem;
-}
-.grades {
-  width: 45.5%;
-  margin: 1rem;
-}
-.key-gen {
-  width: 45.5%;
-  margin: 1rem;
-}
-.labs {
-  width: 45.5%;
-  margin: 1rem;
-}
-/* .labtable {
-  max-width: 45.5%;
-} */
 </style>
