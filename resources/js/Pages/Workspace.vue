@@ -24,7 +24,7 @@
         style="overflow-y: hidden !important; overflow-x: auto !important"
       >
         <btn
-          class="btn btn-danger btn-sm"
+          class="btn btn-secondary btn-sm"
           style="
             margin-left: calc((100% - (100% - 16px)) / 2) !important;
             width: calc(100% - 20px) !important;
