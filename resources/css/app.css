@@ -237,25 +237,25 @@ input:checked + .slider:before {
 }
 
 .dark-scroll-bar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--FSCgrey) #333333;
-    overflow-y: scroll;
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--FSCgrey) #333333 !important;
+    overflow-y: scroll !important;
 }
 
 /* Works on Chrome, Edge, and Safari */
 .dark-scroll-bar::-webkit-scrollbar {
-    width: 10px;
+    width: 10px !important;
 }
 
 .dark-scroll-bar::-webkit-scrollbar-track {
-    background: #333333;
-    border-radius: 50px;
+    background: #333333 !important;
+    border-radius: 50px !important;
 }
 
 .dark-scroll-bar::-webkit-scrollbar-thumb {
-    background-color: var(--FSCgrey);
-    border-radius: 50px;
-    border: 3px solid #333333;
+    background-color: var(--FSCgrey) !important;
+    border-radius: 50px !important;
+    border: 3px solid #333333 !important;
 }
 
 /*============= NAVIGATION =============*/
