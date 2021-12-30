@@ -21,13 +21,18 @@
         class="instructions"
         id="resizeableInstructions"
         v-if="childIsOpen"
-        style="overflow-y: hidden !important; overflow-x: auto !important;"
+        style="overflow-y: hidden !important; overflow-x: auto !important"
       >
-        <small class="navigation">
-          <btn :style="'width: ' + w1 - 10 + 'px !important; margin: auto !important'" class="btn btn-danger btn-sm" @click="this.$emit('unmounting')"
-            >↩ Return to Problems</btn
-          >
-        </small>
+        <btn
+          class="btn btn-secondary btn-sm"
+          style="
+            margin-left: calc((100% - (100% - 16px)) / 2) !important;
+            width: calc(100% - 20px) !important;
+            margin-top: 5px;
+          "
+          @click="this.$emit('unmounting')"
+          >↩ Return to Problems</btn
+        >
         <br />
         <br />
         <h4>{{ title }}</h4>

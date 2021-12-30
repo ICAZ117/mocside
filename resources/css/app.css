@@ -259,6 +259,11 @@ input:checked + .slider:before {
     border: 3px solid #373842 !important;
 }
 
+.btn-secondary {
+    color: #fff;
+    background-color: #444752;
+    border-color: #414452;
+}
 /*============= NAVIGATION =============*/
 
 nav {
