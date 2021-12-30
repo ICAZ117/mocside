@@ -238,8 +238,9 @@ input:checked + .slider:before {
 
 .dark-scroll-bar {
     scrollbar-width: thin !important;
-    scrollbar-color: var(--FSCgrey) #333333 !important;
+    scrollbar-color: var(--FSCgrey) #373842 !important;
     overflow-y: scroll !important;
+    margin-right: 5px !important;
 }
 
 /* Works on Chrome, Edge, and Safari */
@@ -248,14 +249,14 @@ input:checked + .slider:before {
 }
 
 .dark-scroll-bar::-webkit-scrollbar-track {
-    background: #333333 !important;
+    background: #373842 !important;
     border-radius: 50px !important;
 }
 
 .dark-scroll-bar::-webkit-scrollbar-thumb {
-    background-color: var(--FSCgrey) !important;
+    background-color: #24252c !important;
     border-radius: 50px !important;
-    border: 3px solid #333333 !important;
+    border: 3px solid #373842 !important;
 }
 
 /*============= NAVIGATION =============*/
