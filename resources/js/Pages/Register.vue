@@ -153,6 +153,10 @@
             <span v-if="v$.userForm.password.minLength.$invalid"
               >Passwords must be at <i>LEAST</i> 8 characters long</span
             >
+            <span v-if="v$.userForm.password.mustContainLower.$invalid">Passwords must contain at <i>LEAST</i> 1  lowercase character</span>
+            <span v-if="v$.userForm.password.mustContainUpper.$invalid">Passwords must contain at <i>LEAST</i> 1 uppercase character</span>
+            <span v-if="v$.userForm.password.mustContainNumber.$invalid">Passwords must contain at <i>LEAST</i> 1 numeric character</span>
+            <span v-if="v$.userForm.password.mustContainSymbol.$invalid">Passwords must contain at <i>LEAST</i> 1 symbol</span>
           </div>
         </div>
         <br />
@@ -198,6 +202,10 @@ import { getError } from "../utils/helpers";
 import { required, email, minLength, maxLength, between, integer } from "@vuelidate/validators";
 import AuthService from "../services/AuthService";
 import * as API from "../services/API";
+const mustContainLower = (value) => /[a-z]/.test(value);
+const mustContainUpper = (value) => /[A-Z]/.test(value);
+const mustContainNumber = (value) => /\d/.test(value);
+const mustContainSymbol = (value) => (/[|\\/~^:,;?!&%$@#()-_={}`<>.'"*+]/).test(value);
 export default {
   setup() {
     return {
@@ -245,6 +253,10 @@ export default {
       password: {
         required,
         minLength: minLength(10),
+        mustContainLower,
+        mustContainUpper,
+        mustContainNumber,
+        mustContainSymbol
       },
     },
   },
@@ -335,6 +347,6 @@ export default {
     hasError: function() {
       return this.isEmpty || this.isDiff;
     }
-  }
+  },
 };
 </script>
