@@ -26,6 +26,7 @@
         <small class="navigation">
           <span class="pointer underline" @click="this.$emit('unmounting')">↩ Return to Problems</span>
         </small>
+        <br>
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
         <Tiptap
