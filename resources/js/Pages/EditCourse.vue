@@ -53,7 +53,9 @@
               <label for="Course Dates" class="course-edit-label">Course Dates:</label>
               <div class="row">
                 <div class="col-6">
-                  <label for="courseDateStart" style="color: darkgray!important">Start date:&nbsp;</label>
+                  <label for="courseDateStart" style="color: darkgray !important"
+                    >Start date:&nbsp;</label
+                  >
                   <input
                     type="Date"
                     id="courseDateStart"
@@ -62,7 +64,9 @@
                   />
                 </div>
                 <div class="col-6">
-                  <label for="courseDateEnd" style="color: darkgray!important">End date:&nbsp;</label>
+                  <label for="courseDateEnd" style="color: darkgray !important"
+                    >End date:&nbsp;</label
+                  >
                   <input
                     type="Date"
                     id="courseDateEnd"
@@ -105,14 +109,10 @@
         </div>
       </div>
     </div>
-    <hr style="margin: 0;
-    padding: 0;
-    color: white;
-    transform: rotate(90deg);">
-    <hr style="margin: 0;
-    padding: 0;
-    color: white;
-    transform: rotate(90deg);">
+    <hr style="margin: 0; padding: 0; color: white" />
+    <div style="overflow: hidden !important">
+      <hr style="margin: 0; padding: 0; color: white; transform: rotate(90deg)" />
+    </div>
 
     <div class="bottom-row">
       <div class="bottom-left key-gen">
@@ -546,5 +546,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
