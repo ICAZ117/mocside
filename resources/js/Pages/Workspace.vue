@@ -21,7 +21,7 @@
         class="instructions"
         id="resizeableInstructions"
         v-if="childIsOpen"
-        style="overflow: auto !important"
+        style="overflow-y: hidden !important; overflow-x: auto !important;"
       >
         <small class="navigation">
           <btn class="btn btn-danger btn-sm" @click="this.$emit('unmounting')"
@@ -34,6 +34,7 @@
         <hr class="instructions-hr" />
         <Tiptap
           class="dark-scroll-bar"
+          style="overflow-y: scroll !important;"
           :savedText="JSON.parse(description)"
           :editable="false"
           :showMenuBar="false"
