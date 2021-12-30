@@ -205,7 +205,7 @@ import * as API from "../services/API";
 const mustContainLower = (value) => /[a-z]/.test(value);
 const mustContainUpper = (value) => /[A-Z]/.test(value);
 const mustContainNumber = (value) => /\d/.test(value);
-const mustContainSymbol = (value) => (/[|\\/~^:,;?!&%$@#()-_={}`<>.'"*+]/).test(value);
+const mustContainSymbol = (value) => (/\W/).test(value);
 export default {
   setup() {
     return {
