@@ -153,6 +153,10 @@
             <span v-if="v$.userForm.password.minLength.$invalid"
               >Passwords must be at <i>LEAST</i> 8 characters long</span
             >
+            <span v-if="v$.userForm.password.mustContainLower.$invalid">Passwords must contain at <i>LEAST</i> 1  lowercase character</span>
+            <span v-if="v$.userForm.password.mustContainUpper.$invalid">Passwords must contain at <i>LEAST</i> 1 uppercase character</span>
+            <span v-if="v$.userForm.password.mustContainNumber.$invalid">Passwords must contain at <i>LEAST</i> 1 numeric character</span>
+            <span v-if="v$.userForm.password.mustContainSymbol.$invalid">Passwords must contain at <i>LEAST</i> 1 symbol</span>
           </div>
         </div>
         <br />
@@ -245,6 +249,10 @@ export default {
       password: {
         required,
         minLength: minLength(10),
+        mustContainLower,
+        mustContainUpper,
+        mustContainNumber,
+        mustContainSymbol
       },
     },
   },
@@ -335,6 +343,13 @@ export default {
     hasError: function() {
       return this.isEmpty || this.isDiff;
     }
+  },
+  mounted() {
+    console.log("mounted register page");
+    const mustContainLower = (value) => /[a-z]/.test(value);
+    const mustContainUpper = (value) => /[A-Z]/.test(value);
+    const mustContainNumber = (value) => /\d/.test(value);
+    const mustContainSymbol = (value) => (/[|\\/~^:,;?!&%$@#()-_={}`<>.'"*+]/).test(value);
   }
 };
 </script>
