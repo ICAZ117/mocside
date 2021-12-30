@@ -204,6 +204,10 @@ import AuthService from "../services/AuthService";
 import * as API from "../services/API";
 export default {
   setup() {
+    const mustContainLower = (value) => /[a-z]/.test(value);
+    const mustContainUpper = (value) => /[A-Z]/.test(value);
+    const mustContainNumber = (value) => /\d/.test(value);
+    const mustContainSymbol = (value) => (/[|\\/~^:,;?!&%$@#()-_={}`<>.'"*+]/).test(value);
     return {
       v$: useVuelidate(),
     };    
@@ -344,12 +348,5 @@ export default {
       return this.isEmpty || this.isDiff;
     }
   },
-  mounted() {
-    console.log("mounted register page");
-    const mustContainLower = (value) => /[a-z]/.test(value);
-    const mustContainUpper = (value) => /[A-Z]/.test(value);
-    const mustContainNumber = (value) => /\d/.test(value);
-    const mustContainSymbol = (value) => (/[|\\/~^:,;?!&%$@#()-_={}`<>.'"*+]/).test(value);
-  }
 };
 </script>
