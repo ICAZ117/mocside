@@ -260,9 +260,9 @@ input:checked + .slider:before {
 }
 
 .btn-secondary {
-    color: #fff;
-    background-color: #444752;
-    border-color: #414452;
+    color: #fff !important;
+    background-color: #444752 !important;
+    border-color: #414452 !important;
 }
 /*============= NAVIGATION =============*/
 
