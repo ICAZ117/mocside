@@ -148,15 +148,15 @@
             class="invalid-feedback"
           >
             <span v-if="v$.userForm.password.required.$invalid"
-              >Please enter a password</span
+              >Please enter a password <br></span
             >
             <span v-if="v$.userForm.password.minLength.$invalid"
-              >Passwords must be at <i>LEAST</i> 8 characters long</span
+              >Passwords must be at <i>LEAST</i> 8 characters long <br></span
             >
-            <span v-if="v$.userForm.password.mustContainLower.$invalid">Passwords must contain a lowercase character</span>
-            <span v-if="v$.userForm.password.mustContainUpper.$invalid">Passwords must contain an uppercase character</span>
-            <span v-if="v$.userForm.password.mustContainNumber.$invalid">Passwords must contain a numeric character</span>
-            <span v-if="v$.userForm.password.mustContainSymbol.$invalid">Passwords must contain a symbol</span>
+            <span v-if="v$.userForm.password.mustContainLower.$invalid">Passwords must contain a lowercase character <br></span>
+            <span v-if="v$.userForm.password.mustContainUpper.$invalid">Passwords must contain an uppercase character <br></span>
+            <span v-if="v$.userForm.password.mustContainNumber.$invalid">Passwords must contain a numeric character <br></span>
+            <span v-if="v$.userForm.password.mustContainSymbol.$invalid">Passwords must contain a symbol <br></span>
           </div>
         </div>
         <br />
