@@ -116,8 +116,6 @@ export default {
       }
 
       this.oldContent = this.content;
-
-      this.sendInput();
     },
     async enter() {
       // Get new input
@@ -144,22 +142,26 @@ export default {
       };
 
       this.input.push(payload);
+
+      this.sendInput();
       // const res = API.apiClient.post(`/containers/send-in/${this.containerID}`, payload);
     },
     async sendInput() {
-      while (this.isRunning) {
-        if (this.input.length == 0) {
-          await setTimeout(() => {
-            console.log("Waiting...");
-          }, 1000);
-          console.log("Continuing loop...");
-        } else {
-          API.apiClient.post(
-            `/containers/send-in/${this.containerID}`,
-            this.input.shift()
-          );
-        }
-      }
+      // while (this.isRunning) {
+      //   if (this.input.length == 0) {
+      //     await setTimeout(() => {
+      //       console.log("Waiting...");
+      //     }, 1000);
+      //     console.log("Continuing loop...");
+      //   } else {
+      //     API.apiClient.post(
+      //       `/containers/send-in/${this.containerID}`,
+      //       this.input.shift()
+      //     );
+      //   }
+      // }
+      console.log(this.input);
+
     },
 
     async programFinished() {
