@@ -149,7 +149,7 @@ export default {
     async sendInput() {
       while (this.isRunning) {
         if (this.input.length == 0) {
-          await this.setTimeout(() => {
+          await setTimeout(() => {
             console.log("Waiting...");
           }, 1000);
           console.log("Continuing loop...");
