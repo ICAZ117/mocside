@@ -35,7 +35,6 @@ export default {
       recentLog: "",
       newLog: "",
       oldContent: "",
-      input: [],
     };
   },
   watch: {
@@ -141,29 +140,8 @@ export default {
         input: this.newInput,
       };
 
-      this.input.push(payload);
-
-      this.sendInput();
-      // const res = API.apiClient.post(`/containers/send-in/${this.containerID}`, payload);
+      const res = API.apiClient.post(`/containers/send-in/${this.containerID}`, payload);
     },
-    async sendInput() {
-      // while (this.isRunning) {
-      //   if (this.input.length == 0) {
-      //     await setTimeout(() => {
-      //       console.log("Waiting...");
-      //     }, 1000);
-      //     console.log("Continuing loop...");
-      //   } else {
-      //     API.apiClient.post(
-      //       `/containers/send-in/${this.containerID}`,
-      //       this.input.shift()
-      //     );
-      //   }
-      // }
-      console.log(this.input);
-
-    },
-
     async programFinished() {
       this.$emit("programFinished");
       this.newInput = "";
