@@ -8,7 +8,7 @@
       v-model="content"
       @keyup.enter="enter"
       spellcheck="false"
-      :readonly="!isRunning"
+      :readonly="!canEdit"
     ></textarea>
   </form>
 </template>
@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       isRunning: false,
+      canEdit: false,
       authUser: "",
       containerID: 0,
       new: [],
@@ -55,7 +56,7 @@ export default {
         this.startDocker();
       }
     },
-    newLog: function () {
+    newLog: async function () {
       if (this.newLog.replace(/^\n|\n$/g, "") == this.recentLog.replace(/^\n|\n$/g, "")) {
         console.log("Do nothing");
       } else {
@@ -68,7 +69,10 @@ export default {
         this.content += this.newLog.substring(this.recentLog.length);
         this.oldContent = this.content;
         this.recentLog = this.newLog;
+        
       }
+
+      this.canEdit = true;
     },
   },
   methods: {
@@ -94,6 +98,7 @@ export default {
       console.log("Started docker");
 
       this.isRunning = true;
+      this.canEdit = true;
 
       // Get the docker container ID
       this.containerID = res.data.message;
@@ -117,6 +122,8 @@ export default {
       this.oldContent = this.content;
     },
     async enter() {
+      this.canEdit = false;
+
       // Get new input
       this.newInput = this.content.substring(this.oldContent.length);
 
@@ -146,6 +153,7 @@ export default {
       this.$emit("programFinished");
       this.newInput = "";
       this.isRunning = false;
+      this.canEdit = false;
       this.oldContent += "\n" + this.username + "@mocside:/usr/src$ ";
       this.content = this.oldContent;
       this.newLog = "";
