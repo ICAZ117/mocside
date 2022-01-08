@@ -8,7 +8,7 @@
       v-model="content"
       @keyup.enter="enter"
       spellcheck="false"
-      :readonly="!canEdit"
+      :readonly="!isRunning"
     ></textarea>
   </form>
 </template>
@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       isRunning: false,
-      canEdit: false,
+      // canEdit: false,
       authUser: "",
       containerID: 0,
       new: [],
@@ -72,7 +72,7 @@ export default {
         
       }
 
-      this.canEdit = true;
+      // this.canEdit = true;
     },
   },
   methods: {
@@ -98,7 +98,7 @@ export default {
       console.log("Started docker");
 
       this.isRunning = true;
-      this.canEdit = true;
+      // this.canEdit = true;
 
       // Get the docker container ID
       this.containerID = res.data.message;
@@ -122,10 +122,10 @@ export default {
       this.oldContent = this.content;
     },
     async enter() {
-      this.canEdit = false;
+      // this.canEdit = false;
 
       // Get new input
-      this.newInput = this.content.substring(this.oldContent.length);
+      this.newInput = this.content.substring(this.oldContent.length, this.content.lastIndexOf("\n"));
 
       console.log("\n\nNEW INPUT");
       console.log({ in: this.newInput });
@@ -141,7 +141,7 @@ export default {
         this.isWaiting = this.containers.data.data[i] == this.containerID;
       }
 
-      this.oldContent = this.content;
+      this.oldContent = this.content.substring(0, this.content.lastIndexOf("\n"));
 
       var payload = {
         input: this.newInput,
@@ -153,7 +153,7 @@ export default {
       this.$emit("programFinished");
       this.newInput = "";
       this.isRunning = false;
-      this.canEdit = false;
+      // this.canEdit = false;
       this.oldContent += "\n" + this.username + "@mocside:/usr/src$ ";
       this.content = this.oldContent;
       this.newLog = "";
