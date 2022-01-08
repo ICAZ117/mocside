@@ -125,7 +125,7 @@ export default {
     async enter() {
       // this.canEdit = false;
       // Get last \n index
-      var idx = this.content.lastIndexOf("\n");
+      var idx = this.content.lastIndexOf("\n") + 1;
 
       // Get new input
       this.newInput = this.content.substring(this.oldContent.length, idx);
