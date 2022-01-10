@@ -179,7 +179,7 @@ export default defineComponent({
             code: this.assignment.python_starter,
           };
         }
-        const initial = await API.apiClient.post(`/code/`, payload);
+        const initial = await API.apiClient.post(`/code`, payload);
         if (this.lang == "Java") {
           this.code_j = this.assignment.java_starter;
           this.codeID = initial.data.id;
@@ -227,7 +227,7 @@ export default defineComponent({
         code: this.assignment.java_starter,
       };
       if (progress.length == 0) {
-        const res = await API.apiClient.post(`/code/`, payload);
+        const res = await API.apiClient.post(`/code`, payload);
         this.jID = res.data.id;
         // console.log("Got Java");
         return this.assignment.java_starter;
@@ -239,7 +239,7 @@ export default defineComponent({
             return progress[i].code;
           }
         }
-        const res = await API.apiClient.post(`/code/`, payload);
+        const res = await API.apiClient.post(`/code`, payload);
         this.jID = res.data.id;
         // console.log("Got Java");
         return this.assignment.java_starter;
@@ -253,7 +253,7 @@ export default defineComponent({
         code: this.assignment.python_starter,
       };
       if (progress.length == 0) {
-        const res = await API.apiClient.post(`/code/`, payload);
+        const res = await API.apiClient.post(`/code`, payload);
         this.pID = res.data.id;
         return this.assignment.python_starter;
       } else {
@@ -263,7 +263,7 @@ export default defineComponent({
             return progress[i].code;
           }
         }
-        const res = await API.apiClient.post(`/code/`, payload);
+        const res = await API.apiClient.post(`/code`, payload);
         this.pID = res.data.id;
         return this.assignment.python_starter;
       }
