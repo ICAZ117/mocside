@@ -572,7 +572,7 @@ export default defineComponent({
         course_id: this.courseID,
         due_date: "2021-06-03",
       };
-      const lab = await API.apiClient.post(`/labs/`, payload);
+      const lab = await API.apiClient.post(`/labs`, payload);
       this.labs.push(lab.data.data);
       this.unfilteredLabs.push(lab.data.data);
       this.sortLabs();

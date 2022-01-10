@@ -164,7 +164,7 @@ export default {
         input: "New Input",
         output: "New Output",
       };
-      const res = await API.apiClient.post(`/test-cases/`, payload);
+      const res = await API.apiClient.post(`/test-cases`, payload);
       this.cases.push(res.data);
       this.setCurrent(this.cases.length - 1);
     },
