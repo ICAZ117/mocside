@@ -416,7 +416,7 @@ export default defineComponent({
       };
 
       // Make API call and send payload to get said values
-      const res = await API.apiClient.post(`/gradebook/worth/`, payload);
+      const res = await API.apiClient.post(`/gradebook/worth`, payload);
 
       // Save total point values into data object
       this.problems = res.data.data.problems;
