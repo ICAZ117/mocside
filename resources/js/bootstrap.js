@@ -26,6 +26,7 @@ window.Echo = new Echo({
     // cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     wsHost: 'mocside.com',
     wsPort: 6001,
+    wssPort: 6001,
     forceTLS: false,
     disableStats: true,
 });
