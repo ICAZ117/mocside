@@ -58,6 +58,7 @@
                   >
                   <input
                     type="Date"
+                    v-model="courseForm.dateStart"
                     id="courseDateStart"
                     name="courseDateStart"
                     class="profile-field course-edit-field"
@@ -69,6 +70,7 @@
                   >
                   <input
                     type="Date"
+                    v-model="courseForm.dateEnd"
                     id="courseDateEnd"
                     name="courseDateEnd"
                     class="profile-field course-edit-field"
