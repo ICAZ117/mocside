@@ -84,6 +84,11 @@ class InviteController extends Controller
         // puts student on relevant rosters
         $user = Auth::user();
 
+        // if user is not verified, they cannot enroll.
+        if (!$user->isVerified()) {
+            return response()->json(['message' => 'You must verify your account before enrolling in a course.'], 403);
+        }
+
         // check to be sure that the user is a student, before anything else
         $student = Student::where('fsc_id', '=', $user->fsc_id)->first();
         if (!$student) {
