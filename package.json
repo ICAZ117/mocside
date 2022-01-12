@@ -20,7 +20,9 @@
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
+        "@kyvg/vue3-notification": "^2.3.4",
         "@popperjs/core": "^2.9.2",
+        "@tiptap/extension-image": "^2.0.0-beta.15",
         "@tiptap/extension-text-align": "^2.0.0-beta.18",
         "@tiptap/starter-kit": "^2.0.0-beta.77",
         "@tiptap/vue-3": "^2.0.0-beta.41",
@@ -31,10 +33,12 @@
         "vue": "^3.0.11",
         "vue-date-fns": "^2.0.1",
         "vue-final-modal": "^3.3.1",
+        "vue-image-crop-upload": "^3.0.3",
         "vue-router": "^4.0.8",
         "vue-template-compiler": "^2.6.12",
         "vue3-ace-editor": "^2.0.2",
-        "vue3-draggable-resizable": "^1.5.4",
+        "vue3-carousel": "^0.1.27",
+        "vue3-draggable-resizable": "file:vue3-draggable-resizable",
         "vue3-tabs": "^0.1.9",
         "vuex": "^4.0.0",
         "xterm": "^4.13.0",

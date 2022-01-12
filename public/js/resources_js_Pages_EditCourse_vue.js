@@ -180,6 +180,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_FileService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/FileService */ "./resources/js/services/FileService.js");
 /* harmony import */ var _Components_FlashMessage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Components/FlashMessage */ "./resources/js/Components/FlashMessage.vue");
 /* harmony import */ var _Components_FileUpload__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/FileUpload */ "./resources/js/Components/FileUpload.vue");
+/* harmony import */ var _Store_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Store/index */ "./resources/js/Store/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -191,9 +192,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["courseID"],
-  emits: ["unmounting", "courseEdited"],
+  emits: ["unmounting", "courseEdited", "pushToLabs", "studentView", "editLab"],
   components: {
     FlashMessage: _Components_FlashMessage__WEBPACK_IMPORTED_MODULE_4__.default,
     FileUpload: _Components_FileUpload__WEBPACK_IMPORTED_MODULE_5__.default
@@ -223,7 +225,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         uses: ""
       },
       joinKeys: [],
-      keyURL: ""
+      keyURL: "",
+      labs: [],
+      course: {},
+      showDeleteModal: false,
+      reloadDeleteModal: 0,
+      deletingLab: {
+        id: "",
+        lab: "",
+        key: ""
+      }
     };
   },
   methods: {
@@ -286,7 +297,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   payload["expire_date"] = _this2.courseForm.dateEnd;
                 } else {
                   //expire date is set to datetime
-                  payload["expire_date"] = _this2.enrollKey.datetime;
+                  payload["expire_date"] = _this2.enrollKey.datetime + " " + _this2.enrollKey.time;
                 }
 
                 if (_this2.enrollKey.uses == "") {
@@ -314,11 +325,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.keyURL = "http://mocside.com:8000/" + key.join_key + "/enroll"; //copy to clipboard
 
       var copyText = this.keyURL;
-      var textarea = document.createElement('textarea');
+      var textarea = document.createElement("textarea");
       textarea.value = copyText;
       document.body.appendChild(textarea);
       textarea.select();
-      document.execCommand('copy');
+      document.execCommand("copy");
       document.body.removeChild(textarea);
     },
     deleteKey: function deleteKey(key, id) {
@@ -374,11 +385,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 res = _context4.sent;
-                alert("Processed finished with status code: " + res.statusCode);
 
                 _this4.$emit("courseEdited");
 
-              case 9:
+              case 8:
               case "end":
                 return _context4.stop();
             }
@@ -688,44 +698,254 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee11);
       }))();
+    },
+    getLabs: function getLabs() {
+      var _this11 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
+        var rawLabs;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
+          while (1) {
+            switch (_context12.prev = _context12.next) {
+              case 0:
+                _context12.next = 2;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/labs/".concat(_this11.courseID));
+
+              case 2:
+                rawLabs = _context12.sent;
+                // this.labs = rawLabs.data.data;
+                _this11.labs = rawLabs.data.data;
+                _context12.next = 6;
+                return _this11.sortLabs();
+
+              case 6:
+              case "end":
+                return _context12.stop();
+            }
+          }
+        }, _callee12);
+      }))();
+    },
+    published: function published(lab) {
+      //return true if the lab is published
+      //false otherwise
+      var now = new Date(Date.now());
+
+      if (lab.publish_date == "" || lab.publish_date == null) {
+        return false;
+      }
+
+      var pd = lab.publish_date.split("-")[2];
+      var pm = lab.publish_date.split("-")[1] - 1;
+      var py = lab.publish_date.split("-")[0];
+      var published = new Date(py, pm, pd, 0, 0, 0, 0);
+
+      if (published < now) {
+        return true;
+      }
+
+      return false;
+    },
+    sortLabs: function sortLabs() {
+      var _this12 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+          while (1) {
+            switch (_context13.prev = _context13.next) {
+              case 0:
+                _context13.next = 2;
+                return _this12.sortByDueDate();
+
+              case 2:
+                return _context13.abrupt("return", "");
+
+              case 3:
+              case "end":
+                return _context13.stop();
+            }
+          }
+        }, _callee13);
+      }))();
+    },
+    sortByDueDate: function sortByDueDate() {
+      var _this13 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
+          while (1) {
+            switch (_context14.prev = _context14.next) {
+              case 0:
+                //sorts the unfiltered results by start date
+                _this13.labs.sort(function (a, b) {
+                  //if a should be first return -1, 0 for tie, -1 if b first
+                  var la = a.due_date.split("-");
+                  var lb = b.due_date.split("-");
+                  var fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+                  var fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+
+                  if (fa < fb) {
+                    return -1;
+                  }
+
+                  if (fa > fb) {
+                    return 1;
+                  }
+
+                  return 0;
+                });
+
+              case 1:
+              case "end":
+                return _context14.stop();
+            }
+          }
+        }, _callee14);
+      }))();
+    },
+    goToProblems: function goToProblems(id, name) {
+      //emit push to labs but on parent just set boolean since it is about to be unmounted
+      this.$emit("pushToLabs", [this.courseID, this.course.name, id, name]);
+    },
+    studentView: function studentView() {
+      this.$emit("studentView", [this.courseID, this.course.name]);
+    },
+    editLab: function editLab(id, name) {
+      console.log("edit Lab");
+      this.$emit("editLab", [this.courseID, this.course.name, id, name]);
+    },
+    closeDeleting: function closeDeleting() {
+      this.showDeleteModal = false;
+    },
+    deleting: function deleting(id, lab, key) {
+      // document.getElementById("out-click").style.display = "none";
+      this.showDeleteModal = true;
+      this.deletingLab.id = id;
+      this.deletingLab.lab = lab;
+      this.deletingLab.key = key;
+    },
+    removeLab: function removeLab() {
+      var _this14 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15() {
+        var id, key, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
+          while (1) {
+            switch (_context15.prev = _context15.next) {
+              case 0:
+                console.log("remove lab");
+                id = _this14.deletingLab.id;
+                key = _this14.deletingLab.key; //remove from lab the current course
+
+                _context15.next = 5;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.delete("/labs/".concat(id));
+
+              case 5:
+                res = _context15.sent;
+                //filter from labs
+                _this14.labs = _this14.labs.filter(function (l, i) {
+                  return i != key;
+                });
+
+                _this14.closeDeleting();
+
+              case 8:
+              case "end":
+                return _context15.stop();
+            }
+          }
+        }, _callee15);
+      }))();
+    },
+    addLab: function addLab() {
+      var _this15 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee16() {
+        var payload, lab;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee16$(_context16) {
+          while (1) {
+            switch (_context16.prev = _context16.next) {
+              case 0:
+                payload = {
+                  name: "New Lab",
+                  description: "New Lab",
+                  course_id: _this15.courseID,
+                  due_date: "2021-06-03"
+                };
+                _context16.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.post("/labs", payload);
+
+              case 3:
+                lab = _context16.sent;
+
+                _this15.labs.push(lab.data.data);
+
+                _this15.sortLabs();
+
+              case 6:
+              case "end":
+                return _context16.stop();
+            }
+          }
+        }, _callee16);
+      }))();
     }
   },
   mounted: function mounted() {
-    var _this11 = this;
+    var _this16 = this;
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
-      var course;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee17() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee17$(_context17) {
         while (1) {
-          switch (_context12.prev = _context12.next) {
+          switch (_context17.prev = _context17.next) {
             case 0:
-              _context12.next = 2;
-              return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/courses/".concat(_this11.courseID));
+              _context17.next = 2;
+              return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/courses/full/".concat(_this16.courseID));
 
             case 2:
-              course = _context12.sent;
-              _this11.courseForm.name = course.data.data.name;
-              _this11.courseForm.description = course.data.data.description;
-              _this11.courseForm.img = course.data.data.img_loc;
-              _this11.courseForm.dateStart = course.data.data.start_date;
-              _this11.courseForm.dateEnd = course.data.data.end_date;
-              _this11.courseForm.roster = JSON.parse(course.data.data.roster).roster;
+              _this16.course = _context17.sent;
+              _this16.courseForm.name = _this16.course.data.data.name;
+              _this16.courseForm.description = _this16.course.data.data.description;
+              _this16.courseForm.img = _this16.course.data.data.img_loc;
+              _this16.courseForm.dateStart = _this16.course.data.data.start_date;
+              _this16.courseForm.dateEnd = _this16.course.data.data.end_date;
+              _this16.courseForm.roster = JSON.parse(_this16.course.data.data.roster).roster;
+              _this16.course = _this16.course.data.data;
 
-              _this11.getStudents();
+              _this16.getStudents();
 
-              _this11.initKeys();
+              _this16.initKeys();
 
-            case 11:
+              _context17.next = 14;
+              return _this16.getLabs();
+
+            case 14:
             case "end":
-              return _context12.stop();
+              return _context17.stop();
           }
         }
-      }, _callee12);
+      }, _callee17);
     }))();
   },
   beforeUnmount: function beforeUnmount() {
     //editcourse
     this.$emit("unmounting");
+  },
+  computed: {
+    isProf: function isProf() {
+      if (_Store_index__WEBPACK_IMPORTED_MODULE_6__.default.getters["auth/isProf"] == null) {
+        return false;
+      } else {
+        return _Store_index__WEBPACK_IMPORTED_MODULE_6__.default.getters["auth/isProf"];
+      }
+    }
+  },
+  watch: {
+    showDeleteModal: function showDeleteModal() {
+      if (!this.showDeleteModal) {
+        this.reloadDeleteModal++;
+      }
+    }
   }
 });
 
@@ -855,146 +1075,179 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "edit-course"
+  "class": "course-dashboard darkBG"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", {
-  "class": "edit-course-title"
-}, "Edit Course", -1
-/* HOISTED */
-);
-
+var _hoisted_2 = {
+  "class": "top-row"
+};
 var _hoisted_3 = {
-  "class": "course-create-form"
+  "class": "top-left course-details"
 };
 var _hoisted_4 = {
+  "class": "course-create-form"
+};
+var _hoisted_5 = {
   "class": "form-group"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "for": "Course Name"
-}, "Course Name", -1
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "Course Name",
+  "class": "course-edit-label",
+  style: {
+    "width": "21% !important"
+  }
+}, "Course Name:", -1
 /* HOISTED */
 );
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_8 = {
   "class": "form-group"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "for": "Course Description"
-}, "Course Description", -1
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "Course Description",
+  "class": "course-edit-label",
+  style: {
+    "width": "29% !important"
+  }
+}, "Course Description:", -1
 /* HOISTED */
 );
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_10 = {
-  "class": "form-group"
-};
 var _hoisted_11 = {
+  "class": "form-group"
+};
+var _hoisted_12 = {
   "class": "mb-4"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "file",
-  "class": "sr-only"
-}, " Upload Course Image ", -1
+  "class": "course-edit-label"
+}, "Upload Course Image:", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_14 = {
+var _hoisted_15 = {
   "class": "form-group"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "for": "Course Dates"
-}, "Course Dates", -1
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "Course Dates",
+  "class": "course-edit-label"
+}, "Course Dates:", -1
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_17 = {
   "class": "row"
 };
-
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
 var _hoisted_18 = {
-  "class": "form-group"
+  "class": "col-6"
 };
 
 var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-  "for": "Course Roster"
+  "for": "courseDateStart",
+  style: {
+    "color": "darkgray !important"
+  }
+}, "Start date: ", -1
+/* HOISTED */
+);
+
+var _hoisted_20 = {
+  "class": "col-6"
+};
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "courseDateEnd",
+  style: {
+    "color": "darkgray !important"
+  }
+}, "End date: ", -1
+/* HOISTED */
+);
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "form-group"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  type: "submit",
+  "class": "btn btn-success btn-block"
+}, " Save Changes ")], -1
+/* HOISTED */
+);
+
+var _hoisted_24 = {
+  "class": "top-right grades"
+};
+var _hoisted_25 = {
+  "class": "form-group"
+};
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "for": "Course Roster",
+  "class": "course-edit-label"
 }, "Course Roster", -1
 /* HOISTED */
 );
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_21 = {
-  "class": "form-group"
-};
-var _hoisted_22 = {
-  "class": "key-options"
-};
-
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Enroll Key", -1
-/* HOISTED */
-);
-
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Permanent Key", -1
-/* HOISTED */
-);
-
-var _hoisted_26 = {
-  "class": "switch"
-};
-
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
-  "class": "slider round"
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", {
+  style: {
+    "margin": "0",
+    "padding": "0",
+    "color": "white"
+  }
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  style: {
+    "overflow": "hidden !important"
+  }
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", {
+  style: {
+    "margin": "0",
+    "padding": "0",
+    "color": "white",
+    "transform": "rotate(90deg)"
+  }
+})], -1
 /* HOISTED */
 );
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Expire Date", -1
-/* HOISTED */
-);
+var _hoisted_29 = {
+  "class": "bottom-row"
+};
+var _hoisted_30 = {
+  "class": "bottom-left key-gen"
+};
+var _hoisted_31 = {
+  "class": "form-group"
+};
+var _hoisted_32 = {
+  "class": "key-options"
+};
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Expire Time", -1
-/* HOISTED */
-);
-
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Max Uses", -1
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "class": "course-edit-label"
+}, "Enroll Key", -1
 /* HOISTED */
 );
 
@@ -1002,42 +1255,118 @@ var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "form-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  type: "submit",
-  "class": "btn btn-danger btn-block"
-}, " Submit Changes ")], -1
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "class": "course-edit-label"
+}, "Permanent Key", -1
 /* HOISTED */
 );
 
+var _hoisted_36 = {
+  "class": "switch"
+};
+
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+  "class": "slider round"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "class": "course-edit-label"
+}, "Expire Date", -1
+/* HOISTED */
+);
+
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Expire Time", -1
+/* HOISTED */
+);
+
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+  "class": "course-edit-label"
+}, "Max Uses", -1
+/* HOISTED */
+);
+
+var _hoisted_44 = {
+  "class": "bottom-right labs"
+};
+var _hoisted_45 = {
+  style: {
+    "border": "1px solid #9e9e9e !important",
+    "padding": "0 !important",
+    "width": "min-content !important",
+    "margin": "2rem 2rem 2rem 2rem !important"
+  }
+};
+var _hoisted_46 = {
+  "class": "table labtable",
+  style: {
+    "margin": "0 !important"
+  }
+};
+
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", {
+  "class": "labtable"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Title"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "# Problems"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Due Date")])], -1
+/* HOISTED */
+);
+
+var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+  colspan: "5"
+}, "Add Lab", -1
+/* HOISTED */
+);
+
+var _hoisted_49 = {
+  "class": "delete Course"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-    onSubmit: _cache[12] || (_cache[12] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+  var _component_vue_final_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-final-modal");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------ TOP ROW ------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
+    onSubmit: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.handleSubmit && $options.handleSubmit.apply($options, arguments);
     }, ["prevent"])),
     "class": "course-form"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.courseForm.name = $event;
     }),
     id: "courseName",
     name: "courseName",
-    "class": "form-control"
+    "class": "profile-field course-edit-field",
+    style: {
+      "width": "79% !important"
+    }
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" :class=\"{\n              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,\n            }\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"isSubmitted && !v$.userForm.name.required\" class=\"invalid-feedback\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div\n            v-if=\"isSubmitted && v$.userForm.userEmail.$error\"\n            class=\"invalid-feedback\"\n          >\n            Please enter the Course Name\n          </div> ")]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.name]])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.courseForm.description = $event;
     }),
     id: "courseDescription",
     name: "courseDescription",
-    "class": "form-control"
+    "class": "profile-field course-edit-field",
+    style: {
+      "width": "71% !important"
+    }
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.description]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" :class=\"{\n              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,\n            }\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"isSubmitted && !v$.userForm.name.required\" class=\"invalid-feedback\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div\n            v-if=\"isSubmitted && v$.userForm.userEmail.$error\"\n            class=\"invalid-feedback\"\n          >\n            Please enter the Course Name\n          </div> ")]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.description]])]), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "file",
     accept: ['image/*'],
     onChange: _cache[3] || (_cache[3] = function () {
@@ -1046,41 +1375,42 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "file"
   }, null, 32
   /* HYDRATE_EVENTS */
-  )])]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "Date",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.courseForm.dateStart = $event;
     }),
     id: "courseDateStart",
     name: "courseDateStart",
-    "class": "form-control col-4"
+    "class": "profile-field course-edit-field"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.dateStart]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.dateStart]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "Date",
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $data.courseForm.dateEnd = $event;
     }),
     id: "courseDateEnd",
     name: "courseDateEnd",
-    "class": "form-control col-7"
+    "class": "profile-field course-edit-field"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.dateEnd]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" :class=\"{\n              'is-invalid': isSubmitted && v$.userForm.userEmail.$error,\n            }\" "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"isSubmitted && !v$.userForm.name.required\" class=\"invalid-feedback\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div\n            v-if=\"isSubmitted && v$.userForm.userEmail.$error\"\n            class=\"invalid-feedback\"\n          >\n            Please enter the Course Name\n          </div> ")])]), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input\n            type=\"text\"\n            v-model=\"courseForm.roster\"\n            id=\"courseRoster\"\n            name=\"courseRoster\"\n            class=\"form-control\"\n          /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.students, function (student, key) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.courseForm.dateEnd]])])])]), _hoisted_22, _hoisted_23], 32
+  /* HYDRATE_EVENTS */
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    onClick: _cache[7] || (_cache[7] = function ($event) {
+      return $options.studentView();
+    }),
+    "class": "btn btn-danger btn-block"
+  }, " Student View "), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.students, function (student) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
       key: student.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.name) + " ", 1
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.name) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.fsc_user.fsc_id) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(student.email) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(Math.floor(JSON.parse($data.course.gradebook).grades[student.fsc_user.fsc_id] / $data.course.worth * 100 * 100) / 100) + "% ", 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-      onClick: function onClick($event) {
-        return $options.removeStudent(student, key);
-      }
-    }, "X", 8
-    /* PROPS */
-    , ["onClick"])]);
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a @click=\"removeStudent(student, key)\">X</a> ")]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <label for=\"AddStudent\">Add Student by ID</label>\n          <div class=\"row\">\n            <input\n              type=\"number\"\n              v-model=\"studentID\"\n              id=\"AddStudent\"\n              name=\"AddStudent\"\n              class=\"form-control col-7\"\n            />\n          </div>\n          <button @click=\"addStudent\" class=\"btn btn-danger btn-block\">Add Student</button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.joinKeys, function (k, id) {
+  ))])])])]), _hoisted_27, _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.joinKeys, function (k, id) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", {
       key: k
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(k.join_key) + " ", 1
@@ -1100,54 +1430,130 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_32, [_hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     placeholder: "Random",
     type: "text",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
       return $data.enrollKey.key = $event;
-    })
+    }),
+    "class": "profile-field course-edit-field"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.enrollKey.key]]), _hoisted_24, _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.enrollKey.key]]), _hoisted_34, _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "checkbox",
-    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
       return $data.enrollKey.perm = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.enrollKey.perm]]), _hoisted_27]), _hoisted_28, _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.enrollKey.perm]]), _hoisted_37]), _hoisted_38, _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "date",
     disabled: $data.enrollKey.perm,
-    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
       return $data.enrollKey.datetime = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["disabled"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.enrollKey.datetime]]), _hoisted_30, _hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  , ["disabled"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.enrollKey.datetime]]), _hoisted_40, _hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "time",
     disabled: $data.enrollKey.perm,
-    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
       return $data.enrollKey.time = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["disabled"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.enrollKey.time]]), _hoisted_32, _hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  , ["disabled"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.enrollKey.time]]), _hoisted_42, _hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     placeholder: "0 for unlimited use",
     type: "text",
-    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
       return $data.enrollKey.uses = $event;
-    })
+    }),
+    "class": "profile-field course-edit-field"
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.enrollKey.uses]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     type: "button",
-    onClick: _cache[11] || (_cache[11] = function () {
+    onClick: _cache[13] || (_cache[13] = function () {
       return $options.generateKey && $options.generateKey.apply($options, arguments);
     }),
     "class": "btn btn-danger btn-block"
-  }, " Generate Course Enroll Key ")]), _hoisted_34, _hoisted_35], 32
-  /* HYDRATE_EVENTS */
-  )])]);
+  }, " Generate Course Enroll Key ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_46, [_hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.labs, function (lab, key) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      key: lab.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", {
+      "class": "lab pointer",
+      onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return $options.goToProblems(lab.id, lab.name);
+      }, ["prevent"]),
+      onContextmenu: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return _ctx.showMenu(lab.id);
+      }, ["prevent"])
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(lab.name), 1
+    /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(lab.num_problems), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(lab.due_date), 1
+    /* TEXT */
+    )], 40
+    /* PROPS, HYDRATE_EVENTS */
+    , ["onClick", "onContextmenu"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      onClick: function onClick($event) {
+        return $options.editLab(lab.id, lab.name);
+      }
+    }, "...", 8
+    /* PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      onClick: function onClick($event) {
+        return $options.deleting(lab.id, lab, key);
+      }
+    }, "X", 8
+    /* PROPS */
+    , ["onClick"])], 64
+    /* STABLE_FRAGMENT */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), $options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", {
+    key: 0,
+    "class": "lab pointer",
+    onClick: _cache[14] || (_cache[14] = function () {
+      return $options.addLab && $options.addLab.apply($options, arguments);
+    })
+  }, [_hoisted_48])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_final_modal, {
+    modelValue: $data.showDeleteModal,
+    "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
+      return $data.showDeleteModal = $event;
+    }),
+    classes: "modal-container",
+    "content-class": "modal-content",
+    "esc-to-close": true
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "modal-close",
+        onClick: _cache[15] || (_cache[15] = function ($event) {
+          return $options.closeDeleting();
+        })
+      }, "x"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Are you sure you would like to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.deletingLab.lab.name), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "btn btn-md btn-danger",
+        onClick: _cache[16] || (_cache[16] = function ($event) {
+          return $options.closeDeleting();
+        })
+      }, "Cancel"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "btn btn-md btn-danger",
+        onClick: _cache[17] || (_cache[17] = function ($event) {
+          return $options.removeLab();
+        })
+      }, "Delete")])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["modelValue"])]);
 }
 
 /***/ }),

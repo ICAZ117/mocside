@@ -783,7 +783,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["problemID"],
+  props: ["problemID", "tab"],
   data: function data() {
     return {
       saveStatus: "",
@@ -791,10 +791,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       showEditor: false,
       content: "",
       template_j: "",
-      template_p: ""
+      template_p: "",
+      windowWidth: window.innerWidth
     };
   },
   watch: {
+    tab: function tab(newVal, oldVal) {
+      if (newVal != "Model Solution") {
+        this.showEditor = false;
+      }
+    },
     content: function content(val) {
       this.saveStatus = "Saving...";
       this.timeout(this.problemID);
@@ -821,23 +827,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (this.lang == "Java") {
                   payload = {
-                    "java_model": this.content
+                    java_model: this.content
                   };
                 } else {
                   payload = {
-                    "python_model": this.content
+                    python_model: this.content
                   };
                 }
 
-                ;
-                _context.next = 5;
+                _context.next = 4;
                 return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.put("/problems/".concat(assignmentID), payload);
 
-              case 5:
+              case 4:
                 res = _context.sent;
                 this.saveStatus = "All changes have been saved";
 
-              case 7:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -922,7 +927,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       assignmentID: this.problemID,
-      newText: {}
+      newText: {},
+      childIsOpen: false,
+      showDeleteModal: false,
+      reloadDeleteModal: 0
     };
   },
   methods: {
@@ -962,20 +970,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var flag;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                flag = confirm("Are you Sure you want to delete this problem");
+                _this.childIsOpen = false;
 
-                if (!flag) {
-                  _context2.next = 4;
-                  break;
-                }
+                _this.closeDeleting();
 
                 _context2.next = 4;
-                return _this.$emit("delete-problem");
+                return _this.$emit("delete-problem", _this.problemID);
 
               case 4:
               case "end":
@@ -984,6 +988,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    },
+    closeDeleting: function closeDeleting() {
+      this.showDeleteModal = false;
+    },
+    deleting: function deleting() {
+      this.showDeleteModal = true;
     }
   },
   beforeMount: function beforeMount() {},
@@ -1021,7 +1031,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["problemID"],
+  props: ["problemID", "tab"],
   data: function data() {
     return {
       saveStatus: "",
@@ -1029,10 +1039,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       showEditor: false,
       content: "",
       template_j: "",
-      template_p: ""
+      template_p: "",
+      windowWidth: window.innerWidth
     };
   },
   watch: {
+    tab: function tab(newVal, oldVal) {
+      if (newVal != "Template") {
+        this.showEditor = false;
+      }
+    },
     content: function content(val) {
       this.saveStatus = "Saving...";
       console.log("Change status to saving");
@@ -1060,24 +1076,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (this.lang == "Java") {
                   payload = {
-                    "java_starter": this.content
+                    java_starter: this.content
                   };
                 } else {
                   payload = {
-                    "python_starter": this.content
+                    python_starter: this.content
                   };
                 }
 
-                ;
                 console.log(payload);
-                _context.next = 6;
+                _context.next = 5;
                 return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/problems/".concat(assignmentID), payload);
 
-              case 6:
+              case 5:
                 res = _context.sent;
                 this.saveStatus = "All changes have been saved";
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -1187,19 +1202,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getCases: function getCases() {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var res, rawCases;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.next = 2;
+                _context2.next = 2;
                 return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.get("/test-cases/".concat(_this.problemID));
 
               case 2:
-                res = _context.sent;
+                res = _context2.sent;
                 rawCases = res.data;
-                _this.cases = rawCases;
+
+                /*#__PURE__*/
+                _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          _this.cases = rawCases;
+
+                        case 1:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
 
                 if (_this.cases.length != 0) {
                   _this.setCurrent(0);
@@ -1207,20 +1237,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     },
     addTest: function addTest() {
       var _this2 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var payload, res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 console.log("addTest");
                 payload = {
@@ -1229,11 +1259,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   input: "New Input",
                   output: "New Output"
                 };
-                _context2.next = 4;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.post("/test-cases/", payload);
+                _context3.next = 4;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.post("/test-cases", payload);
 
               case 4:
-                res = _context2.sent;
+                res = _context3.sent;
 
                 _this2.cases.push(res.data);
 
@@ -1241,20 +1271,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 7:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     },
     deleteTest: function deleteTest() {
       var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         var key, i, temp, idx, res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 for (i = 0; i < _this3.cases.length; i++) {
                   if (_this3.tc.id == _this3.cases[i].id) {
@@ -1294,18 +1324,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 } // I do this after to ensure that it doesn't try to repost to the test case after it has been deleted
 
 
-                _context3.next = 8;
+                _context4.next = 8;
                 return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.delete("/test-cases/".concat(temp));
 
               case 8:
-                res = _context3.sent;
+                res = _context4.sent;
 
               case 9:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     setCurrent: function setCurrent(idx) {
@@ -1339,38 +1369,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     changeTitle: function changeTitle() {
       var _this4 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var payload, res, i;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                payload = {
-                  title: _this4.tc.Title
-                };
-                _context4.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this4.tc.id), payload);
-
-              case 3:
-                res = _context4.sent;
-
-                for (i = 0; i < _this4.cases.length; i++) {
-                  if (_this4.cases[i].id == res.data.id) {
-                    _this4.cases[i] = res.data;
-                  }
-                }
-
-              case 5:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }))();
-    },
-    changePoints: function changePoints() {
-      var _this5 = this;
-
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
         var payload, res, i;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
@@ -1378,17 +1376,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context5.prev = _context5.next) {
               case 0:
                 payload = {
-                  points: _this5.tc.Points
+                  title: _this4.tc.Title
                 };
                 _context5.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this5.tc.id), payload);
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this4.tc.id), payload);
 
               case 3:
                 res = _context5.sent;
 
-                for (i = 0; i < _this5.cases.length; i++) {
-                  if (_this5.cases[i].id == res.data.id) {
-                    _this5.cases[i] = res.data;
+                for (i = 0; i < _this4.cases.length; i++) {
+                  if (_this4.cases[i].id == res.data.id) {
+                    _this4.cases[i] = res.data;
                   }
                 }
 
@@ -1400,8 +1398,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee5);
       }))();
     },
-    changeFeedback: function changeFeedback(e) {
-      var _this6 = this;
+    changePoints: function changePoints() {
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
         var payload, res, i;
@@ -1409,15 +1407,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
+                payload = {
+                  points: _this5.tc.Points
+                };
+                _context6.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this5.tc.id), payload);
+
+              case 3:
+                res = _context6.sent;
+
+                for (i = 0; i < _this5.cases.length; i++) {
+                  if (_this5.cases[i].id == res.data.id) {
+                    _this5.cases[i] = res.data;
+                  }
+                }
+
+              case 5:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    changeFeedback: function changeFeedback(e) {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
+        var payload, res, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
                 _this6.tc.Feedback = e;
                 payload = {
                   feedback: _this6.tc.Feedback
                 };
-                _context6.next = 4;
+                _context7.next = 4;
                 return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this6.tc.id), payload);
 
               case 4:
-                res = _context6.sent;
+                res = _context7.sent;
 
                 for (i = 0; i < _this6.cases.length; i++) {
                   if (_this6.cases[i].id == res.data.id) {
@@ -1427,46 +1457,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
               case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6);
-      }))();
-    },
-    changeCompare: function changeCompare() {
-      var _this7 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7() {
-        var payload, res, i;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                payload = {
-                  compare_method: _this7.tc.CompareMethod
-                };
-                _context7.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this7.tc.id), payload);
-
-              case 3:
-                res = _context7.sent;
-
-                for (i = 0; i < _this7.cases.length; i++) {
-                  if (_this7.cases[i].id == res.data.id) {
-                    _this7.cases[i] = res.data;
-                  }
-                }
-
-              case 5:
-              case "end":
                 return _context7.stop();
             }
           }
         }, _callee7);
       }))();
     },
-    changeInput: function changeInput() {
-      var _this8 = this;
+    changeCompare: function changeCompare() {
+      var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
         var payload, res, i;
@@ -1475,17 +1473,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context8.prev = _context8.next) {
               case 0:
                 payload = {
-                  input: _this8.tc.Input
+                  compare_method: _this7.tc.CompareMethod
                 };
                 _context8.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this8.tc.id), payload);
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this7.tc.id), payload);
 
               case 3:
                 res = _context8.sent;
 
-                for (i = 0; i < _this8.cases.length; i++) {
-                  if (_this8.cases[i].id == res.data.id) {
-                    _this8.cases[i] = res.data;
+                for (i = 0; i < _this7.cases.length; i++) {
+                  if (_this7.cases[i].id == res.data.id) {
+                    _this7.cases[i] = res.data;
                   }
                 }
 
@@ -1497,8 +1495,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee8);
       }))();
     },
-    changeOutput: function changeOutput() {
-      var _this9 = this;
+    changeInput: function changeInput() {
+      var _this8 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
         var payload, res, i;
@@ -1507,17 +1505,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context9.prev = _context9.next) {
               case 0:
                 payload = {
-                  output: _this9.tc.Output
+                  input: _this8.tc.Input
                 };
                 _context9.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this9.tc.id), payload);
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this8.tc.id), payload);
 
               case 3:
                 res = _context9.sent;
 
-                for (i = 0; i < _this9.cases.length; i++) {
-                  if (_this9.cases[i].id == res.data.id) {
-                    _this9.cases[i] = res.data;
+                for (i = 0; i < _this8.cases.length; i++) {
+                  if (_this8.cases[i].id == res.data.id) {
+                    _this8.cases[i] = res.data;
                   }
                 }
 
@@ -1527,6 +1525,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee9);
+      }))();
+    },
+    changeOutput: function changeOutput() {
+      var _this9 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+        var payload, res, i;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                payload = {
+                  output: _this9.tc.Output
+                };
+                _context10.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_2__.apiClient.put("/test-cases/".concat(_this9.tc.id), payload);
+
+              case 3:
+                res = _context10.sent;
+
+                for (i = 0; i < _this9.cases.length; i++) {
+                  if (_this9.cases[i].id == res.data.id) {
+                    _this9.cases[i] = res.data;
+                  }
+                }
+
+              case 5:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10);
       }))();
     }
   },
@@ -1621,13 +1651,38 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
     }
   },
   methods: {
-    handleSubmit: function handleSubmit() {
+    pressTab: function pressTab() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
+              case 0:
+                console.log("pressed a tab");
+                console.log(_this.selectedTab);
+
+                if (_this.selectedTab == "Save & Exit") {
+                  _this.childIsOpen = false;
+
+                  _this.$emit("problemEdited");
+                }
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    handleSubmit: function handleSubmit() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 //perhaps later replace this with a debounce method for autosaving
                 //save information before returning to the problems page
@@ -1636,16 +1691,16 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
                 //   // "description": this.overview,
                 // };
                 // const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
-                _this.childIsOpen = false;
+                _this2.childIsOpen = false;
 
-                _this.$emit("problemEdited");
+                _this2.$emit("problemEdited");
 
               case 2:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     },
     updateOverview: function updateOverview(e) {
@@ -1654,76 +1709,78 @@ var tabs = ["Overview", "Assign", "Template", "Test Bench", "Model Solution", "G
       this.overview = e;
     },
     getInfo: function getInfo() {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var rawproblem;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return _services_API__WEBPACK_IMPORTED_MODULE_8__.apiClient.get("/problems/full/".concat(_this2.problemID));
-
-              case 2:
-                rawproblem = _context2.sent;
-                _this2.problem = rawproblem.data.data;
-                _this2.assignmentTitle = _this2.problem.name;
-                _this2.overview = _this2.problem.description;
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    },
-    timeout: lodash__WEBPACK_IMPORTED_MODULE_9___default().debounce( /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(assignmentID) {
-        var payload, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                payload = {
-                  "name": this.assignmentTitle
-                };
+                console.log("get info");
                 _context3.next = 3;
-                return _services_API__WEBPACK_IMPORTED_MODULE_8__.apiClient.put("/problems/unique/".concat(assignmentID), payload);
+                return _services_API__WEBPACK_IMPORTED_MODULE_8__.apiClient.get("/problems/full/".concat(_this3.problemID));
 
               case 3:
-                res = _context3.sent;
+                rawproblem = _context3.sent;
+                _this3.problem = rawproblem.data.data;
+                _this3.assignmentTitle = _this3.problem.name;
+                _this3.overview = _this3.problem.description;
 
-              case 4:
+              case 7:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee3);
+      }))();
+    },
+    timeout: lodash__WEBPACK_IMPORTED_MODULE_9___default().debounce( /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(assignmentID) {
+        var payload, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                payload = {
+                  name: this.assignmentTitle
+                };
+                _context4.next = 3;
+                return _services_API__WEBPACK_IMPORTED_MODULE_8__.apiClient.put("/problems/unique/".concat(assignmentID), payload);
+
+              case 3:
+                res = _context4.sent;
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
       }));
 
       return function (_x) {
         return _ref.apply(this, arguments);
       };
     }(), 500),
-    deleteProblem: function deleteProblem() {
-      var _this3 = this;
+    deleteProblem: function deleteProblem(id) {
+      var _this4 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.next = 2;
-                return _this3.$emit("deleteMe");
+                console.log("create-assignment problemid " + id);
+                _context5.next = 3;
+                return _this4.$emit("deleteMe", id);
 
-              case 2:
+              case 3:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4);
+        }, _callee5);
       }))();
     }
   },
@@ -2121,6 +2178,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, " CHANGE LANGUAGE "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <small class=\"col-8 saveStatus\">{{ saveStatus }}</small> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.saveStatus), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_IDE, {
+    offsetTop: 197.8,
+    width: $data.windowWidth,
     lang: $data.lang,
     problemID: $props.problemID,
     showSubmit: false,
@@ -2135,7 +2194,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onUpdate: $options.updateContent
   }, null, 8
   /* PROPS */
-  , ["lang", "problemID", "saved_j", "saved_p", "onUpdate"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  , ["offsetTop", "width", "lang", "problemID", "saved_j", "saved_p", "onUpdate"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -2157,35 +2216,81 @@ var _hoisted_1 = {
   "class": "create-assignment"
 };
 var _hoisted_2 = {
+  "class": "delete Course"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Are you sure you would like to delete this problem", -1
+/* HOISTED */
+);
+
+var _hoisted_4 = {
+  "class": "delete-buttons"
+};
+var _hoisted_5 = {
   "class": "container"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, "Description:", -1
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", null, "Description:", -1
 /* HOISTED */
 );
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", null, null, -1
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, "Proceed with caution!", -1
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h5", null, "Proceed with caution!", -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_vue_final_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-final-modal");
+
   var _component_Tiptap = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Tiptap");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tiptap, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_final_modal, {
+    "class": "delete-modal",
+    modelValue: $data.showDeleteModal,
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.showDeleteModal = $event;
+    }),
+    classes: "modal-container",
+    "content-class": "modal-content delete-modal",
+    "esc-to-close": true
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "modal-close",
+        onClick: _cache[1] || (_cache[1] = function ($event) {
+          return $options.closeDeleting();
+        })
+      }, "x"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "btn btn-md btn-danger delete-button",
+        onClick: _cache[2] || (_cache[2] = function ($event) {
+          return $options.closeDeleting();
+        })
+      }, "Cancel"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "btn btn-md btn-danger delete-button",
+        onClick: _cache[3] || (_cache[3] = function ($event) {
+          return $options.deleteProblem();
+        })
+      }, "Delete")])])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Tiptap, {
     savedText: JSON.parse($props.overview),
     onInput: $options.save,
     showMenuBar: true,
     isDark: false
   }, null, 8
   /* PROPS */
-  , ["savedText", "onInput"]), _hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  , ["savedText", "onInput"]), _hoisted_7, _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-danger btn-lg",
-    onClick: _cache[1] || (_cache[1] = function ($event) {
-      return $options.deleteProblem();
+    onClick: _cache[5] || (_cache[5] = function ($event) {
+      return $options.deleting();
     })
   }, "DELETE ASSIGNMENT")])]);
 }
@@ -2259,6 +2364,9 @@ var _hoisted_11 = {
 var _hoisted_12 = {
   "class": "col-8 saveStatus"
 };
+var _hoisted_13 = {
+  "class": "template-IDE"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_IDE = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("IDE");
 
@@ -2287,7 +2395,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, " CHANGE LANGUAGE "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <small class=\"col-8 saveStatus\">{{ saveStatus }}</small> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.saveStatus), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_IDE, {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_IDE, {
+    offsetTop: 197.8,
+    width: $data.windowWidth,
     lang: $data.lang,
     problemID: $props.problemID,
     showSubmit: false,
@@ -2302,7 +2412,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onUpdate: $options.updateContent
   }, null, 8
   /* PROPS */
-  , ["lang", "problemID", "saved_j", "saved_p", "onUpdate"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  , ["offsetTop", "width", "lang", "problemID", "saved_j", "saved_p", "onUpdate"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -2540,7 +2650,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [_hoisted_19, _hoisted_20, _hoisted_21, _hoisted_22], 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.tc.CompareMethod]]), _hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- TC Input ----------"), _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VAceEditor, {
-    "class": "editor",
+    "class": "tc-editor",
     id: "tcInput",
     onChange: $options.changeInput,
     value: $data.tc.Input,
@@ -2550,7 +2660,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["onChange", "value"]), _hoisted_26, _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("---------- TC Output ----------"), _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_VAceEditor, {
-    "class": "editor",
+    "class": "tc-editor",
     id: "tcOutput",
     onChange: $options.changeOutput,
     value: $data.tc.Output,
@@ -2641,10 +2751,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: "t".concat(i),
           val: tab,
           label: tab,
-          indicator: true
+          indicator: true,
+          onClick: _ctx.pressTab
         }, null, 8
         /* PROPS */
-        , ["val", "label"]);
+        , ["val", "label", "onClick"]);
       }), 128
       /* KEYED_FRAGMENT */
       ))];
@@ -2697,10 +2808,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Template, {
-            problemID: _ctx.problemID
+            problemID: _ctx.problemID,
+            tab: _ctx.selectedTab
           }, null, 8
           /* PROPS */
-          , ["problemID"])];
+          , ["problemID", "tab"])];
         }),
         _: 1
         /* STABLE */
@@ -2723,10 +2835,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ModelSolution, {
-            problemID: _ctx.problemID
+            problemID: _ctx.problemID,
+            tab: _ctx.selectedTab
           }, null, 8
           /* PROPS */
-          , ["problemID"])];
+          , ["problemID", "tab"])];
         }),
         _: 1
         /* STABLE */
@@ -2744,6 +2857,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_tab_panel, {
+        val: 'Save & Exit'
       })];
     }),
     _: 1

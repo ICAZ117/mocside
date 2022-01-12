@@ -1096,6 +1096,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
+var mustContainLower = function mustContainLower(value) {
+  return /[a-z]/.test(value);
+};
+
+var mustContainUpper = function mustContainUpper(value) {
+  return /[A-Z]/.test(value);
+};
+
+var mustContainNumber = function mustContainNumber(value) {
+  return /\d/.test(value);
+};
+
+var mustContainSymbol = function mustContainSymbol(value) {
+  return /\W/.test(value);
+};
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     return {
@@ -1142,7 +1159,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       password: {
         required: _vuelidate_validators__WEBPACK_IMPORTED_MODULE_5__.required,
-        minLength: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_5__.minLength)(8)
+        minLength: (0,_vuelidate_validators__WEBPACK_IMPORTED_MODULE_5__.minLength)(10),
+        mustContainLower: mustContainLower,
+        mustContainUpper: mustContainUpper,
+        mustContainNumber: mustContainNumber,
+        mustContainSymbol: mustContainSymbol
       }
     }
   },
@@ -1157,16 +1178,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.registerUser();
     },
-    login: function login() {
-      this.$router.push({
-        name: "Login"
-      });
-    },
     registerUser: function registerUser() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var payload, res, res2, res3, res4;
+        var payload, self, flag, res, res2, res3, res4, au;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1184,44 +1200,95 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
                 //   .catch((error) => (this.error = getError(error)));
 
-                _context.next = 5;
-                return _services_AuthService__WEBPACK_IMPORTED_MODULE_3__.default.registerUser(payload);
+                self = _this;
+                flag = true;
+                _context.next = 7;
+                return _services_AuthService__WEBPACK_IMPORTED_MODULE_3__.default.registerUser(payload)["catch"](function (error) {
+                  if (error.response.data.errors.hasOwnProperty("email")) {
+                    console.log("Email Error");
+                    self.$notify({
+                      type: "error",
+                      text: "An account with your email already exists!"
+                    });
+                    flag = false;
+                  }
 
-              case 5:
+                  if (error.response.data.errors.hasOwnProperty("username")) {
+                    console.log("Username Error");
+                    self.$notify({
+                      type: "error",
+                      text: "An account with your username already exists!"
+                    });
+                    flag = false;
+                  }
+
+                  if (error.response.data.errors.hasOwnProperty("fsc_id")) {
+                    console.log("FSC ID Error");
+                    self.$notify({
+                      type: "error",
+                      text: "An account with your FSC ID already exists!"
+                    });
+                    flag = false;
+                  }
+                });
+
+              case 7:
                 res = _context.sent;
-                console.log(res); // then, create student. Any user signed up from the front end STARTS as a student.
-                // is there a chance this doesn't work? (CSRF mismatch, likely)
 
-                _context.next = 9;
+                if (!flag) {
+                  _context.next = 26;
+                  break;
+                }
+
+                _context.next = 11;
                 return _services_API__WEBPACK_IMPORTED_MODULE_4__.apiClient.post('/students', {
                   fsc_id: payload.fsc_id
                 });
 
-              case 9:
+              case 11:
                 res2 = _context.sent;
                 console.log(res2); // if we've made it this far, they have a student (probably), and we can push to login
                 // but not before we init gradebook!
 
-                _context.next = 13;
+                _context.next = 15;
                 return _services_API__WEBPACK_IMPORTED_MODULE_4__.apiClient.post("/gradebook/init/".concat(res2.data.data.id), {
                   scope: "student"
                 });
 
-              case 13:
+              case 15:
                 res3 = _context.sent;
                 console.log(res3);
-                _context.next = 17;
+                _context.next = 19;
                 return _services_API__WEBPACK_IMPORTED_MODULE_4__.apiClient.post('/progress');
 
-              case 17:
+              case 19:
                 res4 = _context.sent;
-                console.log(res4); // now, push to login
+                console.log(res4); //update user record in store to get new pfp path?
 
-                _this.$router.push('/login'); // this will get them properly authorized,
+                _context.next = 23;
+                return _this.$store.dispatch("auth/getAuthUser");
+
+              case 23:
+                au = _context.sent;
+
+                if (_this.authUser != null) {
+                  _this.pfp = au.pfp_path;
+
+                  if (_this.pfp == undefined || _this.pfp == null) {
+                    console.log("empty path");
+                    _this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
+                  }
+
+                  document.getElementById("d_navpfp").src = _this.pfp;
+                  document.getElementById("l_navpfp").src = _this.pfp;
+                } // now, push to login
+
+
+                _this.$router.push('/courses'); // this will get them properly authorized,
                 // and in the future possibly aid email verification.
 
 
-              case 20:
+              case 26:
               case "end":
                 return _context.stop();
             }
@@ -1404,60 +1471,109 @@ var _hoisted_33 = {
 var _hoisted_34 = {
   key: 0
 };
-var _hoisted_35 = {
+
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Please enter a password ");
+
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_37 = {
   key: 1
 };
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Passwords must be at ");
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Passwords must be at ");
 
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", null, "LEAST", -1
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", null, "LEAST", -1
 /* HOISTED */
 );
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 8 characters long");
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("  10 characters long ");
 
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_40 = {
+var _hoisted_42 = {
+  key: 2
+};
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Passwords must contain a lowercase character ");
+
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_45 = {
+  key: 3
+};
+
+var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Passwords must contain an uppercase character ");
+
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_48 = {
+  key: 4
+};
+
+var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Passwords must contain a numeric character ");
+
+var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_51 = {
+  key: 5
+};
+
+var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Passwords must contain a symbol ");
+
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_55 = {
   "class": "form-group"
 };
 
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "confirmPassword"
 }, "Confirm Password", -1
 /* HOISTED */
 );
 
-var _hoisted_42 = {
+var _hoisted_57 = {
   key: 0,
   "class": "invalid-feedback"
 };
-var _hoisted_43 = {
+var _hoisted_58 = {
   key: 0
 };
-var _hoisted_44 = {
+var _hoisted_59 = {
   key: 1
 };
 
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_46 = {
+var _hoisted_61 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "form-group"
-};
-
-var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   "class": "btn btn-danger btn-block"
-}, "Register", -1
+}, "Register")], -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------- START FORM -------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-    onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[8] || (_cache[8] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.handleSubmit && $options.handleSubmit.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------ FIRST NAME ------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
@@ -1497,7 +1613,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 2
   /* CLASS */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.username]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"isSubmitted && !v$.userForm.name.required\" class=\"invalid-feedback\"> "), $data.isSubmitted && $setup.v$.userForm.username.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_14, " Please enter a username ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------- EMAIL -------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-    type: "email",
+    type: "text",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.userForm.email = $event;
     }),
@@ -1533,7 +1649,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autocomplete: "new-password"
   }, null, 2
   /* CLASS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.password]]), $data.isSubmitted && $setup.v$.userForm.password.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_33, [$setup.v$.userForm.password.required.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_34, "Please enter a password")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.v$.userForm.password.minLength.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_35, [_hoisted_36, _hoisted_37, _hoisted_38])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("-------------- REPEAT PASSWORD --------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_40, [_hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.password]]), $data.isSubmitted && $setup.v$.userForm.password.$error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_33, [$setup.v$.userForm.password.required.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_34, [_hoisted_35, _hoisted_36])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.v$.userForm.password.minLength.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_37, [_hoisted_38, _hoisted_39, _hoisted_40, _hoisted_41])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.v$.userForm.password.mustContainLower.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_42, [_hoisted_43, _hoisted_44])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.v$.userForm.password.mustContainUpper.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_45, [_hoisted_46, _hoisted_47])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.v$.userForm.password.mustContainNumber.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_48, [_hoisted_49, _hoisted_50])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.v$.userForm.password.mustContainSymbol.$invalid ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_51, [_hoisted_52, _hoisted_53])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_54, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("-------------- REPEAT PASSWORD --------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_55, [_hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "password",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $data.userForm.confirmPassword = $event;
@@ -1544,13 +1660,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autocomplete: "new-password"
   }, null, 2
   /* CLASS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.confirmPassword]]), $options.hasError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_42, [$options.isEmpty ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_43, "Please re-enter your password")) : $options.isDiff ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_44, "Your passwords don't match! ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------ SUBMIT ------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_46, [_hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-    "class": "btn btn-danger btn-block",
-    onClick: _cache[8] || (_cache[8] = function ($event) {
-      return $options.login();
-    }),
-    type: "button"
-  }, "Log In")])], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.userForm.confirmPassword]]), $options.hasError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_57, [$options.isEmpty ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_58, "Please re-enter your password")) : $options.isDiff ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_59, "Your passwords don't match! ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_60, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------ SUBMIT ------------------"), _hoisted_61], 32
   /* HYDRATE_EVENTS */
   )])]);
 }

@@ -19,12 +19,15 @@
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "pusher/pusher-php-server": "~3.0",
-        "ueberdosis/html-to-prosemirror": "^1.5"
+        "ueberdosis/html-to-prosemirror": "dev-main"
     },
     "repositories": [
         {
             "type": "path",
             "url": "./docker-php"
+        }, {
+            "type": "path",
+            "url": "./html-to-prosemirror"
         }
     ],
     "require-dev": {

@@ -14,6 +14,7 @@ html {
     --FSCblue: #0060a9 !important;
     --FSClightblue: #0096db !important;
     --FSCgrey: #646464 !important;
+    --vc-pgn-bg-color: white !important;
     --consoleBG: black !important;
 }
 
@@ -213,10 +214,50 @@ input:checked + .slider:before {
 
 .filterSettings {
     float: right !important;
-    position: relative;
+    position: absolute;
+    left: calc(100vw - 285.5px) !important;
     padding: 0px 10px;
 }
 
+.darkBG {
+    background-color: #222222;
+}
+
+.vue-notification.success {
+    border-top-right-radius: 5px;
+    background: #68cd86 !important;
+    border-left-color: #42a85f;
+    border-bottom-right-radius: 5px;
+}
+
+.dark-scroll-bar {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--FSCgrey) #373842 !important;
+    overflow-y: scroll !important;
+    margin-right: 5px !important;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.dark-scroll-bar::-webkit-scrollbar {
+    width: 10px !important;
+}
+
+.dark-scroll-bar::-webkit-scrollbar-track {
+    background: #373842 !important;
+    border-radius: 50px !important;
+}
+
+.dark-scroll-bar::-webkit-scrollbar-thumb {
+    background-color: #24252c !important;
+    border-radius: 50px !important;
+    border: 3px solid #373842 !important;
+}
+
+.btn-secondary {
+    color: #fff !important;
+    background-color: #444752 !important;
+    border-color: #414452 !important;
+}
 /*============= NAVIGATION =============*/
 
 nav {
@@ -417,24 +458,65 @@ nav {
 
 /*============= CAROUSEL =============*/
 
-#carousel {
+.carousel {
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1) !important;
 }
 
-.carousel-inner {
-    height: calc(100vh - 60px) !important;
+.carousel__viewport {
+    height: calc(100vh - var(--nav-height)) !important;
 }
 
-/*---Change Carousel Transition Speed --*/
-
-.carousel-item-next,
-.carousel-item-prev,
-.carousel-item-active {
-    transition-timing-function: linear !important;
-    transition-duration: 0.5s !important;
+.carousel__slide {
+    display: unset !important;
+    align-items: unset !important;
 }
 
-/*-- Carousel Content --*/
+.carousel__pagination {
+    background-color: var(--FSCgrey) !important;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.carousel__pagination-button {
+    height: calc(var(--vc-pgn-height) * 1.5) !important;
+    width: calc(var(--vc-pgn-width) * 1.5) !important;
+}
+
+.carousel__pagination-button--active {
+    background-color: var(--FSCred) !important;
+}
+
+.carousel__item {
+    min-height: 200px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel__icon {
+    width: calc(var(--vc-icn-width) * 2) !important;
+    height: calc(var(--vc-icn-width) * 2) !important;
+}
+
+.carousel__prev,
+.carousel__next {
+    box-sizing: content-box;
+    border: 5px solid green;
+    width: calc(var(--vc-nav-width) * 2) !important;
+    height: calc(var(--vc-nav-height) * 2) !important;
+}
+
+.carousel__prev {
+    left: 20px !important;
+}
+
+.carousel__next {
+    right: 20px !important;
+}
 
 .carousel-caption {
     position: absolute !important;
@@ -617,6 +699,8 @@ hr.courses {
     width: auto !important;
     margin-left: 1rem !important;
     margin-right: 1rem !important;
+    height: 236px !important;
+    overflow: visible;
 }
 
 .oldcourseHeader {
@@ -641,6 +725,33 @@ hr.courses {
 .dates {
     display: flex !important;
 }
+
+.top-row, .bottom-row {
+    height: calc(((100vh - var(--nav-height)) / 2)) !important;
+    width: 100vw;
+    display: flex;
+}
+
+.course-dashboard {
+    height: 100vh!important;
+    color: rgb(136, 136, 136);
+    width: 100vw!important;
+}
+
+.course-edit-label {
+    color: darkgray;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.course-edit-field {
+    display: inline-block;
+}
+
+.course-details, .grades, .key-gen, .labs {
+    width: 50%;
+    margin: 1rem;
+  }
 
 /*============== LABS and PROBLEMS ==============*/
 
@@ -683,18 +794,18 @@ thead.gradebook {
     border: none !important;
 }
 
+.lab,
+.problem,
+.student {
+    background-color: rgba(231, 231, 231, 0.65) !important;
+}
+
 .complete {
     background-color: rgba(156, 223, 140, 0.65) !important;
 }
 
 .incomplete {
     background-color: rgba(255, 102, 102, 0.65) !important;
-}
-
-.lab,
-.problem,
-.student {
-    background-color: rgba(231, 231, 231, 0.65) !important;
 }
 
 .lab:hover,
@@ -793,6 +904,15 @@ thead.gradebook {
     display: none;
 }
 
+.tc-editor {
+    /* font-family: consolas !important; */
+    font-weight: lighter !important;
+    font-size: 12pt !important;
+    /* min-height: calc((100vh - var(--nav-height)) / 2) !important; */
+    height: 250px !important;
+    margin: 0 !important;
+}
+
 /*============= LOGIN PAGE =============*/
 
 .login {
@@ -830,6 +950,11 @@ thead.gradebook {
     border: 5px solid var(--FSCred) !important;
 }
 
+.forgot-password {
+    color: var(--FSClightblue);
+    margin-left: 3rem;
+}
+
 /*============= REGISTER =============*/
 
 .register {
@@ -845,11 +970,35 @@ thead.gradebook {
     text-align: center !important;
 }
 
-/*============= WORKSPACE =============*/
+/*========== Reset Password ===========*/
+.password-reset {
+    width: 450px !important;
+    border: 1px solid lightgrey !important;
+    background-color: white !important;
+    margin: auto !important;
+    margin-top: 10rem !important;
+    padding: 20px !important;
+}
 
+.password-reset-title {
+    text-align: center !important;
+}
+
+/*============= WORKSPACE =============*/
+.workspace-page {
+    background-color: black !important;
+    width: 100vw !important;
+    height: calc(100vh - var(--nav-height)) !important;
+}
 .work-area {
     padding: 0 !important;
     margin: 0 !important;
+    background-color: black !important;
+    color: lightgray !important;
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
+    font-weight: lighter !important;
+    font-size: 12pt !important;
 }
 
 .instructions {
@@ -867,10 +1016,11 @@ thead.gradebook {
 }
 
 .editor {
-    font-family: consolas !important;
+    /* font-family: consolas !important; */
     font-weight: lighter !important;
     font-size: 12pt !important;
-    min-height: calc((100vh - var(--nav-height)) / 2) !important;
+    /* min-height: calc((100vh - var(--nav-height)) / 2) !important; */
+    height: 100% !important;
     margin: 0 !important;
 }
 
@@ -885,10 +1035,12 @@ thead.gradebook {
 }
 
 .console {
-    background-color: var(--consoleBG) !important;
-    color: lime !important;
-    font-family: consolas !important;
-    height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important;
+    /* background-color: var(--consoleBG) !important;
+    color: lime !important; */
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
+    /* height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important; */
+    height: 100% !important;
     margin: 0 !important;
     padding: 20px;
     border: none !important;
@@ -918,11 +1070,9 @@ thead.gradebook {
 .run-code,
 .submit-code {
     border: none !important;
-    min-width: 10% !important;
-    width: 10% !important;
-    max-width: 10% !important;
-    margin-right: 1% !important;
-    max-height: 31px !important;
+    width: 130px !important;
+    margin-right: 13px !important;
+    height: 31px !important;
 }
 
 .configure-editor {
@@ -935,6 +1085,50 @@ thead.gradebook {
     height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important;
 }
 
+.vdr-container {
+    border: none !important;
+}
+
+.vdr-handle {
+    top: 0 !important;
+    bottom: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    z-index: 10 !important;
+    background-color: var(--FSCblue) !important;
+}
+
+.vdr-container.active {
+    border-bottom: none !important;
+}
+
+.vdr-handle-tm {
+    width: 100% !important;
+    left: 0 !important;
+    margin-top: 0 !important;
+    z-index: 10 !important;
+}
+
+.vdr-handle-bm {
+    display: none !important;
+}
+
+.vdr-handle-mr {
+    display: none !important;
+}
+
+.vdr-handle-ml {
+    height: 100% !important;
+    top: 0 !important;
+    margin-top: 0 !important;
+    z-index: 10 !important;
+}
+
+.ProseMirror > * + * {
+    margin: 0.75em 0 0.75em 0 !important;
+    border: none !important;
+}
+
 /*========== POPUP MODAL ==========*/
 .modal-container {
     display: flex;
@@ -944,6 +1138,7 @@ thead.gradebook {
 .modal-content {
     overflow: auto;
     padding: 2.5rem 1rem 1rem 1rem !important;
+    width: 40% !important;
 }
 .modal-close {
     position: absolute;
@@ -1034,6 +1229,21 @@ thead.gradebook {
     float: right !important;
     text-align: right !important;
     align-items: flex-end !important;
+}
+
+/*========= DELETE MODAL =========*/
+.delete-modal {
+    /* width: 40%; */
+    font-size: 22px;
+    /* height: 20%; */
+}
+
+.delete-buttons {
+    float: right;
+}
+
+.delete-button {
+    margin: 3px;
 }
 
 /*========= ADD ASSIGNMENT =========*/
@@ -1192,6 +1402,10 @@ thead.gradebook {
     padding-top: calc(0.4 * (100vh - (var(--nav-height) + 88.2px))) !important;
 }
 
+.template-IDE {
+    margin-top: 150px !important;
+}
+
 .save-template,
 .save-model {
     width: 100vw !important;
@@ -1307,10 +1521,107 @@ footer .svg-inline--fa:hover {
 }
 
 /*============= PROFILE =============*/
+.large-pfp {
+    height: 250px !important;
+    width: 250px !important;
+    border: 1px solid #333333 !important;
+    border-radius: 50% !important;
+    margin-top: 30px;
+}
+
+.profile {
+    height: calc(100vh - var(--nav-height) - 45.2px) !important;
+    padding: 20px 20px 20px 0 !important;
+}
+
+.profile-picture {
+    width: -webkit-fit-content !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+    margin: auto !important;
+}
+
+.profile-field,
+.profile-field:focus-visible {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+    outline: none !important;
+}
+
+.profile-select {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+}
+
+.profile-select:focus-visible {
+    background-color: #222222 !important;
+    max-height: 30px !important;
+    display: inline-block !important;
+    color: lightgray !important;
+    outline: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--FSCgrey) #333333;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.profile-select:focus-visible::-webkit-scrollbar {
+    width: 10px;
+}
+
+.profile-select:focus-visible::-webkit-scrollbar-track {
+    background: #333333;
+    border-radius: 50px;
+}
+
+.profile-select:focus-visible::-webkit-scrollbar-thumb {
+    background-color: var(--FSCgrey);
+    border-radius: 50px;
+    border: 3px solid #333333;
+}
+
+.settings {
+    scrollbar-width: thin;
+    scrollbar-color: var(--FSCgrey) #333333;
+    overflow-y: scroll;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.settings::-webkit-scrollbar {
+    width: 10px;
+}
+
+.settings::-webkit-scrollbar-track {
+    background: #333333;
+    border-radius: 50px;
+}
+
+.settings::-webkit-scrollbar-thumb {
+    background-color: var(--FSCgrey);
+    border-radius: 50px;
+    border: 3px solid #333333;
+}
+
+.sampleConsole {
+    font: 12pt / normal "Monaco", "Menlo", "Ubuntu Mono", "Consolas",
+        "source-code-pro", monospace;
+    /* height: calc(((100vh - var(--nav-height)) / 2) - 39px) !important; */
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 20px;
+    border: none !important;
+    width: 100% !important;
+    border-radius: 0px !important;
+}
 
 /*============= ENROLL =============*/
 .center-height {
-    margin-top: calc(100vh - var(--nav-height)) !important;
+    margin-top: calc((100vh - var(--nav-height)) / 2) !important;
 }
 
 .invite-card {

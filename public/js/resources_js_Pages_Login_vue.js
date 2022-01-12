@@ -1100,6 +1100,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       v$: (0,_vuelidate_core__WEBPACK_IMPORTED_MODULE_3__.default)()
     };
   },
+  props: {
+    goBack: {
+      "default": false
+    }
+  },
   data: function data() {
     return {
       error: null,
@@ -1134,16 +1139,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.login();
     },
-    signUp: function signUp() {
-      this.$router.push({
-        name: "Register"
-      });
-    },
     login: function login() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var payload, authUser, error;
+        var payload, res, authUser, error;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1159,14 +1159,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _services_AuthService__WEBPACK_IMPORTED_MODULE_1__.default.login(payload);
 
               case 5:
-                _context.next = 7;
+                res = _context.sent;
+                console.log("Authservice res:");
+                console.log(res);
+                console.log("\n\n\n\n");
+                _context.next = 11;
                 return _this.$store.dispatch("auth/getAuthUser");
 
-              case 7:
+              case 11:
                 authUser = _context.sent;
 
                 if (!authUser) {
-                  _context.next = 13;
+                  _context.next = 17;
                   break;
                 }
 
@@ -1176,32 +1180,62 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 //redirect to last address
 
 
-                _this.$router.go(-1);
+                _this.goRouter();
 
-                _context.next = 16;
+                _context.next = 20;
                 break;
 
-              case 13:
+              case 17:
                 error = Error("Unable to fetch user after login, check your API settings.");
                 error.name = "Fetch User";
                 throw error;
 
-              case 16:
-                _context.next = 21;
+              case 20:
+                _context.next = 26;
                 break;
 
-              case 18:
-                _context.prev = 18;
+              case 22:
+                _context.prev = 22;
                 _context.t0 = _context["catch"](2);
-                _this.error = (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_2__.getError)(_context.t0);
+                _this.error = _context.t0.response.data.errors.email[0];
 
-              case 21:
+                if (_this.error == "Invalid email or username.") {
+                  _this.$notify({
+                    type: "error",
+                    text: "Your email/username does not exist!"
+                  });
+                } else if (_this.error == "Invalid password.") {
+                  _this.$notify({
+                    type: "error",
+                    text: "Your password is incorrect!"
+                  });
+                }
+
+              case 26:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 18]]);
+        }, _callee, null, [[2, 22]]);
       }))();
+    },
+    forgotPassword: function forgotPassword() {
+      this.$router.push({
+        name: "ForgotPassword"
+      });
+    },
+    goRouter: function goRouter() {
+      //get the previous route.....if an enroll page redirect there
+      //otherwise redirect to courses
+      if (this.goBack == true) {
+        console.log("course-enroll");
+        this.$router.go(-1);
+      } else {
+        console.log("courses");
+        this.$router.push({
+          name: "Courses"
+        });
+      }
     }
   }
 });
@@ -1290,13 +1324,11 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "form-group"
-};
-
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   "class": "btn btn-danger btn-block"
-}, "Login", -1
+}, "Login")], -1
 /* HOISTED */
 );
 
@@ -1341,13 +1373,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.rememberMe]]), _hoisted_13, _hoisted_14, _hoisted_15])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------ SUBMIT ------------------"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-    type: "button",
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.rememberMe]]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+    "class": "forgot-password",
     onClick: _cache[4] || (_cache[4] = function ($event) {
-      return $options.signUp();
-    }),
-    "class": "btn btn-danger btn-block"
-  }, "Sign Up")])], 32
+      return $options.forgotPassword();
+    })
+  }, "Forgot Password?"), _hoisted_14, _hoisted_15])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("------------------ SUBMIT ------------------"), _hoisted_16], 32
   /* HYDRATE_EVENTS */
   )])]);
 }

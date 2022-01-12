@@ -43,7 +43,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       fscID: null,
       deletedMe: false,
       username: "",
-      sort: "0"
+      sort: "1",
+      showDeleteModal: false,
+      reloadDeleteModal: 0,
+      deletingProblem: {
+        id: "",
+        problem: {},
+        key: ""
+      }
     };
   },
   setup: function setup() {
@@ -72,11 +79,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var payload, problem;
+        var date, month, day, year, ymd, payload, problem;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                date = new Date();
+                date.setDate(date.getDate() + 7);
+                month = '' + (date.getMonth() + 1), day = '' + date.getDate(), year = date.getFullYear();
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+                ymd = [year, month, day].join('-');
                 payload = {
                   name: "New Problem",
                   description: JSON.stringify({
@@ -85,15 +98,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     }]
                   }),
                   lab_id: _this.labID,
-                  due_date: "2021-05-29 13:04:03",
+                  due_date: ymd + " 23:59:59",
                   copy_id: _this.labID,
                   java_starter: "public class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}",
-                  python_starter: 'def main():\n\n\n\nif __name__ == "__main__":\n\tmain()'
+                  python_starter: 'def main():\n\t// Your code here\n\n\nif __name__ == "__main__":\n\tmain()'
                 };
-                _context.next = 3;
+                _context.next = 9;
                 return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.post("/problems", payload);
 
-              case 3:
+              case 9:
                 problem = _context.sent;
                 _this.problemID = problem.data.data.id;
 
@@ -108,7 +121,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 8:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -126,33 +139,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       });
     },
-    deleteProblem: function deleteProblem(problem, key) {
+    closeDeleting: function closeDeleting() {
+      this.showDeleteModal = false;
+    },
+    deleting: function deleting(id, problem, key) {
+      this.showDeleteModal = true;
+      this.deletingProblem.id = id;
+      this.deletingProblem.problem = problem;
+      this.deletingProblem.key = key;
+    },
+    deleteProblem: function deleteProblem() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var flag, res;
+        var id, problem, key, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                flag = confirm("Are you Sure you want to remove " + problem.name + " from this Lab?");
+                console.log("deleting problem");
+                id = _this2.deletingProblem.id;
+                problem = _this2.deletingProblem.problem;
+                key = _this2.deletingProblem.key; // remove this problem from the current lab
 
-                if (!flag) {
-                  _context2.next = 6;
-                  break;
-                }
-
-                _context2.next = 4;
+                _context2.next = 6;
                 return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.delete("/problems/".concat(problem.id));
 
-              case 4:
+              case 6:
                 res = _context2.sent;
                 //filter the problems list
                 _this2.problems = _this2.problems.filter(function (p, i) {
                   return i != key;
+                }); //remove from the unfiltered list
+
+                _this2.unfilteredProblems = _this2.unfilteredProblems.filter(function (p, i) {
+                  return i != key;
                 });
 
-              case 6:
+                _this2.closeDeleting();
+
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -160,7 +186,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    deleteMe: function deleteMe() {
+    deleteMe: function deleteMe(id) {
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
@@ -168,7 +194,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                console.log("deleteMe"); //set variable to be used when problemEdited event is called
+                console.log("deleteMe " + id); //set variable to be used when problemEdited event is called
 
                 _this3.deletedMe = true;
 
@@ -208,65 +234,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.prev = 0;
-                _context4.next = 3;
+                console.log("gotToProblem");
+                _context4.next = 4;
                 return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/problems/".concat(_this4.labID));
 
-              case 3:
+              case 4:
                 rawProblems = _context4.sent;
                 // this.problems = rawProblems.data.data;
                 _this4.unfilteredProblems = rawProblems.data.data;
-                _context4.next = 7;
+                _context4.next = 8;
                 return _this4.getStudent();
 
-              case 7:
+              case 8:
                 prog = _context4.sent;
-                _context4.next = 12;
+                _context4.next = 13;
                 break;
 
-              case 10:
-                _context4.prev = 10;
+              case 11:
+                _context4.prev = 11;
                 _context4.t0 = _context4["catch"](0);
 
-              case 12:
+              case 13:
                 if (_this4.isProf) {
-                  _context4.next = 24;
+                  _context4.next = 25;
                   break;
                 }
 
                 i = 0;
 
-              case 14:
+              case 15:
                 if (!(i < _this4.unfilteredProblems.length)) {
-                  _context4.next = 24;
+                  _context4.next = 25;
                   break;
                 }
 
-                _context4.next = 17;
+                _context4.next = 18;
                 return _this4.getPercent(_this4.unfilteredProblems[i]);
 
-              case 17:
+              case 18:
                 _this4.unfilteredProblems[i]["percent"] = _context4.sent;
-                _context4.next = 20;
+                _context4.next = 21;
                 return _this4.getActivity(_this4.unfilteredProblems[i]);
 
-              case 20:
+              case 21:
                 _this4.unfilteredProblems[i]["activity"] = _context4.sent;
 
-              case 21:
+              case 22:
                 i++;
-                _context4.next = 14;
+                _context4.next = 15;
                 break;
 
-              case 24:
-                _context4.next = 26;
+              case 25:
+                _context4.next = 27;
                 return _this4.sortProblems();
 
-              case 26:
+              case 27:
+                _context4.next = 29;
+                return _this4.getColors();
+
+              case 29:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 10]]);
+        }, _callee4, null, [[0, 11]]);
       }))();
     },
     getStudent: function getStudent() {
@@ -305,48 +336,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
+                console.log("in percent");
                 d = JSON.parse(_this6.progress.assignments);
+                console.log(d);
                 i = 0;
 
-              case 2:
+              case 4:
                 if (!(i < d.length)) {
-                  _context6.next = 9;
+                  _context6.next = 11;
                   break;
                 }
 
                 if (!(d[i].assignment_id == problem.id)) {
-                  _context6.next = 6;
+                  _context6.next = 8;
                   break;
                 }
 
                 c = d[i];
-                return _context6.abrupt("break", 9);
+                return _context6.abrupt("break", 11);
 
-              case 6:
+              case 8:
                 i++;
-                _context6.next = 2;
+                _context6.next = 4;
                 break;
 
-              case 9:
+              case 11:
+                console.log(c);
+
                 if (!(problem.test_cases == 0)) {
-                  _context6.next = 13;
+                  _context6.next = 16;
                   break;
                 }
 
                 return _context6.abrupt("return", "0%");
 
-              case 13:
+              case 16:
                 if (c) {
-                  _context6.next = 17;
+                  _context6.next = 20;
                   break;
                 }
 
                 return _context6.abrupt("return", "0%");
 
-              case 17:
+              case 20:
+                console.log(parseInt(c.cases_passed / problem.test_cases * 100) + "%");
                 return _context6.abrupt("return", parseInt(c.cases_passed / problem.test_cases * 100) + "%");
 
-              case 18:
+              case 22:
               case "end":
                 return _context6.stop();
             }
@@ -392,49 +428,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee7);
       }))();
     },
-    problemEdited: function problemEdited() {
+    getColors: function getColors() {
       var _this8 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
-        var tempID, problem, res;
+        var i, element;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
           while (1) {
             switch (_context8.prev = _context8.next) {
               case 0:
-                tempID = _this8.problemID; ///update the list of courses
+                for (i = 0; i < _this8.unfilteredProblems.length; i++) {
+                  console.log(_this8.unfilteredProblems[i].id + " " + _this8.unfilteredProblems[i]["percent"]);
 
-                _this8.problems = _this8.problems.filter(function (p) {
-                  return p.id != _this8.problemID;
-                });
-                _context8.next = 4;
-                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/problems/full/".concat(_this8.problemID));
-
-              case 4:
-                problem = _context8.sent;
-
-                _this8.problems.push(problem.data.data);
-
-                console.log(problem.data.data);
-                _context8.next = 9;
-                return _this8.Unmounting();
-
-              case 9:
-                if (!_this8.deletedMe) {
-                  _context8.next = 14;
-                  break;
+                  if (_this8.unfilteredProblems[i]["percent"] == "100%") {
+                    //green background
+                    console.log("green background");
+                    element = document.getElementById("p" + _this8.unfilteredProblems[i].id);
+                    console.log("element: ");
+                    console.log(element);
+                    element != null ? element.classList.add("complete") : console.log("element is null");
+                  } else if (_this8.unfilteredProblems[i]["percent"] != "0%") {
+                    //red background
+                    console.log("red background");
+                    element = document.getElementById("p" + _this8.unfilteredProblems[i].id);
+                    element != null ? element.classList.add("incomplete") : console.log("element is null");
+                  } else {
+                    //standard background
+                    console.log("blank color background");
+                  }
                 }
 
-                _context8.next = 12;
-                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.delete("/problems/".concat(tempID));
-
-              case 12:
-                res = _context8.sent;
-                //filter the problems list
-                _this8.problems = _this8.problems.filter(function (p) {
-                  return p.id != tempID;
-                });
-
-              case 14:
+              case 1:
               case "end":
                 return _context8.stop();
             }
@@ -442,36 +466,125 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee8);
       }))();
     },
-    Unmounting: function Unmounting() {
+    problemEdited: function problemEdited() {
       var _this9 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-        var flag;
+        var tempID, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
           while (1) {
             switch (_context9.prev = _context9.next) {
               case 0:
-                _this9.childIsOpen = false;
-                _this9.problemID = null;
-                flag = _this9.refreshPage();
-                console.log("unmounting workspace page");
-                console.log(flag);
+                tempID = _this9.problemID; //check if the problem was deleted from child
 
-                if (flag) {
-                  _this9.$router.push({
-                    name: "Problems",
-                    params: {
-                      lab_id: _this9.labID
-                    }
-                  });
+                if (!_this9.deletedMe) {
+                  _context9.next = 7;
+                  break;
                 }
 
-              case 6:
+                console.log("inside the problem edited deletedMe"); //child deleted button was pressed
+                // remove this problem from the current lab
+
+                _context9.next = 5;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.delete("/problems/".concat(tempID));
+
+              case 5:
+                res = _context9.sent;
+                //filter the problems list
+                _this9.problems = _this9.problems.filter(function (p) {
+                  return p.id != tempID;
+                });
+
+              case 7:
+                _context9.next = 9;
+                return _this9.getColors();
+
+              case 9:
+                _context9.next = 11;
+                return _this9.Unmounting();
+
+              case 11:
               case "end":
                 return _context9.stop();
             }
           }
         }, _callee9);
+      }))();
+    },
+    Unmounting: function Unmounting() {
+      var _this10 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+        var problem, res, flag;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                _this10.unfilteredProblems = _this10.unfilteredProblems.filter(function (p) {
+                  return p.id != _this10.problemID;
+                }); // check if problem is deleted if not then add back in
+
+                if (_this10.deletedMe) {
+                  _context10.next = 12;
+                  break;
+                }
+
+                _context10.next = 4;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/problems/full/".concat(_this10.problemID));
+
+              case 4:
+                problem = _context10.sent;
+                _context10.next = 7;
+                return _this10.getPercent(problem.data.data);
+
+              case 7:
+                problem.data.data["percent"] = _context10.sent;
+                _context10.next = 10;
+                return _this10.getActivity(problem.data.data);
+
+              case 10:
+                problem.data.data["activity"] = _context10.sent;
+
+                _this10.unfilteredProblems.push(problem.data.data);
+
+              case 12:
+                _context10.next = 14;
+                return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.get("/progress/".concat(_this10.fscID));
+
+              case 14:
+                res = _context10.sent;
+                _this10.progress = res.data.data; //set expanded problem to null
+
+                _this10.expandedProblem = null; //recall sort method
+
+                _context10.next = 19;
+                return _this10.sortProblems();
+
+              case 19:
+                _this10.childIsOpen = false;
+                _this10.problemID = null;
+                flag = _this10.refreshPage();
+                console.log("unmounting workspace page");
+                console.log(flag);
+
+                if (flag) {
+                  _this10.$router.push({
+                    name: "Problems",
+                    params: {
+                      lab_id: _this10.labID
+                    }
+                  });
+                }
+
+                _context10.next = 27;
+                return _this10.getColors();
+
+              case 27:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10);
       }))();
     },
     isExpanded: function isExpanded(key) {
@@ -491,94 +604,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
     },
     filterByPublish: function filterByPublish() {
-      var _this10 = this;
+      var _this11 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
         var i, _i;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
           while (1) {
-            switch (_context10.prev = _context10.next) {
+            switch (_context11.prev = _context11.next) {
               case 0:
                 console.log("filter by publish"); //grabs only the courses that are currently in session
                 //empty the courses list just in case
 
-                _this10.problems = [];
+                _this11.problems = [];
 
-                if (!_this10.isProf) {
+                if (!_this11.isProf) {
                   console.log("student"); //is student don't show unpublished
 
-                  for (i = 0; i < _this10.unfilteredProblems.length; i++) {
-                    if (_this10.unfilteredProblems[i].isPublished) {
-                      if (_this10.unfilteredProblems[i].test_cases > 0) {
+                  for (i = 0; i < _this11.unfilteredProblems.length; i++) {
+                    if (_this11.unfilteredProblems[i].isPublished) {
+                      if (_this11.unfilteredProblems[i].test_cases > 0) {
                         //if within date && at least 1 test case
-                        _this10.problems.push(_this10.unfilteredProblems[i]);
+                        _this11.problems.push(_this11.unfilteredProblems[i]);
                       }
                     }
                   }
                 } else {
                   console.log("professor"); //grab all labs including unpublished
 
-                  for (_i = 0; _i < _this10.unfilteredProblems.length; _i++) {
-                    _this10.problems.push(_this10.unfilteredProblems[_i]);
+                  for (_i = 0; _i < _this11.unfilteredProblems.length; _i++) {
+                    _this11.problems.push(_this11.unfilteredProblems[_i]);
                   }
                 }
 
-                return _context10.abrupt("return", "Hi");
+                return _context11.abrupt("return", "Hi");
 
               case 4:
-              case "end":
-                return _context10.stop();
-            }
-          }
-        }, _callee10);
-      }))();
-    },
-    sortProblems: function sortProblems() {
-      var _this11 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
-          while (1) {
-            switch (_context11.prev = _context11.next) {
-              case 0:
-                if (!(_this11.sort == 0)) {
-                  _context11.next = 5;
-                  break;
-                }
-
-                _context11.next = 3;
-                return _this11.sortByDueDate();
-
-              case 3:
-                _context11.next = 12;
-                break;
-
-              case 5:
-                if (!(_this11.sort == 1)) {
-                  _context11.next = 10;
-                  break;
-                }
-
-                _context11.next = 8;
-                return _this11.sortByName();
-
-              case 8:
-                _context11.next = 12;
-                break;
-
-              case 10:
-                _context11.next = 12;
-                return _this11.sortByID();
-
-              case 12:
-                _context11.next = 14;
-                return _this11.filterByPublish();
-
-              case 14:
-                return _context11.abrupt("return", "");
-
-              case 15:
               case "end":
                 return _context11.stop();
             }
@@ -586,7 +647,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee11);
       }))();
     },
-    sortByDueDate: function sortByDueDate() {
+    sortProblems: function sortProblems() {
       var _this12 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
@@ -594,26 +655,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context12.prev = _context12.next) {
               case 0:
-                //sorts the unfiltered results by start date
-                _this12.unfilteredProblems.sort(function (a, b) {
-                  //if a should be first return -1, 0 for tie, -1 if b first
-                  var la = a.due_date.split("-");
-                  var lb = b.due_date.split("-");
-                  var fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
-                  var fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+                if (!(_this12.sort == 0)) {
+                  _context12.next = 5;
+                  break;
+                }
 
-                  if (fa < fb) {
-                    return -1;
-                  }
+                _context12.next = 3;
+                return _this12.sortByDueDate();
 
-                  if (fa > fb) {
-                    return 1;
-                  }
+              case 3:
+                _context12.next = 12;
+                break;
 
-                  return 0;
-                });
+              case 5:
+                if (!(_this12.sort == 1)) {
+                  _context12.next = 10;
+                  break;
+                }
 
-              case 1:
+                _context12.next = 8;
+                return _this12.sortByName();
+
+              case 8:
+                _context12.next = 12;
+                break;
+
+              case 10:
+                _context12.next = 12;
+                return _this12.sortByID();
+
+              case 12:
+                _context12.next = 14;
+                return _this12.filterByPublish();
+
+              case 14:
+                return _context12.abrupt("return", "");
+
+              case 15:
               case "end":
                 return _context12.stop();
             }
@@ -621,7 +699,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee12);
       }))();
     },
-    sortByName: function sortByName() {
+    sortByDueDate: function sortByDueDate() {
       var _this13 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
@@ -629,10 +707,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context13.prev = _context13.next) {
               case 0:
-                //sorts the unfiltered results by the problem name
+                //sorts the unfiltered results by start date
                 _this13.unfilteredProblems.sort(function (a, b) {
-                  var fa = a.name.toLowerCase();
-                  var fb = b.name.toLowerCase();
+                  //if a should be first return -1, 0 for tie, -1 if b first
+                  var la = a.due_date.split("-");
+                  var lb = b.due_date.split("-");
+                  var fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+                  var fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
 
                   if (fa < fb) {
                     return -1;
@@ -653,7 +734,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee13);
       }))();
     },
-    sortByID: function sortByID() {
+    sortByName: function sortByName() {
       var _this14 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14() {
@@ -661,9 +742,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context14.prev = _context14.next) {
               case 0:
-                //sorts the unfiltered results by id of the problem
+                //sorts the unfiltered results by the problem name
                 _this14.unfilteredProblems.sort(function (a, b) {
-                  return a.id - b.id;
+                  var fa = a.name.toLowerCase();
+                  var fb = b.name.toLowerCase();
+
+                  if (fa < fb) {
+                    return -1;
+                  }
+
+                  if (fa > fb) {
+                    return 1;
+                  }
+
+                  return 0;
                 });
 
               case 1:
@@ -672,6 +764,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee14);
+      }))();
+    },
+    sortByID: function sortByID() {
+      var _this15 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
+          while (1) {
+            switch (_context15.prev = _context15.next) {
+              case 0:
+                //sorts the unfiltered results by id of the problem
+                _this15.unfilteredProblems.sort(function (a, b) {
+                  return a.id - b.id;
+                });
+
+              case 1:
+              case "end":
+                return _context15.stop();
+            }
+          }
+        }, _callee15);
       }))();
     },
     refreshPage: function refreshPage() {
@@ -701,78 +814,90 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     }
   },
+  watch: {
+    showDeleteModal: function showDeleteModal() {
+      if (!this.showDeleteModal) {
+        this.reloadDeleteModal++;
+      }
+    }
+  },
   beforeMount: function beforeMount() {
-    var _this15 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15() {
-      var i;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
-        while (1) {
-          switch (_context15.prev = _context15.next) {
-            case 0:
-              _this15.childIsOpen = false;
-              _context15.next = 3;
-              return _this15.getProblems();
-
-            case 3:
-              console.log("\n\nBefore date convert");
-              console.log(_this15.problems);
-              i = 0;
-
-            case 6:
-              if (!(i < _this15.problems.length)) {
-                _context15.next = 13;
-                break;
-              }
-
-              _context15.next = 9;
-              return _this15.convertDate(_this15.problems[i].due_date);
-
-            case 9:
-              _this15.problems[i].due_date = _context15.sent;
-
-            case 10:
-              i++;
-              _context15.next = 6;
-              break;
-
-            case 13:
-              console.log("\n\nAfter date convert");
-              console.log(_this15.problems);
-
-            case 15:
-            case "end":
-              return _context15.stop();
-          }
-        }
-      }, _callee15);
-    }))();
-  },
-  beforeUnmount: function beforeUnmount() {
-    //problems
-    this.$emit("unmounting");
-  },
-  mounted: function mounted() {
     var _this16 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee16() {
+      var i;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee16$(_context16) {
         while (1) {
           switch (_context16.prev = _context16.next) {
             case 0:
-              _context16.next = 2;
-              return _Store_index__WEBPACK_IMPORTED_MODULE_2__.default.getters["auth/authUser"];
-
-            case 2:
-              _this16.authUser = _context16.sent;
-              _this16.username = _this16.authUser.username;
+              console.log("BeforeMount");
+              _this16.childIsOpen = false;
+              _context16.next = 4;
+              return _this16.getProblems().then(_this16.getColors());
 
             case 4:
+              console.log("\n\nBefore date convert");
+              console.log(_this16.problems);
+              i = 0;
+
+            case 7:
+              if (!(i < _this16.problems.length)) {
+                _context16.next = 14;
+                break;
+              }
+
+              _context16.next = 10;
+              return _this16.convertDate(_this16.problems[i].due_date);
+
+            case 10:
+              _this16.problems[i].due_date = _context16.sent;
+
+            case 11:
+              i++;
+              _context16.next = 7;
+              break;
+
+            case 14:
+              console.log("\n\nAfter date convert");
+              console.log(_this16.problems);
+
+            case 16:
             case "end":
               return _context16.stop();
           }
         }
       }, _callee16);
+    }))();
+  },
+  beforeUnmount: function beforeUnmount() {
+    console.log("BeforeUnmount"); //problems
+
+    this.$emit("unmounting");
+  },
+  mounted: function mounted() {
+    var _this17 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee17() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee17$(_context17) {
+        while (1) {
+          switch (_context17.prev = _context17.next) {
+            case 0:
+              console.log("Mounted");
+              _context17.next = 3;
+              return _Store_index__WEBPACK_IMPORTED_MODULE_2__.default.getters["auth/authUser"];
+
+            case 3:
+              _this17.authUser = _context17.sent;
+              _this17.username = _this17.authUser.username;
+              _context17.next = 7;
+              return _this17.getColors();
+
+            case 7:
+            case "end":
+              return _context17.stop();
+          }
+        }
+      }, _callee17);
     }))();
   }
 });
@@ -793,26 +918,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  key: 0
+  "class": "delete Course"
 };
 var _hoisted_2 = {
-  "class": "courses header"
+  "class": "delete-buttons"
 };
 var _hoisted_3 = {
+  "class": "courses header"
+};
+var _hoisted_4 = {
   "class": "heading"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", null, null, -1
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("hr", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "navigation"
 };
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
@@ -826,31 +950,35 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
   "for": "sort"
 }, "Sort By: ", -1
 /* HOISTED */
 );
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "0"
 }, "Due Date", -1
 /* HOISTED */
 );
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "1"
 }, "Name", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "2"
 }, "Unsorted", -1
 /* HOISTED */
 );
 
-var _hoisted_14 = {
+var _hoisted_15 = {
   style: {
     "border": "1px solid #9e9e9e !important",
     "padding": "0 !important",
@@ -858,93 +986,89 @@ var _hoisted_14 = {
     "margin": "4rem 2rem 2rem 2rem !important"
   }
 };
-var _hoisted_15 = {
+var _hoisted_16 = {
   "class": "table problemtable",
   style: {
     "margin": "0 !important"
   }
 };
-var _hoisted_16 = {
+var _hoisted_17 = {
   "class": "problemtable"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-grin-alt spacer"
 })], -1
 /* HOISTED */
 );
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Title", -1
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Title", -1
 /* HOISTED */
 );
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "# Test Cases", -1
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "# Test Cases", -1
 /* HOISTED */
 );
 
-var _hoisted_20 = {
+var _hoisted_21 = {
   key: 0
 };
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Due Date", -1
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", null, "Due Date", -1
 /* HOISTED */
 );
 
-var _hoisted_22 = {
+var _hoisted_23 = {
   key: 1
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-chevron-right"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-chevron-down"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_25 = {
+var _hoisted_26 = {
   key: 0
 };
-var _hoisted_26 = {
+var _hoisted_27 = {
   key: 1
 };
-var _hoisted_27 = {
-  "class": "description-data"
-};
 var _hoisted_28 = {
-  colspan: "5",
   "class": "description-data"
 };
 var _hoisted_29 = {
-  "class": "problem-description"
+  colspan: "5",
+  "class": "description-data"
 };
 var _hoisted_30 = {
-  "class": "row"
+  "class": "problem-description"
 };
 var _hoisted_31 = {
-  "class": "col-11"
+  "class": "row"
 };
 var _hoisted_32 = {
+  "class": "col-11"
+};
+var _hoisted_33 = {
   "class": "right col-1"
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-edit"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "class": "fas fa-trash-alt"
 }, null, -1
-/* HOISTED */
-);
-
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -956,19 +1080,23 @@ var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_38 = {
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_39 = {
   style: {
     "width": "50% !important"
   }
 };
-var _hoisted_39 = {
+var _hoisted_40 = {
   "class": "row"
 };
-var _hoisted_40 = {
+var _hoisted_41 = {
   "class": "col-9"
 };
 
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "",
   selected: "",
   disabled: "",
@@ -977,23 +1105,23 @@ var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "Java"
 }, "Java", -1
 /* HOISTED */
 );
 
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "Python"
 }, "Python", -1
 /* HOISTED */
 );
 
-var _hoisted_44 = {
+var _hoisted_45 = {
   "class": "col-3 ml-1"
 };
 
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
   colspan: "5"
 }, "Add Problem", -1
 /* HOISTED */
@@ -1002,82 +1130,119 @@ var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
+  var _component_vue_final_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-final-modal");
+
   var _component_router_view = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-view");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [!$data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Problems Page"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.labName), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Problems Page"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_final_modal, {
+    modelValue: $data.showDeleteModal,
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.showDeleteModal = $event;
+    }),
+    classes: "modal-container",
+    "content-class": "modal-content delete-modal",
+    "esc-to-close": true
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "modal-close",
+        onClick: _cache[1] || (_cache[1] = function ($event) {
+          return $options.closeDeleting();
+        })
+      }, "x"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, " Are you sure you would like to delete " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.deletingProblem.problem.name) + " from this Lab ", 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "btn btn-md btn-danger delete-button",
+        onClick: _cache[2] || (_cache[2] = function ($event) {
+          return $options.closeDeleting();
+        })
+      }, " Cancel "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "btn btn-md btn-danger delete-button",
+        onClick: _cache[3] || (_cache[3] = function ($event) {
+          return $options.deleteProblem();
+        })
+      }, " Delete ")])])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.labName), 1
   /* TEXT */
-  ), _hoisted_4])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.username) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.currentDirectory), 1
+  ), _hoisted_5])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.username) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.currentDirectory), 1
   /* TEXT */
-  ), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+  ), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
     "class": "pointer underline",
-    onClick: _cache[1] || (_cache[1] = function ($event) {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
       return _this.$emit('unmounting');
     })
-  }, "↩ Return to Labs")]), _hoisted_7, _hoisted_8, _hoisted_9, _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+  }, "↩ Return to Labs")]), _hoisted_8, _hoisted_9, _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
     id: "sort",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $data.sort = $event;
     }),
-    onChange: _cache[3] || (_cache[3] = function () {
+    onChange: _cache[7] || (_cache[7] = function () {
       return $options.sortProblems && $options.sortProblems.apply($options, arguments);
     })
-  }, [_hoisted_11, _hoisted_12, _hoisted_13], 544
+  }, [_hoisted_12, _hoisted_13, _hoisted_14], 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.sort]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [_hoisted_17, _hoisted_18, _hoisted_19, !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", _hoisted_20, "% Successful")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_21, !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", _hoisted_22, "Last Activity")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.problems, function (problem, key) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.sort]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [_hoisted_18, _hoisted_19, _hoisted_20, !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", _hoisted_21, "% Successful")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_22, !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("th", _hoisted_23, "Last Activity")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.problems, function (problem, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       key: problem.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", {
       "class": "problem pointer",
+      id: 'p' + problem.id,
       onClick: function onClick($event) {
         return $options.toggleExpansion(problem.id);
       }
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [_hoisted_23], 512
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [_hoisted_24], 512
     /* NEED_PATCH */
-    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$options.isExpanded(problem.id)]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [_hoisted_24], 512
+    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$options.isExpanded(problem.id)]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, [_hoisted_25], 512
     /* NEED_PATCH */
     ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.isExpanded(problem.id)]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.test_cases), 1
     /* TEXT */
-    ), !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.percent), 1
+    ), !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.percent), 1
     /* TEXT */
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[1]), 1
     /* TEXT */
-    ), !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.activity), 1
+    ), !$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("td", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.activity), 1
     /* TEXT */
     )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 8
     /* PROPS */
-    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.name), 1
+    , ["id", "onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.name), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_32, [$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_33, [$options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
       key: 0,
       onClick: function onClick($event) {
         return $options.editProblem(problem.id);
       },
       "class": "courselaunch text-danger mx-2 my-1 no-decor pointer"
-    }, [_hoisted_33], 8
+    }, [_hoisted_34], 8
     /* PROPS */
     , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5>•••</h5> "), $options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("a", {
       key: 1,
       onClick: function onClick($event) {
-        return $options.deleteProblem(problem, key);
+        return $options.deleting(problem.id, problem, key);
       },
       "class": "courselaunch text-danger mx-2 my-1 no-decor pointer"
-    }, [_hoisted_34], 8
+    }, [_hoisted_35], 8
     /* PROPS */
-    , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5>×</h5> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" get text from .description object "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ problem.description }} "), _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Due Date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]) + " ", 1
+    , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h5>×</h5> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" get text from .description object "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ problem.description }} "), _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Due Date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.due_date.split(" ")[0]) + " ", 1
     /* TEXT */
-    ), _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Test Cases: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.test_cases) + " ", 1
+    ), _hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Test Cases: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(problem.test_cases) + " ", 1
     /* TEXT */
-    ), _hoisted_37]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
-      "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+    ), _hoisted_38]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+      "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
         return $data.lang = $event;
       }),
       id: "lang",
       "class": "form-select"
-    }, [_hoisted_41, _hoisted_42, _hoisted_43], 512
+    }, [_hoisted_42, _hoisted_43, _hoisted_44], 512
     /* NEED_PATCH */
-    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.lang]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.lang]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
       type: "launch",
       name: "launch",
       "class": "launch-workspace btn btn-success",
@@ -1097,18 +1262,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), $options.isProf ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", {
     key: 0,
     "class": "lab pointer",
-    onClick: _cache[5] || (_cache[5] = function () {
+    onClick: _cache[9] || (_cache[9] = function () {
       return $options.addProblem && $options.addProblem.apply($options, arguments);
     })
-  }, [_hoisted_45])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, {
-    key: 1,
-    onUnmounting: _cache[6] || (_cache[6] = function ($event) {
+  }, [_hoisted_46])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.childIsOpen]]), $data.childIsOpen ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_view, {
+    key: 0,
+    onUnmounting: _cache[10] || (_cache[10] = function ($event) {
       return $options.Unmounting();
     }),
-    onProblemEdited: _cache[7] || (_cache[7] = function ($event) {
+    onProblemEdited: _cache[11] || (_cache[11] = function ($event) {
       return $options.problemEdited();
     }),
-    onDeleteMe: _cache[8] || (_cache[8] = function ($event) {
+    onDeleteMe: _cache[12] || (_cache[12] = function ($event) {
       return $options.deleteMe();
     }),
     problemID: $data.problemID,

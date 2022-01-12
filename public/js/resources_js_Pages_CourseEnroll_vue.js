@@ -32,7 +32,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         width: 0,
         height: 0,
         fScaleToTargetWidth: true
-      }
+      },
+      showInfoModal: false,
+      reloadInfoModal: 0
     };
   },
   methods: {
@@ -83,31 +85,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var res;
+        var res, authUser;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _context.prev = 0;
+                _context.next = 3;
                 return _services_API__WEBPACK_IMPORTED_MODULE_1__.apiClient.post("/invite/enroll/".concat(_this.key));
 
-              case 2:
+              case 3:
                 res = _context.sent;
 
+                if (!(res.status != 200)) {
+                  _context.next = 6;
+                  break;
+                }
+
+                throw new Error(res);
+
+              case 6:
+                _context.next = 8;
+                return _this.$store.dispatch("auth/getAuthUser");
+
+              case 8:
+                authUser = _context.sent;
+
                 //move to course page
+                // this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
                 _this.$router.push({
-                  name: "Labs",
-                  params: {
-                    course_id: _this.courseID
-                  }
+                  name: "Courses"
                 });
 
-              case 4:
+                _context.next = 17;
+                break;
+
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](0);
+                //display modal saying course invite code is no longer active
+                console.log("something went wrong in try");
+
+                if (_context.t0.response.status == 403) {
+                  console.log(_context.t0.response);
+                }
+
+                _this.joining();
+
+              case 17:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 12]]);
       }))();
     },
     cancelCourse: function cancelCourse() {
@@ -159,6 +189,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var r = window.location.pathname;
       r = r.split("/");
       this.key = r[1];
+    },
+    closeInfo: function closeInfo() {
+      this.showInfoModal = false;
+    },
+    joining: function joining() {
+      this.showInfoModal = true;
+    }
+  },
+  watch: {
+    showInfoModal: function showInfoModal() {
+      if (!this.showInfoModal) {
+        this.reloadInfoModal++;
+      }
     }
   },
   beforeMount: function beforeMount() {
@@ -212,49 +255,90 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  "class": "delete Course"
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "This Invite Code has expired please contact your professor", -1
+/* HOISTED */
+);
+
+var _hoisted_3 = {
+  "class": "delete-buttons"
+};
+var _hoisted_4 = {
   "class": "invite-card center"
 };
-var _hoisted_2 = {
+var _hoisted_5 = {
   "class": "crop"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_4 = {
+var _hoisted_7 = {
   "class": "center"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_6 = {
+var _hoisted_9 = {
   "class": "center"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  var _component_vue_final_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("vue-final-modal");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_vue_final_modal, {
+    "class": "delete-modal",
+    modelValue: $data.showInfoModal,
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.showInfoModal = $event;
+    }),
+    classes: "modal-container",
+    "content-class": "modal-content delete-modal",
+    "esc-to-close": true
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "modal-close",
+        onClick: _cache[1] || (_cache[1] = function ($event) {
+          return $options.closeInfo();
+        })
+      }, "x"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "btn btn-md btn-danger delete-button",
+        onClick: _cache[2] || (_cache[2] = function ($event) {
+          return $options.closeInfo();
+        })
+      }, "OK")])])];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     style: 'background-image: url("' + this.courseImg + '")',
     "class": "inviteBG"
   }, null, 4
   /* STYLE */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <img\n        :src=\"this.courseImg\"\n        alt=\"Course Image\"\n        class=\"invite-card-img\"\n        :width=\"imgSizes.width\"\n        :height=\"imgSizes.height\"\n      /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <img\n        :src=\"this.courseImg\"\n        alt=\"Course Image\"\n        class=\"invite-card-img\"\n        :width=\"imgSizes.width\"\n        :height=\"imgSizes.height\"\n      /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
     src: this.courseImg,
     alt: "Course Image",
     width: "600"
   }, null, 8
   /* PROPS */
-  , ["src"])]), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.course.name), 1
+  , ["src"])]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.course.name), 1
   /* TEXT */
-  ), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.course.start_date) + " — " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.course.end_date), 1
+  ), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.course.start_date) + " — " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.course.end_date), 1
   /* TEXT */
-  ), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-lg",
     style: {
       "width": "97%",
@@ -262,7 +346,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "border-radius": "5px !important",
       "color": "white"
     },
-    onClick: _cache[1] || (_cache[1] = function ($event) {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.joinCourse();
     })
   }, " Join! ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>You have been invited to join {{ course.name }}</h1>\n  <button @click=\"joinCourse()\" type=\"submit\">Join</button>\n  <button @click=\"cancelCourse()\" type=\"submit\">Cancel</button>\n  <p>yah</p> ")], 2112
