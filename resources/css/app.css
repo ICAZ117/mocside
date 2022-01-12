@@ -956,6 +956,10 @@ thead.gradebook {
     border: 5px solid var(--FSCred) !important;
 }
 
+.forgot-password {
+    color: var(--FSClightblue);
+}
+
 /*============= REGISTER =============*/
 
 .register {

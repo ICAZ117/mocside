@@ -52,6 +52,7 @@
         <div class="form-group form-check">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox" name="remember" v-model="rememberMe"/>Remember Me
+            <a href="" class="forgot-password" @click="forgotPassword()">Forgot Password?</a>
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Check this checkbox to continue.</div>
           </label>
@@ -150,6 +151,9 @@ export default {
           this.$notify({ type: "error", text: "Your password is incorrect!" });
         }
       }
+    },
+    forgotPassword(){
+      console.log("Forgot Password Link Button");
     },
     goRouter() {
       //get the previous route.....if an enroll page redirect there
