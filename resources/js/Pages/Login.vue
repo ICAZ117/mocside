@@ -154,8 +154,8 @@ export default {
     },
     forgotPassword(){
       //make sure a email is added if so then reset-password 
-      this.v$.touch();
-      console.log(this.v$.params);
+      this.v$.$touch();
+      console.log(this.v$.$params);
 
       //otherwise place error on screen
     },
