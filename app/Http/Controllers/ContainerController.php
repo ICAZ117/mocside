@@ -213,7 +213,7 @@ class ContainerController extends Controller
         }
         // create host config
         $mountsConfig->setType("bind");
-        $mountsConfig->setSource("/home/max/mocside/storage/app/" . $head . "/");
+        $mountsConfig->setSource("/var/www/html/mocside/storage/app/" . $head . "/");
         $mountsConfig->setTarget("/usr/src");
         $mountsConfig->setReadOnly(false);
         $hostConfig->setMounts([$mountsConfig]);
@@ -223,10 +223,10 @@ class ContainerController extends Controller
         // save test cases to file
         $assignment = Assignment::find($id);
         $test_cases = $assignment->test_cases;
-        $path = "testCases.json";
+        $path = "/var/www/html/mocside/storage/app/tmp/testCases.json";
         $file = fopen($path, "w");
         fwrite($file, json_encode($test_cases));
-        Storage::disk('local')->putFileAs($head, new File($path), $path);
+        Storage::disk('local')->putFileAs($head, new File($path), "testCases.json");
         fclose($file);
         unlink($path);
 
@@ -711,7 +711,7 @@ class ContainerController extends Controller
         $hostConfig->setUlimits([$ulimits]);
 
         $containerConfig->setStopTimeout(3); // time container will wait before force after get "shutdown" cmd
-        $containerConfig->setImage("673eda123d55"); // this is the image we want to use
+        $containerConfig->setImage("38c52c2ff09b"); // this is the image we want to use
         $containerConfig->setCmd([
             '-c', 'python3 -u supervisor.py -l '.strtolower($validData['lang']).' > console.log | python3 watchdog_laravel.py -i '.$user->fsc_id.' -t 30'
         ]);
@@ -725,7 +725,7 @@ class ContainerController extends Controller
 
         // create host config
         $mountsConfig->setType("bind");
-        $mountsConfig->setSource("/home/max/mocside/storage/app/" . $head . "/");
+        $mountsConfig->setSource("/var/www/html/mocside/storage/app/" . $head . "/");
         $mountsConfig->setTarget("/usr/src");
         $mountsConfig->setReadOnly(false);
         $hostConfig->setMounts([$mountsConfig]);

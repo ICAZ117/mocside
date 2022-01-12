@@ -20,6 +20,7 @@ class UserResource extends JsonResource
           'email' => $this->email,
           'isAdmin' => $this->isAdmin(),
           'isProfessor' => $this->isProf(),
+          'isVerified' => $this->isVerified(),
           'fsc_user' => $this->fscUser,
           'username' => $this->username,
           'settings' => json_decode($this->settings, true),

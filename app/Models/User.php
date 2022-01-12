@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->status;
     }
+
     public function isProf(): bool
     {
         $fscRole = $this->fsc_role;
@@ -34,6 +35,16 @@ class User extends Authenticatable implements MustVerifyEmail
             return true;
         }
         return false;
+    }
+
+    public function isVerified(): bool
+    {
+        if ($this->email_verified_at)
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function fscUser()
