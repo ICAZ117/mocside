@@ -1,69 +1,42 @@
 <template>
-  <div class="container">
-    <div class="password-reset">
-      <h3 class="password-reset-title">Reset Password</h3>
-      <!--------------------- START FORM --------------------->
-      <form @submit.prevent="handleSubmit">
-        <!------------------- PASSWORD ------------------->
+  <div>
+    <!-- Login Form -->
+    <div class="login">
+      <h3 class="login-title">Reset Password</h3>
+
+      <form @submit.prevent="handleSubmit" class="needs-validation">
+        <!-------------------- Email -------------------->
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="email">Email</label>
           <input
-            type="password"
-            v-model="userForm.password"
-            id="password"
-            name="password"
+            type="text"
+            v-model="userForm.email"
+            id="email"
+            name="email"
             class="form-control"
             :class="{
-              'is-invalid': isSubmitted && v$.userForm.password.$error,
+              'is-invalid': isSubmitted && v$.userForm.email.$error,
             }"
-            autocomplete="new-password"
+            autocomplete="email"
           />
           <div
-            v-if="isSubmitted && v$.userForm.password.$error"
+            v-if="isSubmitted && v$.userForm.email.$error"
             class="invalid-feedback"
           >
-            <span v-if="v$.userForm.password.required.$invalid"
-              >Please enter a password <br></span
+           <span v-if="v$.userForm.email.required.$invalid"
+              >Please enter your email</span
             >
-            <span v-if="v$.userForm.password.minLength.$invalid"
-              >Passwords must be at <i>LEAST</i>&nbsp;&nbsp;10 characters long <br></span
+            <span v-if="v$.userForm.email.email.$invalid"
+              >Please provide a valid email address
+              (rickastley@NeverGonnaGiveYouUp.com)</span
             >
-            <span v-if="v$.userForm.password.mustContainLower.$invalid">Passwords must contain a lowercase character <br></span>
-            <span v-if="v$.userForm.password.mustContainUpper.$invalid">Passwords must contain an uppercase character <br></span>
-            <span v-if="v$.userForm.password.mustContainNumber.$invalid">Passwords must contain a numeric character <br></span>
-            <span v-if="v$.userForm.password.mustContainSymbol.$invalid">Passwords must contain a symbol <br></span>
           </div>
         </div>
         <br />
-        <!---------------- REPEAT PASSWORD ---------------->
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            v-model="userForm.confirmPassword"
-            class="form-control"
-            :class="{
-              'is-invalid': isSubmitted && hasError,
-            }"
-            autocomplete="new-password"
-          />
-          <div
-            v-if="hasError"
-            class="invalid-feedback"
-          >
-            <span v-if="isEmpty"
-              >Please re-enter your password</span
-            >
-            <span
-              v-else-if="isDiff"
-              >Your passwords don't match!
-            </span>
-          </div>
-        </div>
-        <br />
+
         <!-------------------- SUBMIT -------------------->
         <div class="form-group">
-          <button class="btn btn-danger btn-block">Reset Password</button>
+          <button class="btn btn-danger btn-block">Send Reset Link</button>
         </div>
       </form>
     </div>
@@ -72,42 +45,30 @@
 
 <script>
 import useVuelidate from "@vuelidate/core";
-import { required, email, minLength, maxLength, between, integer } from "@vuelidate/validators";
-import AuthService from "../services/AuthService";
-import * as API from "../services/API";
-const mustContainLower = (value) => /[a-z]/.test(value);
-const mustContainUpper = (value) => /[A-Z]/.test(value);
-const mustContainNumber = (value) => /\d/.test(value);
-const mustContainSymbol = (value) => (/\W/).test(value);
+import { required } from "@vuelidate/validators";
 export default {
 	setup() {
 		return {
 		v$: useVuelidate(),
-		};    
+		};
 	},
 	data() {
 		return {
-		token: null,
 		error: null,
 		message: null,
 		userForm: {
-			password: "",
-			confirmPassword: "",
+			userEmail: "",
 		},
-		isSubmitted: false,
+			isSubmitted: false,
 		};
-  	},
+	},
 	validations: {
 		userForm: {
-			password: {
+			email: {
 				required,
-				minLength: minLength(10),
-				mustContainLower,
-				mustContainUpper,
-				mustContainNumber,
-				mustContainSymbol
+				email
 			},
-    	},
+		},
 	},
 	methods: {
 		handleSubmit() {
@@ -116,50 +77,32 @@ export default {
 			if (this.v$.$invalid) {
 				return;
 			}
-			this.resetUserPassword();
+			this.forgotPassword();
 		},
-		async resetUserPassword() {
-			this.error = null;
-			this.message = null;
+		async forgotPassword() {
 			const payload = {
-				password: this.userForm.password,
-				password_confirmation: this.userForm.confirmPassword,
+				email: this.userForm.email,
 			};
-
-			// AuthService.registerUser(payload)
-			//   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
-			//   .catch((error) => (this.error = getError(error)));
-
-			const self = this;
-			var flag = true;
-			//res to reset the password with new value
-			//do a .catch(function(error) {
-				//with error handling here and set the flag to false if not completed?
-			// })
-
-			if(flag) {
+			this.error = null;
+			try {
+				//call the route to send the reset link here
+				const res = await API.ApiClient.post(`put route path here`).then((response) => {
+					console.log(response);
+				}).catch((error) => {
+					throw error
+				});
+			} catch (error) {
+				this.error = error.response.data.errors.email[0];
 				
-
-				// now, push to courses
-				this.$router.push('/courses'); // this will get them properly authorized,
+				if (this.error == "Invalid email or username.") {
+					this.$notify({ type: "error", text: "Your email/username does not exist!" });
+				}
+				else if (this.error == "Invalid password.") {
+					this.$notify({ type: "error", text: "Your password is incorrect!" });
+				}
 			}
-			
 		},
 	},
-	computed: {
-		isDiff: function() {
-			return this.userForm.password != this.userForm.confirmPassword;
-		},
-		isEmpty: function() {
-			return this.userForm.confirmPassword == "";
-		},
-		hasError: function() {
-			return this.isEmpty || this.isDiff;
-		}
-	},
-  	mounted() {
-		this.token = this.$route.query.token;
-	}
 }
 </script>
 

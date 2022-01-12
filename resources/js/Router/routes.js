@@ -110,8 +110,13 @@ const routes = [
         name: "Contact"
     },
     {
-        path: "/reset-password",
+        path: "/forgot-password",
         component: () => import("../Pages/ForgotPassword.vue"),
+        name: "ForgotPassword"
+    },
+    {
+        path: "/reset-password",
+        component: () => import("../Pages/ResetPassword.vue"),
         name: "ResetPassword"
     },
     {

@@ -153,11 +153,7 @@ export default {
       }
     },
     forgotPassword(){
-      //make sure a email is added if so then reset-password 
-      this.v$.$touch();
-      console.log(this.v$.$params);
-
-      //otherwise place error on screen
+      this.$router.push({name: "ForgotPassword"});
     },
     goRouter() {
       //get the previous route.....if an enroll page redirect there
