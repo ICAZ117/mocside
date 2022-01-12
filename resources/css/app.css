@@ -971,6 +971,20 @@ thead.gradebook {
     text-align: center !important;
 }
 
+/*========== Reset Password ===========*/
+.password-reset {
+    width: 450px !important;
+    border: 1px solid lightgrey !important;
+    background-color: white !important;
+    margin: auto !important;
+    margin-top: 10rem !important;
+    padding: 20px !important;
+}
+
+.password-reset-title {
+    text-align: center !important;
+}
+
 /*============= WORKSPACE =============*/
 .workspace-page {
     background-color: black !important;

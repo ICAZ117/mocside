@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="register">
-      <h3 class="register-title">Reset Password</h3>
+    <div class="password-reset">
+      <h3 class="password-reset-title">Reset Password</h3>
       <!--------------------- START FORM --------------------->
       <form @submit.prevent="handleSubmit">
         <!------------------- PASSWORD ------------------->
@@ -63,7 +63,7 @@
         <br />
         <!-------------------- SUBMIT -------------------->
         <div class="form-group">
-          <button class="btn btn-danger btn-block">Register</button>
+          <button class="btn btn-danger btn-block">Reset Password</button>
         </div>
       </form>
     </div>
