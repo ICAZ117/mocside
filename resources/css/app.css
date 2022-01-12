@@ -958,6 +958,7 @@ thead.gradebook {
 
 .forgot-password {
     color: var(--FSClightblue);
+    margin-left: 3rem;
 }
 
 /*============= REGISTER =============*/
