@@ -110,6 +110,11 @@ const routes = [
         name: "Contact"
     },
     {
+        path: "/reset-password",
+        component: () => import("../Pages/ForgotPassword.vue"),
+        name: "ResetPassword"
+    },
+    {
         // catch-all path
         path: "/:pathMatch(.*)*",
         component: () => import("../Pages/NotFound.vue"),
