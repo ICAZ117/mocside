@@ -57,7 +57,7 @@ export default {
 		error: null,
 		message: null,
 		userForm: {
-			userEmail: "",
+			email: "",
 		},
 			isSubmitted: false,
 		};
