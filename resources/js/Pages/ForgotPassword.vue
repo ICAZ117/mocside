@@ -46,6 +46,7 @@
 <script>
 import useVuelidate from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
+import AuthService from "../services/AuthService";
 export default {
 	setup() {
 		return {
@@ -86,7 +87,7 @@ export default {
 			this.error = null;
 			try {
 				//call the route to send the reset link here
-				const res = await API.ApiClient.post(`put route path here`).then((response) => {
+				const res = await AuthService.forgotPassword(payload).then((response) => {
 					console.log(response);
 				}).catch((error) => {
 					throw error

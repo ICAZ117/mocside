@@ -4,6 +4,8 @@
       <h3 class="password-reset-title">Reset Password</h3>
       <!--------------------- START FORM --------------------->
       <form @submit.prevent="handleSubmit">
+		<!--------------------- EMAIL --------------------->
+		
         <!------------------- PASSWORD ------------------->
         <div class="form-group">
           <label for="password">Password</label>
@@ -122,13 +124,19 @@ export default {
 			this.error = null;
 			this.message = null;
 			const payload = {
+				email: this.userForm.email, // we will need to make the box for this
 				password: this.userForm.password,
 				password_confirmation: this.userForm.confirmPassword,
+				token: this.token,
 			};
 
 			// AuthService.registerUser(payload)
 			//   .then(() => this.$router.push("/login")) // user is logged in via sanctum from register, but not in store
 			//   .catch((error) => (this.error = getError(error)));
+
+			const res = await AuthService.resetPassword(payload)
+				// .then(() => this.$router.push("/login"))
+				// .catch((error) => (this.error = getError(error)));
 
 			const self = this;
 			var flag = true;
