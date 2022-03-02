@@ -13,53 +13,55 @@ const routes = [
         //     }
         // ]
     },
-    {
-        path: '/courses',
-        component: () => import("../Pages/Courses.vue"),
-        name: "Courses",
-        meta: { requiresAuth: true },
-        children: [
-            {
-                path: ':course_id/labs',
-                component: () => import("../Pages/Labs.vue"),
-                name: "Labs",
-                children: [
-                    {
-                        path: ':lab_id/problems',
-                        component: () => import("../Pages/Problems.vue"),
-                        name: "Problems",
-                        children: [
-                            {
-                                path: ':problem_id/workspace',
-                                component: () => import("../Pages/Workspace.vue"),
-                                name: "Assignment",
-                            },
-                            {
-                                path: ':problem_id/edit',
-                                component: () => import("../Pages/CreateAssignment.vue"),
-                                name: "EditAssignment",
-                            },
-                        ]
-                    },
-                    {
-                        path: ':lab_id/edit',
-                        component: () => import("../Pages/EditLab.vue"),
-                        name: "EditLab",
-                    },
-                ]
-            },
-            {
+	{
+		path: '/courses',
+		component: () => import("../Pages/Courses.vue"),
+		name: "Courses",
+		meta: { requiresAuth: true},
+		children: [
+			{
                 path: ':course_id/edit',
                 component: () => import("../Pages/EditCourse.vue"),
                 name: "EditCourse",
             },
-        ]
-        // Reference for syntax
-        // beforeEnter: (to, from, next) => {
-        //     if (store.getters["auth/isAdmin"]) next();
-        //     else next(false);
-        // }
-    },
+		]
+	},
+	{
+		path: ":course_id/labs",
+		component: () => import("../Pages/Labs.vue"),
+		name: "Labs",
+		meta: { requiresAuth: true},
+		children: [
+			{
+				path: ':lab_id/edit',
+				component: () => import("../Pages/EditLab.vue"),
+				name: "EditLab",
+			},
+		]
+	},
+	{
+		path: ":lab_id/problems",
+		component: () => import("../Pages/Problems.vue"),
+		name: "Problems",
+		children: [
+			{
+				path: ':problem_id/workspace',
+				component: () => import("../Pages/Workspace.vue"),
+				name: "Assignment",
+			},
+			{
+				path: ':problem_id/edit',
+				component: () => import("../Pages/CreateAssignment.vue"),
+				name: "EditAssignment",
+			},
+		]
+	},
+        
+	// Reference for syntax
+	// beforeEnter: (to, from, next) => {
+	//     if (store.getters["auth/isAdmin"]) next();
+	//     else next(false);
+	// }
     {
         path: "/:course_key/enroll",
         component: () => import("../Pages/CourseEnroll.vue"),
