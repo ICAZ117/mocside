@@ -1,6 +1,5 @@
 <template>
   <div>
-	  <p>MY HOME</p>
       <Carousel class="carousel" :wrap-around="true" :autoplay="6000" :transition="600" :pauseAutoplayOnHover="true">
         <Slide :key="0">
           <div class="carousel__item">
