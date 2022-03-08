@@ -27,7 +27,7 @@ const routes = [
 		]
 	},
 	{
-		path: ":course_id/labs",
+		path: "/:course_id/labs",
 		component: () => import("../Pages/Labs.vue"),
 		name: "Labs",
 		meta: { requiresAuth: true},
@@ -40,7 +40,7 @@ const routes = [
 		]
 	},
 	{
-		path: ":lab_id/problems",
+		path: "/:lab_id/problems",
 		component: () => import("../Pages/Problems.vue"),
 		name: "Problems",
 		children: [
