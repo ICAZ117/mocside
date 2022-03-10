@@ -401,7 +401,7 @@ export default {
       this.courseID = id;
       this.$router.push({
         name: "EditCourse",
-        params: { course_id: this.courseID },
+        params: { courseID: this.courseID },
       });
     },
     closeDeleting() {
