@@ -43,7 +43,7 @@
     <small class="navigation"
       ><span>{{ username }}{{ currentDirectory }}</span>
       <br />
-      <span class="pointer underline" @click="this.$emit('unmounting')"
+      <span class="pointer underline" @click="this.goToCourses()"
         >↩ Return to Courses</span
       >
     </small>
