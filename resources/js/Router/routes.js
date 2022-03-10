@@ -5,13 +5,6 @@ const routes = [
         path: '',
         component: () => import("../Pages/Home.vue"),
         name: 'Home',
-        // children: [
-        //     {
-        //         path: 'login',
-        //         component: () => import("../Components/LoginModal.vue"),
-        //         props: true
-        //     }
-        // ]
     },
 	{
 		path: '/courses',
