@@ -447,7 +447,7 @@ export default {
         this.courseName = name;
         this.$router.push({
           name: "Labs",
-          params: { course_id: this.courseID },
+          params: { courseID: this.courseID },
         });
       }
     },
