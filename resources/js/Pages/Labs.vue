@@ -1,5 +1,5 @@
 <template>
-  <div v-show="!childisOpen">
+  <div>
     <!-- Main Page-->
     <vue-final-modal
       v-model="showDeleteModal"
@@ -232,14 +232,7 @@
       </tab-panel>
     </tab-panels>
   </div>
-  <router-view
-    @unmounting="Unmounting()"
-    @labEdited="labEdited()"
-    v-if="childisOpen"
-    :labID="labID"
-    :labName="labName"
-  ></router-view>
-  <div v-if="!childisOpen">
+  <div >
     <div v-for="(lab, key) in labs" :key="lab.id">
       <div :id="lab.id">
         <ul id="menu">
@@ -277,13 +270,11 @@ const tabs = ["Labs", "Grades"];
 
 export default defineComponent({
   props: ["courseID", "courseName"],
-  emits: ["unmounting", "courseEdited"],
   name: "Course",
   data() {
     return {
       labs: [],
       unfilteredLabs: [],
-      childisOpen: false,
       labID: null,
       labName: null,
       authUser: null,
@@ -444,10 +435,9 @@ export default defineComponent({
       this.rightClickID = "";
     },
     goToProblems(id, name) {
-      this.childisOpen = true;
       this.labID = id;
       this.labName = name;
-      this.$router.push({ name: "Problems", params: { lab_id: id } });
+      this.$router.push({ name: "Problems", params: { labID: id } });
     },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
@@ -542,35 +532,6 @@ export default defineComponent({
           name: "Courses",
         });
     },
-    async Unmounting() {
-      this.childisOpen = false;
-      this.labID = null;
-      this.labName = null;
-      var flag = this.refreshPage();
-      console.log("unmounting the problems page");
-      console.log(flag);
-      if (flag) {
-        this.$router.push({
-          name: "Labs",
-          params: { course_id: this.courseID },
-        });
-      }
-      await this.getColors();
-      await this.getGradeColors();
-      await this.getProblemColors();
-    },
-    async labEdited() {
-      ///update the list of courses
-      console.log("lab is edited");
-      this.childisOpen = false;
-      this.labs = this.labs.filter((l) => l.id != this.labID);
-      const lab = await API.apiClient.get(`/labs/full/${this.labID}`);
-      this.labs.push(lab.data.data);
-      await this.getColors();
-      await this.getGradeColors();
-      await this.getProblemColors();
-      this.Unmounting();
-    },
     async addLab() {
       var payload = {
         name: "New Lab",
@@ -586,14 +547,12 @@ export default defineComponent({
       this.labID = lab.data.data.id;
       this.labName = lab.data.data.name;
       console.log(this.labID);
-      this.childisOpen = true;
       this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
     },
     editLab(id, name) {
-      this.childisOpen = true;
       this.labID = id;
       this.labName = name;
-      this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
+      this.$router.push({ name: "EditLab", params: { labID: this.labID } });
     },
     closeDeleting() {
       this.showDeleteModal = false;
@@ -654,34 +613,6 @@ export default defineComponent({
         }
       }
     },
-    routeToChild() {
-      var r = window.location.pathname;
-      var sub = "/courses/" + this.courseID + "/labs";
-      var c = r.substring(sub.length);
-      if (c == "") {
-        console.log("just on the labs page");
-      } else {
-        console.log("on this page: " + c);
-        var c = c.split("/");
-        var lID = c[1];
-        var path = c[2]; //labs, or edit, and maybe something else
-        var name = "";
-        for (let i = 0; i < this.labs.length; i++) {
-          if (this.labs[i].id == lID) {
-            name = this.labs[i].name;
-            break;
-          }
-        }
-
-        if (path == "problems") {
-          this.goToProblems(lID, name);
-        } else if (path == "edit") {
-          this.editLab(lID, name);
-        } else {
-          console.log(path);
-        }
-      }
-    },
     async filterByPublish() {
       console.log("filter by publish");
       //grabs only the courses that are currently in session
@@ -734,74 +665,21 @@ export default defineComponent({
       //get sort method and call it
       if (this.sort == 0) {
         //dueDate
-        await this.sortByDueDate();
+		this.unfilteredLabs = sort(4, this.unfilteredLabs);
       } else if (this.sort == 1) {
         //name
         //default
         await this.sortByName();
+		this.unfilteredLabs = sort(3, this.unfilteredLabs);
       } else {
         //course ID
         await this.sortByID();
+		this.unfilteredLabs = sort(5, this.unfilteredLabs);
       }
       console.log(this.unfilteredLabs);
       //call the filter after sorting
       await this.filterByPublish();
       return "";
-    },
-    async sortByDueDate() {
-      //sorts the unfiltered results by start date
-      this.unfilteredLabs.sort((a, b) => {
-        //if a should be first return -1, 0 for tie, -1 if b first
-        let la = a.due_date.split("-");
-        let lb = b.due_date.split("-");
-        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
-        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    async sortByName() {
-      //sorts the unfiltered results by the lab name
-      this.unfilteredLabs.sort((a, b) => {
-        let fa = a.name.toLowerCase();
-        let fb = b.name.toLowerCase();
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    async sortByID() {
-      //sorts the unfiltered results by ID of the lab
-      //default
-      this.unfilteredLabs.sort((a, b) => {
-        return a.id - b.id;
-      });
-    },
-    refreshPage() {
-      var r = window.location.pathname;
-      var sub = "/courses";
-      var c = r.substring(sub.length);
-      console.log(c);
-      if (c == "") {
-        console.log("just on the courses page");
-        return false;
-        //don't allow the page to refresh to stop it from overriding the courses nav button push
-      } else {
-        console.log("on this page: " + c);
-        var c = c.split("/");
-        var cID = c[1];
-        var path = c[2]; //labs, or edit, and maybe something else
-        return true;
-      }
     },
   },
   computed: {
@@ -825,21 +703,15 @@ export default defineComponent({
   },
   async beforeMount() {
     console.log("Before Mount");
-    this.childisOpen = false;
     await this.getLabs();
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
-    this.routeToChild();
     if (!this.isProf) {
       await this.getStudentObject();
       await this.getGrades();
     }
     await this.getGradeColors();
     console.log("HELLO");
-  },
-  beforeUnmount() {
-    //labs
-    this.$emit("unmounting");
   },
 });
 </script>
