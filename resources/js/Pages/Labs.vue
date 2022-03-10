@@ -537,6 +537,11 @@ export default defineComponent({
         }
       }
     },
+    goToCourses() {
+      this.$router.push({
+          name: "Courses",
+        });
+    },
     async Unmounting() {
       this.childisOpen = false;
       this.labID = null;
