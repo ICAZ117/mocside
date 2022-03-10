@@ -476,10 +476,6 @@ export default {
     studentView() {
       this.$emit("studentView", [this.courseID, this.course.name]);
     },
-    editLab(id, name) {
-      console.log("edit Lab");
-      this.$emit("editLab", [this.courseID, this.course.name, id, name]);
-    },
     closeDeleting() {
       this.showDeleteModal = false;
     },
