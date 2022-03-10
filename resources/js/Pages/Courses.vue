@@ -624,30 +624,6 @@ export default {
       //call the filter after sorting
       this.separateCourses();
     },
-    Unmounting() {
-      if (!this.ignoreUnmount) {
-        // this.childIsOpen = false;
-        this.courseID = null;
-        var flag = this.refreshPage();
-        console.log("unmounting the labs page");
-        if (flag) {
-          this.$router.push({ name: "Courses" });
-        } else {
-          this.routeToChild();
-        }
-      }
-      this.ignoreUnmount = false;
-    },
-    async courseEdited() {
-      ///update the list of courses
-      this.unfilteredCourses = this.unfilteredCourses.filter(
-        (c) => c.id != this.courseID
-      );
-      const course = await API.apiClient.get(`/courses/${this.courseID}`);
-      this.unfilteredCourses.push(course.data.data);
-      this.separateCourses();
-      this.Unmounting();
-    },
     hasLabAccess(cID) {
       for (let i = 0; i < this.enrolledCourses.length; i++) {
         if (this.enrolledCourses[i] == cID) {
@@ -660,35 +636,6 @@ export default {
       if (this.isProf) {
         return this.hasLabAccess(cID);
       } else {
-        return false;
-      }
-    },
-    routeToChild() {
-      var r = window.location.pathname;
-      var sub = "/courses";
-      var c = r.substring(sub.length);
-      if (c == "") {
-        console.log("just on the courses page");
-        return true;
-      } else {
-        console.log("on this page: " + c);
-        var c = c.split("/");
-        var cID = c[1];
-        var path = c[2]; //labs, or edit, and maybe something else
-
-        if (path == "labs") {
-          //check if can go there
-          if (this.hasLabAccess(cID)) {
-            this.goToLabs(cID, "");
-          }
-        } else if (path == "edit") {
-          //check if can go there
-          if (this.hasEditAccess(cID)) {
-            this.editCourse(cID);
-          }
-        } else {
-          console.log(path);
-        }
         return false;
       }
     },
