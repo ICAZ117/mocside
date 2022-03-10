@@ -270,6 +270,7 @@ import store from "../Store/index";
 import * as API from "../services/API";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
+import defaultExport from "../services/Sort";
 
 export default {
   data: () => ({
@@ -603,84 +604,89 @@ export default {
       //get sort method and call it
       if (this.sort == 0) {
         //startDate
-        this.sortByStartDate();
+        // this.sortByStartDate();
+        this.unfilteredCourses = sort(0, this.unfilteredCourses);
       } else if (this.sort == 1) {
         //endDate
-        this.sortByEndDate();
+        // this.sortByEndDate();
+        this.unfilteredCourses = sort(1, this.unfilteredCourses);
       } else if (this.sort == 2) {
         //nextDueProblem
-        this.sortByNextProblemDue();
+        // this.sortByNextProblemDue();
+        this.unfilteredCourses = sort(2, this.unfilteredCourses);
       } else if (this.sort == 3) {
         //name
-        this.sortByName();
+        // this.sortByName();
+        this.unfilteredCourses = sort(3, this.unfilteredCourses);
       } else {
         //default
         //course ID
-        this.sortByID();
+        // this.sortByID();
+        this.unfilteredCourses = sort(5, this.unfilteredCourses);
       }
 
       //call the filter after sorting
       this.separateCourses();
     },
-    sortByStartDate() {
-      //sorts the filtered results by start date
-      this.unfilteredCourses.sort((a, b) => {
-        //if a should be first return -1, 0 for tie, -1 if b first
-        let la = a.start_date.split("-");
-        let lb = b.start_date.split("-");
-        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
-        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    sortByEndDate() {
-      //sorts the filtered results by end date
-      this.unfilteredCourses.sort((a, b) => {
-        //if a should be first return -1, 0 for tie, -1 if b first
-        let la = a.end_date.split("-");
-        let lb = b.end_date.split("-");
-        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
-        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    sortByNextProblemDue() {
-      //sorts the filtered results by showing the course with the earliest due problem being first
-      //this one is gonna be hard to add
-    },
-    sortByName() {
-      //sorts the filtered results by the course name
-      this.unfilteredCourses.sort((a, b) => {
-        let fa = a.name.toLowerCase();
-        let fb = b.name.toLowerCase();
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    sortByID() {
-      //sorts the filtered results by ID of the course
-      //default
-      this.unfilteredCourses.sort((a, b) => {
-        return a.id - b.id;
-      });
-    },
+    // sortByStartDate() {
+    //   //sorts the filtered results by start date
+    //   this.unfilteredCourses.sort((a, b) => {
+    //     //if a should be first return -1, 0 for tie, -1 if b first
+    //     let la = a.start_date.split("-");
+    //     let lb = b.start_date.split("-");
+    //     let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+    //     let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+    //     if (fa < fb) {
+    //       return -1;
+    //     }
+    //     if (fa > fb) {
+    //       return 1;
+    //     }
+    //     return 0;
+    //   });
+    // },
+    // sortByEndDate() {
+    //   //sorts the filtered results by end date
+    //   this.unfilteredCourses.sort((a, b) => {
+    //     //if a should be first return -1, 0 for tie, -1 if b first
+    //     let la = a.end_date.split("-");
+    //     let lb = b.end_date.split("-");
+    //     let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
+    //     let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
+    //     if (fa < fb) {
+    //       return -1;
+    //     }
+    //     if (fa > fb) {
+    //       return 1;
+    //     }
+    //     return 0;
+    //   });
+    // },
+    // sortByNextProblemDue() {
+    //   //sorts the filtered results by showing the course with the earliest due problem being first
+    //   //this one is gonna be hard to add
+    // },
+    // sortByName() {
+    //   //sorts the filtered results by the course name
+    //   this.unfilteredCourses.sort((a, b) => {
+    //     let fa = a.name.toLowerCase();
+    //     let fb = b.name.toLowerCase();
+    //     if (fa < fb) {
+    //       return -1;
+    //     }
+    //     if (fa > fb) {
+    //       return 1;
+    //     }
+    //     return 0;
+    //   });
+    // },
+    // sortByID() {
+    //   //sorts the filtered results by ID of the course
+    //   //default
+    //   this.unfilteredCourses.sort((a, b) => {
+    //     return a.id - b.id;
+    //   });
+    // },
     Unmounting() {
       if (!this.ignoreUnmount) {
         this.childIsOpen = false;
