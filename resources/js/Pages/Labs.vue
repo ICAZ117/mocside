@@ -820,6 +820,7 @@ export default defineComponent({
   },
   async beforeMount() {
     console.log("Before Mount");
+    this.courseID = this.$router.params.course_id;
     this.childisOpen = false;
     await this.getLabs();
     this.authUser = await store.getters["auth/authUser"];
