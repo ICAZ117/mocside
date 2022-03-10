@@ -270,7 +270,7 @@ import store from "../Store/index";
 import * as API from "../services/API";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
-import { sort } from "../services/Sort";
+import sort from "../services/Sort";
 
 export default {
   data: () => ({
