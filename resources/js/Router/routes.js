@@ -31,7 +31,7 @@ const routes = [
 		component: () => import("../Pages/Labs.vue"),
 		name: "Labs",
 		meta: { requiresAuth: true},
-        props: true,
+        props: {courseID},
 		children: [
 			{
 				path: ':lab_id/edit',
