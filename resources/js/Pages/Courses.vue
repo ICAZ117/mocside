@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Main Page-->
-    <div v-if="!childIsOpen">
+    <div>
       <vue-final-modal
         class="delete-modal"
         v-model="showDeleteModal"
@@ -250,7 +250,7 @@
         </div>
       </div>
     </div>
-    <router-view
+    <!-- <router-view
       @unmounting="Unmounting()"
       @courseEdited="courseEdited"
       @pushToLabs="pushToLabs"
@@ -259,10 +259,12 @@
       v-if="childIsOpen"
       :courseID="courseID"
       :courseName="courseName"
-    ></router-view>
+    ></router-view> -->
   </div>
 
-  <div v-if="!childIsOpen" id="out-click" @click="closeMenu"></div>
+  <div id="out-click" @click="closeMenu"></div>
+  <!-- <div v-if="!childIsOpen" id="out-click" @click="closeMenu"></div> -->
+  
 </template>
 
 <script>
@@ -278,7 +280,7 @@ export default {
     enrolledCourses: [],
     courses: [], //all courses
     unfilteredCourses: [], //the filtered courses
-    childIsOpen: false,
+    // childIsOpen: false,
     courseID: null,
     username: "",
     rightClickID: "",
@@ -371,7 +373,7 @@ export default {
       this.courseID = course.data.data.id;
       this.enrolledCourses.push(this.courseID);
       this.addProfessor();
-      this.childIsOpen = true;
+      // this.childIsOpen = true;
       this.courses.currentCourses.push(course.data.data);
       this.unfilteredCourses.push(course.data.data);
       this.sortCourses(4);
@@ -395,7 +397,7 @@ export default {
       return prof;
     },
     editCourse(id) {
-      this.childIsOpen = true;
+      // this.childIsOpen = true;
       this.courseID = id;
       this.$router.push({
         name: "EditCourse",
@@ -416,7 +418,7 @@ export default {
       var id = this.deletingCourse.id;
       var course = this.deletingCourse.course;
       var key = this.deletingCourse.key;
-      this.childIsOpen = false;
+      // this.childIsOpen = false;
       document.getElementById("out-click").style.display = "none";
       //delete the course
       const res = await API.apiClient.delete(`/courses/${id}`);
@@ -624,7 +626,7 @@ export default {
     },
     Unmounting() {
       if (!this.ignoreUnmount) {
-        this.childIsOpen = false;
+        // this.childIsOpen = false;
         this.courseID = null;
         var flag = this.refreshPage();
         console.log("unmounting the labs page");
@@ -727,7 +729,7 @@ export default {
   },
   async mounted() {
     console.log("mounted course page");
-    this.childIsOpen = false;
+    // this.childIsOpen = false;
     this.authUser = await store.getters["auth/authUser"];
     this.username = this.authUser.username;
     console.log(this.authUser);
