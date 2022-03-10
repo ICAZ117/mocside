@@ -688,7 +688,6 @@ export default {
     // this.enrolledCourses[1] = temp;
     await this.getCourses();
     this.separateCourses();
-    this.routeToChild();
 
     // // test of laravel-echo on 10/16/21
     // Echo.channel(`term.${this.authUser.fsc_user.fsc_id}`)
