@@ -18,45 +18,48 @@ const routes = [
 		component: () => import("../Pages/Courses.vue"),
 		name: "Courses",
 		meta: { requiresAuth: true},
-		children: [
-			{
-                path: ':course_id/edit',
-                component: () => import("../Pages/EditCourse.vue"),
-                name: "EditCourse",
-            },
-		]
 	},
+    {
+        path: "/courses/:courseID/edit",
+        component: () => import("../Pages/EditCourse.vue"),
+        name: "EditCourse",
+        meta: { requiresAuth: true},
+        props: true
+    },
 	{
 		path: "/courses/:courseID/labs",
 		component: () => import("../Pages/Labs.vue"),
 		name: "Labs",
 		meta: { requiresAuth: true},
         props: true,
-		children: [
-			{
-				path: ':lab_id/edit',
-				component: () => import("../Pages/EditLab.vue"),
-				name: "EditLab",
-			},
-		]
 	},
+    {
+        path: "/courses/:courseID/labs/:ladID/edit",
+        component: () => import("../Pages/EditLab.vue"),
+        meta: { requiresAuth: true },
+        props: true
+    },
 	{
-		path: "/:lab_id/problems",
+		path: "/courses/:courseID/labs/:labID/problems",
 		component: () => import("../Pages/Problems.vue"),
 		name: "Problems",
+        meta: { requiresAuth: true},
+        props: true,
 		children: [
 			{
 				path: ':problem_id/workspace',
 				component: () => import("../Pages/Workspace.vue"),
 				name: "Assignment",
 			},
-			{
-				path: ':problem_id/edit',
-				component: () => import("../Pages/CreateAssignment.vue"),
-				name: "EditAssignment",
-			},
 		]
 	},
+    {
+        path: "/courses/:courseID/labs/:labID/problems",
+        component: () => import("../Pages/CreateAssignment.vue"),
+        name: "EditAssignment",
+        meta: {requiresAuth: true},
+        props: true
+    },
         
 	// Reference for syntax
 	// beforeEnter: (to, from, next) => {
