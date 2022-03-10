@@ -453,44 +453,6 @@ export default {
         });
       }
     },
-    pushToLabs: function (params) {
-      this.ignoreUnmount = true;
-      var courseID = params[0];
-      var courseName = params[1];
-      var id = params[2];
-      var name = params[3];
-      this.routeToLabs(courseID, id);
-    },
-    routeToLabs(courseID, labID) {
-      //first go to labs page
-      console.log("routeToLabs");
-      console.log(this.ignoreUnmount);
-      this.$router.push("/courses/" + courseID + "/labs/" + labID + "/problems");
-    },
-    pushToLabEdit: function (params) {
-      this.ignoreUnmount = true;
-      var courseID = params[0];
-      var courseName = params[1];
-      var id = params[2];
-      var name = params[3];
-      this.routeToLabEdit(courseID, id);
-    },
-    routeToLabEdit(courseID, labID) {
-      console.log("route to lab edit");
-      console.log(this.ignoreUnmount);
-      this.$router.push("/courses/" + courseID + "/labs/" + labID + "/edit");
-    },
-    pushToCourses: function (params) {
-      this.ignoreUnmount = true;
-      var courseID = params[0];
-      var courseName = params[1];
-      this.routeToCourses(courseID);
-    },
-    routeToCourses(courseID) {
-      console.log("routeToCourses");
-      console.log(this.ignoreUnmount);
-      this.$router.push("/courses/" + courseID + "/labs");
-    },
     async getCourses() {
       this.courses = [];
       this.unfilteredCourses = [];
@@ -639,24 +601,6 @@ export default {
         return false;
       }
     },
-    refreshPage() {
-      var r = window.location.pathname;
-      var sub = "/courses";
-      if (r == "/") {
-        console.log("on home page");
-        return false;
-      }
-      else if (r == "/profile") {
-        return false;
-      } else {
-        // var c = r.substring(sub.length);
-        // if(c != "") {
-        //   return false;
-        // }
-        // causes problem when the user wants to go from says labs back to courses
-        return true;
-      }
-    },
   },
   computed: {
     isProf: function () {
@@ -683,9 +627,6 @@ export default {
     if (this.authUser.fsc_user.courses) {
       this.enrolledCourses = JSON.parse(this.authUser.fsc_user.courses).courses;
     }
-    // var temp = this.enrolledCourses[0];
-    // this.enrolledCourses[0] = this.enrolledCourses[1];
-    // this.enrolledCourses[1] = temp;
     await this.getCourses();
     this.separateCourses();
 
