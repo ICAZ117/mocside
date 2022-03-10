@@ -270,7 +270,7 @@ import store from "../Store/index";
 import * as API from "../services/API";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
-import defaultExport from "../services/Sort";
+import * as sort from "../services/Sort";
 
 export default {
   data: () => ({
@@ -605,24 +605,24 @@ export default {
       if (this.sort == 0) {
         //startDate
         // this.sortByStartDate();
-        this.unfilteredCourses = sort(0, this.unfilteredCourses);
+        this.unfilteredCourses = sort.sort(0, this.unfilteredCourses);
       } else if (this.sort == 1) {
         //endDate
         // this.sortByEndDate();
-        this.unfilteredCourses = sort(1, this.unfilteredCourses);
+        this.unfilteredCourses = sort.sort(1, this.unfilteredCourses);
       } else if (this.sort == 2) {
         //nextDueProblem
         // this.sortByNextProblemDue();
-        this.unfilteredCourses = sort(2, this.unfilteredCourses);
+        this.unfilteredCourses = sort.sort(2, this.unfilteredCourses);
       } else if (this.sort == 3) {
         //name
         // this.sortByName();
-        this.unfilteredCourses = sort(3, this.unfilteredCourses);
+        this.unfilteredCourses = sort.sort(3, this.unfilteredCourses);
       } else {
         //default
         //course ID
         // this.sortByID();
-        this.unfilteredCourses = sort(5, this.unfilteredCourses);
+        this.unfilteredCourses = sort.sort(5, this.unfilteredCourses);
       }
 
       //call the filter after sorting
