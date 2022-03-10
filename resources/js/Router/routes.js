@@ -27,7 +27,7 @@ const routes = [
 		]
 	},
 	{
-		path: "/:course_id/labs",
+		path: "courses/:course_id/labs",
 		component: () => import("../Pages/Labs.vue"),
 		name: "Labs",
 		meta: { requiresAuth: true},

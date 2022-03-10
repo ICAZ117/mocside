@@ -443,7 +443,6 @@ export default {
     },
     goToLabs(id, name) {
       if (this.rightClickID == "") {
-        this.childIsOpen = true;
         this.courseID = id;
         this.courseName = name;
         this.$router.push({
