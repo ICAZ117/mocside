@@ -330,7 +330,9 @@ export default {
         end_date: this.courseForm.dateEnd,
       };
       const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
-      this.$emit("courseEdited");
+      this.$router.push({
+		  name: "Courses",
+	  });
     },
     updateImage() {
       console.log("updated the image");
