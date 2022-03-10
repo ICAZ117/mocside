@@ -669,11 +669,9 @@ export default defineComponent({
       } else if (this.sort == 1) {
         //name
         //default
-        await this.sortByName();
 		this.unfilteredLabs = sort(3, this.unfilteredLabs);
       } else {
         //course ID
-        await this.sortByID();
 		this.unfilteredLabs = sort(5, this.unfilteredLabs);
       }
       console.log(this.unfilteredLabs);
