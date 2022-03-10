@@ -271,6 +271,7 @@ import * as API from "../services/API";
 import store from "../Store/index";
 import { useRoute } from "vue-router";
 import { defineComponent, reactive, toRefs, computed } from "vue";
+import {sort} from "../services/Sort";
 
 const tabs = ["Labs", "Grades"];
 
