@@ -110,7 +110,7 @@ export default defineComponent({
       console.log("pressed a tab");
       console.log(this.selectedTab);
       if(this.selectedTab == "Save & Exit") {
-		  this.$router.push(-1);
+		  this.$router.go(-1);
       }
     },
     async handleSubmit() {
