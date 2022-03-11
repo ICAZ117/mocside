@@ -47,7 +47,7 @@ const routes = [
 		props: true
 	},
     {
-        path: "/courses/:courseID/labs/:labID/problems/:problemID",
+        path: "/courses/:courseID/labs/:labID/problems/:problemID/edit",
         component: () => import("../Pages/CreateAssignment.vue"),
         name: "EditAssignment",
         meta: {requiresAuth: true},
