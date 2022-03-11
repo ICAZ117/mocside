@@ -91,7 +91,7 @@ export default {
 			  publish_date: this.labForm.datePublish,
 		  }
 		  const res = await API.apiClient.put(`/labs/${this.labID}`, payload);
-      this.$emit("labEdited");
+      this.$router.push({name: "Labs", params: { courseID: courseID }});
 	  },
   },
   async mounted() {
@@ -100,10 +100,6 @@ export default {
 	this.labForm.description = Lab.data.data.description;
 	this.labForm.dateDue = Lab.data.data.due_date.split(" ")[0];
 	this.labForm.datePublish = Lab.data.data.publish_date;
-  },
-  beforeUnmount() {
-    //editlab
-    this.$emit("unmounting");
   },
 };
 </script>
