@@ -41,14 +41,14 @@ const routes = [
         props: true,
 		children: [
 			{
-				path: ':problem_id/workspace',
+				path: ':problemID/workspace',
 				component: () => import("../Pages/Workspace.vue"),
 				name: "Assignment",
 			},
 		]
 	},
     {
-        path: "/courses/:courseID/labs/:labID/problems",
+        path: "/courses/:courseID/labs/:labID/problems/:problemID",
         component: () => import("../Pages/CreateAssignment.vue"),
         name: "EditAssignment",
         meta: {requiresAuth: true},

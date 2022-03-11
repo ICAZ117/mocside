@@ -1,5 +1,5 @@
 <template>
-  <div v-show="!childIsOpen">
+  <div>
     <!-- Problems Page-->
     <vue-final-modal
       v-model="showDeleteModal"
@@ -32,7 +32,7 @@
     <small class="navigation"
       ><span>{{ username }}{{ currentDirectory }}</span>
       <br />
-      <span class="pointer underline" @click="this.$emit('unmounting')"
+      <span class="pointer underline" @click="this.$router.push({name: 'Labs', params: {courseID: this.courseID}})"
         >↩ Return to Labs</span
       >
     </small>
@@ -147,15 +147,6 @@
       </table>
     </div>
   </div>
-  <router-view
-    @unmounting="Unmounting()"
-    @problemEdited="problemEdited()"
-    @deleteMe="deleteMe()"
-    v-if="childIsOpen"
-    :problemID="problemID"
-    :lang="lang"
-    :labID="labID"
-  ></router-view>
 </template>
 
 <script>
@@ -166,13 +157,11 @@ import { computed } from "vue";
 import {sort} from "../services/Sort";
 
 export default {
-  props: ["labID", "labName"],
-  emits: ["unmounting", "labEdited"],
+  props: [ "courseID", "labID", "labName"],
   data() {
     return {
       problems: [],
       unfilteredProblems: [],
-      childIsOpen: false,
       problemID: null,
       expandedProblem: null,
       lang: "",
@@ -254,18 +243,16 @@ export default {
       const problem = await API.apiClient.post(`/problems`, payload);
       this.problemID = problem.data.data.id;
       this.problems.push(problem.data.data);
-      this.childIsOpen = true;
       this.$router.push({
         name: "EditAssignment",
-        params: { problem_id: this.problemID },
+        params: { courseID: this.courseID, labID: this.labID, problemID: this.problemID },
       });
     },
     editProblem(id) {
-      this.childIsOpen = true;
       this.problemID = id;
       this.$router.push({
         name: "EditAssignment",
-        params: { problem_id: this.problemID },
+        params: {courseID: this.courseID, labID: this.labID, problemID: this.problemID},
       });
     },
     closeDeleting() {
@@ -291,19 +278,10 @@ export default {
       this.unfilteredProblems = this.unfilteredProblems.filter((p, i) => i != key);
       this.closeDeleting();
     },
-    async deleteMe(id) {
-      console.log("deleteMe " + id);
-
-      //set variable to be used when problemEdited event is called
-      this.deletedMe = true;
-
-      this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
-    },
     goToProblem(id) {
       console.log("go to problem");
-      this.childIsOpen = true;
       this.problemID = id;
-      this.$router.push({ name: "Assignment", params: { problem_id: id } });
+      this.$router.push({ name: "Assignment", params: { problemID: id } });
     },
     async getProblems() {
       try {
@@ -416,9 +394,7 @@ export default {
       this.expandedProblem = null;
       //recall sort method
       await this.sortProblems();
-      this.childIsOpen = false;
       this.problemID = null;
-      var flag = this.refreshPage();
       console.log("unmounting workspace page");
       console.log(flag);
       if (flag) {
@@ -474,71 +450,18 @@ export default {
       //get sort method and call it
       if (this.sort == 0) {
         //dueDate
-        await this.sortByDueDate();
+		this.unfilteredProblems = sort(4, this.unfilteredProblems);
       } else if (this.sort == 1) {
         //name
         //default
-        await this.sortByName();
+		this.unfilteredProblems = sort(3, this.unfilteredProblems);
       } else {
         //course ID
-        await this.sortByID();
+		this.unfilteredProblems = sort(5, this.unfilteredProblems);
       }
       //call the filter after sorting
       await this.filterByPublish();
       return "";
-    },
-    async sortByDueDate() {
-      //sorts the unfiltered results by start date
-      this.unfilteredProblems.sort((a, b) => {
-        //if a should be first return -1, 0 for tie, -1 if b first
-        let la = a.due_date.split("-");
-        let lb = b.due_date.split("-");
-        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
-        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    async sortByName() {
-      //sorts the unfiltered results by the problem name
-      this.unfilteredProblems.sort((a, b) => {
-        let fa = a.name.toLowerCase();
-        let fb = b.name.toLowerCase();
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    async sortByID() {
-      //sorts the unfiltered results by id of the problem
-      this.unfilteredProblems.sort((a, b) => {
-        return a.id - b.id;
-      });
-    },
-    refreshPage() {
-      var r = window.location.pathname;
-      var sub = "/courses";
-      var c = r.substring(sub.length);
-      if (c == "") {
-        console.log("just on the courses page");
-        return false;
-        //don't allow the page to refresh to stop it from overriding the courses nav button push
-      } else {
-        console.log("on this page: " + c);
-        var c = c.split("/");
-        var cID = c[1];
-        var path = c[2]; //labs, or edit, and maybe something else
-        return true;
-      }
     },
   },
   computed: {
@@ -559,7 +482,6 @@ export default {
   },
   async beforeMount() {
     console.log("BeforeMount");
-    this.childIsOpen = false;
     await this.getProblems().then(this.getColors());
 
     console.log("\n\nBefore date convert");
@@ -571,11 +493,6 @@ export default {
 
     console.log("\n\nAfter date convert");
     console.log(this.problems);
-  },
-  beforeUnmount() {
-    console.log("BeforeUnmount");
-    //problems
-    this.$emit("unmounting");
   },
   async mounted() {
     console.log("Mounted");
