@@ -27,7 +27,7 @@ const routes = [
         props: true,
 	},
     {
-        path: "/courses/:courseID/labs/:ladID/edit",
+        path: "/courses/:courseID/labs/:labID/edit",
         component: () => import("../Pages/EditLab.vue"),
 		name: "EditLab",
         meta: { requiresAuth: true },

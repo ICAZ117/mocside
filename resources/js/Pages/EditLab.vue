@@ -67,7 +67,7 @@
 <script>
 import * as API from "../services/API";
 export default {
-  props: ["labID"],
+  props: ["labID", "courseID"],
   emits: ["unmounting", "labEdited"],
   data() {
     return {

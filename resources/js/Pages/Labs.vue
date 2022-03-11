@@ -437,7 +437,7 @@ export default defineComponent({
     goToProblems(id, name) {
       this.labID = id;
       this.labName = name;
-      this.$router.push({ name: "Problems", params: { labID: id } });
+      this.$router.push({ name: "Problems", params: { courseID: courseID, labID: id } });
     },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
@@ -547,12 +547,12 @@ export default defineComponent({
       this.labID = lab.data.data.id;
       this.labName = lab.data.data.name;
       console.log(this.labID);
-      this.$router.push({ name: "EditLab", params: { lab_id: this.labID } });
+      this.$router.push({ name: "EditLab", params: { courseID: this.courseID, lab_id: this.labID } });
     },
     editLab(id, name) {
       this.labID = id;
       this.labName = name;
-      this.$router.push({ name: "EditLab", params: { labID: this.labID } });
+      this.$router.push({ name: "EditLab", params: { courseID: this.courseID, labID: this.labID } });
     },
     closeDeleting() {
       this.showDeleteModal = false;
