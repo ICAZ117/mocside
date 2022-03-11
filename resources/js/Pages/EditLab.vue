@@ -91,7 +91,7 @@ export default {
 			publish_date: this.labForm.datePublish,
 		}
 		const res = await API.apiClient.put(`/labs/${this.labID}`, payload);
-      	this.$router.push({name: "Labs", params: { courseID: courseID }});
+      	this.$router.push({name: "Labs", params: { courseID: this.courseID }});
 	  },
   },
   async mounted() {
