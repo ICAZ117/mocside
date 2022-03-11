@@ -39,13 +39,12 @@ const routes = [
 		name: "Problems",
         meta: { requiresAuth: true},
         props: true,
-		children: [
-			{
-				path: ':problemID/workspace',
-				component: () => import("../Pages/Workspace.vue"),
-				name: "Assignment",
-			},
-		]
+	},
+	{
+		path: "/courses/:courseID/labs/:labID/problems/:problemID/workspace",
+		component: () => import("../Pages/Workspace.vue"),
+		name: "Assignment",
+		props: true
 	},
     {
         path: "/courses/:courseID/labs/:labID/problems/:problemID",

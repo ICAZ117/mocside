@@ -1,5 +1,5 @@
 <template>
-  <div v-if="childIsOpen">
+  <div>
     <div class="assignment header">
       <input
         id="assignment-title"
@@ -92,7 +92,6 @@ export default defineComponent({
   },
   data() {
     return {
-      childIsOpen: true,
       assignmentID: this.problemID,
       assignmentTitle: "",
       overview: {},
@@ -111,8 +110,7 @@ export default defineComponent({
       console.log("pressed a tab");
       console.log(this.selectedTab);
       if(this.selectedTab == "Save & Exit") {
-        this.childIsOpen = false;
-        this.$emit("problemEdited");
+		  this.$router.push(-1);
       }
     },
     async handleSubmit() {
@@ -123,8 +121,6 @@ export default defineComponent({
       //   // "description": this.overview,
       // };
       // const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
-      this.childIsOpen = false;
-      this.$emit("problemEdited");
     },
     updateOverview(e) {
       console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEE");
@@ -145,18 +141,9 @@ export default defineComponent({
       };
       const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
     }, 500),
-    async deleteProblem(id) {
-      console.log("create-assignment problemid " + id);
-      await this.$emit("deleteMe", id);
-    },
   },
   beforeMount() {
     this.getInfo();
-  },
-  beforeUnmount() {
-    //create assignment
-    this.childIsOpen = false;
-    this.$emit("problemEdited");
   },
 });
 </script>
