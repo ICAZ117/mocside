@@ -89,7 +89,7 @@ import "../../../vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
 
 export default defineComponent({
   props: ["problemID", "lang", "labID"],
-  emits: ["unmounting", "problemEdited", "deleteMe"],
+  emits: ["problemEdited", "deleteMe"],
   components: { Vue3DraggableResizable },
 
   data() {
@@ -295,8 +295,6 @@ export default defineComponent({
   },
   beforeUnmount() {
     // workspace
-    console.log("unmounting workspace");
-    this.$emit("unmounting");
     this.childIsOpen = false;
     document.getElementById("thisIsTheDumbestThingIHaveEverHadToDo").style = "";
   },

@@ -281,7 +281,7 @@ export default {
     goToProblem(id) {
       console.log("go to problem");
       this.problemID = id;
-      this.$router.push({ name: "Assignment", params: { courseID: this.courseID, labID: this.labID, problemID: id } });
+      this.$router.push({ name: "Assignment", params: { courseID: this.courseID, labID: this.labID, problemID: id, lang:this.lang } });
     },
     async getProblems() {
       try {
