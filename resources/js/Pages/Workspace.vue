@@ -30,7 +30,7 @@
             width: calc(100% - 20px) !important;
             margin-top: 5px;
           "
-          @click="this.$emit('unmounting')"
+          @click="returnToProblems()"
           >↩ Return to Problems</btn
         >
         <br />
@@ -142,6 +142,9 @@ export default defineComponent({
       //go back in router by 1
       this.$router.go(-1);
     },
+	returnToProblems() {
+		this.$router.go(-1);
+	},
     async getAssignment() {
       //this route needs to be worked on and adjusted
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
