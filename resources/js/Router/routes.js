@@ -44,6 +44,7 @@ const routes = [
 		path: "/courses/:courseID/labs/:labID/problems/:problemID/workspace",
 		component: () => import("../Pages/Workspace.vue"),
 		name: "Assignment",
+		meta: { requiresAuth: true},
 		props: true
 	},
     {
