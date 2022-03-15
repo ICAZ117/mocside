@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="show">
     <div class="assignment header">
       <input
         id="assignment-title"
@@ -96,6 +96,7 @@ export default defineComponent({
       assignmentTitle: "",
       overview: {},
       problem: {},
+	  show: true,
     };
   },
   watch: {
@@ -145,6 +146,9 @@ export default defineComponent({
   },
   beforeMount() {
     this.getInfo();
+  },
+  beforeUnmount() {
+	  this.show = false;
   },
 });
 </script>
