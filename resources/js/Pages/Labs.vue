@@ -437,7 +437,7 @@ export default defineComponent({
     goToProblems(id, name) {
       this.labID = id;
       this.labName = name;
-      this.$router.push({ name: "Problems", params: { courseID: this.courseID, labID: id } });
+      this.$router.push({ name: "Problems", params: { courseID: this.courseID, labID: id, labName: this.labName } });
     },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
