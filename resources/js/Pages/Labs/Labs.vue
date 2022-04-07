@@ -120,6 +120,7 @@
         </div>
       </tab-panel>
       <tab-panel :val="'Grades'">
+		  <!-- <GradeTab :gradebook="student.grade"/> -->
         <div
           style="
             border: 1px solid #9e9e9e !important;
@@ -265,12 +266,16 @@ import store from "../../Store/index";
 import { useRoute } from "vue-router";
 import { defineComponent, reactive, toRefs, computed } from "vue";
 import {sort} from "../../services/Sort";
+import { GradeTab } from "./GradeTab.vue"
 
 const tabs = ["Labs", "Grades"];
 
 export default defineComponent({
   props: ["courseID", "courseName"],
   name: "Course",
+  components: {
+	GradeTab
+  },
   data() {
     return {
       labs: [],
@@ -335,6 +340,7 @@ export default defineComponent({
         `/students/${this.authUser.fsc_user.fsc_id}`
       );
       this.student = res.data;
+	  Console.log("Student Object")
       console.log(res.data);
     },
     async getGrades() {
