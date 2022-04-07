@@ -219,12 +219,12 @@
 </template>
 
 <script>
-import * as API from "../services/API";
-import { getError } from "../utils/helpers";
-import FileService from "../services/FileService";
-import FlashMessage from "../Components/FlashMessage";
-import FileUpload from "../Components/FileUpload";
-import store from "../Store/index";
+import * as API from "../../services/API";
+import { getError } from "../../utils/helpers";
+import FileService from "../../services/FileService";
+import FlashMessage from "../../Components/FlashMessage";
+import FileUpload from "../../Components/FileUpload";
+import store from "../../Store/index";
 export default {
   props: ["courseID"],
   emits: ["unmounting", "courseEdited", "pushToLabs", "studentView", "editLab"],
