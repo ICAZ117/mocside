@@ -66,7 +66,7 @@ const routes = [
         name: "CourseEnroll",
         children: [
             {
-                path: "/enroll/login",
+                path: "login",
                 component: () => import("../Pages/Login.vue"),
                 name: "enroll-login",
             }
