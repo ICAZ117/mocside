@@ -266,16 +266,16 @@ import store from "../../Store/index";
 import { useRoute } from "vue-router";
 import { defineComponent, reactive, toRefs, computed } from "vue";
 import {sort} from "../../services/Sort";
-import { GradeTab } from "./GradeTab.vue"
+// import { GradeTab } from "./GradeTab.vue"
 
 const tabs = ["Labs", "Grades"];
 
 export default defineComponent({
   props: ["courseID", "courseName"],
   name: "Course",
-  components: {
-	GradeTab
-  },
+//   components: {
+// 	GradeTab
+//   },
   data() {
     return {
       labs: [],
