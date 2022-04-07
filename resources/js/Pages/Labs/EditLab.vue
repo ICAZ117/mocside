@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import * as API from "../services/API";
+import * as API from "../../services/API";
 export default {
   props: ["labID", "courseID"],
   emits: ["unmounting", "labEdited"],

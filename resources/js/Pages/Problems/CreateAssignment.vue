@@ -56,14 +56,14 @@
 import { defineComponent, reactive, toRefs } from "vue";
 
 // Assignment components
-import Overview from "../Components/Overview.vue";
-import Assign from "../Components/Assign.vue";
-import Template from "../Components/Template.vue";
-import TestBench from "../Components/TestBench.vue";
-import ModelSolution from "../Components/ModelSolution.vue";
-import GradeBook from "../Components/GradeBook.vue";
+import Overview from "../../Components/Overview.vue";
+import Assign from "../../Components/Assign.vue";
+import Template from "../../Components/Template.vue";
+import TestBench from "../../Components/TestBench.vue";
+import ModelSolution from "../../Components/ModelSolution.vue";
+import GradeBook from "../../Components/GradeBook.vue";
 
-import * as API from "../services/API";
+import * as API from "../../services/API";
 import _ from "lodash";
 
 const tabs = [

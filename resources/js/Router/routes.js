@@ -8,7 +8,7 @@ const routes = [
     },
 	{
 		path: '/courses',
-		component: () => import("../Pages/Courses.vue"),
+		component: () => import("../Pages/Courses/Courses.vue"),
 		name: "Courses",
 		meta: { requiresAuth: true},
 	},
@@ -21,35 +21,35 @@ const routes = [
     },
 	{
 		path: "/courses/:courseID/labs",
-		component: () => import("../Pages/Labs.vue"),
+		component: () => import("../Pages/Labs/Labs.vue"),
 		name: "Labs",
 		meta: { requiresAuth: true},
         props: true,
 	},
     {
         path: "/courses/:courseID/labs/:labID/edit",
-        component: () => import("../Pages/EditLab.vue"),
+        component: () => import("../Pages/Labs/EditLab.vue"),
 		name: "EditLab",
         meta: { requiresAuth: true },
         props: true
     },
 	{
 		path: "/courses/:courseID/labs/:labID/problems",
-		component: () => import("../Pages/Problems.vue"),
+		component: () => import("../Pages/Problems/Problems.vue"),
 		name: "Problems",
         meta: { requiresAuth: true},
         props: true,
 	},
 	{
 		path: "/courses/:courseID/labs/:labID/problems/:problemID/workspace",
-		component: () => import("../Pages/Workspace.vue"),
+		component: () => import("../Pages/WorkSpace/Workspace.vue"),
 		name: "Assignment",
 		meta: { requiresAuth: true},
 		props: true
 	},
     {
         path: "/courses/:courseID/labs/:labID/problems/:problemID/edit",
-        component: () => import("../Pages/CreateAssignment.vue"),
+        component: () => import("../Pages/Problems/CreateAssignment.vue"),
         name: "EditAssignment",
         meta: {requiresAuth: true},
         props: true
@@ -62,7 +62,7 @@ const routes = [
 	// }
     {
         path: "/:course_key/enroll",
-        component: () => import("../Pages/CourseEnroll.vue"),
+        component: () => import("../Pages/Courses/CourseEnroll.vue"),
         name: "CourseEnroll",
         children: [
             {
