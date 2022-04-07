@@ -340,7 +340,7 @@ export default defineComponent({
         `/students/${this.authUser.fsc_user.fsc_id}`
       );
       this.student = res.data;
-	  Console.log("Student Object")
+	  console.log("Student Object")
       console.log(res.data);
     },
     async getGrades() {
