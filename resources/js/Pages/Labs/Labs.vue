@@ -199,23 +199,23 @@
                         </thead>
                         <tbody style="border-bottom: 0 !important">
                           <tr v-for="(problem, key) in grades.labs[index].problems" :key="key" class="lab pointer" :id="'gp' + problem.problemID">
-                            <td>{{ problems[problem.problemID].name }}</td>
+                            <td>{{ problem.name }}</td>
                             <td>
-                              {{ problems[problem.problemID].test_cases }}
+                              {{ problem.test_cases }}
                             </td>
-                            <td>{{ problems[problem.problemID].passed }}</td>
-                            <td>{{ problems[problem.problemID].due_date }}</td>
+                            <td>{{ problem.passed }}</td>
+                            <td>{{ problem.due_date }}</td>
                             <td>{{ problem.grade }}</td>
-                            <td>{{ problems[problem.problemID].worth }}</td>
+                            <td>{{ problem.worth }}</td>
                             <td>
                               {{
-                                problems[problem.problemID].worth == 0
+                                problem.worth == 0
                                   ? 0
                                   : problem.grade == undefined
                                   ? 0
                                   : parseInt(
                                       (problem.grade /
-                                        problems[problem.problemID].worth) *
+                                        problem.worth) *
                                         10000
                                     ) * 0.01
                               }}%
