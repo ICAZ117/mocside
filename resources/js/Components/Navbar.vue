@@ -116,6 +116,7 @@
 <script>
 export default {
   props: ["authUser"],
+  emits: ["forceReload"],
   data() {
     return {
       isDark: false,
