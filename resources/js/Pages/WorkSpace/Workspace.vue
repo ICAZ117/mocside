@@ -85,7 +85,7 @@ import * as API from "../../services/API";
 import { defineComponent } from "vue";
 import Vue3DraggableResizable from "vue3-draggable-resizable";
 //default styles
-import "../../../vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
+import "vue3-draggable-resizable/dist/Vue3DraggableResizable.css";
 
 export default defineComponent({
   props: ["problemID", "lang", "labID"],
