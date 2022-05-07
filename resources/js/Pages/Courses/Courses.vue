@@ -259,6 +259,7 @@ export default {
             },
             showEnrollModal: false,
             showOldCourses: false,
+            rightClickID: "",
         }
     },
     setup() {
