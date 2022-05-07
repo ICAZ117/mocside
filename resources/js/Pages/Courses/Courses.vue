@@ -237,6 +237,7 @@
 </template>
 
 <script>
+// completed the rewrite of the course page
 import store from "../../Store/index";
 import * as API from "../../services/API";
 import { useRoute } from "vue-router";
