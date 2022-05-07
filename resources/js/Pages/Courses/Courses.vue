@@ -281,7 +281,7 @@ export default {
             for (let i = 0; i < this.enrolledCoursesIDs.length; i++) {
                 var cur = this.enrolledCoursesIDs[i];
                 const course = await API.apiClient.get(`/courses/${cur}`);
-                this.tempCourseHolder.push(course.data);
+                tempCourseHolder.push(course.data);
             }
             tempCourseHolder = this.sortCourses(tempCourseHolder, 4);
 
