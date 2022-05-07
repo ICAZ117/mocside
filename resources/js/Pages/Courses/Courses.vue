@@ -324,6 +324,7 @@ export default {
             var now = new Date(Date.now());
             console.log(course);
             if(course.start_date == undefined || course.end_date == undefined) {
+                console.log("something is undefined?");
                 return false;
             }
             console.log("PAST RETURNS");
