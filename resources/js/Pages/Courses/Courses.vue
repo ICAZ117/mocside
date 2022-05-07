@@ -283,7 +283,7 @@ export default {
                 const course = await API.apiClient.get(`/courses/${cur}`);
                 tempCourseHolder.push(course.data);
             }
-            tempCourseHolder = this.sortCourses(tempCourseHolder, 4);
+            tempCourseHolder = await this.sortCourses(tempCourseHolder, 4);
 
             // separate the courses into their respective categories
             var currentCourses = [], oldCourses = [];
@@ -301,7 +301,7 @@ export default {
                 oldCourses,
             }
         },
-        sortCourses(arr, type) {
+        async sortCourses(arr, type) {
             this.sort = type
 
             if(type == 0) {
@@ -481,7 +481,7 @@ export default {
             this.addProfessor();
             //add to frontend list of courses
             this.courses.currentCourses.push(course.data.data);
-            this.sortCourses(this.courses.currentCourses, 4);
+            await this.sortCourses(this.courses.currentCourses, 4);
 
             //initialize the course gradebook
             const gradebook = await API.apiClient.post(`/gradebook/init/${id}`, {
