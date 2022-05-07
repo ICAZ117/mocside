@@ -284,7 +284,7 @@ export default {
                 const course = await API.apiClient.get(`/courses/${cur}`);
                 this.allCourses.push(course.data);
             }
-            this.allCourses = await this.sortCourses(this.allCourses, 4);
+            await this.sortCourses(this.allCourses, 4);
 
             // separate the courses into their respective categories
             var currentCourses = [], oldCourses = [];
@@ -306,16 +306,16 @@ export default {
             this.sort = type
 
             if(type == 0) {
-                arr = sort(0, arr);
+                sort(0, arr);
             } else if (type == 1) {
-                arr = sort(1, arr);
+                sort(1, arr);
             } else if (type == 2) {
-                arr = sort(2, arr);
+                sort(2, arr);
             } else if (type == 3) {
-                arr = sort(3, arr)
+                sort(3, arr)
             } else {
                 // default
-                arr = sort(5, arr);
+                sort(5, arr);
             }
         },
         withinDate(course) {
