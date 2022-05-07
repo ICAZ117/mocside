@@ -247,6 +247,7 @@ export default {
         return {
             username: "",
             enrolledCoursesIDs: [],
+            allCourses: [],
             courses: {},
             sort: 4,
             showDeleteModal: false,
@@ -276,23 +277,23 @@ export default {
             if(this.authUser.fsc_user.courses) {
                 this.enrolledCoursesIDs = JSON.parse(this.authUser.fsc_user.courses).courses;
             }
-            var tempCourseHolder = [];
+            this.allCourses = [];
             // use that list to get the courses
             for (let i = 0; i < this.enrolledCoursesIDs.length; i++) {
                 var cur = this.enrolledCoursesIDs[i];
                 const course = await API.apiClient.get(`/courses/${cur}`);
-                tempCourseHolder.push(course.data);
+                this.allCourses.push(course.data);
             }
-            tempCourseHolder = await this.sortCourses(tempCourseHolder, 4);
+            this.allCourses = await this.sortCourses(this.allCourses, 4);
 
             // separate the courses into their respective categories
             var currentCourses = [], oldCourses = [];
             
-            for (let i = 0; i < tempCourseHolder.length; i++) {
-                if(this.withinDate(tempCourseHolder[i])) {
-                    currentCourses.push(tempCourseHolder[i]);
+            for (let i = 0; i < this.allCourses.length; i++) {
+                if(this.withinDate(this.allCourses[i])) {
+                    currentCourses.push(this.allCourses[i]);
                 } else {
-                    oldCourses.push(tempCourseHolder[i]);
+                    oldCourses.push(this.allCourses[i]);
                 }
             }
 
