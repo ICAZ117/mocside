@@ -540,7 +540,7 @@ export default {
     },
     async mounted() {
         this.username = this.authUser.username;
-        await fetchCourses();
+        await this.fetchCourses();
     },
 }
 </script>
