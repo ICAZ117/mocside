@@ -291,7 +291,6 @@ export default {
             
             for (let i = 0; i < this.allCourses.length; i++) {
                 if(this.withinDate(this.allCourses[i])) {
-                    console.log("YES WITHIN DATE");
                     currentCourses.push(this.allCourses[i]);
                 } else {
                     oldCourses.push(this.allCourses[i]);
@@ -320,15 +319,10 @@ export default {
             }
         },
         withinDate(course) {
-            console.log("WITHIN DATE");
             var now = new Date(Date.now());
-            console.log(course);
             if(course.start_date == undefined || course.end_date == undefined) {
-                console.log(course.start_date);
-                console.log(course.end_date);
                 return false;
             }
-            console.log("PAST RETURNS");
             // get date objects
             var sd = course.start_date.split("-")[2];
             var sm = course.start_date.split("-")[1] - 1;
@@ -355,19 +349,13 @@ export default {
                 now.getSeconds(),
                 now.getMilliseconds()
             );
-            console.log(end)
-            console.log(now)
             if (end >= now) {
-                console.log("end greater than now");
                 if(start <= now) {
-                    console.log("start less than now");
                     return true;
                 } else {
-                    console.log("start greater than now");
                     return false;
                 }
             } else {
-                console.log("end less than now");
                 return false;
             }
 
