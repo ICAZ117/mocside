@@ -478,7 +478,7 @@ export default {
             var id = course.data.data.id;
             this.enrolledCoursesIDs.push(id);
             //add to professors list of course on backend
-            this.addProfessor();
+            await this.addProfessor();
             //add to frontend list of courses
             this.allCourses.push(course.data.data);
             this.courses.currentCourses.push(course.data.data);
@@ -501,7 +501,7 @@ export default {
         //User Related Functions
         async addProfessor() {
             var payload = {
-                course: JSON.stringify({ courses: this.enrolledCoursesIDs})
+                courses: JSON.stringify({ courses: this.enrolledCoursesIDs})
             };
             const prof = await API.apiClient.put(`/professors/${this.authUser.fsc_user.fsc_id}`, payload);
             return prof;
