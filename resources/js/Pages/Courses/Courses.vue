@@ -489,7 +489,7 @@ export default {
             //move to edit course page
             this.$router.push({
                 name: "EditCourse",
-                params: { course_id: id },
+                params: { courseID: id },
             });
         },
 
