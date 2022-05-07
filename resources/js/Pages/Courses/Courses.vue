@@ -480,6 +480,7 @@ export default {
             //add to professors list of course on backend
             this.addProfessor();
             //add to frontend list of courses
+            this.allCourses.push(course.data.data);
             this.courses.currentCourses.push(course.data.data);
             await this.sortCourses(this.courses.currentCourses, 4);
 
