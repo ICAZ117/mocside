@@ -350,14 +350,19 @@ export default {
                 now.getSeconds(),
                 now.getMilliseconds()
             );
-
+            console.log(end)
+            console.log(now)
             if (end >= now) {
+                console.log("end greater than now");
                 if(start <= now) {
+                    console.log("start less than now");
                     return true;
                 } else {
+                    console.log("start greater than now");
                     return false;
                 }
             } else {
+                console.log("end less than now");
                 return false;
             }
 
