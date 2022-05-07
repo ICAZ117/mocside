@@ -484,6 +484,9 @@ export default {
             this.courses.currentCourses.push(course.data.data);
             await this.sortCourses(this.courses.currentCourses, 4);
 
+            //get authUser to update
+            await this.$store.dispatch("auth/getAuthUser");
+
             //initialize the course gradebook
             const gradebook = await API.apiClient.post(`/gradebook/init/${id}`, {
                 scope: "course",
