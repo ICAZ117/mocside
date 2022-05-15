@@ -262,7 +262,8 @@ export default {
             console.log(this.labs);
             await this.labs.forEach(async l => {
                 //get all problems in current lab
-                const problemsInLab = await API.apiClient.get(`/gradebook/${l.id}`).data.data;
+                const problemsInLab = await API.apiClient.get(`/gradebook/${l.id}`);
+                problemsInLab = problemsInLab.data.data;
 
                 //keep labID for later usage
                 console.log(l.id);
