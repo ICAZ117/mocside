@@ -125,6 +125,7 @@ export default {
 
         //labs list work
         async getAllGradeColors() {
+            console.log(this.grades);
             this.grades.labs.forEach(lab => {
                 var element = document.getElementById("gl" + lab.labID);
                 if(lab.percentComplete == "100%") {
