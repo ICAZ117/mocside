@@ -145,7 +145,7 @@ export default {
                 //we have a student
                 this.labs = this.allLabs.filter(lab => {
                     //return true if it should be kept in, and false if it should be removed
-                    if (this.isPublished(labs)) {
+                    if (this.isPublished(lab)) {
                         //check if the published lab has problems
                         if(this.allLabs.num_problems > 0) {
                             return true;
