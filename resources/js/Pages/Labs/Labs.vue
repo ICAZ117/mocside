@@ -42,8 +42,8 @@
       </tab-panel>
       <tab-panel :val="'Grades'">
 
-		  <GradeGrid v-if="!isProf"></GradeGrid>
-            <GradeGrid v-else></GradeGrid>
+		  <GradeGrid v-if="!isProf" :grades="grades"></GradeGrid>
+            <GradeGrid v-else :grades="grades"></GradeGrid>
       </tab-panel>
     </tab-panels>
   </div>
