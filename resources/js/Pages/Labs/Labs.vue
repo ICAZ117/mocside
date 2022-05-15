@@ -319,7 +319,7 @@ export default {
 
 
             //save the total point values into data object
-            this.problems = res.data.data;
+            this.problems = res.data.data.problems;
         },
 
 
