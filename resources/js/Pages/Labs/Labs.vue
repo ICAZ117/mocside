@@ -176,7 +176,7 @@ export default {
             var publishDate = new Date(py, pm, pd, 0, 0, 0, 0);
 
             //check if publish date has passed
-            if(published < now) {
+            if(publishDate < now) {
                 return true;
             } else {
                 return false;
