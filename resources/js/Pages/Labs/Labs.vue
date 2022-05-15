@@ -278,7 +278,7 @@ export default {
                     //fill problems list with objects containing problemID's and grades
                     problems.push({ 
                         problemID: p,
-                        grade: problems.grades[p]
+                        grade: problemsInLab.grades[p]
                     });
 
                     //keep problemID for later usage
