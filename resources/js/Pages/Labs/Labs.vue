@@ -307,6 +307,10 @@ export default {
                 problems: problemIDs,
                 labs: labIDs,
             };
+            if (problemsIDs.length == 0 || labIDs.length == 0) {
+                this.problems = {};
+                return;
+            }
 
             //make API call and send payload to get said values
             const res = await API.apiClient.post(`/gradebook/worth`, payload);
