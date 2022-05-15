@@ -153,7 +153,8 @@ export default {
                             return true;
                         } else {
                             console.log("false")
-                            return false;
+                            // return false;
+                            return true;
                         }
                     } else {
                         console.log("problem with isPublished")
