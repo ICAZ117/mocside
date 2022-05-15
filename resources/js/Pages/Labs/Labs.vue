@@ -41,9 +41,7 @@
         <LabGrid @removeLab="removeLab" :courseID="courseID" :labs="labs" :progress="progress" ></LabGrid>
       </tab-panel>
       <tab-panel :val="'Grades'">
-
 		  <GradeGrid v-if="!isProf" :grades="grades"></GradeGrid>
-            <GradeGrid v-else :grades="grades"></GradeGrid>
       </tab-panel>
     </tab-panels>
   </div>
