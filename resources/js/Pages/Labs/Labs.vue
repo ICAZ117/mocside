@@ -56,8 +56,8 @@ import {sort} from "../../services/Sort";
 import {reactive, toRefs, computed} from "vue";
 import { useRoute } from "vue-router";
 
-import { LabGrid } from "./LabGrid.vue";
-import { GradeGrid } from "./GradeGrid.vue";
+import LabGrid from "./LabGrid.vue";
+import GradeGrid from "./GradeGrid.vue";
 
 const tabs = ["Labs", "Grades"];
 
