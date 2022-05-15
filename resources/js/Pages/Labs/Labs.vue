@@ -293,6 +293,8 @@ export default {
             this.grades = grades;
 
             //create payload to get total lab/problem values
+            console.log(problemIDs);
+            console.log(labIDs);
             var payload = {
                 problems: problemIDs,
                 labs: labIDs,
