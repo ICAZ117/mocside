@@ -108,9 +108,9 @@ export default {
             this.Progress = await this.getProgress();
 
             //loop and get percent complete and recent activity
-            this.allLabs.forEach(async (lab) => {
-                lab["percent"] = await this.getPercent(lab);
-                lab["activity"] = await this.getActivity(lab);
+            this.allLabs.forEach((lab) => {
+                lab["percent"] = this.getPercent(lab);
+                lab["activity"] = this.getActivity(lab);
             });
 
             //sort Labs
@@ -193,7 +193,7 @@ export default {
             this.labs = this.labs.filter((l, i) => i != key);
         },
         //get lab percent
-        async getPercent(lab) {
+        getPercent(lab) {
             if (lab.numProblems == 0) {
                 return "0%";
             }
@@ -211,7 +211,7 @@ export default {
 
         },
         //get lab activity
-        async getActivity(lab) {
+        getActivity(lab) {
             var d = JSON.parse(this.progress.labs);
             d.forEach(l => {
                 if(l.lab_id == lab.id) {
