@@ -38,7 +38,7 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Labs'">
-        <LabGrid @removeLab="removeLab" :courseID="courseID" :labs="labs" :progress="Progress" ></LabGrid>
+        <LabGrid @removeLab="removeLab" :courseID="courseID" :labs="labs" :progress="progress" ></LabGrid>
       </tab-panel>
       <tab-panel :val="'Grades'">
 
@@ -74,7 +74,7 @@ export default {
             fscID: null,
             allLabs: [],
             labs: [],
-            Progress: {},
+            progress: {},
             sort: "4",
             student: {},
             grades: {},
@@ -105,7 +105,7 @@ export default {
             this.allLabs = rawLabs.data.data;
 
             //get's progress if student, returns {} if not
-            this.Progress = await this.getProgress();
+            this.progress = await this.getProgress();
 
             //loop and get percent complete and recent activity
             this.allLabs.forEach((lab) => {
