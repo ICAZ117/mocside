@@ -111,6 +111,11 @@ export default {
             rightClickID: "",
             showDeleteModal: false,
             reloadDeleteModal: 0,
+            deletingLab: {
+                id: "",
+                lab: {},
+                key: ""
+            }
         };
     },
     methods: {
