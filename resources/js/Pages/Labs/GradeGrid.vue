@@ -114,12 +114,14 @@
 import * as API from "../../services/API";
 import store from "../../Store/index";
 export default {
+    props: ["labs"],
     emits: [],
     data() {
         return {
             expandedProblem: null,
             student: {},
             grades: {},
+            problems: {},
         }
     },
     methods: {
