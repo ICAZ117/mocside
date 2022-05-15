@@ -1,27 +1,6 @@
 <template>
   <div>
     <!-- Main Page-->
-    <vue-final-modal
-      v-model="showDeleteModal"
-      classes="modal-container"
-      content-class="modal-content delete-modal"
-      :esc-to-close="true"
-    >
-      <button class="modal-close" @click="closeDeleting()">x</button>
-      <div class="delete Course">
-        <p>
-          Are you sure you would like to delete {{ deletingLab.lab.name }}
-        </p>
-        <div class="delete-buttons">
-          <button class="btn btn-md btn-danger delete-button" @click="closeDeleting()">
-            Cancel
-          </button>
-          <button class="btn btn-md btn-danger delete-button" @click="removeLab()">
-            Delete
-          </button>
-        </div>
-      </div>
-    </vue-final-modal>
     <div class="courses header">
       <div class="heading">
         <h2>{{ courseName }}</h2>
@@ -59,663 +38,306 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Labs'">
-        <div
-          style="
-            border: 1px solid #9e9e9e !important;
-            padding: 0 !important;
-            width: min-content !important;
-            margin: 2rem 2rem 2rem 2rem !important;
-          "
-        >
-          <table class="table labtable" style="margin: 0 !important">
-            <thead class="labtable">
-              <tr>
-                <th>Title</th>
-                <th># Problems</th>
-                <th v-if="!isProf">% Complete</th>
-                <th>Due Date</th>
-                <th v-if="!isProf">Last Activity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template v-for="lab in labs" :key="lab.id">
-                <tr v-if="!isProf" class="lab pointer" :id="lab.id" @click="goToProblems(lab.id, lab.name)">
-                  <td>
-                    <a>{{ lab.name }}</a>
-                  </td>
-                  <td>{{ lab.num_problems }}</td>
-                  <td v-if="!isProf">{{ lab.percent }}</td>
-                  <!-- <td>69%</td> -->
-                  <td>{{ lab.due_date }}</td>
-                  <td v-if="!isProf">{{ lab.activity }}</td>
-                  <!-- <td>4/20/0420</td> -->
-                </tr>
-
-                <tr v-if="isProf" class="lab pointer" @click.prevent="goToProblems(lab.id, lab.name)" @contextmenu.prevent="showMenu(lab.id)">
-                  <td>
-                    <a>{{ lab.name }}</a>
-                  </td>
-                  <td>{{ lab.num_problems }}</td>
-                  <!-- <td>69%</td> -->
-                  <td>{{ lab.due_date }}</td>
-                  <!-- <td>4/20/0420</td> -->
-                </tr>
-              </template>
-
-              <tr v-if="isProf" class="lab pointer" @click="addLab">
-                <td colspan="5">Add Lab</td>
-              </tr>
-              <!-- <tr
-            class="lab"
-            style="cursor: pointer"
-          >
-            <td><a>Lab 2: Printing & I/O</a></td>
-            <td>5</td>
-            <td>100%</td>
-            <td>1/31/2021</td>
-            <td>1/31/2021</td>
-          </tr> -->
-            </tbody>
-          </table>
-        </div>
+        <LabGrid @removeLab="removeLab" :courseID="courseID" :labs="labs" :progress="Progress" ></LabGrid>
       </tab-panel>
       <tab-panel :val="'Grades'">
-		  <!-- <GradeTab :gradebook="student.grade"/> -->
-        <div
-          style="
-            border: 1px solid #9e9e9e !important;
-            padding: 0 !important;
-            width: min-content !important;
-            margin: 2rem 2rem 2rem 2rem !important;
-          "
-        >
-          <table class="table problemtable" style="margin: 0 !important">
-            <thead class="problemtable" style="border: none !important">
-              <tr>
-                <th><i class="fas fa-grin-alt spacer"></i></th>
-                <th>Lab Name</th>
-                <th># Problems</th>
-                <th>% Complete</th>
-                <th>Due Date</th>
-                <th>Points Earned</th>
-                <th>Points Possible</th>
-                <th>Grade Percentage</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Loop over all LABS -->
-              <template v-for="(lab, index) in grades.labs" :key="index">
-                <!-- Regular table row -->
-                <tr class="problem pointer" :id="'gl' + lab.labID" @click="toggleExpansion(lab.labID)">
-                  <td v-if="!isExpanded(lab.labID)">
-                    <i class="fas fa-chevron-right"></i>
-                  </td>
-                  <td v-if="isExpanded(lab.labID)">
-                    <i class="fas fa-chevron-down"></i>
-                  </td>
-                  <td>{{ lab.name }}</td>
-                  <td>{{ lab.numProblems }}</td>
-                  <td>{{ lab.percentComplete }}</td>
-                  <td>{{ lab.dueDate }}</td>
-                  <td>{{ lab.grade == undefined ? "--" : lab.grade }}</td>
-                  <td>{{ lab.total_points }}</td>
-                  <td>
-                    {{
-                      lab.total_points == 0
-                        ? 0
-                        : lab.grade == undefined
-                        ? 0
-                        : parseInt((lab.grade / lab.total_points) * 10000) *
-                          0.01
-                    }}%
-                  </td>
-                </tr>
 
-                <!-- Dropdown table row -->
-                <tr class="lab-tableDrop" v-show="isExpanded(lab.labID)">
-                  <td class="description-data" colspan="8">
-                    <div
-                      style="
-                        border: 1px solid #9e9e9e !important;
-                        border-right: none !important;
-                        padding: 0 !important;
-                        margin: 0.5rem 1rem 0.5rem 1rem !important;
-                      "
-                    >
-                      <table
-                        class="table"
-                        style="margin: 0; width: -webkit-fill-available"
-                      >
-                        <thead class="labtable">
-                          <tr>
-                            <th>Title</th>
-                            <th># Test Cases</th>
-                            <th># Test Cases Passed</th>
-                            <th>Due Date</th>
-                            <th>Points Earned</th>
-                            <th>Points Possible</th>
-                            <th>Grade Percentage</th>
-                          </tr>
-                        </thead>
-                        <tbody style="border-bottom: 0 !important">
-                          <tr v-for="(problem, key) in grades.labs[index].problems" :key="key" class="lab pointer" :id="'gp' + problem.problemID">
-                            <td>{{ problem.name }}</td>
-                            <td>
-                              {{ problem.test_cases }}
-                            </td>
-                            <td>{{ problem.passed }}</td>
-                            <td>{{ problem.due_date }}</td>
-                            <td>{{ problem.grade }}</td>
-                            <td>{{ problem.worth }}</td>
-                            <td>
-                              {{
-                                problem.worth == 0
-                                  ? 0
-                                  : problem.grade == undefined
-                                  ? 0
-                                  : parseInt(
-                                      (problem.grade /
-                                        problem.worth) *
-                                        10000
-                                    ) * 0.01
-                              }}%
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
+		  <GradeGrid v-if="!isProf"></GradeGrid>
+            <GradeGrid v-else></GradeGrid>
       </tab-panel>
     </tab-panels>
-  </div>
-  <div >
-    <div v-for="(lab, key) in labs" :key="lab.id">
-      <div :id="lab.id">
-        <ul id="menu">
-          <li class="menu-item">
-            <a
-              v-if="isProf"
-              class="pointer no-decor"
-              @click="editLab(lab.id, lab.name)"
-              >Edit</a
-            >
-          </li>
-          <li class="menu-item">
-            <a
-              v-if="isProf"
-              class="pointer no-decor"
-              @click="deleting(lab.id, lab, key)"
-              >Delete</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div id="out-click" @click="closeMenu"></div>
   </div>
 </template>
 
 <script>
 import * as API from "../../services/API";
 import store from "../../Store/index";
-import { useRoute } from "vue-router";
-import { defineComponent, reactive, toRefs, computed } from "vue";
 import {sort} from "../../services/Sort";
-// import { GradeTab } from "./GradeTab.vue"
+import {reactive, toRefs, computed} from "vue";
+import { useRoute } from "vue-router";
+
+import { LabGrid } from "./LabGrid.vue";
+import { GradeGrid } from "./GradeGrid.vue";
 
 const tabs = ["Labs", "Grades"];
 
-export default defineComponent({
-  props: ["courseID", "courseName"],
-  name: "Course",
-//   components: {
-// 	GradeTab
-//   },
-  data() {
-    return {
-      labs: [],
-      unfilteredLabs: [],
-      labID: null,
-      labName: null,
-      authUser: null,
-      fscID: null,
-      progress: [],
-      username: "",
-      rightClickID: "",
-      student: {},
-      grades: {},
-      problems: {},
-      expandedProblem: null,
-      sort: "1",
-      showDeleteModal: false,
-      reloadDeleteModal: 0,
-      deletingLab: {
-        id: "",
-        lab: {},
-        key: "",
-      },
-    };
-  },
-  setup() {
-    const route = useRoute();
-
-    const currentDirectory = computed(() => route.path);
-
-    const state = reactive({
-      selectedTab: tabs[0],
-    });
-
-    return {
-      currentDirectory,
-      tabs,
-      ...toRefs(state),
-    };
-  },
-  methods: {
-    isExpanded(key) {
-      // return this.expandedProblem.indexOf(key) !== -1;
-      return this.expandedProblem == key;
+export default {
+    props: ["courseID", "courseName"],
+    name: "Labs",
+    components: {
+        LabGrid,
+        GradeGrid
     },
-    toggleExpansion(key) {
-      // Close
-      if (this.isExpanded(key)) {
-        // this.expandedProblem.splice(this.expandedProblem.indexOf(key), 1);
-        this.lang = "";
-        this.expandedProblem = null;
-      }
-      // Open
-      else {
-        // this.expandedProblem.push(key);
-        this.expandedProblem = key;
-      }
-    },
-    async getStudentObject() {
-      console.log(this.authUser);
-      const res = await API.apiClient.get(
-        `/students/${this.authUser.fsc_user.fsc_id}`
-      );
-      this.student = res.data;
-	  console.log("Student Object")
-      console.log(res.data);
-    },
-    async getGrades() {
-      // Initiallize local student gradebook
-      var grades = {
-        grade: 0,
-        labs: [],
-      };
-
-      // Create logging lists for payload later in method
-      var labIDs = [],
-        problemIDs = [];
-
-      // Get total grade for course
-      grades.grade = JSON.parse(this.student.gradebook_courses).grades[
-        this.courseID
-      ];
-
-      // Get all labs the student is in
-      var studentLabs = JSON.parse(this.student.gradebook_labs);
-
-      console.log("BEFORE FOR LOOP");
-      console.log(this.labs.length);
-
-      // Loop over all of the labs in the current course
-      for (let i = 0; i < this.labs.length; i++) {
-        // Get all of the problems for current lab
-        const problemsInLab = await API.apiClient.get(
-          `/gradebook/${this.labs[i].id}`
-        );
-        problemsInLab = problemsInLab.data.data;
-
-        // Log labID for later usage
-        labIDs.push(this.labs[i].id);
-
-        // Initialize problems list
-        var problems = [];
-
-        // Loop over all problems within current lab
-        for (let j = 0; j < problemsInLab.problems.length; j++) {
-          // Fill problems list with objects containing problemID's and grades
-          problems.push({
-            problemID: problemsInLab.problems[j],
-            grade: problemsInLab.grades[problemsInLab.problems[j]],
-          });
-
-          // Log problemID for later usage
-          problemIDs.push(problemsInLab.problems[j]);
+    data() {
+        return {
+            username: "",
+            fscID: null,
+            allLabs: [],
+            labs: [],
+            Progress: {},
+            sort: "4",
+            student: {},
+            grades: {},
+            problems: {},
         }
+    },
+    setup() {
+        const route = useRoute();
 
-        // Add the current lab to the local student gradebook
-        grades.labs.push({
-          grade: studentLabs.grades[this.labs[i].id],
-          labID: this.labs[i].id,
-          name: this.labs[i].name,
-          numProblems: this.labs[i].num_problems,
-          percentComplete: this.labs[i].percent,
-          dueDate: this.labs[i].due_date,
-          total_points: this.labs[i].total_points,
-          problems: problems,
+        const currentDirectory = computed(() => route.path);
+
+        const state = reactive({
+            selectedTab: tabs[0],
         });
-      }
 
-      // Set data value to local gradebook
-      this.grades = grades;
+        return {
+            currentDirectory,
+            tabs,
+            ...toRefs(state),
+        };
+    },
+    methods: {
+        //lab list work
+        async fetchLabs() {
+            const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
 
-      // Create payload to get total lab/problem values
-      var payload = {
-        problems: problemIDs,
-        labs: labIDs,
-      };
+            //get list of all labs
+            this.allLabs = rawLabs.data.data;
 
-      // Make API call and send payload to get said values
-      const res = await API.apiClient.post(`/gradebook/worth`, payload);
+            //get's progress if student, returns {} if not
+            this.Progress = await this.getProgress();
 
-      // Save total point values into data object
-      this.problems = res.data.data.problems;
-    },
-    showMenu(course_id) {
-      if (this.isProf) {
-        this.rightClickID = String(course_id);
-        const menu = document.getElementById(this.rightClickID).childNodes[0];
-        const outClick = document.getElementById("out-click");
-        menu.style.top = `${window.event.clientY + document.body.scrollTop}px`;
-        menu.style.left = `${window.event.clientX}px`;
-        menu.classList.add("show");
+            //loop and get percent complete and recent activity
+            this.allLabs.forEach(lab => {
+                lab["percent"] = await this.getPercent(lab);
+                lab["activity"] = await this.getActivity(lab);
+            });
 
-        outClick.style.display = "block";
-      }
-    },
-    closeMenu() {
-      try {
-        document
-          .getElementById(this.rightClickID)
-          .childNodes[0].classList.remove("show");
-      } catch (e) {}
-      document.getElementById("out-click").style.display = "none";
-      this.rightClickID = "";
-    },
-    goToProblems(id, name) {
-      this.labID = id;
-      this.labName = name;
-      this.$router.push({ name: "Problems", params: { courseID: this.courseID, labID: id, labName: this.labName } });
-    },
-    async getLabs() {
-      const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
-      // this.labs = rawLabs.data.data;
-      this.unfilteredLabs = rawLabs.data.data;
-      const prog = await this.getStudent();
-      if (!this.isProf) {
-        for (let i = 0; i < this.unfilteredLabs.length; i++) {
-          this.unfilteredLabs[i]["percent"] = await this.getPercent(
-            this.unfilteredLabs[i]
-          );
-          this.unfilteredLabs[i]["activity"] = await this.getActivity(
-            this.unfilteredLabs[i]
-          );
-        }
-      }
-      console.log("get labs");
-      await this.sortLabs();
-      await this.getColors();
-    },
-    async getColors() {
+            //sort Labs
+            await this.sortLabs();
+        },
 
-      for(let i = 0; i < this.unfilteredLabs.length; i++) {
-        console.log(this.unfilteredLabs[i].id + " " + this.unfilteredLabs[i]["percent"]);
-        if(this.unfilteredLabs[i]["percent"] == "100%") {
-          //green background
-          console.log("green background");
-          var element = document.getElementById(this.unfilteredLabs[i].id);
-          element.classList.add("complete");
-        }
-        else if(this.unfilteredLabs[i]["percent"] != "0%") {
-          //red background
-          console.log("red background");
-          var element = document.getElementById(this.unfilteredLabs[i].id);
-          element.classList.add("incomplete");
-        }
-        else {
-          //standard background
-          console.log("blank color background");
-        }
-      }
-    },
-    async getGradeColors() {
-      for(let i = 0; i < this.grades.labs.length; i++) {
-        console.log(this.grades.labs[i].labID + " " + this.grades.labs[i].percentComplete);
-        if(this.grades.labs[i].percentComplete == "100%") {
-          //green background
-          console.log("green background");
-          let tmp = "gl" + this.grades.labs[i].labID;
-          var element = document.getElementById(tmp);
-          element.classList.add("complete");
-        }
-        else if (this.grades.labs[i].percentComplete != "0%") {
-          //red background
-          console.log("red background");
-          let tmp = "gl" + this.grades.labs[i].labID;
-          var element = document.getElementById(tmp);
-          element.classList.add("incomplete");
-        }
-        else {
-          //standard background
-          console.log("blank color background");
-        }
-
-        console.log("About to get Problem Colors");
-        for(let j = 0; j < this.grades.labs[i].problems.length; j++) {
-          console.log("problem: " + j + " in lab: " + i);
-          console.log(this.grades.labs[i].problems[j].problemID + " " + this.grades.labs[i].problems[j].grade);
-          if(this.grades.labs[i].problems[j].grade == 100) {
-            //green background
-            console.log("green background");
-            var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
-            console.log(elementp);
-            elementp.classList.add("complete");
-          }
-          else if (this.grades.labs[i].problems[j].grade != 0) {
-            //red background
-            console.log("red background");
-            var elementp = document.getElementById("gp" + this.grades.labs[i].problems[j].problemID);
-            console.log(elementp);
-            elementp.classList.add("incomplete");
-          }
-          else {
-            //standard background
-            console.log("Standard Background");
-          }
-        }
-      }
-    },
-    goToCourses() {
-      this.$router.push({
-          name: "Courses",
-        });
-    },
-    async addLab() {
-      var payload = {
-        name: "New Lab",
-        description: "New Lab",
-        course_id: this.courseID,
-        due_date: "2021-06-03",
-      };
-      const lab = await API.apiClient.post(`/labs`, payload);
-      this.labs.push(lab.data.data);
-      this.unfilteredLabs.push(lab.data.data);
-      this.sortLabs();
-      console.log(lab.data.data);
-      this.labID = lab.data.data.id;
-      this.labName = lab.data.data.name;
-      console.log(this.labID);
-      this.$router.push({ name: "EditLab", params: { courseID: this.courseID, lab_id: this.labID } });
-    },
-    editLab(id, name) {
-      this.labID = id;
-      this.labName = name;
-      this.$router.push({ name: "EditLab", params: { courseID: this.courseID, labID: this.labID } });
-    },
-    closeDeleting() {
-      this.showDeleteModal = false;
-    },
-    deleting(id, lab, key) {
-      document.getElementById("out-click").style.display = "none";
-      this.showDeleteModal = true;
-      this.deletingLab.id = id;
-      this.deletingLab.lab = lab;
-      this.deletingLab.key = key;
-    },
-    async removeLab() {
-      var id = this.deletingLab.id;
-      var lab = this.deletingLab.lab;
-      var key = this.deletingLab.key;
-      //remove from lab the current course
-      const res = await API.apiClient.delete(`/labs/${lab.id}`);
-
-      //filter from labs
-      this.labs = this.labs.filter((l, i) => i != key);
-
-      //filter from unfiltered labs
-      this.unfilteredLabs = this.unfilteredLabs.filter((l) => l.id != lab.id);
-      this.closeDeleting();
-    },
-    async getStudent() {
-      this.authUser = store.getters["auth/authUser"];
-      this.fscID = this.authUser.fsc_user.fsc_id;
-      if (!this.isProf) {
-        const res = await API.apiClient.get(`/progress/${this.fscID}`);
-        this.progress = res.data.data;
-        return this.progress;
-      }
-      return {};
-    },
-    async getPercent(lab) {
-      var d = JSON.parse(this.progress.labs);
-      var c;
-      for (let i = 0; i < d.length; i++) {
-        if (d[i].lab_id == lab.id) {
-          c = d[i];
-          break;
-        }
-      }
-      if (lab.numProblems == 0) {
-        return "0%";
-      } else if (!c) {
-        return "0%";
-      } else {
-        return parseInt((c.num_completed / lab.num_problems) * 100) + "%";
-      }
-    },
-    async getActivity(lab) {
-      var d = JSON.parse(this.progress.labs);
-      for (let i = 0; i < d.length; i++) {
-        if (d[i].lab_id == lab.id) {
-          return d[i].last_progress;
-        }
-      }
-    },
-    async filterByPublish() {
-      console.log("filter by publish");
-      //grabs only the courses that are currently in session
-      //empty the courses list just in case
-      this.labs = [];
-
-      if (!this.isProf) {
-        console.log("student");
-        //is student don't show unpublished
-        for (let i = 0; i < this.unfilteredLabs.length; i++) {
-          console.log("\n\n\n\n" + i);
-          if (this.published(this.unfilteredLabs[i])) {
-            console.log("Lab is published. Checking if it has problems...");
-            if (this.unfilteredLabs[i].num_problems > 0) {
-              console.log("Lab does have problems");
-              //if within date && at least 1 problem
-              this.labs.push(this.unfilteredLabs[i]);
+        async sortLabs() {
+            //get sort method and call it
+            if(this.sort == "0") {
+                //duedate
+                this.allLabs = sort(4, this.allLabs);
+            } else if (this.sort == "1") {
+                //name
+                //default
+                this.allLabs = sort(3, this.allLabs);
+            } else {
+                //Lab ID
+                this.allLabs = sort(5, this.allLabs);
             }
-          }
+
+            //filter lab list as necessary
+            await this.filterLabs();
+
+            return;
+        },
+
+        async filterLabs() {
+            //if student only grab published labs
+            if(this.isProf) {
+                this.labs = this.allLabs;
+            } else {
+                //we have a student
+                this.labs = this.allLabs.filter(lab => {
+                    //return true if it should be kept in, and false if it should be removed
+                    if (this.isPublished(labs)) {
+                        //check if the published lab has problems
+                        if(this.allLabs.num_problems > 0) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return false;
+                    }
+                });
+            }
+            return;
+        },
+
+        isPublished(lab) {
+            // return true if the lab is published
+            var now = new Date(Date.now());
+
+            // if no publish date
+            if (lab.publish_date == null || lab.publish_date == "") {
+                return false;
+            }
+
+            var pd = lab.publish_date.split("-")[2];
+            var pm = lab.publish_date.split("-")[1]-1;
+            var py = lab.publish_date.split("-")[0];
+
+            var publishDate = new Date(py, pm, pd, 0, 0, 0, 0);
+
+            //check if publish date has passed
+            if(published < now) {
+                return true;
+            } else {
+                return false;
+            }
+
+        },
+
+
+        //individual lab work
+        //deleting a lab
+        removeLab(key) {
+            //remove from both labs list
+            this.allLabs = this.allLabs.filter((l, i) => i != key);
+            this.labs = this.labs.filter((l, i) => i != key);
+        },
+        //get lab percent
+        async getPercent(lab) {
+            if (lab.numProblems == 0) {
+                return "0%";
+            }
+
+            var d = JSON.parse(this.progress.labs);
+            d.forEach(l => {
+                if(l.lab_id == lab.id) {
+                    if(!l) {
+                        return "0%";
+                    } else {
+                        return parseInt((l.num_completed / lab.num_problems) * 100) + "%";
+                    }
+                }
+            });
+
+        },
+        //get lab activity
+        async getActivity(lab) {
+            var d = JSON.parse(this.progress.labs);
+            d.forEach(l => {
+                if(l.lab_id == lab.id) {
+                    return l.last_progress;
+                }
+            })
+        },
+
+
+
+        //user Related Functions
+        async getProgress() {
+            //check if student
+            if(!this.isProf) {
+                const res = await API.apiClient.get(`/progress/${this.fscID}`);
+                return res.data.data;
+            } else {
+                //could eventually replace this with a total progress of all students
+                return {};
+            }
+        },
+
+        async getStudentObject() {
+            const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
+            this.student = res.data;
+        },
+
+        async getGrades() {
+            // initialize local student gradebook
+            var grades = { grade: 0, labs: [] };
+
+            //logging lists for payload later
+            var labIDs = [], problemIDs = [];
+
+            //get total grade for course
+            grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
+
+            //get all labs the student is in
+            var studentLabs = JSON.parse(this.student.gradebook_labs);
+
+            //loop over all of the labs in the current course
+            this.labs.forEach(l => {
+                //get all problems in current lab
+                const problemsInLab = await API.apiClient.get(`/gradebook/${l.id}`).data.data;
+
+                //keep labID for later usage
+                labIDs.push(l.id);
+
+                //init problems list
+                var problems = [];
+
+                //loop over all problems within current lab
+                problemsInLab.problems.forEach(p => {
+                    //fill problems list with objects containing problemID's and grades
+                    problems.push({ 
+                        problemID: p,
+                        grade: problems.grades[p]
+                    });
+
+                    //keep problemID for later usage
+                    problemIDs.push(p);
+                });
+
+                //add current lab to the local student gradebook
+                grades.labs.push({
+                    grade: studentLabs.grades[l.id],
+                    labID: l.id,
+                    name: l.name,
+                    numProblems: l.num_problems,
+                    percentComplete: l.percent,
+                    dueDate: l.due_date,
+                    total_points: l.total_points,
+                    problems: problems,
+                });
+            });
+
+            //set the vue data value
+            this.grades = grades;
+
+            //create payload to get total lab/problem values
+            var payload = {
+                problems: problemIDs,
+                labs: labIDs,
+            };
+
+            //make API call and send payload to get said values
+            const res = await API.apiClient.post(`/gradebook/worth`, payload);
+
+
+            //save the total point values into data object
+            this.problems = res.data.data;
+        },
+
+
+        //routing functions
+        goToCourses() {
+            this.$router.push({
+                name: "Courses",    
+            });
+        },
+    },
+    computed: {
+        authUser: function() {
+            return store.getters["auth/authUser"];
+        },
+        isProf: function() {
+            if(store.getters["auth/isProf"] == null) {
+                return false;
+            } else {
+                return store.getters["auth/isProf"];
+            }
         }
-      } else {
-        console.log("professor");
-        //grab all labs including unpublished
-        for (let i = 0; i < this.unfilteredLabs.length; i++) {
-          this.labs.push(this.unfilteredLabs[i]);
+    },
+    async mounted() {
+        this.username = this.authUser.username;
+        this.fscID = this.authUser.fsc_user.fsc_id;
+        await this.fetchLabs();
+
+        if(!this.isProf) {
+            this.getStudentObject();
+            this.getGrades();
         }
-      }
-
-      return "Hi";
     },
-    published(lab) {
-      //return true if the lab is published
-      //false otherwise
-      var now = new Date(Date.now());
-      if (lab.publish_date == "" || lab.publish_date == null) {
-        return false;
-      }
-      var pd = lab.publish_date.split("-")[2];
-      var pm = lab.publish_date.split("-")[1] - 1;
-      var py = lab.publish_date.split("-")[0];
-
-      var published = new Date(py, pm, pd, 0, 0, 0, 0);
-
-      if (published < now) {
-        return true;
-      }
-      return false;
-    },
-    async sortLabs() {
-      //get sort method and call it
-      if (this.sort == 0) {
-        //dueDate
-		this.unfilteredLabs = sort(4, this.unfilteredLabs);
-      } else if (this.sort == 1) {
-        //name
-        //default
-		this.unfilteredLabs = sort(3, this.unfilteredLabs);
-      } else {
-        //course ID
-		this.unfilteredLabs = sort(5, this.unfilteredLabs);
-      }
-      console.log(this.unfilteredLabs);
-      //call the filter after sorting
-      await this.filterByPublish();
-      return "";
-    },
-  },
-  computed: {
-    isProf: function () {
-      if (store.getters["auth/isProf"] == null) {
-        return false;
-      } else {
-        return store.getters["auth/isProf"];
-      }
-    },
-  },
-  watch: {
-    showDeleteModal: function () {
-      if (!this.showDeleteModal) {
-        this.reloadDeleteModal++;
-      }
-    },
-  },
-  async mounted() {
-    console.log("Mounted");
-  },
-  async beforeMount() {
-    console.log("Before Mount");
-    await this.getLabs();
-    this.authUser = await store.getters["auth/authUser"];
-    this.username = this.authUser.username;
-    if (!this.isProf) {
-      await this.getStudentObject();
-      await this.getGrades();
-    }
-    await this.getGradeColors();
-    console.log("HELLO");
-  },
-});
+}
 </script>
+
+<style>
+
+</style>
