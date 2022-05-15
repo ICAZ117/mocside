@@ -332,8 +332,8 @@ export default {
         await this.fetchLabs();
 
         if(!this.isProf) {
-            this.getStudentObject();
-            this.getGrades();
+            await this.getStudentObject();
+            await this.getGrades();
         }
     },
 }
