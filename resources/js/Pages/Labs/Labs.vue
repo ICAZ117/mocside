@@ -247,6 +247,7 @@ export default {
             var labIDs = [], problemIDs = [];
 
             //get total grade for course
+            console.log(this.student.gradebook_courses);
             grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
 
             //get all labs the student is in
