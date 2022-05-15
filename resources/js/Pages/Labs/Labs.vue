@@ -254,7 +254,7 @@ export default {
             var studentLabs = JSON.parse(this.student.gradebook_labs);
 
             //loop over all of the labs in the current course
-            this.labs.forEach(async l => {
+            await this.labs.forEach(async l => {
                 //get all problems in current lab
                 const problemsInLab = await API.apiClient.get(`/gradebook/${l.id}`).data.data;
 
