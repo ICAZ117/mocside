@@ -259,10 +259,6 @@ export default {
         this.username = this.authUser.username;
         this.fscID = this.authUser.fsc_user.fsc_id;
         await this.fetchLabs();
-
-        if(!this.isProf) {
-            await this.getStudentObject();
-        }
     },
 }
 </script>
