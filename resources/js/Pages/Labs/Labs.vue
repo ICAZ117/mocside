@@ -259,6 +259,7 @@ export default {
                 const problemsInLab = await API.apiClient.get(`/gradebook/${l.id}`).data.data;
 
                 //keep labID for later usage
+                console.log(l.id);
                 labIDs.push(l.id);
 
                 //init problems list
@@ -273,6 +274,7 @@ export default {
                     });
 
                     //keep problemID for later usage
+                    console.log(p);
                     problemIDs.push(p);
                 });
 
