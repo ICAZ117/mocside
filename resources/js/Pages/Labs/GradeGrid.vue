@@ -119,6 +119,7 @@ export default {
     data() {
         return {
             expandedProblem: null,
+            student: {},
         }
     },
     methods: {
@@ -160,6 +161,91 @@ export default {
         },
 
 
+        //user related functions
+        async getGrades() {
+            // initialize local student gradebook
+            var grades = { grade: 0, labs: [] };
+
+            //logging lists for payload later
+            var labIDs = [], problemIDs = [];
+
+            //get total grade for course
+            console.log(this.student.gradebook_courses);
+            grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
+
+            //get all labs the student is in
+            var studentLabs = JSON.parse(this.student.gradebook_labs);
+
+            //loop over all of the labs in the current course
+            console.log(this.labs);
+            await this.labs.forEach(async l => {
+                //get all problems in current lab
+                const problemsInLabres = await API.apiClient.get(`/gradebook/${l.id}`);
+                var problemsInLab = problemsInLabres.data.data;
+
+                //keep labID for later usage
+                console.log(l.id);
+                labIDs.push(l.id);
+
+                //init problems list
+                var problems = [];
+
+                //loop over all problems within current lab
+                console.log(problemsInLab);
+                problemsInLab.problems.forEach(p => {
+                    //fill problems list with objects containing problemID's and grades
+                    problems.push({ 
+                        problemID: p,
+                        grade: problemsInLab.grades[p]
+                    });
+
+                    //keep problemID for later usage
+                    console.log(p);
+                    problemIDs.push(p);
+                });
+
+                //add current lab to the local student gradebook
+                grades.labs.push({
+                    grade: studentLabs.grades[l.id],
+                    labID: l.id,
+                    name: l.name,
+                    numProblems: l.num_problems,
+                    percentComplete: l.percent,
+                    dueDate: l.due_date,
+                    total_points: l.total_points,
+                    problems: problems,
+                });
+            });
+
+            //set the vue data value
+            this.grades = grades;
+
+            //create payload to get total lab/problem values
+            console.log(problemIDs);
+            console.log(labIDs);
+            var payload = {
+                problems: problemIDs,
+                labs: labIDs,
+            };
+            if (problemIDs.length == 0 || labID.length == 0) {
+                this.problems = {};
+                return;
+            }
+
+            //make API call and send payload to get said values
+            const res = await API.apiClient.post(`/gradebook/worth`, payload);
+
+
+            //save the total point values into data object
+            this.problems = res.data.data.problems;
+        },
+
+        async getStudentObject() {
+            const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
+            this.student = res.data;
+        },
+
+
         //individual lab work
         //toggling the expanded list of problems
         toggleExpansion(key) {
@@ -190,6 +276,8 @@ export default {
     },
     async mounted() {
         //set the colors of all the graded labs and problems
+        await this.getStudentObject();
+        await this.getGrades();
         await this.getAllGradeColors();
     },
 }
