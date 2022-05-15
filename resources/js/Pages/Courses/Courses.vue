@@ -250,6 +250,7 @@ export default {
             enrolledCoursesIDs: [],
             allCourses: [],
             courses: {},
+            enrollCode: null,
             sort: 4,
             showDeleteModal: false,
             reloadDeleteModal: 0,
