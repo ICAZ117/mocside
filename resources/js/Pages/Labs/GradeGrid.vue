@@ -119,6 +119,7 @@ export default {
         return {
             expandedProblem: null,
             student: {},
+            grades: {},
         }
     },
     methods: {
