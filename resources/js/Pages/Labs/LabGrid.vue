@@ -158,7 +158,7 @@ export default {
                 name: "EditLab",
                 params: {
                     courseID: this.courseID,
-                    lab_id: labID,
+                    labID: labID,
                 }
             });
 
@@ -242,7 +242,7 @@ export default {
         async editLab(labID, labName) {
             this.labID = labID;
             this.labName = labName;
-            this.$router.push({ name: "EditLab", params: { courseID: this.courseID, lab_id: labID } });
+            this.$router.push({ name: "EditLab", params: { courseID: this.courseID, labID: labID } });
         },
 
         //miscellaneous methods
