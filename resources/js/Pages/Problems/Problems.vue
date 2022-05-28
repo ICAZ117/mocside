@@ -202,7 +202,7 @@ export default {
         lab.due_date = this.convertDate(lab.due_date);
       });
 
-      //sort Labs
+      //sort Problems
       await this.sortProblems();
 
       await this.getColors();
@@ -211,14 +211,14 @@ export default {
       //get sort method and call it
       if(this.sort == "0") {
         //due date
-        this.allLabs = sort(4, this.allLabs);
+        this.allProblems = sort(4, this.allProblems);
       } else if(this.sort == "1") {
         //name
         //default
-        this.allLabs = sort(3, this.allLabs);
+        this.allProblems = sort(3, this.allProblems);
       } else {
         //unsorted
-        this.allLabs = sort(5, this.allLabs);
+        this.allProblems = sort(5, this.allProblems);
       }
       
         //call the filter after sorting
