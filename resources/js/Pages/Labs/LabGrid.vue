@@ -126,14 +126,14 @@ export default {
                 var element = document.getElementById(lab.id);
                 if (lab["percent"] == "100%") {
                     //green background
-                    element.classList.add("complete");
+                    element?.classList.add("complete");
                 } else if (lab["percent"] != "0%") {
                     //red background
-                    element.classList.add("incomplete");
+                    element?.classList.add("incomplete");
                 } else {
                     //white background do nothing
-                    element.classList.remove("incomplete");
-                    element.classList.remove("complete");
+                    element?.classList.remove("incomplete");
+                    element?.classList.remove("complete");
                 }
             });
         },

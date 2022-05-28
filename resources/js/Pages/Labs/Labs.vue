@@ -150,8 +150,7 @@ export default {
                             return true;
                         } else {
                             console.log("false")
-                            // return false;
-                            return true;
+                            return false;
                         }
                     } else {
                         console.log("problem with isPublished")
@@ -210,7 +209,7 @@ export default {
                     }
                 }
             });
-
+            return "0%";
         },
         //get lab activity
         getActivity(lab) {
@@ -219,7 +218,9 @@ export default {
                 if(l.lab_id == lab.id) {
                     return l.last_progress;
                 }
-            })
+            });
+
+            return "No Recent Activity";
         },
 
 
