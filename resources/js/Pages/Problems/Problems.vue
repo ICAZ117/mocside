@@ -209,20 +209,22 @@ export default {
     },
     async sortProblems() {
       //get sort method and call it
-        if (this.sort == 0) {
-          //dueDate
-      this.unfilteredProblems = sort(4, this.unfilteredProblems);
-        } else if (this.sort == 1) {
-          //name
-          //default
-      this.unfilteredProblems = sort(3, this.unfilteredProblems);
-        } else {
-          //course ID
-      this.unfilteredProblems = sort(5, this.unfilteredProblems);
-        }
+      if(this.sort == "0") {
+        //due date
+        this.allLabs = sort(4, this.allLabs);
+      } else if(this.sort == "1") {
+        //name
+        //default
+        this.allLabs = sort(3, this.allLabs);
+      } else {
+        //unsorted
+        this.allLabs = sort(5, this.allLabs);
+      }
+      
         //call the filter after sorting
         await this.filterByPublish();
-        return "";
+
+        return;
     },
     async filterByPublish() {
       this.problems = [];
