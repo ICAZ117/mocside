@@ -196,10 +196,10 @@ export default {
       this.progress = await this.getProgress();
 
       //loop through and get percent complete and recent activity
-      this.allProblems.forEach((lab) => {
-        lab["percent"] = this.getPercent(lab);
-        lab["activity"] = this.getActivity(lab);
-        lab.due_date = this.convertDate(lab.due_date);
+      this.allProblems.forEach((problem) => {
+        problem["percent"] = this.getPercent(problem);
+        problem["activity"] = this.getActivity(problem);
+        problem.due_date = this.convertDate(problem.due_date);
       });
 
       //sort Problems
@@ -232,10 +232,10 @@ export default {
       if(this.isProf) {
         this.problems = this.allProblems;
       } else {
-        this.problems = this.allProblems.filter(lab => {
-          if(lab.isPublished) {
+        this.problems = this.allProblems.filter(problem => {
+          if(problem.isPublished) {
             //check that problem has at least 1 test case
-            if(lab.test_cases > 0) {
+            if(problem.test_cases > 0) {
               return true;
             } else {
               return false;
@@ -252,10 +252,10 @@ export default {
     async getColors() {
       this.allProblems.forEach((problem) => {
         var element = document.getElementById(problem.id);
-        if(lab["percent"] == "100%") {
+        if(problem["percent"] == "100%") {
           //green background
           element?.classList.add("complete");
-        } else if (lab["percent"] != "0%") {
+        } else if (problem["percent"] != "0%") {
           //red background
           element?.classList.add("incomplete");
         } else {
