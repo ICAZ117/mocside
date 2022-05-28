@@ -196,7 +196,7 @@ export default {
       this.progress = await this.getProgress();
 
       //loop through and get percent complete and recent activity
-      this.allLabs.forEach((lab) => {
+      this.allLabs.forEach(async (lab) => {
         lab["percent"] = this.getPercent(lab);
         lab["activity"] = this.getActivity(lab);
         lab.due_date = await this.convertDate(lab.due_date);
