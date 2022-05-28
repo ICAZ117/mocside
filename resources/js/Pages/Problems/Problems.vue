@@ -197,8 +197,10 @@ export default {
 
       //loop through and get percent complete and recent activity
       this.allProblems.forEach((problem) => {
-        problem["percent"] = this.getPercent(problem);
-        problem["activity"] = this.getActivity(problem);
+        if(!this.isProf) {
+          problem["percent"] = this.getPercent(problem);
+          problem["activity"] = this.getActivity(problem);
+        }
         problem.due_date = this.convertDate(problem.due_date);
       });
 

@@ -106,8 +106,10 @@ export default {
 
             //loop and get percent complete and recent activity
             this.allLabs.forEach((lab) => {
-                lab["percent"] = this.getPercent(lab);
-                lab["activity"] = this.getActivity(lab);
+                if(!this.isProf) {
+                    lab["percent"] = this.getPercent(lab);
+                    lab["activity"] = this.getActivity(lab);
+                }
             });
 
             //sort Labs
