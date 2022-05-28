@@ -154,23 +154,20 @@ import * as API from "../../services/API";
 import store from "../../Store/index";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
-import {sort} from "../../services/Sort";
+import { sort } from "../../services/Sort";
 
 export default {
-  props: [ "courseID", "labID", "labName"],
+  props: ["courseID", "labID", "labName"],
   data() {
     return {
+      allProblems: [],
       problems: [],
-      unfilteredProblems: [],
-      problemID: null,
-      expandedProblem: null,
-      lang: "",
-      progress: [],
-      authUser: null,
-      fscID: null,
-      deletedMe: false,
+      progress: {},
       username: "",
       sort: "1",
+      expandedProblem: null,
+      lang: "",
+      problemID: null,
       showDeleteModal: false,
       reloadDeleteModal: 0,
       deletingProblem: {
@@ -190,317 +187,243 @@ export default {
     };
   },
   methods: {
+    //problem list work
+    async fetchProblems() {
+      const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
+      this.allProblems = rawProblems.data.data;
+
+      //get's progress if student, returns {} if not
+      this.progress = await this.getProgress();
+
+      //loop through and get percent complete and recent activity
+      this.allLabs.forEach((lab) => {
+        lab["percent"] = this.getPercent(lab);
+        lab["activity"] = this.getActivity(lab);
+        lab.due_date = await this.convertDate(lab.due_date);
+      });
+
+      //sort Labs
+      await this.sortProblems();
+
+      await this.getColors();
+    },
+    async sortProblems() {
+      //get sort method and call it
+        if (this.sort == 0) {
+          //dueDate
+      this.unfilteredProblems = sort(4, this.unfilteredProblems);
+        } else if (this.sort == 1) {
+          //name
+          //default
+      this.unfilteredProblems = sort(3, this.unfilteredProblems);
+        } else {
+          //course ID
+      this.unfilteredProblems = sort(5, this.unfilteredProblems);
+        }
+        //call the filter after sorting
+        await this.filterByPublish();
+        return "";
+    },
+    async filterByPublish() {
+      this.problems = [];
+
+      if(this.isProf) {
+        this.problems = this.allProblems;
+      } else {
+        this.problems = this.allProblems.filter(lab => {
+          if(lab.isPublished) {
+            //check that problem has at least 1 test case
+            if(lab.test_cases > 0) {
+              return true;
+            } else {
+              return false;
+            }
+          } else {
+            return false;
+          }
+        });
+      }
+
+      return;
+
+    },
+    async getColors() {
+      this.allProblems.forEach((problem) => {
+        var element = document.getElementById(problem.id);
+        if(lab["percent"] == "100%") {
+          //green background
+          element?.classList.add("complete");
+        } else if (lab["percent"] != "0%") {
+          //red background
+          element?.classList.add("incomplete");
+        } else {
+          //white background do nothing
+          element?.classList.remove("complete");
+          element?.classList.remove("incomplete");
+        }
+      });
+    },
+
+    //individual problem work
+    //getting problem information to display
+    getPercent(problem){
+      if(problem.test_cases == 0) {
+        return "0%";
+      }
+
+      var d = JSON.parse(this.progress.assignments);
+      d.forEach(p => {
+        if(p.assignment_id == problem.id) {
+          if(!p) {
+            return "0%";
+          } else {
+            return parseInt((p.cases_passed / problem.test_cases) * 100) + "%";
+          }
+        }
+      });
+
+      return "0%";
+
+    },
+    getActivity(problem) {
+      var d = JSON.parse(this.progress.assignments);
+      d.forEach(p => {
+        if(p.assignment_id == problem.id) {
+          if(!p) {
+            return "No recent activity";
+          } else {
+            return p.last_progress;
+          }
+        }
+      });
+      return "No recent activity";
+    },
     convertDate(numericalDate) {
-      // Input: 2021-06-04
-      // Output: Jun 4
-      const months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
-      var dateList = numericalDate.split("-");
-      console.log("\n\n\n");
-      console.log(dateList);
-      var month = months[Number(dateList[1]) - 1];
-      var day = Number(dateList[2].split(" ")[0]);
+      var tmpD = new Date(numericalDate);
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-      console.log(day);
-
-      return month + " " + day;
+      return `${months[tmpD.getMonth()]} ${tmpD.getDate()}`;
     },
-    async addProblem() {
-      var date = new Date();
-      date.setDate(date.getDate() + 7);
-      var month = '' + (date.getMonth() + 1),
-        day = '' + date.getDate(),
-        year = date.getFullYear();
-
-      if (month.length < 2) 
-          month = '0' + month;
-      if (day.length < 2) 
-          day = '0' + day;
-
-      var ymd = [year, month, day].join('-');
-      var payload = {
-        name: "New Problem",
-        description: JSON.stringify({ ops: [{ insert: "New Problem" }] }),
-        lab_id: this.labID,
-        due_date: ymd + " 23:59:59",
-        copy_id: this.labID,
-        java_starter:
-          "public class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}",
-        python_starter: 'def main():\n\t// Your code here\n\n\nif __name__ == "__main__":\n\tmain()',
-      };
-      const problem = await API.apiClient.post(`/problems`, payload);
-      this.problemID = problem.data.data.id;
-      this.problems.push(problem.data.data);
-      this.$router.push({
-        name: "EditAssignment",
-        params: { courseID: this.courseID, labID: this.labID, problemID: this.problemID },
-      });
+    //Expanding and Collapsing a problem
+    toggleExpansion(key) {
+      if(this.isExpanded(key)) {
+        this.lang = "";
+        this.expandedProblem = null;
+      } else {
+        this.expandedProblem = key;
+      }
     },
-    editProblem(id) {
-      this.problemID = id;
-      this.$router.push({
-        name: "EditAssignment",
-        params: {courseID: this.courseID, labID: this.labID, problemID: this.problemID},
-      });
+    isExpanded(key) {
+      return this.expandedProblem == key;
     },
+    //Deleting a Problem
     closeDeleting() {
-      this.showDeleteModal = false;
+      this.showDelteModal = false;
+    },
+    async deleteProblem() {
+      var id = this.deletingProblem.id;
+      var problem = this.deletingProblem.problem;
+      var key = this.deletingProblem.key;
+
+      const res = await API.apiClient.delete(`/problems/${problem.id}`);
+
+      //filter from list of problems
+      this.allProblems = this.allProblems.filter(p => p.id != id);
+      this.problems = this.problems.filter(p => p.id != id);
+
+      this.closeDeleting();
     },
     deleting(id, problem, key) {
-      this.showDeleteModal = true;
+      this.showDelteModal = true;
       this.deletingProblem.id = id;
       this.deletingProblem.problem = problem;
       this.deletingProblem.key = key;
     },
-    async deleteProblem() {
-      console.log("deleting problem");
-      var id = this.deletingProblem.id;
-      var problem = this.deletingProblem.problem;
-      var key = this.deletingProblem.key;
-      // remove this problem from the current lab
-      const res = await API.apiClient.delete(`/problems/${problem.id}`);
+    //add Problem
+    async addProblem() {
+      //set date to 1 week from current
+      var date = new Date();
+      date.setDate(date.getDate() + 7);
+      var month = '' + (date.getMonth() + 1), day = '' + date.getDate(), year = '' + date.getFullYear();
+      
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
 
-      //filter the problems list
-      this.problems = this.problems.filter((p, i) => i != key);
-      //remove from the unfiltered list
-      this.unfilteredProblems = this.unfilteredProblems.filter((p, i) => i != key);
-      this.closeDeleting();
+      var ymd = [year, month, day].join('-');
+
+      var payload = {
+        name: "New Problem",
+        description: JSON.stringify({ ops: [{insert: "New Problem"}]}),
+        lab_id: this.labID,
+        due_date: ymd + " 23:59:59",
+        copy_id: this.labID,
+        java_starter: "public class Main{\n\tpublic static void main(String[] args){\n\t\t\n\t}\n}",
+        python_starter: 'def main():\n\t// Your code here\n\n\nif __name__ == "__main__":\n\tmain()',
+      };
+
+      const problem = await API.apiClient.post(`/problems`, payload);
+      this.allProblems.push(problems.data.data);
+      this.problems.push(problems.data.data);
+
+      this.editProblem(problem.data.data.id);
+    },
+
+
+    //user related functions
+    async getProgress() {
+      //check if student
+      if(!this.isProf) {
+        const res = await API.apiClient.get(`/progress/${this.authUser.fsc_user.fsc_id}`);
+        return res.data.data;
+      } else {
+        //could eventually replace this with a total progress of all students
+        return {};
+      }
+    },
+
+
+    //routing functions
+    //edit a problem
+    editProblem(id) {
+      this.problemID = id;
+      this.$router.push({
+        name: "EditAssignment",
+        params: {courseID: this.courseID, labID: this.labID, problemID: id},
+      })
     },
     goToProblem(id) {
-      console.log("go to problem");
-      this.problemID = id;
-      this.$router.push({ name: "Assignment", params: { courseID: this.courseID, labID: this.labID, problemID: id, lang:this.lang } });
-    },
-    async getProblems() {
-      try {
-        console.log("gotToProblem");
-        const rawProblems = await API.apiClient.get(`/problems/${this.labID}`);
-        // this.problems = rawProblems.data.data;
-        this.unfilteredProblems = rawProblems.data.data;
-        const prog = await this.getStudent();
-      } catch (e) {
-        // this.$router.go(-1);
-      }
-      if (!this.isProf) {
-        for (let i = 0; i < this.unfilteredProblems.length; i++) {
-          this.unfilteredProblems[i]["percent"] = await this.getPercent(this.unfilteredProblems[i]);
-          this.unfilteredProblems[i]["activity"] = await this.getActivity(this.unfilteredProblems[i]);
-        }
-      }
-      await this.sortProblems();
-      await this.getColors();
-    },
-    async getStudent() {
-      this.authUser = store.getters["auth/authUser"];
-      this.fscID = this.authUser.fsc_user.fsc_id;
-      const res = await API.apiClient.get(`/progress/${this.fscID}`);
-      this.progress = res.data.data;
-      return this.progress;
-    },
-    async getPercent(problem) {
-      console.log("in percent");
-      var d = JSON.parse(this.progress.assignments);
-      var c;
-      console.log(d);
-      for (let i = 0; i < d.length; i++) {
-        if (d[i].assignment_id == problem.id) {
-          c = d[i];
-          break;
-        }
-      }
-      console.log(c);
-      if (problem.test_cases == 0) {
-        return "0%";
-      } else if (!c) {
-        return "0%";
-      } else {
-        console.log(parseInt((c.cases_passed / problem.test_cases) * 100) + "%");
-        return parseInt((c.cases_passed / problem.test_cases) * 100) + "%";
-      }
-    },
-    async getActivity(problem) {
-      var d = JSON.parse(this.progress.assignments);
-      for (let i = 0; i < d.length; i++) {
-        if (d[i].assignment_id == problem.id) {
-          return d[i].last_progress;
-        }
-      }
-    },
-    async getColors() {
-
-      for(let i = 0; i < this.unfilteredProblems.length; i++) {
-        console.log(this.unfilteredProblems[i].id + " " + this.unfilteredProblems[i]["percent"]);
-        if(this.unfilteredProblems[i]["percent"] == "100%") {
-          //green background
-          console.log("green background");
-          var element = document.getElementById("p" + this.unfilteredProblems[i].id);
-          console.log("element: ");
-          console.log(element);
-          (element != null) ? element.classList.add("complete") : console.log("element is null");
-        }
-        else if(this.unfilteredProblems[i]["percent"] != "0%") {
-          //red background
-          console.log("red background");
-          var element = document.getElementById("p" + this.unfilteredProblems[i].id);
-          (element != null) ? element.classList.add("incomplete") : console.log("element is null");
-        }
-        else {
-          //standard background
-          console.log("blank color background");
-        }
-      }
-    },
-    async problemEdited() {
-      var tempID = this.problemID;
-
-      //check if the problem was deleted from child
-      if (this.deletedMe) {
-        console.log("inside the problem edited deletedMe");
-        //child deleted button was pressed
-        // remove this problem from the current lab
-        const res = await API.apiClient.delete(`/problems/${tempID}`);
-
-        //filter the problems list
-        this.problems = this.problems.filter((p) => p.id != tempID);
-      }
-      await this.getColors();
-      await this.Unmounting();
+      this.problemId = id;
+      this.$router.push({ name: "Assignment", params: {courseID: this.courseID, labID: this.labID, problemID: id, lang: this.lang }});
     },
 
-    async Unmounting() {
-      this.unfilteredProblems = this.unfilteredProblems.filter((p) => p.id != this.problemID);
-      // check if problem is deleted if not then add back in
-      if(!this.deletedMe) {
-        const problem = await API.apiClient.get(`/problems/full/${this.problemID}`); 
-        problem.data.data["percent"] = await this.getPercent(problem.data.data);
-        problem.data.data["activity"] = await this.getActivity(problem.data.data);
-        this.unfilteredProblems.push(problem.data.data);
-      }
-      const res = await API.apiClient.get(`/progress/${this.fscID}`);
-      this.progress = res.data.data;
-      //set expanded problem to null
-      this.expandedProblem = null;
-      //recall sort method
-      await this.sortProblems();
-      this.problemID = null;
-      console.log("unmounting workspace page");
-      console.log(flag);
-      if (flag) {
-        this.$router.push({ name: "Problems", params: { lab_id: this.labID } });
-      }
-      await this.getColors();
-    },
-    isExpanded(key) {
-      // return this.expandedProblem.indexOf(key) !== -1;
-      return this.expandedProblem == key;
-    },
-    toggleExpansion(key) {
-      // Close
-      if (this.isExpanded(key)) {
-        // this.expandedProblem.splice(this.expandedProblem.indexOf(key), 1);
-        this.lang = "";
-        this.expandedProblem = null;
-      }
-      // Open
-      else {
-        // this.expandedProblem.push(key);
-        this.expandedProblem = key;
-      }
-    },
-    async filterByPublish() {
-      console.log("filter by publish");
-      //grabs only the courses that are currently in session
-      //empty the courses list just in case
-      this.problems = [];
-
-      if (!this.isProf) {
-        console.log("student");
-        //is student don't show unpublished
-        for (let i = 0; i < this.unfilteredProblems.length; i++) {
-          if (this.unfilteredProblems[i].isPublished) {
-            if (this.unfilteredProblems[i].test_cases> 0) {
-              //if within date && at least 1 test case
-              this.problems.push(this.unfilteredProblems[i]);
-            }
-          }
-        }
-      } else {
-        console.log("professor");
-        //grab all labs including unpublished
-        for (let i = 0; i < this.unfilteredProblems.length; i++) {
-          this.problems.push(this.unfilteredProblems[i]);
-        }
-      }
-
-      return "Hi";
-    },
-    async sortProblems() {
-      //get sort method and call it
-      if (this.sort == 0) {
-        //dueDate
-		this.unfilteredProblems = sort(4, this.unfilteredProblems);
-      } else if (this.sort == 1) {
-        //name
-        //default
-		this.unfilteredProblems = sort(3, this.unfilteredProblems);
-      } else {
-        //course ID
-		this.unfilteredProblems = sort(5, this.unfilteredProblems);
-      }
-      //call the filter after sorting
-      await this.filterByPublish();
-      return "";
-    },
   },
   computed: {
-    isProf: function () {
+    authUser: function() {
+      return store.getters["auth/authUser"];
+    },
+    isProf: function() {
       if (store.getters["auth/isProf"] == null) {
-        return false;
+          return false;
       } else {
-        return store.getters["auth/isProf"];
+          return store.getters["auth/isProf"];
       }
     },
   },
   watch: {
-    showDeleteModal: function () {
-      if (!this.showDeleteModal) {
+    showDeleteModal: function() {
+      if(!this.showDeleteModal) {
         this.reloadDeleteModal++;
       }
-    },
-  },
-  async beforeMount() {
-    console.log("BeforeMount");
-    await this.getProblems().then(this.getColors());
-
-    console.log("\n\nBefore date convert");
-    console.log(this.problems);
-
-    for (let i = 0; i < this.problems.length; i++) {
-      this.problems[i].due_date = await this.convertDate(this.problems[i].due_date);
     }
-
-    console.log("\n\nAfter date convert");
-    console.log(this.problems);
   },
-  async mounted() {
-    console.log("Mounted");
-    this.authUser = await store.getters["auth/authUser"];
+  mounted() {
     this.username = this.authUser.username;
-    await this.getColors();
+    await this.fetchProblems();
   },
-};
+
+}
 </script>
 
-<style></style>
+<style>
+
+</style>
