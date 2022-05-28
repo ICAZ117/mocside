@@ -145,7 +145,7 @@ export default {
                     console.log(lab)
                     if (this.isPublished(lab)) {
                         //check if the published lab has problems
-                        if(this.allLabs.num_problems > 0) {
+                        if(lab.num_problems > 0) {
                             console.log("true")
                             return true;
                         } else {
