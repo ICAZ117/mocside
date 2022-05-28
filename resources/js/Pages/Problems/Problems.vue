@@ -416,7 +416,7 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     this.username = this.authUser.username;
     await this.fetchProblems();
   },
