@@ -190,10 +190,10 @@ export default {
 
         //individual lab work
         //deleting a lab
-        removeLab(key) {
+        removeLab(id) {
             //remove from both labs list
-            this.allLabs = this.allLabs.filter((l, i) => i != key);
-            this.labs = this.labs.filter((l, i) => i != key);
+            this.allLabs = this.allLabs.filter((l) => l.id != id);
+            this.labs = this.labs.filter((l) => l.id != id);
         },
         //get lab percent
         getPercent(lab) {
