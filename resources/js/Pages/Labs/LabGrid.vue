@@ -181,7 +181,8 @@ export default {
             const res = await API.apiClient.delete(`/labs/${lab.id}`);
 
             //filter from the list of labs
-            this.labs = this.labs.filter((l) => l.id != id);
+            //props are read Only this must be done from the parent
+            // this.labs = this.labs.filter((l) => l.id != id);
             //do same to parent
             this.$emit('removeLab', id);
 
