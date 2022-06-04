@@ -151,16 +151,10 @@ export default {
             //add lab to backend
             const lab = await API.apiClient.post(`/labs`, payload);
 
-            var labID = lab.data.data;
+            var labID = lab.data.data.id;
 
             //move to Edit Page
-            this.$router.push({
-                name: "EditLab",
-                params: {
-                    courseID: this.courseID,
-                    labID: labID,
-                }
-            });
+            this.editLab(labID, lab.data.data.name);
 
             //not adding it to the list of labs because when they redirect back to the page it should be there, 
             // because it will be regrabbing all the labs
