@@ -366,8 +366,8 @@ export default {
       };
 
       const problem = await API.apiClient.post(`/problems`, payload);
-      this.allProblems.push(problems.data.data);
-      this.problems.push(problems.data.data);
+      this.allProblems.push(problem.data.data);
+      this.problems.push(problem.data.data);
 
       this.editProblem(problem.data.data.id);
     },
