@@ -9,7 +9,7 @@
         :key="tc.id"
         :tc="tc"
         class="tc-card col-1"
-        @click="setCurrent(idx)"
+        @click="setCurrentTC(idx)"
       >
         <div class="tc-card-title">
           <!-- <p>tc{{ i }}</p> -->
@@ -150,7 +150,6 @@ export default {
         output: "New Output",
       };
       const res = await API.apiClient.post(`/test-cases`, payload);
-      console.log(res.data)
 
       //add to list of test cases
       this.cases.push(res.data);
