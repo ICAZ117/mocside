@@ -58,27 +58,27 @@
           <button class="dropbtn fas fa-filter"></button>
           <div class="dropdown-content">
             <small
-              ><span @click="sortWrapper(0)" :class="sort == 0 ? 'selected' : ''"
+              ><span @click="sortCourses(0)" :class="sort == 0 ? 'selected' : ''"
                 >Start</span
               ></small
             >
             <small
-              ><span @click="sortWrapper(1)" :class="sort == 1 ? 'selected' : ''"
+              ><span @click="sortCourses(1)" :class="sort == 1 ? 'selected' : ''"
                 >End</span
               ></small
             >
             <small
-              ><span @click="sortWrapper(2)" :class="sort == 2 ? 'selected' : ''"
+              ><span @click="sortCourses(2)" :class="sort == 2 ? 'selected' : ''"
                 >Next Problem Due</span
               ></small
             >
             <small
-              ><span @click="sortWrapper(3)" :class="sort == 3 ? 'selected' : ''"
+              ><span @click="sortCourses(3)" :class="sort == 3 ? 'selected' : ''"
                 >Name</span
               ></small
             >
             <small
-              ><span @click="sortWrapper(4)" :class="sort == 4 ? 'selected' : ''"
+              ><span @click="sortCourses(4)" :class="sort == 4 ? 'selected' : ''"
                 >Unsorted</span
               ></small
             >
@@ -287,9 +287,26 @@ export default {
                 const course = await API.apiClient.get(`/courses/${cur}`);
                 this.allCourses.push(course.data.data);
             }
-            await this.sortCourses(this.allCourses, 4);
+            await this.sortCourses(4);
+        },
+        async sortCourses(type) {
+            if(this.sort == 0) {
+                this.allCourses = sort(0, this.allCourses);
+            } else if (this.sort == 1) {
+                this.allCourses = sort(1, this.allCourses);
+            } else if (this.sort == 2) {
+                this.allCourses = sort(2, this.allCourses);
+            } else if (this.sort == 3) {
+                this.allCourses = sort(3, this.allCourses);
+            } else {
+                // default
+                this.allCourses = sort(5, this.allCourses);
+            }
 
-            // separate the courses into their respective categories
+            this.filterCourses();
+        },
+        filterCourses() {
+           // separate the courses into their respective categories
             var currentCourses = [], oldCourses = [];
             
             for (let i = 0; i < this.allCourses.length; i++) {
@@ -303,25 +320,6 @@ export default {
             this.courses = {
                 currentCourses,
                 oldCourses,
-            }
-        },
-        sortWrapper(type) {
-          this.sortCourses(this.allCourses, type);
-        },
-        async sortCourses(arr, type) {
-            this.sort = type
-
-            if(type == 0) {
-                sort(0, arr);
-            } else if (type == 1) {
-                sort(1, arr);
-            } else if (type == 2) {
-                sort(2, arr);
-            } else if (type == 3) {
-                sort(3, arr)
-            } else {
-                // default
-                sort(5, arr);
             }
         },
         withinDate(course) {
