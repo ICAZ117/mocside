@@ -51,7 +51,7 @@
 
       <!------------ TC Feedback ------------>
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap :savedText="JSON.parse(tc.Feedback)" @input="changeFeedback" :showMenuBar="true" :isDark="false" />
+      <!-- <Tiptap :savedText="JSON.parse(tc.Feedback)" @input="changeFeedback" :showMenuBar="true" :isDark="false" /> -->
       <br /><br />
 
       <!------------ TC Compare Method ------------>
