@@ -36,85 +36,76 @@
 import * as API from "../../services/API";
 import store from "../../Store/index";
 export default {
-  props: ['problemID'],
+  props: ["problemID"],
   data() {
     return {
-      authUser: {},
       gradebook: {},
       students: [],
       worth: 0,
     }
   },
   methods: {
-    async getStudents(){
-      if(this.isProf == true) {
-        const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
-        this.gradebook = JSON.parse(res.data.data.gradebook);
-        this.worth = res.data.data.worth;
+    //GETTERS
+    async fetchGradebook() {
+      const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      this.gradebook = JSON.parse(res.data.data.gradebook);
+      this.worth = res.data.data.worth;
 
-        // this logic is populating front-end gradebook
-        var student_ids = this.gradebook.students; // list of ids in gradebook 
-        var curr;
-        for (let i = 0; i < student_ids.length; i++) {
-          curr = student_ids[i];
-          const res2 = await API.apiClient.get(`/students/${curr}`) // this will return USER objects that contain student
-          var student = res2.data.data;
-          console.log(student.fsc_id);
-          var points = this.gradebook.grades[curr];
-          var calcGrades = this.calcGrade(res.data.data, points)
-          this.students.push({
-            name: student.name,
-            ID: curr,
-            grade: calcGrades[1],
-            percent: calcGrades[2],
-            letterGrade: calcGrades[0],
-            email: student.email,
-          });
-        }
-      }
+      this.fetchStudents(res.data.data);
     },
+    async fetchStudents(assignment) {
+      var studentIDs = this.gradebook.students;
+      
+      studentIDs.forEach(async (studentID) => {
+        const res = await API.apiClient.get(`/students/${studentID}`);
+        let student = res.data.data;
+        let points = this.gradebook.grades[studentID];
+        let calcGrades = this.calcGrade(assignment, points);
+
+        this.students.push({
+          name: student.name,
+          ID: studentID,
+          grade: calcGrades[1],
+          percent: calcGrades[2],
+          letterGrade: calcGrades[0],
+          email: student.email,
+        });
+      });
+
+    },
+
+    //helper functions
     calcGrade(assignment, points) {
-      // calc numbers
+      // calculate numbers
       var worth = assignment.worth;
-      var percent;
-      percent = points*100;
-      percent = percent / worth * 100;
-      percent = Math.floor(percent);
-      percent = percent / 100;
+      var percent = Math.floor((points*100) / worth * 100) / 100;
 
-
-      // calc letters
-      var letterGrade;
-      if (percent > 90) {
-        letterGrade = 'A';
-      } else if (percent > 80) {
-        letterGrade = 'B';
-      } else if (percent > 70) {
-        letterGrade = 'C';
-      } else if (percent > 60) {
-        letterGrade = 'D';
-      } else {
-        letterGrade = "F";
-      }
+      //calculate letter grade
+      let letterGrade = percent > 90 ? 'A' : percent > 80 ? 'B' : percent > 70 ? 'C' : percent > 60 ? 'D' : 'F';
 
       return [letterGrade, points, percent];
-    }
+    },
   },
   computed: {
+    authUser: function() {
+      return store.getters["auth/authUser"];
+    },
     isProf: function() {
-      if (store.getters["auth/isProf"] == null) {
+      if(store.getters["auth/isProf"] == null) {
         return false;
-      }
-      else {
+      } else {
         return store.getters["auth/isProf"];
       }
     }
   },
   mounted() {
-    this.authUser = store.getters["auth/authUser"];
-    this.getStudents();
-  }
-};
+    if(this.isProf == true) {
+      this.fetchGradebook();
+    }
+  },
+}
 </script>
 
-<style></style>
+<style>
+
+</style>
