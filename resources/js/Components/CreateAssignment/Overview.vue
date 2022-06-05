@@ -38,7 +38,7 @@ export default {
       required: true,
     },
     problemID: {
-      type: Number,
+      type: String,
       required: true,
     },
   },
