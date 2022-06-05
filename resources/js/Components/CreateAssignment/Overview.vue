@@ -78,6 +78,9 @@ export default {
     }, 3000),
 
   },
+  beforeMount() {
+    console.log(this.overview);
+  }
 
 }
 </script>
