@@ -134,8 +134,7 @@ export default {
     //GETTERS
     async fetchCases() {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
-      console.log(res.data);
-      this.cases = res.data;
+      this.cases = res.data.data;
 
       if(this.cases.length != 0) {
         this.setCurrentTC(0);
@@ -151,6 +150,7 @@ export default {
         output: "New Output",
       };
       const res = await API.apiClient.post(`/test-cases`, payload);
+      console.log(res.data)
 
       //add to list of test cases
       this.cases.push(res.data);
@@ -195,7 +195,7 @@ export default {
         title: this.tc.Title,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-
+      console.log(res.data);
       //update the test case in the list of cases
       this.updateTestCase(res.data);
     },
