@@ -24,7 +24,7 @@
           </p>
         </div>
       </div>
-      <div @click="addTest()" class="tc-card col-1">
+      <div @click="addTestCase()" class="tc-card col-1">
         <div class="tc-card-title">
           <p>Add Test Case</p>
           <p>+</p>
@@ -99,24 +99,25 @@
       <hr />
 
       <!------------ DELETE TC ------------>
-      <button @click="deleteTest()" class="btn btn-md btn-danger">Delete</button>
+      <button @click="deleteTestCase()" class="btn btn-md btn-danger">Delete</button>
       <br />
     </div>
   </div>
 </template>
 
 <script>
-import { VAceEditor } from "vue3-ace-editor";
+import { VAceEditor} from "vue3-ace-editor";
 
 import * as API from "../../services/API";
 import _ from "lodash";
-
 export default {
-  props: {
-    problemID: Number,
+  props: ["problemID"],
+  components: {
+    VAceEditor,
   },
   data() {
     return {
+      cases: [],
       currentTC: 0,
       tc: {
         id: "",
@@ -127,133 +128,84 @@ export default {
         Input: "",
         Output: "",
       },
-      feedback: {},
-      cases: [],
-    };
+    }
   },
-  components: {
-    VAceEditor,
-  },
-  // watch: {
-  //   tc: {
-  //     deep: true,
-  //     handler() {
-  //       if (this.tc.id != "") {
-  //         // this.timeout(this.problemID);
-  //         console.log("something changed");
-  //       }
-  //     },
-  //   },
-  // },
   methods: {
-    async getCases() {
+    //GETTERS
+    async fetchCases() {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
-      var rawCases = res.data;
-      async () => {
-        this.cases = rawCases;
-      };
+      this.cases = res.data;
+
       if(this.cases.length != 0) {
-        this.setCurrent(0);
+        this.setCurrentTC(0);
       }
     },
-    async addTest() {
-      console.log("addTest");
+
+    //add test case
+    async addTestCase() {
       var payload = {
-        assignment_id: this.problemID,
+        assignment_id: parseInt(this.problemID),
         feedback: JSON.stringify({}),
         input: "New Input",
         output: "New Output",
       };
       const res = await API.apiClient.post(`/test-cases`, payload);
+
+      //add to list of test cases
       this.cases.push(res.data);
-      this.setCurrent(this.cases.length - 1);
+      //set current to new test case
+      this.setCurrentTC(this.cases.length - 1);
     },
-    async deleteTest() {
-      var key;
-      for (let i = 0; i < this.cases.length; i++) {
-        if (this.tc.id == this.cases[i].id) {
-          key = i;
-        }
-      }
-      this.cases = this.cases.filter((c, i) => i != key);
+
+    //delete test case
+    async deleteTestCase() {
+      //remove from the list of test cases
+      this.cases = this.cases.filter((tc) => tc.id != this.tc.id);
+
       var temp = this.tc.id;
-      //set current to null
-      if(this.currentTC != 1 && this.currentTC.length != 0) {
-        this.currentTC--;
+      
+      //set current tc to no test case
+      this.currentTC = 0;
+      this.tc = {
+        id: "",
+        Title: "",
+        Points: 0,
+        Feedback: {},
+        CompareMethod: "",
+        Input: "",
+        Output: "",
       };
-      if(this.currentTC.length != 0) {
-        var idx = this.currentTC - 1;
-        this.tc.id = this.cases[idx].id;
-        this.tc.Title = this.cases[idx].title;
-        this.tc.Points = this.cases[idx].points;
-        this.tc.Feedback = this.cases[idx].feedback;
-        this.tc.CompareMethod = this.cases[idx].compare_method;
-        this.tc.Input = this.cases[idx].input;
-        this.tc.Output = this.cases[idx].output;
-      }
-      else {
-        this.currentTC = 0;
-        this.tc.id = "";
-        this.tc.Title = "";
-        this.tc.Points = "";
-        this.tc.Feedback = "";
-        this.tc.CompareMethod = "";
-        this.tc.Input = "";
-        this.tc.Output = "";
-      }
 
       // I do this after to ensure that it doesn't try to repost to the test case after it has been deleted
       const res = await API.apiClient.delete(`/test-cases/${temp}`);
     },
-    setCurrent(idx) {
-      this.currentTC = idx + 1;
-      console.log(this.tc);
-      console.log(this.cases[idx]);
-      this.tc.id = this.cases[idx].id;
-      this.tc.Title = this.cases[idx].title;
-      this.tc.Points = this.cases[idx].points;
-      this.tc.Feedback = this.cases[idx].feedback;
-      this.tc.CompareMethod = this.cases[idx].compare_method;
-      this.tc.Input = this.cases[idx].input;
-      this.tc.Output = this.cases[idx].output;
+
+
+    //edit parts of the test case
+    updateTestCase(testCase) {
+      for(let i = 0; i< this.cases.length; i++) {
+        if(this.cases[i].id == testCase.id) {
+          this.cases[i] = testCase;
+        }
+      }
     },
-    // timeout: _.debounce(async function (problemID) {
-    //   var payload = {
-    //     // title: this.tc.Title,
-    //     // points: this.tc.Points,
-    //     feedback: this.tc.Feedback,
-    //     // compare_method: this.tc.CompareMethod,
-    //     // input: this.tc.Input,
-    //     // output: this.tc.Output,
-    //   };
-    //   const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-    //   for (let i = 0; i < this.cases.length; i++) {
-    //     if (this.cases[i].id == res.data.id) {
-    //       this.cases[i] = res.data;
-    //     }
-    //   }
-    // }, 500),
     async changeTitle() {
       var payload = {
         title: this.tc.Title,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-      for (let i = 0; i < this.cases.length; i++) {
-        if (this.cases[i].id == res.data.id) {
-          this.cases[i] = res.data;
-        }
-      }
+
+      //update the test case in the list of cases
+      this.updateTestCase(res.data);
     },
     async changePoints() {
       var payload = {
         points: this.tc.Points,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-      for (let i = 0; i < this.cases.length; i++) {
-        if (this.cases[i].id == res.data.id) {
-          this.cases[i] = res.data;
-        }
-      }
+
+      //update the test case in the list of cases
+      this.updateTestCase(res.data);
     },
     async changeFeedback(e) {
       this.tc.Feedback = e;
@@ -261,50 +213,59 @@ export default {
         feedback: this.tc.Feedback,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-      for (let i = 0; i < this.cases.length; i++) {
-        if (this.cases[i].id == res.data.id) {
-          this.cases[i] = res.data;
-        }
-      }
+
+      //update the test case in the list of cases
+      this.updateTestCase(res.data);
     },
     async changeCompare() {
       var payload = {
         compare_method: this.tc.CompareMethod,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-      for (let i = 0; i < this.cases.length; i++) {
-        if (this.cases[i].id == res.data.id) {
-          this.cases[i] = res.data;
-        }
-      }
+
+      //update the test case in the list of cases
+      this.updateTestCase(res.data);
     },
     async changeInput() {
       var payload = {
         input: this.tc.Input,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-      for (let i = 0; i < this.cases.length; i++) {
-        if (this.cases[i].id == res.data.id) {
-          this.cases[i] = res.data;
-        }
-      }
+
+      //update the test case in the list of cases
+      this.updateTestCase(res.data);
     },
     async changeOutput() {
       var payload = {
         output: this.tc.Output,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-      for (let i = 0; i < this.cases.length; i++) {
-        if (this.cases[i].id == res.data.id) {
-          this.cases[i] = res.data;
-        }
-      }
+
+      //update the test case in the list of cases
+      this.updateTestCase(res.data);
     },
+
+    //TEST case selector
+    setCurrentTC(idx) {
+      this.currentTC = idx + 1;
+      this.tc = {
+        id: this.cases[idx].id,
+        Title: this.cases[idx].title,
+        Points: this.cases[idx].points,
+        Feedback: this.cases[idx].feedback,
+        CompareMethod: this.cases[idx].compare_method,
+        Input: this.cases[idx].input,
+        Output: this.cases[idx].output,
+      };
+    },
+
   },
   mounted() {
-    this.getCases();
+    this.fetchCases();
   },
-};
+}
 </script>
 
-<style></style>
+<style>
+
+</style>
