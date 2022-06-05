@@ -392,7 +392,7 @@ export default {
       this.problemID = id;
       this.$router.push({
         name: "EditAssignment",
-        params: {courseID: this.courseID, labID: this.labID, problemID: id},
+        params: {courseID: this.courseID, labID: this.labID, problemID: id, labName: this.labName },
       })
     },
     goToProblem(id) {
