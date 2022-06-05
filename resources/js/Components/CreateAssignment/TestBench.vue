@@ -194,7 +194,7 @@ export default {
         title: this.tc.Title,
       };
       const res = await API.apiClient.put(`/test-cases/${this.tc.id}`, payload);
-      console.log(res.data);
+      
       //update the test case in the list of cases
       this.updateTestCase(res.data);
     },
