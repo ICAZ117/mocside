@@ -28,7 +28,7 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Overview'">
-        <Overview @delete="deleteProblem" :overview="overview" :problemID="problemID"/>
+        <Overview @delete="deleteProblem" :overview="JSON.parse(overview)" :problemID="problemID"/>
       </tab-panel>
       <tab-panel :val="'Assign'">
         <Assign @delete="deleteProblem" :problemID="problemID"  />
