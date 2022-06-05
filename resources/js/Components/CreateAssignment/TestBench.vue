@@ -134,6 +134,7 @@ export default {
     //GETTERS
     async fetchCases() {
       const res = await API.apiClient.get(`/test-cases/${this.problemID}`);
+      console.log(res.data);
       this.cases = res.data;
 
       if(this.cases.length != 0) {
