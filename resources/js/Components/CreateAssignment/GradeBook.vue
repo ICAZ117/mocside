@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import * as API from "../services/API";
-import store from "../Store/index";
+import * as API from "../../services/API";
+import store from "../../Store/index";
 export default {
   props: ['problemID'],
   data() {

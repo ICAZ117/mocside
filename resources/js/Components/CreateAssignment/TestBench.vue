@@ -108,7 +108,7 @@
 <script>
 import { VAceEditor } from "vue3-ace-editor";
 
-import * as API from "../services/API";
+import * as API from "../../services/API";
 import _ from "lodash";
 
 export default {
