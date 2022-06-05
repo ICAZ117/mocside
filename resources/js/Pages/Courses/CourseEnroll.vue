@@ -14,13 +14,6 @@
       class="inviteBG"
     ></div>
     <div class="invite-card center">
-      <!-- <img
-        :src="this.courseImg"
-        alt="Course Image"
-        class="invite-card-img"
-        :width="imgSizes.width"
-        :height="imgSizes.height"
-      /> -->
       <div class="crop">
         <img :src="this.courseImg" alt="Course Image" width="600" />
       </div>
@@ -43,11 +36,6 @@
       </button>
     </div>
   </div>
-
-  <!-- <h1>You have been invited to join {{ course.name }}</h1>
-  <button @click="joinCourse()" type="submit">Join</button>
-  <button @click="cancelCourse()" type="submit">Cancel</button>
-  <p>yah</p> -->
 </template>
 
 <script>
@@ -59,62 +47,96 @@ export default {
       course: {},
       courseID: "",
       courseImg: "",
+      showInfoModal: false,
+      reloadInfoModal: 0,
       imgSizes: {
         width: 0,
         height: 0,
         fScaleToTargetWidth: true,
       },
-      showInfoModal: false,
-      reloadInfoModal: 0,
-    };
+    }
   },
   methods: {
-    scaleImage(srcwidth, srcheight, targetwidth, targetheight, fLetterBox) {
-      console.log("HERE");
-      console.log(srcwidth);
-      console.log(srcheight);
-      console.log(targetwidth);
-      console.log(targetheight);
-      console.log(fLetterBox);
+    //GETTERS
+    //get course enroll key from URL
+    getKey() {
+      var r = window.location.pathname;
+      r = r.split("/");
+      this.key = r[1];
+    },
+    //get course using key
+    async getCourse() {
+      if(this.key == "") return;
+
+      const res = await API.apiClient.get(`/invite/${this.key}`);
+      this.courseID = res.data.data.course_id;
+
+      //get course using key
+      const resp = await API.apiClient.get(`/courses/${this.courseID}`);
+      this.course = resp.data.data;
+
+      //grab image location from course
+      this.courseImg = this.course.img_loc;
+      await this.getImg();
+    },
+
+    //IMAGE Functions
+    //get image
+    async getImg() {
+      let img = new Image();
+      img.onload = () => {
+        this.scaleImage(this.width, this.height, 600, 338, false);
+      }
+      img.src = this.courseImg;
+    },
+    //scale image
+    scaleImage(srcWidth, srcHeight, trgWidth, trgHeight, fLetterBox) {
       this.imgSizes = {
         width: 0,
-        height: 0,
+        height: 0, 
         fScaleToTargetWidth: true,
       };
 
-      if (srcwidth > 0 && srcheight > 0 && targetwidth > 0 && targetheight > 0) {
-        // scale to the target width
-        var scaleX1 = targetwidth;
-        var scaleY1 = (srcheight * targetwidth) / srcwidth;
+      if(srcWidth <= 0 || srcHeight <= 0 || trgWidth <= 0 || trgHeight <= 0) return;
 
-        // scale to the target height
-        var scaleX2 = (srcwidth * targetheight) / srcheight;
-        var scaleY2 = targetheight;
+      //scale to target width
+      var scaleX1 = trgWidth;
+      var scaleY1 = (srcHeight * trgWidth) / srcWidth;
 
-        // now figure out which one we should use
-        var fScaleOnWidth = scaleX2 > targetwidth;
-        if (fScaleOnWidth) {
-          fScaleOnWidth = fLetterBox;
-        } else {
-          fScaleOnWidth = !fLetterBox;
-        }
+      //scale to target height
+      var scaleX2 = (srcWidth * trgHeight) / srcHeight;
+      var scaleY2 = trgHeight;
 
-        if (fScaleOnWidth) {
-          this.imgSizes.width = Math.floor(scaleX1);
-          this.imgSizes.height = Math.floor(scaleY1);
-          this.imgSizes.fScaleToTargetWidth = true;
-        } else {
-          this.imgSizes.width = Math.floor(scaleX2);
-          this.imgSizes.height = Math.floor(scaleY2);
-          this.imgSizes.fScaleToTargetWidth = false;
-        }
-        this.imgSizes.targetleft = Math.floor((targetwidth - this.imgSizes.width) / 2);
-        this.imgSizes.targettop = Math.floor((targetheight - this.imgSizes.height) / 2);
+      //now figure out which one to use
+      var fScaleonWidth = scaleX2 > trgWidth;
+      fScaleonWidth = fScaleonWidth ? fLetterBox : !fLetterBox;
+
+
+      if(fScaleonWidth) {
+        this.imgSizes.width = Math.floor(scaleX1);
+        this.imgSizes.height = Math.floor(scaleY1);
+        this.imgSizes.fScaleToTargetWidth = true;
+      } else {
+        this.imgSizes.width = Math.floor(scaleX2);
+        this.imgSizes.height = Math.floor(scaleY2);
+        this.imgSizes.fScaleToTargetWidth = false;
       }
+
+      this.imgSizes.targetLeft = Math.floor((trgWidth - this.imgSizes.width) / 2);
+      this.imgSizes.targetTop = Math.floor((trgHeight - this.imgSizes.height) / 2);
     },
 
+    //MODAL Functions
+    closeInfo() {
+      this.showInfoModal = false;
+    },
+    showInfo() {
+      this.showInfoModal = true;
+    },
+
+
+    //JOIN Course
     async joinCourse() {
-      //join class
       try {
         const res = await API.apiClient.post(`/invite/enroll/${this.key}`);
         if(res.status != 200) {
@@ -123,79 +145,41 @@ export default {
 
         //update authUser
         const authUser = await this.$store.dispatch("auth/getAuthUser");
-      
+
 
         //move to course page
-        // this.$router.push({ name: "Labs", params: { course_id: this.courseID } });
-        this.$router.push({name: "Courses" });
-      }
-      catch(exception) {
-        //display modal saying course invite code is no longer active
-        console.log("something went wrong in try");
+        this.goToCourses();
+
+
+      } catch(exception) {
         if(exception.response.status == 403) {
           console.log(exception.response);
         }
-        this.joining();
+        this.showInfo();
       }
-
     },
-    cancelCourse() {
-      //move to home since not joining page
+
+    //route to courses page
+    goToCourses() {
       this.$router.push({ name: "Courses" });
     },
-    async getCourse() {
-      //if valid key
-      if (this.key == "") {
-        console.log("404");
-      }
-      const res = await API.apiClient.get(`/invite/${this.key}`);
-      this.courseID = res.data.data.course_id;
 
-      //grab course using key
-      const resp = await API.apiClient.get(`/courses/${this.courseID}`);
-      this.course = resp.data.data;
 
-      //Grab image location from course
-      this.courseImg = this.course.img_loc;
-    },
-    getKey() {
-      // /key/enroll
-      var r = window.location.pathname;
-      r = r.split("/");
-      this.key = r[1];
-    },
-    closeInfo() {
-      this.showInfoModal = false;
-    },
-    joining() {
-      this.showInfoModal = true;
-    },
   },
   watch: {
-    showInfoModal: function () {
-      if (!this.showInfoModal) {
+    showInfoModal: function() {
+      if(!this.showInfoModal) {
         this.reloadInfoModal++;
       }
-    },
+    }
   },
-  async beforeMount() {
+  mounted() {
     this.getKey();
-
-    await this.getCourse();
-
-    console.log(this.course);
-
-    var self = this;
-
-    let img = new Image();
-
-    img.onload = function () {
-      self.scaleImage(this.width, this.height, 600, 338, false);
-    };
-
-    img.src = this.courseImg;
-  },
-};
+    this.getCourse();
+  }
+}
 </script>
 
-<style></style>
+<style>
+
+</style>
