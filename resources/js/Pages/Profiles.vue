@@ -66,51 +66,45 @@
 import * as API from "../services/API";
 import AuthService from "../services/AuthService";
 import store from "../Store/index";
-import { useRoute } from "vue-router";
+
 export default {
 	props: ['fsc_id'],
 	data() {
 		return {
-			user: {
+			currentUser: {},
+			userDisplay: {
 				pfp: "",
 				name: "",
 				screen_name: "",
 				pronouns: "",
 				email: "",
 				fsc_id: "",
-			},
-			currentUser: {},
-			studentID: "",
+			}
 		}
 	},
 	methods: {
-		async upgradeUser() {
-			console.log("upgrade User");
-			//post request
-			const res = await API.apiClient.post(`/users/elevate/${this.fsc_id}`);
-		},
-		async downgradeUser() {
-			console.log("downgrade User");
-
-			const res = await API.apiClient.post(`/users/downgrade/${this.fsc_id}`);
-		},
-		async deleteUser() {
-			console.log("delete User");
-		},
-		async getUser() {
-			//api call to get currentUser
+		//get User Profile
+		async fetchUser() {
 			const res = await API.apiClient.get(`/users/profile/${this.fsc_id}`);
-			console.log(res);
 			this.currentUser = res.data.data;
 
-			//check if its empty
+			await this.setupSettings();
+		},
+		//check if new profile
+		async setupSettings() {
 			if(this.currentUser.settings == null) {
 				const res = await API.apiClient.post(`/profile/init`);
+
+				this.currentUser = await API.apiClqient.get(`/users/profile/${this.fsc_id}`).data.data;
 			}
 
-			this.user.name = this.currentUser.name;
-			this.user.email = this.currentUser.email;
-			this.user.screen_name = this.currentUser.fsc_user.screen_name;
+			this.setDisplayUser();
+		},
+		//set display user
+		setDisplayUser() {
+			this.userDisplay.name = this.currentUser.name;
+			this.userDisplay.email = this.currentUser.email
+			this.userDisplay.screen_name = this.currentUser.fsc_user.screen_name;
 			this.user.fsc_id = this.currentUser.fsc_user.fsc_id;
 			this.user.pronouns = this.currentUser.fsc_user.pronouns;
 
@@ -118,21 +112,37 @@ export default {
 			if(this.user.pfp == undefined || this.user.pfp == null || this.user.pfp == "") {
 				this.user.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
 			}
+
 			document.getElementById("pfp").src = this.user.pfp;
-			//write to check if the picture is loaded...if not then change back to default pfp
+
+			//TODO: check if picture loaded, otherwise set back to default pfp
+
+		},
+
+
+		//USER control Level
+		//upgrade user to professor
+		async upgradeUser() {
+			const res = await API.apiClient.post(`/users/elevate/${this.fsc_id}`);
+		},
+		//downgrade user to student
+		async downgradeUser() {
+			const res = await API.apiClient.post(`/users/downgrade/${this.fsc_id}`);
+		},
+
+		//delete User
+		async deleteUser() {
+			console.log("delete User not implemented yet");
 		},
 	},
 	computed: {
-		isProf: function () {
-			if (store.getters["auth/isProf"] == null) {
-				return false;
-			} else {
-				return store.getters["auth/isProf"];
-			}
-		},
+		isProf: function() {
+			if(store.getters["auth/isProf"] == null) return false;
+			return store.getters["auth/isProf"];
+		}
 	},
-	async beforeMount() {
-		await this.getUser();
+	mounted() {
+		this.fetchUser();
 	},
 }
 </script>
