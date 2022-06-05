@@ -147,7 +147,7 @@ export default {
         this.courseIDs = JSON.parse(this.authUser.fsc_user.courses).courses; 
       }
 
-      this.courseIDs.forEach((courseID) => {
+      this.courseIDs.forEach(async (courseID) => {
         const res = await API.apiClient.get(`/courses/${courseID}`);
         this.courses.push(res.data.data);
         this.setEmptyCourseCardValues(res.data.data);
