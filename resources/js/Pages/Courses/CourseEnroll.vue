@@ -3,7 +3,7 @@
     <vue-final-modal class="delete-modal" v-model="showInfoModal" classes="modal-container" content-class="modal-content delete-modal" :esc-to-close="true">
       <button class="modal-close" @click="closeInfo()">x</button>
       <div class="delete Course">
-        <p>This Invite Code has expired please contact your professor</p>
+        <p>{{ InfoMessage }}</p>
         <div class="delete-buttons">
           <button class="btn btn-md btn-danger delete-button" @click="closeInfo()">OK</button>
         </div>
@@ -54,6 +54,7 @@ export default {
         height: 0,
         fScaleToTargetWidth: true,
       },
+      InfoMessage: "Something went wrong please contact your professor",
     }
   },
   methods: {
@@ -155,6 +156,7 @@ export default {
         if(exception.response.status == 403) {
           console.log(exception.response);
         }
+        this.InfoMessage = exception.response.data.message;
         this.showInfo();
       }
     },
