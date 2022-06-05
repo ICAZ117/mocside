@@ -305,6 +305,9 @@ export default {
                 oldCourses,
             }
         },
+        sort(type) {
+          this.sortCourses(this.allCourses, type);
+        },
         async sortCourses(arr, type) {
             this.sort = type
 
