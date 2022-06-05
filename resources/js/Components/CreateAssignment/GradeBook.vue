@@ -27,8 +27,11 @@
             <a :href="'mailto:' + student.email">{{ student.email }}</a>
           </td>
         </tr>
-        <tr v-if="students.length == 0" colspan="6">
-          <h2>No student submissions currently</h2>
+        <tr v-if="students.length == 0">
+          <td colspan="6">
+            <h2>No student submissions currently</h2>
+          </td>
+         
         </tr>
       </tbody>
     </table>
