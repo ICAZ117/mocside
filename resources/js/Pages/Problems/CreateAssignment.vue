@@ -105,7 +105,7 @@ export default {
     },
 
     //delete problem
-    deleteProblem() {
+    async deleteProblem() {
       const res = await API.apiClient.delete(`/problems/${this.problemID}`);
       this.goToProblems();
     },
