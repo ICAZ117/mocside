@@ -28,7 +28,7 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Overview'">
-        <Overview @delete="deleteProblem" :overview="overview" :problemID="assignmentID"/>
+        <Overview @delete="deleteProblem" :overview="overview" :problemID="problemID"/>
       </tab-panel>
       <tab-panel :val="'Assign'">
         <Assign @delete="deleteProblem" :problemID="problemID"  />
@@ -89,7 +89,6 @@ export default {
   },
   data() {
     return {
-      assignmentID: this.problemID,
       assignmentTitle: "",
       overview: {},
       problem: {},
