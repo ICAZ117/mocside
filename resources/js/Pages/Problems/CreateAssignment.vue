@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show">
+  <div>
     <div class="assignment header">
       <input
         id="assignment-title"
@@ -28,40 +28,39 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Overview'">
-        <Overview
-          @update="updateOverview"
-          @delete-problem="deleteProblem"
-          :overview="overview"
-          :problemID="assignmentID"
-        />
+        <Overview @delete="deleteProblem" :overview="overview" :problemID="assignmentID"/>
       </tab-panel>
       <tab-panel :val="'Assign'">
-        <Assign :problemID="problemID" @delete-problem="deleteProblem" />
+        <Assign @delete="deleteProblem" :problemID="problemID"  />
       </tab-panel>
       <tab-panel :val="'Template'">
         <Template :problemID="problemID" :tab="selectedTab" />
       </tab-panel>
-      <tab-panel :val="'Test Bench'"> <TestBench :problemID="problemID" /> </tab-panel>
-      <tab-panel :val="'Model Solution'"
-        ><ModelSolution :problemID="problemID" :tab="selectedTab"
-      /></tab-panel>
-      <tab-panel :val="'Grade Book'"> <GradeBook :problemID="problemID" /> </tab-panel>
+      <tab-panel :val="'Test Bench'">
+        <TestBench :problemID="problemID" />
+      </tab-panel>
+      <tab-panel :val="'Model Solution'">
+        <ModelSolution :problemID="problemID" :tab="selectedTab"/>
+      </tab-panel>
+      <tab-panel :val="'Grade Book'">
+        <GradeBook :problemID="problemID" />
+      </tab-panel>
       <tab-panel :val="'Save & Exit'"></tab-panel>
     </tab-panels>
   </div>
 </template>
 
-<script lang="ts">
-// Imports for tab functionality. Note: VScode is wrong, there's no error here smh
-import { defineComponent, reactive, toRefs } from "vue";
+<script>
+//imports for tab functionality
+import { reactive, toRefs } from "vue";
 
-// Assignment components
-import Overview from "../../Components/Overview.vue";
-import Assign from "../../Components/Assign.vue";
-import Template from "../../Components/Template.vue";
-import TestBench from "../../Components/TestBench.vue";
-import ModelSolution from "../../Components/ModelSolution.vue";
-import GradeBook from "../../Components/GradeBook.vue";
+//asignment components
+import Overview from "../../Components/CreateAssignment/Overview.vue";
+import Assign from "../../Components/CreateAssignment/Assign.vue";
+import Template from "../../Components/CreateAssignment/Template.vue";
+import TestBench from "../../Components/CreateAssignment/TestBench.vue";
+import ModelSolution from "../../Components/CreateAssignment/ModelSolution.vue";
+import GradeBook from "../../Components/CreateAssignment/GradeBook.vue";
 
 import * as API from "../../services/API";
 import _ from "lodash";
@@ -73,12 +72,10 @@ const tabs = [
   "Test Bench",
   "Model Solution",
   "Grade Book",
-  "Save & Exit",
+  "Save & Exit"
 ];
-
-export default defineComponent({
-  props: ["problemID"],
-  emits: ["unmounting", "problemEdited", "deleteMe"],
+export default {
+  props: ["courseID", "labID", "problemID", "labName"],
   components: { Overview, Assign, Template, TestBench, ModelSolution, GradeBook },
   name: "Create Assignment",
   setup() {
@@ -96,8 +93,42 @@ export default defineComponent({
       assignmentTitle: "",
       overview: {},
       problem: {},
-	  show: true,
-    };
+    }
+  },
+  methods: {
+    //get problem details
+    async fetchProblem() {
+      const rawProblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      this.problem = rawProblem.data.data;
+      this.assignmentTitle = this.problem.name;
+      this.overview = this.problem.description;
+    },
+
+    //delete problem
+    deleteProblem() {
+      const res = await API.apiClient.delete(`/problems/${this.problemID}`);
+      this.goToProblems();
+    },
+
+    //return to list of problems
+    goToProblems() {
+      this.$router.push({ name: "Problems", params: { courseID: this.courseID, labID: this.labID,  labName: this.labName } });
+    },
+
+    //switch tabs
+    async pressTab() {
+      if(this.selectedTab == "Save & Exit") {
+        this.$router.go(-1);
+      }
+    },
+
+    //changing title of the problem
+    timeout: _.debounce(async function(assingmentID) {
+      var payload = {
+        name: this.assignmentTitle,
+      };
+      const res = await API.apiClient.put(`/problems/unique/${assingmentID}`, payload);
+    }, 500),
   },
   watch: {
     assignmentTitle: function (val) {
@@ -106,51 +137,12 @@ export default defineComponent({
       }
     },
   },
-  methods: {
-    async pressTab() {
-      console.log("pressed a tab");
-      console.log(this.selectedTab);
-      if(this.selectedTab == "Save & Exit") {
-		  console.log("pressed save and exit");
-		  this.$router.go(-1);
-      }
-    },
-    async handleSubmit() {
-      //perhaps later replace this with a debounce method for autosaving
-      //save information before returning to the problems page
-      // var payload = {
-      //   name: this.title,
-      //   // "description": this.overview,
-      // };
-      // const res = await API.apiClient.put(`/problems/${this.problemID}`, payload);
-    },
-    updateOverview(e) {
-      console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEE");
-
-      //will be removing this in place of using debounce on each specific tab and then saving only that tab at a time
-      this.overview = e;
-    },
-    async getInfo() {
-      console.log("get info");
-      const rawproblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      this.problem = rawproblem.data.data;
-      this.assignmentTitle = this.problem.name;
-      this.overview = this.problem.description;
-    },
-    timeout: _.debounce(async function (assignmentID) {
-      var payload = {
-        name: this.assignmentTitle,
-      };
-      const res = await API.apiClient.put(`/problems/unique/${assignmentID}`, payload);
-    }, 500),
+  mounted() {
+    this.fetchProblem();
   },
-  beforeMount() {
-    this.getInfo();
-  },
-  beforeUnmount() {
-	  this.show = false;
-  },
-});
+}
 </script>
 
-<style></style>
+<style>
+
+</style>
