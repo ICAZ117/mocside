@@ -29,6 +29,9 @@
         </tr>
       </tbody>
     </table>
+    <div v-if="students.length == 0">
+      <h1>No Student submissions currently</h1>
+    </div>
   </div>
 </template>
 
@@ -51,7 +54,9 @@ export default {
       this.gradebook = JSON.parse(res.data.data.gradebook);
       this.worth = res.data.data.worth;
 
-      this.fetchStudents(res.data.data);
+      if(this.gradebook != null) {
+        this.fetchStudents(res.data.data);
+      }
     },
     async fetchStudents(assignment) {
       var studentIDs = this.gradebook.students;
