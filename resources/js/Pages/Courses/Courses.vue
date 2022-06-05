@@ -58,27 +58,27 @@
           <button class="dropbtn fas fa-filter"></button>
           <div class="dropdown-content">
             <small
-              ><span @click="sortCourses(0)" :class="sort == 0 ? 'selected' : ''"
+              ><span @click="sort(0)" :class="sort == 0 ? 'selected' : ''"
                 >Start</span
               ></small
             >
             <small
-              ><span @click="sortCourses(1)" :class="sort == 1 ? 'selected' : ''"
+              ><span @click="sort(1)" :class="sort == 1 ? 'selected' : ''"
                 >End</span
               ></small
             >
             <small
-              ><span @click="sortCourses(2)" :class="sort == 2 ? 'selected' : ''"
+              ><span @click="sort(2)" :class="sort == 2 ? 'selected' : ''"
                 >Next Problem Due</span
               ></small
             >
             <small
-              ><span @click="sortCourses(3)" :class="sort == 3 ? 'selected' : ''"
+              ><span @click="sort(3)" :class="sort == 3 ? 'selected' : ''"
                 >Name</span
               ></small
             >
             <small
-              ><span @click="sortCourses(4)" :class="sort == 4 ? 'selected' : ''"
+              ><span @click="sort(4)" :class="sort == 4 ? 'selected' : ''"
                 >Unsorted</span
               ></small
             >
