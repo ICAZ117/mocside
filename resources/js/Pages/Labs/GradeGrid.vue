@@ -173,13 +173,11 @@ export default {
 
             //get total grade for course
 			let tmp = (JSON.parse(this.student.gradebook_courses).grades)
-			console.log(this.courseID)
-			console.log(tmp[this.courseID])
             grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
-			console.log(grades.grade)
 
             //get all labs the student is in
             var studentLabs = JSON.parse(this.student.gradebook_labs);
+			console.log("student labs")
 			console.log(studentLabs)
 
 
