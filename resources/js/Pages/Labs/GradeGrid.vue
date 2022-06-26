@@ -128,7 +128,6 @@ export default {
 
         //labs list work
         async getAllGradeColors() {
-            console.log(this.grades);
             this.grades.labs.forEach(lab => {
                 var element = document.getElementById("gl" + lab.labID);
                 if(lab.percentComplete == "100%") {
@@ -165,6 +164,7 @@ export default {
 
         //user related functions
         async getGrades() {
+			console.log("get grades")
             // initialize local student gradebook
             var grades = { grade: 0, labs: [] };
 
@@ -172,28 +172,28 @@ export default {
             var labIDs = [], problemIDs = [];
 
             //get total grade for course
-            console.log(this.student.gradebook_courses);
             grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
+			console.log(grades.grade)
 
             //get all labs the student is in
             var studentLabs = JSON.parse(this.student.gradebook_labs);
+			console.log(studentLabs)
+
 
             //loop over all of the labs in the current course
-            console.log(this.labs);
+			console.log(this.labs)
             await this.labs.forEach(async l => {
                 //get all problems in current lab
                 const problemsInLabres = await API.apiClient.get(`/gradebook/${l.id}`);
                 var problemsInLab = problemsInLabres.data.data;
 
                 //keep labID for later usage
-                console.log(l.id);
                 labIDs.push(l.id);
 
                 //init problems list
                 var problems = [];
 
                 //loop over all problems within current lab
-                console.log(problemsInLab);
                 problemsInLab.problems.forEach(p => {
                     //fill problems list with objects containing problemID's and grades
                     problems.push({ 
@@ -202,7 +202,6 @@ export default {
                     });
 
                     //keep problemID for later usage
-                    console.log(p);
                     problemIDs.push(p);
                 });
 
@@ -223,8 +222,6 @@ export default {
             this.grades = grades;
 
             //create payload to get total lab/problem values
-            console.log(problemIDs);
-            console.log(labIDs);
             var payload = {
                 problems: problemIDs,
                 labs: labIDs,
@@ -277,6 +274,7 @@ export default {
         },
     },
     async mounted() {
+		console.log("mounted")
         //set the colors of all the graded labs and problems
         await this.getStudentObject();
         await this.getGrades();
