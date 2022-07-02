@@ -177,7 +177,8 @@ export default {
             var studentLabs = JSON.parse(this.student.gradebook_labs);
 
             //loop over all of the labs in the current course
-            await this.labs.forEach(async l => {
+			for(let i =0; i < this.labs.length; i++) {
+				let l = this.labs[i];
                 //get all problems in current lab
                 const problemsInLabres = await API.apiClient.get(`/gradebook/${l.id}`);
                 var problemsInLab = problemsInLabres.data.data;
@@ -189,7 +190,8 @@ export default {
                 var problems = [];
 
                 //loop over all problems within current lab
-                problemsInLab.problems.forEach(p => {
+				for(let j = 0; j < problemsInLab.problems.length; j++) {
+					let p = problemsInLab.problems[j];
                     //fill problems list with objects containing problemID's and grades
                     problems.push({ 
                         problemID: p,
@@ -198,7 +200,7 @@ export default {
 
                     //keep problemID for later usage
                     this.problemIDs.push(p);
-                });
+                };
 
                 //add current lab to the local student gradebook
                 this.grades.labs.push({
@@ -211,7 +213,7 @@ export default {
                     total_points: l.total_points,
                     problems: problems,
                 });
-            });
+            };
 
 			console.log("end of lab pushing")
         },
