@@ -167,8 +167,6 @@ export default {
 
         //user related functions
         async getGrades() {
-			console.log("get grades")
-
             //logging lists for payload later
             var labIDs = [], problemIDs = [];
 
@@ -192,7 +190,6 @@ export default {
                 var problems = [];
 
                 //loop over all problems within current lab
-				console.log(problemsInLab)
                 problemsInLab.problems.forEach(p => {
                     //fill problems list with objects containing problemID's and grades
                     problems.push({ 
@@ -205,7 +202,6 @@ export default {
                 });
 
                 //add current lab to the local student gradebook
-				console.log("pushing a lab")
                 this.grades.labs.push({
                     grade: studentLabs.grades[l.id],
                     labID: l.id,
@@ -216,11 +212,11 @@ export default {
                     total_points: l.total_points,
                     problems: problems,
                 });
-				console.log(this.grades)
             });
 
 			console.log("end of lab pushing")
-			console.log(this.grades)
+			console.log(labIDs)
+			console.log(problemIDs)
 
             //create payload to get total lab/problem values
             var payload = {
