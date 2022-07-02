@@ -115,16 +115,6 @@ import * as API from "../../services/API";
 import store from "../../Store/index";
 export default {
 	props: ["courseID", "labs"],
-	// props: {
-	// 	courseID: {
-	// 		type: String,
-	// 		required: true,
-	// 	},
-	// 	labs: {
-	// 		type: Array,
-	// 		required: true,
-	// 	},
-	// },
     emits: [],
     data() {
         return {
@@ -187,12 +177,8 @@ export default {
 
             //get all labs the student is in
             var studentLabs = JSON.parse(this.student.gradebook_labs);
-			console.log("student labs")
-			console.log(studentLabs)
-
 
             //loop over all of the labs in the current course
-			console.log(this.labs)
             await this.labs.forEach(async l => {
                 //get all problems in current lab
                 const problemsInLabres = await API.apiClient.get(`/gradebook/${l.id}`);
@@ -205,6 +191,7 @@ export default {
                 var problems = [];
 
                 //loop over all problems within current lab
+				console.log(problemsInLab)
                 problemsInLab.problems.forEach(p => {
                     //fill problems list with objects containing problemID's and grades
                     problems.push({ 
@@ -217,6 +204,7 @@ export default {
                 });
 
                 //add current lab to the local student gradebook
+				console.log("pushing a lab")
                 grades.labs.push({
                     grade: studentLabs.grades[l.id],
                     labID: l.id,
@@ -285,9 +273,6 @@ export default {
         },
     },
     async mounted() {
-		console.log(this.labs)
-		console.log("mounted")
-        //set the colors of all the graded labs and problems
         await this.getStudentObject();
         await this.getGrades();
         await this.getAllGradeColors();
