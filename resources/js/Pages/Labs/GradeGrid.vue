@@ -125,6 +125,8 @@ export default {
 				labs: [],
 			},
             problems: {},
+			labIDs: [],
+			problemIDs: [],
         }
     },
     methods: {
@@ -167,11 +169,8 @@ export default {
 
         //user related functions
         async getGrades() {
-            //logging lists for payload later
-            var labIDs = [], problemIDs = [];
 
             //get total grade for course
-			let tmp = (JSON.parse(this.student.gradebook_courses).grades)
             this.grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
 
             //get all labs the student is in
@@ -184,7 +183,7 @@ export default {
                 var problemsInLab = problemsInLabres.data.data;
 
                 //keep labID for later usage
-                labIDs.push(l.id);
+                this.labIDs.push(l.id);
 
                 //init problems list
                 var problems = [];
@@ -198,7 +197,7 @@ export default {
                     });
 
                     //keep problemID for later usage
-                    problemIDs.push(p);
+                    this.problemIDs.push(p);
                 });
 
                 //add current lab to the local student gradebook
@@ -215,15 +214,13 @@ export default {
             });
 
 			console.log("end of lab pushing")
-			console.log(labIDs)
-			console.log(problemIDs)
 
             //create payload to get total lab/problem values
             var payload = {
                 problems: problemIDs,
                 labs: labIDs,
             };
-            if (problemIDs.length == 0 || labID.length == 0) {
+            if (problemIDs.length == 0 || labIDs.length == 0) {
                 this.problems = {};
                 return;
             }
@@ -235,6 +232,17 @@ export default {
             //save the total point values into data object
             this.problems = res.data.data.problems;
         },
+
+		// async getProblems() {
+		// 	var payload = {
+		// 		problems: this.problemIDs,
+		// 		labs: this.labIDs
+		// 	};
+		// 	if(this.problemIDs.length == 0 || this.labIDs == 0) {
+		// 		this.problems = {};
+		// 		return;
+		// 	} 
+		// },
 
         async getStudentObject() {
             const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
