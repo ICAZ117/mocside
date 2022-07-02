@@ -53,19 +53,12 @@ export default {
     },
     launchConsole: function () {
       if (this.launchConsole && this.problemID != "" && this.problemID != null) {
-        console.log("WE STARTIN BOIS");
         this.startDocker();
       }
     },
     newLog: async function () {
       if (this.newLog.replace(/^\n|\n$/g, "") == this.recentLog.replace(/^\n|\n$/g, "")) {
-        console.log("Do nothing");
       } else {
-        console.log("Recent Log:");
-        console.log({ a: this.recentLog });
-        console.log("New Log:");
-        console.log({ a: this.newLog });
-        console.log("\n\n");
 
         this.content += this.newLog.substring(this.recentLog.length);
         this.oldContent = this.content;
@@ -96,7 +89,6 @@ export default {
       );
 
       document.consoleForm.console.focus();
-      console.log("Started docker");
 
       this.isRunning = true;
       // this.canEdit = true;
@@ -130,9 +122,6 @@ export default {
       // Get new input
       this.newInput = this.content.substring(this.oldContent.length, idx);
 
-      console.log("\n\nNEW INPUT");
-      console.log({ in: this.newInput });
-      console.log("\n");
       // Add to recent log
       this.recentLog += this.newInput;
 
@@ -169,7 +158,6 @@ export default {
     if (this.isWaiting || this.isPolling) {
       this.isWaiting = false;
       const res = API.apiClient.delete(`/containers/${this.containerID}`);
-      console.log(res.data);
     }
     this.$emit("unmount");
   },
@@ -179,8 +167,6 @@ export default {
     this.content = this.username + "@mocside:/usr/src$ ";
     this.oldContent = this.content;
 
-    // console.log(this.authUser);
-    // console.log("color: " + this.authUser.settings.consoleOptions.foreground + "!important; background-color: " + this.authUser.settings.consoleOptions.background + "!important;");
     // var el = document.getElementById("scrollToBottom");
     document.getElementById("scrollToBottom").style =
       "color: " +
@@ -194,22 +180,11 @@ export default {
         this.newLog = e.log;
 
         // this.newTermContent = e.log;
-        // console.log("\n\nEVENT RECIEVED FROM WEBSOCKET");
-        // console.log("\nCONTENT:");
-        // console.log(e);
-        // console.log("\noldTermContent:");
-        // console.log(this.oldTermContent);
-        // console.log("\nnewTermContent:");
-        // console.log(this.newTermContent);
-        // console.log("\n______________________________________\n");
 
         // if(this.enteredInput) {
         //   this.oldTermContent = e.log;
-        //   console.log("Entered Input");
-        //   console.log("oldTermContent: " + this.oldTermContent);
         // }
         // else {
-        //   console.log("Program Output");
         //   this.newTermContent = e.log;
         // }
       })

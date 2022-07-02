@@ -272,7 +272,6 @@ export default {
   methods: {
     async initKeys() {
       const res = await API.apiClient.get(`/invite/course/${this.courseID}`);
-      console.log(res);
       var myArr = res.data.data;
       for (let i = 0; i < myArr.length; i++) {
         this.joinKeys.push(myArr[i]);
@@ -335,7 +334,6 @@ export default {
 	  });
     },
     updateImage() {
-      console.log("updated the image");
     },
     clearMessage() {
       this.error = null;
@@ -356,7 +354,6 @@ export default {
         try {
           const response = await FileService.uploadFile(payload);
           this.message = "File uploaded.";
-          console.log(response.data.asset_link);
           this.courseForm.img = response.data.asset_link;
         } catch (error) {
           this.error = getError(error);
@@ -401,7 +398,6 @@ export default {
         //at end add to the students list
         this.students.push(stud.data.data);
       } catch (error) {
-        console.log(error);
       }
     },
     async getStudent() {
@@ -487,7 +483,6 @@ export default {
       this.deletingLab.key = key;
     },
     async removeLab() {
-      console.log("remove lab");
       var id = this.deletingLab.id;
       var key = this.deletingLab.key;
 

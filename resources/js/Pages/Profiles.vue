@@ -132,7 +132,6 @@ export default {
 
 		//delete User
 		async deleteUser() {
-			console.log("delete User not implemented yet");
 		},
 	},
 	computed: {

@@ -47,7 +47,6 @@ export default defineComponent({
   },
   methods: {
     print(val) {
-      console.log(val);
     },
   },
 });

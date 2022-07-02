@@ -88,7 +88,6 @@ export default {
 			try {
 				//call the route to send the reset link here
 				const res = await AuthService.forgotPassword(payload).then((response) => {
-					console.log(response);
 				}).catch((error) => {
 					throw error
 				});

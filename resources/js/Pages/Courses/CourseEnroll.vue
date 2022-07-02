@@ -154,7 +154,6 @@ export default {
 
       } catch(exception) {
         if(exception.response.status == 403) {
-          console.log(exception.response);
         }
         this.InfoMessage = exception.response.data.message;
         this.showInfo();

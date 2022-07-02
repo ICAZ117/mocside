@@ -501,7 +501,6 @@ export default {
   watch: {
     userString: function (newVal, oldVal) {
       if (newVal != oldVal) {
-        console.log("Unsaved changes");
         this.hasUnsavedChanges = true;
       }
     },
@@ -532,7 +531,6 @@ export default {
     },
     async updatePass() {
       if (this.password.new != this.password.confirm) {
-        console.log("These passwords do not match");
         this.passNoMatch = true;
       } else {
         // this.showPassChange = false;
@@ -542,7 +540,6 @@ export default {
           // do this if pass the other checks
           this.passNoMatch = false;
           this.showPassModal = false;
-          console.log("updatedPassword");
           //try fortify route and pass current and new password....i believe it checks for us and returns an error/status code
           var payload = {
             current_password: this.password.current,
@@ -554,7 +551,6 @@ export default {
         }
         else {
           //password doesn't pass the requirements
-          console.log("password does not meet requirements");
         }
       }
     },
@@ -580,7 +576,6 @@ export default {
     async updateEmail() {
       // this.showEmailChange = false;
       this.showEmailModal = false;
-      console.log("updateEmail");
       var payload = {
         email: this.user.email,
       };
@@ -636,7 +631,6 @@ export default {
         try {
           const response = await FileService.uploadFile(payload);
           this.message = "File uploaded.";
-          console.log(response.data.asset_link);
           this.temppfp = response.data.asset_link;
         } catch (error) {
           this.error = getError(error);
@@ -645,7 +639,6 @@ export default {
     },
     async saveProfile() {
       //route works...jsut can't updated all parts of profile yet
-      console.log("saving profile");
       this.$notify({ type: "success", text: "Your changes have been saved!" });
       this.hasUnsavedChanges = false;
       var payload = {
@@ -661,15 +654,12 @@ export default {
         `/profile/full/${this.authUser.fsc_user.fsc_id}`,
         payload
       );
-      console.log(res);
     },
     async updateImage() {
       await this.uploadImage();
       document.getElementById("pfpmodal").src = this.temppfp;
-      console.log("showing the new avatar look on screen but not saving changes yet");
     },
     async changeAvatar() {
-      console.log("changing the avatar picture in backend");
       //api call to backend to update pfp path
       var payload = {
         pfp_path: this.temppfp,
@@ -694,7 +684,6 @@ export default {
       this.showPassModal = true;
     },
     async deleteAccount() {
-      console.log("delete account");
       //not working yet
     },
     getGrades() {
@@ -789,10 +778,8 @@ export default {
     this.hasUnsavedChanges = false;
   },
   async beforeRouteLeave(to, from, next) {
-    console.log("HERE");
     if (this.hasUnsavedChanges) {
       const decision = await this.waitForDecision();
-      console.log("HAS UNSAVED CHANGES");
 
       if (decision == "yes") {
         this.leavePage = "";

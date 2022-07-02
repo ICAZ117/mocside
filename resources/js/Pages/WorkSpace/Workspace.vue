@@ -138,7 +138,6 @@ export default defineComponent({
       this.debouncedWidth = this.w2;
     },
     async unmountingWork() {
-      console.log("unmountingWork");
       //go back in router by 1
       this.$router.go(-1);
     },
@@ -186,26 +185,18 @@ export default defineComponent({
         if (this.lang == "Java") {
           this.code_j = this.assignment.java_starter;
           this.codeID = initial.data.id;
-          console.log("initial.id " + initial.data.id);
-          console.log(this.codeID);
         } else {
           this.code_p = this.assignment.python_starter;
           this.codeID = initial.data.id;
-          console.log("initial.id " + initial.data.id);
-          console.log(this.codeID);
         }
       } else {
         //otherwise not empty
         if (this.lang == "Java") {
           this.code_j = empty.data.dump[0].code;
           this.codeID = empty.data.dump[0].id;
-          console.log("empty.data.dump[0].id " + empty.data.dump[0].id);
-          console.log(this.codeID);
         } else {
           this.code_p = empty.data.dump[0].code;
           this.codeID = empty.data.dump[0].id;
-          console.log("empty.data.dump[0].id " + empty.data.dump[0].id);
-          console.log(this.codeID);
         }
       }
       this.forceReload = 1;
@@ -232,19 +223,16 @@ export default defineComponent({
       if (progress.length == 0) {
         const res = await API.apiClient.post(`/code`, payload);
         this.jID = res.data.id;
-        // console.log("Got Java");
         return this.assignment.java_starter;
       } else {
         for (let i = 0; i < progress.length; i++) {
           if (progress[i].lang == "java") {
-            console.log("Got Java");
             this.jID = progress[i].id;
             return progress[i].code;
           }
         }
         const res = await API.apiClient.post(`/code`, payload);
         this.jID = res.data.id;
-        // console.log("Got Java");
         return this.assignment.java_starter;
       }
     },
