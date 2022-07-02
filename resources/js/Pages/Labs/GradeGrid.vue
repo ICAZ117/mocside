@@ -214,12 +214,9 @@ export default {
                     problems: problems,
                 });
             };
-
-			console.log("end of lab pushing")
         },
 
 		async getProblems() {
-			console.log("start of get problems")
 			var payload = {
 				problems: this.problemIDs,
 				labs: this.labIDs
