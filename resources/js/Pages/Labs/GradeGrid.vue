@@ -114,7 +114,16 @@
 import * as API from "../../services/API";
 import store from "../../Store/index";
 export default {
-    props: ["courseID", "labs"],
+	props: {
+		courseID: {
+			type: String,
+			required: true,
+		},
+		labs: {
+			type: Array,
+			required: true,
+		},
+	},
     emits: [],
     data() {
         return {
