@@ -215,7 +215,10 @@ export default {
                     total_points: l.total_points,
                     problems: problems,
                 });
+				console.log(grades)
             });
+
+			console.log("end of lab pushing")
 
             //set the vue data value
             this.grades = grades;
