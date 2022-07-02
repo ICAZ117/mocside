@@ -249,7 +249,7 @@ export default {
         //individual lab work
         //toggling the expanded list of problems
         toggleExpansion(key) {
-            if(this.isExapanded(key)) {
+            if(this.isExpanded(key)) {
                 //close
                 this.lang = "";
                 this.expandedProblem = null;
@@ -258,7 +258,7 @@ export default {
                 this.expandedProblem = key;
             }
         },
-        isExapanded(key) {
+        isExpanded(key) {
             return this.expandedProblem == key;
         },
     },
