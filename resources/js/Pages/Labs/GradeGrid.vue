@@ -214,35 +214,25 @@ export default {
             });
 
 			console.log("end of lab pushing")
+        },
 
-            //create payload to get total lab/problem values
-            var payload = {
-                problems: this.problemIDs,
-                labs: this.labIDs,
-            };
-            if (this.problemIDs.length == 0 || this.labIDs.length == 0) {
-                this.problems = {};
-                return;
-            }
+		async getProblems() {
+			console.log("start of get problems")
+			var payload = {
+				problems: this.problemIDs,
+				labs: this.labIDs
+			};
+			if(this.problemIDs.length == 0 || this.labIDs == 0) {
+				this.problems = {};
+				return;
+			} 
 
             //make API call and send payload to get said values
             const res = await API.apiClient.post(`/gradebook/worth`, payload);
 
-
             //save the total point values into data object
             this.problems = res.data.data.problems;
-        },
-
-		// async getProblems() {
-		// 	var payload = {
-		// 		problems: this.problemIDs,
-		// 		labs: this.labIDs
-		// 	};
-		// 	if(this.problemIDs.length == 0 || this.labIDs == 0) {
-		// 		this.problems = {};
-		// 		return;
-		// 	} 
-		// },
+		},
 
         async getStudentObject() {
             const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
@@ -281,6 +271,7 @@ export default {
     async mounted() {
         await this.getStudentObject();
         await this.getGrades();
+		await this.getProblems();
         await this.getAllGradeColors();
     },
 }
