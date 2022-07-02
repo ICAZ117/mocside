@@ -220,7 +220,7 @@ export default {
                 problems: this.problemIDs,
                 labs: this.labIDs,
             };
-            if (problemIDs.length == 0 || labIDs.length == 0) {
+            if (this.problemIDs.length == 0 || this.labIDs.length == 0) {
                 this.problems = {};
                 return;
             }
