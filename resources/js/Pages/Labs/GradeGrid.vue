@@ -120,7 +120,10 @@ export default {
         return {
             expandedProblem: null,
             student: {},
-            grades: {},
+            grades: {
+				grade: 0,
+				labs: [],
+			},
             problems: {},
         }
     },
@@ -165,15 +168,13 @@ export default {
         //user related functions
         async getGrades() {
 			console.log("get grades")
-            // initialize local student gradebook
-            var grades = { grade: 0, labs: [] };
 
             //logging lists for payload later
             var labIDs = [], problemIDs = [];
 
             //get total grade for course
 			let tmp = (JSON.parse(this.student.gradebook_courses).grades)
-            grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
+            this.grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
 
             //get all labs the student is in
             var studentLabs = JSON.parse(this.student.gradebook_labs);
@@ -205,7 +206,7 @@ export default {
 
                 //add current lab to the local student gradebook
 				console.log("pushing a lab")
-                grades.labs.push({
+                this.grades.labs.push({
                     grade: studentLabs.grades[l.id],
                     labID: l.id,
                     name: l.name,
@@ -215,13 +216,11 @@ export default {
                     total_points: l.total_points,
                     problems: problems,
                 });
-				console.log(grades)
+				console.log(this.grades)
             });
 
 			console.log("end of lab pushing")
-
-            //set the vue data value
-            this.grades = grades;
+			console.log(this.grades)
 
             //create payload to get total lab/problem values
             var payload = {
