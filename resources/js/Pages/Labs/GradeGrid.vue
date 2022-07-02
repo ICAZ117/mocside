@@ -275,6 +275,7 @@ export default {
         },
     },
     async mounted() {
+		console.log(this.labs)
 		console.log("mounted")
         //set the colors of all the graded labs and problems
         await this.getStudentObject();
