@@ -217,8 +217,8 @@ export default {
 
             //create payload to get total lab/problem values
             var payload = {
-                problems: problemIDs,
-                labs: labIDs,
+                problems: this.problemIDs,
+                labs: this.labIDs,
             };
             if (problemIDs.length == 0 || labIDs.length == 0) {
                 this.problems = {};
