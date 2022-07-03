@@ -167,7 +167,7 @@ export default {
 				let p = labProblems.problems[i];
 				problems.push({
 					problemID: p,
-                    grade: problemsInLab.grades[p]
+                    grade: labProblems.grades[p]
 				});
 
 			}
