@@ -173,7 +173,7 @@ export default {
 			}
 
 			//add problems to the lab in grades
-			lab = this.grades.labs.filter(x => x.labID == labID)[0];
+			var lab = this.grades.labs.filter(x => x.labID == labID)[0];
 			lab.problems = problems;
 		},
 
