@@ -163,10 +163,14 @@ export default {
 
 			var problems = [];
 
+			this.problemsIDs = labProblems.problems;
+
+			var probs = await this.getProblems();
+
+
 			for(let i = 0; i < labProblems.problems.length; i++) {
 				let p = labProblems.problems[i];
-
-				let prob = await this.getProblem(p);
+				let prob = probs[p];
 
 				problems.push({
 					problemID: p,
@@ -177,9 +181,6 @@ export default {
 					worth: prob.worth,
                     grade: labProblems.grades[p]
 				});
-
-				//keep problemID for later usage
-                this.problemIDs.push(p);
 
 			}
 
@@ -254,6 +255,7 @@ export default {
 
             //save the total point values into data object
             this.problems = res.data.data.problems;
+			return this.problems;
 		},
 
         async getStudentObject() {
