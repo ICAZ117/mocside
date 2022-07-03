@@ -131,6 +131,16 @@ export default {
     },
     methods: {
 
+		async getLabGrades() {
+			//get the total grade of the course
+			this.grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
+
+			//get the labs of the student
+			var studentLabs = JSON.parse(this.student.gradebook_labs)
+
+			console.log(studentLabs)
+		},
+
         //labs list work
         async getAllGradeColors() {
             this.grades.labs.forEach(lab => {
@@ -269,9 +279,12 @@ export default {
     },
     async mounted() {
         await this.getStudentObject();
-        await this.getGrades();
-		await this.getProblems();
-        await this.getAllGradeColors();
+        // await this.getGrades();
+		// await this.getProblems();
+        // await this.getAllGradeColors();
+
+		//rework so labs are loaded on page load, but problems aren't loaded until lab is expanded
+		//then get colors to work
     },
 }
 </script>
