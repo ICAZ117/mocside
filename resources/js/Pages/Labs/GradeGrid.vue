@@ -165,16 +165,27 @@ export default {
 
 			for(let i = 0; i < labProblems.problems.length; i++) {
 				let p = labProblems.problems[i];
+
 				problems.push({
 					problemID: p,
+					//name: 
+					//test_cases:
+					//passed:
+					//due_date
+					//worth:
                     grade: labProblems.grades[p]
 				});
+
+				//keep problemID for later usage
+                this.problemIDs.push(p);
 
 			}
 
 			//add problems to the lab in grades
 			var lab = this.grades.labs.filter(x => x.labID == labID)[0];
 			lab.problems = problems;
+
+			this.getProblems();
 		},
 
         //labs list work
@@ -267,10 +278,10 @@ export default {
 				problems: this.problemIDs,
 				labs: this.labIDs
 			};
-			if(this.problemIDs.length == 0 || this.labIDs == 0) {
+			if(this.problemIDs.length == 0 || this.labIDs.length == 0) {
 				this.problems = {};
 				return;
-			} 
+			}
 
             //make API call and send payload to get said values
             const res = await API.apiClient.post(`/gradebook/worth`, payload);
