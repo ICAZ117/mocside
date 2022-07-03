@@ -279,6 +279,9 @@ export default {
     },
     async mounted() {
         await this.getStudentObject();
+
+		this.getLabGrades();
+
         // await this.getGrades();
 		// await this.getProblems();
         // await this.getAllGradeColors();
