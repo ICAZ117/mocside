@@ -165,7 +165,7 @@ export default {
 
 			this.problemsIDs = labProblems.problems;
 
-			var probs = await this.getProblems();
+			var probs = await this.getProblems(labProblems.problems);
 
 
 			for(let i = 0; i < labProblems.problems.length; i++) {
@@ -224,13 +224,12 @@ export default {
             });
         },
 
-		async getProblems() {
+		async getProblems(problemIDs) {
 			var payload = {
-				problems: this.problemIDs,
+				problems: problemIDs,
 				labs: this.labIDs
 			};
-			console.log(payload)
-			if(this.problemIDs.length == 0 || this.labIDs.length == 0) {
+			if(problemIDs.length == 0 || this.labIDs.length == 0) {
 				this.problems = {};
 				return;
 			}
