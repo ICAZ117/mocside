@@ -158,7 +158,7 @@ export default {
 		},
 
 		async getLabProblems(labID) {
-			const res = await API.apiClient.get(`/gradebook/${l.id}`);
+			const res = await API.apiClient.get(`/gradebook/${labID}`);
 			var labProblems = res.data.data;
 
 			var problems = [];
