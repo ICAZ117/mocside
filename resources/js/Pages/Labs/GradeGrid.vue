@@ -200,6 +200,8 @@ export default {
 			//make API call and send payload to get problem values
 			const res = await API.apiClient.post(`/gradebook/worth`, payload);
 
+			console.log(res.data.data.problems)
+
 			return res.data.data.problems[0];
 		},
 
