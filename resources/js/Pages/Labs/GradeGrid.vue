@@ -189,22 +189,6 @@ export default {
 			lab.problems = problems;
 		},
 
-		async getProblem(pID) {
-			var payload = {
-				problems: [pID],
-				labs: this.labIDs
-			};
-			if(!pID || this.labIDs.length == 0) {
-				return;
-			}
-
-			//make API call and send payload to get problem values
-			const res = await API.apiClient.post(`/gradebook/worth`, payload);
-
-			//returns object instead of array for some reason
-			return res.data.data.problems[pID];
-		},
-
         //labs list work
         async getAllGradeColors() {
             this.grades.labs.forEach(lab => {
@@ -255,6 +239,8 @@ export default {
 
             //save the total point values into data object
             this.problems = res.data.data.problems;
+
+			console.log(this.problems);
 			return this.problems;
 		},
 
