@@ -130,7 +130,7 @@ export default {
         }
     },
     methods: {
-
+		//lab list work
 		async getLabGrades() {
 			//get the total grade of the course
 			this.grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
@@ -157,6 +157,7 @@ export default {
 			}
 		},
 
+		//individual lab work
 		async getLabProblems(labID) {
 			const res = await API.apiClient.get(`/gradebook/${labID}`);
 			var labProblems = res.data.data;
@@ -188,6 +189,26 @@ export default {
 			var lab = this.grades.labs.filter(x => x.labID == labID)[0];
 			lab.problems = problems;
 		},
+
+		async getProblems(problemIDs) {
+			var payload = {
+				problems: problemIDs,
+				labs: this.labIDs
+			};
+			if(problemIDs.length == 0 || this.labIDs.length == 0) {
+				this.problems = {};
+				return;
+			}
+
+			//make API call and send payload to get said values
+			const res = await API.apiClient.post(`/gradebook/worth`, payload);
+
+			//save the total point values into data object
+			this.problems = res.data.data.problems;
+
+			return this.problems;
+		},
+
 
         //labs list work
         async getAllGradeColors() {
@@ -224,26 +245,8 @@ export default {
             });
         },
 
-		async getProblems(problemIDs) {
-			var payload = {
-				problems: problemIDs,
-				labs: this.labIDs
-			};
-			if(problemIDs.length == 0 || this.labIDs.length == 0) {
-				this.problems = {};
-				return;
-			}
 
-            //make API call and send payload to get said values
-            const res = await API.apiClient.post(`/gradebook/worth`, payload);
-
-            //save the total point values into data object
-            this.problems = res.data.data.problems;
-
-			console.log(this.problems);
-			return this.problems;
-		},
-
+		//get the students grades and what not
         async getStudentObject() {
             const res = await API.apiClient.get(`/students/${this.authUser.fsc_user.fsc_id}`);
             this.student = res.data;
@@ -282,15 +285,14 @@ export default {
     },
     async mounted() {
         await this.getStudentObject();
-
 		this.getLabGrades();
 
-        // await this.getGrades();
-		// await this.getProblems();
         // await this.getAllGradeColors();
 
-		//rework so labs are loaded on page load, but problems aren't loaded until lab is expanded
-		//then get colors to work
+		//need to get the lab colors here
+
+		//lab and problems are loading properly need to get colors working now
+		//lab percent complete is not being set properly
     },
 }
 </script>
