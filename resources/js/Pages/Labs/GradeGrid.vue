@@ -166,13 +166,15 @@ export default {
 			for(let i = 0; i < labProblems.problems.length; i++) {
 				let p = labProblems.problems[i];
 
+				let prob = await this.getProblem(p);
+
 				problems.push({
 					problemID: p,
-					//name: 
-					//test_cases:
-					//passed:
-					//due_date
-					//worth:
+					name: prob.name,
+					test_cases: prob.test_cases,
+					passed: prob.passed,
+					due_date: prob.due_date,
+					worth: prob.worth,
                     grade: labProblems.grades[p]
 				});
 
@@ -184,8 +186,21 @@ export default {
 			//add problems to the lab in grades
 			var lab = this.grades.labs.filter(x => x.labID == labID)[0];
 			lab.problems = problems;
+		},
 
-			this.getProblems();
+		async getProblem(pID) {
+			var payload = {
+				problems: [pID],
+				labs: this.labIDs
+			};
+			if(!pID || this.labIDs.length == 0) {
+				return;
+			}
+
+			//make API call and send payload to get problem values
+			const res = await API.apiClient.post(`/gradebook/worth`, payload);
+
+			return res.data.data.problems[0];
 		},
 
         //labs list work
@@ -221,56 +236,6 @@ export default {
                     }
                 });
             });
-        },
-
-
-        //user related functions
-        async getGrades() {
-
-            //get total grade for course
-            this.grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
-
-            //get all labs the student is in
-            var studentLabs = JSON.parse(this.student.gradebook_labs);
-
-            //loop over all of the labs in the current course
-			for(let i =0; i < this.labs.length; i++) {
-				let l = this.labs[i];
-                //get all problems in current lab
-                const problemsInLabres = await API.apiClient.get(`/gradebook/${l.id}`);
-                var problemsInLab = problemsInLabres.data.data;
-
-                //keep labID for later usage
-                this.labIDs.push(l.id);
-
-                //init problems list
-                var problems = [];
-
-                //loop over all problems within current lab
-				for(let j = 0; j < problemsInLab.problems.length; j++) {
-					let p = problemsInLab.problems[j];
-                    //fill problems list with objects containing problemID's and grades
-                    problems.push({ 
-                        problemID: p,
-                        grade: problemsInLab.grades[p]
-                    });
-
-                    //keep problemID for later usage
-                    this.problemIDs.push(p);
-                };
-
-                //add current lab to the local student gradebook
-                this.grades.labs.push({
-                    grade: studentLabs.grades[l.id],
-                    labID: l.id,
-                    name: l.name,
-                    numProblems: l.num_problems,
-                    percentComplete: l.percent,
-                    dueDate: l.due_date,
-                    total_points: l.total_points,
-                    problems: problems,
-                });
-            };
         },
 
 		async getProblems() {
