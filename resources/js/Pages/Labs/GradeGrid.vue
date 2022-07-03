@@ -135,10 +135,46 @@ export default {
 			//get the total grade of the course
 			this.grades.grade = JSON.parse(this.student.gradebook_courses).grades[this.courseID];
 
-			//get the labs of the student
+			//get the ids of the labs the student has worked on/completed
 			var studentLabs = JSON.parse(this.student.gradebook_labs)
 
-			console.log(studentLabs)
+			//loop over each lab in current course
+			for(let i = 0; i < this.labs.length; i++) {
+				let l = this.labs[i];
+
+				this.labIDs.push(l.id)
+
+				//add current lab to the local student gradebook
+                this.grades.labs.push({
+                    grade: studentLabs.grades[l.id],
+                    labID: l.id,
+                    name: l.name,
+                    numProblems: l.num_problems,
+                    percentComplete: l.percent,
+                    dueDate: l.due_date,
+                    total_points: l.total_points,
+                });
+			}
+		},
+
+		async getLabProblems(labID) {
+			const res = await API.apiClient.get(`/gradebook/${l.id}`);
+			var labProblems = res.data.data;
+
+			var problems = [];
+
+			for(let i = 0; i < labProblems.problems.length; i++) {
+				let p = labProblems.problems[i];
+				problems.push({
+					problemID: p,
+                    grade: problemsInLab.grades[p]
+				});
+
+			}
+
+			//add problems to the lab in grades
+			lab = this.grades.labs.filter(x => x.labID == labID)[0];
+			lab.problems = problems;
 		},
 
         //labs list work
@@ -257,6 +293,8 @@ export default {
                 this.lang = "";
                 this.expandedProblem = null;
             } else {
+				//get lab's problem details
+				this.getLabProblems(key);
                 //open
                 this.expandedProblem = key;
             }
