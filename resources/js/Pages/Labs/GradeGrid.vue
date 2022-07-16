@@ -286,13 +286,7 @@ export default {
     async mounted() {
         await this.getStudentObject();
 		this.getLabGrades();
-
-        // await this.getAllGradeColors();
-
-		//need to get the lab colors here
-
-		//lab and problems are loading properly need to get colors working now
-		//lab percent complete is not being set properly
+        await this.getAllGradeColors();
     },
 }
 </script>
