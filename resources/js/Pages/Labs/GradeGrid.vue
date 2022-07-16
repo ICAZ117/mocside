@@ -188,7 +188,6 @@ export default {
 			//add problems to the lab in grades
 			var lab = this.grades.labs.filter(x => x.labID == labID)[0];
 			lab.problems = problems;
-            // this.getProblemGradeColors(lab);
 		},
 
 		async getProblems(problemIDs) {
@@ -234,27 +233,6 @@ export default {
             if(grade == 100) return "complete"
             else if(grade != 0) return "incomplete"
             else return ''
-        },
-
-        async getProblemGradeColors(lab) {
-            //get colors for each labs list of problems
-            console.log(lab)
-            lab.problems.forEach(problem => {
-                console.log(problem)
-                var elementp = document.getElementById("gp" + problem.problemID);
-                console.log(elementp)
-                if(problem.grade == 100){
-                    //green background
-                    elementp?.classList.add("complete");
-                } else if(problem.grade != 0) {
-                    //red background
-                    elementp?.classList.add("incomplete");
-                } else {
-                    //white background
-                    elementp?.classList.remove("complete");
-                    elementp?.classList.remove("incomplete");
-                }
-            });
         },
 
 
