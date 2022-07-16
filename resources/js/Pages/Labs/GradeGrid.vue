@@ -230,9 +230,10 @@ export default {
         },
 
         problemGradeColor(problem) {
-            if(problem.grade == 100) return "complete"
-            if(problem.grade != 0) return "incomplete"
-            return ''
+            grade = parseInt((problem.grade /problem.worth) * 10000) * 0.01
+            if(grade == 100) return "complete"
+            else if(grade != 0) return "incomplete"
+            else return ''
         },
 
         async getProblemGradeColors(lab) {
