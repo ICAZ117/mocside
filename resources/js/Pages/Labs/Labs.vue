@@ -198,26 +198,23 @@ export default {
             }
 
             var d = JSON.parse(this.progress.labs);
-            console.log(d)
-            d.forEach(l => {
-                if(l.lab_id == lab.id) {
-                    if(!l) {
-                        return "0%";
-                    } else {
-                        return parseInt((l.num_completed / lab.num_problems) * 100) + "%";
-                    }
+            for(let i = 0; i < d.length; i++) {
+                if(d[i].lab_id == lab.id) {
+                    return parseInt((d[i].num_completed / lab.num_problems) * 100) + "%";
                 }
-            });
+            }
+
             return "0%";
         },
         //get lab activity
         getActivity(lab) {
             var d = JSON.parse(this.progress.labs);
-            d.forEach(l => {
-                if(l.lab_id == lab.id) {
-                    return l.last_progress;
+            
+            for(let i = 0; i < d.length; i++) {
+                if(d[i].lab_id == lab.id) {
+                    return d[i].last_progress;
                 }
-            });
+            }
 
             return "No Recent Activity";
         },
