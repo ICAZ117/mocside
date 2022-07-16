@@ -230,7 +230,7 @@ export default {
         },
 
         problemGradeColor(problem) {
-            grade = parseInt((problem.grade /problem.worth) * 10000) * 0.01
+            let grade = parseInt((problem.grade /problem.worth) * 10000) * 0.01
             if(grade == 100) return "complete"
             else if(grade != 0) return "incomplete"
             else return ''
