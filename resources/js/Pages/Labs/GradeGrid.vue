@@ -215,7 +215,6 @@ export default {
         async getLabGradeColors() {
             this.grades.labs.forEach(lab => {
                 var element = document.getElementById("gl" + lab.labID);
-                console.log(element)
                 if(lab.percentComplete == "100%") {
                     //green background
                     element?.classList.add("complete");
@@ -234,6 +233,7 @@ export default {
             //get colors for each labs list of problems
             lab.problems.forEach(problem => {
                 var elementp = document.getElementById("gp" + problem.problemID);
+                console.log(elementp)
                 if(problem.grade == 100){
                     //green background
                     elementp?.classList.add("complete");
