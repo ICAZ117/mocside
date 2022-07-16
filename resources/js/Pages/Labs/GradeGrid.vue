@@ -231,7 +231,9 @@ export default {
 
         async getProblemGradeColors(lab) {
             //get colors for each labs list of problems
+            console.log(lab)
             lab.problems.forEach(problem => {
+                console.log(problem)
                 var elementp = document.getElementById("gp" + problem.problemID);
                 console.log(elementp)
                 if(problem.grade == 100){
