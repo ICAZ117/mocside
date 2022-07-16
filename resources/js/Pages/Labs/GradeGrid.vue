@@ -76,7 +76,7 @@
                         </tr>
                     </thead>
                     <tbody style="border-bottom: 0 !important">
-                        <tr v-for="(problem, key) in grades.labs[index].problems" :key="key" class="lab pointer" :id="'gp' + problem.problemID">
+                        <tr v-for="(problem, key) in grades.labs[index].problems" :key="key" class="lab pointer" :id="'gp' + problem.problemID" :class="problemGradeColor(problem)">
                         <td>{{ problem.name }}</td>
                         <td>
                             {{ problem.test_cases }}
@@ -188,7 +188,7 @@ export default {
 			//add problems to the lab in grades
 			var lab = this.grades.labs.filter(x => x.labID == labID)[0];
 			lab.problems = problems;
-            this.getProblemGradeColors(lab);
+            // this.getProblemGradeColors(lab);
 		},
 
 		async getProblems(problemIDs) {
@@ -227,6 +227,12 @@ export default {
                     element?.classList.remove("incomplete");
                 }
             });
+        },
+
+        problemGradeColor(problem) {
+            if(problem.grade == 100) return "complete"
+            if(problem.grade != 0) return "incomplete"
+            return ''
         },
 
         async getProblemGradeColors(lab) {
