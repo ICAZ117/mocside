@@ -73,7 +73,7 @@ export default {
             allLabs: [],
             labs: [],
             progress: {},
-            sort: "4",
+            sort: "1",
             student: {},
             problems: {},
         }
