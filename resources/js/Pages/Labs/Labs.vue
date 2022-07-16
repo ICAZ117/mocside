@@ -198,6 +198,7 @@ export default {
             }
 
             var d = JSON.parse(this.progress.labs);
+            console.log(d)
             d.forEach(l => {
                 if(l.lab_id == lab.id) {
                     if(!l) {
