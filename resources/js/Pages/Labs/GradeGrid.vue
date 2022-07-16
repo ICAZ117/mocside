@@ -188,6 +188,7 @@ export default {
 			//add problems to the lab in grades
 			var lab = this.grades.labs.filter(x => x.labID == labID)[0];
 			lab.problems = problems;
+            this.getProblemGradeColors(lab);
 		},
 
 		async getProblems(problemIDs) {
@@ -211,7 +212,7 @@ export default {
 
 
         //labs list work
-        async getAllGradeColors() {
+        async getLabGradeColors() {
             this.grades.labs.forEach(lab => {
                 var element = document.getElementById("gl" + lab.labID);
                 console.log(element)
@@ -226,23 +227,24 @@ export default {
                     element?.classList.remove("complete");
                     element?.classList.remove("incomplete");
                 }
+            });
+        },
 
-
-                //get colors for each labs list of problems
-                // lab.problems.forEach(problem => {
-                //     var elementp = document.getElementById("gp" + problem.problemID);
-                //     if(problem.grade == 100){
-                //         //green background
-                //         elementp?.classList.add("complete");
-                //     } else if(problem.grade != 0) {
-                //         //red background
-                //         elementp?.classList.add("incomplete");
-                //     } else {
-                //         //white background
-                //         elementp?.classList.remove("complete");
-                //         elementp?.classList.remove("incomplete");
-                //     }
-                // });
+        async getProblemGradeColors(lab) {
+            //get colors for each labs list of problems
+            lab.problems.forEach(problem => {
+                var elementp = document.getElementById("gp" + problem.problemID);
+                if(problem.grade == 100){
+                    //green background
+                    elementp?.classList.add("complete");
+                } else if(problem.grade != 0) {
+                    //red background
+                    elementp?.classList.add("incomplete");
+                } else {
+                    //white background
+                    elementp?.classList.remove("complete");
+                    elementp?.classList.remove("incomplete");
+                }
             });
         },
 
@@ -287,7 +289,7 @@ export default {
     async mounted() {
         await this.getStudentObject();
 		await this.getLabGrades();
-        await this.getAllGradeColors();
+        await this.getLabGradeColors();
     },
 }
 </script>
