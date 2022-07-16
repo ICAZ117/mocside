@@ -290,6 +290,7 @@ export default {
             await this.sortCourses(4);
         },
         async sortCourses(type) {
+            if (type) this.sort = type
             if(this.sort == 0) {
                 this.allCourses = sort(0, this.allCourses);
             } else if (this.sort == 1) {
