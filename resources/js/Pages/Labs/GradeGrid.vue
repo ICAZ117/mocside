@@ -229,20 +229,20 @@ export default {
 
 
                 //get colors for each labs list of problems
-                lab.problems.forEach(problem => {
-                    var elementp = document.getElementById("gp" + problem.problemID);
-                    if(problem.grade == 100){
-                        //green background
-                        elementp?.classList.add("complete");
-                    } else if(problem.grade != 0) {
-                        //red background
-                        elementp?.classList.add("incomplete");
-                    } else {
-                        //white background
-                        elementp?.classList.remove("complete");
-                        elementp?.classList.remove("incomplete");
-                    }
-                });
+                // lab.problems.forEach(problem => {
+                //     var elementp = document.getElementById("gp" + problem.problemID);
+                //     if(problem.grade == 100){
+                //         //green background
+                //         elementp?.classList.add("complete");
+                //     } else if(problem.grade != 0) {
+                //         //red background
+                //         elementp?.classList.add("incomplete");
+                //     } else {
+                //         //white background
+                //         elementp?.classList.remove("complete");
+                //         elementp?.classList.remove("incomplete");
+                //     }
+                // });
             });
         },
 
