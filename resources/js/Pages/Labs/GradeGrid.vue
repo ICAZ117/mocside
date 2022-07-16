@@ -214,16 +214,17 @@ export default {
         async getAllGradeColors() {
             this.grades.labs.forEach(lab => {
                 var element = document.getElementById("gl" + lab.labID);
+                console.log(element)
                 if(lab.percentComplete == "100%") {
                     //green background
-                    element.classList.add("complete");
+                    element?.classList.add("complete");
                 } else if (lab.percentComplete != "0%") {
                     //red background
-                    element.classList.add("incomplete");
+                    element?.classList.add("incomplete");
                 } else {
                     //white background
-                    element.classList.remove("complete");
-                    element.classList.remove("incomplete");
+                    element?.classList.remove("complete");
+                    element?.classList.remove("incomplete");
                 }
 
 
@@ -232,14 +233,14 @@ export default {
                     var elementp = document.getElementById("gp" + problem.problemID);
                     if(problem.grade == 100){
                         //green background
-                        elementp.classList.add("complete");
+                        elementp?.classList.add("complete");
                     } else if(problem.grade != 0) {
                         //red background
-                        elementp.classList.add("incomplete");
+                        elementp?.classList.add("incomplete");
                     } else {
                         //white background
-                        elementp.classList.remove("complete");
-                        elementp.classList.remove("incomplete");
+                        elementp?.classList.remove("complete");
+                        elementp?.classList.remove("incomplete");
                     }
                 });
             });
