@@ -1,7 +1,7 @@
 <template>
     <div class="form-group">
         <ul>
-        <li v-for="(k, id) in joinKeys" :key="k">
+        <li v-for="(k, id) in joinKeys" :key="k" style="cursor: default;">
             {{ k.join_key }}
             <!-- <button class="btn btn-danger" type="button" @click="copyKey(k)">Copy Url</button>
             <button class="btn btn-danger" type="button" @click="deleteKey(k, id)">Delete Key</button> -->
