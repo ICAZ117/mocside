@@ -11,7 +11,7 @@
             </thead>
             <tbody>
                 <template v-for="(k, id) in joinKeys" :key="k">
-                    <tr>
+                    <tr class="key-row">
                         <td>{{ k.join_key }}</td>
                         <td>{{ k.max_uses == 0 ? '∞' : k.max_uses - k.uses }}</td>
                         <td>{{ k.expire_date }}</td>
