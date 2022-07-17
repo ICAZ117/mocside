@@ -739,7 +739,8 @@ hr.courses {
 }
 
 .course-dashboard {
-    height: 100vh!important;
+    height: 93.75vh!important;
+    overflow-y: hidden;
     color: rgb(136, 136, 136);
     width: 100vw!important;
 }
