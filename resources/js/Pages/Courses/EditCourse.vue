@@ -118,7 +118,7 @@
 
     <div class="bottom-row">
       <div class="bottom-left key-gen">
-        <KeyGen :courseID="courseID"></KeyGen>
+        <KeyGen :courseID="courseID" :courseEnd="courseForm.dateEnd"></KeyGen>
       </div>
       <div class="bottom-right labs">
         <div

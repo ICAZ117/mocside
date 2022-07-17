@@ -45,7 +45,7 @@
 <script>
 import * as API from "../services/API";
 export default {
-    props: ["courseID"],
+    props: ["courseID", "courseEnd"],
     data() {
         return {
             enrollKey: {
@@ -96,7 +96,7 @@ export default {
             payload["join_key"] = res.data.data.join_key;
             if (this.enrollKey.perm) {
                 //get end time of course
-                payload["expire_date"] = this.courseForm.dateEnd;
+                payload["expire_date"] = this.courseEnd;
             } else {
                 //expire date is set to datetime
                 payload["expire_date"] = this.enrollKey.datetime + " " + this.enrollKey.time;
