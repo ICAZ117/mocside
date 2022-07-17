@@ -60,7 +60,7 @@ export default {
         }
     },
     methods: {
-        fetchKeys() {
+        async fetchKeys() {
             const res = await API.apiClient.get(`/invite/course/${this.courseID}`);
             var myArr = res.data.data;
             for (let i = 0; i < myArr.length; i++) {
