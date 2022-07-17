@@ -5,8 +5,8 @@
             {{ k.join_key }}
             <!-- <button class="btn btn-danger" type="button" @click="copyKey(k)">Copy Url</button>
             <button class="btn btn-danger" type="button" @click="deleteKey(k, id)">Delete Key</button> -->
-            <a @click="copyKey(k)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">
-                <i class="fas fa-edit"></i>
+            <a @click="copyKey(k)" class="courselaunch text-primary mx-2 my-1 no-decor pointer">
+                <i class="fas fa-copy"></i>
             </a>
             <a @click="deleteKey(k, id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">
                 <i class="fas fa-trash-alt"></i>
