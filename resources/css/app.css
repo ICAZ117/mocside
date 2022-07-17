@@ -789,6 +789,16 @@ thead.keygen-head {
     cursor: pointer;
 }
 
+.keygen.form-group {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.key-list, .create-key {
+    width: 50%;
+    margin: 1rem;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable,

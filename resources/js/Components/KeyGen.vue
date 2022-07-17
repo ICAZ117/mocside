@@ -1,64 +1,68 @@
 <template>
-    <div class="form-group">
-        <table class="table keygen">
-            <thead class="keygen-head">
-                <tr>
-                    <th>Key</th>
-                    <th>Uses</th>
-                    <th>Expire Date</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <template v-for="(k, id) in joinKeys" :key="k">
-                    <tr class="key-row">
-                        <td>{{ k.join_key }}</td>
-                        <td>{{ k.max_uses == 0 ? '∞' : k.max_uses - k.uses }}</td>
-                        <td>{{ k.expire_date }}</td>
-                        <td>
-                            <a @click="copyKey(k)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Copy Key">
-                                <i class="fas fa-copy"></i>
-                            </a>
-                            <a @click="deleteKey(k, id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer" title="Delete Key">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-                        </td>
+    <div class=" keygen form-group">
+        <div class="key-list">
+            <table class="table keygen">
+                <thead class="keygen-head">
+                    <tr>
+                        <th>Key</th>
+                        <th>Uses</th>
+                        <th>Expire Date</th>
+                        <th></th>
                     </tr>
-                </template>
-            </tbody>
-        </table>
-        <div class="key-options">
-        <label class="course-edit-label">Enroll Key</label>
-        <input
-            placeholder="Random"
-            type="text"
-            v-model="enrollKey.key"
-            class="profile-field course-edit-field"
-        />
-        <br />
-        <label class="course-edit-label">Permanent Key</label>
-        <label class="switch">
-            <input type="checkbox" v-model="enrollKey.perm" />
-            <span class="slider round"></span>
-        </label>
-        <br />
-        <label class="course-edit-label">Expire Date</label>
-        <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
-        <br />
-        <label>Expire Time</label>
-        <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
-        <br />
-        <label class="course-edit-label">Max Uses</label>
-        <input
-            placeholder="0 for unlimited use"
-            type="text"
-            v-model="enrollKey.uses"
-            class="profile-field course-edit-field"
-        />
+                </thead>
+                <tbody>
+                    <template v-for="(k, id) in joinKeys" :key="k">
+                        <tr class="key-row">
+                            <td>{{ k.join_key }}</td>
+                            <td>{{ k.max_uses == 0 ? '∞' : k.max_uses - k.uses }}</td>
+                            <td>{{ k.expire_date }}</td>
+                            <td>
+                                <a @click="copyKey(k)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Copy Key">
+                                    <i class="fas fa-copy"></i>
+                                </a>
+                                <a @click="deleteKey(k, id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer" title="Delete Key">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
         </div>
-        <button type="button" @click="generateKey" class="btn btn-danger btn-block">
-        Generate Course Enroll Key
-        </button>
+        <div class="create-key">
+            <div class="key-options">
+            <label class="course-edit-label">Enroll Key</label>
+            <input
+                placeholder="Random"
+                type="text"
+                v-model="enrollKey.key"
+                class="profile-field course-edit-field"
+            />
+            <br />
+            <label class="course-edit-label">Permanent Key</label>
+            <label class="switch">
+                <input type="checkbox" v-model="enrollKey.perm" />
+                <span class="slider round"></span>
+            </label>
+            <br />
+            <label class="course-edit-label">Expire Date</label>
+            <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
+            <br />
+            <label>Expire Time</label>
+            <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
+            <br />
+            <label class="course-edit-label">Max Uses</label>
+            <input
+                placeholder="0 for unlimited use"
+                type="text"
+                v-model="enrollKey.uses"
+                class="profile-field course-edit-field"
+            />
+            </div>
+            <button type="button" @click="generateKey" class="btn btn-danger btn-block">
+            Generate Course Enroll Key
+            </button>
+        </div>
     </div>
 </template>
 
