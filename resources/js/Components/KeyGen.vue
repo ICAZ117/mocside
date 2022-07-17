@@ -13,13 +13,12 @@
             </a>
         </li>
         </ul>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Key</th>
-                    <th>Remaining Uses</th>
+                    <th>Uses</th>
                     <th>Expire Date</th>
-                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,8 +28,22 @@
                     <td>3</td>
                     <td>July 17, 2022</td>
                     <td>Edit</td>
-                    <td>Delete</td>
                 </tr>
+                <template v-for="(k, id) in joinKeys" :key="k">
+                    <tr>
+                        <td>{{ k.join_key }}</td>
+                        <td>{{ k.max_uses - k.uses < 1 ? '∞' : k.max_uses - k.uses }}</td>
+                        <td>{{ k.expire_date }}</td>
+                        <td>
+                            <a @click="copyKey(k)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Copy Key">
+                                <i class="fas fa-copy"></i>
+                            </a>
+                            <a @click="deleteKey(k, id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer" title="Delete Key">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </template>
             </tbody>
         </table>
         <div class="key-options">
