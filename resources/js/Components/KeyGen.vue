@@ -3,8 +3,14 @@
         <ul>
         <li v-for="(k, id) in joinKeys" :key="k">
             {{ k.join_key }}
-            <a @click="copyKey(k)">Copy Url</a>
-            <a @click="deleteKey(k, id)">Delete Key</a>
+            <!-- <button class="btn btn-danger" type="button" @click="copyKey(k)">Copy Url</button>
+            <button class="btn btn-danger" type="button" @click="deleteKey(k, id)">Delete Key</button> -->
+            <a @click="copyKey(k)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a @click="deleteKey(k, id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer">
+                <i class="fas fa-trash-alt"></i>
+            </a>
         </li>
         </ul>
         <div class="key-options">
