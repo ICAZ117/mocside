@@ -1,18 +1,5 @@
 <template>
     <div class="form-group">
-        <ul>
-        <li v-for="(k, id) in joinKeys" :key="k" style="cursor: default;">
-            {{ k.join_key }}
-            <!-- <button class="btn btn-danger" type="button" @click="copyKey(k)">Copy Url</button>
-            <button class="btn btn-danger" type="button" @click="deleteKey(k, id)">Delete Key</button> -->
-            <a @click="copyKey(k)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Copy Key">
-                <i class="fas fa-copy"></i>
-            </a>
-            <a @click="deleteKey(k, id)" class="courselaunch text-danger mx-2 my-1 no-decor pointer" title="Delete Key">
-                <i class="fas fa-trash-alt"></i>
-            </a>
-        </li>
-        </ul>
         <table class="table keygen">
             <thead class="keygen-head">
                 <tr>
