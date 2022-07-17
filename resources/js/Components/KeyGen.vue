@@ -109,7 +109,7 @@ export default {
             this.joinKeys.push(res2.data.data);
         },
     },
-    mounted() {
+    async mounted() {
         await this.fetchKeys();
     }
 }
