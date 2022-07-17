@@ -760,6 +760,30 @@ hr.courses {
     margin: 1rem;
   }
 
+table.keygen {
+    background-color: inherit !important;
+    border: none !important;
+}
+
+.keygen td {
+    /* border: 1px solid #9e9e9e !important; */
+    /* border-right: none !important; */
+    /* border-left: none !important; */
+    border: none !important;
+}
+
+.keygen tr {
+    /* border: 1px solid #9e9e9e !important; */
+    border: none !important;
+}
+
+thead.keygen-head {
+    background-color: rgba(0, 96, 169, 0.75) !important;
+    color: white !important;
+    /* border: 1px solid rgba(0, 96, 169, 0.75) !important; */
+    border: none !important;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable,

@@ -13,8 +13,8 @@
             </a>
         </li>
         </ul>
-        <table class="table">
-            <thead>
+        <table class="table keygen">
+            <thead class="keygen-head">
                 <tr>
                     <th>Key</th>
                     <th>Uses</th>
@@ -23,16 +23,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Chase-Test</td>
-                    <td>3</td>
-                    <td>July 17, 2022</td>
-                    <td>Edit</td>
-                </tr>
                 <template v-for="(k, id) in joinKeys" :key="k">
                     <tr>
                         <td>{{ k.join_key }}</td>
-                        <td>{{ k.max_uses - k.uses < 1 ? '∞' : k.max_uses - k.uses }}</td>
+                        <td>{{ k.max_uses == 0 ? '∞' : k.max_uses - k.uses }}</td>
                         <td>{{ k.expire_date }}</td>
                         <td>
                             <a @click="copyKey(k)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Copy Key">
