@@ -13,6 +13,26 @@
             </a>
         </li>
         </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Remaining Uses</th>
+                    <th>Expire Date</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Chase-Test</td>
+                    <td>3</td>
+                    <td>July 17, 2022</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </tr>
+            </tbody>
+        </table>
         <div class="key-options">
         <label class="course-edit-label">Enroll Key</label>
         <input
