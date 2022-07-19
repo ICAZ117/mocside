@@ -29,41 +29,57 @@
                 </tbody>
             </table>
         </div>
-        <div class="create-key">
-            <div class="key-options">
-                <label class="course-edit-label">Enroll Key</label>
-                <input
-                    placeholder="Random"
-                    type="text"
-                    v-model="enrollKey.key"
-                    class="profile-field course-edit-field"
-                />
-                <br />
-                <label class="course-edit-label">Permanent Key</label>
-                <label class="switch">
-                    <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
-                    <span class="slider round"></span>
-                </label>
-                <br />
-                <div>
-                    <label class="course-edit-label">Expire Date</label>
-                    <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
-                    <br />
-                    <label>Expire Time</label>
-                    <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
-                    <br />
-                    <label class="course-edit-label">Max Uses</label>
+        <div class="create-key flex">
+            <div class="key-options flex-row">
+                <div class="flex-row">
+                    <label class="course-edit-label">Enroll Key</label>
                     <input
-                        placeholder="0 for unlimited use"
+                        placeholder="Random"
                         type="text"
-                        v-model="enrollKey.uses"
+                        v-model="enrollKey.key"
                         class="profile-field course-edit-field"
                     />
                 </div>
+                
+                <div class="flex-row">
+                    <label class="course-edit-label">Permanent Key</label>
+                    <label class="switch">
+                        <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                
+                
+                <div class="flex flex-row">
+                    <div class="flex-row">
+                        <label class="course-edit-label">Expire Date</label>
+                        <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
+                    </div>
+                    
+                    
+                    <div class="flex-row">
+                        <label>Expire Time</label>
+                        <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
+                    </div>
+                    
+                    
+                    <div class="flex-row">
+                        <label class="course-edit-label">Max Uses</label>
+                        <input
+                            placeholder="0 for unlimited use"
+                            type="text"
+                            v-model="enrollKey.uses"
+                            class="profile-field course-edit-field"
+                        />
+                    </div>
+                </div>
             </div>
-            <button type="button" @click="generateKey" class="btn btn-danger btn-block">
-            Generate Key
-            </button>
+            <div class="gen-button flex-row">
+                <button type="button" @click="generateKey" class="btn btn-danger btn-block gen-button">
+                    Generate Key
+                </button>
+            </div>
+            
         </div>
     </div>
 </template>

@@ -799,6 +799,21 @@ thead.keygen-head {
     margin: 1rem;
 }
 
+.create-key.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.create-key .flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+.create-key .flex-row {
+    max-width: 100%;
+    flex: 1 1 100%;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable,
