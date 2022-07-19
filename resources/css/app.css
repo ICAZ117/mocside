@@ -822,6 +822,11 @@ thead.keygen-head {
     max-width: 50%;
     flex: 1 1 50%;
 }
+.keygen label.keygen-label {
+    font-size: small;
+    font-weight: normal;
+    color:whitesmoke;
+}
 
 /*============== LABS and PROBLEMS ==============*/
 

@@ -32,7 +32,7 @@
         <div class="create-key flex">
             <div class="key-options flex-row">
                 <div class="flex-row">
-                    <label class="course-edit-label">Enroll Key</label>
+                    <label class="keygen-label">Enroll Key</label>
                     <br>
                     <input
                         placeholder="Random"
@@ -54,19 +54,19 @@
                 <div class="flex flex-row">
                     <div class="flex flex-row">
                         <div class="flex-50">
-                            <label class="course-edit-label">Expire Date</label>
+                            <label class="keygen-label">Expire Date</label>
                             <br>
                             <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
                         </div>
                         <div class="flex-50">
-                            <label class="course-edit-label">Expire Time</label>
+                            <label class="keygen-label">Expire Time</label>
                             <br>
                             <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
                         </div>
                     </div>                    
                     
                     <div class="flex-row">
-                        <label class="course-edit-label">Max Uses</label>
+                        <label class="keygen-label">Max Uses</label>
                         <br>
                         <input
                             placeholder="0 for unlimited use"
