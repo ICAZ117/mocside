@@ -76,11 +76,11 @@
                         />
                     </div>
                 </div>
-            </div>
-            <div class="gen-button flex-row">
-                <button type="button" @click="generateKey" class="btn btn-danger btn-block gen-button">
-                    Generate Key
-                </button>
+                <div class="gen-button flex-row">
+                    <button type="button" @click="generateKey" class="btn btn-danger btn-block gen-button">
+                        Generate Key
+                    </button>
+                </div>
             </div>
             
         </div>
