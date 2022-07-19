@@ -47,7 +47,7 @@
                             <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
                             <span class="slider round"></span>
                         </label>
-                        <label class="keygen-label-perm" style="margin-top: -1rem;">Permanent</label>
+                        <label class="keygen-label-perm" style="margin-top: -1rem;">Permanent Key</label>
                     </div>
                 </div>
                
