@@ -63,15 +63,7 @@
                             <br>
                             <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
                         </div>
-                    </div>
-                    
-                    
-                    <div class="flex-row">
-                        <label>Expire Time</label>
-                        <br>
-                        <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
-                    </div>
-                    
+                    </div>                    
                     
                     <div class="flex-row">
                         <label class="course-edit-label">Max Uses</label>
