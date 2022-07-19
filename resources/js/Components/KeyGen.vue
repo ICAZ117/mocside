@@ -43,12 +43,12 @@
                         />
                     </div>
                     <div>
-                        <label class="keygen-label" style="margin-bottom: 1rem;">Permanent</label>
-                        <br>
+                        
                         <label class="switch">
                             <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
                             <span class="slider round"></span>
                         </label>
+                        <label class="keygen-label-perm" style="margin-bottom: 1rem;">Permanent</label>
                     </div>
                 </div>
                
