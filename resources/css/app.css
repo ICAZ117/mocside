@@ -813,6 +813,15 @@ thead.keygen-head {
     max-width: 100%;
     flex: 1 1 100%;
 }
+.gen-button {
+    display: flex;
+    justify-content: end;
+    align-items: start;
+}
+.flex-50 {
+    max-width: 50%;
+    flex: 1 1 50%;
+}
 
 /*============== LABS and PROBLEMS ==============*/
 
