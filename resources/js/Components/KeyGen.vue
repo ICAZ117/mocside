@@ -54,12 +54,12 @@
                 <div class="flex flex-row" style="margin-bottom: 1rem;">
                     <div class="flex flex-row" style="margin-bottom: 1rem;">
                         <div class="flex-50">
-                            <label class="keygen-label">Expire Date</label>
+                            <label class="keygen-label" :class="{ dull : enrollKey.perm }">Expire Date</label>
                             <br>
                             <input type="date" class="date-field" id="expireDate" name="expireDate" :class="{ dull : enrollKey.perm }" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
                         </div>
                         <div class="flex-50">
-                            <label class="keygen-label">Expire Time</label>
+                            <label class="keygen-label" :class="{ dull : enrollKey.perm }">Expire Time</label>
                             <br>
                             <input type="time" class="time-field" id="expireTime" name="expireTime" :class="{ dull : enrollKey.perm }" :disabled="enrollKey.perm" v-model="enrollKey.time" />
                         </div>
