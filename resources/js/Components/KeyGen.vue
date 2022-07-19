@@ -32,25 +32,25 @@
         <div class="create-key flex">
             <div class="key-options flex-row">
                 <div class="flex-row" style="margin-bottom: 1rem;">
-                    <label class="keygen-label">Enroll Key</label>
-                    <br>
-                    <input
-                        placeholder="Random"
-                        type="text"
-                        v-model="enrollKey.key"
-                        class="profile-field course-edit-field"
-                    />
+                    <div>
+                        <label class="keygen-label">Enroll Key</label>
+                        <br>
+                        <input
+                            placeholder="Random"
+                            type="text"
+                            v-model="enrollKey.key"
+                            class="profile-field course-edit-field"
+                        />
+                    </div>
+                    <div>
+                        <label class="keygen-label">Permanent</label>
+                        <label class="switch">
+                            <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
                 </div>
-                
-                <div class="flex-row">
-                    <label class="course-edit-label">Permanent Key</label>
-                    <label class="switch">
-                        <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-                
-                
+               
                 <div class="flex flex-row" style="margin-bottom: 1rem;">
                     <div class="flex flex-row" style="margin-bottom: 1rem;">
                         <div class="flex-50">
