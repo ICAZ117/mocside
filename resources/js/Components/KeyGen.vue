@@ -56,12 +56,12 @@
                         <div class="flex-50">
                             <label class="keygen-label">Expire Date</label>
                             <br>
-                            <input type="Date" class="profile-field course-edit-field" id="expireDate" name="expireDate" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
+                            <input type="date" class="date-field" id="expireDate" name="expireDate" :class="{ dull : enrollKey.perm }" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
                         </div>
                         <div class="flex-50">
                             <label class="keygen-label">Expire Time</label>
                             <br>
-                            <input type="Time" class="profile-field course-edit-field" id="expireTime" name="expireTime" :disabled="enrollKey.perm" v-model="enrollKey.time" />
+                            <input type="time" class="time-field" id="expireTime" name="expireTime" :class="{ dull : enrollKey.perm }" :disabled="enrollKey.perm" v-model="enrollKey.time" />
                         </div>
                     </div>                    
                     
