@@ -36,13 +36,12 @@
                     placeholder="Random"
                     type="text"
                     v-model="enrollKey.key"
-                    @click="togglePerm()"
                     class="profile-field course-edit-field"
                 />
                 <br />
                 <label class="course-edit-label">Permanent Key</label>
                 <label class="switch">
-                    <input type="checkbox" v-model="enrollKey.perm" />
+                    <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
                     <span class="slider round"></span>
                 </label>
                 <br />
@@ -140,7 +139,7 @@ export default {
         },
         localDate(date) {
             if(!date || !date.includes('-')) return date
-            date = date.split(" ")
+            date = date.split(" ")[0]
             const [y, m, d] = date.toString().split('-')
             return m + '/' + d + '/' + y;
         }
