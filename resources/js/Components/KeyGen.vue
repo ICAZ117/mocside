@@ -15,7 +15,7 @@
                         <tr class="key-row">
                             <td>{{ k.join_key }}</td>
                             <td>{{ k.max_uses == 0 ? '∞' : k.max_uses - k.uses }}</td>
-                            <td>{{ k.expire_date }}</td>
+                            <td>{{ localDate(k.expire_date)}}</td>
                             <td>
                                 <a @click="copyKey(k)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Copy Key">
                                     <i class="fas fa-copy"></i>
@@ -31,36 +31,38 @@
         </div>
         <div class="create-key">
             <div class="key-options">
-            <label class="course-edit-label">Enroll Key</label>
-            <input
-                placeholder="Random"
-                type="text"
-                v-model="enrollKey.key"
-                class="profile-field course-edit-field"
-            />
-            <br />
-            <label class="course-edit-label">Permanent Key</label>
-            <label class="switch">
-                <input type="checkbox" v-model="enrollKey.perm" />
-                <span class="slider round"></span>
-            </label>
-            <br />
-            <label class="course-edit-label">Expire Date</label>
-            <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
-            <br />
-            <label>Expire Time</label>
-            <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
-            <br />
-            <label class="course-edit-label">Max Uses</label>
-            <input
-                placeholder="0 for unlimited use"
-                type="text"
-                v-model="enrollKey.uses"
-                class="profile-field course-edit-field"
-            />
+                <label class="course-edit-label">Enroll Key</label>
+                <input
+                    placeholder="Random"
+                    type="text"
+                    v-model="enrollKey.key"
+                    class="profile-field course-edit-field"
+                />
+                <br />
+                <label class="course-edit-label">Permanent Key</label>
+                <label class="switch">
+                    <input type="checkbox" v-model="enrollKey.perm" />
+                    <span class="slider round"></span>
+                </label>
+                <br />
+                <div v-if="enrollKey.perm != true">
+                    <label class="course-edit-label">Expire Date</label>
+                    <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
+                    <br />
+                    <label>Expire Time</label>
+                    <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
+                    <br />
+                    <label class="course-edit-label">Max Uses</label>
+                    <input
+                        placeholder="0 for unlimited use"
+                        type="text"
+                        v-model="enrollKey.uses"
+                        class="profile-field course-edit-field"
+                    />
+                </div>
             </div>
             <button type="button" @click="generateKey" class="btn btn-danger btn-block">
-            Generate Course Enroll Key
+            Generate Key
             </button>
         </div>
     </div>
@@ -132,6 +134,12 @@ export default {
             const res2 = await API.apiClient.put(`/invite/${keyCode}`, payload);
             this.joinKeys.push(res2.data.data);
         },
+        localDate(date) {
+            if(!date || !date.includes('-')) return date
+            date = date.split(" ")
+            const [y, m, d] = date.split('-')
+            return m + '/' + d + '/' + y;
+        }
     },
     async mounted() {
         await this.fetchKeys();
