@@ -836,7 +836,8 @@ label.keygen-label-perm {
     color:whitesmoke;
 }
 
-.date-field {
+.date-field,
+.date-field:focus-visible {
     background-color: transparent;
     color: lightgray;
     border: none;
@@ -845,7 +846,8 @@ label.keygen-label-perm {
     outline: none !important;
 }
 
-.time-field {
+.time-field,
+.time-field:focus-visible {
     background-color: transparent;
     color: lightgray;
     border: none;
