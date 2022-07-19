@@ -31,7 +31,7 @@
         </div>
         <div class="create-key flex">
             <div class="key-options flex-row">
-                <div class="flex-row">
+                <div class="flex-row" style="margin-bottom: 1rem;">
                     <label class="keygen-label">Enroll Key</label>
                     <br>
                     <input
@@ -52,7 +52,7 @@
                 
                 
                 <div class="flex flex-row">
-                    <div class="flex flex-row">
+                    <div class="flex flex-row" style="margin-bottom: 1rem;">
                         <div class="flex-50">
                             <label class="keygen-label">Expire Date</label>
                             <br>
