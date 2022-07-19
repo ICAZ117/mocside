@@ -42,13 +42,12 @@
                             class="profile-field course-edit-field"
                         />
                     </div>
-                    <div>
-                        
-                        <label class="switch">
+                    <div style="display: flex; padding-top: 1.5rem;">
+                        <label class="switch" style="align-self:center;margin-right:3px;">
                             <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
                             <span class="slider round"></span>
                         </label>
-                        <label class="keygen-label-perm" style="margin-bottom: 1rem;">Permanent</label>
+                        <label class="keygen-label-perm" style="margin-top: -1rem;">Permanent</label>
                     </div>
                 </div>
                
