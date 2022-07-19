@@ -36,6 +36,7 @@
                     placeholder="Random"
                     type="text"
                     v-model="enrollKey.key"
+                    @click="togglePerm()"
                     class="profile-field course-edit-field"
                 />
                 <br />
@@ -45,7 +46,7 @@
                     <span class="slider round"></span>
                 </label>
                 <br />
-                <div v-if="enrollKey.perm != true">
+                <div>
                     <label class="course-edit-label">Expire Date</label>
                     <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
                     <br />
@@ -134,10 +135,13 @@ export default {
             const res2 = await API.apiClient.put(`/invite/${keyCode}`, payload);
             this.joinKeys.push(res2.data.data);
         },
+        togglePerm() {
+            this.enrollKey.perm = !this.enrollKey.perm;
+        },
         localDate(date) {
             if(!date || !date.includes('-')) return date
             date = date.split(" ")
-            const [y, m, d] = date.split('-')
+            const [y, m, d] = date.toString().split('-')
             return m + '/' + d + '/' + y;
         }
     },
