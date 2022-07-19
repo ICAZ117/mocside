@@ -52,14 +52,14 @@
                 
                 
                 <div class="flex flex-row">
-                    <div class="flex-row">
+                    <div class="flex flex-row">
                         <div class="flex-50">
                             <label class="course-edit-label">Expire Date</label>
                             <br>
                             <input type="date" :disabled="enrollKey.perm" v-model="enrollKey.datetime" />
                         </div>
                         <div class="flex-50">
-                            <label>Expire Time</label>
+                            <label class="course-edit-label">Expire Time</label>
                             <br>
                             <input type="time" :disabled="enrollKey.perm" v-model="enrollKey.time" />
                         </div>
