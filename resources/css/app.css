@@ -856,6 +856,10 @@ label.keygen-label-perm {
     outline: none !important;
 }
 
+.keygen .dull {
+    color: gray;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable,
