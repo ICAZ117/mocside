@@ -857,7 +857,7 @@ label.keygen-label-perm {
 }
 
 .keygen .dull {
-    color: gray;
+    color: gray !important;
 }
 
 /*============== LABS and PROBLEMS ==============*/
