@@ -836,6 +836,24 @@ label.keygen-label-perm {
     color:whitesmoke;
 }
 
+.date-field {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+    outline: none !important;
+}
+
+.time-field {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+    outline: none !important;
+}
+
 /*============== LABS and PROBLEMS ==============*/
 
 table.labtable,
