@@ -809,6 +809,10 @@ thead.keygen-head {
     flex-direction: row;
     flex-wrap:wrap;
 }
+.create-key .flex-nowrap {
+    display: flex;
+    flex-direction: row;
+}
 .create-key .flex-row {
     max-width: 100%;
     flex: 1 1 100%;

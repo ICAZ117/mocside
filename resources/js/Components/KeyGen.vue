@@ -31,7 +31,7 @@
         </div>
         <div class="create-key flex">
             <div class="key-options flex-row">
-                <div class="flex-row" style="margin-bottom: 1rem;">
+                <div class="flex-nowrap flex-row" style="margin-bottom: 1rem;">
                     <div>
                         <label class="keygen-label">Enroll Key</label>
                         <br>
@@ -43,7 +43,8 @@
                         />
                     </div>
                     <div>
-                        <label class="keygen-label">Permanent</label>
+                        <label class="keygen-label" style="margin-bottom: 1rem;">Permanent</label>
+                        <br>
                         <label class="switch">
                             <input type="checkbox" v-model="enrollKey.perm" @click="togglePerm()"/>
                             <span class="slider round"></span>
