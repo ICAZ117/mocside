@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="top-right grades">
-        <CourseRoster :course="course"></CourseRoster>
+        <CourseRoster :course="course" v-if="course != null"></CourseRoster>
       </div>
     </div>
     <hr style="margin: 0; padding: 0; color: white" />
@@ -193,7 +193,7 @@ export default {
       file: null,
       endpoint: "/images/store",
       labs: [],
-      course: {},
+      course: null,
       showDeleteModal: false,
       reloadDeleteModal: 0,
       deletingLab: {

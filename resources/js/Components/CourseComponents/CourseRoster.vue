@@ -61,6 +61,7 @@ export default {
     },
     methods: {
         async fetchStudents() {
+            console.log(this.course.roster)
             this.rosterIDs = JSON.parse(this.course.roster).roster;
             for (let i = 0; i < this.rosterIDs.length; i++) {
                 const res = await API.apiClient.get(`/students/${this.rosterIDs[i]}`);
