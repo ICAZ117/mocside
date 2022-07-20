@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group">
+    <div class="roster form-group">
         <button @click="studentView()" class="btn btn-danger btn-block">
             Student View
         </button>
@@ -18,7 +18,7 @@
                 <!-- <a @click="removeStudent(student, key)">X</a> -->
             </li>
         </ul>
-        <div class="roster">
+        <div class="roster-list">
             <table class="table roster">
                 <thead class="roster-head">
                     <tr>
@@ -61,7 +61,6 @@ export default {
     },
     methods: {
         async fetchStudents() {
-            console.log(this.course.roster)
             this.rosterIDs = JSON.parse(this.course.roster).roster;
             for (let i = 0; i < this.rosterIDs.length; i++) {
                 const res = await API.apiClient.get(`/students/${this.rosterIDs[i]}`);

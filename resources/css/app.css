@@ -764,6 +764,10 @@ table.keygen {
     background-color: inherit !important;
     border: none !important;
 }
+table.roster {
+    background-color: inherit !important;
+    border: none !important;
+}
 
 .keygen td {
     /* border: 1px solid #9e9e9e !important; */
@@ -771,9 +775,15 @@ table.keygen {
     /* border-left: none !important; */
     border: none !important;
 }
+.roster td {
+    border: none !important;
+}
 
 .keygen tr {
     /* border: 1px solid #9e9e9e !important; */
+    border: none !important;
+}
+.roster tr {
     border: none !important;
 }
 
@@ -783,8 +793,17 @@ thead.keygen-head {
     /* border: 1px solid rgba(0, 96, 169, 0.75) !important; */
     border: none !important;
 }
+thead.roster-head {
+    background-color: rgba(0, 96, 169, 0.75) !important;
+    color: white !important;
+    border: none !important;
+}
 
 .keygen .key-row {
+    background-color: rgba(231, 231, 231, 0.65);
+    cursor: pointer;
+}
+.roster .roster-row {
     background-color: rgba(231, 231, 231, 0.65);
     cursor: pointer;
 }
