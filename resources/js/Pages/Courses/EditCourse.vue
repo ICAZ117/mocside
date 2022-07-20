@@ -89,26 +89,7 @@
         </div>
       </div>
       <div class="top-right grades">
-        <div class="form-group">
-          <button @click="studentView()" class="btn btn-danger btn-block">
-            Student View
-          </button>
-          <label for="Course Roster" class="course-edit-label">Course Roster</label>
-          <ul>
-            <li v-for="student in students" :key="student.id">
-              {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }}
-              {{
-                Math.floor(
-                  (JSON.parse(course.gradebook).grades[student.fsc_user.fsc_id] /
-                    course.worth) *
-                    100 *
-                    100
-                ) / 100
-              }}%
-              <!-- <a @click="removeStudent(student, key)">X</a> -->
-            </li>
-          </ul>
-        </div>
+        <CourseRoster :course="course"></CourseRoster>
       </div>
     </div>
     <hr style="margin: 0; padding: 0; color: white" />
@@ -184,7 +165,8 @@ import { getError } from "../../utils/helpers";
 import FileService from "../../services/FileService";
 import FlashMessage from "../../Components/FlashMessage";
 import FileUpload from "../../Components/FileUpload";
-import KeyGen from "../../Components/KeyGen.vue";
+import KeyGen from "../../Components/CourseComponents/KeyGen.vue";
+import CourseRoster from "../../Components/CourseComponents/CourseRoster.vue";
 import store from "../../Store/index";
 export default {
   props: ["courseID"],
@@ -193,6 +175,7 @@ export default {
     FlashMessage,
     FileUpload,
     KeyGen,
+    CourseRoster
   },
   data() {
     return {
@@ -209,17 +192,6 @@ export default {
       isSubmitted: false,
       file: null,
       endpoint: "/images/store",
-      students: [],
-      studentID: "",
-      enrollKey: {
-        key: "",
-        perm: true,
-        datetime: "",
-        time: "",
-        uses: "",
-      },
-      joinKeys: [],
-      keyURL: "",
       labs: [],
       course: {},
       showDeleteModal: false,
@@ -274,64 +246,6 @@ export default {
         }
       }
     },
-    async removeStudent(student, index) {
-      //remove student ID from course's roster list
-      for (let i = 0; i < this.courseForm.roster.length; i++) {
-        if (this.courseForm.roster[i] == student.fsc_user.fsc_id) {
-          this.courseForm.roster.splice(i, 1);
-          break;
-        }
-      }
-      const res = await this.updateRoster();
-      //remove course ID from student's courses list
-      var courses = JSON.parse(student.fsc_user.courses).courses;
-      for (let i = 0; i < courses.length; i++) {
-        if (courses[i] == this.courseID) {
-          courses.splice(i, 1);
-          break;
-        }
-      }
-      const res2 = await this.updateStudentCourses(courses);
-      //remove student object from list
-      this.students = this.students.filter((user, i) => i != index);
-    },
-    async getStudents() {
-      for (let i = 0; i < this.courseForm.roster.length; i++) {
-        const res = await API.apiClient.get(`/students/${this.courseForm.roster[i]}`);
-        this.students.push(res.data.data);
-      }
-    },
-    async addStudent() {
-      try {
-        const stud = await this.getStudent();
-        this.courseForm.roster.push(this.studentID);
-        const res = await this.updateRoster();
-        var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
-        courses.push(this.courseID);
-        const res2 = await this.updateStudentCourses(courses);
-        //at end add to the students list
-        this.students.push(stud.data.data);
-      } catch (error) {
-      }
-    },
-    async getStudent() {
-      return await API.apiClient.get(`/students/${this.studentID}`);
-    },
-    async updateRoster() {
-      var payload = {
-        roster: JSON.stringify({ roster: this.courseForm.roster }),
-      };
-      return await API.apiClient.put(`/courses/${this.courseID}`, payload);
-    },
-    async updateStudentCourses(courses) {
-      payload = {
-        courses: JSON.stringify({ courses: courses }),
-      };
-      return await API.apiClient.put(
-        `/students/${stud.data.data.fsc_user.fsc_id}`,
-        payload
-      );
-    },
     async getLabs() {
       const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
       // this.labs = rawLabs.data.data;
@@ -383,9 +297,6 @@ export default {
       //emit push to labs but on parent just set boolean since it is about to be unmounted
       this.$emit("pushToLabs", [this.courseID, this.course.name, id, name]);
     },
-    studentView() {
-      this.$emit("studentView", [this.courseID, this.course.name]);
-    },
     closeDeleting() {
       this.showDeleteModal = false;
     },
@@ -428,7 +339,6 @@ export default {
     this.courseForm.dateEnd = this.course.data.data.end_date;
     this.courseForm.roster = JSON.parse(this.course.data.data.roster).roster;
     this.course = this.course.data.data;
-    this.getStudents();
     await this.getLabs();
   },
   beforeUnmount() {
