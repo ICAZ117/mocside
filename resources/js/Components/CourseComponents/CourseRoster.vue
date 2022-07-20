@@ -1,24 +1,7 @@
 <template>
     <div class="roster form-group">
-        <button @click="studentView()" class="btn btn-danger btn-block">
-            Student View
-        </button>
-        <label for="Course Roster" class="course-edit-label">Course Roster</label>
-        <ul>
-            <li v-for="student in students" :key="student.id">
-                {{ student.name }} {{ student.fsc_user.fsc_id }} {{ student.email }}
-                {{
-                Math.floor(
-                    (JSON.parse(course.gradebook).grades[student.fsc_user.fsc_id] /
-                    course.worth) *
-                    100 *
-                    100
-                ) / 100
-                }}%
-                <!-- <a @click="removeStudent(student, key)">X</a> -->
-            </li>
-        </ul>
-        <div class="roster-list">
+        <label for="Course Roster" class="course-edit-label flex-100">Course Roster</label>
+        <div class="roster-list flex-row">
             <table class="table roster">
                 <thead class="roster-head">
                     <tr>
@@ -45,6 +28,11 @@
                     </template>
                 </tbody>
             </table>
+        </div>
+        <div class="student-view-btn flex-row">
+            <button type="button" @click="studentView()" class="btn btn-danger btn-block student-view-btn">
+                Student View
+            </button>
         </div>
     </div>
 </template>

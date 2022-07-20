@@ -813,6 +813,11 @@ thead.roster-head {
     width: 100%;
     display: flex;
 }
+.roster.form-group {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
 .key-list, .create-key {
     width: 50%;
     margin: 1rem;
@@ -828,6 +833,10 @@ thead.roster-head {
     flex-direction: row;
     flex-wrap:wrap;
 }
+.roster .flex-nowrap {
+    display: flex;
+    flex-direction: row;
+}
 .create-key .flex-nowrap {
     display: flex;
     flex-direction: row;
@@ -836,11 +845,16 @@ thead.roster-head {
     max-width: 100%;
     flex: 1 1 100%;
 }
+.roster .flex-row {
+    max-width: 100%;
+    flex: 1 1 100%;
+}
 .gen-button {
     display: flex;
     justify-content: end;
     align-items: start;
 }
+
 .flex-50 {
     max-width: 50%;
     flex: 1 1 50%;
