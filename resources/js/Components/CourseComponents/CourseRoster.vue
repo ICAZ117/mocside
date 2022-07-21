@@ -96,7 +96,7 @@ export default {
             const res2 = await this.updateStudentCourses(courses, student);
 
             //remove student object from list
-            this.students = this.students.filter((user, i) => i != index);
+            this.students = this.students.filter((user) => user.id != student.id);
         },
         studentView() {
             //adjust to new route version
