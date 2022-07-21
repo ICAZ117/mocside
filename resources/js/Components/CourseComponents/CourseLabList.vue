@@ -75,7 +75,7 @@ export default {
             console.log("add adding lab code")
         }
     },
-    mounted() {
+    async mounted() {
         await this.fetchLabs();
     }
 }
