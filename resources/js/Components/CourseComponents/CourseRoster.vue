@@ -30,6 +30,9 @@
             </table>
         </div>
         <div class="student-view-btn flex-row" style="display: flex; justify-content: end;">
+            <!-- <button type="button" @click="addStudent()" class="btn btn-danger btn-block add-student-btn">
+                Add Student
+            </button> -->
             <button type="button" @click="studentView()" class="btn btn-danger btn-block student-view-btn">
                 Student View
             </button>
