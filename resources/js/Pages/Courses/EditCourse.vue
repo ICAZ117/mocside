@@ -102,45 +102,7 @@
         <KeyGen :courseID="courseID" :courseEnd="courseForm.dateEnd"></KeyGen>
       </div>
       <div class="bottom-right labs">
-        <div
-          style="
-            border: 1px solid #9e9e9e !important;
-            padding: 0 !important;
-            width: min-content !important;
-            margin: 2rem 2rem 2rem 2rem !important;
-          "
-        >
-          <table class="table labtable" style="margin: 0 !important">
-            <thead class="labtable">
-              <tr>
-                <th>Title</th>
-                <th># Problems</th>
-                <th>Due Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template v-for="(lab, key) in labs" :key="lab.id">
-                <tr
-                  class="lab pointer"
-                  @click.prevent="goToProblems(lab.id, lab.name)"
-                  @contextmenu.prevent="showMenu(lab.id)"
-                >
-                  <td>
-                    <a>{{ lab.name }}</a>
-                  </td>
-                  <td>{{ lab.num_problems }}</td>
-                  <td>{{ lab.due_date }}</td>
-                </tr>
-                <a @click="editLab(lab.id, lab.name)">...</a>
-                <a @click="deleting(lab.id, lab, key)">X</a>
-              </template>
-
-              <tr v-if="isProf" class="lab pointer" @click="addLab">
-                <td colspan="5">Add Lab</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <CourseLabList :courseID="courseID"></CourseLabList>
       </div>
     </div>
     <vue-final-modal
@@ -167,6 +129,7 @@ import FlashMessage from "../../Components/FlashMessage";
 import FileUpload from "../../Components/FileUpload";
 import KeyGen from "../../Components/CourseComponents/KeyGen.vue";
 import CourseRoster from "../../Components/CourseComponents/CourseRoster.vue";
+import CourseLabList from "../../Components/CourseComponents/CourseLabList.vue";
 import store from "../../Store/index";
 export default {
   props: ["courseID"],
@@ -175,7 +138,8 @@ export default {
     FlashMessage,
     FileUpload,
     KeyGen,
-    CourseRoster
+    CourseRoster,
+    CourseLabList
   },
   data() {
     return {
