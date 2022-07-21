@@ -110,7 +110,7 @@ export default {
             return await API.apiClient.put(`/courses/${this.course.id}`, payload);
         },
         async updateStudentCourses(courses) {
-            payload = {
+            var payload = {
                 courses: JSON.stringify({ courses: courses }),
             };
             return await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
