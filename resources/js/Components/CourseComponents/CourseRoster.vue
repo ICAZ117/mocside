@@ -9,7 +9,7 @@
                         <th>FSC-ID</th>
                         <th>Email</th>
                         <th>Course Grade</th>
-                        <!-- <th></th> -->
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,11 +19,11 @@
                             <td>{{ student.fsc_user.fsc_id }}</td>
                             <td>{{ student.email }}</td>
                             <td>{{ Math.floor((JSON.parse(course.gradebook).grades[student.fsc_user.fsc_id] /course.worth) *100 *100) / 100 }}%</td>
-                            <!-- <td>
+                            <td>
                                 <a @click="removeStudent(student, key)" title="Drop Student From Course">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                            </td> -->
+                            </td>
                         </tr>
                     </template>
                 </tbody>
@@ -75,26 +75,28 @@ export default {
         },
         async removeStudent(student, index) {
             //remove student ID from course's roster list
-            console.log("fix remove student")
-            // var roster = JSON.parse(this.course.roster).roster;
-            // for (let i = 0; i < roster.length; i++) {
-            //     if (roster[i] == student.fsc_user.fsc_id) {
-            //         roster.splice(i, 1);
-            //         break;
-            //     }
-            // }
-            // const res = await this.updateRoster();
-            // //remove course ID from student's courses list
-            // var courses = JSON.parse(student.fsc_user.courses).courses;
-            // for (let i = 0; i < courses.length; i++) {
-            //     if (courses[i] == this.course.id) {
-            //         courses.splice(i, 1);
-            //         break;
-            //     }
-            // }
-            // const res2 = await this.updateStudentCourses(courses);
-            // //remove student object from list
-            // this.students = this.students.filter((user, i) => i != index);
+            for (let i = 0; i < this.rosterIDs.length; i++) {
+                if (this.rosterIDs[i] == student.fsc_user.fsc_id) {
+                    this.rosterIDs.splice(i, 1);
+                    break;
+                }
+            }
+            //remove the student from the roster list
+            const res = await this.updateRoster();
+
+            //remove course ID from student's courses list
+            var courses = JSON.parse(student.fsc_user.courses).courses;
+            for (let i = 0; i < courses.length; i++) {
+                if (courses[i] == this.course.id) {
+                    courses.splice(i, 1);
+                    break;
+                }
+            }
+            //remove the course id from the student
+            const res2 = await this.updateStudentCourses(courses);
+
+            //remove student object from list
+            this.students = this.students.filter((user, i) => i != index);
         },
         studentView() {
             //adjust to new route version
@@ -102,18 +104,16 @@ export default {
             // this.$emit("studentView", [this.courseID, this.course.name]);
         },
         async updateRoster() {
-            console.log("fix updateRoster")
-            // var payload = {
-            //     roster: JSON.stringify({ roster: this.courseForm.roster }),
-            // };
-            // return await API.apiClient.put(`/courses/${this.courseID}`, payload);
+            var payload = {
+                roster: JSON.stringify({ roster: this.rosterIDs }),
+            };
+            return await API.apiClient.put(`/courses/${this.course.id}`, payload);
         },
         async updateStudentCourses(courses) {
-            console.log("Fix student courses")
-            // payload = {
-            //     courses: JSON.stringify({ courses: courses }),
-            // };
-            // return await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
+            payload = {
+                courses: JSON.stringify({ courses: courses }),
+            };
+            return await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
         },
     },
     async mounted() {
