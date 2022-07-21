@@ -93,7 +93,7 @@ export default {
                 }
             }
             //remove the course id from the student
-            const res2 = await this.updateStudentCourses(courses);
+            const res2 = await this.updateStudentCourses(courses, student);
 
             //remove student object from list
             this.students = this.students.filter((user, i) => i != index);
@@ -109,11 +109,11 @@ export default {
             };
             return await API.apiClient.put(`/courses/${this.course.id}`, payload);
         },
-        async updateStudentCourses(courses) {
+        async updateStudentCourses(courses, student) {
             var payload = {
                 courses: JSON.stringify({ courses: courses }),
             };
-            return await API.apiClient.put(`/students/${stud.data.data.fsc_user.fsc_id}`, payload);
+            return await API.apiClient.put(`/students/${student.fsc_user.fsc_id}`, payload);
         },
     },
     async mounted() {
