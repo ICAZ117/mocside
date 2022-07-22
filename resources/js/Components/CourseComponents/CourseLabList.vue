@@ -37,6 +37,19 @@
             </tbody>
         </table>
     </div>
+    <vue-final-modal
+      v-model="showDeleteModal"
+      classes="modal-container"
+      content-class="modal-content"
+      :esc-to-close="true"
+    >
+      <button class="modal-close" @click="closeDeleting()">x</button>
+      <div class="delete Course">
+        <p>Are you sure you would like to delete {{ deletingLab.lab.name }}</p>
+        <button class="btn btn-md btn-danger" @click="closeDeleting()">Cancel</button>
+        <button class="btn btn-md btn-danger" @click="removeLab()">Delete</button>
+      </div>
+    </vue-final-modal>
 </template>
 
 <script>
@@ -47,6 +60,13 @@ export default {
     data() {
         return {
             labs: [],
+            showDeleteModal: false,
+            reloadDeleteModal: 0,
+            deletingLab: {
+                id: "",
+                lab: "",
+                key: "",
+            },
         }
     },
     methods: {
@@ -72,8 +92,24 @@ export default {
         async editLab(labID) {
             this.$router.push({ name: "EditLab", params: { courseID: this.courseID, labID: labID } });
         },
-        deleting() {
-            console.log("add deleting code")
+        closeDeleting() {
+            this.showDeleteModal = false;
+        },
+        deleting(id, lab, key) {
+            this.showDeleteModal = true;
+            this.deletingLab.id = id;
+            this.deletingLab.lab = lab;
+            this.deletingLab.key = key;
+        },
+        removeLab() {
+            var id = this.deletingLab.id;
+            var key = this.deletingLab.key;
+
+            const res = await API.apiClient.delete(`/labs/${id}`);
+
+            //filter from labs
+            this.labs = this.labs.filter((l, i) => i != key);
+            this.closeDeleting();
         },
         async addLab() {
             var today = new Date(Date.now())
@@ -86,6 +122,13 @@ export default {
             const lab = await API.apiClient.post(`/labs`, payload);
             this.labs.push(lab.data.data);
             this.sortLabs();
+        }
+    },
+    watch: {
+        showDeleteModal: function() {
+            if(!this.showDeleteModal) {
+                this.reloadDeleteModal++;
+            }
         }
     },
     async mounted() {
