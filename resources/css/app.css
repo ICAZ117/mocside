@@ -841,6 +841,14 @@ thead.labtable-head {
     flex-wrap: wrap;
     align-content: start;
 }
+.lablist {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: start;
+}
 .key-list, .create-key {
     width: 50%;
     margin: 1rem;

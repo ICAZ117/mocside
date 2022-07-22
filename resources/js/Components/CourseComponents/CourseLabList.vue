@@ -1,5 +1,6 @@
 <template>
     <div class="lablist">
+        <label for="Course Labs" class="course-edit-label flex-100">Course Labs</label>
         <table class="table courselab">
             <thead class="labtable-head">
                 <tr>
