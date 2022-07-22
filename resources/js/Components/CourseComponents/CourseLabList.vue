@@ -81,7 +81,7 @@ export default {
                 name: "New Lab",
                 description: "New Lab",
                 course_id: this.courseID,
-                due_date: today.getFullYear() + "-" + (today.Month() + 1) + "-" + today.getDate()
+                due_date: today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate()
             };
             const lab = await API.apiClient.post(`/labs`, payload);
             this.labs.push(lab.data.data);
