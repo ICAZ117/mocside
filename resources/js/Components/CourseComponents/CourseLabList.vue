@@ -22,10 +22,6 @@
                         <td>{{ lab.num_problems }}</td>
                         <td>{{ lab.due_date }}</td>
                         <td>
-                            <a @click="editLab(lab.id, lab.name)">...</a>
-                            <a @click="deleting(lab.id, lab, key)">X</a>
-                        </td>
-                        <td>
                             <a @click="editLab(lab.id, lab.name)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Edit Lab">
                                 <i class="fas fa-copy"></i>
                             </a>
@@ -35,7 +31,7 @@
                         </td>
                     </tr>
                 </template>
-                <tr class="lab-row" @click="addLab">
+                <tr class="lab-row add-row" @click="addLab">
                     <td colspan="5">Add Lab</td>
                 </tr>
             </tbody>
