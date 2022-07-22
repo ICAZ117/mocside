@@ -109,7 +109,6 @@ export default {
     }
   },
   mounted() {
-    console.log("here at the wall")
     this.fetchLab();
   }
 }
