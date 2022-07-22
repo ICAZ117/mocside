@@ -101,7 +101,7 @@ export default {
             this.deletingLab.lab = lab;
             this.deletingLab.key = key;
         },
-        removeLab() {
+        async removeLab() {
             var id = this.deletingLab.id;
             var key = this.deletingLab.key;
 
