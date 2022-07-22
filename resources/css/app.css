@@ -828,7 +828,7 @@ thead.labtable-head {
     cursor: pointer;
 }
 .courselab .lab-row:hover {
-    background-color: rgba(204, 204, 204, 0.65) !important;
+    background-color: rgba(204, 204, 204, 0.4) !important;
     transition-timing-function: ease-in !important;
     transition-duration: 0.2s !important;
 }
