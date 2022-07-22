@@ -80,14 +80,14 @@ export default {
             this.labs = sort(4, this.labs);
         },
         goToProblems(id, name) {
-            // this.$router.push({
-            //     name: "Problems",
-            //     params: {
-            //         courseID: this.courseID,
-            //         labID: id,
-            //         labName: name,
-            //     }
-            // });
+            this.$router.push({
+                name: "Problems",
+                params: {
+                    courseID: this.courseID,
+                    labID: id,
+                    labName: name,
+                }
+            });
         },
         async editLab(labID) {
             this.$router.push({ name: "EditLab", params: { courseID: this.courseID, labID: labID } });
