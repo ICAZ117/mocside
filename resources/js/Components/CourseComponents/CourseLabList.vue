@@ -25,10 +25,17 @@
                             <a @click="editLab(lab.id, lab.name)">...</a>
                             <a @click="deleting(lab.id, lab, key)">X</a>
                         </td>
+                        <td>
+                            <a @click="editLab(lab.id, lab.name)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Edit Lab">
+                                <i class="fas fa-copy"></i>
+                            </a>
+                            <a @click="deleting(lab.id, lab, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer" title="Delete Lab">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
                     </tr>
                 </template>
-
-                <tr v-if="isProf" class="lab-row" @click="addLab">
+                <tr class="lab-row" @click="addLab">
                     <td colspan="5">Add Lab</td>
                 </tr>
             </tbody>
@@ -54,7 +61,7 @@ export default {
             await this.sortLabs();
         },
         sortLabs() {
-            this.labs = this.sort(4, this.labs);
+            this.labs = sort(4, this.labs);
         },
         goToProblems(id, name) {
             this.$router.push({
