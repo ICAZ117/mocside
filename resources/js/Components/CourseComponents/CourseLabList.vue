@@ -22,7 +22,7 @@
                         <td>{{ lab.num_problems }}</td>
                         <td>{{ lab.due_date }}</td>
                         <td>
-                            <a @click="editLab(lab.id, lab.name)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Edit Lab">
+                            <a @click="editLab(lab.id)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Edit Lab">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a @click="deleting(lab.id, lab, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer" title="Delete Lab">
@@ -69,8 +69,8 @@ export default {
                 }
             });
         },
-        editLab() {
-            console.log("add edit lab")
+        async editLab(labID) {
+            this.$router.push({ name: "EditLab", params: { courseID: this.courseID, labID: labID } });
         },
         deleting() {
             console.log("add deleting code")

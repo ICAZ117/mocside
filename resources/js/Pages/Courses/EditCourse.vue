@@ -271,10 +271,6 @@ export default {
     this.courseForm.roster = JSON.parse(this.course.data.data.roster).roster;
     this.course = this.course.data.data;
   },
-  beforeUnmount() {
-    //editcourse
-    this.$emit("unmounting");
-  },
   computed: {
     isProf: function () {
       if (store.getters["auth/isProf"] == null) {
