@@ -12,7 +12,7 @@
             <tbody>
                 <template v-for="(lab, key) in labs" :key="lab.id">
                     <tr
-                        class="lab pointer"
+                        class="lab-row"
                         @click.prevent="goToProblems(lab.id, lab.name)"
                     >
                         <td>
@@ -27,7 +27,7 @@
                     </tr>
                 </template>
 
-                <tr v-if="isProf" class="lab pointer" @click="addLab">
+                <tr v-if="isProf" class="lab-row" @click="addLab">
                     <td colspan="5">Add Lab</td>
                 </tr>
             </tbody>
