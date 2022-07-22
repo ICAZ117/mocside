@@ -23,7 +23,7 @@
                         <td>{{ lab.due_date }}</td>
                         <td>
                             <a @click="editLab(lab.id, lab.name)" class="courselaunch text-primary mx-2 my-1 no-decor pointer" title="Edit Lab">
-                                <i class="fas fa-copy"></i>
+                                <i class="fas fa-edit"></i>
                             </a>
                             <a @click="deleting(lab.id, lab, key)" class="courselaunch text-danger mx-2 my-1 no-decor pointer" title="Delete Lab">
                                 <i class="fas fa-trash-alt"></i>
