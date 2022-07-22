@@ -75,8 +75,17 @@ export default {
         deleting() {
             console.log("add deleting code")
         },
-        addLab() {
-            console.log("add adding lab code")
+        async addLab() {
+            var today = new Date(Date.now())
+            var payload = {
+                name: "New Lab",
+                description: "New Lab",
+                course_id: this.courseID,
+                due_date: `${today.getFullYear}-${today.Month + 1}-${today.getDate()}`
+            };
+            const lab = await API.apiClient.post(`/labs`, payload);
+            this.labs.push(lab.data.data);
+            this.sortLabs();
         }
     },
     async mounted() {
