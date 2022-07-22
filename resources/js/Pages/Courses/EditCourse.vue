@@ -210,12 +210,6 @@ export default {
         }
       }
     },
-    async getLabs() {
-      const rawLabs = await API.apiClient.get(`/labs/${this.courseID}`);
-      // this.labs = rawLabs.data.data;
-      this.labs = rawLabs.data.data;
-      await this.sortLabs();
-    },
     published(lab) {
       //return true if the lab is published
       //false otherwise
@@ -233,33 +227,6 @@ export default {
         return true;
       }
       return false;
-    },
-    async sortLabs() {
-      //get sort method and call it
-      await this.sortByDueDate();
-      //call the filter after sorting
-      return "";
-    },
-    async sortByDueDate() {
-      //sorts the unfiltered results by start date
-      this.labs.sort((a, b) => {
-        //if a should be first return -1, 0 for tie, -1 if b first
-        let la = a.due_date.split("-");
-        let lb = b.due_date.split("-");
-        let fa = Date.UTC(la[0], la[1] - 1, la[2], 0, 0, 0, 0);
-        let fb = Date.UTC(lb[0], lb[1] - 1, lb[2], 0, 0, 0, 0);
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    goToProblems(id, name) {
-      //emit push to labs but on parent just set boolean since it is about to be unmounted
-      this.$emit("pushToLabs", [this.courseID, this.course.name, id, name]);
     },
     closeDeleting() {
       this.showDeleteModal = false;
@@ -303,7 +270,6 @@ export default {
     this.courseForm.dateEnd = this.course.data.data.end_date;
     this.courseForm.roster = JSON.parse(this.course.data.data.roster).roster;
     this.course = this.course.data.data;
-    await this.getLabs();
   },
   beforeUnmount() {
     //editcourse
