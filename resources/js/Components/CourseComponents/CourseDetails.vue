@@ -1,7 +1,7 @@
 <template>
     <div class="course-create-form">
         <form @submit.prevent="handleSubmit" class="course-form">
-            <div class="form-group">
+            <div class="flex-100 form-group">
                 <label
                 for="Course Name"
                 class="course-edit-label"
@@ -19,7 +19,7 @@
             </div>
             <br />
 
-            <div class="form-group">
+            <div class="flex-100 form-group">
                 <label
                 for="Course Description"
                 class="course-edit-label"
@@ -37,7 +37,7 @@
             </div>
             <br />
 
-            <div class="form-group">
+            <div class=" flex-100 form-group">
                 <label for="Course Dates" class="course-edit-label">Course Dates:</label>
                 <div class="row">
                 <div class="col-6">
