@@ -48,7 +48,8 @@ export default {
   },
   methods: {
     async fetchCourse() {
-      this.course = await API.apiClient.get(`/courses/full/${this.courseID}`).data.data;
+      const res = await API.apiClient.get(`/courses/full/${this.courseID}`);
+      this.course = res.data.data;
     }
   },
   async mounted() {
