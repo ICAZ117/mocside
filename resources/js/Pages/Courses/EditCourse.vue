@@ -34,7 +34,6 @@ import store from "../../Store/index";
 import CourseDetails from '../../Components/CourseComponents/CourseDetails.vue';
 export default {
   props: ["courseID"],
-  emits: ["unmounting", "courseEdited", "pushToLabs", "studentView", "editLab"],
   components: {
     KeyGen,
     CourseRoster,
@@ -54,15 +53,6 @@ export default {
   },
   async mounted() {
     await this.fetchCourse();
-  },
-  computed: {
-    isProf: function () {
-      if (store.getters["auth/isProf"] == null) {
-        return false;
-      } else {
-        return store.getters["auth/isProf"];
-      }
-    },
   },
 };
 </script>
