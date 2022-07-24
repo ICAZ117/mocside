@@ -758,7 +758,17 @@ hr.courses {
 .course-details, .grades, .key-gen, .labs {
     width: 50%;
     margin: 1rem;
-  }
+}
+
+.course-create-form {
+    width:100%;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
 
 table.keygen {
     background-color: inherit !important;

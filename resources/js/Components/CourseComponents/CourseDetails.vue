@@ -38,14 +38,6 @@
         <br />
 
         <div class="form-group">
-            <div class="mb-4">
-            <label for="file" class="course-edit-label">Upload Course Image:</label>
-            <br />
-            <input type="file" :accept="['image/*']" @change="fileChange" id="file" />
-            </div>
-        </div>
-
-        <div class="form-group">
             <label for="Course Dates" class="course-edit-label">Course Dates:</label>
             <div class="row">
             <div class="col-6">
@@ -75,12 +67,23 @@
             </div>
         </div>
         <br />
+        
+        <div class="flex-100">
+            <div class="form-group">
+                <div class="mb-4">
+                <label for="file" class="course-edit-label">Upload Course Image:</label>
+                <br />
+                <input type="file" :accept="['image/*']" @change="fileChange" id="file" />
+                </div>
+            </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-success btn-block">
-            Save Changes
-            </button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block">
+                Save Changes
+                </button>
+            </div>
         </div>
+
         </form>
     </div>
 </template>
