@@ -738,6 +738,11 @@ hr.courses {
     display: flex;
 }
 
+.flex-100 {
+    max-width:100%;
+    flex: 1 1 100%;
+}
+
 .course-dashboard {
     height: 93.75vh!important;
     overflow-y: hidden;
