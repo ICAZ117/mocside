@@ -777,6 +777,10 @@ hr.courses {
     flex-wrap: wrap;
 }
 
+.course-create-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
 
 table.keygen {
     background-color: inherit !important;

@@ -69,7 +69,7 @@
             <br />
             
             <div class="flex-100">
-                <div class="form-group">
+                <div class=" flex-50 form-group">
                     <div class="mb-4">
                     <label for="file" class="course-edit-label">Upload Course Image:</label>
                     <br />
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="flex-50 form-group">
                     <button type="submit" class="btn btn-success btn-block">
                     Save Changes
                     </button>
