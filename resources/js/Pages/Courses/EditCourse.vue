@@ -3,90 +3,7 @@
     <!-------------- TOP ROW -------------->
     <div class="top-row">
       <div class="top-left course-details">
-        <div class="course-create-form">
-          <form @submit.prevent="handleSubmit" class="course-form">
-            <div class="form-group">
-              <label
-                for="Course Name"
-                class="course-edit-label"
-                style="width: 21% !important"
-                >Course Name:</label
-              >
-              <input
-                type="text"
-                v-model="courseForm.name"
-                id="courseName"
-                name="courseName"
-                class="profile-field course-edit-field"
-                style="width: 79% !important"
-              />
-            </div>
-            <br />
-
-            <div class="form-group">
-              <label
-                for="Course Description"
-                class="course-edit-label"
-                style="width: 29% !important"
-                >Course Description:</label
-              >
-              <input
-                type="text"
-                v-model="courseForm.description"
-                id="courseDescription"
-                name="courseDescription"
-                class="profile-field course-edit-field"
-                style="width: 71% !important"
-              />
-            </div>
-            <br />
-
-            <div class="form-group">
-              <div class="mb-4">
-                <label for="file" class="course-edit-label">Upload Course Image:</label>
-                <br />
-                <input type="file" :accept="['image/*']" @change="fileChange" id="file" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="Course Dates" class="course-edit-label">Course Dates:</label>
-              <div class="row">
-                <div class="col-6">
-                  <label for="courseDateStart" style="color: darkgray !important"
-                    >Start date:&nbsp;</label
-                  >
-                  <input
-                    type="Date"
-                    v-model="courseForm.dateStart"
-                    id="courseDateStart"
-                    name="courseDateStart"
-                    class="profile-field course-edit-field"
-                  />
-                </div>
-                <div class="col-6">
-                  <label for="courseDateEnd" style="color: darkgray !important"
-                    >End date:&nbsp;</label
-                  >
-                  <input
-                    type="Date"
-                    v-model="courseForm.dateEnd"
-                    id="courseDateEnd"
-                    name="courseDateEnd"
-                    class="profile-field course-edit-field"
-                  />
-                </div>
-              </div>
-            </div>
-            <br />
-
-            <div class="form-group">
-              <button type="submit" class="btn btn-success btn-block">
-                Save Changes
-              </button>
-            </div>
-          </form>
-        </div>
+        <CourseDetails :course="course"></CourseDetails>
       </div>
       <div class="top-right grades">
         <CourseRoster :course="course" v-if="course != null"></CourseRoster>
@@ -99,7 +16,7 @@
 
     <div class="bottom-row">
       <div class="bottom-left key-gen">
-        <KeyGen :courseID="courseID" :courseEnd="courseForm.dateEnd"></KeyGen>
+        <KeyGen :courseID="courseID" :courseEnd="course.end_date"></KeyGen>
       </div>
       <div class="bottom-right labs">
         <CourseLabList :courseID="courseID"></CourseLabList>
@@ -110,121 +27,32 @@
 
 <script>
 import * as API from "../../services/API";
-import { getError } from "../../utils/helpers";
-import FileService from "../../services/FileService";
-import FlashMessage from "../../Components/FlashMessage";
-import FileUpload from "../../Components/FileUpload";
 import KeyGen from "../../Components/CourseComponents/KeyGen.vue";
 import CourseRoster from "../../Components/CourseComponents/CourseRoster.vue";
 import CourseLabList from "../../Components/CourseComponents/CourseLabList.vue";
 import store from "../../Store/index";
+import CourseDetails from '../../Components/CourseComponents/CourseDetails.vue';
 export default {
   props: ["courseID"],
   emits: ["unmounting", "courseEdited", "pushToLabs", "studentView", "editLab"],
   components: {
-    FlashMessage,
-    FileUpload,
     KeyGen,
     CourseRoster,
-    CourseLabList
+    CourseLabList,
+    CourseDetails
   },
   data() {
     return {
-      error: null,
-      message: null,
-      courseForm: {
-        name: "",
-        description: "",
-        img: "",
-        dateStart: "",
-        dateEnd: "",
-        roster: [],
-      },
-      isSubmitted: false,
-      file: null,
-      endpoint: "/images/store",
-      labs: [],
       course: null,
-      showDeleteModal: false,
-      reloadDeleteModal: 0,
-      deletingLab: {
-        id: "",
-        lab: "",
-        key: "",
-      },
     };
   },
   methods: {
-    async handleSubmit() {
-      this.isSubmitted = true;
-      await this.uploadImage();
-      var payload = {
-        name: this.courseForm.name,
-        description: this.courseForm.description,
-        img_loc: this.courseForm.img,
-        start_date: this.courseForm.dateStart,
-        end_date: this.courseForm.dateEnd,
-      };
-      const res = await API.apiClient.put(`/courses/${this.courseID}`, payload);
-      this.$router.push({
-		  name: "Courses",
-	  });
-    },
-    updateImage() {
-    },
-    clearMessage() {
-      this.error = null;
-      this.message = null;
-    },
-    fileChange(event) {
-      this.clearMessage();
-      this.file = event.target.files[0];
-    },
-    async uploadImage() {
-      if (this.file != null) {
-        const payload = {};
-        const formData = new FormData();
-        formData.append("file", this.file);
-        payload.file = formData;
-        payload.endpoint = this.endpoint;
-        this.clearMessage();
-        try {
-          const response = await FileService.uploadFile(payload);
-          this.message = "File uploaded.";
-          this.courseForm.img = response.data.asset_link;
-        } catch (error) {
-          this.error = getError(error);
-        }
-      }
-    },
-    published(lab) {
-      //return true if the lab is published
-      //false otherwise
-      var now = new Date(Date.now());
-      if (lab.publish_date == "" || lab.publish_date == null) {
-        return false;
-      }
-      var pd = lab.publish_date.split("-")[2];
-      var pm = lab.publish_date.split("-")[1] - 1;
-      var py = lab.publish_date.split("-")[0];
-
-      var published = new Date(py, pm, pd, 0, 0, 0, 0);
-
-      if (published < now) {
-        return true;
-      }
-      return false;
-    },
+    async fetchCourse() {
+      this.course = await API.apiClient.get(`/courses/full/${this.courseID}`).data.data;
+    }
   },
   async mounted() {
-    this.course = await API.apiClient.get(`/courses/full/${this.courseID}`);
-    this.courseForm.name = this.course.data.data.name;
-    this.courseForm.description = this.course.data.data.description;
-    this.courseForm.img = this.course.data.data.img_loc;
-    this.courseForm.dateStart = this.course.data.data.start_date;
-    this.courseForm.dateEnd = this.course.data.data.end_date;
-    this.courseForm.roster = JSON.parse(this.course.data.data.roster).roster;
-    this.course = this.course.data.data;
+    await this.fetchCourse();
   },
   computed: {
     isProf: function () {
