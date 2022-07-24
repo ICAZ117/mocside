@@ -110,7 +110,6 @@ export default {
                 img: "",
                 dateStart: "",
                 dateEnd: "",
-                roster: [],
             },
         }
     },
@@ -162,7 +161,6 @@ export default {
         this.courseForm.img = this.course.img_loc;
         this.courseForm.dateStart = this.course.start_date;
         this.courseForm.dateEnd = this.course.end_date;
-        this.courseForm.roster = JSON.parse(this.course.roster).roster;
     },
 }
 </script>
