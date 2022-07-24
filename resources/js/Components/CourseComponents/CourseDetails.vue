@@ -68,7 +68,7 @@
             </div>
             <br />
             
-            <div class="flex-100">
+            <div class="flex-100" style="display:flex;flex-direction:row;">
                 <div class=" flex-50 form-group">
                     <div class="mb-4">
                     <label for="file" class="course-edit-label">Upload Course Image:</label>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="flex-50 form-group">
+                <div class="flex-50 form-group" style="display:flex;justify-content:end;align-items:center;">
                     <button type="submit" class="btn btn-success btn-block">
                     Save Changes
                     </button>
