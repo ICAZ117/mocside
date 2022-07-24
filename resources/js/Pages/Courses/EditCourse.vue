@@ -1,5 +1,5 @@
 <template>
-  <div class="course-dashboard darkBG">
+  <div v-if="course != null" class="course-dashboard darkBG">
     <!-------------- TOP ROW -------------->
     <div class="top-row">
       <div class="top-left course-details">
