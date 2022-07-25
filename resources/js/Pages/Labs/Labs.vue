@@ -41,7 +41,7 @@
         <LabGrid @removeLab="removeLab" :courseID="courseID" :labs="labs" :progress="progress" :studentView="studentView"></LabGrid>
       </tab-panel>
       <tab-panel :val="'Grades'">
-		  <GradeGrid v-if="!isProf && labs.length != 0" :courseID="courseID" :labs="labs" :studentView="studentView"></GradeGrid>
+		  <GradeGrid v-if="!isProf && labs.length != 0 && !studentView" :courseID="courseID" :labs="labs" :studentView="studentView"></GradeGrid>
       </tab-panel>
     </tab-panels>
   </div>
@@ -263,9 +263,6 @@ export default {
         }
         this.username = this.authUser.username;
         this.fscID = this.authUser.fsc_user.fsc_id;
-        if (this.studentView) {
-            tabs.filter((t) => t != "Grades");
-        }
         await this.fetchLabs();
     },
 }
