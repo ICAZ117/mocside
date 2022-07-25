@@ -3,7 +3,7 @@
     <!-- Main Page-->
     <div class="courses header">
       <div class="heading">
-        <h2>{{ courseName }}</h2>
+        <h2>{{ courseName ? courseName : courseNameLocal }}</h2>
         <hr />
 
         <tabs v-model="selectedTab">
@@ -76,6 +76,7 @@ export default {
             sort: "1",
             student: {},
             problems: {},
+            courseNameLocal: "",
         }
     },
     setup() {
@@ -258,7 +259,7 @@ export default {
     },
     async mounted() {
         if (!this.courseName) {
-            this.courseName = await this.getCourseName();
+            this.courseNameLocal = await this.getCourseName();
         }
         this.username = this.authUser.username;
         this.fscID = this.authUser.fsc_user.fsc_id;
