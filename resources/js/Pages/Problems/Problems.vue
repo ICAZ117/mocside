@@ -32,7 +32,7 @@
     <small class="navigation"
       ><span>{{ username }}{{ currentDirectory }}</span>
       <br />
-      <span class="pointer underline" @click="this.$router.push({name: 'Labs', params: {courseID: this.courseID}})"
+      <span class="pointer underline" @click="this.goToLabs()"
         >↩ Return to Labs</span
       >
     </small>
@@ -399,6 +399,13 @@ export default {
       this.problemId = id;
       this.$router.push({ name: "Assignment", params: {courseID: this.courseID, labID: this.labID, problemID: id, lang: this.lang }});
     },
+    goToLabs() {
+      this.$router.push({name: 'Labs', params: {courseID: this.courseID, courseName: this.getCourseName(this.courseID), }});
+    },
+    getCourseName(id) {
+      const res = await API.apiClient.get(`/courses/${id}`);
+      return res.data.data.name;
+    }
 
   },
   computed: {

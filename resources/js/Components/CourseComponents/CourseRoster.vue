@@ -102,9 +102,7 @@ export default {
             this.students = this.students.filter((user) => user.id != student.id);
         },
         studentView() {
-            //adjust to new route version
-            console.log("fix this studentView")
-            // this.$emit("studentView", [this.courseID, this.course.name]);
+            this.$router.push({name: 'Labs', params: {courseID: this.courseID, courseName: this.course.name, studentView: true }});
         },
         async updateRoster() {
             var payload = {

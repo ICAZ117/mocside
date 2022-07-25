@@ -38,10 +38,10 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Labs'">
-        <LabGrid @removeLab="removeLab" :courseID="courseID" :labs="labs" :progress="progress" ></LabGrid>
+        <LabGrid @removeLab="removeLab" :courseID="courseID" :labs="labs" :progress="progress" :studentView="studentView"></LabGrid>
       </tab-panel>
       <tab-panel :val="'Grades'">
-		  <GradeGrid v-if="!isProf && labs.length != 0" :courseID="courseID" :labs="labs"></GradeGrid>
+		  <GradeGrid v-if="!isProf && labs.length != 0" :courseID="courseID" :labs="labs" :studentView="studentView"></GradeGrid>
       </tab-panel>
     </tab-panels>
   </div>
@@ -60,7 +60,7 @@ import GradeGrid from "./GradeGrid.vue";
 const tabs = ["Labs", "Grades"];
 
 export default {
-    props: ["courseID", "courseName"],
+    props: ["courseID", "courseName", "studentView"],
     name: "Labs",
     components: {
         LabGrid,
@@ -248,7 +248,7 @@ export default {
             if(store.getters["auth/isProf"] == null) {
                 return false;
             } else {
-                return store.getters["auth/isProf"];
+                return store.getters["auth/isProf"] && !this.studentView;
             }
         }
     },

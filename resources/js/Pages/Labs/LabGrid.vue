@@ -102,7 +102,7 @@
 import * as API from "../../services/API";
 import store from "../../Store/index";
 export default {
-    props: [ "courseID", "labs", "progress" ],
+    props: [ "courseID", "labs", "progress", "studentView" ],
     emits: ["removeLab"],
     data() {
         return {
@@ -254,7 +254,7 @@ export default {
             if (store.getters["auth/isProf"] == null) {
                 return false;
             } else {
-                return store.getters["auth/isProf"];
+                return store.getters["auth/isProf"] && !this.studentView;
             }
         },
     },
