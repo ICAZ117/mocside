@@ -57,7 +57,7 @@ import { useRoute } from "vue-router";
 import LabGrid from "./LabGrid.vue";
 import GradeGrid from "./GradeGrid.vue";
 
-const tabs = ["Labs", "Grades"];
+var tabs = ["Labs", "Grades"];
 
 export default {
     props: ["courseID", "courseName", "studentView"],
@@ -258,15 +258,14 @@ export default {
         }
     },
     async mounted() {
-        console.log("mounted labs")
-        console.log(this.courseID)
-        console.log(this.courseName)
-        console.log(this.studentView)
         if (!this.courseName) {
             this.courseNameLocal = await this.getCourseName();
         }
         this.username = this.authUser.username;
         this.fscID = this.authUser.fsc_user.fsc_id;
+        if (this.studentView) {
+            tabs.filter((t) => t != "Grades");
+        }
         await this.fetchLabs();
     },
 }
