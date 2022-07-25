@@ -402,7 +402,7 @@ export default {
     goToLabs() {
       this.$router.push({name: 'Labs', params: {courseID: this.courseID, courseName: this.getCourseName(this.courseID), }});
     },
-    getCourseName(id) {
+    async getCourseName(id) {
       const res = await API.apiClient.get(`/courses/${id}`);
       return res.data.data.name;
     }
