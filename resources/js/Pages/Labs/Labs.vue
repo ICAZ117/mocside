@@ -258,6 +258,10 @@ export default {
         }
     },
     async mounted() {
+        console.log("mounted labs")
+        console.log(this.courseID)
+        console.log(this.courseName)
+        console.log(this.studentView)
         if (!this.courseName) {
             this.courseNameLocal = await this.getCourseName();
         }
