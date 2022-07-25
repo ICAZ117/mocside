@@ -400,12 +400,8 @@ export default {
       this.$router.push({ name: "Assignment", params: {courseID: this.courseID, labID: this.labID, problemID: id, lang: this.lang }});
     },
     goToLabs() {
-      this.$router.push({name: 'Labs', params: {courseID: this.courseID, courseName: this.getCourseName(this.courseID), }});
+      this.$router.push({name: 'Labs', params: {courseID: this.courseID }});
     },
-    async getCourseName(id) {
-      const res = await API.apiClient.get(`/courses/${id}`);
-      return res.data.data.name;
-    }
 
   },
   computed: {

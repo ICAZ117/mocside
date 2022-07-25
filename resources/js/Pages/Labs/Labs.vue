@@ -239,6 +239,10 @@ export default {
                 name: "Courses",    
             });
         },
+        async getCourseName() {
+            const res = await API.apiClient.get(`/courses/${this.courseID}`);
+            return res.data.data.name;
+        }
     },
     computed: {
         authUser: function() {
@@ -253,6 +257,9 @@ export default {
         }
     },
     async mounted() {
+        if (!this.courseName) {
+            this.courseName = await this.getCourseName();
+        }
         this.username = this.authUser.username;
         this.fscID = this.authUser.fsc_user.fsc_id;
         await this.fetchLabs();
