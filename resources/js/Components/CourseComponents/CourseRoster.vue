@@ -102,9 +102,9 @@ export default {
             this.students = this.students.filter((user) => user.id != student.id);
         },
         studentView() {
-            console.log(this.courseID)
+            console.log(this.course.id)
             console.log(this.course.name)
-            this.$router.push({name: 'Labs', params: {courseID: this.courseID, courseName: this.course.name, studentView: true }});
+            this.$router.push({name: 'Labs', params: {courseID: this.course.id, courseName: this.course.name, studentView: true }});
         },
         async updateRoster() {
             var payload = {
