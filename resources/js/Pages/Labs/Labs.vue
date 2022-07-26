@@ -26,11 +26,9 @@
         >↩ Return to Courses</span
       >
     </small>
-    <div class="exit-student-view">
+    <div class="exit-student-view" style="text-align:end;margin-top:1rem;margin-right:1rem;">
       <button type="button" v-if="this.studentView" @click="exitStudentView()" class="btn btn-danger">Exit Student View</button>
     </div>
-    <br />
-    <br />
     <br />
     <label for="sort">Sort By: </label>
     <select id="sort" v-model="sort" @change="sortLabs">
