@@ -30,6 +30,8 @@
       <button type="button" v-if="this.studentView" @click="exitStudentView()" class="btn btn-danger">Exit Student View</button>
     </div>
     <br />
+    <br v-if="!this.studentView">
+    <br v-if="!this.studentView">
     <label for="sort">Sort By: </label>
     <select id="sort" v-model="sort" @change="sortLabs">
       <option value="0">Due Date</option>

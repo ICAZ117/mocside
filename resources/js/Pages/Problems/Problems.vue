@@ -40,6 +40,8 @@
       <button type="button" v-if="this.studentView" @click="exitStudentView()" class="btn btn-danger">Exit Student View</button>
     </div>
     <br />
+    <br v-if="!this.studentView">
+    <br v-if="!this.studentView">
     <label for="sort">Sort By: </label>
     <select id="sort" v-model="sort" @change="sortProblems">
       <option value="0">Due Date</option>
@@ -401,7 +403,9 @@ export default {
       this.$router.push({ name: "Assignment", params: {courseID: this.courseID, labID: this.labID, problemID: id, lang: this.lang }});
     },
     goToLabs() {
-      this.$router.push({name: 'Labs', params: {courseID: this.courseID, studentView: this.studentView }});
+      this.studentView ? 
+        this.$router.push({name: 'Labs', params: {courseID: this.courseID, studentView: this.studentView }})
+        : this.$router.push({name: 'Labs', params: {courseID: this.courseID }});
     },
     exitStudentView() {
       this.$router.push({name: 'Problems', params: {courseID: this.courseID, labID: this.labID, labName: this.labName }});
