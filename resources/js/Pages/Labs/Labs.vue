@@ -26,6 +26,9 @@
         >↩ Return to Courses</span
       >
     </small>
+    <div class="exit-student-view">
+      <button type="button" v-if="this.studentView" @click="exitStudentView()" class="btn btn-danger">Exit Student View</button>
+    </div>
     <br />
     <br />
     <br />
@@ -243,6 +246,9 @@ export default {
         async getCourseName() {
             const res = await API.apiClient.get(`/courses/${this.courseID}`);
             return res.data.data.name;
+        },
+        exitStudentView() {
+            this.$router.push({name: 'Labs', params: { courseID: this.courseID, courseName: this.courseName }});
         }
     },
     computed: {

@@ -36,6 +36,9 @@
         >↩ Return to Labs</span
       >
     </small>
+    <div class="exit-student-view">
+      <button type="button" v-if="this.studentView" @click="exitStudentView()" class="btn btn-danger">Exit Student View</button>
+    </div>
     <br />
     <br />
     <br />
@@ -402,6 +405,9 @@ export default {
     goToLabs() {
       this.$router.push({name: 'Labs', params: {courseID: this.courseID, studentView: this.studentView }});
     },
+    exitStudentView() {
+      this.$router.push({name: 'Problems', params: {courseID: this.courseID, labID: this.labID, labName: this.labName }});
+    }
 
   },
   computed: {
