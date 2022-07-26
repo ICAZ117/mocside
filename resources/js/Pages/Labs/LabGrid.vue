@@ -221,15 +221,9 @@ export default {
         goToProblems(id, name) {
             this.labID = id;
             this.labName = name;
-            this.$router.push({
-                name: "Problems",
-                params: {
-                    courseID: this.courseID,
-                    labID: id,
-                    labName: name,
-                    studentView: this.studentView
-                }
-            });
+            this.studentView ?
+              this.$router.push({ name: "Problems", params: { courseID: this.courseID, labID: id, labName: name, studentView: this.studentView }})
+              : this.$router.push({ name: "Problems", params: { courseID: this.courseID, labID: id, labName: name }});
         },
         //edit lab
         async editLab(labID, labName) {
