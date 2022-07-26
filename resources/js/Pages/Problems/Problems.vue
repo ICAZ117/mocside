@@ -41,7 +41,6 @@
     </div>
     <br />
     <br v-if="!this.studentView">
-    <br v-if="!this.studentView">
     <label for="sort">Sort By: </label>
     <select id="sort" v-model="sort" @change="sortProblems">
       <option value="0">Due Date</option>
