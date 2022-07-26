@@ -3,7 +3,7 @@
     <!-- Main Page-->
     <div class="courses header">
       <div class="heading">
-        <h2>{{ courseName ? courseName : courseNameLocal }}</h2>
+        <h2>{{ (courseName ? courseName : courseNameLocal) + (this.studentView ? ' - Student View' : '') }}</h2>
         <hr />
 
         <tabs v-model="selectedTab">

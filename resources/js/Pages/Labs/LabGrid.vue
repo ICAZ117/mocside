@@ -227,6 +227,7 @@ export default {
                     courseID: this.courseID,
                     labID: id,
                     labName: name,
+                    studentView: this.studentView
                 }
             });
         },

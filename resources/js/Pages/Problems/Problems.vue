@@ -24,7 +24,7 @@
     </vue-final-modal>
     <div class="courses header">
       <div class="heading">
-        <h2>{{ this.labName }}</h2>
+        <h2>{{ this.labName  + (this.studentView ? ' - Student View' : '') }}</h2>
         <hr />
       </div>
     </div>
@@ -157,7 +157,7 @@ import { computed } from "vue";
 import { sort } from "../../services/Sort";
 
 export default {
-  props: ["courseID", "labID", "labName"],
+  props: ["courseID", "labID", "labName", "studentView"],
   data() {
     return {
       allProblems: [],
@@ -400,7 +400,7 @@ export default {
       this.$router.push({ name: "Assignment", params: {courseID: this.courseID, labID: this.labID, problemID: id, lang: this.lang }});
     },
     goToLabs() {
-      this.$router.push({name: 'Labs', params: {courseID: this.courseID }});
+      this.$router.push({name: 'Labs', params: {courseID: this.courseID, studentView: this.studentView }});
     },
 
   },
@@ -412,7 +412,7 @@ export default {
       if (store.getters["auth/isProf"] == null) {
           return false;
       } else {
-          return store.getters["auth/isProf"];
+          return store.getters["auth/isProf"] && !this.studentView;
       }
     },
   },
