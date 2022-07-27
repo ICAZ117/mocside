@@ -68,20 +68,24 @@ export default {
         },
         async addStudent() {
             try {
-                const stud = await this.getStudent();
+				payload = {
+					course_id: this.course.id,
+				}
+				const res = await API.apiClient.post(`/invite/add/${this.newStudentID}`, payload);
+                // const stud = await this.getStudent();
 
-				if(stud == null) return;
+				// if(stud == null) return;
 
-				this.rosterIDs.push(this.newStudentID);
-                const res = await this.updateRoster();
+				// this.rosterIDs.push(this.newStudentID);
+                // const res = await this.updateRoster();
 
-                var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
-                courses.push(this.course.id);
-                const res2 = await this.updateStudentCourses(courses, stud.data.data);
+                // var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
+                // courses.push(this.course.id);
+                // const res2 = await this.updateStudentCourses(courses, stud.data.data);
 
-                //at end add to the students list
-                this.students.push(stud.data.data);
-				this.newStudentID = null;
+                // //at end add to the students list
+                // this.students.push(stud.data.data);
+				// this.newStudentID = null;
             } catch (error) {
 				console.log(error);
             }

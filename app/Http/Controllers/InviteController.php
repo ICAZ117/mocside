@@ -145,6 +145,58 @@ class InviteController extends Controller
         return response()->json(['message' => 'Enrolled in course.'], 200);
     }
 
+	public function addStudent(Request $request, $id)
+	{
+		if(Auth::user()->isAdmin())
+		{
+			$validData = $request->validate([
+				'course_id' => 'required',
+			]);
+			$student = Student::where('fsc_id', $id)->first();
+			if (!$student) {
+                return response()->json(['message' => 'couldn\'t find student with id '.$id], 410);
+            }
+
+			//get course
+			$course = Course::findOrFail($validData['course_id']);
+
+			//check that student isn't already in roster
+			$course_roster = json_decode($course->roster, true);
+			foreach($course_roster['roster'] as $student_id) {
+				if($student_id == $id) {
+					return response()->json(['message' => 'Student is already enrolled in this course.'], 403);
+				}
+			}
+
+			//populate rosters
+			// IF this code fails, it will be because the user does not have
+			// columns properly initialized by init/gradebook
+			$student_roster = json_decode($student->courses, true);
+			array_push($student_roster['courses'], $course->id);
+			array_push($course_roster['roster'], $id);
+			$course->roster = json_encode($course_roster);
+			$student->courses = json_encode($student_roster);
+
+			//we also need to init them in the course-wide gradebook
+			$course_book = json_decode($course->gradebook, true);
+			array_push($course_book['students'], $id);
+			$course_book['grades'][$id] = 0;
+			$course->gradebook = json_encode($course_book);
+
+			$student_course_book = json_decode($student->gradebook_courses, true);
+			array_push($student_course_book['courses'], $course->id);
+			$student_course_book['grades'][$course->id] = 0;
+			$student->gradebook_courses = json_encode($student_course_book);
+
+			$course->save();
+			$student->save();
+
+			return response()->json(['message' => 'Student added to course.'], 200);
+			
+		}
+		return response()->json(['message' => 'Forbidden.'], 403);
+	}
+
     // delete invite key.
     public function delete($id)
     {

@@ -138,6 +138,7 @@ Route::middleware(['auth:sanctum', 'active'])->group(function () {
     Route::post('/invite/enroll/{key}', [InviteController::class, 'enroll']);
     Route::put('/invite/{id}', [InviteController::class, 'update']);
     Route::delete('/invite/{id}', [InviteController::class, 'delete']);
+	Route::post('/invite/add/{id}', [InviteController::class, 'addStudent']);
 
     Route::put('/profile/full/{id}', [ProfileController::class, 'updateFullProfile']);
     Route::put('/profile/pfp', [ProfileController::class, 'updatePFP']);
