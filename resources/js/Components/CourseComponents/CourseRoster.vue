@@ -32,7 +32,7 @@
         <div class="student-view-btn flex-row" style="display: flex; justify-content: space-between;">
             
 			<div>
-				<input type="text" v-model="newStudentID" id="newStudent" name="newStudent" class="course-edit-field">
+				<input type="text" v-model="newStudentID" id="newStudent" name="newStudent" class="course-edit-field" style="margin-right:1rem;">
 				<button type="button" @click="addStudent()" class="btn btn-danger btn-block add-student-btn">
 					Add Student
 				</button>
