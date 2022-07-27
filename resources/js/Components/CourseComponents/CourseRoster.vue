@@ -30,9 +30,13 @@
             </table>
         </div>
         <div class="student-view-btn flex-row" style="display: flex; justify-content: space-between;">
-            <button type="button" @click="addStudent()" class="btn btn-danger btn-block add-student-btn">
-                Add Student
-            </button>
+            
+			<div>
+				<input type="text" v-model="newStudentID" id="newStudent" name="newStudent" class="course-edit-field">
+				<button type="button" @click="addStudent()" class="btn btn-danger btn-block add-student-btn">
+					Add Student
+				</button>
+			</div>
             <button type="button" @click="studentView()" class="btn btn-danger btn-block student-view-btn">
                 Student View
             </button>
@@ -48,6 +52,7 @@ export default {
         return {
             students: [],
             rosterIDs: [],
+			newStudentID: null,
         }
     },
     methods: {
@@ -59,22 +64,27 @@ export default {
             }
         },
         async getStudent() {
-            console.log("fix getStudent")
-            // return await API.apiClient.get(`/students/${this.studentID}`);
+            return await API.apiClient.get(`/students/${this.newStudentID}`);
         },
         async addStudent() {
-            console.log("fix addStudent")
-            // try {
-            //     const stud = await this.getStudent();
-            //     this.courseForm.roster.push(this.studentID);
-            //     const res = await this.updateRoster();
-            //     var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
-            //     courses.push(this.courseID);
-            //     const res2 = await this.updateStudentCourses(courses);
-            //     //at end add to the students list
-            //     this.students.push(stud.data.data);
-            // } catch (error) {
-            // }
+            try {
+                const stud = await this.getStudent();
+
+				if(stud == null) return;
+
+				this.rosterIDs.push(this.newStudentID);
+                const res = await this.updateRoster();
+
+                var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
+                courses.push(this.course.id);
+                const res2 = await this.updateStudentCourses(courses, stud.data.data);
+
+                //at end add to the students list
+                this.students.push(stud.data.data);
+				this.newStudentID = null;
+            } catch (error) {
+				console.log(error);
+            }
         },
         async removeStudent(student, index) {
             //remove student ID from course's roster list
