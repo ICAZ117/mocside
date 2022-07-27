@@ -68,7 +68,7 @@ export default {
         },
         async addStudent() {
             try {
-				payload = {
+				var payload = {
 					course_id: this.course.id,
 				}
 				const res = await API.apiClient.post(`/invite/add/${this.newStudentID}`, payload);
