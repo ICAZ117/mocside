@@ -32,7 +32,7 @@
         <div class="student-view-btn flex-row" style="display: flex; justify-content: space-between;">
             
 			<div>
-				<input type="text" v-model="newStudentID" id="newStudent" name="newStudent" class="course-edit-field" style="margin-right:1rem;">
+				<input type="text" v-model="newStudentID" id="newStudent" name="newStudent" class="profile-field course-edit-field" style="margin-right:1rem;">
 				<button type="button" @click="addStudent()" class="btn btn-danger btn-block add-student-btn">
 					Add Student
 				</button>
@@ -72,20 +72,19 @@ export default {
 					course_id: this.course.id,
 				}
 				const res = await API.apiClient.post(`/invite/add/${this.newStudentID}`, payload);
-                // const stud = await this.getStudent();
 
-				// if(stud == null) return;
+                if(res.status == 200) {
+                    const stud = await this.getStudent();
 
-				// this.rosterIDs.push(this.newStudentID);
-                // const res = await this.updateRoster();
+                    if(stud == null) return;
 
-                // var courses = JSON.parse(stud.data.data.fsc_user.courses).courses;
-                // courses.push(this.course.id);
-                // const res2 = await this.updateStudentCourses(courses, stud.data.data);
+                    //add to student list
+                    this.students.push(stud.data.data);
+                    this.newStudentID = null;
 
-                // //at end add to the students list
-                // this.students.push(stud.data.data);
-				// this.newStudentID = null;
+                } else {
+                    console.log("Error adding student")
+                }
             } catch (error) {
 				console.log(error);
             }
