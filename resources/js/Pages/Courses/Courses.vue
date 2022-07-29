@@ -458,7 +458,7 @@ export default {
                     //the number of uses is unlimited or not reached yet
                     // check if within the expire date of the code
                     var currentTime = new Date(
-                        new Date().toISOString.split("T")[0] + " " + new Date().toISOString().split("T")[1].split(".")[0]
+                        new Date(Date.now()).toISOString().split("T")[0] + " " + new Date(Date.now()).toISOString().split("T")[1].split(".")[0]
                     );
                     var expirationDate = new Date(course.expire_date);
 
