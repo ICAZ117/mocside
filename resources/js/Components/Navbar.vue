@@ -162,14 +162,11 @@ export default {
         return true;
       }
     },
-	test: function() {
-		var d = $route.path
-		console.log(d)
-	}
   },
   watch: {
     $route(to) {
-		console.log("watch: " + to)
+		console.log("watch")
+		console.log(to)
       if (to.fullPath != "/") {
         this.isDark = true;
       } else {
