@@ -165,17 +165,12 @@ export default {
   },
   watch: {
     $route(to) {
-		console.log("watch")
-		console.log(to)
       if (to.fullPath == "/") {
         this.isDark = false;
       } else {
         this.isDark = true;
       }
       this.updatePFP();
-    //   this.$emit("forceReload");
-    //   if(to.fullPath == "/profile") {
-    //   }
     },
   },
 };
