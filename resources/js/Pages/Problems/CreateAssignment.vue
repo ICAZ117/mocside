@@ -28,7 +28,7 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Overview'">
-        <Overview v-if="overview != null && overview != {}" @delete="deleteProblem" :overview="overview" :problemID="problemID"/>
+        <Overview v-if="overview != null && overview != ''" @delete="deleteProblem" :overview="overview" :problemID="problemID"/>
       </tab-panel>
       <tab-panel :val="'Assign'">
         <Assign @delete="deleteProblem" :problemID="problemID"  />
@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       assignmentTitle: "",
-      overview: {},
+      overview: null,
       problem: {},
     }
   },
@@ -100,7 +100,7 @@ export default {
       const rawProblem = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.problem = rawProblem.data.data;
       this.assignmentTitle = this.problem.name;
-      this.overview = JSON.parse(this.problem.description);
+      this.overview = this.problem.description;
     },
 
     //delete problem

@@ -19,7 +19,7 @@
     <div class="container">
       <h4>Description:</h4>
       <div style="height: 65%;">
-        <Tiptap :savedText="overview" @input="save" :showMenuBar="true" :isDark="false" />
+        <Tiptap :savedText="content" @input="save" :showMenuBar="true" :isDark="false" />
         <hr />
         <h5>Proceed with caution!</h5>
         <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
@@ -37,7 +37,7 @@ export default {
   emits: ["delete"],
   props: {
     overview: {
-      type: Object,
+      type: String,
       required: true,
     },
     problemID: {
@@ -50,6 +50,7 @@ export default {
       showDeleteModal: false,
       reloadDeleteModal: 0,
       newText: {},
+      content: null
     }
   },
   methods: {
@@ -81,6 +82,10 @@ export default {
     }, 3000),
 
   },
+  async mounted() {
+    console.log(this.overview)
+    this.content = await JSON.parse(this.overview);
+  }
 
 }
 </script>
