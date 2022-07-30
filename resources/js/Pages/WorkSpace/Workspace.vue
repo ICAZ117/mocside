@@ -38,7 +38,7 @@
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
         <Tiptap
-          :savedText="savedText"
+          :savedText="description"
           :editable="false"
           :showMenuBar="false"
           :isDark="true"
@@ -100,7 +100,7 @@ export default defineComponent({
       IDEWidth: window.innerWidth * 0.67,
       assignment: {},
       title: "",
-      description: "",
+      description: null,
       code_j: "",
       code_p: "",
       theme: "",
@@ -150,7 +150,7 @@ export default defineComponent({
       const rawAssignment = await API.apiClient.get(`/problems/full/${this.problemID}`);
       this.assignment = rawAssignment.data.data;
       this.title = this.assignment.name;
-      this.description = this.assignment.description;
+      this.description = await JSON.parse(this.assignment.description);
       //check if empty....post if empty
       var payload = {
         lang: this.lang,
@@ -201,8 +201,6 @@ export default defineComponent({
         }
       }
       this.forceReload = 1;
-
-      this.savedText = await JSON.parse(this.description)
 
       // const res = await API.apiClient.get(`/code/search/${this.problemID}`);
       // var progress = res.data.data;
