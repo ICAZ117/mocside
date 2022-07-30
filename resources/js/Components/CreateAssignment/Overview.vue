@@ -18,7 +18,7 @@
       </vue-final-modal>
     <div class="container">
       <h4>Description:</h4>
-      <Tiptap :savedText="overview" @input="save" :showMenuBar="true" :isDark="false" />
+      <Tiptap v-if="overview != {}" :savedText="overview" @input="save" :showMenuBar="true" :isDark="false" />
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
