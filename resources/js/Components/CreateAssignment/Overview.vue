@@ -18,7 +18,7 @@
       </vue-final-modal>
     <div class="container">
       <h4>Description:</h4>
-      <Tiptap :savedText="prepOverview()" @input="save" :showMenuBar="true" :isDark="false" />
+      <!-- <Tiptap :savedText="prepOverview()" @input="save" :showMenuBar="true" :isDark="false" /> -->
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
@@ -65,6 +65,7 @@ export default {
 
     // get overview
     prepOverview() {
+      console.log("prep")
       console.log(this.overview)
       return JSON.parse(this.overview);
     },
@@ -84,6 +85,9 @@ export default {
     }, 3000),
 
   },
+  mounted() {
+    console.log(this.overview)
+  }
 
 }
 </script>
