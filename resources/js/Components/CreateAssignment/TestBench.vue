@@ -51,7 +51,9 @@
 
       <!------------ TC Feedback ------------>
       <h6><b>Feedback on test failure</b></h6>
-      <Tiptap :savedText="feedbackContent" @input="changeFeedback" :showMenuBar="true" :isDark="false" />
+        <div style="height:35%;">
+          <Tiptap :savedText="feedbackContent" @input="changeFeedback" :showMenuBar="true" :isDark="false" />
+        </div>
       <br /><br />
 
       <!------------ TC Compare Method ------------>
