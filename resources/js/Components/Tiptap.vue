@@ -80,6 +80,12 @@ export default {
       },
     });
   },
+  watch : {
+    savedText(value) {
+      console.log(value)
+      console.log(this.editor.getJSON())
+    }
+  },
 
   beforeUnmount() {
     //tiptap
