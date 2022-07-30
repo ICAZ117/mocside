@@ -1,42 +1,44 @@
 <template>
-  <div style="height: 90%!important;">
-    <bubble-menu
-      class="bubble-menu"
-      :tippy-options="{ duration: 100 }"
-      :editor="editor"
-      v-if="editor && showMenuBar"
-    >
-      <button
-        @click="editor.chain().focus().toggleBold().run()"
-        :class="{ 'is-active': editor.isActive('bold') }"
+<div style="height: 35%;">
+    <div style="height: 90%!important;">
+      <bubble-menu
+        class="bubble-menu"
+        :tippy-options="{ duration: 100 }"
+        :editor="editor"
+        v-if="editor && showMenuBar"
       >
-        Bold
-      </button>
-      <button
-        @click="editor.chain().focus().toggleItalic().run()"
-        :class="{ 'is-active': editor.isActive('italic') }"
-      >
-        Italic
-      </button>
-      <button
-        @click="editor.chain().focus().toggleStrike().run()"
-        :class="{ 'is-active': editor.isActive('strike') }"
-      >
-        Strike
-      </button>
-    </bubble-menu>
+        <button
+          @click="editor.chain().focus().toggleBold().run()"
+          :class="{ 'is-active': editor.isActive('bold') }"
+        >
+          Bold
+        </button>
+        <button
+          @click="editor.chain().focus().toggleItalic().run()"
+          :class="{ 'is-active': editor.isActive('italic') }"
+        >
+          Italic
+        </button>
+        <button
+          @click="editor.chain().focus().toggleStrike().run()"
+          :class="{ 'is-active': editor.isActive('strike') }"
+        >
+          Strike
+        </button>
+      </bubble-menu>
 
-    <div
-      class="rtf-editor"
-      v-if="editor"
-      :style="
-        isDark
-          ? 'border: none!important;'
-          : 'border: 2px solid #0d0d0d; box-shadow: 0px 0px 3px black;'
-      "
-    >
-      <menu-bar class="editor__header" :editor="editor" v-if="showMenuBar" />
-      <editor-content class="dark-scroll-bar editor__content" :editor="editor" />
+      <div
+        class="rtf-editor"
+        v-if="editor"
+        :style="
+          isDark
+            ? 'border: none!important;'
+            : 'border: 2px solid #0d0d0d; box-shadow: 0px 0px 3px black;'
+        "
+      >
+        <menu-bar class="editor__header" :editor="editor" v-if="showMenuBar" />
+        <editor-content class="dark-scroll-bar editor__content" :editor="editor" />
+      </div>
     </div>
   </div>
 </template>
