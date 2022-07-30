@@ -51,7 +51,7 @@
 
       <!------------ TC Feedback ------------>
       <h6><b>Feedback on test failure</b></h6>
-      <!-- <Tiptap :savedText="JSON.parse(tc.Feedback)" @input="changeFeedback" :showMenuBar="true" :isDark="false" /> -->
+      <Tiptap :savedText="feedbackContent" @input="changeFeedback" :showMenuBar="true" :isDark="false" />
       <br /><br />
 
       <!------------ TC Compare Method ------------>
@@ -128,6 +128,7 @@ export default {
         Input: "",
         Output: "",
       },
+      feedbackContent: null,
     }
   },
   methods: {
@@ -246,7 +247,7 @@ export default {
     },
 
     //TEST case selector
-    setCurrentTC(idx) {
+    async setCurrentTC(idx) {
       this.currentTC = idx + 1;
       this.tc = {
         id: this.cases[idx].id,
@@ -257,6 +258,7 @@ export default {
         Input: this.cases[idx].input,
         Output: this.cases[idx].output,
       };
+      this.feedbackContent = await JSON.parse(tc.Feedback);
     },
 
   },
