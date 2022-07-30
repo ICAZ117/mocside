@@ -18,7 +18,7 @@
       </vue-final-modal>
     <div class="container">
       <h4>Description:</h4>
-      <Tiptap :savedText="overview" @input="save" :showMenuBar="true" :isDark="false" />
+      <Tiptap :savedText="temp" @input="save" :showMenuBar="true" :isDark="false" />
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
@@ -47,6 +47,7 @@ export default {
       showDeleteModal: false,
       reloadDeleteModal: 0,
       newText: {},
+      temp: null,
     }
   },
   methods: {
@@ -80,6 +81,7 @@ export default {
   },
   mounted() {
     console.log(this.overview)
+    this.temp = {"type":"reactive","objectType":"Reactive","value":{"type":"doc","content":[{"type":"paragraph","content":[{"text":"This is my test creation of a new problem","type":"text"}]},{"type":"paragraph","content":[{"text":"Print the name of the User given as input","type":"text"}]},{"type":"paragraph"},{"type":"paragraph","content":[{"text":"INPUT:","type":"text"}]},{"type":"codeBlock","attrs":{"language":null},"content":[{"text":"Chase","type":"text"}]},{"type":"paragraph"},{"type":"paragraph","content":[{"text":"OUTPUT:","type":"text"}]},{"type":"codeBlock","attrs":{"language":null},"content":[{"text":"Hello Chase","type":"text"}]},{"type":"paragraph"}]}}
   }
 
 }
