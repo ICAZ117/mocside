@@ -83,14 +83,11 @@ export default {
   },
   watch : {
     savedText(value) {
-
       const isSame = this.editor.getJSON() === toRaw(value).value
 
       if(isSame) {
-        console.log("same")
         return
       }
-      console.log("new values")
       this.editor.commands.setContent(toRaw(value).value, false)
     }
   },
