@@ -20,10 +20,11 @@
       <h4>Description:</h4>
       <div style="height: 65%;">
         <Tiptap :savedText="temp" @input="save" :showMenuBar="true" :isDark="false" />
+        <hr />
+        <h5>Proceed with caution!</h5>
+        <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
       </div>
-      <hr />
-      <h5>Proceed with caution!</h5>
-      <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
+      
     </div>
   </div>
 </template>
