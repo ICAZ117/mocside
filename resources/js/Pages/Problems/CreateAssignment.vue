@@ -28,7 +28,7 @@
 
     <tab-panels v-model="selectedTab" :animate="true">
       <tab-panel :val="'Overview'">
-        <Overview v-if="overview != null" @delete="deleteProblem" :overview="overview" :problemID="problemID"/>
+        <Overview v-if="overview != null && overview != {}" @delete="deleteProblem" :overview="overview" :problemID="problemID"/>
       </tab-panel>
       <tab-panel :val="'Assign'">
         <Assign @delete="deleteProblem" :problemID="problemID"  />
