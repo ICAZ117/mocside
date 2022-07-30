@@ -84,7 +84,7 @@ export default {
   watch : {
     savedText(value) {
       console.log(this.editor.getJSON())
-      console.log(toRaw(value).value)
+      console.log(toRaw(value))
       const isSame = this.editor.getJSON() === toRaw(value).value
 
       if(isSame) {
