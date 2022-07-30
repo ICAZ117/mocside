@@ -83,7 +83,6 @@ export default {
 
   },
   async mounted() {
-    console.log(this.overview)
     this.content = await JSON.parse(this.overview);
   }
 
