@@ -18,7 +18,7 @@
       </vue-final-modal>
     <div class="container">
       <h4>Description:</h4>
-      <!-- <Tiptap :savedText="JSON.parse(overview)" @input="save" :showMenuBar="true" :isDark="false" /> -->
+      <Tiptap :savedText="prepOverview()" @input="save" :showMenuBar="true" :isDark="false" />
       <hr />
       <h5>Proceed with caution!</h5>
       <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
@@ -61,6 +61,12 @@ export default {
     async deletProblem() {
       this.closeDeleting();
       await this.$emit("delete");
+    },
+
+    // get overview
+    prepOverview() {
+      console.log(this.overview)
+      return JSON.parse(this.overview);
     },
 
     //save the overview
