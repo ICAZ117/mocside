@@ -258,7 +258,7 @@ export default {
         Input: this.cases[idx].input,
         Output: this.cases[idx].output,
       };
-      this.feedbackContent = await JSON.parse(tc.Feedback);
+      this.feedbackContent = await JSON.parse(this.tc.Feedback);
     },
 
   },
