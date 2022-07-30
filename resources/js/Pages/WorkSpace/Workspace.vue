@@ -23,7 +23,7 @@
         v-if="childIsOpen"
         style="overflow-y: hidden !important; overflow-x: auto !important"
       >
-        <btn
+        <button
           class="btn btn-secondary btn-sm"
           style="
             margin-left: calc((100% - (100% - 16px)) / 2) !important;
@@ -31,7 +31,7 @@
             margin-top: 5px;
           "
           @click="returnToProblems()"
-          >↩ Return to Problems</btn
+          >↩ Return to Problems</button
         >
         <br />
         <br />
