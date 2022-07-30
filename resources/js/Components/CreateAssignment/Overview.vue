@@ -65,8 +65,6 @@ export default {
 
     // get overview
     prepOverview() {
-      console.log("prep")
-      console.log(this.overview)
       return this.overview;
     },
 
