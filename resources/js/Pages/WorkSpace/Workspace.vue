@@ -38,7 +38,7 @@
         <h4>{{ title }}</h4>
         <hr class="instructions-hr" />
         <Tiptap
-          :savedText="JSON.parse(description)"
+          :savedText="savedText"
           :editable="false"
           :showMenuBar="false"
           :isDark="true"
@@ -123,6 +123,7 @@ export default defineComponent({
       w2: window.innerWidth * 0.67,
       active: true,
       debouncedWidth: window.innerWidth * 0.67,
+      savedText: null,
     };
   },
   watch: {
@@ -200,6 +201,8 @@ export default defineComponent({
         }
       }
       this.forceReload = 1;
+
+      this.savedText = await JSON.parse(this.description)
 
       // const res = await API.apiClient.get(`/code/search/${this.problemID}`);
       // var progress = res.data.data;
