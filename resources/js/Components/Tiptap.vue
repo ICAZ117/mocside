@@ -84,6 +84,15 @@ export default {
     savedText(value) {
       console.log(value)
       console.log(this.editor.getJSON())
+
+      const isSame = this.editor.getJSON() === value
+
+      if(isSame) {
+        console.log("same")
+        return
+      }
+      console.log("new values")
+      this.editor.commands.setContent(value, false)
     }
   },
 
