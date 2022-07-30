@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { toRaw } from 'vue';
 import { Editor, EditorContent, BubbleMenu } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
@@ -82,6 +83,7 @@ export default {
   },
   watch : {
     savedText(value) {
+      console.log(toRaw(value))
       console.log(value)
       console.log(this.editor.getJSON())
 
