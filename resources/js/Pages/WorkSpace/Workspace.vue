@@ -149,8 +149,6 @@ export default {
       var payload = {
         lang: this.lang,
       }
-      console.log(payload)
-      console.log(this.lang)
       return await API.apiClient.post(`/code/check/${this.problemID}`, payload);
     },
     async initEmptyCode() {
@@ -213,7 +211,7 @@ export default {
   // },
   async mounted() {
     if(!this.lang) this.returnToProblems();
-    await this.fetchAssignment();
+    else await this.fetchAssignment();
     // this.reloadSliders++;
     // document.getElementById("resizeableInstructions").remove();
     // document.getElementById("thisIsTheDumbestThingIHaveEverHadToDo").style =
