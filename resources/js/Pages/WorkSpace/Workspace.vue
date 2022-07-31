@@ -149,7 +149,7 @@ export default {
       var payload = {
         lang: this.lang,
       }
-      if(this.lang == "") console.log("empty: " + this.lang)
+      console.log(payload)
       return await API.apiClient.post(`/code/check/${this.problemID}`, payload);
     },
     async initEmptyCode() {
