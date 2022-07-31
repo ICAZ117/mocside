@@ -95,7 +95,7 @@ export default {
 
       // vue resizeable
       instructionsHeight: window.innerHeight - 60,
-      instrcutionsWidth: window.innerWidth * 0.33,
+      instructionsWidth: window.innerWidth * 0.33,
       IDEHeight: window.innerHeight - 60,
       IDEWidth: window.innerWidth * 0.67,
       instrcutx: 0,
