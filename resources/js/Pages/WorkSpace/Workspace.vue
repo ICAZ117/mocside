@@ -150,6 +150,7 @@ export default {
         lang: this.lang,
       }
       console.log(payload)
+      console.log(this.lang)
       return await API.apiClient.post(`/code/check/${this.problemID}`, payload);
     },
     async initEmptyCode() {
@@ -211,6 +212,7 @@ export default {
   //   document.getElementById("thisIsTheDumbestThingIHaveEverHadToDo").style = "";
   // },
   async mounted() {
+    if(!this.lang) this.returnToProblems();
     await this.fetchAssignment();
     // this.reloadSliders++;
     // document.getElementById("resizeableInstructions").remove();
