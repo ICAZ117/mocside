@@ -17,7 +17,6 @@
         :key="reloadSliders"
         class="instructions"
         id="resizeableInstructions"
-        v-if="childIsOpen"
         style="overflow-y: hidden !important; overflow-x: auto !important"
       >
         <button
@@ -39,7 +38,6 @@
           :editable="false"
           :showMenuBar="false"
           :isDark="true"
-          v-if="childIsOpen"
         />
       </Vue3DraggableResizable>
 
@@ -70,7 +68,6 @@
           :labID="labID"
           @update="updateContent"
           :key="forceReload"
-          v-if="childIsOpen"
           :width="debouncedWidth"
         /> -->
       </Vue3DraggableResizable>
