@@ -98,7 +98,7 @@ export default {
       instructionsWidth: window.innerWidth * 0.33,
       IDEHeight: window.innerHeight - 60,
       IDEWidth: window.innerWidth * 0.67,
-      instrcutx: 0,
+      instructx: 0,
       instructy: 60,
       instructw: 0,
       instructh: 0,
