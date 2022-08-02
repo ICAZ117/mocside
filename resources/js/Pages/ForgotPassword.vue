@@ -100,7 +100,7 @@ export default {
 				else if (this.error?.errors?.email[0] == "Invalid password.") {
 					this.$notify({ type: "error", text: "Your password is incorrect!" });
 				} else {
-					this.$notify({ type: "error", text: this.error });
+					this.$notify({ type: "error", text: this.error.message });
 				}
 			}
 		},
