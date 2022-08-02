@@ -88,8 +88,8 @@ export default {
       title: null,
       description: null,
       codeID: "",
-      code_p: null,
-      code_j: null,
+      code_p: "",
+      code_j: "",
       forceReload: 0,
       reloadSliders: 0,
 
