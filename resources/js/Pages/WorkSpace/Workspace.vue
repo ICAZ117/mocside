@@ -57,7 +57,7 @@
         :key="reloadSliders"
         id="resizeableIDE"
       >
-        <!-- <IDE
+        <IDE
           :offsetTop="0"
           :lang="lang"
           :showSubmit="true"
@@ -69,7 +69,7 @@
           @update="updateContent"
           :key="forceReload"
           :width="debouncedWidth"
-        /> -->
+        />
       </Vue3DraggableResizable>
     </div>
   </div>
