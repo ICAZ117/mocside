@@ -95,7 +95,7 @@ export default {
 			if(this.currentUser.settings == null) {
 				const res = await API.apiClient.post(`/profile/init`);
 
-				this.currentUser = await API.apiClqient.get(`/users/profile/${this.fsc_id}`).data.data;
+				this.currentUser = await API.apiClient.get(`/users/profile/${this.fsc_id}`).data.data;
 			}
 
 			this.setDisplayUser();
