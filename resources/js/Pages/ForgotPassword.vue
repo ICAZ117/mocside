@@ -88,18 +88,19 @@ export default {
 			try {
 				//call the route to send the reset link here
 				const res = await AuthService.forgotPassword(payload).then((response) => {
-					console.log(response);
 				}).catch((error) => {
 					throw error
 				});
 			} catch (error) {
-				this.error = error.response.data.errors.email[0];
-				
-				if (this.error == "Invalid email or username.") {
+				this.error = error.response.data;
+				console.log(this.error)
+				if (this.error?.errors?.email[0] == "Invalid email or username.") {
 					this.$notify({ type: "error", text: "Your email/username does not exist!" });
 				}
-				else if (this.error == "Invalid password.") {
+				else if (this.error?.errors?.email[0] == "Invalid password.") {
 					this.$notify({ type: "error", text: "Your password is incorrect!" });
+				} else {
+					this.$notify({ type: "error", text: this.error.message });
 				}
 			}
 		},

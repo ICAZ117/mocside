@@ -42,7 +42,7 @@
         </div>
         <br />
 
-		<div class="form-group">
+		    <div class="form-group">
           <label for="Lab Publish Date">Lab Publish Date</label>
           <div class="row">
             <input
@@ -65,48 +65,55 @@
 </template>
 
 <script>
-import * as API from "../services/API";
+import * as API from "../../services/API";
 export default {
-  props: ["labID"],
-  emits: ["unmounting", "labEdited"],
+  props: ["labID", "courseID"],
   data() {
     return {
       labForm: {
-		    name: "",
-		    description: "",
-		    dateDue: null,
+        name: "",
+        description: "",
+        dateDue: null,
         timeDue: null,
-		    datePublish: null,
-	    },
-	    isSubmitted: false,
-    };
+        datePublish: null,
+      },
+    }
   },
   methods: {
-	  async handleSubmit() {
-		  this.isSubmitted = true;
-		  var payload = {
-			  name: this.labForm.name,
-			  description: this.labForm.description,
-			  due_date: this.labForm.dateDue,
-			  publish_date: this.labForm.datePublish,
-		  }
-		  const res = await API.apiClient.put(`/labs/${this.labID}`, payload);
-      this.$emit("labEdited");
-	  },
+    async fetchLab() {
+      const Lab = await API.apiClient.get(`/labs/full/${this.labID}`);
+      this.labForm = {
+        name: Lab.data.data.name,
+        description: Lab.data.data.description,
+        dateDue: Lab.data.data.due_date.split(" ")[0],
+        timeDue: Lab.data.data.due_date.split(" ")[1],
+        datePublish: Lab.data.data.publish_date,
+      }
+    },
+
+    async handleSubmit() {
+      const payload = {
+        name: this.labForm.name,
+        description: this.labForm.description,
+        due_date: this.labForm.dateDue,
+        publish_date: this.labForm.datePublish,
+      }
+
+      const res = await API.apiClient.put(`/labs/${this.labID}`, payload);
+
+      this.returnToLabs();
+    },
+
+    returnToLabs() {
+      this.$router.push({name: "Labs", params: { courseID: this.courseID }});
+    }
   },
-  async mounted() {
-	const Lab = await API.apiClient.get(`/labs/full/${this.labID}`);
-	this.labForm.name = Lab.data.data.name;
-	this.labForm.description = Lab.data.data.description;
-	this.labForm.dateDue = Lab.data.data.due_date.split(" ")[0];
-	this.labForm.datePublish = Lab.data.data.publish_date;
-  },
-  beforeUnmount() {
-    //editlab
-    this.$emit("unmounting");
-  },
-};
+  mounted() {
+    this.fetchLab();
+  }
+}
 </script>
 
 <style>
+
 </style>

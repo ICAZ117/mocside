@@ -5,68 +5,68 @@ const routes = [
         path: '',
         component: () => import("../Pages/Home.vue"),
         name: 'Home',
-        // children: [
-        //     {
-        //         path: 'login',
-        //         component: () => import("../Components/LoginModal.vue"),
-        //         props: true
-        //     }
-        // ]
     },
+	{
+		path: '/courses',
+		component: () => import("../Pages/Courses/Courses.vue"),
+		name: "Courses",
+		meta: { requiresAuth: true},
+	},
     {
-        path: '/courses',
-        component: () => import("../Pages/Courses.vue"),
-        name: "Courses",
-        meta: { requiresAuth: true },
-        children: [
-            {
-                path: ':course_id/labs',
-                component: () => import("../Pages/Labs.vue"),
-                name: "Labs",
-                children: [
-                    {
-                        path: ':lab_id/problems',
-                        component: () => import("../Pages/Problems.vue"),
-                        name: "Problems",
-                        children: [
-                            {
-                                path: ':problem_id/workspace',
-                                component: () => import("../Pages/Workspace.vue"),
-                                name: "Assignment",
-                            },
-                            {
-                                path: ':problem_id/edit',
-                                component: () => import("../Pages/CreateAssignment.vue"),
-                                name: "EditAssignment",
-                            },
-                        ]
-                    },
-                    {
-                        path: ':lab_id/edit',
-                        component: () => import("../Pages/EditLab.vue"),
-                        name: "EditLab",
-                    },
-                ]
-            },
-            {
-                path: ':course_id/edit',
-                component: () => import("../Pages/EditCourse.vue"),
-                name: "EditCourse",
-            },
-        ]
-        // Reference for syntax
-        // beforeEnter: (to, from, next) => {
-        //     if (store.getters["auth/isAdmin"]) next();
-        //     else next(false);
-        // }
+        path: "/courses/:courseID/edit",
+        component: () => import("../Pages/Courses/EditCourse.vue"),
+        name: "EditCourse",
+        meta: { requiresAuth: true},
+        props: true
     },
+	{
+		path: "/courses/:courseID/labs",
+		component: () => import("../Pages/Labs/Labs.vue"),
+		name: "Labs",
+		meta: { requiresAuth: true},
+        props: true,
+	},
+    {
+        path: "/courses/:courseID/labs/:labID/edit",
+        component: () => import("../Pages/Labs/EditLab.vue"),
+		name: "EditLab",
+        meta: { requiresAuth: true },
+        props: true
+    },
+	{
+		path: "/courses/:courseID/labs/:labID/problems",
+		component: () => import("../Pages/Problems/Problems.vue"),
+		name: "Problems",
+        meta: { requiresAuth: true},
+        props: true,
+	},
+	{
+		path: "/courses/:courseID/labs/:labID/problems/:problemID/workspace",
+		component: () => import("../Pages/WorkSpace/Workspace.vue"),
+		name: "Assignment",
+		meta: { requiresAuth: true},
+		props: true
+	},
+    {
+        path: "/courses/:courseID/labs/:labID/problems/:problemID/edit",
+        component: () => import("../Pages/Problems/CreateAssignment.vue"),
+        name: "EditAssignment",
+        meta: {requiresAuth: true},
+        props: true
+    },
+        
+	// Reference for syntax
+	// beforeEnter: (to, from, next) => {
+	//     if (store.getters["auth/isAdmin"]) next();
+	//     else next(false);
+	// }
     {
         path: "/:course_key/enroll",
-        component: () => import("../Pages/CourseEnroll.vue"),
+        component: () => import("../Pages/Courses/CourseEnroll.vue"),
         name: "CourseEnroll",
         children: [
             {
-                path: "/enroll/login",
+                path: "login",
                 component: () => import("../Pages/Login.vue"),
                 name: "enroll-login",
             }

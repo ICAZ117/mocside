@@ -289,17 +289,14 @@ export default {
       var flag = true;
       const res = await AuthService.registerUser(payload).catch(function (error) {
         if(error.response.data.errors.hasOwnProperty("email")) {
-          console.log("Email Error");
           self.$notify({ type: "error", text: "An account with your email already exists!" });
           flag = false;
         }
         if(error.response.data.errors.hasOwnProperty("username")) {
-          console.log("Username Error");
           self.$notify({ type: "error", text: "An account with your username already exists!" });
           flag = false;
         }
         if(error.response.data.errors.hasOwnProperty("fsc_id")) {
-          console.log("FSC ID Error");
           self.$notify({ type: "error", text: "An account with your FSC ID already exists!" });
           flag = false;
         }
@@ -309,21 +306,17 @@ export default {
         // then, create student. Any user signed up from the front end STARTS as a student.
         // is there a chance this doesn't work? (CSRF mismatch, likely)
         const res2 = await API.apiClient.post('/students', { fsc_id: payload.fsc_id });
-        console.log(res2);
 
         // if we've made it this far, they have a student (probably), and we can push to login
         // but not before we init gradebook!
         const res3 = await API.apiClient.post(`/gradebook/init/${res2.data.data.id}`, { scope: "student" });
-        console.log(res3);
         const res4 = await API.apiClient.post('/progress');
-        console.log(res4);
 
         //update user record in store to get new pfp path?
         var au = await this.$store.dispatch("auth/getAuthUser");
         if(this.authUser != null) {
           this.pfp = au.pfp_path;
           if(this.pfp == undefined || this.pfp == null) {
-            console.log("empty path");
             this.pfp = "images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
           }
           document.getElementById("d_navpfp").src = this.pfp;

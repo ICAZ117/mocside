@@ -18,71 +18,77 @@
       </vue-final-modal>
     <div class="container">
       <h4>Description:</h4>
-      <Tiptap :savedText="JSON.parse(overview)" @input="save" :showMenuBar="true" :isDark="false" />
-      <hr />
-      <h5>Proceed with caution!</h5>
-      <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
+      <div style="height: 65%;">
+        <Tiptap :savedText="content" @input="save" :showMenuBar="true" :isDark="false" />
+        <hr />
+        <h5>Proceed with caution!</h5>
+        <button class="btn btn-danger btn-lg" @click="deleting()">DELETE ASSIGNMENT</button>
+      </div>
+      
     </div>
   </div>
 </template>
 
 <script>
 import _ from "lodash";
-import * as API from "../services/API";
+import * as API from "../../services/API";
 
 export default {
-  emits: ["delete-problem"],
+  emits: ["delete"],
   props: {
     overview: {
-      type: Object,
+      type: String,
       required: true,
     },
     problemID: {
-      type: Number,
+      type: String,
       required: true,
     },
   },
   data() {
     return {
-      assignmentID: this.problemID,
-      newText: {},
-      childIsOpen: false,
       showDeleteModal: false,
       reloadDeleteModal: 0,
-    };
+      newText: {},
+      content: null
+    }
   },
   methods: {
-    timeout: _.debounce(async function (assignmentID) {
-      var payload = {
-        description: this.newText,
-      };
-      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-    }, 3000),
-    save(e) {
-      this.newText = e;
-      this.timeout(this.assignmentID);
-    },
-    async deleteProblem() {
-      this.childIsOpen = false;
-      this.closeDeleting();
-      await this.$emit("delete-problem", this.problemID);
+
+    //deleting
+    deleting() {
+      this.showDeleteModal = true;
     },
     closeDeleting() {
       this.showDeleteModal = false;
     },
-    deleting() {
-      this.showDeleteModal = true;
+    async deletProblem() {
+      this.closeDeleting();
+      await this.$emit("delete");
     },
+
+    //save the overview
+    save(e) {
+      this.newText = e;
+      this.timeout(this.problemID);
+    },
+
+    //pass the new overview to the backend
+    timeout: _.debounce(async function (assignmentID) {
+      const payload = {
+        description: this.newText,
+      };
+      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+    }, 3000),
+
   },
-  beforeMount() {
-  },
-  beforeUnmount() {
-    //overview
-    console.log("overview unmount");
-  },
-  mounted() {
-  },
-};
+  async mounted() {
+    this.content = await JSON.parse(this.overview);
+  }
+
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

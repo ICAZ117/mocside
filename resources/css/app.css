@@ -738,8 +738,14 @@ hr.courses {
     display: flex;
 }
 
+.flex-100 {
+    max-width:100%;
+    flex: 1 1 100%;
+}
+
 .course-dashboard {
-    height: 100vh!important;
+    height: 93.75vh!important;
+    overflow-y: hidden;
     color: rgb(136, 136, 136);
     width: 100vw!important;
 }
@@ -757,7 +763,193 @@ hr.courses {
 .course-details, .grades, .key-gen, .labs {
     width: 50%;
     margin: 1rem;
-  }
+}
+
+.course-create-form {
+    width:100%;
+    height: 100%;
+}
+
+.course-create-form .course-form {
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.course-create-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+
+table.keygen {
+    background-color: inherit !important;
+    border: none !important;
+}
+table.roster {
+    background-color: inherit !important;
+    border: none !important;
+}
+table.courselab {
+    background-color: inherit !important;
+    border: none !important;
+}
+
+.keygen td {
+    /* border: 1px solid #9e9e9e !important; */
+    /* border-right: none !important; */
+    /* border-left: none !important; */
+    border: none !important;
+}
+.roster td {
+    border: none !important;
+}
+.courselab td {
+    border: none !important;
+}
+
+
+.keygen tr {
+    /* border: 1px solid #9e9e9e !important; */
+    border: none !important;
+}
+.roster tr {
+    border: none !important;
+}
+.courselab tr {
+    border: none !important;
+}
+
+thead.keygen-head {
+    background-color: rgba(0, 96, 169, 0.75) !important;
+    color: white !important;
+    /* border: 1px solid rgba(0, 96, 169, 0.75) !important; */
+    border: none !important;
+}
+thead.roster-head {
+    background-color: rgba(0, 96, 169, 0.75) !important;
+    color: white !important;
+    border: none !important;
+}
+thead.labtable-head {
+    background-color: rgba(0, 96, 169, 0.75) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.keygen .key-row {
+    background-color: rgba(231, 231, 231, 0.65);
+    cursor: pointer;
+}
+.roster .roster-row {
+    background-color: rgba(231, 231, 231, 0.65);
+    cursor: pointer;
+}
+.courselab .lab-row {
+    background-color: rgba(231, 231, 231, 0.65);
+    cursor: pointer;
+}
+.courselab .lab-row:hover {
+    background-color: rgba(204, 204, 204, 0.4) !important;
+    transition-timing-function: ease-in !important;
+    transition-duration: 0.2s !important;
+}
+
+.keygen.form-group {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.roster.form-group {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: start;
+}
+.lablist {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: start;
+}
+.key-list, .create-key {
+    width: 50%;
+    margin: 1rem;
+}
+
+.create-key.flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.create-key .flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+.roster .flex-nowrap {
+    display: flex;
+    flex-direction: row;
+}
+.create-key .flex-nowrap {
+    display: flex;
+    flex-direction: row;
+}
+.create-key .flex-row {
+    max-width: 100%;
+    flex: 1 1 100%;
+}
+.roster .flex-row {
+    max-width: 100%;
+    flex: 1 1 100%;
+}
+.gen-button {
+    display: flex;
+    justify-content: end;
+    align-items: start;
+}
+
+.flex-50 {
+    max-width: 50%;
+    flex: 1 1 50%;
+}
+.keygen label.keygen-label {
+    font-size: small;
+    font-weight: normal;
+    color:whitesmoke;
+}
+
+label.keygen-label-perm {
+    color:whitesmoke;
+}
+
+.date-field,
+.date-field:focus-visible {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+    outline: none !important;
+}
+
+.time-field,
+.time-field:focus-visible {
+    background-color: transparent;
+    color: lightgray;
+    border: none;
+    border-bottom: 2px var(--FSCgrey) solid;
+    border-radius: unset;
+    outline: none !important;
+}
+
+.keygen .dull {
+    color: gray !important;
+}
 
 /*============== LABS and PROBLEMS ==============*/
 

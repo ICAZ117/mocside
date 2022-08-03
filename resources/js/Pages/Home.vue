@@ -86,31 +86,28 @@
   </div>
 </template>
 
-<script> 
-import Modal from "../Components/Modal";
-import FormInput from "../Components/FormInput";
-import BaseBtn from "../Components/BaseBtn";
+<script>
 import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 export default {
-  components: { Modal, FormInput, BaseBtn, Carousel, Slide, Pagination, Navigation },
+  components: {Carousel, Slide, Pagination, Navigation },
   data() {
     return {
-      email: null,
-      password: null,
-      error: null,
-    };
-  },
-  methods: {
 
-  },
-  mounted() {
-    let buttonsNext = document.getElementsByClassName('carousel__next');
-    if (buttonsNext.length > 0) {
-      buttonsNext.item(0).click();
     }
   },
-};
+  methods: {
+    setUpButtons() {
+      let buttonsNext = document.getElementsByClassName('carousel__next');
+      if(buttonsNext.length > 0) {
+        buttonsNext.item(0).click();
+      }
+    },
+  },
+  mounted() {
+    this.setUpButtons();
+  },
+}
 </script>
 
 <style>

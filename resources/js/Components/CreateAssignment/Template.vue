@@ -24,7 +24,7 @@
     </div>
 
     <div v-if="showEditor" class="template-workspace">
-      <div class="save-model">
+      <div class="save-template">
         <div class="row">
           <button class="btn btn-primary btn-md col-4" @click="changeLanguage()">
             CHANGE LANGUAGE
@@ -34,82 +34,87 @@
         </div>
       </div>
 
-      <IDE
-        :offsetTop="197.8"
-        :width="windowWidth"
-        :lang="lang"
-        :problemID="problemID"
-        :showSubmit="false"
-        v-model:saved_j="template_j"
-        v-model:saved_p="template_p"
-        @update="updateContent"
-      />
+      <div class="template-IDE"> 
+        <IDE
+          :offsetTop="197.8"
+          :width="window.innerWidth"
+          :lang="lang"
+          :problemID="problemID"
+          :showSubmit="false"
+          v-model:saved_j="template_j"
+          v-model:saved_p="template_p"
+          @update="updateContent"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import * as API from "../services/API";
+import _ from "lodash";
+import * as API from "../../services/API";
+
 export default {
   props: ["problemID", "tab"],
   data() {
     return {
-      saveStatus: "",
-      lang: "",
       showEditor: false,
-      content: "",
+      saveStatus: "",
       template_j: "",
       template_p: "",
-      windowWidth: window.innerWidth,
-    };
-  },
-  watch: {
-    tab: function (newVal, oldVal) {
-      if (newVal != "Model Solution") {
-        this.showEditor = false;
-      }
-    },
-    content: function (val) {
-      this.saveStatus = "Saving...";
-      this.timeout(this.problemID);
-    },
+      lang: "",
+      content: "",
+    }
   },
   methods: {
-    launchEditor() {
-      this.showEditor = true;
-      // this.$forceUpdate();
-    },
-    changeLanguage() {
-      this.showEditor = false;
-    },
-    updateContent(e) {
-      this.content = e.code;
-    },
-    timeout: _.debounce(async function (assignmentID) {
-      var payload = {};
-      if (this.lang == "Java") {
-        payload = {
-          java_model: this.content,
-        };
-      } else {
-        payload = {
-          python_model: this.content,
-        };
-      }
-      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
-      this.saveStatus = "All changes have been saved";
-    }, 500),
-    async getStarter() {
+    //get templates
+    async fetchTemplates() {
       const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
       var templates = res.data.data;
       this.template_j = templates.java_starter;
       this.template_p = templates.python_starter;
     },
+
+    //Editor
+    launchEditor() {
+      this.showEditor = true;
+    },
+    changeLanguage() {
+      this.showEditor = false;
+    },
+
+    //update Content
+    updateContent(e) {
+      this.content = e.code;
+    },
+
+    //save content
+    timeout: _.debounce(async function(assignmentID) {
+      var payload = {};
+      this.lang == "Java" ? payload = { java_starter: this.content, } : payload = { python_starter: this.content, };
+
+      const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
+      this.saveStatus = "All changes have been";
+    }, 500),
+
   },
-  beforeMount() {
-    this.getStarter();
+  watch: {
+    tab: function (newVal, oldVal) {
+      if(newVal != "Template") {
+        this.showEditor = false;
+      }
+    },
+    content: function(val) {
+      this.saveStatus = "Saving...";
+      this.timeout(this.problemID);
+    },
   },
-};
+  mounted() {
+    this.fetchTemplates();
+  },
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

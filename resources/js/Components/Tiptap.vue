@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { toRaw } from 'vue';
 import { Editor, EditorContent, BubbleMenu } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar.vue";
@@ -79,6 +80,16 @@ export default {
         self.$emit("input", this.getJSON());
       },
     });
+  },
+  watch : {
+    savedText(value) {
+      const isSame = this.editor.getJSON() === toRaw(value)
+
+      if(isSame) {
+        return
+      }
+      this.editor.commands.setContent(toRaw(value), false)
+    }
   },
 
   beforeUnmount() {

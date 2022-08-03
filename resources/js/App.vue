@@ -3,7 +3,7 @@
     <!-- <div @click="key = !key">
       <Navbar :authUser="authUser" :key="key" @forceReload="reload" />
     </div> -->
-    <Navbar :authUser="authUser" :key="key" @forceReload="reload" />
+    <Navbar :authUser="authUser" :key="forceReload" @forceReload="reload" />
     <router-view></router-view>
     <notifications position="bottom left"/>
   </div>

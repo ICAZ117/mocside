@@ -24,7 +24,7 @@
     </div>
 
     <div v-if="showEditor" class="template-workspace">
-      <div class="save-template">
+      <div class="save-model">
         <div class="row">
           <button class="btn btn-primary btn-md col-4" @click="changeLanguage()">
             CHANGE LANGUAGE
@@ -34,88 +34,83 @@
         </div>
       </div>
 
-      <div class="template-IDE"> 
-        <IDE
-          :offsetTop="197.8"
-          :width="windowWidth"
-          :lang="lang"
-          :problemID="problemID"
-          :showSubmit="false"
-          v-model:saved_j="template_j"
-          v-model:saved_p="template_p"
-          @update="updateContent"
-        />
-      </div>
+      <IDE
+        :offsetTop="197.8"
+        :width="window.innerWidth"
+        :lang="lang"
+        :problemID="problemID"
+        :showSubmit="false"
+        v-model:saved_j="template_j"
+        v-model:saved_p="template_p"
+        @update="updateContent"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import _ from "lodash";
-import * as API from "../services/API";
-
+import * as API from "../../services/API";
 export default {
   props: ["problemID", "tab"],
   data() {
     return {
       saveStatus: "",
-      lang: "",
       showEditor: false,
       content: "",
       template_j: "",
       template_p: "",
-      windowWidth: window.innerWidth,
-    };
-  },
-  watch: {
-    tab: function (newVal, oldVal) {
-      if (newVal != "Template") {
-        this.showEditor = false;
-      }
-    },
-    content: function (val) {
-      this.saveStatus = "Saving...";
-      console.log("Change status to saving");
-      this.timeout(this.problemID);
-    },
+      lang: "",
+    }
   },
   methods: {
+    //get templates
+    async fetchModelTemplates() {
+      const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
+      var templates = res.data.data;
+      this.template_j = templates.java_model == "" ? templates.java_starter : templates.java_model;
+      this.template_p = templates.python_model == "" ? templates.python_starter : templates.python_model;
+    },
+
+    //Editor
     launchEditor() {
       this.showEditor = true;
-      // this.$forceUpdate();
     },
     changeLanguage() {
       this.showEditor = false;
     },
+
+
+    //update Content
     updateContent(e) {
       this.content = e.code;
     },
-    timeout: _.debounce(async function (assignmentID) {
+
+    //save content
+    timeout: _.debounce(async function(assignmentID) {
       var payload = {};
-      if (this.lang == "Java") {
-        payload = {
-          java_starter: this.content,
-        };
-      } else {
-        payload = {
-          python_starter: this.content,
-        };
-      }
-      console.log(payload);
+      this.lang == "Java" ? payload = { java_model: this.content, } : payload = { python_model: this.content, };
+
       const res = await API.apiClient.put(`/problems/${assignmentID}`, payload);
       this.saveStatus = "All changes have been saved";
     }, 500),
-    async getStarter() {
-      const res = await API.apiClient.get(`/problems/full/${this.problemID}`);
-      var templates = res.data.data;
-      this.template_j = templates.java_starter;
-      this.template_p = templates.python_starter;
+  },
+  watch: {
+    tab: function(newVal, oldVal) {
+      if(newVal != "Model Solution") {
+        this.showEditor = false;
+      }
     },
+    content: function(val) {
+      this.saveStatus = "Saving...";
+      this.timeout(this.problemID);
+    }
   },
-  beforeMount() {
-    this.getStarter();
+  mounted() {
+    this.fetchModelTemplates();
   },
-};
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

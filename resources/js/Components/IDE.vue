@@ -358,7 +358,6 @@ export default defineComponent({
     },
     width: function (newVal, oldVal) {
       // watch it
-      console.log("Prop changed: ", newVal, " | was: ", oldVal);
       this.w1 = this.width;
       this.w2 = this.width;
       this.dynamicWidth = this.width;
@@ -430,12 +429,6 @@ export default defineComponent({
     },
     adjustEditorHeight() {
       setTimeout(() => {
-        console.log("window.innerHeight: " + window.innerHeight);
-        console.log(
-          "window.innerHeight - offsetTop: " + window.innerHeight - this.offsetTop
-        );
-        console.log("h2: " + this.h2);
-        console.log("total: " + window.innerHeight - this.offsetTop - this.h2);
         this.h1 = window.innerHeight - this.offsetTop - this.h2;
         this.dynamicWidth++;
         this.evenDynamicerWidth++;
@@ -466,7 +459,6 @@ export default defineComponent({
       this.launchConsole = true;
       // //code is saved....now need to run it
       // const res3 = await API.apiClient.post(`/containers/spin-up/${this.problemID}`, payload);
-      // console.log("\nspin-up complete\n");
       // this.containerID = res3.data.message;
     },
     async submitCode() {
@@ -492,13 +484,10 @@ export default defineComponent({
 
       const dump = res3.data.dump;
 
-      console.log(dump);
 
       var currentTC = 0;
-      console.log("\n\n\n\n\n\n\n\n--------------- STARTING COMPARISON ---------------");
 
       for (let i = 0; i < res3.data.dump.length - 1; i += 4) {
-        console.log("\n\ni = " + i);
 
         var tc = {
           tcID: JSON.parse(dump[i]),
@@ -507,13 +496,11 @@ export default defineComponent({
           compare: JSON.parse(dump[i + 3]),
         };
 
-        console.log(tc);
 
         var self = this;
 
         // IF the code has a compile error, handle it
         if (tc.compare == "compilationError") {
-          console.log("----> CODE HAD A COMPILATION ERROR");
           this.accordions = [
             {
               title: "Compilation Error",
@@ -538,7 +525,6 @@ export default defineComponent({
         }
         // ELSE IF the code has a runtime error, handle it
         else if (tc.compare[0] == "runtimeError" || tc.compare[0] == '"runtimeError"') {
-          console.log("----> CODE HAD A RUNTIME ERROR");
           this.accordions[currentTC].isSuccessful = false;
           this.accordions[currentTC].hasError = true;
           this.accordions[currentTC].text = JSON.parse(tc.userOut);
@@ -549,7 +535,6 @@ export default defineComponent({
         }
         // ELSE, the code ran successfully. Now check if it passed the test case or not.
         else {
-          console.log("----> CODE RAN SUCCESSFULLY");
           tc.compare = JSON.parse(tc.compare);
 
           // IF code passed test case
@@ -736,10 +721,8 @@ export default defineComponent({
       //assume this is UTC
 
       // var backDate = this.getBackDate(due_date);
-      // console.log(backDate);
 
       // assuming both times are using the same time zone the following works, or both are utc
-      console.log("due_date " + due_date)
       if (due_date == null || due_date == 0) { // (Max) I am adding this catch case because imported courses
         return false;         // Don't have a properly saved due_date_utc, but they do in future
       }                       // versions of the migrate software (9/18/21)

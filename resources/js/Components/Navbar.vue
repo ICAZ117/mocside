@@ -116,6 +116,7 @@
 <script>
 export default {
   props: ["authUser"],
+  emits: ["forceReload"],
   data() {
     return {
       isDark: false,
@@ -135,36 +136,28 @@ export default {
       this.$forceUpdate();
     },
     async updatePFP() {
-      console.log("Updating PFP");
       var au = await this.$store.dispatch("auth/getAuthUser");
-      console.log(au);
-      console.log(this.authUser);
       // this.authUser = au;
       if(this.authUser != null) {
         this.pfp = au.pfp_path;
         if(this.pfp == undefined || this.pfp == null || this.pfp == "") {
-          console.log("empty path");
           this.pfp = "../../images/DefaultPFP.png?dca25dcd82b7a37cf8c8334dbf19eb69=";
         }
         document.getElementById("d_navpfp").src = this.pfp;
         document.getElementById("l_navpfp").src = this.pfp;
-        console.log(this.pfp);
       }
     },
   },
   mounted() {
     this.updatePFP();
-    console.log("we are mounting the navbar component");
   },
   unmounted() {
-    console.log("unmounting the navbar component which should never happen");
   },
   computed: {
     isLoggedIn: function () {
       if (this.authUser == null) {
         return false;
       } else {
-        console.log("Detects Login");
         this.updatePFP();
         return true;
       }
@@ -172,18 +165,12 @@ export default {
   },
   watch: {
     $route(to) {
-      if (to.fullPath != "/") {
-        this.isDark = true;
-      } else {
+      if (to.fullPath == "/") {
         this.isDark = false;
+      } else {
+        this.isDark = true;
       }
-      console.log("Detects change in route from home route");
       this.updatePFP();
-      this.$emit("forceReload");
-      console.log(to);
-      if(to.fullPath == "/profile") {
-        console.log("watch profile page change before course unmount annoyance");
-      }
     },
   },
 };

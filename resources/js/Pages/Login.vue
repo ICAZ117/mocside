@@ -125,9 +125,6 @@ export default {
       this.error = null;
       try {
         const res = await AuthService.login(payload);
-        console.log("Authservice res:");
-        console.log(res);
-        console.log("\n\n\n\n");
         const authUser = await this.$store.dispatch("auth/getAuthUser");
         if (authUser) {
           this.$store.dispatch("auth/setGuest", { value: "isNotGuest" });
@@ -159,11 +156,9 @@ export default {
       //get the previous route.....if an enroll page redirect there
       //otherwise redirect to courses
       if (this.goBack == true) {
-        console.log("course-enroll");
         this.$router.go(-1);
       }
       else {
-        console.log("courses");
         this.$router.push({ name: "Courses" });
       }
 
