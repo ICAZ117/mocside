@@ -159,7 +159,7 @@ export default {
         this.assignment.java_starter = "public class Main {\n\tpublic static void main(String[] args) {\n\t\t}}";
       }
 
-      payload = {
+      var payload = {
         lang: this.lang.toLowerCase(0),
         problem_id: this.problemID, 
         code: this.lang == "Java" ? this.assignment.java_starter : this.assignment.python_starter,
